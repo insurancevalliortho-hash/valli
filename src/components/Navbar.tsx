@@ -40,10 +40,10 @@ export default function Navbar() {
                             <a
                                 key={item}
                                 href={`#${item.toLowerCase()}`}
-                                className="relative text-sm font-medium text-[#40484a] hover:text-[#00333c] hover:font-bold px-5 py-2 rounded-full transition-colors group overflow-hidden"
+                                className="relative text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-5 py-2 rounded-full transition-colors group overflow-hidden"
                             >
                                 <span className="relative z-10">{item}</span>
-                                <div className="absolute inset-0 bg-white rounded-full translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0" />
+                                <div className="absolute inset-0 bg-[#f98825]/15 rounded-full translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0" />
                             </a>
                         ))}
                     </div>
