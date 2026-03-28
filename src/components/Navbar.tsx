@@ -26,23 +26,28 @@ export default function Navbar() {
             >
                 <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
                     {/* Logo Area */}
-                    <div className="flex items-center gap-4 group cursor-pointer">
+                    <a href="/" className="flex items-center gap-4 group cursor-pointer">
                         <img src="/logo.png" alt="Valli Hospital Logo" className="h-12 w-auto" />
                         <div className="text-xl font-medium tracking-tight text-[#00333c] hidden sm:flex flex-col leading-tight">
                             <span>Valli <span className="font-light text-[#40484a]">Hospital</span></span>
                             <span className="text-[0.65rem] tracking-widest text-[#f98825] uppercase font-bold">Super Speciality</span>
                         </div>
-                    </div>
+                    </a>
 
                     {/* Desktop Menu - Rounded Floating Pill */}
                     <div className="hidden md:flex items-center bg-white/70 border border-[#bfc8ca]/40 rounded-full px-2 py-1.5 backdrop-blur-md shadow-[0_8px_20px_rgba(0,51,60,0.05)]">
-                        {["Specialities", "Doctors", "Technology", "About"].map((item) => (
+                        {[
+                            { label: "Specialities", href: "/specialities" },
+                            { label: "Doctors", href: "/doctors" },
+                            { label: "Technology", href: "/technology" },
+                            { label: "About", href: "/about" },
+                        ].map((item) => (
                             <a
-                                key={item}
-                                href={`#${item.toLowerCase()}`}
+                                key={item.label}
+                                href={item.href}
                                 className="relative text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-5 py-2 rounded-full transition-colors group overflow-hidden"
                             >
-                                <span className="relative z-10">{item}</span>
+                                <span className="relative z-10">{item.label}</span>
                                 <div className="absolute inset-0 bg-[#f98825]/15 rounded-full translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0" />
                             </a>
                         ))}
@@ -50,9 +55,9 @@ export default function Navbar() {
 
                     {/* Primary Action Button */}
                     <div className="hidden md:block">
-                        <button className="relative bg-[#004b57] text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-[#00333c] hover:scale-105 transition-all duration-300 shadow-[0_4px_15px_rgba(0,75,87,0.3)]">
+                        <a href="/book-appointment" className="relative bg-[#004b57] text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-[#00333c] hover:scale-105 transition-all duration-300 shadow-[0_4px_15px_rgba(0,75,87,0.3)] inline-block">
                             Book Appointment
-                        </button>
+                        </a>
                     </div>
 
                     {/* Mobile Menu Toggle */}
@@ -80,29 +85,35 @@ export default function Navbar() {
                         </div>
 
                         <div className="flex flex-col space-y-8 text-center relative z-10">
-                            {["Specialities", "Doctors", "Technology", "About"].map((item, i) => (
+                            {[
+                                { label: "Specialities", href: "/specialities" },
+                                { label: "Doctors", href: "/doctors" },
+                                { label: "Technology", href: "/technology" },
+                                { label: "About", href: "/about" },
+                            ].map((item, i) => (
                                 <motion.a
-                                    key={item}
-                                    href={`#${item.toLowerCase()}`}
+                                    key={item.label}
+                                    href={item.href}
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.1 * i + 0.3 }}
                                     className="text-4xl font-light text-[#00333c] hover:text-[#f98825] hover:font-medium transition-all"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
-                                    {item}
+                                    {item.label}
                                 </motion.a>
                             ))}
+                            <motion.a
+                                href="/book-appointment"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.7 }}
+                                className="bg-[#004b57] text-white px-8 py-3 rounded-full font-bold text-lg mx-auto"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                Book Appointment
+                            </motion.a>
                         </div>
-
-                        <motion.button
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.8 }}
-                            className="absolute bottom-12 bg-[#004b57] text-white px-8 py-4 rounded-full font-semibold text-lg shadow-lg"
-                        >
-                            Log Portal
-                        </motion.button>
                     </motion.div>
                 )}
             </AnimatePresence>
