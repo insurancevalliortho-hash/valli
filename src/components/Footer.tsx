@@ -47,7 +47,7 @@ export default function Footer() {
                                 <div>
                                     <strong className="block text-white mb-1">Address</strong>
                                     <span className="text-white/70 text-sm leading-relaxed block max-w-[250px]">
-                                        SF No.154/2d, Meyyanoor Main Road (Opposite to Vidyamandir School, Angammal Colony), Salem, Tamil Nadu - 636004, India.
+                                        Opp. to Sri Vidya Mandir School, Meyyanoor Road, Salem - 636 004
                                     </span>
                                 </div>
                             </li>
@@ -63,9 +63,9 @@ export default function Footer() {
                             <li className="flex gap-4 items-start group">
                                 <div className="mt-1 text-[#f98825] group-hover:scale-110 transition-transform"><Mail size={20} /></div>
                                 <div>
-                                    <strong className="block text-white mb-1">Email</strong>
+                                    <strong className="block text-white mb-1">Website</strong>
                                     <span className="text-white/70 text-sm block">
-                                        info@vallihospital.com
+                                        www.vallihospital.in
                                     </span>
                                 </div>
                             </li>

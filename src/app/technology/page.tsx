@@ -85,7 +85,7 @@ const techItems = [
         stat: { value: "100%", label: "Diabetic Safety Protocol" },
     },
     {
-        title: "Modular Operation Theatre",
+        title: "2 HVAC-Equipped Modular OTs",
         tag: "Sterile Environment",
         accentColor: "#004b57",
         bg: "bg-white",
@@ -95,9 +95,9 @@ const techItems = [
                 <path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
             </svg>
         ),
-        description: "Our modular laminar-flow OT suite maintains Class 100 clean-room conditions — the gold standard for joint replacement surgery. HEPA filtration, positive pressure, and UV sterilisation ensure zero infection risk.",
-        benefits: ["Class 100 clean room", "Laminar airflow", "HEPA filtration", "UV sterilisation"],
-        stat: { value: "0%", label: "Post-Op Infection Rate" },
+        description: "Our 2 HVAC-equipped modular laminar-flow OT suites maintain Class 100 clean-room conditions—the gold standard for advanced surgical procedures. HEPA filtration, positive pressure, and UV sterilisation ensure maximum safety.",
+        benefits: ["Class 100 clean room", "Laminar airflow", "HVAC HEPA filtration", "UV sterilisation"],
+        stat: { value: "2", label: "Advanced OTs" },
     },
 ];
 

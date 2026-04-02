@@ -15,7 +15,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
     title: "Valli Super Speciality Hospital",
-    description: "Modern healthcare with advanced medical technology.",
+    description: "Where expertise restores lives. Advanced care, precision healing, and excellence in every specialty.",
 };
 
 export default function RootLayout({

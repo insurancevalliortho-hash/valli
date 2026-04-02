@@ -33,6 +33,7 @@ const awards = [
 ];
 
 const supportingTeam = [
+    { name: "Dr. I. Vijayalakshmi", role: "Co-Founder & Director", specialty: "Hospital Administration & Patient Care Excellence", exp: "21+ years", initials: "IV" },
     { name: "Dr. Priya Raghunathan", role: "Senior Resident — Orthopaedics", specialty: "Fracture Management & Sports Medicine", exp: "6 years", initials: "PR" },
     { name: "Dr. Karthik Sundar", role: "Consultant — Spine & Pain", specialty: "Lumbar Disorders & Epidural Therapy", exp: "9 years", initials: "KS" },
     { name: "Dr. Meena Velankanni", role: "Consultant — Paediatric Ortho", specialty: "Club Foot, DDH & Scoliosis", exp: "8 years", initials: "MV" },
@@ -70,7 +71,7 @@ export default function DoctorsPage() {
                         Hands That<br /><span className="text-[#f98825]">Heal</span>
                     </motion.h1>
                     <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }} className="text-xl text-white/60 max-w-xl leading-relaxed font-medium">
-                        Led by one of Tamil Nadu&apos;s most celebrated orthopaedic surgeons — our team brings decades of expertise and genuine care.
+                        Led by our founders Dr. T. Natanasabapathy and Dr. I. Vijayalakshmi — our team brings decades of expertise and genuine care.
                     </motion.p>
                 </div>
             </section>
@@ -202,7 +203,7 @@ export default function DoctorsPage() {
                         </span>
                         <h2 className="text-4xl font-black text-[#00333c] tracking-tight">Supporting <span className="text-[#f98825]">Specialists</span></h2>
                     </motion.div>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                         {supportingTeam.map((doc, i) => (
                             <motion.div key={doc.name} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 * i }}
                                 className="bg-white border border-[#e5eaeb] rounded-2xl p-7 hover:shadow-xl transition-shadow duration-500">

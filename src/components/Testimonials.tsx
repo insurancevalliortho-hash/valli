@@ -8,7 +8,7 @@ const testimonials = [
     { name: "Bhuvaneshwari S.", initials: "BS", role: "Trauma Recovery Patient", text: "Dr. Natanasabapathy sir, you are the best ortho surgeon I have ever seen. Thank you so much for your care. I was injured by my own bullock in the neck area... I was unconscious but now I'm completely alright. He did a great job.", rating: 5, accent: "#f98825" },
     { name: "Karthikeyan", initials: "K", role: "Accident Survivor", text: "My sincere thanks to Valli Super Speciality Hospital. I met with a severe accident 5 months ago. Today I am living my life only because of the doctors here. Excellent treatment and accurate diagnosis.", rating: 5, accent: "#3cb3a6" },
     { name: "Yuvarajan", initials: "Y", role: "Surgical Patient", text: "Care shown by the doctors and staff members is outstanding. The procedure went better than we hoped. Clean and hygienic environment. I am fully satisfied.", rating: 5, accent: "#f98825" },
-    { name: "Sababathy", initials: "S", role: "Physiotherapy Patient", text: "My wife is daily consulting for physiotherapy. The care is good and she is recovering soon. Friendly staff and quick service at an affordable price.", rating: 5, accent: "#004b57" },
+    { name: "Anonymous", initials: "A", role: "Joint Care Patient", text: "After years of pain, I can finally enjoy my morning walks again. Thanks to Valli Ortho for giving me my life back!", rating: 5, accent: "#004b57" },
 ];
 
 const PAGES = [[0, 1], [2, 3]];

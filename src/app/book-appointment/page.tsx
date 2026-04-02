@@ -9,13 +9,13 @@ import MagneticCursor from "../../components/MagneticCursor";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 
 const departments = [
-    "Advanced Joint Care & Replacement",
-    "Sports Medicine & Arthroscopy",
-    "Trauma & Fracture Clinic",
-    "Foot & Ankle Clinic",
-    "Back Pain & Spinal Disorders",
-    "Bone Cancer Treatment",
-    "Paediatric Orthopaedics",
+    "Orthopaedics & Joint Replacement",
+    "Gastroenterology",
+    "Neurosurgery & Neurology",
+    "Plastic & Vascular Surgery",
+    "Internal Medicine & Urology",
+    "Paediatrics & Surgery",
+    "24x7 Emergency",
 ];
 
 const timeSlots = [
@@ -305,7 +305,7 @@ export default function BookAppointmentPage() {
                             <div className="bg-white border border-[#e5eaeb] rounded-2xl p-6 space-y-5">
                                 <h3 className="text-[#00333c] font-black text-base">Contact Info</h3>
                                 {[
-                                    { icon: <MapPin size={18} />, label: "Address", val: "SF No.154/2d, Meyyanoor Main Road, Salem - 636004" },
+                                    { icon: <MapPin size={18} />, label: "Address", val: "Opp. to Sri Vidya Mandir School, Meyyanoor Road, Salem - 636 004" },
                                     { icon: <Phone size={18} />, label: "Helpline", val: "+91 90034 17111" },
                                     { icon: <Mail size={18} />, label: "Email", val: "info@vallihospital.com" },
                                     { icon: <Clock size={18} />, label: "OPD Hours", val: "9:00 AM – 8:00 PM" },

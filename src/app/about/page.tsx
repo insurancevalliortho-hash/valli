@@ -11,17 +11,17 @@ const values = [
     {
         icon: "🏥",
         title: "Mission",
-        desc: "To deliver world-class orthopaedic care with compassion, precision, and cutting-edge technology — restoring mobility and improving lives across Tamil Nadu.",
+        desc: "To empower patients with strength, mobility, and confidence through cutting-edge medical expertise while providing advanced, compassionate care.",
     },
     {
         icon: "🔭",
         title: "Vision",
-        desc: "To be South India's most trusted orthopaedic centre — where every patient is treated as family and every outcome is celebrated as a shared victory.",
+        desc: "To be a premier Super Specialty Hospital, setting new standards in advanced medical care and patient well-being.",
     },
     {
         icon: "❤️",
         title: "Values",
-        desc: "Integrity in diagnosis. Compassion in care. Excellence in surgery. Every decision we make is guided by the patient's best interest — always.",
+        desc: "Compassion, Innovation, Excellence, Integrity & Commitment. Your health is our priority, and we are dedicated to providing 24/7 specialized care.",
     },
 ];
 
@@ -84,7 +84,7 @@ export default function AboutPage() {
                         Two Decades of<br /><span className="text-[#f98825]">Healing Salem</span>
                     </motion.h1>
                     <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }} className="text-xl text-white/60 max-w-xl leading-relaxed font-medium">
-                        Founded in 2003 by Dr. T. Natanasabapathy, Valli Super Speciality Hospital has grown from a single-surgeon practice to Salem&apos;s most advanced orthopaedic centre.
+                        Founded by Dr. T. Natanasabapathy and Dr. I. Vijayalakshmi, what began as a 20-bed orthopaedic trauma center now stands as a beacon of excellence in specialized medical care.
                     </motion.p>
                 </div>
             </section>
@@ -142,13 +142,13 @@ export default function AboutPage() {
                             </h2>
                             <div className="space-y-4 text-[#40484a] text-base leading-relaxed font-medium">
                                 <p>
-                                    In 2003, Dr. T. Natanasabapathy returned to Salem with one dream: to give patients in Tamil Nadu access to the same quality of orthopaedic care available in Chennai or Mumbai — without leaving their home city.
+                                    Established in 2022, we began as a 20-bed orthopaedic trauma and emergency care center. Our founders' vision was clear: to create a center of excellence providing world-class healthcare across multiple specialties.
                                 </p>
                                 <p>
-                                    Starting with a small clinic on Meyyanoor Main Road, he built a reputation surgery by surgery, patient by patient — on outcomes, honesty, and a refusal to cut corners. Salem noticed.
+                                    At Valli, patients aren't just case files; they are individuals with stories, dreams, and hopes. Every diagnosis, every surgery, and every treatment plan is crafted with precision and compassion.
                                 </p>
                                 <p>
-                                    Twenty-one years later, Valli Super Speciality Hospital stands as Salem&apos;s most advanced orthopaedic centre — with 7 departments, a team of specialists, and the same uncompromising care that started it all.
+                                    Today, we stand as a beacon of excellence in specialized medical care, offering cutting-edge treatments in Orthopaedics, Plastic Surgery, Gastroenterology, Neurosurgery, Paediatrics, Internal Medicine, and more.
                                 </p>
                             </div>
                         </motion.div>
@@ -159,7 +159,7 @@ export default function AboutPage() {
                             <div className="absolute inset-0 bg-gradient-to-t from-[#001f25]/60 via-transparent to-transparent" />
                             <div className="absolute bottom-6 left-6 right-6 bg-[#001f25]/70 backdrop-blur-md border border-white/15 rounded-xl px-5 py-4">
                                 <div className="text-[9px] uppercase tracking-widest text-white/40 font-bold mb-1">Location</div>
-                                <div className="text-white font-bold text-sm">Meyyanoor Main Road, Salem, Tamil Nadu</div>
+                                <div className="text-white font-bold text-sm">Opp. Sri Vidya Mandir School, Meyyanoor Road, Salem</div>
                             </div>
                         </motion.div>
                     </div>
@@ -226,7 +226,7 @@ export default function AboutPage() {
                         Visit Us in Salem
                     </motion.h2>
                     <motion.p initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-white/60 text-lg mb-8 max-w-xl mx-auto">
-                        SF No.154/2d, Meyyanoor Main Road (Opposite Vidyamandir School, Angammal Colony), Salem - 636004
+                        Opp. to Sri Vidya Mandir School, Meyyanoor Road, Salem - 636 004
                     </motion.p>
                     <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="flex flex-col sm:flex-row gap-4 justify-center">
                         <a href="/book-appointment" className="bg-[#f98825] text-white px-8 py-4 rounded-full font-bold text-sm hover:bg-[#e0751e] transition-colors shadow-lg">Book Appointment</a>

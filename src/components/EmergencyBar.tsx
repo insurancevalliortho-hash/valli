@@ -12,7 +12,7 @@ export default function EmergencyBar() {
             <button className="flex-1 py-4 flex flex-col items-center justify-center gap-1 bg-[var(--color-secondary)] text-white hover:bg-[#e67e00] transition-colors">
                 <Phone size={20} />
                 <span className="text-xs font-semibold block sm:hidden">Emergency</span>
-                <span className="text-xs font-semibold hidden sm:block">Call: 1800-XXX-XXXX</span>
+                <span className="text-xs font-semibold hidden sm:block">Call: +91 90034 17111</span>
             </button>
         </div>
     );

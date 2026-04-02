@@ -9,8 +9,8 @@ import MagneticCursor from "../../components/MagneticCursor";
 
 const specialities = [
     {
-        id: "joint-care",
-        title: "Advanced Joint Care & Replacement",
+        id: "orthopaedics",
+        title: "Orthopaedics & Joint Replacement",
         subtitle: "Flagship Department",
         accentColor: "#f98825",
         bg: "bg-gradient-to-br from-[#00333c] to-[#004b57]",
@@ -22,124 +22,124 @@ const specialities = [
                 <path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
             </svg>
         ),
-        description: "Comprehensive, evidence-based treatments specializing in minimally invasive total knee and hip replacements for faster recovery and less pain.",
-        procedures: ["Total Knee Replacement", "Total Hip Replacement", "Unicondylar Knee Replacement", "Revision Joint Replacement", "Bilateral Knee Replacement"],
-        tech: ["C-ARM Fluoroscopy", "Computer Navigation", "Ultrasound-Guided Blocks"],
+        description: "Comprehensive bone and joint care for all ages, specializing in minimally invasive total knee and hip replacements. We get active patients back to peak performance.",
+        procedures: ["Total Joint Replacement", "Sports Injuries & Ligament Reconstruction", "Fracture Management", "Spine Disorders Treatment", "Trauma Care"],
+        tech: ["Arthroscopy", "Computer Navigation", "Ultrasound-Guided Blocks"],
         stat: { value: "3,000+", label: "Joint Replacements Performed" },
     },
     {
-        id: "sports-medicine",
-        title: "Sports Medicine & Arthroscopy",
-        subtitle: "Elite Recovery",
+        id: "gastroenterology",
+        title: "Gastroenterology",
+        subtitle: "Digestive Care",
         accentColor: "#f98825",
         bg: "bg-white",
         dark: false,
-        tag: "Elite Recovery",
+        tag: "Digestive Care",
         tagBg: "bg-[#f98825]/10 text-[#f98825]",
         icon: (
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-8 h-8">
-                <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+                <path d="M8 7v4m8-4v4m-4-8v12m-6 4h12c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H6c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2z" />
             </svg>
         ),
-        description: "Cutting-edge arthroscopy for rapid healing of ligament and tendon damage. We get athletes and active patients back to peak performance.",
-        procedures: ["ACL Reconstruction", "Meniscus Repair", "Shoulder Arthroscopy", "Rotator Cuff Repair", "Cartilage Restoration"],
-        tech: ["4K Arthroscope", "MRI-Guided Planning", "PRP Therapy"],
-        stat: { value: "500+", label: "Arthroscopic Procedures" },
+        description: "Specialized digestive and liver care ensuring early diagnosis and minimally invasive treatment for a wide range of gastric disorders.",
+        procedures: ["Endoscopy & Colonoscopy", "Liver Disease Management", "Acid Reflux Treatment", "Ulcer Treatment", "Gastric Disorder Diagnosis"],
+        tech: ["Advanced Endoscopes", "High-Def Diagnostics", "ICU Support"],
+        stat: { value: "1,500+", label: "Endoscopies Done" },
     },
     {
-        id: "trauma",
-        title: "Trauma & Fracture Clinic",
-        subtitle: "Emergency Ready",
+        id: "neurosurgery",
+        title: "Neurosurgery & Neurology",
+        subtitle: "Brain & Spine",
         accentColor: "#ba1a1a",
         bg: "bg-[#fff5f5]",
         dark: false,
-        tag: "Emergency Ready",
+        tag: "Brain & Spine",
         tagBg: "bg-red-100 text-red-700",
         icon: (
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-8 h-8">
                 <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
             </svg>
         ),
-        description: "Painless treatment using Ultrasound-guided nerve blocks for all fracture cases. Our 24/7 emergency team handles the most complex polytrauma.",
-        procedures: ["Complex Fracture Fixation", "Polytrauma Management", "Nerve Block Anesthesia", "Pelvi-Acetabular Surgery", "Intramedullary Nailing"],
-        tech: ["Ultrasound Nerve Block", "C-ARM Imaging", "ICU Monitoring"],
-        stat: { value: "24/7", label: "Emergency Coverage" },
+        description: "Advanced treatments for brain and spinal cord injuries. Expert diagnosis and treatment for nerve conditions including stroke and epilepsy.",
+        procedures: ["Brain Tumour Surgery", "Herniated Disc Surgery", "Stroke & Aneurysm Treatment", "Parkinson's Care", "Migraine Treatment"],
+        tech: ["Neuro-Monitoring", "Fluoroscopy-Guided", "Endoscopic Spine"],
+        stat: { value: "High", label: "Success Rate" },
     },
     {
-        id: "foot-ankle",
-        title: "Foot & Ankle Clinic",
-        subtitle: "Precision Diagnostics",
+        id: "plastic-surgery",
+        title: "Plastic & Vascular Surgery",
+        subtitle: "Reconstructive",
         accentColor: "#004b57",
         bg: "bg-white",
         dark: false,
-        tag: "Precision Diagnostics",
+        tag: "Reconstructive",
         tagBg: "bg-[#004b57]/10 text-[#004b57]",
         icon: (
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-8 h-8">
                 <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
             </svg>
         ),
-        description: "Advanced Pedoscan with Doppler Assessment to prevent complications. Expert care for all foot and ankle conditions, from flatfoot to tendon disorders.",
-        procedures: ["Flatfoot Correction", "Hallux Valgus Surgery", "Ankle Arthroscopy", "Achilles Tendon Repair", "Diabetic Foot Care"],
-        tech: ["Pedoscan Analysis", "Doppler Assessment", "3D Gait Analysis"],
-        stat: { value: "98%", label: "Patient Satisfaction" },
+        description: "Restoring function and enhancing aesthetics with meticulous care for burns, trauma, and vascular complications.",
+        procedures: ["Reconstructive Surgery", "Hand Surgery & Microsurgery", "Scar Revision", "Skin Grafting", "Vascular Repair"],
+        tech: ["Microsurgery Tools", "Doppler Assessment", "Modular OT"],
+        stat: { value: "Top", label: "Aesthetic Outcomes" },
     },
     {
-        id: "back-spine",
-        title: "Back Pain & Spinal Disorders",
-        subtitle: "Pain Management",
+        id: "internal-medicine",
+        title: "Internal Medicine & Urology",
+        subtitle: "Primary Care",
         accentColor: "#f98825",
         bg: "bg-white",
         dark: false,
-        tag: "Pain Management",
+        tag: "Primary Care",
         tagBg: "bg-[#f98825]/10 text-[#f98825]",
         icon: (
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-8 h-8">
                 <path d="M4 6h16M4 12h16m-7 6h7" />
             </svg>
         ),
-        description: "Modern therapeutic interventions for spinal disorders to help you live pain-free. From conservative management to minimally invasive surgery.",
-        procedures: ["Disc Prolapse Treatment", "Spinal Stenosis Surgery", "Lumbar Fusion", "Cervical Disc Replacement", "Epidural Injections"],
-        tech: ["Fluoroscopy-Guided", "Neuro-Monitoring", "Endoscopic Spine"],
-        stat: { value: "90%", label: "Non-Surgical Success Rate" },
+        description: "Expert care for chronic and acute illnesses, ensuring optimal health through continuous monitoring and preventive measures.",
+        procedures: ["Diabetes Management", "Hypertension Management", "Respiratory Treatment", "Thyroid Care", "Preventive Health Check-ups"],
+        tech: ["24/7 Diagnostics", "Dialysis Unit", "Laboratory Network"],
+        stat: { value: "24/7", label: "Monitoring" },
     },
     {
-        id: "bone-cancer",
-        title: "Bone Cancer Treatment",
-        subtitle: "Full Support",
+        id: "paediatrics",
+        title: "Paediatrics & Surgery",
+        subtitle: "Child-First Care",
         accentColor: "#004b57",
         bg: "bg-white",
         dark: false,
-        tag: "Full Support",
+        tag: "Child-First Care",
         tagBg: "bg-[#004b57]/10 text-[#004b57]",
         icon: (
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-8 h-8">
                 <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
             </svg>
         ),
-        description: "Compassionate, conservative, and surgical approach to musculoskeletal oncology. Limb-salvage surgery to preserve function while fighting cancer.",
-        procedures: ["Limb Salvage Surgery", "Bone Tumor Resection", "Prosthetic Reconstruction", "Biopsy & Staging", "Chemotherapy Coordination"],
-        tech: ["PET-CT Guided", "Intraoperative Navigation", "Oncology MDT"],
-        stat: { value: "Limb", label: "Salvage Priority" },
+        description: "Complete healthcare for children including newborn wellness, emergency surgeries, and laparoscopic procedures—tailored exactly for young ones.",
+        procedures: ["Newborn Check-ups", "Immunization", "Birth Defect Corrections", "Hernia Surgery", "Laparoscopic Procedures"],
+        tech: ["Pediatric Anesthesia", "Safe Diagnostics", "Incubators"],
+        stat: { value: "100%", label: "Child-Safe Protocols" },
     },
     {
-        id: "paediatric",
-        title: "Paediatric Orthopaedics",
-        subtitle: "Child-First Care",
+        id: "emergency",
+        title: "24x7 Emergency",
+        subtitle: "Industrial Injury Support",
         accentColor: "#f98825",
         bg: "bg-gradient-to-r from-[#ebfdfc] to-[#ffffff]",
         dark: false,
-        tag: "Child-First Care",
+        tag: "Emergency Ready",
         tagBg: "bg-[#f98825]/10 text-[#f98825]",
         icon: (
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-8 h-8">
                 <path d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
         ),
-        description: "Gentle, specialized care for childhood orthopaedic issues and congenital deformities—tailored exactly for children's unique needs and growth.",
-        procedures: ["Club Foot Correction", "DDH Treatment", "Cerebral Palsy Surgery", "Scoliosis Management", "Growth Plate Fractures"],
-        tech: ["Ponseti Method", "EOS Imaging", "Pediatric Anesthesia"],
-        stat: { value: "100%", label: "Child-Safe Protocols" },
+        description: "Specialized care for those who keep INDUSTRIES RUNNING. We maintain a 30-minute interval from arrival to operation.",
+        procedures: ["Limb Salvage Procedures", "Debridement & Fixation", "Ultrasound Nerve Block", "BLS Training", "Trauma Support"],
+        tech: ["C-ARM Imaging", "Advanced ER", "Ambulance Support"],
+        stat: { value: "30 Min", label: "Arrival to OT" },
     },
 ];
 

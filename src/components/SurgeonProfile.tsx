@@ -3,20 +3,20 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
-const creds = ["M.S. Ortho", "FIAS", "Joint Replacement", "Arthroscopy", "Trauma & Spine"];
+const creds = ["M.S. Ortho", "FIAS", "Joint Replacement", "Arthroscopy", "Trauma & Spine", "Bio Regenerative Orthopedics"];
 
 const stats = [
-    { value: "21+", label: "Years" },
-    { value: "5K+", label: "Surgeries" },
+    { value: "16+", label: "Years" },
+    { value: "10K+", label: "Surgeries" },
     { value: "98%", label: "Success" },
     { value: "15+", label: "Specialities" },
 ];
 
 const milestones = [
-    { year: "2003", title: "Founded Valli Super Speciality Hospital" },
-    { year: "2010", title: "Pioneered minimally invasive joint replacement in Salem" },
-    { year: "2018", title: "Reached 3,000 successful knee replacements" },
-    { year: "2024", title: "Best Orthopedic Surgeon — Tamil Nadu" },
+    { year: "2022", title: "Founded Valli Super Speciality Hospital" },
+    { year: "2023", title: "Pioneered Total Elbow Replacement in Salem" },
+    { year: "2024", title: "Reached 3,000 successful Knee Replacements" },
+    { year: "2025", title: "Pioneered Bio Regenerative Orthopedics in Salem" },
 ];
 
 export default function SurgeonProfile() {
@@ -88,8 +88,7 @@ export default function SurgeonProfile() {
                                 transition={{ duration: 0.6, delay: 0.5 }}
                                 className="absolute bottom-4 left-4 right-4 bg-[#001f25]/80 backdrop-blur-xl border border-white/15 rounded-2xl px-4 py-3"
                             >
-                                <div className="text-[9px] uppercase tracking-widest text-white/40 font-bold">Chairman & Chief</div>
-                                <div className="text-white font-black text-sm mt-0.5">Orthopedic Surgeon</div>
+                                <div className="text-white font-black text-sm mt-0.5">Chief Orthopedic Surgeon</div>
                             </motion.div>
                         </div>
 
@@ -116,7 +115,7 @@ export default function SurgeonProfile() {
                                     transition={{ delay: 0.2 }}
                                     className="text-[#f98825] font-semibold text-sm md:text-base"
                                 >
-                                    Chairman & Chief Orthopedic Surgeon, Valli Hospital
+                                    Chief Orthopedic Surgeon
                                 </motion.p>
                             </div>
 
@@ -148,7 +147,7 @@ export default function SurgeonProfile() {
                                 transition={{ delay: 0.15 }}
                                 className="text-white/60 text-sm md:text-base leading-relaxed"
                             >
-                                With 21+ years of dedicated practice, Dr. Natanasabapathy specializes in complex joint replacements, arthroscopy, and severe trauma reconstruction — celebrated as one of Salem's most trusted orthopedic surgeons.
+                                With 16+ years of dedicated practice, Dr. Natanasabapathy specializes in complex joint replacements, arthroscopy, and severe trauma reconstruction — celebrated as one of Salem's most trusted orthopedic surgeons.
                             </motion.p>
 
                             {/* Credential pills */}

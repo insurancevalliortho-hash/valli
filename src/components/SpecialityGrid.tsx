@@ -5,8 +5,8 @@ import { useRef } from "react";
 
 const specialities = [
     {
-        title: "Advanced Joint Care & Replacement",
-        description: "Comprehensive, evidence-based treatments specializing in minimally invasive total knee and hip replacements for faster recovery.",
+        title: "Orthopaedics & Joint Replacement",
+        description: "Comprehensive bone and joint care, sports injuries, and minimally invasive total joint replacements.",
         accentColor: "#f98825",
         bg: "bg-gradient-to-br from-[#00333c] to-[#004b57]",
         textColor: "text-white",
@@ -22,8 +22,8 @@ const specialities = [
         dark: true,
     },
     {
-        title: "Sports Medicine & Arthroscopy",
-        description: "Cutting-edge arthroscopy for rapid healing of ligament and tendon damage.",
+        title: "Gastroenterology",
+        description: "Specialized digestive and liver care, including endoscopy and colonoscopy procedures.",
         accentColor: "#f98825",
         bg: "bg-white",
         textColor: "text-[#00333c]",
@@ -32,15 +32,15 @@ const specialities = [
         rowSpan: "row-span-1",
         icon: (
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
-                <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+                <path d="M8 7v4m8-4v4m-4-8v12m-6 4h12c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H6c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2z" />
             </svg>
         ),
-        tag: "Elite Recovery",
+        tag: "Digestive Care",
         dark: false,
     },
     {
-        title: "Trauma & Fracture Clinic",
-        description: "Painless treatment using Ultrasound-guided nerve blocks for all fracture cases.",
+        title: "Neurosurgery & Neurology",
+        description: "Advanced treatments for nerve, brain, and spine conditions including stroke and epilepsy management.",
         accentColor: "#ba1a1a",
         bg: "bg-[#ffdad6]",
         textColor: "text-[#93000a]",
@@ -52,12 +52,12 @@ const specialities = [
                 <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
             </svg>
         ),
-        tag: "Emergency Ready",
+        tag: "Brain & Spine",
         dark: false,
     },
     {
-        title: "Foot & Ankle Clinic",
-        description: "Advanced Pedoscan with Doppler Assessment to prevent complications.",
+        title: "Plastic & Vascular Surgery",
+        description: "Restoring function and aesthetics, including hand surgeries, microsurgery, and flap cover surgeries.",
         accentColor: "#004b57",
         bg: "bg-white",
         textColor: "text-[#00333c]",
@@ -69,12 +69,12 @@ const specialities = [
                 <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
             </svg>
         ),
-        tag: "Precision Diagnostics",
+        tag: "Reconstructive",
         dark: false,
     },
     {
-        title: "Back Pain & Spinal Disorders",
-        description: "Modern therapeutic interventions for spinal disorders to help you live pain-free.",
+        title: "Internal Medicine & Urology",
+        description: "Expert care for chronic and acute illnesses, diabetes, hypertension, and nephrology disorders.",
         accentColor: "#f98825",
         bg: "bg-white",
         textColor: "text-[#00333c]",
@@ -86,12 +86,12 @@ const specialities = [
                 <path d="M4 6h16M4 12h16m-7 6h7" />
             </svg>
         ),
-        tag: "Pain Management",
+        tag: "Primary Care",
         dark: false,
     },
     {
-        title: "Bone Cancer Treatment",
-        description: "Compassionate, conservative, and surgical approach to musculoskeletal oncology.",
+        title: "Paediatrics & Paediatric Surgery",
+        description: "Complete healthcare for children including newborn wellness, emergency surgeries, and laparoscopic procedures.",
         accentColor: "#004b57",
         bg: "bg-white",
         textColor: "text-[#00333c]",
@@ -103,12 +103,12 @@ const specialities = [
                 <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
             </svg>
         ),
-        tag: "Full Support",
+        tag: "Child-First Care",
         dark: false,
     },
     {
-        title: "Paediatric Orthopaedics",
-        description: "Gentle, specialized care for childhood orthopaedic issues and congenital deformities — tailored exactly for children's unique needs.",
+        title: "24x7 Emergency & Industrial Injury",
+        description: "Immediate advanced trauma care and emergency limb salvage procedures tailored for industrial environments.",
         accentColor: "#f98825",
         bg: "bg-gradient-to-r from-[#ebfdfc] to-[#ffffff]",
         textColor: "text-[#00333c]",
@@ -120,7 +120,7 @@ const specialities = [
                 <path d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
         ),
-        tag: "Child-First Care",
+        tag: "Emergency Ready",
         dark: false,
     },
 ];
