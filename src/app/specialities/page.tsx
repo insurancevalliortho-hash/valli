@@ -29,22 +29,34 @@ const specialities = [
     },
     {
         id: "gastroenterology",
-        title: "Gastroenterology",
-        subtitle: "Digestive Care",
+        title: "Surgical Gastroenterology",
+        subtitle: "Advanced Solutions for Digestive Health",
         accentColor: "#f98825",
         bg: "bg-white",
         dark: false,
-        tag: "Digestive Care",
+        tag: "Digestive Health",
         tagBg: "bg-[#f98825]/10 text-[#f98825]",
         icon: (
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-8 h-8">
                 <path d="M8 7v4m8-4v4m-4-8v12m-6 4h12c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H6c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2z" />
             </svg>
         ),
-        description: "Specialized digestive and liver care ensuring early diagnosis and minimally invasive treatment for a wide range of gastric disorders.",
-        procedures: ["Endoscopy & Colonoscopy", "Liver Disease Management", "Acid Reflux Treatment", "Ulcer Treatment", "Gastric Disorder Diagnosis"],
-        tech: ["Advanced Endoscopes", "High-Def Diagnostics", "ICU Support"],
-        stat: { value: "1,500+", label: "Endoscopies Done" },
+        description: "Experience world-class care at our specialized Surgical Gastroenterology wing, integrated within our robust 50-bedded multispecialty framework.",
+        bullets: [
+            "Precision Surgical Excellence: Experience world-class care at our specialized Surgical Gastroenterology wing, integrated within our robust 50-bedded multispecialty framework.",
+            "Minimally Invasive Mastery: We specialize in advanced laparoscopy, offering \"keyhole\" surgeries that ensure faster recovery, less pain, and minimal scarring.",
+            "Expert Specialist Leadership: Our department is led by a dedicated Surgical Gastroenterologist, providing expert management for complex abdominal and digestive disorders.",
+            "Complete Diagnostic Suite: Benefit from immediate, on-site insights with our high-resolution CT scan and Ultrasound facilities for rapid and accurate diagnosis.",
+            "Advanced Endoscopic Interventions: From routine screenings to therapeutic procedures, our high-definition Endoscopy and Colonoscopy services provide a clear window to your health.",
+            "Comprehensive Trauma Support: As a trauma-heavy setup, we are uniquely equipped to handle emergency abdominal surgeries and acute GI injuries with 24/7 readiness.",
+            "Tailored Treatment Plans: We provide personalized care for conditions ranging from gallstones and hernias to complex gastrointestinal cancers.",
+            "Integrated Critical Care: Our surgical team works in tandem with our high-tech ICUs to provide seamless post-operative monitoring for high-risk patients.",
+            "Cutting-Edge Infrastructure: Our modular operating theaters are designed for maximum safety, utilizing the latest surgical technology for superior clinical outcomes.",
+            "Restoring Your Quality of Life: At Valli Superspecialty, we combine diagnostic precision with surgical innovation to get you back to your best self, faster."
+        ],
+        procedures: [],
+        tech: [],
+        stat: { value: "Top", label: "Digestive Care" },
     },
     {
         id: "neurosurgery",
@@ -86,8 +98,8 @@ const specialities = [
     },
     {
         id: "internal-medicine",
-        title: "Internal Medicine & Urology",
-        subtitle: "Primary Care",
+        title: "Internal Medicine",
+        subtitle: "The Foundation of Comprehensive Healing",
         accentColor: "#f98825",
         bg: "bg-white",
         dark: false,
@@ -98,10 +110,22 @@ const specialities = [
                 <path d="M4 6h16M4 12h16m-7 6h7" />
             </svg>
         ),
-        description: "Expert care for chronic and acute illnesses, ensuring optimal health through continuous monitoring and preventive measures.",
-        procedures: ["Diabetes Management", "Hypertension Management", "Respiratory Treatment", "Thyroid Care", "Preventive Health Check-ups"],
-        tech: ["24/7 Diagnostics", "Dialysis Unit", "Laboratory Network"],
-        stat: { value: "24/7", label: "Monitoring" },
+        description: "Our Department of Internal Medicine serves as the expert core of our 50-bedded multispecialty hospital, managing diverse and complex medical conditions.",
+        bullets: [
+            "Holistic Healthcare Excellence: Our Department of Internal Medicine serves as the expert core of our 50-bedded multispecialty hospital, managing diverse and complex medical conditions.",
+            "Elite Life-Saving Skills: Rest easy knowing our medical staff is rigorously trained in ACLS and ATLS, ensuring immediate, world-class intervention during any crisis.",
+            "Integrated Critical Care: With a high-tech ICU on-site, we provide seamless transitions for patients requiring intensive monitoring and advanced life support.",
+            "Diagnostic Powerhouse: We utilize immediate, in-house CT scans and Ultrasound to transform clinical symptoms into precise, actionable diagnoses within minutes.",
+            "Advanced Internal Imaging: Our specialists offer high-definition Endoscopy and Colonoscopy, providing vital insights into gastrointestinal health without the need for external referrals.",
+            "Surgical Synergy: We work hand-in-hand with our Laparoscopy team to offer minimally invasive surgical solutions for internal medical complications.",
+            "Expert Chronic Disease Management: From hypertension and diabetes to complex infectious diseases, we provide personalized, evidence-based treatment plans.",
+            "Rapid Trauma Response: In our trauma-centric environment, our physicians are masters of stabilizing and managing multi-system medical emergencies 24/7.",
+            "Preventative Wellness: Beyond acute care, we focus on comprehensive health screenings and early detection to safeguard your long-term vitality.",
+            "Compassionate Expertise: At Valli Superspecialty, we combine cutting-edge medical science with a dedicated human touch to lead your journey back to health."
+        ],
+        procedures: [],
+        tech: [],
+        stat: { value: "24/7", label: "Care & Diagnostics" },
     },
     {
         id: "paediatrics",
@@ -123,9 +147,40 @@ const specialities = [
         stat: { value: "100%", label: "Child-Safe Protocols" },
     },
     {
+        id: "critical-care",
+        title: "Anaesthesiology & ICU",
+        subtitle: "The Architects of Critical Care",
+        accentColor: "#ba1a1a",
+        bg: "bg-[#fff5f5]",
+        dark: false,
+        tag: "Critical Care",
+        tagBg: "bg-red-100 text-red-700",
+        icon: (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-8 h-8">
+                <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+        ),
+        description: "Our Anaesthesia and Critical Care team stands as the ultimate shield against the unpredictable, providing the silent, steady heartbeat behind every life-saving surgery.",
+        bullets: [
+            "Vigilance in the Vortex: Our Department of Anaesthesiology provides the silent, steady heartbeat behind every life-saving surgery in our high-volume trauma center.",
+            "10-Bedded Critical Care: We manage one of the region's best Critical Care units, offering a sophisticated safety net for the most complex emergency cases.",
+            "Mastery Over Pain: Utilizing advanced ultrasound-guided nerve blocks and precision analgesia, we ensure patient comfort even in the aftermath of severe trauma.",
+            "Real-Time Life Support: Our specialists are experts in advanced hemodynamic monitoring and mechanical ventilation, maintaining stability when it matters most.",
+            "The Bridge to Recovery: We provide a seamless continuum of care, transitioning patients from the chaos of the ER to the controlled stability of our modern ICUs.",
+            "Precision Anaesthesia: From medical emergencies to geriatric trauma, our tailored anesthetic plans prioritize safety and rapid post-operative recovery.",
+            "24/7 Intensivist Presence: Round-the-clock coverage by board-certified intensivists means expert intervention is always seconds away, never minutes.",
+            "Cutting-Edge Technology: Equipped with high-end workstations and point-of-care diagnostics to make split-second, data-driven clinical decisions.",
+            "Multidisciplinary Synergy: We act as the vital link between surgery and recovery, collaborating across specialties to optimize outcomes for every patient.",
+            "Guardians of Survival: At Valli Superspecialty, our Anaesthesia and Critical Care team stands as the ultimate shield against the unpredictable."
+        ],
+        procedures: [],
+        tech: [],
+        stat: { value: "10", label: "ICU Beds" },
+    },
+    {
         id: "emergency",
-        title: "24x7 Emergency",
-        subtitle: "Industrial Injury Support",
+        title: "Emergency Medicine",
+        subtitle: "Every Second Counts",
         accentColor: "#f98825",
         bg: "bg-gradient-to-r from-[#ebfdfc] to-[#ffffff]",
         dark: false,
@@ -136,10 +191,22 @@ const specialities = [
                 <path d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
         ),
-        description: "Specialized care for those who keep INDUSTRIES RUNNING. We maintain a 30-minute interval from arrival to operation.",
-        procedures: ["Limb Salvage Procedures", "Debridement & Fixation", "Ultrasound Nerve Block", "BLS Training", "Trauma Support"],
-        tech: ["C-ARM Imaging", "Advanced ER", "Ambulance Support"],
-        stat: { value: "30 Min", label: "Arrival to OT" },
+        description: "At Valli Superspecialty, we don’t just treat emergencies—we redefine survival through innovation, massive infrastructure, and rapid-response protocols.",
+        bullets: [
+            "Precision in Emergencies: Experience world-class trauma care in our massive, state-of-the-art 50-bedded Emergency & Trauma center.",
+            "The Golden Hour Advantage: Our rapid-response protocols are designed to deliver life-saving interventions when every millisecond matters.",
+            "Elite Trauma Specialists: Our department is spearheaded by a multidisciplinary team of certified surgeons and emergency physicians available 24/7/365.",
+            "Advanced Diagnostics On-Site: Instant access to high-speed imaging and bedside pathology ensures no time is wasted in reaching a diagnosis.",
+            "Comprehensive Critical Care: From acute cardiac events to complex poly-trauma, we provide a seamless transition from the ER to our high-tech ICUs.",
+            "Cutting-Edge Infrastructure: Equipped with a dedicated Triage Zone, specialized procedure rooms, and integrated life-support systems.",
+            "Air and Road Connectivity: Our seamless ambulance network ensures that expert medical intervention begins the moment we reach your doorstep.",
+            "Mass Casualty Readiness: One of the region's largest setups, uniquely capable of managing large-scale emergencies with clinical excellence.",
+            "Compassion Under Pressure: We combine high-velocity medical care with a human touch, supporting families through their most difficult moments.",
+            "Your Safety, Our Mission: At Valli Superspecialty, we don’t just treat emergencies—we redefine survival through innovation and expertise."
+        ],
+        procedures: [],
+        tech: [],
+        stat: { value: "50+", label: "Trauma Bed Capacity" },
     },
 ];
 
@@ -228,38 +295,54 @@ export default function SpecialitiesPage() {
                                     </div>
 
                                     {/* Right — Procedures + Tech + CTA */}
-                                    <div className="flex-1 p-8 md:p-10">
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 h-full">
-                                            <div>
-                                                <h3 className={`text-xs font-bold uppercase tracking-widest mb-4 ${item.dark ? "text-white/40" : "text-[#40484a]"}`}>Procedures</h3>
-                                                <ul className="space-y-2.5">
-                                                    {item.procedures.map((p) => (
-                                                        <li key={p} className={`flex items-center gap-2.5 text-sm font-medium ${item.dark ? "text-white/70" : "text-[#00333c]"}`}>
-                                                            <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: item.accentColor }} />
-                                                            {p}
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-
-                                            <div>
-                                                <h3 className={`text-xs font-bold uppercase tracking-widest mb-4 ${item.dark ? "text-white/40" : "text-[#40484a]"}`}>Technology Used</h3>
-                                                <div className="flex flex-wrap gap-2 mb-8">
-                                                    {item.tech.map((t) => (
-                                                        <span key={t} className={`text-xs font-semibold px-3 py-1.5 rounded-full ${item.dark ? "bg-white/10 text-white/70 border border-white/15" : "bg-white text-[#004b57] border border-[#e5eaeb]"}`}>
-                                                            {t}
-                                                        </span>
+                                    <div className="flex-1 p-8 md:p-10 flex flex-col justify-between">
+                                        {(item as any).bullets ? (
+                                            <div className="mb-8">
+                                                <h3 className={`text-xs font-bold uppercase tracking-widest mb-6 ${item.dark ? "text-white/40" : "text-[#40484a]"}`}>Department Highlights</h3>
+                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 gap-y-6">
+                                                    {(item as any).bullets.map((b: string) => (
+                                                        <div key={b} className={`flex items-start gap-3 text-sm font-medium ${item.dark ? "text-white/80" : "text-[#00333c]"}`}>
+                                                            <span className="w-1.5 h-1.5 rounded-full shrink-0 mt-1.5" style={{ backgroundColor: item.accentColor }} />
+                                                            <span className="leading-relaxed">{b}</span>
+                                                        </div>
                                                     ))}
                                                 </div>
-
-                                                <a href="/book-appointment"
-                                                    className="inline-flex items-center gap-2 bg-[#004b57] text-white px-6 py-3 rounded-full text-sm font-bold hover:bg-[#00333c] hover:-translate-y-0.5 transform transition-all duration-200 shadow-md">
-                                                    Book Consultation
-                                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                                    </svg>
-                                                </a>
                                             </div>
+                                        ) : (
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 h-full mb-8">
+                                                <div>
+                                                    <h3 className={`text-xs font-bold uppercase tracking-widest mb-4 ${item.dark ? "text-white/40" : "text-[#40484a]"}`}>Procedures</h3>
+                                                    <ul className="space-y-2.5">
+                                                        {item.procedures.map((p) => (
+                                                            <li key={p} className={`flex items-start gap-2.5 text-sm font-medium ${item.dark ? "text-white/70" : "text-[#00333c]"}`}>
+                                                                <span className="w-1.5 h-1.5 rounded-full shrink-0 mt-1.5" style={{ backgroundColor: item.accentColor }} />
+                                                                <span className="leading-relaxed">{p}</span>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+
+                                                <div>
+                                                    <h3 className={`text-xs font-bold uppercase tracking-widest mb-4 ${item.dark ? "text-white/40" : "text-[#40484a]"}`}>Technology Used</h3>
+                                                    <div className="flex flex-wrap gap-2 mb-8">
+                                                        {item.tech.map((t) => (
+                                                            <span key={t} className={`text-xs font-semibold px-3 py-1.5 rounded-full ${item.dark ? "bg-white/10 text-white/70 border border-white/15" : "bg-white text-[#004b57] border border-[#e5eaeb]"}`}>
+                                                                {t}
+                                                            </span>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        <div>
+                                            <a href="/book-appointment"
+                                                className="inline-flex items-center gap-2 bg-[#004b57] text-white px-6 py-3 rounded-full text-sm font-bold hover:bg-[#00333c] hover:-translate-y-0.5 transform transition-all duration-200 shadow-md">
+                                                Book Consultation
+                                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                </svg>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
