@@ -155,12 +155,12 @@ export default function AboutSection() {
                             </h2>
 
                             {/* Polished Paragraphs */}
-                            <div className="space-y-6 mb-12">
+                            <div className="space-y-6 mb-12 flex flex-col">
                                 <p className="text-[#00333c] font-semibold text-base md:text-lg leading-relaxed max-w-2xl bg-white/40 backdrop-blur-sm p-4 rounded-xl border border-white/60">
-                                    Located in the heart of Salem at Opposite to Sri Vidya Mandir School, Meyyanoor Road, Valli Super Speciality Hospital is a premier healthcare institution dedicated to delivering advanced medical treatments. With a legacy of over two decades, we specialize heavily in orthopedics, sports medicine, and trauma care.
+                                    From its landmark inception in October 2022 as Valli Orthopedic and Sports Hospital, our institution has been driven by a singular mission: to provide world-class surgical and rehabilitative care. Recognizing the growing need for comprehensive medical intervention, we underwent a transformative upgradation in 2025, emerging as Valli Superspecialty Hospital.
                                 </p>
                                 <p className="text-[#40484a]/90 font-medium text-base md:text-lg leading-relaxed max-w-xl px-4 border-l-[3px] border-[#3cb3a6]">
-                                    We believe that medical expertise is most effective when paired with kindness, clear communication, and a patient-centric environment, strictly adhering to national protocols for affordable excellence.
+                                    This expansion has solidified our position as a premier 50-bedded multispecialty hub. While our roots remain deeply embedded in Sports Medicine and Joint Replacements, our growth has been defined by an obsession with Trauma and Emergency services.
                                 </p>
                             </div>
 

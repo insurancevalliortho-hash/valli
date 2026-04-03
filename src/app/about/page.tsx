@@ -138,17 +138,17 @@ export default function AboutPage() {
                                 Our Story
                             </span>
                             <h2 className="text-4xl md:text-5xl font-black text-[#00333c] leading-tight tracking-tight mb-6">
-                                Built on Trust,<br /><span className="text-[#f98825]">One Patient at a Time</span>
+                                The Evolution of Excellence:<br /><span className="text-[#f98825]">Valli Superspecialty Hospital</span>
                             </h2>
                             <div className="space-y-4 text-[#40484a] text-base leading-relaxed font-medium">
                                 <p>
-                                    Established in 2022, we began as a 20-bed orthopaedic trauma and emergency care center. Our founders' vision was clear: to create a center of excellence providing world-class healthcare across multiple specialties.
+                                    From its landmark inception in October 2022 as Valli Orthopedic and Sports Hospital, our institution has been driven by a singular mission: to provide world-class surgical and rehabilitative care. Recognizing the growing need for comprehensive medical intervention in the region, we underwent a transformative upgradation in 2025, emerging as Valli Superspecialty Hospital. This expansion has solidified our position as a premier 50-bedded multispecialty hub, where advanced technology meets compassionate care.
                                 </p>
                                 <p>
-                                    At Valli, patients aren't just case files; they are individuals with stories, dreams, and hopes. Every diagnosis, every surgery, and every treatment plan is crafted with precision and compassion.
+                                    While our roots remain deeply embedded in Sports Medicine, Spine Surgeries, and Joint Replacements, our growth has been defined by an obsession with Trauma and Emergency services. We operate with the belief that during the "Golden Hour," every second is a lifeline. To support this, we have integrated a high-tech ICU, a sophisticated Surgical Gastroenterology wing, and a 24/7 diagnostic suite featuring CT scans and Ultrasound.
                                 </p>
                                 <p>
-                                    Today, we stand as a beacon of excellence in specialized medical care, offering cutting-edge treatments in Orthopaedics, Plastic Surgery, Gastroenterology, Neurosurgery, Paediatrics, Internal Medicine, and more.
+                                    With a medical team rigorously trained in ACLS and ATLS, Valli Superspecialty Hospital stands as a beacon of reliability—transforming complex emergencies into stories of survival and recovery.
                                 </p>
                             </div>
                         </motion.div>
