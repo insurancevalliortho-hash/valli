@@ -7,7 +7,7 @@ const facilities = [
     {
         title: "24/7 Emergency Care",
         description: "Round-the-clock trauma and critical care services with an arrival-operation time interval maintained at 30 minutes.",
-        img: "https://picsum.photos/seed/hosp-er/1400/900",
+        img: "https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?auto=format&fit=crop&w=1400&q=80",
         tag: "24/7 Rapid Response",
         accent: "#f98825",
         number: "01",
@@ -15,7 +15,7 @@ const facilities = [
     {
         title: "Advanced Diagnostic Services",
         description: "X-ray, CT scan, ultrasound, and laboratory tests available anytime, ensuring precise diagnostics around the clock.",
-        img: "https://picsum.photos/seed/hospital/1400/900",
+        img: "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=1400&q=80",
         tag: "Real-Time Imaging",
         accent: "#3cb3a6",
         number: "02",
@@ -23,7 +23,7 @@ const facilities = [
     {
         title: "HVAC-Equipped Modular OTs",
         description: "2 HVAC-equipped advanced surgical suites and Modular Operation Theatres to ensure safety, precision, and a sterile environment.",
-        img: "https://picsum.photos/seed/hosp-sterile/1400/900",
+        img: "https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=1400&q=80",
         tag: "Ultra-Hygienic",
         accent: "#f98825",
         number: "03",
@@ -31,7 +31,7 @@ const facilities = [
     {
         title: "Physiotherapy & Rehabilitation",
         description: "Specialized recovery programs for mobility and pain relief, ensuring a holistic healing approach.",
-        img: "https://picsum.photos/seed/hosp-rehab/1400/900",
+        img: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1400&q=80",
         tag: "Personalized Care",
         accent: "#3cb3a6",
         number: "04",
@@ -47,11 +47,11 @@ function FacilityRow({ fac, idx }: { fac: typeof facilities[0]; idx: number }) {
     const isEven = idx % 2 === 0;
 
     return (
-        <div ref={rowRef} className="relative flex flex-col lg:flex-row min-h-[70vh] overflow-hidden">
+        <div ref={rowRef} className="relative flex flex-col lg:flex-row min-h-[50svh] xl:min-h-[55vh] overflow-hidden">
 
             {/* Image half */}
             <motion.div
-                className={`relative w-full lg:w-[55%] min-h-[50vw] lg:min-h-[70vh] overflow-hidden ${isEven ? "lg:order-1" : "lg:order-2"}`}
+                className={`relative w-full lg:w-[55%] min-h-[40vw] lg:min-h-[50vh] xl:min-h-[55vh] overflow-hidden ${isEven ? "lg:order-1" : "lg:order-2"}`}
             >
                 {/* Rotating corner diamond */}
                 <motion.div
@@ -98,7 +98,7 @@ function FacilityRow({ fac, idx }: { fac: typeof facilities[0]; idx: number }) {
             </motion.div>
 
             {/* Text half */}
-            <div className={`relative w-full lg:w-[45%] bg-[#f5f7f8] flex items-center px-8 md:px-12 lg:px-16 py-14 lg:py-0 ${isEven ? "lg:order-2" : "lg:order-1"}`}>
+            <div className={`relative w-full lg:w-[45%] bg-[#f5f7f8] flex items-center px-8 md:px-10 lg:px-12 xl:px-14 py-10 lg:py-0 ${isEven ? "lg:order-2" : "lg:order-1"}`}>
 
                 {/* Background ring decoration */}
                 <div
@@ -115,16 +115,16 @@ function FacilityRow({ fac, idx }: { fac: typeof facilities[0]; idx: number }) {
                     >
                         {/* Giant number watermark */}
                         <div
-                            className="text-[7rem] font-black leading-none select-none pointer-events-none mb-2 -ml-2 opacity-[0.07]"
+                            className="text-[4rem] xl:text-[5rem] font-black leading-none select-none pointer-events-none mb-1 -ml-1 opacity-[0.07]"
                             style={{ color: fac.accent }}
                         >
                             {fac.number}
                         </div>
 
-                        <h3 className="text-3xl md:text-4xl xl:text-[2.7rem] font-black text-[#00333c] tracking-tight leading-[1.1] mb-5">
+                        <h3 className="text-2xl md:text-3xl xl:text-[2rem] font-black text-[#00333c] tracking-tight leading-[1.1] mb-3">
                             {fac.title}
                         </h3>
-                        <p className="text-[#40484a] font-medium text-base md:text-lg leading-relaxed mb-8 max-w-md">
+                        <p className="text-[#40484a] font-medium text-sm md:text-base leading-relaxed mb-6 max-w-md">
                             {fac.description}
                         </p>
                         <a
@@ -149,7 +149,7 @@ export default function TechShowcase() {
         <section id="facilities" className="bg-[#f5f7f8] text-[#0e1e1e]">
 
             {/* Section header */}
-            <div className="container mx-auto px-6 md:px-12 pt-24 pb-16 text-center">
+            <div className="container mx-auto px-6 md:px-12 pt-16 pb-12 text-center">
                 <motion.span
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -165,7 +165,7 @@ export default function TechShowcase() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                    className="text-4xl md:text-5xl xl:text-6xl font-black text-[#00333c] tracking-tight leading-[1.07] mb-5"
+                    className="text-3xl md:text-4xl xl:text-5xl font-black text-[#00333c] tracking-tight leading-[1.07] mb-4"
                 >
                     State-of-the-Art <span className="text-[#f98825]">Facilities</span>
                 </motion.h2>

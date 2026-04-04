@@ -131,7 +131,7 @@ export default function SpecialityGrid() {
     const bgShapeY = useTransform(scrollYProgress, [0, 1], ["-6%", "6%"]);
 
     return (
-        <section id="specialities" ref={ref} className="py-24 md:py-32 bg-[#f9fafb] relative overflow-hidden">
+        <section id="specialities" ref={ref} className="py-16 md:py-24 bg-[#f9fafb] relative overflow-hidden">
 
             {/* ── Hero-language geometric background shapes ── */}
             <motion.div
@@ -149,7 +149,7 @@ export default function SpecialityGrid() {
             <div className="container mx-auto px-6 md:px-12 relative z-10">
 
                 {/* Header */}
-                <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
+                <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -161,7 +161,7 @@ export default function SpecialityGrid() {
                             <span className="w-1.5 h-1.5 rounded-full bg-[#f98825]" />
                             Departments
                         </span>
-                        <h2 className="text-4xl md:text-6xl font-black text-[#00333c] leading-[1.07] tracking-tight">
+                        <h2 className="text-3xl md:text-4xl xl:text-5xl font-black text-[#00333c] leading-[1.07] tracking-tight">
                             Centers of <span className="text-[#f98825]">Excellence</span>
                         </h2>
                     </motion.div>
@@ -177,7 +177,7 @@ export default function SpecialityGrid() {
                 </div>
 
                 {/* Bento grid */}
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-5 auto-rows-[260px]">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-4 auto-rows-[220px] xl:auto-rows-[240px]">
                     {specialities.map((item, index) => (
                         <motion.div
                             key={index}
@@ -227,7 +227,7 @@ export default function SpecialityGrid() {
 
                             {/* Bottom row */}
                             <div className="relative z-10 mt-auto group-hover:-translate-y-2 transition-transform duration-500">
-                                <h3 className={`text-2xl md:text-[1.7rem] font-black mb-3 tracking-tight leading-tight ${item.textColor}`}>
+                                <h3 className={`text-xl md:text-2xl font-black mb-2 tracking-tight leading-tight ${item.textColor}`}>
                                     {item.title}
                                 </h3>
                                 <p className={`font-medium leading-relaxed text-sm md:text-base ${item.descColor}`}>

@@ -6,7 +6,6 @@ import SurgeonProfile from "./../components/SurgeonProfile";
 import SpecialityGrid from "./../components/SpecialityGrid";
 import TechShowcase from "./../components/TechShowcase";
 import Testimonials from "./../components/Testimonials";
-import EmergencyBar from "./../components/EmergencyBar";
 import SmoothScroll from "./../components/SmoothScroll";
 import MagneticCursor from "./../components/MagneticCursor";
 import Footer from "./../components/Footer";
@@ -25,7 +24,7 @@ export default function Home() {
                 <TechShowcase />
                 <Testimonials />
             </main>
-            <EmergencyBar />
+
             <Footer />
         </SmoothScroll>
     );

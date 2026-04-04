@@ -17,8 +17,8 @@ export default function Navbar() {
         <>
             <motion.nav
                 className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 border-b ${isScrolled
-                    ? "bg-white/80 backdrop-blur-xl border-[#bfc8ca]/30 py-4 shadow-[0_8px_30px_rgba(0,51,60,0.06)]"
-                    : "bg-transparent border-transparent py-8"
+                    ? "bg-white/80 backdrop-blur-xl border-[#bfc8ca]/30 py-2 shadow-[0_8px_30px_rgba(0,51,60,0.06)]"
+                    : "bg-transparent border-transparent py-4"
                     }`}
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
@@ -26,12 +26,15 @@ export default function Navbar() {
             >
                 <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
                     {/* Logo Area */}
-                    <a href="/" className="flex items-center gap-4 group cursor-pointer">
-                        <img src="/logo.png" alt="Valli Hospital Logo" className="h-12 w-auto" />
-                        <div className="text-xl font-medium tracking-tight text-[#00333c] hidden sm:flex flex-col leading-tight">
-                            <span>Valli <span className="font-light text-[#40484a]">Hospital</span></span>
-                            <span className="text-[0.65rem] tracking-widest text-[#f98825] uppercase font-bold">Super Speciality</span>
-                        </div>
+                    <a href="/" className="flex items-center gap-3 group cursor-pointer">
+                        {/* Mobile: full logo.png (has Tamil text), no extra label */}
+                        <img src="/logo.png" alt="Valli Hospital" className="h-10 w-auto sm:hidden" />
+
+                        {/* Desktop: favicon icon + single-line teal name */}
+                        <img src="/favicon.png" alt="Valli Hospital" className="hidden sm:block h-11 w-auto" />
+                        <span className="hidden sm:block text-xl font-bold tracking-tight text-[#004b57] whitespace-nowrap">
+                            Valli Super Speciality Hospital
+                        </span>
                     </a>
 
                     {/* Desktop Menu - Rounded Floating Pill */}

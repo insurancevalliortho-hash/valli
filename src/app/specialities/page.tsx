@@ -22,15 +22,21 @@ const specialities = [
                 <path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
             </svg>
         ),
-        description: "Comprehensive bone and joint care for all ages, specializing in minimally invasive total knee and hip replacements. We get active patients back to peak performance.",
-        procedures: ["Total Joint Replacement", "Sports Injuries & Ligament Reconstruction", "Fracture Management", "Spine Disorders Treatment", "Trauma Care"],
-        tech: ["Arthroscopy", "Computer Navigation", "Ultrasound-Guided Blocks"],
+        description: "Comprehensive bone and joint care, sports injuries, and minimally invasive total joint replacements backed by advanced arthroscopy and computer navigation.",
+        bullets: [
+            "Total Knee & Hip Replacement using minimally invasive techniques for faster recovery.",
+            "Arthroscopic surgery for sports injuries, ligament reconstruction, and cartilage repairs.",
+            "Complex trauma & fracture management with 24/7 emergency orthopedic readiness.",
+            "Spine disorder treatment including disc herniation, spondylolisthesis, and stenosis.",
+            "Advanced diagnostics: high-speed CT scan, ultrasound, and bone density studies on-site.",
+            "Integrated physiotherapy & rehabilitation to restore full mobility post-surgery.",
+        ],
         stat: { value: "3,000+", label: "Joint Replacements Performed" },
     },
     {
         id: "gastroenterology",
-        title: "Surgical Gastroenterology",
-        subtitle: "Advanced Solutions for Digestive Health",
+        title: "Advanced Surgical Gastroenterology",
+        subtitle: "Digestive Care",
         accentColor: "#f98825",
         bg: "bg-white",
         dark: false,
@@ -41,26 +47,20 @@ const specialities = [
                 <path d="M8 7v4m8-4v4m-4-8v12m-6 4h12c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H6c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2z" />
             </svg>
         ),
-        description: "Experience world-class care at our specialized Surgical Gastroenterology wing, integrated within our robust 50-bedded multispecialty framework.",
+        description: "High-performance surgical management of complex abdominal conditions within a 50-bedded multispecialty framework powered by laparoscopy and advanced endoscopy.",
         bullets: [
-            "Precision Surgical Excellence: Experience world-class care at our specialized Surgical Gastroenterology wing, integrated within our robust 50-bedded multispecialty framework.",
-            "Minimally Invasive Mastery: We specialize in advanced laparoscopy, offering \"keyhole\" surgeries that ensure faster recovery, less pain, and minimal scarring.",
-            "Expert Specialist Leadership: Our department is led by a dedicated Surgical Gastroenterologist, providing expert management for complex abdominal and digestive disorders.",
-            "Complete Diagnostic Suite: Benefit from immediate, on-site insights with our high-resolution CT scan and Ultrasound facilities for rapid and accurate diagnosis.",
-            "Advanced Endoscopic Interventions: From routine screenings to therapeutic procedures, our high-definition Endoscopy and Colonoscopy services provide a clear window to your health.",
-            "Comprehensive Trauma Support: As a trauma-heavy setup, we are uniquely equipped to handle emergency abdominal surgeries and acute GI injuries with 24/7 readiness.",
-            "Tailored Treatment Plans: We provide personalized care for conditions ranging from gallstones and hernias to complex gastrointestinal cancers.",
-            "Integrated Critical Care: Our surgical team works in tandem with our high-tech ICUs to provide seamless post-operative monitoring for high-risk patients.",
-            "Cutting-Edge Infrastructure: Our modular operating theaters are designed for maximum safety, utilizing the latest surgical technology for superior clinical outcomes.",
-            "Restoring Your Quality of Life: At Valli Superspecialty, we combine diagnostic precision with surgical innovation to get you back to your best self, faster."
+            "Minimally invasive laparoscopic surgery for gallstones, hernias, appendicitis, and GERD.",
+            "Advanced Endoscopy & Colonoscopy for GI bleeding, peptic ulcers, and polyp management.",
+            "Complex hepatobiliary surgery for pancreatitis, liver abscesses, and pancreatic pseudocysts.",
+            "Emergency laparotomies and life-saving care for GI perforations and bowel obstruction.",
+            "High-resolution CT scan & ultrasound for rapid mapping of abdominal trauma.",
+            "ACLS & ATLS certified team with high-tech ICU for seamless post-operative critical care.",
         ],
-        procedures: [],
-        tech: [],
-        stat: { value: "Top", label: "Digestive Care" },
+        stat: { value: "24/7", label: "Surgical Readiness" },
     },
     {
         id: "neurosurgery",
-        title: "Neurosurgery & Neurology",
+        title: "Advanced Neurosurgery & Neurological Care",
         subtitle: "Brain & Spine",
         accentColor: "#ba1a1a",
         bg: "bg-[#fff5f5]",
@@ -72,34 +72,96 @@ const specialities = [
                 <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
             </svg>
         ),
-        description: "Advanced treatments for brain and spinal cord injuries. Expert diagnosis and treatment for nerve conditions including stroke and epilepsy.",
-        procedures: ["Brain Tumour Surgery", "Herniated Disc Surgery", "Stroke & Aneurysm Treatment", "Parkinson's Care", "Migraine Treatment"],
-        tech: ["Neuro-Monitoring", "Fluoroscopy-Guided", "Endoscopic Spine"],
-        stat: { value: "High", label: "Success Rate" },
+        description: "Elite neurosurgical precision for brain tumors, cerebrovascular emergencies, and spine disorders within a high-tech ICU-backed multispecialty infrastructure.",
+        bullets: [
+            "Brain tumor surgery: Gliomas, Meningiomas, Pituitary Adenomas with neuro-microscope precision.",
+            "Cerebrovascular care for Aneurysms, AVM, Ischemic & Hemorrhagic Stroke.",
+            "Emergency neurosurgery for Traumatic Brain Injury, Epidural & Subdural Hematomas.",
+            "Spine surgery: Herniated Disc, Spondylolisthesis, Spinal Stenosis, and Spinal Cord Tumors.",
+            "VP Shunting for Hydrocephalus and management of Trigeminal Neuralgia.",
+            "Rapid CT scan & MRI-guided diagnostics for congenital anomalies and ICP management.",
+        ],
+        stat: { value: "High", label: "Precision Rate" },
     },
     {
-        id: "plastic-surgery",
-        title: "Plastic & Vascular Surgery",
-        subtitle: "Reconstructive",
-        accentColor: "#004b57",
+        id: "pulmonology",
+        title: "Advanced Respiratory Care & Pulmonology",
+        subtitle: "Lung & Airway",
+        accentColor: "#3cb3a6",
         bg: "bg-white",
         dark: false,
-        tag: "Reconstructive",
-        tagBg: "bg-[#004b57]/10 text-[#004b57]",
+        tag: "Respiratory Care",
+        tagBg: "bg-[#3cb3a6]/10 text-[#3cb3a6]",
         icon: (
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-8 h-8">
-                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
+                <path d="M12 3c0 0-4 4-4 9s2 6 4 6 4-1 4-6-4-9-4-9z" />
             </svg>
         ),
-        description: "Restoring function and enhancing aesthetics with meticulous care for burns, trauma, and vascular complications.",
-        procedures: ["Reconstructive Surgery", "Hand Surgery & Microsurgery", "Scar Revision", "Skin Grafting", "Vascular Repair"],
-        tech: ["Microsurgery Tools", "Doppler Assessment", "Modular OT"],
-        stat: { value: "Top", label: "Aesthetic Outcomes" },
+        description: "Elite respiratory care for Asthma, COPD, TB, and life-threatening emergencies like ARDS within a 50-bedded multispecialty setup with interventional pulmonology.",
+        bullets: [
+            "Expert management of Asthma, COPD, Bronchiectasis, ILD, and Pleural Effusion.",
+            "Flexible Bronchoscopy for lung cancer diagnosis and therapeutic removal of foreign bodies.",
+            "Life-saving ICU care for ARDS, Pneumothorax, and Massive Hemoptysis — 24/7.",
+            "High-resolution CT & ultrasound (USG Thorax) for lung nodules and mediastinal conditions.",
+            "Thoracocentesis, BiPAP/CPAP therapy, and comprehensive Pulmonary Rehabilitation.",
+            "Synergy with Endoscopy and Laparoscopy teams for Pulmonary Embolism and Sarcoidosis.",
+        ],
+        stat: { value: "24/7", label: "Respiratory ICU" },
+    },
+    {
+        id: "hematology",
+        title: "Hematology & Blood Disorders",
+        subtitle: "Precision Care for Every Drop of Life",
+        accentColor: "#ba1a1a",
+        bg: "bg-[#fff5f5]",
+        dark: false,
+        tag: "Blood Disorders",
+        tagBg: "bg-red-100 text-red-700",
+        icon: (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-8 h-8">
+                <path d="M12 2a7 7 0 017 7c0 5-7 13-7 13S5 14 5 9a7 7 0 017-7z" />
+            </svg>
+        ),
+        description: "Expert diagnosis and management of blood disorders from Anemia and Hemophilia to Leukemia within a 50-bedded multispecialty framework with 24/7 ICU readiness.",
+        bullets: [
+            "Diagnosis & management of Iron Deficiency Anemia, Thalassemia, Sickle Cell Disease, and Hemophilia.",
+            "Emergency care for Septicemia, Thrombocytopenia, DIC, and DVT — ACLS & ATLS certified team.",
+            "High-speed CT scan & ultrasound for Lymphadenopathy and Splenomegaly investigations.",
+            "Endoscopy & Colonoscopy suite for rapid identification of occult GI bleeding.",
+            "Comprehensive oncology workups for Leukemia, Lymphoma, and Multiple Myeloma.",
+            "Laparoscopic Splenectomy for ITP and minimally invasive surgical synergy when needed.",
+        ],
+        stat: { value: "24/7", label: "Emergency Hematology" },
+    },
+    {
+        id: "critical-care",
+        title: "Anaesthesiology & Critical Care",
+        subtitle: "The Shield of Critical Care",
+        accentColor: "#f98825",
+        bg: "bg-gradient-to-br from-[#00333c] to-[#001f25]",
+        dark: true,
+        tag: "Critical Care",
+        tagBg: "bg-[#f98825]/20 text-[#f98825]",
+        icon: (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-8 h-8">
+                <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+        ),
+        description: "Precision anaesthesia and rapid-response critical care — the high-velocity clinical engine safeguarding every heartbeat through surgery, trauma, and recovery.",
+        bullets: [
+            "General, Regional & Ultrasound-Guided Nerve Block Anaesthesia for all surgical specialties.",
+            "24/7 ICU management for Septic Shock, MODS, ARDS, and Status Epilepticus.",
+            "Primary responders for Polytrauma, TBI, and Hemorrhagic Shock in all emergencies.",
+            "24/7 POCUS diagnostics, ABG analysis, and real-time hemodynamic monitoring.",
+            "Management of Poisoning/Toxicology, DKA, and Acute Renal Failure in critical care.",
+            "Sedation for Endoscopy/Colonoscopy and post-operative recovery for high-risk patients.",
+        ],
+        stat: { value: "10-Bed", label: "Advanced ICU" },
     },
     {
         id: "internal-medicine",
-        title: "Internal Medicine",
-        subtitle: "The Foundation of Comprehensive Healing",
+        title: "Internal Medicine & Urology",
+        subtitle: "Primary Care",
         accentColor: "#f98825",
         bg: "bg-white",
         dark: false,
@@ -110,76 +172,45 @@ const specialities = [
                 <path d="M4 6h16M4 12h16m-7 6h7" />
             </svg>
         ),
-        description: "Our Department of Internal Medicine serves as the expert core of our 50-bedded multispecialty hospital, managing diverse and complex medical conditions.",
+        description: "Expert core of our 50-bedded multispecialty hospital managing chronic and acute illnesses with ACLS/ATLS-certified staff, on-site diagnostics, and integrated critical care.",
         bullets: [
-            "Holistic Healthcare Excellence: Our Department of Internal Medicine serves as the expert core of our 50-bedded multispecialty hospital, managing diverse and complex medical conditions.",
-            "Elite Life-Saving Skills: Rest easy knowing our medical staff is rigorously trained in ACLS and ATLS, ensuring immediate, world-class intervention during any crisis.",
-            "Integrated Critical Care: With a high-tech ICU on-site, we provide seamless transitions for patients requiring intensive monitoring and advanced life support.",
-            "Diagnostic Powerhouse: We utilize immediate, in-house CT scans and Ultrasound to transform clinical symptoms into precise, actionable diagnoses within minutes.",
-            "Advanced Internal Imaging: Our specialists offer high-definition Endoscopy and Colonoscopy, providing vital insights into gastrointestinal health without the need for external referrals.",
-            "Surgical Synergy: We work hand-in-hand with our Laparoscopy team to offer minimally invasive surgical solutions for internal medical complications.",
-            "Expert Chronic Disease Management: From hypertension and diabetes to complex infectious diseases, we provide personalized, evidence-based treatment plans.",
-            "Rapid Trauma Response: In our trauma-centric environment, our physicians are masters of stabilizing and managing multi-system medical emergencies 24/7.",
-            "Preventative Wellness: Beyond acute care, we focus on comprehensive health screenings and early detection to safeguard your long-term vitality.",
-            "Compassionate Expertise: At Valli Superspecialty, we combine cutting-edge medical science with a dedicated human touch to lead your journey back to health."
+            "Expert management of Diabetes, Hypertension, Infectious Diseases, and Renal disorders.",
+            "ACLS & ATLS certified team with seamless ICU transition for rapid-deterioration cases.",
+            "In-house CT scan & Ultrasound delivering accurate diagnoses within minutes.",
+            "High-definition Endoscopy & Colonoscopy for gastrointestinal health without referrals.",
+            "Laparoscopic surgical synergy for internal medical complications requiring intervention.",
+            "Comprehensive urology: nephrology disorders, bladder and prostate care, renal failure.",
         ],
-        procedures: [],
-        tech: [],
         stat: { value: "24/7", label: "Care & Diagnostics" },
     },
     {
         id: "paediatrics",
-        title: "Paediatrics & Surgery",
+        title: "Paediatrics & Paediatric Surgery",
         subtitle: "Child-First Care",
-        accentColor: "#004b57",
+        accentColor: "#3cb3a6",
         bg: "bg-white",
         dark: false,
         tag: "Child-First Care",
-        tagBg: "bg-[#004b57]/10 text-[#004b57]",
+        tagBg: "bg-[#3cb3a6]/10 text-[#3cb3a6]",
         icon: (
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-8 h-8">
                 <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
             </svg>
         ),
-        description: "Complete healthcare for children including newborn wellness, emergency surgeries, and laparoscopic procedures—tailored exactly for young ones.",
-        procedures: ["Newborn Check-ups", "Immunization", "Birth Defect Corrections", "Hernia Surgery", "Laparoscopic Procedures"],
-        tech: ["Pediatric Anesthesia", "Safe Diagnostics", "Incubators"],
+        description: "Complete healthcare for children including newborn wellness, emergency surgeries, and laparoscopic procedures with child-safe anesthesia protocols.",
+        bullets: [
+            "Newborn wellness check-ups, immunization, and neonatal intensive care support.",
+            "Pediatric emergency surgery for appendicitis, intussusception, and acute abdomen.",
+            "Laparoscopic procedures: hernia repair, pyloric stenosis, and undescended testis.",
+            "Birth defect corrections and congenital anomaly management with specialist oversight.",
+            "Child-safe diagnostic suite: dedicated pediatric imaging, ultrasound, and lab services.",
+            "Specialized pediatric anesthesia with incubator-ready post-op monitoring.",
+        ],
         stat: { value: "100%", label: "Child-Safe Protocols" },
     },
     {
-        id: "critical-care",
-        title: "Anaesthesiology & ICU",
-        subtitle: "The Architects of Critical Care",
-        accentColor: "#ba1a1a",
-        bg: "bg-[#fff5f5]",
-        dark: false,
-        tag: "Critical Care",
-        tagBg: "bg-red-100 text-red-700",
-        icon: (
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-8 h-8">
-                <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
-        ),
-        description: "Our Anaesthesia and Critical Care team stands as the ultimate shield against the unpredictable, providing the silent, steady heartbeat behind every life-saving surgery.",
-        bullets: [
-            "Vigilance in the Vortex: Our Department of Anaesthesiology provides the silent, steady heartbeat behind every life-saving surgery in our high-volume trauma center.",
-            "10-Bedded Critical Care: We manage one of the region's best Critical Care units, offering a sophisticated safety net for the most complex emergency cases.",
-            "Mastery Over Pain: Utilizing advanced ultrasound-guided nerve blocks and precision analgesia, we ensure patient comfort even in the aftermath of severe trauma.",
-            "Real-Time Life Support: Our specialists are experts in advanced hemodynamic monitoring and mechanical ventilation, maintaining stability when it matters most.",
-            "The Bridge to Recovery: We provide a seamless continuum of care, transitioning patients from the chaos of the ER to the controlled stability of our modern ICUs.",
-            "Precision Anaesthesia: From medical emergencies to geriatric trauma, our tailored anesthetic plans prioritize safety and rapid post-operative recovery.",
-            "24/7 Intensivist Presence: Round-the-clock coverage by board-certified intensivists means expert intervention is always seconds away, never minutes.",
-            "Cutting-Edge Technology: Equipped with high-end workstations and point-of-care diagnostics to make split-second, data-driven clinical decisions.",
-            "Multidisciplinary Synergy: We act as the vital link between surgery and recovery, collaborating across specialties to optimize outcomes for every patient.",
-            "Guardians of Survival: At Valli Superspecialty, our Anaesthesia and Critical Care team stands as the ultimate shield against the unpredictable."
-        ],
-        procedures: [],
-        tech: [],
-        stat: { value: "10", label: "ICU Beds" },
-    },
-    {
         id: "emergency",
-        title: "Emergency Medicine",
+        title: "24x7 Emergency & Industrial Injury",
         subtitle: "Every Second Counts",
         accentColor: "#f98825",
         bg: "bg-gradient-to-r from-[#ebfdfc] to-[#ffffff]",
@@ -191,22 +222,91 @@ const specialities = [
                 <path d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
         ),
-        description: "At Valli Superspecialty, we don’t just treat emergencies—we redefine survival through innovation, massive infrastructure, and rapid-response protocols.",
+        description: "Immediate advanced trauma and industrial injury care with 30-minute arrival-to-operation protocols backed by ACLS/ATLS certified emergency responders.",
         bullets: [
-            "Precision in Emergencies: Experience world-class trauma care in our massive, state-of-the-art 50-bedded Emergency & Trauma center.",
-            "The Golden Hour Advantage: Our rapid-response protocols are designed to deliver life-saving interventions when every millisecond matters.",
-            "Elite Trauma Specialists: Our department is spearheaded by a multidisciplinary team of certified surgeons and emergency physicians available 24/7/365.",
-            "Advanced Diagnostics On-Site: Instant access to high-speed imaging and bedside pathology ensures no time is wasted in reaching a diagnosis.",
-            "Comprehensive Critical Care: From acute cardiac events to complex poly-trauma, we provide a seamless transition from the ER to our high-tech ICUs.",
-            "Cutting-Edge Infrastructure: Equipped with a dedicated Triage Zone, specialized procedure rooms, and integrated life-support systems.",
-            "Air and Road Connectivity: Our seamless ambulance network ensures that expert medical intervention begins the moment we reach your doorstep.",
-            "Mass Casualty Readiness: One of the region's largest setups, uniquely capable of managing large-scale emergencies with clinical excellence.",
-            "Compassion Under Pressure: We combine high-velocity medical care with a human touch, supporting families through their most difficult moments.",
-            "Your Safety, Our Mission: At Valli Superspecialty, we don’t just treat emergencies—we redefine survival through innovation and expertise."
+            "50-bedded trauma center with dedicated triage zone and 30-min arrival-to-operation time.",
+            "ACLS & ATLS certified emergency physicians and surgeons on-site 24/7/365.",
+            "Industrial injury rapid limb-salvage protocols and emergency polytrauma management.",
+            "Instant bedside diagnostics: high-speed CT scan, ultrasound, and point-of-care labs.",
+            "Seamless ER to ICU transition with continuous intensivist monitoring.",
+            "Mass casualty readiness — one of the region's largest emergency setups.",
         ],
-        procedures: [],
-        tech: [],
         stat: { value: "50+", label: "Trauma Bed Capacity" },
+    },
+    {
+        id: "omfs",
+        title: "Oral & Maxillofacial Surgery",
+        subtitle: "Advanced Facial Surgical Care",
+        accentColor: "#004b57",
+        bg: "bg-white",
+        dark: false,
+        tag: "Facial Surgery",
+        tagBg: "bg-[#004b57]/10 text-[#004b57]",
+        icon: (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-8 h-8">
+                <circle cx="12" cy="8" r="4" /><path d="M6 20v-2a6 6 0 0112 0v2" />
+            </svg>
+        ),
+        description: "Elite surgical precision for the face, jaws, and mouth — managing complex facial trauma, oral cancers, TMJ disorders, and orthognathic reconstruction.",
+        bullets: [
+            "Complex facial trauma: Mandibular, ZMC, Orbital Floor Fractures, and Nasal Bone Injuries.",
+            "Oral cancer (SCC), odontogenic cysts, ameloblastoma, and dentoalveolar pathology management.",
+            "3D CT facial reconstruction and ultrasound for precise TMJ and salivary gland mapping.",
+            "Microvascular reconstruction, nerve repair, and cleft lip & palate orthognathic correction.",
+            "Emergency airway management for Ludwig's Angina and deep neck space infections.",
+            "Synergy with Neurosurgery and Plastic Surgery for holistic functional & aesthetic restoration.",
+        ],
+        stat: { value: "Elite", label: "Facial Reconstruction" },
+    },
+    {
+        id: "brachial-plexus",
+        title: "Brachial Plexus & Peripheral Nerve Surgery",
+        subtitle: "Microscopic Nerve Restoration",
+        accentColor: "#3cb3a6",
+        bg: "bg-white",
+        dark: false,
+        tag: "Nerve Surgery",
+        tagBg: "bg-[#3cb3a6]/10 text-[#3cb3a6]",
+        icon: (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-8 h-8">
+                <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+        ),
+        description: "Elite microscopic precision for restoring upper limb function — managing Brachial Plexus Injuries, Nerve Compressions, and Obstetric Palsy with Neurotization techniques.",
+        bullets: [
+            "Traumatic Brachial Plexus Injuries: Avulsions, Ruptures, and Neuromas management.",
+            "Obstetric Brachial Plexus Palsy: Erb's Palsy and Klumpke's Palsy surgical correction.",
+            "Nerve Grafting, Nerve Transfers (Neurotization), and Microneurolysis with high-precision microscopes.",
+            "Carpal Tunnel, Ulnar Nerve Entrapment, and Thoracic Outlet Syndrome (TOS).",
+            "CT Myelography & high-resolution Nerve Ultrasound for Schwannoma and Neurofibroma mapping.",
+            "Neuropathic pain management with Pain Intervention Medicine and Muscle Re-education Physiotherapy.",
+        ],
+        stat: { value: "Micro", label: "Precision Nerve Surgery" },
+    },
+    {
+        id: "laboratory",
+        title: "High-Precision Laboratory & Diagnostics",
+        subtitle: "Diagnostic Backbone",
+        accentColor: "#004b57",
+        bg: "bg-gradient-to-br from-[#f0faf9] to-[#ffffff]",
+        dark: false,
+        tag: "Diagnostics",
+        tagBg: "bg-[#004b57]/10 text-[#004b57]",
+        icon: (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-8 h-8">
+                <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" />
+            </svg>
+        ),
+        description: "24/7 diagnostic backbone of our multispecialty infrastructure — rapid Biochemistry, Hematology, Microbiology, and Pathology guiding every life-saving decision.",
+        bullets: [
+            "Automated CBC, Lipid Profile, LFT, RFT, Thyroid Panel, and HbA1c with rapid turnaround.",
+            "Emergency diagnostics: Troponin-I, Procalcitonin, Blood Culture, Serum Amylase 24/7.",
+            "Histopathology & Cytology (FNAC/Biopsy) for cancers, TB, and inflammatory bowel disease.",
+            "Coagulation profiles (PT/INR), ABG analysis for ventilator patients and surgical prep.",
+            "Inflammatory markers (CRP, ESR, RA Factor) for Rheumatoid Arthritis and Gout.",
+            "Integrated with CT Scan, Ultrasound, Endoscopy, and Laparoscopy for holistic diagnostics.",
+        ],
+        stat: { value: "24/7", label: "Lab Operations" },
     },
 ];
 
@@ -296,44 +396,17 @@ export default function SpecialitiesPage() {
 
                                     {/* Right — Procedures + Tech + CTA */}
                                     <div className="flex-1 p-8 md:p-10 flex flex-col justify-between">
-                                        {(item as any).bullets ? (
-                                            <div className="mb-8">
-                                                <h3 className={`text-xs font-bold uppercase tracking-widest mb-6 ${item.dark ? "text-white/40" : "text-[#40484a]"}`}>Department Highlights</h3>
-                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 gap-y-6">
-                                                    {(item as any).bullets.map((b: string) => (
-                                                        <div key={b} className={`flex items-start gap-3 text-sm font-medium ${item.dark ? "text-white/80" : "text-[#00333c]"}`}>
-                                                            <span className="w-1.5 h-1.5 rounded-full shrink-0 mt-1.5" style={{ backgroundColor: item.accentColor }} />
-                                                            <span className="leading-relaxed">{b}</span>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        ) : (
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 h-full mb-8">
-                                                <div>
-                                                    <h3 className={`text-xs font-bold uppercase tracking-widest mb-4 ${item.dark ? "text-white/40" : "text-[#40484a]"}`}>Procedures</h3>
-                                                    <ul className="space-y-2.5">
-                                                        {item.procedures.map((p) => (
-                                                            <li key={p} className={`flex items-start gap-2.5 text-sm font-medium ${item.dark ? "text-white/70" : "text-[#00333c]"}`}>
-                                                                <span className="w-1.5 h-1.5 rounded-full shrink-0 mt-1.5" style={{ backgroundColor: item.accentColor }} />
-                                                                <span className="leading-relaxed">{p}</span>
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </div>
-
-                                                <div>
-                                                    <h3 className={`text-xs font-bold uppercase tracking-widest mb-4 ${item.dark ? "text-white/40" : "text-[#40484a]"}`}>Technology Used</h3>
-                                                    <div className="flex flex-wrap gap-2 mb-8">
-                                                        {item.tech.map((t) => (
-                                                            <span key={t} className={`text-xs font-semibold px-3 py-1.5 rounded-full ${item.dark ? "bg-white/10 text-white/70 border border-white/15" : "bg-white text-[#004b57] border border-[#e5eaeb]"}`}>
-                                                                {t}
-                                                            </span>
-                                                        ))}
+                                        <div className="mb-8">
+                                            <h3 className={`text-xs font-bold uppercase tracking-widest mb-5 ${item.dark ? "text-white/40" : "text-[#40484a]"}`}>Department Highlights</h3>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 gap-y-4">
+                                                {item.bullets.map((b, bi) => (
+                                                    <div key={bi} className={`flex items-start gap-3 text-sm font-medium ${item.dark ? "text-white/80" : "text-[#00333c]"}`}>
+                                                        <span className="w-1.5 h-1.5 rounded-full shrink-0 mt-1.5" style={{ backgroundColor: item.accentColor }} />
+                                                        <span className="leading-relaxed">{b}</span>
                                                     </div>
-                                                </div>
+                                                ))}
                                             </div>
-                                        )}
+                                        </div>
 
                                         <div>
                                             <a href="/book-appointment"

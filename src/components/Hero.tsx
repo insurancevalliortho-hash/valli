@@ -1,289 +1,277 @@
 "use client";
 
-import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { motion, useScroll, useTransform, useSpring, Variants } from "framer-motion";
+import { useRef } from "react";
+import { ArrowRight, ShieldCheck } from "lucide-react";
 
-const stats = [
+const STATS = [
     { value: "3+", label: "Years of Excellence" },
     { value: "16K+", label: "Patients Treated" },
     { value: "95%", label: "Success Rate" },
     { value: "15+", label: "Specialities" },
 ];
 
-const headlineData = [
-    { text: "WORLD-CLASS", color: "#004b57", size: "text-[12vw] md:text-[8vw] lg:text-[100px]" },
-    { text: "HEALTHCARE &", color: "#3cb3a6", size: "text-[12vw] md:text-[8vw] lg:text-[100px]" },
-    { text: "ORTHOPEDIC EXCELLENCE", color: "#f98825", size: "text-[10vw] md:text-[7vw] lg:text-[85px]" },
-];
+// ─── Animation Variants ───────────────────────────────────────────────────────
+
+const containerVariants: Variants = {
+    hidden: {},
+    show: {
+        transition: {
+            staggerChildren: 0.08,
+            delayChildren: 0.15,
+        },
+    },
+};
+
+// Clip-path line reveal — each line slides up from below its own mask
+const lineReveal: Variants = {
+    hidden: { y: "110%", opacity: 0 },
+    show: {
+        y: "0%",
+        opacity: 1,
+        transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1] },
+    },
+};
+
+// Fade + slight upward drift
+const fadeUp: Variants = {
+    hidden: { opacity: 0, y: 24 },
+    show: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] },
+    },
+};
+
+// Badge slide-in from left
+const badgeReveal: Variants = {
+    hidden: { opacity: 0, x: -30, scale: 0.92 },
+    show: {
+        opacity: 1,
+        x: 0,
+        scale: 1,
+        transition: { duration: 0.8, ease: [0.34, 1.56, 0.64, 1] },
+    },
+};
+
+// Stat counter pop
+const statPop: Variants = {
+    hidden: { opacity: 0, y: 20, scale: 0.85 },
+    show: (i: number) => ({
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        transition: {
+            duration: 0.6,
+            delay: i * 0.1,
+            ease: [0.34, 1.56, 0.64, 1],
+        },
+    }),
+};
+
+// Image panel entrance
+const imageReveal: Variants = {
+    hidden: { opacity: 0, scale: 1.08, x: 40 },
+    show: {
+        opacity: 1,
+        scale: 1,
+        x: 0,
+        transition: { duration: 1.6, ease: [0.16, 1, 0.3, 1], delay: 0.2 },
+    },
+};
+
+// Button spring bounce
+const buttonBounce: Variants = {
+    hidden: { opacity: 0, scale: 0.88, y: 16 },
+    show: {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        transition: { duration: 0.7, ease: [0.34, 1.56, 0.64, 1] },
+    },
+};
 
 export default function Hero() {
     const containerRef = useRef<HTMLElement>(null);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        const timer = setTimeout(() => setIsLoading(false), 2200);
-        return () => clearTimeout(timer);
-    }, []);
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
-        offset: ["start start", "end end"]
+        offset: ["start start", "end start"],
     });
 
-    const smoothProgress = useSpring(scrollYProgress, { damping: 25, stiffness: 120, mass: 0.05 });
+    const smooth = useSpring(scrollYProgress, { damping: 30, stiffness: 80, mass: 0.3 });
 
-    const mouseX = useMotionValue(0);
-    const mouseY = useMotionValue(0);
+    const yDesktopText = useTransform(smooth, [0, 1], ["0%", "-20%"]);
+    const yDesktopImage = useTransform(smooth, [0, 1], ["0%", "-10%"]);
+    const imgScale = useTransform(smooth, [0, 1], [1, 1.06]);
+    const desktopFade = useTransform(smooth, [0, 0.7], [1, 0]);
 
-    const handleMouseMove = (e: React.MouseEvent) => {
-        const { clientX, clientY } = e;
-        const width = typeof window !== "undefined" ? window.innerWidth : 1000;
-        const height = typeof window !== "undefined" ? window.innerHeight : 1000;
-        mouseX.set((clientX / width) * 2 - 1);
-        mouseY.set((clientY / height) * 2 - 1);
-    };
+    // ── Shared Content Block ───────────────────────────────────────────────────
+    const Content = (
+        <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="show"
+            className="flex flex-col mt-10"
+        >
 
-    const tiltX = useSpring(useTransform(mouseY, [-1, 1], [15, -15]), { stiffness: 150, damping: 20 });
-    const tiltY = useSpring(useTransform(mouseX, [-1, 1], [-15, 15]), { stiffness: 150, damping: 20 });
-    const glassX = useSpring(useTransform(mouseX, [-1, 1], [-20, 20]), { stiffness: 100, damping: 30 });
-    const glassY = useSpring(useTransform(mouseY, [-1, 1], [-20, 20]), { stiffness: 100, damping: 30 });
 
-    const titleScale = useTransform(smoothProgress, [0, 0.25], [1, 2.5]);
-    const titleOpacity = useTransform(smoothProgress, [0.05, 0.22], [1, 0]);
-    const titleY = useTransform(smoothProgress, [0, 0.3], ["0%", "-40%"]);
-    const titleBlur = useTransform(smoothProgress, [0, 0.2], ["blur(0px)", "blur(20px)"]);
-    const letterSpacing = useTransform(smoothProgress, [0, 0.25], ["-0.03em", "0.15em"]);
+            {/* WORLD-CLASS */}
+            <div className="overflow-hidden">
+                <motion.span
+                    variants={lineReveal}
+                    className="block font-light text-[#001014] text-[2.5rem] sm:text-[3.4rem] lg:text-[3rem] xl:text-[3.5rem] 2xl:text-[4rem] leading-[0.95] tracking-tighter"
+                >
+                    WORLD-CLASS
+                </motion.span>
+            </div>
 
-    const textOpacity = useTransform(smoothProgress, [0, 0.15], [1, 0]);
-    const textY = useTransform(smoothProgress, [0, 0.2], ["0px", "-30px"]);
+            {/* HEALTHCARE */}
+            <div className="overflow-hidden">
+                <motion.span
+                    variants={lineReveal}
+                    className="block font-black text-[#f98825] text-[2.5rem] sm:text-[3.4rem] lg:text-[3rem] xl:text-[3.5rem] 2xl:text-[4rem] leading-[0.95] tracking-tighter"
+                >
+                    HEALTHCARE
+                </motion.span>
+            </div>
 
-    const imageScale = useTransform(smoothProgress, [0, 0.2, 0.5, 1], [0.85, 1, 1.25, 1.35]);
-    const imageOpacity = useTransform(smoothProgress, [0, 0.2, 0.7, 1], [0.3, 1, 1, 0.7]);
-    const imageBlur = useTransform(smoothProgress, [0, 0.15, 0.5], ["blur(12px)", "blur(0px)", "blur(0px)"]);
+            {/* & Orthopedic Excellence */}
+            <div className="overflow-hidden mt-1">
+                <motion.span
+                    variants={lineReveal}
+                    className="block font-light text-[#3cb3a6] text-[1.5rem] sm:text-[2rem] lg:text-[1.8rem] xl:text-[2.2rem] 2xl:text-[2.6rem] leading-[1.0] tracking-tight italic mb-3"
+                >
+                    &amp; Orthopedic Excellence
+                </motion.span>
+            </div>
 
-    const glassPanel1X = useTransform(smoothProgress, [0, 0.4], ["-20%", "-110%"]);
-    const glassPanel1Y = useTransform(smoothProgress, [0, 0.4], ["10%", "-50%"]);
-    const glassPanel1Rotate = useTransform(smoothProgress, [0, 0.4], [5, -15]);
-    const glassPanel1Opacity = useTransform(smoothProgress, [0, 0.1, 0.4], [0, 1, 1]);
+            {/* Divider line accent */}
+            <motion.div variants={fadeUp} className="w-10 h-[2px] bg-[#f98825] mb-4 origin-left" />
 
-    const glassPanel2X = useTransform(smoothProgress, [0, 0.4], ["20%", "110%"]);
-    const glassPanel2Y = useTransform(smoothProgress, [0, 0.4], ["-10%", "60%"]);
-    const glassPanel2Rotate = useTransform(smoothProgress, [0, 0.4], [-5, 25]);
-    const glassPanel2Opacity = useTransform(smoothProgress, [0, 0.1, 0.4], [0, 1, 1]);
+            {/* Description */}
+            <motion.p
+                variants={fadeUp}
+                className="text-gray-500 font-medium text-sm leading-relaxed max-w-[440px] mb-5"
+            >
+                Welcome to Valli Super Speciality Hospital. Where expertise restores lives. We provide advanced care, precision healing, and excellence in every specialty.
+            </motion.p>
 
-    const ctaOpacity = useTransform(smoothProgress, [0.55, 0.75], [0, 1]);
-    const ctaY = useTransform(smoothProgress, [0.55, 0.75], [50, 0]);
+            {/* CTA Buttons */}
+            <motion.div
+                variants={containerVariants}
+                className="flex flex-wrap items-center gap-4 mb-6 lg:mb-8"
+            >
+                <motion.a
+                    variants={buttonBounce}
+                    href="#"
+                    whileHover={{ scale: 1.04, y: -2 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="group flex items-center gap-3 bg-[#f98825] text-white px-7 py-3.5 rounded-full font-bold uppercase tracking-[0.1em] text-xs hover:bg-[#3cb3a6] shadow-md hover:shadow-[0_12px_24px_rgba(60,179,166,0.25)] transition-all duration-500"
+                >
+                    Book Consultation
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </motion.a>
+                <motion.a
+                    variants={buttonBounce}
+                    href="#"
+                    whileHover={{ x: 4 }}
+                    className="text-[#001014] hover:text-[#3cb3a6] text-xs font-bold uppercase tracking-[0.1em] transition-all duration-300 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-[#3cb3a6] hover:after:w-full after:transition-all after:duration-300 pb-1"
+                >
+                    View Outcomes
+                </motion.a>
+            </motion.div>
+
+            {/* Stats Strip */}
+            <motion.div variants={fadeUp} className="grid grid-cols-4 gap-0 border-t border-gray-100 pt-6">
+                {STATS.map((s, i) => (
+                    <motion.div
+                        key={i}
+                        custom={i}
+                        variants={statPop}
+                        whileHover={{ y: -3, scale: 1.05 }}
+                        transition={{ type: "spring", stiffness: 300 }}
+                        className={`flex flex-col items-start cursor-default ${i > 0 ? "border-l border-gray-100 pl-3 sm:pl-5" : ""}`}
+                    >
+                        <span className={`text-[1.5rem] sm:text-[2rem] lg:text-[2.2rem] font-black leading-none tracking-tighter ${i % 2 === 0 ? "text-[#f98825]" : "text-[#3cb3a6]"}`}>
+                            {s.value}
+                        </span>
+                        <span className="text-[8px] sm:text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-1.5 leading-tight">
+                            {s.label}
+                        </span>
+                    </motion.div>
+                ))}
+            </motion.div>
+        </motion.div>
+    );
 
     return (
         <section
             ref={containerRef}
-            className="relative w-full h-[300vh] bg-white"
+            className="relative w-full h-[100vh] bg-[#fcfdfd] selection:bg-[#3cb3a6] selection:text-white overflow-hidden"
         >
-            <AnimatePresence>
-                {isLoading && (
+            <div className="sticky top-0 w-full h-[100svh] overflow-hidden">
+
+                {/* Blueprint Grid BG */}
+                <div className="absolute inset-0 z-0 pointer-events-none">
                     <motion.div
-                        key="loader"
-                        initial={{ opacity: 1 }}
-                        exit={{ opacity: 0, scale: 1.1, filter: "blur(20px)" }}
-                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                        className="fixed inset-0 z-[100] bg-white flex items-center justify-center"
+                        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2, delay: 0.5 }}
+                        className="absolute inset-0 bg-[linear-gradient(rgba(60,179,166,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(60,179,166,0.04)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_70%_80%_at_30%_50%,#000_20%,transparent_100%)]"
+                    />
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 3, delay: 0.3 }}
+                        className="absolute top-[-10%] right-[0%] w-[40vw] h-[40vw] rounded-full border border-[#f98825]/10 animate-[spin_60s_linear_infinite]"
+                    />
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 3, delay: 0.5 }}
+                        className="absolute top-[10%] right-[-8%] w-[55vw] h-[55vw] rounded-full border border-[#3cb3a6]/5 animate-[spin_100s_linear_infinite_reverse]"
+                    />
+                </div>
+
+                {/* ══════════ MOBILE LAYOUT ══════════ */}
+                <div className="lg:hidden absolute inset-0 z-0 pointer-events-none">
+                    <img
+                        src="/hero-person.png"
+                        alt=""
+                        className="w-full h-full object-cover object-right-top opacity-[0.07]"
+                        loading="eager"
+                    />
+                </div>
+                <div className="lg:hidden relative z-10 flex flex-col justify-center h-full px-6 sm:px-10 pt-24 pb-10 overflow-y-auto">
+                    {Content}
+                </div>
+
+                {/* ══════════ DESKTOP LAYOUT ══════════ */}
+                <div className="hidden lg:flex w-full h-full">
+
+                    {/* Left text panel — scroll parallax */}
+                    <motion.div
+                        style={{ y: yDesktopText, opacity: desktopFade }}
+                        className="flex flex-col justify-center px-16 xl:px-20 w-[52%] shrink-0 h-full"
                     >
-                        <motion.div
-                            initial={{ scale: 0.8, opacity: 0 }}
-                            animate={{ scale: [0.8, 1.05, 1], opacity: 1 }}
-                            transition={{ duration: 1.2, ease: "easeOut" }}
-                            className="relative flex flex-col items-center"
-                        >
-                            <div className="relative">
-                                <motion.img
-                                    src="/logo.png"
-                                    alt="Valli Hospital"
-                                    className="h-20 md:h-28 w-auto mb-6"
-                                    animate={{ filter: ["brightness(1)", "brightness(1.3)", "brightness(1)"] }}
-                                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                                />
-                                <motion.div
-                                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent w-full h-full"
-                                    animate={{ left: ["-100%", "200%"] }}
-                                    transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-                                />
-                            </div>
-                            <div className="h-[2px] w-40 bg-[#004b57]/10 rounded-full overflow-hidden">
-                                <motion.div
-                                    className="h-full bg-[#f98825]"
-                                    initial={{ width: "0%" }}
-                                    animate={{ width: "100%" }}
-                                    transition={{ duration: 1.8, ease: "easeInOut" }}
-                                />
-                            </div>
-                        </motion.div>
+                        {Content}
                     </motion.div>
-                )}
-            </AnimatePresence>
 
-            <div
-                className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center perspective-[1200px]"
-                onMouseMove={handleMouseMove}
-            >
-                {/* --- Ambient Background --- */}
-                <div className="absolute inset-0 z-0 bg-[#f8fbfa]" />
-                <div className="absolute top-[10%] left-[15%] w-[45vw] h-[45vw] bg-[#3cb3a6]/15 rounded-full blur-[140px] pointer-events-none will-change-transform" />
-                <div className="absolute bottom-[10%] right-[15%] w-[35vw] h-[35vw] bg-[#f98825]/10 rounded-full blur-[120px] pointer-events-none will-change-transform" />
-
-                {/* --- Central Exploding Image & Glassmorphism --- */}
-                <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
-
+                    {/* Right image panel */}
                     <motion.div
-                        style={{
-                            scale: imageScale,
-                            opacity: imageOpacity,
-                            filter: imageBlur,
-                        }}
-                        className="relative w-[90vw] md:w-[65vw] h-[55vh] md:h-[75vh] max-w-[1000px] max-h-[800px] rounded-[2rem] md:rounded-[4rem] overflow-hidden shadow-[0_30px_80px_rgba(0,40,50,0.25)] will-change-transform"
+                        variants={imageReveal}
+                        initial="hidden"
+                        animate="show"
+                        style={{ y: yDesktopImage, scale: imgScale, opacity: desktopFade }}
+                        className="flex-1 relative h-full overflow-hidden"
                     >
                         <img
-                            src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80&w=1600"
-                            alt="Advanced Surgery"
-                            className="w-full h-full object-cover -scale-x-100 contrast-[1.1] saturate-105"
+                            src="/hero-person.png"
+                            alt="Orthopedic Care – Valli Hospital"
+                            className="absolute inset-0 w-full h-full object-cover object-center"
+                            loading="eager"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#004b57]/80 via-[#004b57]/20 to-transparent" />
-                    </motion.div>
-
-                    <motion.div
-                        style={{
-                            rotateX: tiltX,
-                            rotateY: tiltY,
-                            x: useTransform(() => `calc(${glassPanel1X.get()} + ${glassX.get()}px)`),
-                            y: useTransform(() => `calc(${glassPanel1Y.get()} + ${glassY.get()}px)`),
-                            rotateZ: glassPanel1Rotate,
-                            opacity: glassPanel1Opacity,
-                        }}
-                        className="absolute z-20 w-[140px] sm:w-[200px] md:w-[360px] h-[180px] sm:h-[240px] md:h-[420px] rounded-[1rem] md:rounded-[2rem] bg-white/20 backdrop-blur-[24px] border border-white/60 shadow-[0_20px_50px_rgba(0,75,87,0.15)] flex flex-col justify-end p-3 sm:p-5 md:p-8 will-change-transform"
-                    >
-                        <div className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-[#f98825] to-[#e0751e] mb-2 md:mb-4 shadow-xl flex items-center justify-center">
-                            <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-white animate-pulse" />
-                        </div>
-                        <h3 className="text-[#004b57] text-sm sm:text-xl md:text-3xl font-black mb-0.5 md:mb-1 opacity-95">Precision.</h3>
-                        <p className="text-[#004b57]/80 text-[9px] md:text-base font-bold leading-tight md:leading-normal">Minimal Access and High Precision Surgeries.</p>
-                    </motion.div>
-
-                    <motion.div
-                        style={{
-                            rotateX: tiltX,
-                            rotateY: tiltY,
-                            x: useTransform(() => `calc(${glassPanel2X.get()} - ${glassX.get()}px)`),
-                            y: useTransform(() => `calc(${glassPanel2Y.get()} - ${glassY.get()}px)`),
-                            rotateZ: glassPanel2Rotate,
-                            opacity: glassPanel2Opacity,
-                        }}
-                        className="absolute z-20 w-[120px] sm:w-[180px] md:w-[320px] h-[120px] sm:h-[180px] md:h-[320px] rounded-[1rem] md:rounded-[2rem] bg-gradient-to-br from-[#004b57]/90 to-[#3cb3a6]/80 backdrop-blur-2xl border border-white/30 shadow-[-20px_30px_60px_rgba(0,75,87,0.3)] p-3 sm:p-5 md:p-8 flex flex-col items-start justify-between will-change-transform"
-                    >
-                        <div className="text-white/80 font-mono text-[8px] md:text-sm uppercase tracking-widest font-bold"></div>
-                        <div className="text-lg sm:text-3xl md:text-4xl font-black text-white leading-tight">Accredited by NABH</div>
+                        {/* Seamless edge blend */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#fcfdfd] via-[#fcfdfd]/50 to-transparent pointer-events-none" />
+                        <div className="absolute inset-0 bg-gradient-to-b from-[#fcfdfd]/10 via-transparent to-[#fcfdfd]/20 pointer-events-none" />
                     </motion.div>
                 </div>
 
-                {/* --- Kinetic Typography & Paragraph --- */}
-                <motion.div
-                    style={{
-                        scale: titleScale,
-                        opacity: titleOpacity,
-                        y: titleY,
-                        filter: titleBlur,
-                    }}
-                    className="absolute z-30 pointer-events-none flex flex-col items-center justify-center text-center w-full px-4 h-full will-change-transform"
-                >
-                    {headlineData.map((line, li) => (
-                        <motion.h1
-                            key={li}
-                            style={{ color: line.color, letterSpacing: letterSpacing as any }}
-                            className={`${line.size} font-black leading-[0.9] tracking-tighter drop-shadow-[0_20px_40px_rgba(255,255,255,0.8)] flex flex-wrap justify-center gap-x-[0.2em] mb-1`}
-                        >
-                            {line.text.split(" ").map((word, wi) => (
-                                <motion.span
-                                    key={wi}
-                                    initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
-                                    animate={!isLoading ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
-                                    transition={{
-                                        duration: 0.8,
-                                        delay: 0.5 + (li * 0.2) + (wi * 0.1),
-                                        ease: [0.16, 1, 0.3, 1]
-                                    }}
-                                    className="inline-block"
-                                >
-                                    {word}
-                                </motion.span>
-                            ))}
-                        </motion.h1>
-                    ))}
-
-                    <div className="relative mt-8 md:mt-12 group pointer-events-auto">
-                        <motion.div
-                            initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
-                            animate={!isLoading ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
-                            transition={{ duration: 0.8, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                        >
-                            <motion.div
-                                style={{ opacity: textOpacity, y: textY }}
-                                className="relative z-10 max-w-2xl px-8 py-6 rounded-[2rem] bg-white/60 backdrop-blur-xl border border-white/80 shadow-[0_20px_50px_rgba(0,51,60,0.08)] overflow-hidden"
-                            >
-                                <div className="absolute top-0 left-0 w-1 h-full bg-[#f98825]" />
-                                <p className="text-[#004b57] text-sm md:text-base lg:text-lg font-semibold leading-relaxed">
-                                    Welcome to <span className="text-[#f98825] font-bold">Valli Super Speciality Hospital</span>.
-                                    Where expertise restores lives. We provide advanced care, precision healing, and excellence in every specialty.
-                                </p>
-                                <div className="mt-4 flex items-center justify-center gap-6 opacity-60">
-                                    <div className="h-[1px] flex-1 bg-[#004b57]/10" />
-                                    <div className="flex gap-2">
-                                        {[1, 2, 3].map(i => <div key={i} className="w-1.5 h-1.5 rounded-full bg-[#3cb3a6]" />)}
-                                    </div>
-                                    <div className="h-[1px] flex-1 bg-[#004b57]/10" />
-                                </div>
-                            </motion.div>
-                        </motion.div>
-                    </div>
-                </motion.div>
-
-                {/* --- Exploding UI: Stats unpacking sequentially --- */}
-                <div className="absolute inset-0 z-40 pointer-events-none flex flex-col justify-end pb-[20vh] md:pb-0 md:justify-center items-center">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 md:gap-6 w-full max-w-7xl px-4 md:px-8 mt-16 md:mt-32">
-                        {stats.map((stat, i) => {
-                            const start = 0.35 + (i * 0.05);
-                            const end = start + 0.15;
-                            const statY = useTransform(smoothProgress, [start, end], [120, 0]);
-                            const statOpacity = useTransform(smoothProgress, [start, end], [0, 1]);
-                            const statBlur = useTransform(smoothProgress, [start, end], ["blur(20px)", "blur(0px)"]);
-                            const statScale = useTransform(smoothProgress, [start, end], [0.85, 1]);
-
-                            return (
-                                <motion.div
-                                    key={stat.label}
-                                    style={{ y: statY, opacity: statOpacity, filter: statBlur, scale: statScale }}
-                                    className="bg-white/95 backdrop-blur-2xl border border-white/80 rounded-xl sm:rounded-2xl md:rounded-[2rem] p-3 sm:p-4 md:p-8 shadow-[0_20px_50px_rgba(0,75,87,0.08)] flex flex-col items-center justify-center text-center origin-bottom pointer-events-auto hover:bg-white hover:scale-105 transition-all duration-300 will-change-transform"
-                                >
-                                    <h4 className="text-2xl sm:text-3xl md:text-5xl font-black text-[#f98825] mb-1">{stat.value}</h4>
-                                    <p className="text-[#004b57] text-[8px] sm:text-[9px] md:text-xs font-black uppercase tracking-widest leading-tight opacity-70">{stat.label}</p>
-                                </motion.div>
-                            );
-                        })}
-                    </div>
-
-                    <motion.div
-                        style={{ opacity: ctaOpacity, y: ctaY }}
-                        className="absolute bottom-6 md:bottom-16 pointer-events-auto flex flex-col md:flex-row gap-3 md:gap-4 px-4 w-full max-w-2xl mx-auto will-change-transform"
-                    >
-                        <button className="flex-1 bg-gradient-to-r from-[#f98825] to-[#e0751e] text-white px-6 md:px-14 py-3 md:py-4 rounded-full font-bold text-sm md:text-base shadow-[0_12px_30px_rgba(249,136,37,0.35)] hover:shadow-[0_15px_40px_rgba(249,136,37,0.45)] hover:-translate-y-1 transform transition-all duration-300 relative whitespace-nowrap text-center justify-center flex items-center">
-                            Book Appointment
-                        </button>
-                        <button className="flex-1 shrink-0 flex items-center justify-center gap-2 sm:gap-3 bg-gradient-to-r from-[#ba1a1a] to-[#d92c2c] text-white px-6 md:px-14 py-3 md:py-4 rounded-full font-bold text-[13px] md:text-base shadow-[0_20px_40px_rgba(186,26,26,0.3)] hover:shadow-[0_25px_50px_rgba(186,26,26,0.4)] hover:-translate-y-1 transform transition-all duration-300 whitespace-nowrap text-center">
-                            <span className="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5 shrink-0">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-70" />
-                                <span className="relative inline-flex rounded-full h-2 w-2 sm:h-2.5 sm:w-2.5 bg-white" />
-                            </span>
-                            24/7 Emergency
-                        </button>
-                    </motion.div>
-                </div>
             </div>
         </section>
     );

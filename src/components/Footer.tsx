@@ -1,107 +1,98 @@
 "use client";
 
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function Footer() {
     return (
-        <footer className="bg-[#001418] text-white pt-24 pb-12 relative overflow-hidden">
-            <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#004b57]/20 blur-[120px] rounded-full pointer-events-none" />
-            <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#f98825]/20 blur-[100px] rounded-full pointer-events-none" />
+        <footer className="bg-white text-[#001014] pt-24 pb-12 border-t border-gray-200 relative overflow-hidden">
 
-            <div className="container mx-auto px-6 md:px-12 relative z-10">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
+            {/* Flat Solid Background Without Gradients */}
 
-                    {/* Brand Column */}
-                    <div className="lg:col-span-5 pr-0 lg:pr-12">
-                        <div className="flex items-center gap-4 mb-8">
-                            <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center backdrop-blur-sm border border-white/20">
-                                <img src="/logo.png" alt="Valli Hospital Logo" className="w-10 h-10 object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
-                            </div>
-                            <div className="flex flex-col">
-                                <span className="text-2xl font-black tracking-tight text-white leading-none">Valli <span className="text-[#f5a623] font-medium">Hospital</span></span>
-                                <span className="text-[10px] tracking-[0.2em] text-[#f98825] uppercase font-bold mt-1">Committed to Excellence</span>
-                            </div>
+            <div className="container mx-auto px-6 md:px-12 max-w-[1600px] relative z-10">
+
+                {/* ── TOP UI STRUCTURE GRID ── */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 lg:gap-8 mb-20 lg:mb-24">
+
+                    {/* Left Block - Huge Statement */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }} viewport={{ once: true }}
+                        className="lg:col-span-5 flex flex-col justify-between items-start"
+                    >
+                        <div className="w-full">
+                            <h2 className="text-4xl md:text-5xl lg:text-5xl font-light mb-6 tracking-tight leading-[1.1]">
+                                Future of <br /> <strong className="font-black text-[#3cb3a6]">Orthopedic Care.</strong>
+                            </h2>
+                            <p className="text-gray-500 max-w-sm mb-12 leading-relaxed font-medium">
+                                Driven by precision. Measured by recovery. Your physical independence is our architecture.
+                            </p>
                         </div>
-                        <h3 className="text-3xl font-bold text-white mb-6 tracking-tight">
-                            Plan Your Visit
-                        </h3>
-                        <p className="text-white/70 font-medium leading-relaxed max-w-sm mb-8">
-                            Your journey to a pain-free, healthier life begins here. Valli Super Speciality Hospital is committed to you.
-                        </p>
-                        <div className="flex gap-4">
-                            <a href="#" className="bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-full font-bold text-sm transition-colors border border-white/10">
-                                Submit Inquiry
-                            </a>
-                            <a href="#" className="bg-[#f98825] text-[#001418] px-6 py-3 rounded-full font-bold text-sm shadow-[0_0_20px_rgba(129,243,229,0.3)] hover:shadow-[0_0_30px_rgba(129,243,229,0.5)] transition-all">
-                                Get Directions
-                            </a>
-                        </div>
-                    </div>
 
-                    {/* Contact Info Column */}
-                    <div className="lg:col-span-4">
-                        <h4 className="text-[#f5a623] font-bold uppercase tracking-widest text-xs mb-8">Connect With Us</h4>
+                        <a href="#" className="group w-fit flex items-center gap-4 bg-[#f98825] text-white px-8 py-4 rounded-full font-bold uppercase tracking-[0.15em] text-xs hover:bg-[#3cb3a6] hover:-translate-y-1 transition-all duration-300 shadow-md">
+                            Book Appointment
+                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" className="group-hover:translate-x-1 transition-transform" xmlns="http://www.w3.org/2000/svg"><path d="M8.14645 3.14645C8.34171 2.95118 8.65829 2.95118 8.85355 3.14645L12.8536 7.14645C13.0488 7.34171 13.0488 7.65829 12.8536 7.85355L8.85355 11.8536C8.65829 12.0488 8.34171 12.0488 8.14645 11.8536C7.95118 11.6583 7.95118 11.3417 8.14645 11.1464L11.2929 8H2.5C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H11.2929L8.14645 3.85355C7.95118 3.65829 7.95118 3.34171 8.14645 3.14645Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path></svg>
+                        </a>
+                    </motion.div>
+
+                    {/* Middle - Contact Grid */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }} viewport={{ once: true }}
+                        className="lg:col-span-4 lg:col-start-7 flex flex-col gap-8 md:mt-0 mt-8"
+                    >
+                        <h4 className="text-[#f98825] text-xs font-bold uppercase tracking-[0.2em]">Contact & Info</h4>
                         <ul className="space-y-6">
-                            <li className="flex gap-4 items-start group">
-                                <div className="mt-1 text-[#f98825] group-hover:scale-110 transition-transform"><MapPin size={20} /></div>
-                                <div>
-                                    <strong className="block text-white mb-1">Address</strong>
-                                    <span className="text-white/70 text-sm leading-relaxed block max-w-[250px]">
-                                        Opp. to Sri Vidya Mandir School, Meyyanoor Road, Salem - 636 004
-                                    </span>
-                                </div>
+                            <li className="group">
+                                <p className="text-[10px] uppercase tracking-widest text-[#f98825] mb-2 font-bold group-hover:translate-x-1 transition-transform">Emergency 24/7</p>
+                                <a href="#" className="text-2xl sm:text-3xl font-black text-[#001014] tracking-tight hover:text-[#3cb3a6] transition-colors leading-none inline-block">+91 90034 17111</a>
                             </li>
-                            <li className="flex gap-4 items-start group">
-                                <div className="mt-1 text-[#f98825] group-hover:scale-110 transition-transform"><Phone size={20} /></div>
-                                <div>
-                                    <strong className="block text-white mb-1">24/7 Helpline</strong>
-                                    <span className="text-white/70 text-sm block">
-                                        +91 90034 17111
-                                    </span>
-                                </div>
+                            <li className="pt-6 border-t border-gray-100 group">
+                                <p className="text-[10px] uppercase tracking-widest text-[#f98825] mb-2 font-bold group-hover:translate-x-1 transition-transform">General Inquiry</p>
+                                <a href="#" className="text-lg sm:text-xl font-bold tracking-tight hover:text-[#001014] text-gray-500 transition-colors inline-block">info@vallihospital.in</a>
                             </li>
-                            <li className="flex gap-4 items-start group">
-                                <div className="mt-1 text-[#f98825] group-hover:scale-110 transition-transform"><Mail size={20} /></div>
-                                <div>
-                                    <strong className="block text-white mb-1">Website</strong>
-                                    <span className="text-white/70 text-sm block">
-                                        www.vallihospital.in
-                                    </span>
-                                </div>
+                            <li className="pt-6 border-t border-gray-100 group">
+                                <p className="text-[10px] uppercase tracking-widest text-[#f98825] mb-2 font-bold group-hover:translate-x-1 transition-transform">Location</p>
+                                <p className="text-sm font-bold tracking-wide text-gray-500 leading-relaxed max-w-[280px]">Opp. to Sri Vidya Mandir School,<br /> Meyyanoor Road, Salem - 636 004</p>
                             </li>
                         </ul>
-                    </div>
+                    </motion.div>
 
-                    {/* Working Hours Column */}
-                    <div className="lg:col-span-3">
-                        <h4 className="text-[#f5a623] font-bold uppercase tracking-widest text-xs mb-8">Visiting Hours</h4>
-                        <div className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-sm">
-                            <div className="flex items-center gap-3 text-[#f98825] mb-4">
-                                <Clock size={24} />
-                                <span className="font-bold text-white">Open 24 Hours</span>
-                            </div>
-                            <p className="text-white/60 text-sm leading-relaxed">
-                                Emergency Services and Pharmacy available round the clock, 365 days a year.
-                            </p>
-                            <div className="w-full h-px bg-white/10 my-4" />
-                            <div className="flexjustify-between text-sm">
-                                <span className="text-white/80 font-medium">OPD Consultation</span>
-                            </div>
-                            <div className="text-[#f98825] font-bold text-sm mt-1">9:00 AM - 8:00 PM</div>
-                        </div>
-                    </div>
+                    {/* Right - Quick Links */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }} viewport={{ once: true }}
+                        className="lg:col-span-2 flex flex-col gap-8"
+                    >
+                        <h4 className="text-[#f98825] text-xs font-bold uppercase tracking-[0.2em]">Navigation</h4>
+                        <ul className="space-y-4 font-bold text-gray-500 text-sm">
+                            <li><a href="#" className="hover:text-[#f98825] hover:ml-2 transition-all block">Home</a></li>
+                            <li><a href="#" className="hover:text-[#f98825] hover:ml-2 transition-all block">Specialities</a></li>
+                            <li><a href="#" className="hover:text-[#f98825] hover:ml-2 transition-all block">The Surgeon</a></li>
+                            <li><a href="#" className="hover:text-[#f98825] hover:ml-2 transition-all block">Testimonials</a></li>
+                            <li className="pt-2"><a href="#" className="text-[#3cb3a6] hover:text-[#f98825] transition-colors block border-b border-gray-200 hover:border-[#f98825] pb-1 w-fit">Contact Us</a></li>
+                        </ul>
+                    </motion.div>
                 </div>
 
-                {/* Bottom Bar */}
-                <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                    <p className="text-white/40 text-xs font-medium tracking-wide text-center md:text-left">
-                        © {new Date().getFullYear()} Valli Super Speciality Hospital. All rights reserved.
-                    </p>
-                    <div className="flex gap-6 text-xs text-white/40 font-medium">
-                        <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-                        <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-                    </div>
+                {/* ── MASSIVE EDGE-TO-EDGE HOSPITAL NAME ── */}
+                <div className="w-full flex justify-center items-center py-10 lg:py-16 border-b border-gray-200 relative overflow-hidden select-none">
+                    <motion.span
+                        initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 0.15, scale: 1 }} transition={{ duration: 1.5, ease: "easeOut" }} viewport={{ once: true }}
+                        className="text-[9.5vw] md:text-[6.5vw] lg:text-[5.5vw] xl:text-[5vw] whitespace-nowrap font-black leading-none text-[#3cb3a6] tracking-tighter w-full text-center origin-bottom"
+                    >
+                        VALLI SUPER SPECIALITY HOSPITAL
+                    </motion.span>
                 </div>
+
+                {/* Final Sub Bar */}
+                <motion.div
+                    initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1, delay: 0.5 }} viewport={{ once: true }}
+                    className="pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-400"
+                >
+                    <p className="text-center md:text-left">© {new Date().getFullYear()} VALLI SUPER SPECIALITY HOSPITAL.<br className="md:hidden" /> ALL RIGHTS RESERVED.</p>
+                    <div className="flex gap-6">
+                        <a href="#" className="hover:text-[#001014] transition-colors">PRIVACY POLICY</a>
+                        <a href="#" className="hover:text-[#001014] transition-colors">TERMS OF USE</a>
+                    </div>
+                </motion.div>
+
             </div>
         </footer>
     );
