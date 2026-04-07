@@ -86,7 +86,7 @@ export default function DoctorsPage() {
                             <div className="lg:w-[360px] shrink-0 relative overflow-hidden">
                                 <div className="absolute inset-0 bg-gradient-to-br from-[#004b57] via-[#f98825]/30 to-[#3cb3a6]/50" />
                                 <div className="relative h-80 lg:h-full min-h-[400px]">
-                                    <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=90&w=700" alt="Dr. T. Natanasabapathy" className="w-full h-full object-cover object-top" />
+                                    <img src="surgeon.jpeg" alt="Dr. T. Natanasabapathy" className="w-full h-full object-cover object-top" />
                                     <div className="absolute inset-0 bg-gradient-to-t from-[#001f25]/70 via-transparent to-transparent" />
                                     <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#001825]/40 hidden lg:block" />
                                 </div>
