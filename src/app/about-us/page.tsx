@@ -138,18 +138,33 @@ export default function AboutPage() {
                                 Our Story
                             </span>
                             <h2 className="text-4xl md:text-5xl font-black text-[#00333c] leading-tight tracking-tight mb-6">
-                                The Evolution of Excellence:<br /><span className="text-[#f98825]">Valli Superspecialty Hospital</span>
+                                Our Legacy & Vision:<br /><span className="text-[#f98825]">The Journey of Valli Superspecialty Hospital</span>
                             </h2>
-                            <div className="space-y-4 text-[#40484a] text-base leading-relaxed font-medium">
+                            <div className="space-y-6 text-[#40484a] text-base leading-relaxed font-medium">
                                 <p>
-                                    From its landmark inception in October 2022 as Valli Orthopedic and Sports Hospital, our institution has been driven by a singular mission: to provide world-class surgical and rehabilitative care. Recognizing the growing need for comprehensive medical intervention in the region, we underwent a transformative upgradation in 2025, emerging as Valli Superspecialty Hospital. This expansion has solidified our position as a premier 50-bedded multispecialty hub, where advanced technology meets compassionate care.
+                                    From its very inception, Valli Superspecialty Hospital was built on a foundation of clinical excellence and a deep-rooted commitment to the community of Salem and its surrounding districts. Our story is one of rapid transformation, fueled by the unwavering vision of our founders and a tireless pursuit of international healthcare standards.
                                 </p>
-                                <p>
-                                    While our roots remain deeply embedded in Sports Medicine, Spine Surgeries, and Joint Replacements, our growth has been defined by an obsession with Trauma and Emergency services. We operate with the belief that during the "Golden Hour," every second is a lifeline. To support this, we have integrated a high-tech ICU, a sophisticated Surgical Gastroenterology wing, and a 24/7 diagnostic suite featuring CT scans and Ultrasound.
-                                </p>
-                                <p>
-                                    With a medical team rigorously trained in ACLS and ATLS, Valli Superspecialty Hospital stands as a beacon of reliability—transforming complex emergencies into stories of survival and recovery.
-                                </p>
+
+                                <div>
+                                    <h3 className="text-xl font-bold text-[#00333c] mb-2">The Foundation of Excellence</h3>
+                                    <p className="mb-4">
+                                        Valli Orthopedic and Sports Hospital was co-founded on October 16, 2022, by Dr. Natanasabapathy Thiagarajan, M.S., and Dr. Vijayalakshmi Irulappan, M.D. Their goal was clear: to establish a center of excellence in Orthopedics that would bridge the gap between local healthcare and global medical standards. What began as a specialized 24-hour Trauma and Emergency Hospital with 20 beds was designed to serve Salem—a thriving business hub of 3.5 million people—and the adjoining regions. By prioritizing updated medical knowledge for our doctors and healthcare staff, we ensure that every patient receives treatment aligned with the latest global protocols.
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <h3 className="text-xl font-bold text-[#00333c] mb-2">The Arduous Path to Quality: NABH Accreditation</h3>
+                                    <p className="mb-4">
+                                        The true turning point in our journey arrived in 2024. Driven by the aspiration to be the safest hospital for our patients, our team underwent a rigorous and arduous journey to meet exacting national standards, achieving Full NABH Accreditation. This milestone validated our commitment to patient safety, clinical outcomes, and operational transparency, paving the way for prestigious corporate, industrial, and health insurance tie-ups.
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <h3 className="text-xl font-bold text-[#f98825] mb-2">Evolution into Valli Superspecialty Hospital</h3>
+                                    <p>
+                                        Growth is a natural byproduct of trust. In 2025, responding to the growing needs of our community, we successfully transformed into the 50-bedded Valli Superspecialty Hospital. Today, we stand as a beacon of advanced medical care. Whether it is complex orthopedic surgery, sports medicine, or emergency trauma care, our mission remains the same: to deliver compassionate, safe, and international-standard healthcare to every patient who walks through our doors.
+                                    </p>
+                                </div>
                             </div>
                         </motion.div>
 

@@ -38,22 +38,60 @@ export default function Navbar() {
                     </a>
 
                     {/* Desktop Menu - Rounded Floating Pill */}
-                    <div className="hidden md:flex items-center bg-white/70 border border-[#bfc8ca]/40 rounded-full px-2 py-1.5 backdrop-blur-md shadow-[0_8px_20px_rgba(0,51,60,0.05)]">
-                        {[
-                            { label: "Specialities", href: "/specialities" },
-                            { label: "Doctors", href: "/doctors" },
-                            { label: "Technology", href: "/technology" },
-                            { label: "About", href: "/about" },
-                        ].map((item) => (
-                            <a
-                                key={item.label}
-                                href={item.href}
-                                className="relative text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-5 py-2 rounded-full transition-colors group overflow-hidden"
-                            >
-                                <span className="relative z-10">{item.label}</span>
-                                <div className="absolute inset-0 bg-[#f98825]/15 rounded-full translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0" />
-                            </a>
-                        ))}
+                    <div className="hidden lg:flex items-center bg-white/70 border border-[#bfc8ca]/40 rounded-full px-2 py-1.5 backdrop-blur-md shadow-[0_8px_20px_rgba(0,51,60,0.05)]">
+                        {/* About Us */}
+                        <a href="/about-us" className="relative text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-5 py-2 rounded-full transition-colors group overflow-hidden">
+                            <span className="relative z-10">About us</span>
+                            <div className="absolute inset-0 bg-[#f98825]/15 rounded-full translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0" />
+                        </a>
+
+                        {/* Specialities Dropdown */}
+                        <div className="relative group/dropdown">
+                            <button className="relative text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-5 py-2 rounded-full transition-colors overflow-hidden focus:outline-none">
+                                <span className="relative z-10 flex items-center gap-1">Specialities <svg className="w-3 h-3 transition-transform group-hover/dropdown:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg></span>
+                            </button>
+                            <div className="absolute top-full left-0 mt-4 w-64 bg-white border border-[#bfc8ca]/40 rounded-xl shadow-xl opacity-0 invisible group-hover/dropdown:opacity-100 group-hover/dropdown:visible transition-all duration-300 origin-top-left z-50 flex flex-col py-2">
+                                <a href="/joint-care-clinic" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Joint Care Clinic</a>
+                                <a href="/sports-medicine-clinic" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Sports Medicine</a>
+                                <a href="/foot-and-ankle-clinic" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Foot & Ankle Clinic</a>
+                                <a href="/back-pain-and-spinal-disorders" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Back Pain & Spinal Disorders</a>
+                                <a href="/paediatric-orthopaedics-deformity-clinic" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Paediatric Orthopaedics & Deformity Clinic</a>
+                                <a href="/failed-surgery-corrections" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Failed Surgery Corrections</a>
+                                <a href="/sports-injury-clinic" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Sports Injury Clinic</a>
+                                <a href="/fracture-clinic" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Fracture Clinic</a>
+                            </div>
+                        </div>
+
+                        {/* Services Dropdown */}
+                        <div className="relative group/dropdown">
+                            <button className="relative text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-5 py-2 rounded-full transition-colors overflow-hidden focus:outline-none">
+                                <span className="relative z-10 flex items-center gap-1">Services <svg className="w-3 h-3 transition-transform group-hover/dropdown:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg></span>
+                            </button>
+                            <div className="absolute top-full left-0 mt-4 w-56 bg-white border border-[#bfc8ca]/40 rounded-xl shadow-xl opacity-0 invisible group-hover/dropdown:opacity-100 group-hover/dropdown:visible transition-all duration-300 origin-top-left z-50 flex flex-col py-2">
+                                <a href="/arthroscopy" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Arthroscopy</a>
+                                <a href="/bone-cancer-treatment" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Bone Cancer Treatment</a>
+                                <a href="/genetic-testing" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Genetic Testing</a>
+                                <a href="/sports-training" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Sports Training</a>
+                            </div>
+                        </div>
+
+                        {/* Facilities */}
+                        <a href="/facilities" className="relative text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-5 py-2 rounded-full transition-colors group overflow-hidden">
+                            <span className="relative z-10">Facilities</span>
+                            <div className="absolute inset-0 bg-[#f98825]/15 rounded-full translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0" />
+                        </a>
+
+                        {/* Doctors */}
+                        <a href="/doctors" className="relative text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-5 py-2 rounded-full transition-colors group overflow-hidden">
+                            <span className="relative z-10">Doctors</span>
+                            <div className="absolute inset-0 bg-[#f98825]/15 rounded-full translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0" />
+                        </a>
+
+                        {/* Contact Us */}
+                        <a href="/contact-us" className="relative text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-5 py-2 rounded-full transition-colors group overflow-hidden">
+                            <span className="relative z-10">Contact us</span>
+                            <div className="absolute inset-0 bg-[#f98825]/15 rounded-full translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0" />
+                        </a>
                     </div>
 
                     {/* Primary Action Button */}
@@ -89,10 +127,12 @@ export default function Navbar() {
 
                         <div className="flex flex-col space-y-8 text-center relative z-10">
                             {[
+                                { label: "About us", href: "/about-us" },
                                 { label: "Specialities", href: "/specialities" },
+                                { label: "Services", href: "/services" },
+                                { label: "Facilities", href: "/facilities" },
                                 { label: "Doctors", href: "/doctors" },
-                                { label: "Technology", href: "/technology" },
-                                { label: "About", href: "/about" },
+                                { label: "Contact us", href: "/contact-us" },
                             ].map((item, i) => (
                                 <motion.a
                                     key={item.label}
