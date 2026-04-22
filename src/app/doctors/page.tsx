@@ -6,6 +6,8 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import SmoothScroll from "../../components/SmoothScroll";
 import MagneticCursor from "../../components/MagneticCursor";
+import { doctorsData } from "../../data/doctors";
+import Link from "next/link";
 
 const stats = [
     { value: "21+", label: "Years Experience" },
@@ -32,12 +34,7 @@ const awards = [
     { title: "Innovation in Arthroscopy", year: "2019", org: "ISAS — Indian Society of Arthroscopy" },
 ];
 
-const supportingTeam = [
-    { name: "Dr. I. Vijayalakshmi", role: "Co-Founder & Director", specialty: "Hospital Administration & Patient Care Excellence", exp: "21+ years", initials: "IV" },
-    { name: "Dr. Priya Raghunathan", role: "Senior Resident — Orthopaedics", specialty: "Fracture Management & Sports Medicine", exp: "6 years", initials: "PR" },
-    { name: "Dr. Karthik Sundar", role: "Consultant — Spine & Pain", specialty: "Lumbar Disorders & Epidural Therapy", exp: "9 years", initials: "KS" },
-    { name: "Dr. Meena Velankanni", role: "Consultant — Paediatric Ortho", specialty: "Club Foot, DDH & Scoliosis", exp: "8 years", initials: "MV" },
-];
+// Removed supportingTeam to use doctorsData
 
 export default function DoctorsPage() {
     const heroRef = useRef<HTMLElement>(null);
@@ -204,17 +201,19 @@ export default function DoctorsPage() {
                         <h2 className="text-4xl font-black text-[#00333c] tracking-tight">Supporting <span className="text-[#f98825]">Specialists</span></h2>
                     </motion.div>
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                        {supportingTeam.map((doc, i) => (
-                            <motion.div key={doc.name} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 * i }}
-                                className="bg-white border border-[#e5eaeb] rounded-2xl p-7 hover:shadow-xl transition-shadow duration-500">
-                                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#004b57] to-[#3cb3a6] flex items-center justify-center mb-5">
-                                    <span className="text-white font-black text-xl">{doc.initials}</span>
-                                </div>
-                                <div className="text-[#f98825] text-[10px] font-black uppercase tracking-widest mb-1">{doc.exp} Experience</div>
-                                <h3 className="text-[#00333c] font-black text-lg mb-1">{doc.name}</h3>
-                                <div className="text-[#004b57] text-xs font-bold mb-3">{doc.role}</div>
-                                <p className="text-[#40484a] text-sm leading-relaxed">{doc.specialty}</p>
-                            </motion.div>
+                        {doctorsData.map((doc, i) => (
+                            <Link href={`/doctors/${doc.slug}`} key={doc.name} className="block group">
+                                <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 * i }}
+                                    className="bg-white border border-[#e5eaeb] rounded-2xl p-7 hover:shadow-xl transition-shadow duration-500 h-full flex flex-col">
+                                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#004b57] to-[#3cb3a6] overflow-hidden mb-5 flex shrink-0">
+                                        <img src={doc.image} alt={doc.name} className="w-full h-full object-cover object-top opacity-90 group-hover:scale-110 transition-transform duration-500" />
+                                    </div>
+                                    <div className="text-[#f98825] text-[10px] font-black uppercase tracking-widest mb-1 line-clamp-1">{doc.shortDescription}</div>
+                                    <h3 className="text-[#00333c] font-black text-lg mb-1 group-hover:text-[#f98825] transition-colors">{doc.name}</h3>
+                                    <div className="text-[#004b57] text-xs font-bold mb-3">{doc.department}</div>
+                                    <p className="text-[#40484a] text-sm leading-relaxed flex-1 line-clamp-3">{doc.description}</p>
+                                </motion.div>
+                            </Link>
                         ))}
                     </div>
                 </div>

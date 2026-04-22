@@ -15,7 +15,7 @@ export default function Home() {
         <SmoothScroll>
             <MagneticCursor />
             <Navbar />
-            <main className="min-h-screen bg-white w-full block">
+            <main className="min-h-screen bg-white w-full block overflow-x-hidden">
                 <Hero />
                 <TrustBar />
                 <AboutSection />

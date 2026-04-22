@@ -30,25 +30,26 @@ export default function Navbar() {
                         {/* Mobile: full logo.png (has Tamil text), no extra label */}
                         <img src="/logo.png" alt="Valli Hospital" className="h-10 w-auto sm:hidden" />
 
-                        {/* Desktop: favicon icon + single-line teal name */}
-                        <img src="/favicon.png" alt="Valli Hospital" className="hidden sm:block h-11 w-auto" />
-                        <span className="hidden sm:block text-xl font-bold tracking-tight text-[#004b57] whitespace-nowrap">
-                            Valli Super Speciality Hospital
-                        </span>
+                        {/* Desktop: favicon icon + 2-line name */}
+                        <img src="/favicon.png" alt="Valli Hospital" className="hidden sm:block h-10 xl:h-11 w-auto" />
+                        <div className="hidden sm:flex flex-col justify-center text-[#004b57]">
+                            <span className="text-lg xl:text-xl font-black leading-none tracking-tight">Valli</span>
+                            <span className="text-[10px] xl:text-xs font-bold tracking-[0.15em] uppercase mt-0.5 opacity-80">Super Speciality Hospital</span>
+                        </div>
                     </a>
 
                     {/* Desktop Menu - Rounded Floating Pill */}
-                    <div className="hidden lg:flex items-center bg-white/70 border border-[#bfc8ca]/40 rounded-full px-2 py-1.5 backdrop-blur-md shadow-[0_8px_20px_rgba(0,51,60,0.05)]">
+                    <div className="hidden lg:flex items-center bg-white/70 border border-[#bfc8ca]/40 rounded-full px-1.5 xl:px-2 py-1 xl:py-1.5 backdrop-blur-md shadow-[0_8px_20px_rgba(0,51,60,0.05)]">
                         {/* About Us */}
-                        <a href="/about-us" className="relative text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-5 py-2 rounded-full transition-colors group overflow-hidden">
-                            <span className="relative z-10">About us</span>
+                        <a href="/about-us" className="relative text-[13px] xl:text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-3 xl:px-5 py-2 rounded-full transition-colors group overflow-hidden">
+                            <span className="relative z-10 whitespace-nowrap">About us</span>
                             <div className="absolute inset-0 bg-[#f98825]/15 rounded-full translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0" />
                         </a>
 
                         {/* Specialities Dropdown */}
                         <div className="relative group/dropdown">
-                            <button className="relative text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-5 py-2 rounded-full transition-colors overflow-hidden focus:outline-none">
-                                <span className="relative z-10 flex items-center gap-1">Specialities <svg className="w-3 h-3 transition-transform group-hover/dropdown:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg></span>
+                            <button className="relative text-[13px] xl:text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-3 xl:px-5 py-2 rounded-full transition-colors overflow-hidden focus:outline-none">
+                                <span className="relative z-10 flex items-center gap-1 whitespace-nowrap">Specialities <svg className="w-3 h-3 transition-transform group-hover/dropdown:rotate-180 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg></span>
                             </button>
                             <div className="absolute top-full left-0 mt-4 w-64 bg-white border border-[#bfc8ca]/40 rounded-xl shadow-xl opacity-0 invisible group-hover/dropdown:opacity-100 group-hover/dropdown:visible transition-all duration-300 origin-top-left z-50 flex flex-col py-2">
                                 <a href="/joint-care-clinic" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Joint Care Clinic</a>
@@ -64,8 +65,8 @@ export default function Navbar() {
 
                         {/* Services Dropdown */}
                         <div className="relative group/dropdown">
-                            <button className="relative text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-5 py-2 rounded-full transition-colors overflow-hidden focus:outline-none">
-                                <span className="relative z-10 flex items-center gap-1">Services <svg className="w-3 h-3 transition-transform group-hover/dropdown:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg></span>
+                            <button className="relative text-[13px] xl:text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-3 xl:px-5 py-2 rounded-full transition-colors overflow-hidden focus:outline-none">
+                                <span className="relative z-10 flex items-center gap-1 whitespace-nowrap">Services <svg className="w-3 h-3 transition-transform group-hover/dropdown:rotate-180 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg></span>
                             </button>
                             <div className="absolute top-full left-0 mt-4 w-56 bg-white border border-[#bfc8ca]/40 rounded-xl shadow-xl opacity-0 invisible group-hover/dropdown:opacity-100 group-hover/dropdown:visible transition-all duration-300 origin-top-left z-50 flex flex-col py-2">
                                 <a href="/arthroscopy" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Arthroscopy</a>
@@ -76,34 +77,34 @@ export default function Navbar() {
                         </div>
 
                         {/* Facilities */}
-                        <a href="/facilities" className="relative text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-5 py-2 rounded-full transition-colors group overflow-hidden">
-                            <span className="relative z-10">Facilities</span>
+                        <a href="/facilities" className="relative text-[13px] xl:text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-3 xl:px-5 py-2 rounded-full transition-colors group overflow-hidden">
+                            <span className="relative z-10 whitespace-nowrap">Facilities</span>
                             <div className="absolute inset-0 bg-[#f98825]/15 rounded-full translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0" />
                         </a>
 
                         {/* Doctors */}
-                        <a href="/doctors" className="relative text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-5 py-2 rounded-full transition-colors group overflow-hidden">
-                            <span className="relative z-10">Doctors</span>
+                        <a href="/doctors" className="relative text-[13px] xl:text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-3 xl:px-5 py-2 rounded-full transition-colors group overflow-hidden">
+                            <span className="relative z-10 whitespace-nowrap">Doctors</span>
                             <div className="absolute inset-0 bg-[#f98825]/15 rounded-full translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0" />
                         </a>
 
                         {/* Contact Us */}
-                        <a href="/contact-us" className="relative text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-5 py-2 rounded-full transition-colors group overflow-hidden">
-                            <span className="relative z-10">Contact us</span>
+                        <a href="/contact-us" className="relative text-[13px] xl:text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-3 xl:px-5 py-2 rounded-full transition-colors group overflow-hidden">
+                            <span className="relative z-10 whitespace-nowrap">Contact us</span>
                             <div className="absolute inset-0 bg-[#f98825]/15 rounded-full translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0" />
                         </a>
                     </div>
 
                     {/* Primary Action Button */}
-                    <div className="hidden md:block">
-                        <a href="/book-appointment" className="relative bg-[#004b57] text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-[#00333c] hover:scale-105 transition-all duration-300 shadow-[0_4px_15px_rgba(0,75,87,0.3)] inline-block">
+                    <div className="hidden lg:block">
+                        <a href="/book-appointment" className="relative bg-[#004b57] text-white px-5 xl:px-6 py-2 xl:py-2.5 rounded-full text-sm font-semibold hover:bg-[#00333c] hover:scale-105 transition-all duration-300 shadow-[0_4px_15px_rgba(0,75,87,0.3)] inline-block whitespace-nowrap">
                             Book Appointment
                         </a>
                     </div>
 
                     {/* Mobile Menu Toggle */}
                     <button
-                        className="md:hidden relative z-50 w-10 h-10 flex items-center justify-center bg-white/80 rounded-full border border-[#bfc8ca]/30 text-[#00333c] backdrop-blur-md shadow-sm"
+                        className="lg:hidden relative z-50 w-10 h-10 flex items-center justify-center bg-white/80 rounded-full border border-[#bfc8ca]/30 text-[#00333c] backdrop-blur-md shadow-sm"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     >
                         {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -115,7 +116,7 @@ export default function Navbar() {
             <AnimatePresence>
                 {isMobileMenuOpen && (
                     <motion.div
-                        className="fixed inset-0 z-40 bg-white/95 backdrop-blur-3xl flex flex-col justify-center items-center md:hidden"
+                        className="fixed inset-0 z-40 bg-white/95 backdrop-blur-3xl flex flex-col justify-center items-center lg:hidden"
                         initial={{ opacity: 0, clipPath: "circle(0% at 100% 0%)" }}
                         animate={{ opacity: 1, clipPath: "circle(150% at 100% 0%)" }}
                         exit={{ opacity: 0, clipPath: "circle(0% at 100% 0%)" }}

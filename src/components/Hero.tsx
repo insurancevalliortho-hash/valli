@@ -183,7 +183,7 @@ export default function Hero() {
             </motion.div>
 
             {/* Stats Strip */}
-            <motion.div variants={fadeUp} className="grid grid-cols-4 gap-0 border-t border-gray-100 pt-6">
+            <motion.div variants={fadeUp} className="grid grid-cols-2 lg:grid-cols-4 gap-y-6 lg:gap-y-0 gap-x-2 border-t border-gray-100 pt-6">
                 {STATS.map((s, i) => (
                     <motion.div
                         key={i}
@@ -191,7 +191,7 @@ export default function Hero() {
                         variants={statPop}
                         whileHover={{ y: -3, scale: 1.05 }}
                         transition={{ type: "spring", stiffness: 300 }}
-                        className={`flex flex-col items-start cursor-default ${i > 0 ? "border-l border-gray-100 pl-3 sm:pl-5" : ""}`}
+                        className={`flex flex-col items-start cursor-default ${(i % 2 !== 0) ? "border-l border-gray-100 pl-4" : ""} ${i >= 2 ? "lg:border-l lg:border-gray-100 lg:pl-4" : ""}`}
                     >
                         <span className={`text-[1.5rem] sm:text-[2rem] lg:text-[2.2rem] font-black leading-none tracking-tighter ${i % 2 === 0 ? "text-[#f98825]" : "text-[#3cb3a6]"}`}>
                             {s.value}
@@ -208,12 +208,12 @@ export default function Hero() {
     return (
         <section
             ref={containerRef}
-            className="relative w-full h-[100vh] bg-[#fcfdfd] selection:bg-[#3cb3a6] selection:text-white overflow-hidden"
+            className="relative w-full lg:h-[100vh] min-h-[100svh] bg-[#fcfdfd] selection:bg-[#3cb3a6] selection:text-white lg:overflow-hidden"
         >
-            <div className="sticky top-0 w-full h-[100svh] overflow-hidden">
+            <div className="lg:sticky lg:top-0 w-full lg:h-[100svh] flex flex-col">
 
                 {/* Blueprint Grid BG */}
-                <div className="absolute inset-0 z-0 pointer-events-none">
+                <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
                     <motion.div
                         initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2, delay: 0.5 }}
                         className="absolute inset-0 bg-[linear-gradient(rgba(60,179,166,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(60,179,166,0.04)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_70%_80%_at_30%_50%,#000_20%,transparent_100%)]"
@@ -229,7 +229,7 @@ export default function Hero() {
                 </div>
 
                 {/* ══════════ MOBILE LAYOUT ══════════ */}
-                <div className="lg:hidden absolute inset-0 z-0 pointer-events-none">
+                <div className="lg:hidden absolute inset-0 z-0 pointer-events-none overflow-hidden">
                     <img
                         src="/hero-person.png"
                         alt=""
@@ -237,7 +237,7 @@ export default function Hero() {
                         loading="eager"
                     />
                 </div>
-                <div className="lg:hidden relative z-10 flex flex-col justify-center h-full px-6 sm:px-10 pt-24 pb-10 overflow-y-auto">
+                <div className="lg:hidden relative z-10 flex flex-col justify-center min-h-[100svh] px-6 sm:px-10 pt-32 pb-16">
                     {Content}
                 </div>
 
