@@ -15,13 +15,16 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://vallihospital.in"),
+    applicationName: "Valli Super Speciality Hospital",
+    generator: "Next.js",
+    category: "Medical",
     title: {
         default: "Valli Super Speciality Hospital | Best Orthopedic Care in Salem",
         template: "%s | Valli Super Speciality Hospital",
     },
     description: "Valli Super Speciality Hospital in Salem offers advanced orthopedic care, joint replacements, spine surgery, and comprehensive medical excellence. Where expertise restores lives.",
-    keywords: ["Orthopedic Hospital", "Salem", "Joint Replacement", "Spine Surgery", "Valli Hospital", "Best Orthopedician", "Trauma Care", "Sports Medicine"],
-    authors: [{ name: "Valli Super Speciality Hospital" }],
+    keywords: ["Orthopedic Hospital", "Salem", "Joint Replacement", "Spine Surgery", "Valli Hospital", "Best Orthopedician", "Trauma Care", "Sports Medicine", "Super Speciality Hospital", "Orthopedic Surgeon"],
+    authors: [{ name: "Valli Super Speciality Hospital", url: "https://vallihospital.in" }],
     creator: "Valli Super Speciality Hospital",
     publisher: "Valli Super Speciality Hospital",
     formatDetection: {
@@ -36,15 +39,28 @@ export const metadata: Metadata = {
         siteName: "Valli Super Speciality Hospital",
         locale: "en_IN",
         type: "website",
+        images: [
+            {
+                url: "/favicon.png",
+                width: 1200,
+                height: 630,
+                alt: "Valli Super Speciality Hospital",
+            }
+        ],
+        emails: ["info@vallihospital.in"],
+        phoneNumbers: ["+919003417111"],
     },
     twitter: {
         card: "summary_large_image",
         title: "Valli Super Speciality Hospital",
         description: "Advanced orthopedic care, precision healing, and excellence in every specialty.",
+        creator: "@ValliHospital", // Replace with actual Twitter handle
+        images: ["/favicon.png"],
     },
     robots: {
         index: true,
         follow: true,
+        nocache: false,
         googleBot: {
             index: true,
             follow: true,
@@ -52,6 +68,11 @@ export const metadata: Metadata = {
             "max-image-preview": "large",
             "max-snippet": -1,
         },
+    },
+    verification: {
+        google: "google-site-verification-code", // Replace with your code
+        yandex: "yandex-verification-code", // Replace with your code
+        yahoo: "yahoo-verification-code", // Replace with your code
     },
     icons: {
         icon: "/favicon.png",
@@ -74,18 +95,42 @@ export default function RootLayout({
         name: "Valli Super Speciality Hospital",
         url: "https://vallihospital.in",
         logo: "https://vallihospital.in/favicon.png",
+        image: ["https://vallihospital.in/favicon.png"],
         description: "Valli Super Speciality Hospital in Salem offers advanced orthopedic care, joint replacements, and spine surgery.",
         address: {
             "@type": "PostalAddress",
+            streetAddress: "Meyyanur Bypass Road", // Update to exact address
             addressLocality: "Salem",
             addressRegion: "Tamil Nadu",
+            postalCode: "636004", // Update to exact PIN code
             addressCountry: "IN"
+        },
+        geo: {
+            "@type": "GeoCoordinates",
+            latitude: "11.6643", // Salem approximate
+            longitude: "78.1460"
         },
         contactPoint: {
             "@type": "ContactPoint",
             telephone: "+91-9003417111",
-            contactType: "customer service"
-        }
+            contactType: "customer service",
+            availableLanguage: ["English", "Tamil"]
+        },
+        sameAs: [
+            "https://www.facebook.com/vallihospital", // Update with actual link
+            "https://www.instagram.com/vallihospital", // Update with actual link
+            "https://www.linkedin.com/company/vallihospital" // Update with actual link
+        ],
+        openingHoursSpecification: [
+            {
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: [
+                    "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+                ],
+                opens: "00:00",
+                closes: "23:59"
+            }
+        ]
     };
 
     return (

@@ -59,5 +59,29 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         notFound();
     }
 
-    return <DoctorClientPage doctor={doctor} />;
+    const jsonLd = {
+        "@context": "https://schema.org",
+        "@type": "Physician",
+        "name": doctor.name,
+        "image": `https://vallihospital.in${doctor.image}`,
+        "description": doctor.shortDescription,
+        "medicalSpecialty": doctor.department,
+        "alumniOf": doctor.qualifications.split(",").map(q => q.trim()),
+        "url": `https://vallihospital.in/doctors/${doctor.slug}`,
+        "parentOrganization": {
+            "@type": "Hospital",
+            "name": "Valli Super Speciality Hospital",
+            "url": "https://vallihospital.in"
+        }
+    };
+
+    return (
+        <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
+            <DoctorClientPage doctor={doctor} />
+        </>
+    );
 }

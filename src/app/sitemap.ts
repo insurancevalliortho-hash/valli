@@ -28,7 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         url: `${baseUrl}${route}`,
         lastModified: new Date().toISOString(),
         changeFrequency: 'weekly' as const,
-        priority: route === '' ? 1 : 0.8,
+        priority: route === '' ? 1.0 : 0.9,
     }));
 
     // Dynamic doctor routes
@@ -36,7 +36,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         url: `${baseUrl}/doctors/${doctor.slug}`,
         lastModified: new Date().toISOString(),
         changeFrequency: 'monthly' as const,
-        priority: 0.7,
+        priority: 0.8,
     }));
 
     return [...routes, ...doctorRoutes];
