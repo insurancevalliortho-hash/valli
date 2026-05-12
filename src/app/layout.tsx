@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat, Poppins } from "next/font/google";
 import "./globals.css";
+import { HospitalSchema, PhysicianSchema } from "../components/seo/StructuredData";
 
 const montserrat = Montserrat({
     variable: "--font-montserrat",
@@ -41,7 +42,7 @@ export const metadata: Metadata = {
         type: "website",
         images: [
             {
-                url: "/favicon.png",
+                url: "/og-image.jpg",
                 width: 1200,
                 height: 630,
                 alt: "Valli Super Speciality Hospital",
@@ -70,9 +71,9 @@ export const metadata: Metadata = {
         },
     },
     verification: {
-        google: "google-site-verification-code", // Replace with your code
-        yandex: "yandex-verification-code", // Replace with your code
-        yahoo: "yahoo-verification-code", // Replace with your code
+        google: "google-site-verification-code", // TODO: paste real Google Search Console verification code here
+        yandex: "yandex-verification-code", // TODO: paste real Yandex verification code here
+        yahoo: "yahoo-verification-code", // TODO: paste real Yahoo verification code here
     },
     icons: {
         icon: "/favicon.png",
@@ -89,57 +90,11 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const jsonLd = {
-        "@context": "https://schema.org",
-        "@type": "MedicalOrganization",
-        name: "Valli Super Speciality Hospital",
-        url: "https://vallihospital.in",
-        logo: "https://vallihospital.in/favicon.png",
-        image: ["https://vallihospital.in/favicon.png"],
-        description: "Valli Super Speciality Hospital in Salem offers advanced orthopedic care, joint replacements, and spine surgery.",
-        address: {
-            "@type": "PostalAddress",
-            streetAddress: "Meyyanur Bypass Road", // Update to exact address
-            addressLocality: "Salem",
-            addressRegion: "Tamil Nadu",
-            postalCode: "636004", // Update to exact PIN code
-            addressCountry: "IN"
-        },
-        geo: {
-            "@type": "GeoCoordinates",
-            latitude: "11.6643", // Salem approximate
-            longitude: "78.1460"
-        },
-        contactPoint: {
-            "@type": "ContactPoint",
-            telephone: "+91-9003417111",
-            contactType: "customer service",
-            availableLanguage: ["English", "Tamil"]
-        },
-        sameAs: [
-            "https://www.facebook.com/vallihospital", // Update with actual link
-            "https://www.instagram.com/vallihospital", // Update with actual link
-            "https://www.linkedin.com/company/vallihospital" // Update with actual link
-        ],
-        openingHoursSpecification: [
-            {
-                "@type": "OpeningHoursSpecification",
-                dayOfWeek: [
-                    "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-                ],
-                opens: "00:00",
-                closes: "23:59"
-            }
-        ]
-    };
-
     return (
         <html lang="en">
             <body className={`${montserrat.variable} ${poppins.variable} antialiased selection:bg-secondary selection:text-white`}>
-                <script
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-                />
+                <HospitalSchema />
+                <PhysicianSchema />
                 {children}
             </body>
         </html>

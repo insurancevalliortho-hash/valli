@@ -96,7 +96,7 @@ export default function AboutSection() {
                         <BlurFade delay={0.1}>
                             <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-[4rem] font-light text-[#004b57] leading-[1.05] tracking-tight mb-16">
                                 The Evolution of Excellence: <br />
-                                <span className="font-bold text-[#f98825]">Valli Superspecialty Hospital</span>
+                                <span className="font-bold text-[#f98825]">Valli Super Specialty Hospital</span>
                             </h2>
                         </BlurFade>
 

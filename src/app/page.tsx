@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Navbar from "./../components/Navbar";
 import Hero from "./../components/Hero";
 import TrustBar from "./../components/TrustBar";
@@ -9,6 +10,15 @@ import Testimonials from "./../components/Testimonials";
 import SmoothScroll from "./../components/SmoothScroll";
 import MagneticCursor from "./../components/MagneticCursor";
 import Footer from "./../components/Footer";
+
+export const metadata: Metadata = {
+    other: {
+        "geo.region": "IN-TN",
+        "geo.placename": "Salem, Tamil Nadu",
+        "geo.position": "11.6643;78.1460",
+        "ICBM": "11.6643, 78.1460"
+    }
+};
 
 export default function Home() {
     const jsonLd = [

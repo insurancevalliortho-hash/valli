@@ -1,8 +1,35 @@
 "use client";
 
-import { motion, useScroll, useTransform, useSpring, Variants } from "framer-motion";
-import { useRef } from "react";
-import { ArrowRight, ShieldCheck } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { ArrowRight, ChevronRight, ChevronLeft } from "lucide-react";
+
+const HERO_SLIDES = [
+    {
+        id: 1,
+        image: "/hero-surgery.png",
+        title: "WORLD-CLASS",
+        highlight: "HEALTHCARE",
+        subtitle: "Orthopedic Excellence",
+        description: "Where expertise restores lives. We provide advanced care, precision healing, and excellence in every specialty."
+    },
+    {
+        id: 2,
+        image: "/hero-person.png",
+        title: "COMPASSIONATE",
+        highlight: "PATIENT CARE",
+        subtitle: "Healing with Empathy",
+        description: "Experience healthcare designed around your well-being, guided by empathy and advanced medical science."
+    },
+    {
+        id: 3,
+        image: "/hero-motion.png",
+        title: "STATE-OF-THE-ART",
+        highlight: "TECHNOLOGY",
+        subtitle: "Precision & Safety",
+        description: "Equipped with cutting-edge medical technology to ensure the highest standards of safety and recovery."
+    }
+];
 
 const STATS = [
     { value: "3+", label: "Years of Excellence" },
@@ -11,267 +38,241 @@ const STATS = [
     { value: "15+", label: "Specialities" },
 ];
 
-// ─── Animation Variants ───────────────────────────────────────────────────────
-
-const containerVariants: Variants = {
-    hidden: {},
-    show: {
-        transition: {
-            staggerChildren: 0.08,
-            delayChildren: 0.15,
-        },
-    },
-};
-
-// Clip-path line reveal — each line slides up from below its own mask
-const lineReveal: Variants = {
-    hidden: { y: "110%", opacity: 0 },
-    show: {
-        y: "0%",
-        opacity: 1,
-        transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1] },
-    },
-};
-
-// Fade + slight upward drift
-const fadeUp: Variants = {
-    hidden: { opacity: 0, y: 24 },
-    show: {
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] },
-    },
-};
-
-// Badge slide-in from left
-const badgeReveal: Variants = {
-    hidden: { opacity: 0, x: -30, scale: 0.92 },
-    show: {
-        opacity: 1,
-        x: 0,
-        scale: 1,
-        transition: { duration: 0.8, ease: [0.34, 1.56, 0.64, 1] },
-    },
-};
-
-// Stat counter pop
-const statPop: Variants = {
-    hidden: { opacity: 0, y: 20, scale: 0.85 },
-    show: (i: number) => ({
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        transition: {
-            duration: 0.6,
-            delay: i * 0.1,
-            ease: [0.34, 1.56, 0.64, 1],
-        },
-    }),
-};
-
-// Image panel entrance
-const imageReveal: Variants = {
-    hidden: { opacity: 0, scale: 1.08, x: 40 },
-    show: {
-        opacity: 1,
-        scale: 1,
-        x: 0,
-        transition: { duration: 1.6, ease: [0.16, 1, 0.3, 1], delay: 0.2 },
-    },
-};
-
-// Button spring bounce
-const buttonBounce: Variants = {
-    hidden: { opacity: 0, scale: 0.88, y: 16 },
-    show: {
-        opacity: 1,
-        scale: 1,
-        y: 0,
-        transition: { duration: 0.7, ease: [0.34, 1.56, 0.64, 1] },
-    },
-};
-
 export default function Hero() {
-    const containerRef = useRef<HTMLElement>(null);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isHovered, setIsHovered] = useState(false);
+    const [mountKey, setMountKey] = useState("initial");
 
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end start"],
-    });
+    // Force a fresh key on mount to prevent Framer Motion from getting stuck during Next.js client navigation
+    useEffect(() => {
+        setMountKey(Math.random().toString());
+    }, []);
 
-    const smooth = useSpring(scrollYProgress, { damping: 30, stiffness: 80, mass: 0.3 });
+    // Auto-play with pause on hover
+    useEffect(() => {
+        if (isHovered) return;
+        const timer = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % HERO_SLIDES.length);
+        }, 6000); // 6 seconds per slide
+        return () => clearInterval(timer);
+    }, [isHovered]);
 
-    const yDesktopText = useTransform(smooth, [0, 1], ["0%", "-20%"]);
-    const yDesktopImage = useTransform(smooth, [0, 1], ["0%", "-10%"]);
-    const imgScale = useTransform(smooth, [0, 1], [1, 1.06]);
-    const desktopFade = useTransform(smooth, [0, 0.7], [1, 0]);
+    const nextSlide = () => setCurrentIndex((prev) => (prev + 1) % HERO_SLIDES.length);
+    const prevSlide = () => setCurrentIndex((prev) => (prev === 0 ? HERO_SLIDES.length - 1 : prev - 1));
 
-    // ── Shared Content Block ───────────────────────────────────────────────────
-    const Content = (
-        <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="show"
-            className="flex flex-col mt-10"
-        >
-
-
-            {/* WORLD-CLASS */}
-            <div className="overflow-hidden">
-                <motion.span
-                    variants={lineReveal}
-                    className="block font-light text-[#001014] text-[2.5rem] sm:text-[3.4rem] lg:text-[3rem] xl:text-[3.5rem] 2xl:text-[4rem] leading-[0.95] tracking-tighter"
-                >
-                    WORLD-CLASS
-                </motion.span>
-            </div>
-
-            {/* HEALTHCARE */}
-            <div className="overflow-hidden">
-                <motion.span
-                    variants={lineReveal}
-                    className="block font-black text-[#f98825] text-[2.5rem] sm:text-[3.4rem] lg:text-[3rem] xl:text-[3.5rem] 2xl:text-[4rem] leading-[0.95] tracking-tighter"
-                >
-                    HEALTHCARE
-                </motion.span>
-            </div>
-
-            {/* & Orthopedic Excellence */}
-            <div className="overflow-hidden mt-1">
-                <motion.span
-                    variants={lineReveal}
-                    className="block font-light text-[#3cb3a6] text-[1.5rem] sm:text-[2rem] lg:text-[1.8rem] xl:text-[2.2rem] 2xl:text-[2.6rem] leading-[1.0] tracking-tight italic mb-3"
-                >
-                    &amp; Orthopedic Excellence
-                </motion.span>
-            </div>
-
-            {/* Divider line accent */}
-            <motion.div variants={fadeUp} className="w-10 h-[2px] bg-[#f98825] mb-4 origin-left" />
-
-            {/* Description */}
-            <motion.p
-                variants={fadeUp}
-                className="text-gray-500 font-medium text-sm leading-relaxed max-w-[440px] mb-5"
-            >
-                Welcome to Valli Super Speciality Hospital. Where expertise restores lives. We provide advanced care, precision healing, and excellence in every specialty.
-            </motion.p>
-
-            {/* CTA Buttons */}
-            <motion.div
-                variants={containerVariants}
-                className="flex flex-wrap items-center gap-4 mb-6 lg:mb-8"
-            >
-                <motion.a
-                    variants={buttonBounce}
-                    href="#"
-                    whileHover={{ scale: 1.04, y: -2 }}
-                    whileTap={{ scale: 0.97 }}
-                    className="group flex items-center gap-3 bg-[#f98825] text-white px-7 py-3.5 rounded-full font-bold uppercase tracking-[0.1em] text-xs hover:bg-[#3cb3a6] shadow-md hover:shadow-[0_12px_24px_rgba(60,179,166,0.25)] transition-all duration-500"
-                >
-                    Book Consultation
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </motion.a>
-                <motion.a
-                    variants={buttonBounce}
-                    href="#"
-                    whileHover={{ x: 4 }}
-                    className="text-[#001014] hover:text-[#3cb3a6] text-xs font-bold uppercase tracking-[0.1em] transition-all duration-300 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-[#3cb3a6] hover:after:w-full after:transition-all after:duration-300 pb-1"
-                >
-                    View Outcomes
-                </motion.a>
-            </motion.div>
-
-            {/* Stats Strip */}
-            <motion.div variants={fadeUp} className="grid grid-cols-2 lg:grid-cols-4 gap-y-6 lg:gap-y-0 gap-x-2 border-t border-gray-100 pt-6">
-                {STATS.map((s, i) => (
-                    <motion.div
-                        key={i}
-                        custom={i}
-                        variants={statPop}
-                        whileHover={{ y: -3, scale: 1.05 }}
-                        transition={{ type: "spring", stiffness: 300 }}
-                        className={`flex flex-col items-start cursor-default ${(i % 2 !== 0) ? "border-l border-gray-100 pl-4" : ""} ${i >= 2 ? "lg:border-l lg:border-gray-100 lg:pl-4" : ""}`}
-                    >
-                        <span className={`text-[1.5rem] sm:text-[2rem] lg:text-[2.2rem] font-black leading-none tracking-tighter ${i % 2 === 0 ? "text-[#f98825]" : "text-[#3cb3a6]"}`}>
-                            {s.value}
-                        </span>
-                        <span className="text-[8px] sm:text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-1.5 leading-tight">
-                            {s.label}
-                        </span>
-                    </motion.div>
-                ))}
-            </motion.div>
-        </motion.div>
-    );
+    // Wait until mounted to render animations to avoid hydration/navigation bugs
+    if (mountKey === "initial") {
+        return <section className="relative w-full h-[100svh] bg-[#001014]" />;
+    }
 
     return (
         <section
-            ref={containerRef}
-            className="relative w-full lg:h-[100vh] min-h-[100svh] bg-[#fcfdfd] selection:bg-[#3cb3a6] selection:text-white lg:overflow-hidden"
+            className="relative w-full h-[100svh] bg-[#001014] overflow-hidden flex flex-col justify-end"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
         >
-            <div className="lg:sticky lg:top-0 w-full lg:h-[100svh] flex flex-col">
+            {/* Cinematic Background Images */}
+            <AnimatePresence mode="popLayout">
+                <motion.div
+                    key={`bg-${mountKey}-${currentIndex}`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+                    className="absolute inset-0 z-0"
+                >
+                    <motion.img
+                        src={HERO_SLIDES[currentIndex].image}
+                        alt="Hero background"
+                        className="w-full h-full object-cover object-[center_top]"
+                        initial={{ scale: 1.15 }}
+                        animate={{ scale: 1 }}
+                        transition={{ duration: 12, ease: "easeOut" }}
+                    />
+                    {/* Immersive Gradients to blend colors flawlessly */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#001014]/95 via-[#001014]/60 to-transparent mix-blend-multiply" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#001014] via-[#001014]/20 to-transparent opacity-90" />
+                    {/* Subtle Teal glow for deep integration */}
+                    <div className="absolute inset-0 bg-[#3cb3a6]/5 mix-blend-overlay pointer-events-none" />
+                </motion.div>
+            </AnimatePresence>
 
-                {/* Blueprint Grid BG */}
-                <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-                    <motion.div
-                        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2, delay: 0.5 }}
-                        className="absolute inset-0 bg-[linear-gradient(rgba(60,179,166,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(60,179,166,0.04)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_70%_80%_at_30%_50%,#000_20%,transparent_100%)]"
-                    />
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 3, delay: 0.3 }}
-                        className="absolute top-[-10%] right-[0%] w-[40vw] h-[40vw] rounded-full border border-[#f98825]/10 animate-[spin_60s_linear_infinite]"
-                    />
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 3, delay: 0.5 }}
-                        className="absolute top-[10%] right-[-8%] w-[55vw] h-[55vw] rounded-full border border-[#3cb3a6]/5 animate-[spin_100s_linear_infinite_reverse]"
-                    />
+            {/* Main Content Grid */}
+            <div className="relative z-10 w-full h-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 flex flex-col justify-center pt-32 sm:pt-40 lg:pt-32 pb-32 sm:pb-40 lg:pb-48">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-4 items-center h-full">
+
+                    {/* Left Text Content */}
+                    <div className="lg:col-span-8 flex flex-col items-start mt-10 lg:mt-0">
+                        <AnimatePresence mode="popLayout">
+                            <motion.div
+                                key={`text-${mountKey}-${currentIndex}`}
+                                initial="hidden"
+                                animate="visible"
+                                exit="exit"
+                                variants={{
+                                    hidden: { opacity: 0 },
+                                    visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+                                    exit: { opacity: 0, transition: { duration: 0.4 } }
+                                }}
+                                className="max-w-4xl"
+                            >
+                                <motion.div
+                                    variants={{
+                                        hidden: { opacity: 0, x: -20 },
+                                        visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } }
+                                    }}
+                                    className="flex items-center gap-4 mb-6 sm:mb-8"
+                                >
+                                    <span className="w-12 sm:w-16 h-[2px] bg-[#f98825] shadow-[0_0_10px_rgba(249,136,37,0.5)]"></span>
+                                    <span className="text-[#3cb3a6]  tracking-[0.2em] uppercase text-xs sm:text-sm drop-shadow-lg">
+                                        {HERO_SLIDES[currentIndex].subtitle}
+                                    </span>
+                                </motion.div>
+
+                                <h1 className="text-white font-light text-[2.8rem] sm:text-[4.2rem] lg:text-[5rem] xl:text-[5.5rem] leading-[1] tracking-tighter mb-6">
+                                    <motion.span
+                                        variants={{
+                                            hidden: { opacity: 0, y: 30 },
+                                            visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } }
+                                        }}
+                                        className="block drop-shadow-2xl"
+                                    >
+                                        {HERO_SLIDES[currentIndex].title}
+                                    </motion.span>
+                                    <motion.span
+                                        variants={{
+                                            hidden: { opacity: 0, y: 30 },
+                                            visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } }
+                                        }}
+                                        className="block font-black text-[#f98825] drop-shadow-2xl"
+                                    >
+                                        {HERO_SLIDES[currentIndex].highlight}
+                                    </motion.span>
+                                </h1>
+
+                                <motion.p
+                                    variants={{
+                                        hidden: { opacity: 0, y: 20 },
+                                        visible: { opacity: 1, y: 0, transition: { duration: 0.8, delay: 0.2, ease: "easeOut" } }
+                                    }}
+                                    className="text-gray-200 text-sm sm:text-lg lg:text-xl font-medium max-w-2xl leading-relaxed drop-shadow-md border-l-2 border-[#3cb3a6]/30 pl-5 sm:pl-6"
+                                >
+                                    {HERO_SLIDES[currentIndex].description}
+                                </motion.p>
+
+                                <motion.div
+                                    variants={{
+                                        hidden: { opacity: 0, y: 20 },
+                                        visible: { opacity: 1, y: 0, transition: { duration: 0.8, delay: 0.3, ease: "easeOut" } }
+                                    }}
+                                    className="mt-10 sm:mt-14"
+                                >
+                                    <button className="group relative px-8 py-4 sm:px-10 sm:py-5 bg-[#f98825] text-white font-bold text-xs sm:text-sm tracking-[0.15em] uppercase overflow-hidden rounded-full transition-all hover:scale-105 shadow-[0_10px_30px_rgba(249,136,37,0.3)] hover:shadow-[0_15px_40px_rgba(249,136,37,0.5)]">
+                                        <span className="relative z-10 flex items-center gap-3">
+                                            Book Appointment
+                                            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-2 transition-transform duration-300" />
+                                        </span>
+                                        <div className="absolute inset-0 h-full w-full bg-[#3cb3a6] scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 ease-[0.22,1,0.36,1] z-0"></div>
+                                    </button>
+                                </motion.div>
+                            </motion.div>
+                        </AnimatePresence>
+                    </div>
+
+                    {/* Right Navigation & Progress - Desktop */}
+                    <div className="lg:col-span-4 hidden lg:flex flex-col items-end justify-center h-full gap-16 relative z-20">
+                        {/* Elegant Vertical Slide Indicators */}
+                        <div className="flex flex-col gap-6 items-end">
+                            {HERO_SLIDES.map((_, idx) => (
+                                <button
+                                    key={idx}
+                                    onClick={() => setCurrentIndex(idx)}
+                                    aria-label={`Go to slide ${idx + 1}`}
+                                    className="group relative flex items-center justify-end w-24 h-6 cursor-pointer"
+                                >
+                                    <span
+                                        className={`absolute right-0 h-[3px] rounded-full transition-all duration-700 ease-[0.22,1,0.36,1] ${idx === currentIndex
+                                                ? "w-full bg-[#f98825] shadow-[0_0_10px_rgba(249,136,37,0.8)]"
+                                                : "w-1/3 bg-white/20 group-hover:w-2/3 group-hover:bg-white/60"
+                                            }`}
+                                    />
+                                    <span className={`absolute right-full mr-4 text-xs font-bold transition-opacity duration-300 ${idx === currentIndex ? "opacity-100 text-[#f98825]" : "opacity-0"}`}>
+                                        0{idx + 1}
+                                    </span>
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Premium Circular Controls */}
+                        <div className="flex gap-4">
+                            <button
+                                onClick={prevSlide}
+                                className="group relative w-16 h-16 rounded-full border border-white/20 bg-[#001014]/40 backdrop-blur-xl flex items-center justify-center text-white overflow-hidden transition-all hover:border-[#3cb3a6]/80 shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:shadow-[0_8px_32px_rgba(60,179,166,0.3)]"
+                            >
+                                <div className="absolute inset-0 bg-[#3cb3a6] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.22,1,0.36,1]" />
+                                <ChevronLeft className="w-6 h-6 relative z-10 group-hover:-translate-x-1 transition-transform" />
+                            </button>
+                            <button
+                                onClick={nextSlide}
+                                className="group relative w-16 h-16 rounded-full border border-white/20 bg-[#001014]/40 backdrop-blur-xl flex items-center justify-center text-white overflow-hidden transition-all hover:border-[#3cb3a6]/80 shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:shadow-[0_8px_32px_rgba(60,179,166,0.3)]"
+                            >
+                                <div className="absolute inset-0 bg-[#3cb3a6] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.22,1,0.36,1]" />
+                                <ChevronRight className="w-6 h-6 relative z-10 group-hover:translate-x-1 transition-transform" />
+                            </button>
+                        </div>
+                    </div>
                 </div>
+            </div>
 
-                {/* ══════════ MOBILE LAYOUT ══════════ */}
-                <div className="lg:hidden absolute inset-0 z-0 pointer-events-none overflow-hidden">
-                    <img
-                        src="/hero-person.png"
-                        alt=""
-                        className="w-full h-full object-cover object-right-top opacity-[0.07]"
-                        loading="eager"
-                    />
-                </div>
-                <div className="lg:hidden relative z-10 flex flex-col justify-center min-h-[100svh] px-6 sm:px-10 pt-32 pb-16">
-                    {Content}
-                </div>
-
-                {/* ══════════ DESKTOP LAYOUT ══════════ */}
-                <div className="hidden lg:flex w-full h-full">
-
-                    {/* Left text panel — scroll parallax */}
-                    <motion.div
-                        style={{ y: yDesktopText, opacity: desktopFade }}
-                        className="flex flex-col justify-center px-16 xl:px-20 w-[52%] shrink-0 h-full"
-                    >
-                        {Content}
-                    </motion.div>
-
-                    {/* Right image panel */}
-                    <motion.div
-                        variants={imageReveal}
-                        initial="hidden"
-                        animate="show"
-                        style={{ y: yDesktopImage, scale: imgScale, opacity: desktopFade }}
-                        className="flex-1 relative h-full overflow-hidden"
-                    >
-                        <img
-                            src="/hero-person.png"
-                            alt="Orthopedic Care – Valli Hospital"
-                            className="absolute inset-0 w-full h-full object-cover object-center"
-                            loading="eager"
+            {/* Mobile Navigation (Visible only on small screens) */}
+            <div className="lg:hidden absolute bottom-32 sm:bottom-40 left-6 right-6 z-20 flex justify-between items-center">
+                <div className="flex gap-3 items-center">
+                    {HERO_SLIDES.map((_, idx) => (
+                        <button
+                            key={idx}
+                            onClick={() => setCurrentIndex(idx)}
+                            aria-label={`Go to slide ${idx + 1}`}
+                            className={`h-[3px] rounded-full transition-all duration-500 ${idx === currentIndex ? "w-10 bg-[#f98825]" : "w-4 bg-white/30"
+                                }`}
                         />
-                        {/* Seamless edge blend */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-[#fcfdfd] via-[#fcfdfd]/50 to-transparent pointer-events-none" />
-                        <div className="absolute inset-0 bg-gradient-to-b from-[#fcfdfd]/10 via-transparent to-[#fcfdfd]/20 pointer-events-none" />
-                    </motion.div>
+                    ))}
                 </div>
+                <div className="flex gap-2">
+                    <button onClick={prevSlide} className="w-12 h-12 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white">
+                        <ChevronLeft className="w-5 h-5" />
+                    </button>
+                    <button onClick={nextSlide} className="w-12 h-12 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white">
+                        <ChevronRight className="w-5 h-5" />
+                    </button>
+                </div>
+            </div>
 
+            {/* Ultra-Premium Glassmorphic Stats Dock - Centered at bottom */}
+            <div className="absolute bottom-6 sm:bottom-10 left-0 w-full z-30 px-6 sm:px-10 lg:px-16 hidden md:block">
+                <motion.div
+                    key={`stats-${mountKey}`}
+                    initial={{ y: 50, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                    className="max-w-[1440px] mx-auto"
+                >
+                    <div className="grid grid-cols-4 bg-[#001014]/60 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 relative overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.6)]">
+                        {/* Premium Glow Effect inside dock */}
+                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-full bg-[#3cb3a6]/5 blur-[60px] pointer-events-none" />
+                        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+
+                        {STATS.map((stat, i) => (
+                            <div key={i} className={`flex flex-col items-center justify-center text-center relative group ${i !== 0 ? "border-l border-white/10" : ""}`}>
+                                <span className={`text-4xl lg:text-5xl font-black tracking-tighter mb-2 transition-transform duration-500 group-hover:scale-105 ${i % 2 === 0 ? "text-[#f98825]" : "text-[#3cb3a6]"}`}>
+                                    {stat.value}
+                                </span>
+                                <span className="text-[10px] lg:text-xs text-gray-300 uppercase tracking-[0.25em] font-bold">
+                                    {stat.label}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                </motion.div>
             </div>
         </section>
     );

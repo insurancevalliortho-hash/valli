@@ -32,7 +32,7 @@ export default function Navbar() {
 
                         {/* Desktop: favicon icon + 2-line name */}
                         <img src="/favicon.png" alt="Valli Hospital" className="hidden sm:block h-10 xl:h-11 w-auto" />
-                        <div className="hidden sm:flex flex-col justify-center text-[#004b57]">
+                        <div className={`hidden sm:flex flex-col justify-center transition-colors duration-500 ${isScrolled ? "text-[#004b57]" : "text-[#f98825]"}`}>
                             <span className="text-lg xl:text-xl font-black leading-none tracking-tight">Valli</span>
                             <span className="text-[10px] xl:text-xs font-bold tracking-[0.15em] uppercase mt-0.5 opacity-80">Super Speciality Hospital</span>
                         </div>
