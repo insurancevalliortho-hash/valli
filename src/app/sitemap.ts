@@ -3,7 +3,6 @@ import { doctorsData } from '../data/doctors';
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://vallihospital.in';
-
     const homeRoute = [
         {
             url: baseUrl,
@@ -12,7 +11,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 1.0,
         }
     ];
-
     const specialtyRoutes = [
         '/joint-care-clinic',
         '/sports-medicine-clinic',
@@ -50,6 +48,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
         changeFrequency: 'monthly' as const,
         priority: 0.8,
     }));
-
     return [...homeRoute, ...specialtyRoutes, ...otherPages, ...doctorRoutes];
 }

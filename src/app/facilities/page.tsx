@@ -1,13 +1,5 @@
-
-import { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: 'Facilities in Salem | Valli Super Speciality Hospital',
-  description: 'Advanced Facilities in Salem. Valli Super Speciality Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.',
-  keywords: 'Salem, Facilities, Tamil Nadu, Dr. Natanasabapathy, best facilities hospital in Salem, top orthopedic surgeon Salem, facilities treatment',
-};
-
 "use client";
+
 
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
@@ -139,19 +131,19 @@ export default function FacilitiesPage() {
     // Horizontal Scroll Logic
     const horizontalRef = useRef<HTMLElement>(null);
     const { scrollYProgress } = useScroll({ target: horizontalRef });
-    
+
     // Animate X translation from 0% to -80% (to scroll through the 5 items)
     const x = useTransform(scrollYProgress, [0, 1], ["0%", "-80%"]);
-    
+
     // Dynamic background color transition based on scroll progress
-    const bgColor = useTransform(scrollYProgress, 
-        [0, 0.25, 0.5, 0.75, 1], 
+    const bgColor = useTransform(scrollYProgress,
+        [0, 0.25, 0.5, 0.75, 1],
         facilities.map(f => f.theme.bg)
     );
 
     // Dynamic nav/logo color logic
     const [isDarkBg, setIsDarkBg] = useState(true);
-    
+
     useEffect(() => {
         return scrollYProgress.onChange((latest) => {
             // Determine active index roughly based on progress
@@ -171,78 +163,78 @@ export default function FacilitiesPage() {
                     {/* Glowing Orbs */}
                     <div className="absolute top-1/4 right-[-10%] w-[40vw] h-[40vw] bg-[#3cb3a6]/20 rounded-full blur-[120px] mix-blend-screen" />
                     <div className="absolute bottom-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-[#f98825]/15 rounded-full blur-[150px] mix-blend-screen" />
-                    
+
                     {/* Animated Grid Pattern */}
-                    <motion.div 
+                    <motion.div
                         animate={{ backgroundPosition: ["0px 0px", "60px 60px"] }}
                         transition={{ repeat: Infinity, duration: 10, ease: "linear" }}
-                        className="absolute inset-0" 
-                        style={{ 
-                            backgroundImage: "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)", 
-                            backgroundSize: "60px 60px" 
-                        }} 
+                        className="absolute inset-0"
+                        style={{
+                            backgroundImage: "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
+                            backgroundSize: "60px 60px"
+                        }}
                     />
                 </motion.div>
-                
+
                 <div className="container mx-auto px-6 md:px-12 relative z-10 flex flex-col items-center text-center">
-                    <motion.div 
-                        initial={{ opacity: 0, scale: 0.8 }} 
-                        animate={{ opacity: 1, scale: 1 }} 
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
                         className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 text-white/80 text-xs font-bold tracking-[0.2em] uppercase mb-8 backdrop-blur-md"
                     >
                         <span className="w-2 h-2 rounded-full bg-[#f98825] shadow-[0_0_10px_#f98825] animate-pulse" />
                         Infrastructure
                     </motion.div>
-                    
+
                     <div className="overflow-hidden">
-                        <motion.h1 
-                            initial={{ y: 100, opacity: 0 }} 
-                            animate={{ y: 0, opacity: 1 }} 
-                            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }} 
+                        <motion.h1
+                            initial={{ y: 100, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
                             className="text-6xl md:text-8xl lg:text-9xl font-black text-white leading-[1.0] tracking-tighter mb-6"
                         >
                             The Architecture <br className="hidden md:block" />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#f98825] to-[#f9a052]">of Healing</span>
                         </motion.h1>
                     </div>
-                    
-                    <motion.p 
-                        initial={{ opacity: 0, y: 20 }} 
-                        animate={{ opacity: 1, y: 0 }} 
-                        transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }} 
+
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
                         className="text-lg md:text-xl text-white/50 max-w-2xl leading-relaxed font-medium mb-16"
                     >
                         Five specialized departments. Advanced diagnostic arrays. One unified mission to deliver precision care when every second counts.
                     </motion.p>
 
-                    <motion.div 
-                        initial={{ opacity: 0 }} 
-                        animate={{ opacity: 1 }} 
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
                         transition={{ delay: 1, duration: 1 }}
                         className="flex flex-col items-center gap-4 text-white/30"
                     >
                         <span className="text-[10px] uppercase tracking-widest font-bold">Scroll to explore</span>
-                        <motion.div 
+                        <motion.div
                             animate={{ height: ["0rem", "4rem", "0rem"], opacity: [0, 1, 0] }}
                             transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-                            className="w-px bg-gradient-to-b from-[#f98825] to-transparent" 
+                            className="w-px bg-gradient-to-b from-[#f98825] to-transparent"
                         />
                     </motion.div>
                 </div>
             </section>
 
             {/* Horizontal Scroll Gallery Section */}
-            <motion.section 
-                ref={horizontalRef} 
-                style={{ backgroundColor: bgColor }} 
+            <motion.section
+                ref={horizontalRef}
+                style={{ backgroundColor: bgColor }}
                 className="relative h-[600vh]" // 600vh gives enough scroll distance for 5 items
             >
                 <div className="sticky top-0 h-screen flex items-center overflow-hidden">
                     <motion.div style={{ x }} className="flex gap-10 px-[10vw] md:px-[5vw] w-[500vw] md:w-[400vw] items-center">
                         {facilities.map((facility, index) => (
                             <div key={facility.id} className="w-[85vw] md:w-[75vw] h-[80vh] flex-shrink-0 relative group perspective-[2000px]">
-                                <motion.div 
+                                <motion.div
                                     className={`w-full h-full rounded-[2.5rem] border shadow-2xl overflow-hidden ${facility.theme.cardBg} ${facility.theme.border} backdrop-blur-xl relative flex flex-col`}
                                     style={{
                                         boxShadow: facility.theme.isDark ? "0 20px 60px rgba(0,0,0,0.4)" : "0 20px 60px rgba(0,0,0,0.05)"
@@ -256,24 +248,24 @@ export default function FacilitiesPage() {
 
                                     {/* Content Grid */}
                                     <div className="grid grid-cols-1 lg:grid-cols-12 flex-1 relative z-10">
-                                        
+
                                         {/* Left Side: Title & Stat */}
                                         <div className={`lg:col-span-5 p-8 lg:p-12 flex flex-col border-b lg:border-b-0 lg:border-r ${facility.theme.border}`}>
                                             <div className="flex items-center gap-4 mb-auto">
-                                                <div className="w-14 h-14 rounded-2xl flex items-center justify-center backdrop-blur-md shadow-inner transition-transform duration-500 group-hover:scale-105 group-hover:rotate-3" 
-                                                     style={{ backgroundColor: `${facility.theme.accent}15`, color: facility.theme.accent }}>
+                                                <div className="w-14 h-14 rounded-2xl flex items-center justify-center backdrop-blur-md shadow-inner transition-transform duration-500 group-hover:scale-105 group-hover:rotate-3"
+                                                    style={{ backgroundColor: `${facility.theme.accent}15`, color: facility.theme.accent }}>
                                                     {facility.icon}
                                                 </div>
                                                 <div className={`text-sm font-black tracking-[0.25em] uppercase ${facility.theme.isDark ? 'text-white/40' : 'text-black/40'}`}>
                                                     Facility {facility.id}
                                                 </div>
                                             </div>
-                                            
+
                                             <div className="mt-12 lg:mt-0">
                                                 <h2 className={`text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.1] mb-4 ${facility.theme.text}`}>
                                                     {facility.title}
                                                 </h2>
-                                                
+
                                                 <p className={`text-base font-medium mb-10 max-w-sm ${facility.theme.isDark ? 'text-white/60' : 'text-[#475569]'}`}>
                                                     {facility.subtitle}
                                                 </p>
@@ -307,7 +299,7 @@ export default function FacilitiesPage() {
                                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-8">
                                                     {facility.capabilities.map((cap, i) => (
                                                         <div key={i} className="flex items-start gap-4 group/cap">
-                                                            <div className="w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-1 transition-colors duration-300 group-hover/cap:bg-current" 
+                                                            <div className="w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-1 transition-colors duration-300 group-hover/cap:bg-current"
                                                                 style={{ backgroundColor: `${facility.theme.accent}15`, color: facility.theme.accent }}>
                                                                 <svg className="w-3 h-3 text-current group-hover/cap:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
@@ -321,7 +313,7 @@ export default function FacilitiesPage() {
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                 </motion.div>
                             </div>
