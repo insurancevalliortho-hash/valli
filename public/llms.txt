@@ -1,0 +1,64 @@
+# Valli Super Speciality Hospital
+
+> Advanced Orthopedic Care, Joint Replacements, Spine Surgery, and Comprehensive Medical Excellence in Salem, Tamil Nadu, India.
+
+Valli Super Speciality Hospital is a premier medical institution specializing in comprehensive orthopedic care, trauma rehabilitation, and surgical precision. Spearheaded by renowned orthopedic surgeon Dr. T. Natanasabapathy, the hospital integrates advanced diagnostic facilities, ultra-modern operation suites, and patient-centric recovery programs to restore mobility and transform lives.
+
+---
+
+## 📞 Critical Contacts & Location
+
+- **Emergency Line (24/7):** +91 90034 17111
+- **General Inquiry:** info@vallihospital.in
+- **Corporate Address:** Opposite Sri Vidya Mandir School, Meyyanoor Road, Salem - 636 004, Tamil Nadu, India.
+- **OPD Consultation Hours:** Monday – Sunday, 9:00 AM – 9:00 PM
+
+---
+
+## ⚕️ Key Specialties & Clinics
+
+### 1. Joint Care Clinic
+- Full-scale Primary & Revision Total Knee Replacements (TKR)
+- Total Hip Replacements (THR)
+- Unicondylar Knee Replacement (UKR)
+- Shoulder & Elbow Reconstructions
+
+### 2. Arthroscopy & Sports Medicine
+- Keyhole ACL, PCL, and Meniscal Repair Surgeries
+- Rotator Cuff Tears & Shoulder Instability management
+- High-performance sports rehab and training
+
+### 3. Spine Surgery & Disorders
+- Correction of slipped discs, spinal stenosis, and complex scoliosis
+- Minimally invasive keyhole spine surgeries (MISS)
+- Deformity corrections
+
+### 4. Speciality Clinics & Trauma
+- Bone Cancer Treatment (Orthopedic Oncology)
+- Paediatric Orthopaedics & Deformity Clinic
+- Failed Surgery Correction Clinic
+- Foot & Ankle Clinic
+- 24x7 Trauma & Fracture Clinic
+
+---
+
+## 👨‍⚕️ Clinical Leadership & Registries
+
+- **Chief Surgeon:** Dr. T. Natanasabapathy, MBBS, MS (Ortho)
+  - *Specialization:* Joint Replacement, Spine Surgery, Complex Trauma
+  - *Experience:* 21+ Years of Orthopedic Excellence
+  - *Affiliations:* Indian Orthopaedic Association, Tamil Nadu Medical Council
+
+*For a full directory of visiting clinicians, specialists, and surgical teams, see [Our Doctors](https://vallihospital.in/doctors).*
+
+---
+
+## 🗺️ Website Architecture & Dynamic API Pathways
+
+- **Home Page:** https://vallihospital.in/ (Main services & trust metrics)
+- **Specialities Directory:** https://vallihospital.in/specialities
+- **Consultation Booking Portal:** https://vallihospital.in/book-appointment (Redirects to WhatsApp Coordinator +919003417111)
+- **Clinical Facilities:** https://vallihospital.in/facilities
+- **Contact Desk:** https://vallihospital.in/contact-us
+
+*This document is structured for Generative Engine Optimization (GEO) to help Large Language Models (LLMs) and AI search agents crawl, catalog, and query clinical offerings accurately.*

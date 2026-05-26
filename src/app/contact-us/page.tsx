@@ -8,6 +8,7 @@ import Footer from "../../components/Footer";
 import SmoothScroll from "../../components/SmoothScroll";
 import MagneticCursor from "../../components/MagneticCursor";
 import { BreadcrumbSchema, HospitalSchema } from "../../components/seo/StructuredData";
+import ObfuscatedEmail from "../../components/ObfuscatedEmail";
 
 interface FormState {
   fullName: string;
@@ -240,12 +241,11 @@ export default function ContactUsPage() {
                   Book slots for High-Speed CT Scans, digital X-Rays, genetic DNA mapping profiles, and biochemistry lab screenings.
                 </p>
               </div>
-              <a
-                href="mailto:info@vallihospital.in"
-                className="bg-[#f98825] hover:bg-[#e0751e] text-white font-bold text-xs tracking-wider uppercase text-center py-3.5 rounded-full transition-colors"
+              <ObfuscatedEmail
+                className="bg-[#f98825] hover:bg-[#e0751e] text-white font-bold text-xs tracking-wider uppercase text-center py-3.5 rounded-full transition-colors block w-full"
               >
                 Email desk: info@vallihospital.in
-              </a>
+              </ObfuscatedEmail>
             </motion.div>
           </div>
         </div>

@@ -22,10 +22,10 @@ export const metadata: Metadata = {
     generator: "Next.js",
     category: "Medical",
     title: {
-        default: "Valli Super Speciality Hospital | Best Orthopedic Care in Salem",
+        default: "Valli Super Speciality Hospital | Best Orthopedic Care",
         template: "%s | Valli Super Speciality Hospital",
     },
-    description: "Valli Super Speciality Hospital in Salem offers advanced orthopedic care, joint replacements, spine surgery, and comprehensive medical excellence. Where expertise restores lives.",
+    description: "Valli Super Speciality Hospital in Salem offers advanced orthopedic care, joint replacements, spine surgery, and comprehensive medical excellence.",
     keywords: ["Orthopedic Hospital", "Salem", "Joint Replacement", "Spine Surgery", "Valli Hospital", "Best Orthopedician", "Trauma Care", "Sports Medicine", "Super Speciality Hospital", "Orthopedic Surgeon"],
     authors: [{ name: "Valli Super Speciality Hospital", url: "https://vallihospital.in" }],
     creator: "Valli Super Speciality Hospital",

@@ -65,7 +65,44 @@ export default function Hero() {
 
     // Wait until mounted to render animations to avoid hydration/navigation bugs
     if (mountKey === "initial") {
-        return <section className="relative w-full h-[100svh] bg-[#001014]" />;
+        return (
+            <section className="relative w-full h-[100svh] bg-[#001014] overflow-hidden flex flex-col justify-end">
+                {/* Cinematic Background Images for SSR/First Paint */}
+                <div className="absolute inset-0 z-0">
+                    <img
+                        src={HERO_SLIDES[0].image}
+                        alt="Valli Super Speciality Hospital"
+                        className="w-full h-full object-cover object-[center_top]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#001014]/95 via-[#001014]/60 to-transparent mix-blend-multiply" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#001014] via-[#001014]/20 to-transparent opacity-90" />
+                </div>
+
+                <div className="relative z-10 w-full h-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 flex flex-col justify-center pt-32 sm:pt-40 lg:pt-32 pb-32 sm:pb-40 lg:pb-48">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-4 items-center h-full">
+                        <div className="lg:col-span-8 flex flex-col items-start mt-10 lg:mt-0">
+                            <div className="max-w-4xl">
+                                <div className="flex items-center gap-4 mb-6 sm:mb-8">
+                                    <span className="w-12 sm:w-16 h-[2px] bg-[#f98825]"></span>
+                                    <span className="text-[#3cb3a6] tracking-[0.2em] uppercase text-xs sm:text-sm">
+                                        {HERO_SLIDES[0].subtitle}
+                                    </span>
+                                </div>
+
+                                <h1 className="text-white font-light text-[2.8rem] sm:text-[4.2rem] lg:text-[5rem] xl:text-[5.5rem] leading-[1] tracking-tighter mb-6">
+                                    <span className="block">{HERO_SLIDES[0].title}</span>
+                                    <span className="block font-black text-[#f98825]">{HERO_SLIDES[0].highlight}</span>
+                                </h1>
+
+                                <p className="text-gray-200 text-sm sm:text-lg lg:text-xl font-medium max-w-2xl leading-relaxed border-l-2 border-[#3cb3a6]/30 pl-5 sm:pl-6">
+                                    {HERO_SLIDES[0].description}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        );
     }
 
     return (

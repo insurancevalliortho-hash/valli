@@ -8,6 +8,7 @@ import Footer from "../../components/Footer";
 import SmoothScroll from "../../components/SmoothScroll";
 import MagneticCursor from "../../components/MagneticCursor";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import ObfuscatedEmail from "../../components/ObfuscatedEmail";
 
 const departments = [
     "Orthopaedics & Joint Replacement",
@@ -331,7 +332,11 @@ export default function BookAppointmentPage() {
                                         <div className="mt-0.5 text-[#f98825] shrink-0">{icon}</div>
                                         <div>
                                             <div className="text-[10px] font-black uppercase tracking-widest text-[#40484a] mb-0.5">{label}</div>
-                                            <div className="text-[#00333c] font-semibold text-sm">{val}</div>
+                                            <div className="text-[#00333c] font-semibold text-sm">
+                                                {label === "Email" ? (
+                                                    <ObfuscatedEmail className="text-[#00333c] font-bold text-sm hover:text-[#3cb3a6] transition-colors" />
+                                                ) : val}
+                                            </div>
                                         </div>
                                     </div>
                                 ))}
