@@ -39,7 +39,7 @@ export default function Footer() {
                         initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }} viewport={{ once: true }}
                         className="lg:col-span-4 lg:col-start-7 flex flex-col gap-8 md:mt-0 mt-8"
                     >
-                        <h4 className="text-[#f98825] text-xs font-bold uppercase tracking-[0.2em]">Contact & Info</h4>
+                        <div className="text-[#f98825] text-xs font-bold uppercase tracking-[0.2em]">Contact & Info</div>
                         <ul className="space-y-6">
                             <li className="group">
                                 <p className="text-[10px] uppercase tracking-widest text-[#f98825] mb-2 font-bold group-hover:translate-x-1 transition-transform">Emergency 24/7</p>
@@ -61,7 +61,7 @@ export default function Footer() {
                         initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }} viewport={{ once: true }}
                         className="lg:col-span-2 flex flex-col gap-8"
                     >
-                        <h4 className="text-[#f98825] text-xs font-bold uppercase tracking-[0.2em]">Navigation</h4>
+                        <div className="text-[#f98825] text-xs font-bold uppercase tracking-[0.2em]">Navigation</div>
                         <ul className="space-y-4 font-bold text-gray-500 text-sm">
                             <li><a href="/" className="hover:text-[#f98825] hover:ml-2 transition-all block">Home</a></li>
                             <li><a href="/specialities" className="hover:text-[#f98825] hover:ml-2 transition-all block">Specialities</a></li>

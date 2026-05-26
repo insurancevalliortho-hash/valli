@@ -4,6 +4,7 @@ import "./globals.css";
 import { HospitalSchema, PhysicianSchema } from "../components/seo/StructuredData";
 import { Suspense } from "react";
 import PageTransitionLoader from "../components/PageTransitionLoader";
+import Script from "next/script";
 
 const montserrat = Montserrat({
     variable: "--font-montserrat",
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
         default: "Valli Super Speciality Hospital | Best Orthopedic Care",
         template: "%s | Valli Super Speciality Hospital",
     },
-    description: "Valli Super Speciality Hospital in Salem offers advanced orthopedic care, joint replacements, spine surgery, and comprehensive medical excellence.",
+    description: "Valli Super Speciality Hospital in Salem offers advanced orthopedic care, joint replacements, and spine surgery.",
     keywords: ["Orthopedic Hospital", "Salem", "Joint Replacement", "Spine Surgery", "Valli Hospital", "Best Orthopedician", "Trauma Care", "Sports Medicine", "Super Speciality Hospital", "Orthopedic Surgeon"],
     authors: [{ name: "Valli Super Speciality Hospital", url: "https://vallihospital.in" }],
     creator: "Valli Super Speciality Hospital",
@@ -50,7 +51,6 @@ export const metadata: Metadata = {
                 alt: "Valli Super Speciality Hospital",
             }
         ],
-        emails: ["info@vallihospital.in"],
         phoneNumbers: ["+919003417111"],
     },
     twitter: {
@@ -84,6 +84,10 @@ export const metadata: Metadata = {
     },
     alternates: {
         canonical: "https://vallihospital.in",
+        languages: {
+            "en-IN": "https://vallihospital.in",
+            "x-default": "https://vallihospital.in",
+        },
     },
 };
 
@@ -95,6 +99,18 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${montserrat.variable} ${poppins.variable} antialiased selection:bg-secondary selection:text-white`}>
+                <Script
+                    src="https://www.googletagmanager.com/gtag/js?id=G-VALLIHOSP"
+                    strategy="afterInteractive"
+                />
+                <Script id="google-analytics" strategy="afterInteractive">
+                    {`
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag(){dataLayer.push(arguments);}
+                        gtag('js', new Date());
+                        gtag('config', 'G-VALLIHOSP');
+                    `}
+                </Script>
                 <Suspense fallback={null}>
                     <PageTransitionLoader />
                 </Suspense>

@@ -3,12 +3,42 @@
 import { motion } from "framer-motion";
 
 const logos = [
-    { name: "NABH", src: "https://images.seeklogo.com/logo-png/39/1/nabh-logo-png_seeklogo-398755.png" },
-    { name: "HDFC ERGO", src: "https://upload.wikimedia.org/wikipedia/en/thumb/5/56/HDFC_ERGO_Logo_2025.png/330px-HDFC_ERGO_Logo_2025.png" },
-    { name: "Star Health", src: "https://play-lh.googleusercontent.com/JEcrbamGiWvHjDBubpjIfDAZ5-aqy-z1oDXag4XSDptHSYtGftWcH_sfENba-lSlBQ" },
-    { name: "SBI General", src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTX6sXAMSiLW6oopymkkFE-wP0yltVNNBVqeA&s" },
-    { name: "ICICI Lombard", src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPtAPFlH1QOyJWzuOfQcrkTIorAkeeGWhtdA&s" },
-    { name: "Care Health", src: "https://play-lh.googleusercontent.com/ZBdHZIdRgt-8pMRTHrSiJqLLQ_03SDr9LVfj_wZOUOgEb5CXA2_Dy-0pJdNKVicex-BS" },
+    { 
+        name: "NABH", 
+        src: "https://images.seeklogo.com/logo-png/39/1/nabh-logo-png_seeklogo-398755.png",
+        width: 56,
+        height: 56
+    },
+    { 
+        name: "HDFC ERGO", 
+        src: "https://upload.wikimedia.org/wikipedia/en/thumb/5/56/HDFC_ERGO_Logo_2025.png/330px-HDFC_ERGO_Logo_2025.png",
+        width: 150,
+        height: 50
+    },
+    { 
+        name: "Star Health", 
+        src: "https://play-lh.googleusercontent.com/JEcrbamGiWvHjDBubpjIfDAZ5-aqy-z1oDXag4XSDptHSYtGftWcH_sfENba-lSlBQ",
+        width: 56,
+        height: 56
+    },
+    { 
+        name: "SBI General", 
+        src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTX6sXAMSiLW6oopymkkFE-wP0yltVNNBVqeA&s",
+        width: 150,
+        height: 50
+    },
+    { 
+        name: "ICICI Lombard", 
+        src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPtAPFlH1QOyJWzuOfQcrkTIorAkeeGWhtdA&s",
+        width: 150,
+        height: 50
+    },
+    { 
+        name: "Care Health", 
+        src: "https://play-lh.googleusercontent.com/ZBdHZIdRgt-8pMRTHrSiJqLLQ_03SDr9LVfj_wZOUOgEb5CXA2_Dy-0pJdNKVicex-BS",
+        width: 56,
+        height: 56
+    },
 ];
 
 export default function TrustBar() {
@@ -44,8 +74,10 @@ export default function TrustBar() {
                                 <img
                                     src={logo.src}
                                     alt={logo.name}
+                                    width={logo.width}
+                                    height={logo.height}
                                     referrerPolicy="no-referrer"
-                                    className="h-10 md:h-14 w-auto  transition-all duration-300 drop-shadow-sm group-hover:drop-shadow-md"
+                                    className="h-10 md:h-14 w-auto transition-all duration-300 drop-shadow-sm group-hover:drop-shadow-md"
                                 />
                             </div>
                         ))}

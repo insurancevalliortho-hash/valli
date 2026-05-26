@@ -84,12 +84,12 @@ export default function SurgeonProfile() {
                             >
                                 Dr. T. <br /> <span className="font-black text-white drop-shadow-[0_0_20px_rgba(249,136,37,0.2)]">Natanasabapathy</span>
                             </motion.h2>
-                            <motion.h3
+                            <motion.div
                                 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.2 }}
                                 className="text-[#3cb3a6] font-light text-xl sm:text-2xl mt-3 italic tracking-wide"
                             >
                                 Chief Orthopedic Surgeon
-                            </motion.h3>
+                            </motion.div>
                         </div>
 
                         {/* Elegant Corporate Image Frame */}
@@ -120,12 +120,12 @@ export default function SurgeonProfile() {
 
                         {/* Bio Block */}
                         <div className="w-full">
-                            <motion.h4
+                            <motion.h3
                                 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}
                                 className="text-3xl sm:text-4xl lg:text-5xl font-light leading-[1.3] mb-6"
                             >
                                 Orchestrating <span className="font-bold text-[#f98825]">movement</span>. <br /> Minimizing <span className="font-bold text-[#3cb3a6]">recovery</span>.
-                            </motion.h4>
+                            </motion.h3>
                             <motion.p
                                 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }}
                                 className="text-white/70 text-sm sm:text-base leading-relaxed mb-8 max-w-2xl"
@@ -174,13 +174,13 @@ export default function SurgeonProfile() {
 
                 {/* ── BOTTOM SECTION: UNIFIED TIMELINE ── */}
                 <div className="w-full mt-4 lg:mt-8 pt-12 border-t border-white/10">
-                    <motion.h5
+                    <motion.h3
                         initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }}
                         className="text-white font-bold text-2xl sm:text-3xl lg:text-4xl tracking-tight mb-12 sm:mb-16 flex items-center gap-6"
                     >
                         Milestones Track
                         <span className="flex-1 h-[1px] bg-gradient-to-r from-[#f98825]/30 to-transparent" />
-                    </motion.h5>
+                    </motion.h3>
 
                     <div className="relative w-full">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-16 gap-x-8 sm:gap-x-12 lg:gap-x-16">
@@ -197,7 +197,7 @@ export default function SurgeonProfile() {
 
                                     <div className="pl-8 md:pl-0 border-l-[3px] border-dashed border-white/10 md:border-l-0 ml-0.5 md:ml-0 h-full cursor-pointer relative z-20">
                                         <div className="text-[#3cb3a6] text-3xl font-black tracking-widest mb-2 group-hover:-translate-y-2 transition-transform duration-500 drop-shadow-[0_0_15px_rgba(60,179,166,0.3)]">{m.year}</div>
-                                        <h6 className="text-white text-xl sm:text-2xl font-bold leading-tight mb-3 group-hover:text-[#f98825] transition-colors drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">{m.title}</h6>
+                                        <div className="text-white text-xl sm:text-2xl font-bold leading-tight mb-3 group-hover:text-[#f98825] transition-colors drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">{m.title}</div>
                                         <p className="text-white/60 text-sm sm:text-base leading-relaxed pr-4">{m.desc}</p>
                                     </div>
                                 </motion.div>

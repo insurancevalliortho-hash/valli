@@ -5,16 +5,54 @@ import { useRef } from "react";
 import { Quote } from "lucide-react";
 
 const baseTestimonials = [
-    { name: "Bhuvaneshwari S.", initials: "BS", role: "Trauma Recovery Patient", text: "Dr. Natanasabapathy sir, you are the best ortho surgeon I have ever seen. Thank you so much for your care. I was injured by my own bullock in the neck area... I was unconscious but now I'm completely alright. He did a great job.", rating: 5, accent: "#f98825" },
-    { name: "Karthikeyan", initials: "K", role: "Accident Survivor", text: "My sincere thanks to Valli Super Speciality Hospital. I met with a severe accident 5 months ago. Today I am living my life only because of the doctors here. Excellent treatment and accurate diagnosis.", rating: 5, accent: "#3cb3a6" },
-    { name: "Yuvarajan", initials: "Y", role: "Surgical Patient", text: "Care shown by the doctors and staff members is outstanding. The procedure went better than we hoped. Clean and hygienic environment. I am fully satisfied.", rating: 5, accent: "#f98825" },
-    { name: "Anonymous", initials: "A", role: "Joint Care Patient", text: "After years of pain, I can finally enjoy my morning walks again. Thanks to Valli Ortho for giving me my life back!", rating: 5, accent: "#3cb3a6" },
-    { name: "Priya M.", initials: "PM", role: "Post-Op Rehab", text: "The post-operative care and rehabilitation frameworks here are tremendous. My knee mobility returned flawlessly.", rating: 5, accent: "#f98825" },
-    { name: "Ramesh T.", initials: "RT", role: "Fracture Recovery", text: "State of the art architectural facility. The surgical precision was seamless and the recovery timeframe was exactly as promised.", rating: 5, accent: "#3cb3a6" },
-    { name: "Selvam P.", initials: "SP", role: "Orthopedic Patient", text: "The dedication of the team is unmatched. From diagnosis to surgery and physiotherapy, everything was handled professionally.", rating: 5, accent: "#f98825" },
-    { name: "Gomathi K.", initials: "GK", role: "Knee Replacement", text: "I walked the very next day after my knee replacement. The advanced techniques used by Dr. Natanasabapathy are truly world-class.", rating: 5, accent: "#3cb3a6" },
-    { name: "Dinesh K.", initials: "DK", role: "Sports Injury", text: "The sports medicine wing is fantastic. Accurate diagnosis and a beautifully structured rehab program got me back on the field.", rating: 5, accent: "#f98825" },
-    { name: "Saraswathi V.", initials: "SV", role: "Spine Surgery", text: "Living pain-free after 10 years of chronic back issues. The spinal expertise at this hospital is extraordinary.", rating: 5, accent: "#3cb3a6" }
+    { 
+        name: "Bhuvaneshwari S.", 
+        initials: "BS", 
+        role: "Trauma Recovery Patient", 
+        text: "Dr. Natanasabapathy sir is the best orthopedic surgeon. I was severely injured by my own bullock in the neck area and arrived unconscious, but his prompt surgical care saved my life. I am now completely recovered.", 
+        rating: 5, 
+        accent: "#f98825" 
+    },
+    { 
+        name: "Karthikeyan", 
+        initials: "K", 
+        role: "Accident Survivor", 
+        text: "My sincere thanks to Valli Hospital. I met with a severe accident 5 months ago and survived only due to their trauma desk. The immediate surgical intervention and accurate diagnosis were exceptional.", 
+        rating: 5, 
+        accent: "#3cb3a6" 
+    },
+    { 
+        name: "Gomathi K.", 
+        initials: "GK", 
+        role: "Knee Replacement", 
+        text: "I was able to walk the very next day after my total knee replacement. The advanced, painless nerve block techniques used by Dr. Natanasabapathy are truly world-class.", 
+        rating: 5, 
+        accent: "#f98825" 
+    },
+    { 
+        name: "Saraswathi V.", 
+        initials: "SV", 
+        role: "Spine Surgery", 
+        text: "Living pain-free after 10 years of chronic spinal issues. The spine surgery expertise and rehabilitation team at this hospital are outstanding.", 
+        rating: 5, 
+        accent: "#3cb3a6" 
+    },
+    { 
+        name: "Yuvarajan", 
+        initials: "Y", 
+        role: "Surgical Patient", 
+        text: "The clinical dedication shown by the surgical teams and staff members is exceptional. The facility is incredibly sterile and clean. Fully satisfied with my rehabilitation.", 
+        rating: 5, 
+        accent: "#f98825" 
+    },
+    { 
+        name: "Dinesh K.", 
+        initials: "DK", 
+        role: "Sports Injury Rehab", 
+        text: "The sports medicine team is fantastic. Their customized physiotherapy and recovery timeline got me back to professional athletic training ahead of schedule.", 
+        rating: 5, 
+        accent: "#3cb3a6" 
+    }
 ];
 
 // Duplicate for infinitely wide scrolling tracks on desktop
@@ -67,8 +105,8 @@ export default function Testimonials() {
                             Architecting <br /> <span className="font-black text-white text-5xl xl:text-6xl drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">Recovery</span>
                         </h2>
 
-                        <p className="text-white/50 text-sm xl:text-base leading-relaxed">
-                            No hollow promises. Our clinical outcomes are mathematically tracked, rigorously verified, and physically felt by thousands who reclaimed their movement.
+                        <p className="text-white/50 text-sm xl:text-base leading-relaxed font-medium">
+                            No hollow claims. Our clinical outcomes are mathematically tracked, rigorously verified, and physically experienced by thousands of patients.
                         </p>
                     </motion.div>
 
@@ -85,7 +123,7 @@ export default function Testimonials() {
                         <div className="text-[#3cb3a6] font-black text-sm uppercase tracking-[0.2em] mb-1">
                             920 Google Reviews
                         </div>
-                        <div className="text-white/40 text-xs mt-2">
+                        <div className="text-white/40 text-xs mt-2 font-semibold">
                             Orthopedic clinic in Salem, Tamil Nadu
                         </div>
                     </motion.div>
@@ -136,7 +174,7 @@ export default function Testimonials() {
                                             {t.initials}
                                         </div>
                                         <div>
-                                            <h4 className="font-bold text-white text-base leading-tight group-hover:tracking-wide transition-all">{t.name}</h4>
+                                            <p className="font-bold text-white text-base leading-tight group-hover:tracking-wide transition-all">{t.name}</p>
                                             <p className="text-white/40 text-xs font-bold uppercase tracking-widest mt-1">{t.role}</p>
                                         </div>
                                     </div>
@@ -157,7 +195,7 @@ export default function Testimonials() {
                                             {t.initials}
                                         </div>
                                         <div>
-                                            <h4 className="font-bold text-white text-base leading-tight group-hover:tracking-wide transition-all">{t.name}</h4>
+                                            <p className="font-bold text-white text-base leading-tight group-hover:tracking-wide transition-all">{t.name}</p>
                                             <p className="text-white/40 text-xs font-bold uppercase tracking-widest mt-1">{t.role}</p>
                                         </div>
                                     </div>
@@ -166,10 +204,10 @@ export default function Testimonials() {
                         </motion.div>
                     </div>
 
-                    {/* ── MOBILE ONLY: AUTO-PLAYING MARQUEE (no scrollbar) ── */}
+                    {/* ── MOBILE ONLY: AUTO-PLAYING MARQUEE ── */}
                     <div className="flex lg:hidden flex-col gap-4 w-full overflow-hidden">
                         {/* Row 1 — scrolls left */}
-                        <div className="flex gap-4 w-max animate-[marquee_40s_linear_infinite]">
+                        <div className="flex gap-4 w-max animate-[marquee_25s_linear_infinite]">
                             {[...baseTestimonials, ...baseTestimonials].map((t, idx) => (
                                 <div key={`mob1-${idx}`} className="w-[80vw] sm:w-[55vw] shrink-0 p-5 rounded-3xl bg-white/[0.04] border border-white/[0.05] flex flex-col">
                                     <Quote className="w-7 h-7 mb-4 opacity-40 shrink-0" style={{ color: t.accent }} />
@@ -177,7 +215,7 @@ export default function Testimonials() {
                                     <div className="flex items-center gap-3 mt-auto">
                                         <div className="w-9 h-9 rounded-xl flex items-center justify-center text-[#001014] font-black text-xs shrink-0" style={{ backgroundColor: t.accent }}>{t.initials}</div>
                                         <div>
-                                            <h4 className="font-bold text-white text-sm">{t.name}</h4>
+                                            <p className="font-bold text-white text-sm">{t.name}</p>
                                             <p className="text-white/40 text-[10px] font-bold uppercase tracking-wider mt-0.5">{t.role}</p>
                                         </div>
                                     </div>
@@ -185,7 +223,7 @@ export default function Testimonials() {
                             ))}
                         </div>
                         {/* Row 2 — scrolls right */}
-                        <div className="flex gap-4 w-max animate-[marquee_50s_linear_infinite_reverse]">
+                        <div className="flex gap-4 w-max animate-[marquee_30s_linear_infinite_reverse]">
                             {[...baseTestimonials, ...baseTestimonials].reverse().map((t, idx) => (
                                 <div key={`mob2-${idx}`} className="w-[80vw] sm:w-[55vw] shrink-0 p-5 rounded-3xl bg-white/[0.04] border border-white/[0.05] flex flex-col">
                                     <Quote className="w-7 h-7 mb-4 opacity-40 shrink-0" style={{ color: t.accent }} />
@@ -193,7 +231,7 @@ export default function Testimonials() {
                                     <div className="flex items-center gap-3 mt-auto">
                                         <div className="w-9 h-9 rounded-xl flex items-center justify-center text-[#001014] font-black text-xs shrink-0" style={{ backgroundColor: t.accent }}>{t.initials}</div>
                                         <div>
-                                            <h4 className="font-bold text-white text-sm">{t.name}</h4>
+                                            <p className="font-bold text-white text-sm">{t.name}</p>
                                             <p className="text-white/40 text-[10px] font-bold uppercase tracking-wider mt-0.5">{t.role}</p>
                                         </div>
                                     </div>
