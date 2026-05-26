@@ -83,10 +83,10 @@ export const metadata: Metadata = {
         shortcut: "/favicon.png",
     },
     alternates: {
-        canonical: "https://vallihospital.in",
+        canonical: "https://vallihospital.in/",
         languages: {
-            "en-IN": "https://vallihospital.in",
-            "x-default": "https://vallihospital.in",
+            "en-IN": "https://vallihospital.in/",
+            "x-default": "https://vallihospital.in/",
         },
     },
 };
