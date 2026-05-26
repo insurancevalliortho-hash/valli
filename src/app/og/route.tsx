@@ -39,7 +39,7 @@ export async function GET() {
             opacity: 0.9,
           }}
         >
-          Salem's Premier Orthopedic & Super Speciality Hospital
+          Salem&apos;s Premier Orthopedic & Super Speciality Hospital
         </div>
       </div>
     ),

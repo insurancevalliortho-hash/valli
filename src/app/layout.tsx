@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Montserrat, Poppins } from "next/font/google";
 import "./globals.css";
 import { HospitalSchema, PhysicianSchema } from "../components/seo/StructuredData";
+import { Suspense } from "react";
+import PageTransitionLoader from "../components/PageTransitionLoader";
 
 const montserrat = Montserrat({
     variable: "--font-montserrat",
@@ -55,7 +57,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "Valli Super Speciality Hospital",
         description: "Advanced orthopedic care, precision healing, and excellence in every specialty.",
-        creator: "@ValliHospital", // Replace with actual Twitter handle
+        creator: "@ValliHospital",
         images: ["/favicon.png"],
     },
     robots: {
@@ -71,9 +73,9 @@ export const metadata: Metadata = {
         },
     },
     verification: {
-        google: "google-site-verification-code", // TODO: paste real Google Search Console verification code here
-        yandex: "yandex-verification-code", // TODO: paste real Yandex verification code here
-        yahoo: "yahoo-verification-code", // TODO: paste real Yahoo verification code here
+        google: "google-site-verification-code",
+        yandex: "yandex-verification-code",
+        yahoo: "yahoo-verification-code",
     },
     icons: {
         icon: "/favicon.png",
@@ -93,9 +95,14 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${montserrat.variable} ${poppins.variable} antialiased selection:bg-secondary selection:text-white`}>
+                <Suspense fallback={null}>
+                    <PageTransitionLoader />
+                </Suspense>
                 <HospitalSchema />
                 <PhysicianSchema />
-                {children}
+                <div id="page-content-wrapper" className="min-h-screen">
+                    {children}
+                </div>
             </body>
         </html>
     );

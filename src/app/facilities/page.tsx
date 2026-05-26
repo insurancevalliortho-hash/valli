@@ -109,14 +109,15 @@ const facilities = [
             </svg>
         ),
         paragraphs: [
-            "Our premier center for advanced pain relief ensures crystal-clear imaging for delicate interventions. We provide life-changing nerve blocks for trauma, ensuring immediate relief for acute injuries.",
-            "Our expertise extends to complex neurological pain, offering plexus and ganglion blocks for Trigeminal Neuralgia, TMJ, and specialized protocols for chronic cancer pain and stroke-related recovery."
+            "Our premier center for advanced pain relief ensures crystal-clear imaging for delicate interventions. We provide life-changing nerve blocks for trauma, ensuring immediate relief for acute pain.",
+            "Our expertise extends to complex neurological pain, offering plexus and ganglion blocks for Trigeminal Neuralgia, TMJ, specialized protocols for chronic cancer pain and pain free Post Operative Phase."
         ],
         capabilities: [
             "Trauma nerve blocks",
             "Epidural & caudal injections",
             "Trigeminal Neuralgia blocks",
-            "Chronic cancer pain management"
+            "Chronic cancer pain management",
+            "Chemical Neurolysis"
         ],
         theme: { bg: "#001f25", cardBg: "bg-white/5", text: "text-white", border: "border-white/10", accent: "#f98825", isDark: true }
     }

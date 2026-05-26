@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
@@ -61,6 +62,22 @@ export default function BookAppointmentPage() {
     };
 
     const handleSubmit = () => {
+        const whatsappNumber = "+919003417111";
+        const messageText = `*VALLI HOSPITAL APPOINTMENT REQUEST* 🏥\n\n` +
+            `*Patient Name:* ${form.name}\n` +
+            `*Mobile Number:* ${form.phone}\n` +
+            `*Email:* ${form.email || "N/A"}\n` +
+            `*Department:* ${form.department}\n` +
+            `*Doctor:* ${form.doctor}\n` +
+            `*Preferred Date:* ${form.date}\n` +
+            `*Preferred Time:* ${form.time}\n\n` +
+            `*Patient Brief / Symptoms:* \n${form.notes || "No additional details provided."}\n\n` +
+            `_This request was generated via the Valli Super Speciality Hospital website._`;
+
+        const encodedText = encodeURIComponent(messageText);
+        const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedText}`;
+
+        window.open(whatsappUrl, "_blank");
         setSubmitted(true);
     };
 
@@ -78,10 +95,10 @@ export default function BookAppointmentPage() {
                 <div className="absolute -bottom-16 -left-10 w-[30vw] h-[30vw] bg-[#004b57]/20 rounded-[5rem] rotate-45 pointer-events-none" />
                 <div className="container mx-auto px-6 md:px-12 relative z-10">
                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-4">
-                        <a href="/" className="inline-flex items-center gap-2 text-white/40 hover:text-white/70 text-sm transition-colors">
+                        <Link href="/" className="inline-flex items-center gap-2 text-white/40 hover:text-white/70 text-sm transition-colors">
                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                             Home
-                        </a>
+                        </Link>
                     </motion.div>
                     <motion.span initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/8 border border-white/12 text-[#f98825] text-xs font-bold tracking-[0.2em] uppercase mb-6">
                         <span className="w-1.5 h-1.5 rounded-full bg-[#f98825] animate-pulse" />
@@ -136,9 +153,9 @@ export default function BookAppointmentPage() {
                                                 </div>
                                             ))}
                                         </div>
-                                        <a href="/" className="bg-[#004b57] text-white px-8 py-3 rounded-full font-bold text-sm hover:bg-[#00333c] transition-colors inline-block">
+                                        <Link href="/" className="bg-[#004b57] text-white px-8 py-3 rounded-full font-bold text-sm hover:bg-[#00333c] transition-colors inline-block">
                                             Back to Home
-                                        </a>
+                                        </Link>
                                     </motion.div>
                                 ) : (
                                     <motion.div key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-white border border-[#e5eaeb] rounded-[2rem] overflow-hidden">

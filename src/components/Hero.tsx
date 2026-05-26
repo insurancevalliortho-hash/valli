@@ -45,7 +45,10 @@ export default function Hero() {
 
     // Force a fresh key on mount to prevent Framer Motion from getting stuck during Next.js client navigation
     useEffect(() => {
-        setMountKey(Math.random().toString());
+        const handle = requestAnimationFrame(() => {
+            setMountKey(Math.random().toString());
+        });
+        return () => cancelAnimationFrame(handle);
     }, []);
 
     // Auto-play with pause on hover

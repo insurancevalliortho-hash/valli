@@ -1,14 +1,29 @@
-
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { useRef, useState } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import SmoothScroll from "../../components/SmoothScroll";
 import MagneticCursor from "../../components/MagneticCursor";
 import { doctorsData } from "../../data/doctors";
 import Link from "next/link";
+
+const filterCategories = [
+    { id: "ALL", label: "All Specialists" },
+    { id: "ORTHO", label: "Orthopaedics & Joint" },
+    { id: "MED", label: "Medicine & Diagnostics" },
+    { id: "SURG", label: "Specialised Surgeries" },
+    { id: "CONS", label: "Critical Care & Diagnostic" }
+];
+
+const getDocCategory = (dept: string) => {
+    const d = dept.toUpperCase();
+    if (d.includes("ORTHO") || d.includes("HAND") || d.includes("MICRO")) return "ORTHO";
+    if (d.includes("MEDICINE") || d.includes("BIOCHEM")) return "MED";
+    if (d.includes("NEURO") || d.includes("PLASTIC") || d.includes("PAEDIATRIC SURG")) return "SURG";
+    return "CONS";
+};
 
 const stats = [
     { value: "21+", label: "Years Experience" },
@@ -38,6 +53,7 @@ const awards = [
 // Removed supportingTeam to use doctorsData
 
 export default function DoctorsPage() {
+    const [selectedCategory, setSelectedCategory] = useState("ALL");
     const heroRef = useRef<HTMLElement>(null);
     const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
     const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
@@ -56,10 +72,10 @@ export default function DoctorsPage() {
                 </motion.div>
                 <div className="container mx-auto px-6 md:px-12 relative z-10">
                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-4">
-                        <a href="/" className="inline-flex items-center gap-2 text-white/40 hover:text-white/70 text-sm transition-colors">
+                        <Link href="/" className="inline-flex items-center gap-2 text-white/40 hover:text-white/70 text-sm transition-colors">
                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                             Home
-                        </a>
+                        </Link>
                     </motion.div>
                     <motion.span initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/8 border border-white/12 text-[#f98825] text-xs font-bold tracking-[0.2em] uppercase mb-6">
                         <span className="w-1.5 h-1.5 rounded-full bg-[#f98825] animate-pulse" />
@@ -122,9 +138,9 @@ export default function DoctorsPage() {
                                     ))}
                                 </motion.div>
                                 <div className="flex flex-col sm:flex-row gap-3">
-                                    <a href="/book-appointment" className="bg-[#f98825] text-white px-7 py-3 rounded-full font-bold text-sm shadow-[0_6px_20px_rgba(249,136,37,0.35)] hover:bg-[#e0751e] hover:-translate-y-0.5 transform transition-all duration-200 text-center">
+                                    <Link href="/book-appointment" className="bg-[#f98825] text-white px-7 py-3 rounded-full font-bold text-sm shadow-[0_6px_20px_rgba(249,136,37,0.35)] hover:bg-[#e0751e] hover:-translate-y-0.5 transform transition-all duration-200 text-center">
                                         Book a Consultation →
-                                    </a>
+                                    </Link>
                                     <a href="tel:+919003417111" className="bg-white/10 hover:bg-white/20 text-white border border-white/15 px-7 py-3 rounded-full font-bold text-sm transition-colors text-center">
                                         Call Directly
                                     </a>
@@ -193,30 +209,94 @@ export default function DoctorsPage() {
             </section>
 
             {/* Supporting Team */}
-            <section className="bg-[#f9fafb] py-20">
+            <section className="bg-[#f9fafb] py-20 min-h-screen">
                 <div className="container mx-auto px-6 md:px-12">
-                    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-xl mb-12">
-                        <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#004b57]/8 text-[#004b57] border border-[#004b57]/12 text-xs font-bold tracking-[0.18em] uppercase mb-5">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#f98825]" />Our Team
-                        </span>
-                        <h2 className="text-4xl font-black text-[#00333c] tracking-tight">Supporting <span className="text-[#f98825]">Specialists</span></h2>
-                    </motion.div>
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                        {doctorsData.map((doc, i) => (
-                            <Link href={`/doctors/${doc.slug}`} key={doc.name} className="block group">
-                                <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 * i }}
-                                    className="bg-white border border-[#e5eaeb] rounded-2xl p-7 hover:shadow-xl transition-shadow duration-500 h-full flex flex-col">
-                                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#004b57] to-[#3cb3a6] overflow-hidden mb-5 flex shrink-0">
-                                        <img src={doc.image} alt={doc.name} className="w-full h-full object-cover object-top opacity-90 group-hover:scale-110 transition-transform duration-500" />
-                                    </div>
-                                    <div className="text-[#f98825] text-[10px] font-black uppercase tracking-widest mb-1 line-clamp-1">{doc.shortDescription}</div>
-                                    <h3 className="text-[#00333c] font-black text-lg mb-1 group-hover:text-[#f98825] transition-colors">{doc.name}</h3>
-                                    <div className="text-[#004b57] text-xs font-bold mb-3">{doc.department}</div>
-                                    <p className="text-[#40484a] text-sm leading-relaxed flex-1 line-clamp-3">{doc.description}</p>
-                                </motion.div>
-                            </Link>
-                        ))}
+                    <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
+                        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-xl">
+                            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#004b57]/8 text-[#004b57] border border-[#004b57]/12 text-xs font-bold tracking-[0.18em] uppercase mb-5">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#f98825]" />Our Team
+                            </span>
+                            <h2 className="text-4xl md:text-5xl font-black text-[#00333c] tracking-tight leading-tight">Supporting <span className="text-[#f98825]">Specialists</span></h2>
+                            <p className="text-[#40484a] font-medium mt-3 text-sm">Browse our comprehensive medical team categorized by clinical department.</p>
+                        </motion.div>
                     </div>
+
+                    {/* Filter Tabs */}
+                    <div className="flex flex-wrap gap-2.5 mb-12 p-2 bg-[#004b57]/5 rounded-[2rem] border border-[#004b57]/8 max-w-fit">
+                        {filterCategories.map((cat) => {
+                            const isActive = selectedCategory === cat.id;
+                            return (
+                                <button
+                                    key={cat.id}
+                                    onClick={() => setSelectedCategory(cat.id)}
+                                    className={`relative px-5 py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
+                                        isActive ? "text-white" : "text-[#004b57] hover:bg-[#004b57]/8"
+                                    }`}
+                                >
+                                    {isActive && (
+                                        <motion.div
+                                            layoutId="activeTabGlow"
+                                            className="absolute inset-0 bg-[#004b57] rounded-full -z-10 shadow-md"
+                                            transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                                        />
+                                    )}
+                                    {cat.label}
+                                </button>
+                            );
+                        })}
+                    </div>
+
+                    <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        <AnimatePresence mode="popLayout">
+                            {doctorsData
+                                .filter((doc) => selectedCategory === "ALL" || getDocCategory(doc.department) === selectedCategory)
+                                .map((doc, i) => {
+                                    const hasPhoto = doc.image && doc.image !== "/placeholder-doctor.png";
+                                    return (
+                                        <motion.div
+                                            key={doc.slug}
+                                            layout
+                                            initial={{ opacity: 0, scale: 0.9 }}
+                                            animate={{ opacity: 1, scale: 1 }}
+                                            exit={{ opacity: 0, scale: 0.9 }}
+                                            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                                            className="h-full"
+                                        >
+                                            <Link href={`/doctors/${doc.slug}`} className="block group h-full">
+                                                <div className="bg-white border border-[#e5eaeb] rounded-3xl p-7 hover:shadow-2xl hover:border-[#f98825]/20 transition-all duration-500 h-full flex flex-col justify-between">
+                                                    <div>
+                                                        <div className="flex justify-between items-start mb-5">
+                                                            {hasPhoto ? (
+                                                                <div className="w-16 h-16 rounded-2xl bg-[#004b57]/10 overflow-hidden shrink-0 border border-black/5 shadow-inner">
+                                                                    <img
+                                                                        src={doc.image}
+                                                                        alt={doc.name}
+                                                                        className="w-full h-full object-cover object-top opacity-95 group-hover:scale-110 transition-transform duration-500"
+                                                                    />
+                                                                </div>
+                                                            ) : (
+                                                                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#004b57] to-[#3cb3a6] flex items-center justify-center shrink-0 shadow-inner group-hover:scale-105 transition-transform duration-500">
+                                                                    <svg className="w-8 h-8 text-white/80" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                                                                    </svg>
+                                                                </div>
+                                                            )}
+                                                            <span className="text-[9px] font-black tracking-widest text-[#f98825] uppercase bg-[#f98825]/10 px-2.5 py-1 rounded-md border border-[#f98825]/10">
+                                                                {doc.qualifications.split(",")[0]}
+                                                            </span>
+                                                        </div>
+                                                        <div className="text-[#f98825] text-[10px] font-black uppercase tracking-widest mb-1.5 line-clamp-1">{doc.shortDescription}</div>
+                                                        <h3 className="text-[#00333c] font-black text-xl mb-1 group-hover:text-[#f98825] transition-colors line-clamp-1">{doc.name}</h3>
+                                                        <div className="text-[#004b57] text-xs font-bold mb-4">{doc.department}</div>
+                                                    </div>
+                                                    <p className="text-[#40484a] text-sm leading-relaxed line-clamp-3 font-medium mt-auto">{doc.description}</p>
+                                                </div>
+                                            </Link>
+                                        </motion.div>
+                                    );
+                                })}
+                        </AnimatePresence>
+                    </motion.div>
                 </div>
             </section>
 
@@ -230,7 +310,7 @@ export default function DoctorsPage() {
                         Book a consultation with Dr. Natanasabapathy or one of our specialists today.
                     </motion.p>
                     <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="/book-appointment" className="bg-[#f98825] text-white px-8 py-4 rounded-full font-bold text-sm hover:bg-[#e0751e] transition-colors shadow-lg">Book Appointment</a>
+                        <Link href="/book-appointment" className="bg-[#f98825] text-white px-8 py-4 rounded-full font-bold text-sm hover:bg-[#e0751e] transition-colors shadow-lg">Book Appointment</Link>
                         <a href="tel:+919003417111" className="bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-full font-bold text-sm border border-white/20 transition-colors">Call +91 90034 17111</a>
                     </motion.div>
                 </div>

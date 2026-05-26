@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: 'Joint Care Clinic in Salem | Valli Super Speciality Hospital',
   description: 'Advanced Joint Care Clinic in Salem. Valli Super Speciality Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.',
   keywords: 'Salem, Joint Care Clinic, Tamil Nadu, Dr. Natanasabapathy, best joint care clinic hospital in Salem, top orthopedic surgeon Salem, joint care clinic treatment',
+  alternates: {
+    canonical: 'https://vallihospital.in/joint-care-clinic',
+  },
 };
 
 import Navbar from '../../components/Navbar';
@@ -18,7 +21,8 @@ import Footer from '../../components/Footer';
 export default function Page() {
   return (
     <>
-      <Navbar />\n
+      <Navbar />
+
       <BreadcrumbSchema items={[
         { name: 'Home', url: 'https://vallihospital.in/' },
         { name: 'Specialities', url: 'https://vallihospital.in/specialities' },
@@ -28,9 +32,10 @@ export default function Page() {
         { question: 'What is the Joint Care Clinic?', answer: 'The Joint Care Clinic at Valli Super Speciality Hospital provides advanced, specialized care for related conditions.' },
         { question: 'Who is the lead doctor?', answer: 'Dr. T. Natanasabapathy, Chief Orthopedic Surgeon, leads our specialized care teams.' }
       ]} />
-  \n
+  
+
       {/* Breadcrumb UI */}
-      <div className="container mx-auto px-6 md:px-12 py-4 bg-[#001f25]">
+      <div className="mx-auto px-6 md:px-12 pt-28 pb-4 bg-[#001f25]">
         <nav aria-label="breadcrumb">
           <ol className="flex space-x-2 text-sm text-gray-400">
             <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
@@ -71,7 +76,7 @@ export default function Page() {
       <h2 className="text-2xl font-bold text-[#00333c] mt-8">Pathophysiology, Procedures, and Treatments</h2>
       <p>The degradation of articular cartilage, whether induced by primary osteoarthritis, inflammatory conditions such as rheumatoid arthritis, or post-traumatic arthritis following severe injury, initiates a cascading biomechanical failure. This failure alters load distribution, induces subchondral bone sclerosis, and severely limits patient mobility and quality of life. The Joint Care Clinic utilizes a rigorously tiered intervention strategy to combat these biomechanical failures.</p>
       <p>Precision in joint care relies intrinsically on accurate spatial and anatomical mapping. To this end, the clinic utilizes advanced Magnetic Resonance Imaging (MRI), High-Resolution Ultrasound (USG), Computed Tomography (CT), and comprehensive X-ray imaging. A critical component of their diagnostic protocol is the acquisition of full-length lower limb radiographs, capturing the entire skeletal structure from the hip to the ankle in multiple anatomical planes. This full-length imaging is absolutely critical for assessing mechanical axis deviation and planning precise corrective osteotomies or arthroplasties.</p>
-      <p>Conservative management forms the first line of defense. The department employs non-invasive, standardized periodic function assessments to guide customized "return to function" protocols. These protocols encompass intensive physical therapy, pharmacological management, and detailed musculoskeletal strength and gait analysis to correct compensatory movement patterns. When conservative measures are exhausted and articular degradation is severe, the clinic provides joint salvage procedures and complex reconstructive surgeries, including primary and revision total joint replacements (arthroplasty). Furthermore, the department specifically caters to patients arriving with complex complications from previous treatments performed at other institutions, offering targeted, highly specialized surgical solutions for failed arthroplasties.</p>
+      <p>Conservative management forms the first line of defense. The department employs non-invasive, standardized periodic function assessments to guide customized &ldquo;return to function&rdquo; protocols. These protocols encompass intensive physical therapy, pharmacological management, and detailed musculoskeletal strength and gait analysis to correct compensatory movement patterns. When conservative measures are exhausted and articular degradation is severe, the clinic provides joint salvage procedures and complex reconstructive surgeries, including primary and revision total joint replacements (arthroplasty). Furthermore, the department specifically caters to patients arriving with complex complications from previous treatments performed at other institutions, offering targeted, highly specialized surgical solutions for failed arthroplasties.</p>
     
               </div>
           </div>
@@ -83,11 +88,14 @@ export default function Page() {
         <div className="container mx-auto px-6 md:px-12">
           <h3 className="text-2xl font-bold text-[#00333c] mb-6">Related Treatments & Specialities</h3>
           <ul className="flex flex-col md:flex-row gap-6 md:gap-12">
-            <li><a href="/sports-medicine-clinic" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Sports Medicine Clinic</a></li>\n<li><a href="/fracture-clinic" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Fracture Clinic</a></li>\n<li><a href="/arthroscopy" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Arthroscopy</a></li>
+            <li><Link href="/sports-medicine-clinic" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Sports Medicine Clinic</Link></li>
+<li><Link href="/fracture-clinic" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Fracture Clinic</Link></li>
+<li><Link href="/arthroscopy" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Arthroscopy</Link></li>
           </ul>
         </div>
       </section>
-  \n<Footer />
+  
+<Footer />
     </>
   );
 }

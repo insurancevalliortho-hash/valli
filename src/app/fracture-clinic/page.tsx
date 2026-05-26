@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: 'Fracture Clinic in Salem | Valli Super Speciality Hospital',
   description: 'Advanced Fracture Clinic in Salem. Valli Super Speciality Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.',
   keywords: 'Salem, Fracture Clinic, Tamil Nadu, Dr. Natanasabapathy, best fracture clinic hospital in Salem, top orthopedic surgeon Salem, fracture clinic treatment',
+  alternates: {
+    canonical: 'https://vallihospital.in/fracture-clinic',
+  },
 };
 
 import Navbar from '../../components/Navbar';
@@ -18,7 +21,8 @@ import Footer from '../../components/Footer';
 export default function Page() {
   return (
     <>
-      <Navbar />\n
+      <Navbar />
+
       <BreadcrumbSchema items={[
         { name: 'Home', url: 'https://vallihospital.in/' },
         { name: 'Specialities', url: 'https://vallihospital.in/specialities' },
@@ -28,9 +32,10 @@ export default function Page() {
         { question: 'What is the Fracture Clinic?', answer: 'The Fracture Clinic at Valli Super Speciality Hospital provides advanced, specialized care for related conditions.' },
         { question: 'Who is the lead doctor?', answer: 'Dr. T. Natanasabapathy, Chief Orthopedic Surgeon, leads our specialized care teams.' }
       ]} />
-  \n
+  
+
       {/* Breadcrumb UI */}
-      <div className="container mx-auto px-6 md:px-12 py-4 bg-[#001f25]">
+      <div className="mx-auto px-6 md:px-12 pt-28 pb-4 bg-[#001f25]">
         <nav aria-label="breadcrumb">
           <ol className="flex space-x-2 text-sm text-gray-400">
             <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
@@ -66,7 +71,7 @@ export default function Page() {
               <div className="max-w-4xl mx-auto space-y-6 text-[#40484a] text-lg leading-relaxed font-medium">
                   
       <h2 className="text-2xl font-bold text-[#00333c]">Clinical Focus and Overview</h2>
-      <p>Operating under the profound physiological core philosophy that "Movement is Life" and "Life is Movement," the Fracture Clinic provides rapid, comprehensive emergency fracture management. By integrating multiple surgical and medical sub-specialties, the clinic's hero objective is to achieve the earliest possible functional, anatomical, and cosmetic recovery of high-energy trauma victims.</p>
+      <p>Operating under the profound physiological core philosophy that &ldquo;Movement is Life&rdquo; and &ldquo;Life is Movement,&rdquo; the Fracture Clinic provides rapid, comprehensive emergency fracture management. By integrating multiple surgical and medical sub-specialties, the clinic&apos;s hero objective is to achieve the earliest possible functional, anatomical, and cosmetic recovery of high-energy trauma victims.</p>
       
       <h2 className="text-2xl font-bold text-[#00333c] mt-8">Pathophysiology, Procedures, and Treatments</h2>
       <p>High-energy trauma, such as motor vehicle collisions or severe falls, requires a highly choreographed, interdisciplinary physiological response.</p>
@@ -87,11 +92,14 @@ export default function Page() {
         <div className="container mx-auto px-6 md:px-12">
           <h3 className="text-2xl font-bold text-[#00333c] mb-6">Related Treatments & Specialities</h3>
           <ul className="flex flex-col md:flex-row gap-6 md:gap-12">
-            <li><a href="/joint-care-clinic" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Joint Care Clinic</a></li>\n<li><a href="/sports-injury-clinic" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Sports Injury Clinic</a></li>\n<li><a href="/paediatric-orthopaedics-deformity-clinic" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Paediatric Orthopaedics Deformity Clinic</a></li>
+            <li><Link href="/joint-care-clinic" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Joint Care Clinic</Link></li>
+<li><Link href="/sports-injury-clinic" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Sports Injury Clinic</Link></li>
+<li><Link href="/paediatric-orthopaedics-deformity-clinic" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Paediatric Orthopaedics Deformity Clinic</Link></li>
           </ul>
         </div>
       </section>
-  \n<Footer />
+  
+<Footer />
     </>
   );
 }

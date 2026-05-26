@@ -98,7 +98,7 @@ export default function Testimonials() {
                         Patient Outcomes
                     </span>
                     <h2 className="text-4xl font-light leading-[1.1] tracking-tight mb-2">
-                        Lives We've <br /> <span className="font-black text-white">Transformed</span>
+                        Lives We&apos;ve <br /> <span className="font-black text-white">Transformed</span>
                     </h2>
 
                     <div className="mt-8 p-6 rounded-3xl border border-white/10 bg-white/[0.02] w-full max-w-sm">

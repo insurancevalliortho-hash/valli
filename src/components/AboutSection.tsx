@@ -111,7 +111,7 @@ export default function AboutSection() {
 
                             <BlurFade delay={0.2}>
                                 <p className="text-lg lg:text-xl text-[#40484a]/90 leading-[1.9] font-light">
-                                    While our roots remain deeply embedded in Sports Medicine, Spine Surgeries, and Joint Replacements, our growth has been defined by an obsession with Trauma and Emergency services. We operate with the belief that during the <span className="font-medium text-[#f98825]">"Golden Hour,"</span> every second is a lifeline.
+                                    While our roots remain deeply embedded in Sports Medicine, Spine Surgeries, and Joint Replacements, our growth has been defined by an obsession with Trauma and Emergency services. We operate with the belief that during the <span className="font-medium text-[#f98825]">&ldquo;Golden Hour,&rdquo;</span> every second is a lifeline.
                                 </p>
                             </BlurFade>
 

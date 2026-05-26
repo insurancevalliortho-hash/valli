@@ -186,7 +186,7 @@ export default function SpecialityGrid() {
                             viewport={{ once: true, margin: "-40px" }}
                             transition={{ duration: 0.7, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
                             whileHover={{ y: -6 }}
-                            className={`group relative rounded-[2.5rem] p-8 md:p-10 flex flex-col justify-between overflow-hidden cursor-pointer
+                            className={`group relative rounded-[2.5rem] p-6 md:p-7 flex flex-col justify-between overflow-hidden cursor-pointer
                                 shadow-sm hover:shadow-2xl transition-shadow duration-500
                                 ${item.colSpan} ${item.rowSpan} ${item.bg}
                                 border ${item.dark ? "border-white/10" : "border-[#e5eaeb]"}
@@ -210,13 +210,7 @@ export default function SpecialityGrid() {
 
                             {/* Top row */}
                             <div className="flex justify-between items-start relative z-10">
-                                <div
-                                    className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-sm
-                                        ${item.dark ? "bg-white/12 backdrop-blur-md" : "bg-white shadow-md"}`}
-                                    style={{ color: item.accentColor }}
-                                >
-                                    {item.icon}
-                                </div>
+
                                 <span
                                     className={`text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full
                                         ${item.dark ? "bg-white/10 text-white border border-white/15" : "bg-white text-[#40484a] border border-[#e5eaeb]"}`}

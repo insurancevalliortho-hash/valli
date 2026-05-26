@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: 'Failed Surgery Corrections in Salem | Valli Super Speciality Hospital',
   description: 'Advanced Failed Surgery Corrections in Salem. Valli Super Speciality Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.',
   keywords: 'Salem, Failed Surgery Corrections, Tamil Nadu, Dr. Natanasabapathy, best failed surgery corrections hospital in Salem, top orthopedic surgeon Salem, failed surgery corrections treatment',
+  alternates: {
+    canonical: 'https://vallihospital.in/failed-surgery-corrections',
+  },
 };
 
 import Navbar from '../../components/Navbar';
@@ -18,7 +21,8 @@ import Footer from '../../components/Footer';
 export default function Page() {
   return (
     <>
-      <Navbar />\n
+      <Navbar />
+
       <BreadcrumbSchema items={[
         { name: 'Home', url: 'https://vallihospital.in/' },
         { name: 'Specialities', url: 'https://vallihospital.in/specialities' },
@@ -28,9 +32,10 @@ export default function Page() {
         { question: 'What is the Failed Surgery Corrections?', answer: 'The Failed Surgery Corrections at Valli Super Speciality Hospital provides advanced, specialized care for related conditions.' },
         { question: 'Who is the lead doctor?', answer: 'Dr. T. Natanasabapathy, Chief Orthopedic Surgeon, leads our specialized care teams.' }
       ]} />
-  \n
+  
+
       {/* Breadcrumb UI */}
-      <div className="container mx-auto px-6 md:px-12 py-4 bg-[#001f25]">
+      <div className="mx-auto px-6 md:px-12 pt-28 pb-4 bg-[#001f25]">
         <nav aria-label="breadcrumb">
           <ol className="flex space-x-2 text-sm text-gray-400">
             <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
@@ -84,11 +89,14 @@ export default function Page() {
         <div className="container mx-auto px-6 md:px-12">
           <h3 className="text-2xl font-bold text-[#00333c] mb-6">Related Treatments & Specialities</h3>
           <ul className="flex flex-col md:flex-row gap-6 md:gap-12">
-            <li><a href="/joint-care-clinic" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Joint Care Clinic</a></li>\n<li><a href="/back-pain-and-spinal-disorders" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Back Pain and Spinal Disorders</a></li>\n<li><a href="/arthroscopy" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Arthroscopy</a></li>
+            <li><a href="/joint-care-clinic" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Joint Care Clinic</a></li>
+<li><a href="/back-pain-and-spinal-disorders" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Back Pain and Spinal Disorders</a></li>
+<li><a href="/arthroscopy" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Arthroscopy</a></li>
           </ul>
         </div>
       </section>
-  \n<Footer />
+  
+<Footer />
     </>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
 import SmoothScroll from "../../../components/SmoothScroll";
@@ -19,10 +20,10 @@ export default function DoctorClientPage({ doctor }: { doctor: Doctor }) {
             <section className="relative pt-40 pb-20 bg-[#f9fafb] min-h-[40vh] flex items-center">
                 <div className="container mx-auto px-6 md:px-12 relative z-10">
                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-4">
-                        <a href="/doctors" className="inline-flex items-center gap-2 text-[#004b57]/60 hover:text-[#004b57] text-sm transition-colors font-medium">
+                        <Link href="/doctors" className="inline-flex items-center gap-2 text-[#004b57]/60 hover:text-[#004b57] text-sm transition-colors font-medium">
                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                             Back to Doctors
-                        </a>
+                        </Link>
                     </motion.div>
                     <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }} className="text-4xl md:text-6xl font-black text-[#00333c] tracking-tight mb-4">
                         {doctor.name}
@@ -80,9 +81,9 @@ export default function DoctorClientPage({ doctor }: { doctor: Doctor }) {
                                 </div>
                                 
                                 <div className="flex flex-col sm:flex-row gap-4 mt-4">
-                                    <a href="/book-appointment" className="bg-[#f98825] text-white px-8 py-4 rounded-full font-bold text-sm shadow-[0_6px_20px_rgba(249,136,37,0.35)] hover:bg-[#e0751e] hover:-translate-y-0.5 transform transition-all duration-200 text-center">
+                                    <Link href="/book-appointment" className="bg-[#f98825] text-white px-8 py-4 rounded-full font-bold text-sm shadow-[0_6px_20px_rgba(249,136,37,0.35)] hover:bg-[#e0751e] hover:-translate-y-0.5 transform transition-all duration-200 text-center">
                                         Book a Consultation →
-                                    </a>
+                                    </Link>
                                     <a href="tel:+919003417111" className="bg-white/10 hover:bg-white/20 text-white border border-white/15 px-8 py-4 rounded-full font-bold text-sm transition-colors text-center">
                                         Call Directly
                                     </a>

@@ -40,6 +40,9 @@ export const metadata: Metadata = {
   title: '${specialty.name} in Salem | Valli Super Speciality Hospital',
   description: '${formatDesc(specialty.name)}',
   keywords: '${formatKeywords(specialty.name)}',
+  alternates: {
+    canonical: 'https://vallihospital.in/${specialty.slug}',
+  },
 };
 `;
 
@@ -126,6 +129,9 @@ export const metadata: Metadata = {
   title: '${page.name} in Salem | Valli Super Speciality Hospital',
   description: '${formatDesc(page.name)}',
   keywords: '${formatKeywords(page.name)}',
+  alternates: {
+    canonical: 'https://vallihospital.in/${page.slug}',
+  },
 };
 `;
 

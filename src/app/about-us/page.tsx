@@ -1,16 +1,8 @@
-
-import { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: 'About Us in Salem | Valli Super Speciality Hospital',
-  description: 'Advanced About Us in Salem. Valli Super Speciality Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.',
-  keywords: 'Salem, About Us, Tamil Nadu, Dr. Natanasabapathy, best about us hospital in Salem, top orthopedic surgeon Salem, about us treatment',
-};
-
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import SmoothScroll from "../../components/SmoothScroll";
@@ -80,10 +72,10 @@ export default function AboutPage() {
                 </motion.div>
                 <div className="container mx-auto px-6 md:px-12 relative z-10">
                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-4">
-                        <a href="/" className="inline-flex items-center gap-2 text-white/40 hover:text-white/70 text-sm transition-colors">
+                        <Link href="/" className="inline-flex items-center gap-2 text-white/40 hover:text-white/70 text-sm transition-colors">
                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                             Home
-                        </a>
+                        </Link>
                     </motion.div>
                     <motion.span initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/8 border border-white/12 text-[#f98825] text-xs font-bold tracking-[0.2em] uppercase mb-6">
                         <span className="w-1.5 h-1.5 rounded-full bg-[#f98825] animate-pulse" />
@@ -253,7 +245,7 @@ export default function AboutPage() {
                         Opp. to Sri Vidya Mandir School, Meyyanoor Road, Salem - 636 004
                     </motion.p>
                     <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="/book-appointment" className="bg-[#f98825] text-white px-8 py-4 rounded-full font-bold text-sm hover:bg-[#e0751e] transition-colors shadow-lg">Book Appointment</a>
+                        <Link href="/book-appointment" className="bg-[#f98825] text-white px-8 py-4 rounded-full font-bold text-sm hover:bg-[#e0751e] transition-colors shadow-lg">Book Appointment</Link>
                         <a href="tel:+919003417111" className="bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-full font-bold text-sm border border-white/20 transition-colors">Call +91 90034 17111</a>
                     </motion.div>
                 </div>

@@ -1,9 +1,12 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Facilities in Salem | Valli Super Speciality Hospital',
-  description: 'Advanced Facilities in Salem. Valli Super Speciality Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.',
-  keywords: 'Salem, Facilities, Tamil Nadu, Dr. Natanasabapathy, best facilities hospital in Salem, top orthopedic surgeon Salem, facilities treatment',
+  title: 'Advanced Medical Facilities in Salem | Valli Super Speciality Hospital',
+  description: 'Explore our state-of-the-art medical infrastructure in Salem including modular laminar-flow OTs, 10-bed critical care ICU, Dual Slice GE CT scanners, interventional ultrasound (USG), and 24/7 diagnostics.',
+  keywords: 'hospital facilities Salem, medical infrastructure Tamil Nadu, 24/7 CT scan Salem, modular operation theatre, advanced ICU Salem',
+  alternates: {
+    canonical: 'https://vallihospital.in/facilities',
+  },
 };
 
 export default function FacilitiesLayout({

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
 
 export default function Navbar() {
     const { scrollY } = useScroll();
@@ -26,7 +27,7 @@ export default function Navbar() {
             >
                 <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
                     {/* Logo Area */}
-                    <a href="/" className="flex items-center gap-3 group cursor-pointer">
+                    <Link href="/" className="flex items-center gap-3 group cursor-pointer">
                         {/* Mobile: full logo.png (has Tamil text), no extra label */}
                         <img src="/logo.png" alt="Valli Hospital" className="h-10 w-auto sm:hidden" />
 
@@ -36,15 +37,15 @@ export default function Navbar() {
                             <span className="text-lg xl:text-xl font-black leading-none tracking-tight">Valli</span>
                             <span className="text-[10px] xl:text-xs font-bold tracking-[0.15em] uppercase mt-0.5 opacity-80">Super Speciality Hospital</span>
                         </div>
-                    </a>
+                    </Link>
 
                     {/* Desktop Menu - Rounded Floating Pill */}
                     <div className="hidden lg:flex items-center bg-white/70 border border-[#bfc8ca]/40 rounded-full px-1.5 xl:px-2 py-1 xl:py-1.5 backdrop-blur-md shadow-[0_8px_20px_rgba(0,51,60,0.05)]">
                         {/* About Us */}
-                        <a href="/about-us" className="relative text-[13px] xl:text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-3 xl:px-5 py-2 rounded-full transition-colors group overflow-hidden">
+                        <Link href="/about-us" className="relative text-[13px] xl:text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-3 xl:px-5 py-2 rounded-full transition-colors group overflow-hidden">
                             <span className="relative z-10 whitespace-nowrap">About us</span>
                             <div className="absolute inset-0 bg-[#f98825]/15 rounded-full translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0" />
-                        </a>
+                        </Link>
 
                         {/* Specialities Dropdown */}
                         <div className="relative group/dropdown">
@@ -52,14 +53,14 @@ export default function Navbar() {
                                 <span className="relative z-10 flex items-center gap-1 whitespace-nowrap">Specialities <svg className="w-3 h-3 transition-transform group-hover/dropdown:rotate-180 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg></span>
                             </button>
                             <div className="absolute top-full left-0 mt-4 w-64 bg-white border border-[#bfc8ca]/40 rounded-xl shadow-xl opacity-0 invisible group-hover/dropdown:opacity-100 group-hover/dropdown:visible transition-all duration-300 origin-top-left z-50 flex flex-col py-2">
-                                <a href="/joint-care-clinic" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Joint Care Clinic</a>
-                                <a href="/sports-medicine-clinic" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Sports Medicine</a>
-                                <a href="/foot-and-ankle-clinic" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Foot & Ankle Clinic</a>
-                                <a href="/back-pain-and-spinal-disorders" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Back Pain & Spinal Disorders</a>
-                                <a href="/paediatric-orthopaedics-deformity-clinic" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Paediatric Orthopaedics & Deformity Clinic</a>
-                                <a href="/failed-surgery-corrections" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Failed Surgery Corrections</a>
-                                <a href="/sports-injury-clinic" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Sports Injury Clinic</a>
-                                <a href="/fracture-clinic" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Fracture Clinic</a>
+                                <Link href="/joint-care-clinic" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Joint Care Clinic</Link>
+                                <Link href="/sports-medicine-clinic" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Sports Medicine</Link>
+                                <Link href="/foot-and-ankle-clinic" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Foot & Ankle Clinic</Link>
+                                <Link href="/back-pain-and-spinal-disorders" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Back Pain & Spinal Disorders</Link>
+                                <Link href="/paediatric-orthopaedics-deformity-clinic" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Paediatric Orthopaedics & Deformity Clinic</Link>
+                                <Link href="/failed-surgery-corrections" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Failed Surgery Corrections</Link>
+                                <Link href="/sports-injury-clinic" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Sports Injury Clinic</Link>
+                                <Link href="/fracture-clinic" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Fracture Clinic</Link>
                             </div>
                         </div>
 
@@ -69,37 +70,37 @@ export default function Navbar() {
                                 <span className="relative z-10 flex items-center gap-1 whitespace-nowrap">Services <svg className="w-3 h-3 transition-transform group-hover/dropdown:rotate-180 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg></span>
                             </button>
                             <div className="absolute top-full left-0 mt-4 w-56 bg-white border border-[#bfc8ca]/40 rounded-xl shadow-xl opacity-0 invisible group-hover/dropdown:opacity-100 group-hover/dropdown:visible transition-all duration-300 origin-top-left z-50 flex flex-col py-2">
-                                <a href="/arthroscopy" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Arthroscopy</a>
-                                <a href="/bone-cancer-treatment" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Bone Cancer Treatment</a>
-                                <a href="/genetic-testing" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Genetic Testing</a>
-                                <a href="/sports-training" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Sports Training</a>
+                                <Link href="/arthroscopy" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Arthroscopy</Link>
+                                <Link href="/bone-cancer-treatment" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Bone Cancer Treatment</Link>
+                                <Link href="/genetic-testing" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Genetic Testing</Link>
+                                <Link href="/sports-training" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Sports Training</Link>
                             </div>
                         </div>
 
                         {/* Facilities */}
-                        <a href="/facilities" className="relative text-[13px] xl:text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-3 xl:px-5 py-2 rounded-full transition-colors group overflow-hidden">
+                        <Link href="/facilities" className="relative text-[13px] xl:text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-3 xl:px-5 py-2 rounded-full transition-colors group overflow-hidden">
                             <span className="relative z-10 whitespace-nowrap">Facilities</span>
                             <div className="absolute inset-0 bg-[#f98825]/15 rounded-full translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0" />
-                        </a>
+                        </Link>
 
                         {/* Doctors */}
-                        <a href="/doctors" className="relative text-[13px] xl:text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-3 xl:px-5 py-2 rounded-full transition-colors group overflow-hidden">
+                        <Link href="/doctors" className="relative text-[13px] xl:text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-3 xl:px-5 py-2 rounded-full transition-colors group overflow-hidden">
                             <span className="relative z-10 whitespace-nowrap">Doctors</span>
                             <div className="absolute inset-0 bg-[#f98825]/15 rounded-full translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0" />
-                        </a>
+                        </Link>
 
                         {/* Contact Us */}
-                        <a href="/contact-us" className="relative text-[13px] xl:text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-3 xl:px-5 py-2 rounded-full transition-colors group overflow-hidden">
+                        <Link href="/contact-us" className="relative text-[13px] xl:text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-3 xl:px-5 py-2 rounded-full transition-colors group overflow-hidden">
                             <span className="relative z-10 whitespace-nowrap">Contact us</span>
                             <div className="absolute inset-0 bg-[#f98825]/15 rounded-full translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0" />
-                        </a>
+                        </Link>
                     </div>
 
                     {/* Primary Action Button */}
                     <div className="hidden lg:block">
-                        <a href="/book-appointment" className="relative bg-[#004b57] text-white px-5 xl:px-6 py-2 xl:py-2.5 rounded-full text-sm font-semibold hover:bg-[#00333c] hover:scale-105 transition-all duration-300 shadow-[0_4px_15px_rgba(0,75,87,0.3)] inline-block whitespace-nowrap">
+                        <Link href="/book-appointment" className="relative bg-[#004b57] text-white px-5 xl:px-6 py-2 xl:py-2.5 rounded-full text-sm font-semibold hover:bg-[#00333c] hover:scale-105 transition-all duration-300 shadow-[0_4px_15px_rgba(0,75,87,0.3)] inline-block whitespace-nowrap">
                             Book Appointment
-                        </a>
+                        </Link>
                     </div>
 
                     {/* Mobile Menu Toggle */}
@@ -135,28 +136,34 @@ export default function Navbar() {
                                 { label: "Doctors", href: "/doctors" },
                                 { label: "Contact us", href: "/contact-us" },
                             ].map((item, i) => (
-                                <motion.a
+                                <motion.div
                                     key={item.label}
-                                    href={item.href}
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.1 * i + 0.3 }}
-                                    className="text-4xl font-light text-[#00333c] hover:text-[#f98825] hover:font-medium transition-all"
-                                    onClick={() => setIsMobileMenuOpen(false)}
                                 >
-                                    {item.label}
-                                </motion.a>
+                                    <Link
+                                        href={item.href}
+                                        className="text-4xl font-light text-[#00333c] hover:text-[#f98825] hover:font-medium transition-all"
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                    >
+                                        {item.label}
+                                    </Link>
+                                </motion.div>
                             ))}
-                            <motion.a
-                                href="/book-appointment"
+                            <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.7 }}
-                                className="bg-[#004b57] text-white px-8 py-3 rounded-full font-bold text-lg mx-auto"
-                                onClick={() => setIsMobileMenuOpen(false)}
                             >
-                                Book Appointment
-                            </motion.a>
+                                <Link
+                                    href="/book-appointment"
+                                    className="bg-[#004b57] text-white px-8 py-3 rounded-full font-bold text-lg mx-auto inline-block"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                >
+                                    Book Appointment
+                                </Link>
+                            </motion.div>
                         </div>
                     </motion.div>
                 )}

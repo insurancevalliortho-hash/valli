@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: 'Genetic Testing in Salem | Valli Super Speciality Hospital',
   description: 'Advanced Genetic Testing in Salem. Valli Super Speciality Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.',
   keywords: 'Salem, Genetic Testing, Tamil Nadu, Dr. Natanasabapathy, best genetic testing hospital in Salem, top orthopedic surgeon Salem, genetic testing treatment',
+  alternates: {
+    canonical: 'https://vallihospital.in/genetic-testing',
+  },
 };
 
 import Navbar from '../../components/Navbar';
@@ -18,7 +21,8 @@ import Footer from '../../components/Footer';
 export default function Page() {
   return (
     <>
-      <Navbar />\n
+      <Navbar />
+
       <BreadcrumbSchema items={[
         { name: 'Home', url: 'https://vallihospital.in/' },
         { name: 'Specialities', url: 'https://vallihospital.in/specialities' },
@@ -28,9 +32,10 @@ export default function Page() {
         { question: 'What is the Genetic Testing?', answer: 'The Genetic Testing at Valli Super Speciality Hospital provides advanced, specialized care for related conditions.' },
         { question: 'Who is the lead doctor?', answer: 'Dr. T. Natanasabapathy, Chief Orthopedic Surgeon, leads our specialized care teams.' }
       ]} />
-  \n
+  
+
       {/* Breadcrumb UI */}
-      <div className="container mx-auto px-6 md:px-12 py-4 bg-[#001f25]">
+      <div className="mx-auto px-6 md:px-12 pt-28 pb-4 bg-[#001f25]">
         <nav aria-label="breadcrumb">
           <ol className="flex space-x-2 text-sm text-gray-400">
             <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
@@ -65,9 +70,8 @@ export default function Page() {
           <div className="container mx-auto px-6 md:px-12">
               <div className="max-w-4xl mx-auto space-y-6 text-[#40484a] text-lg leading-relaxed font-medium">
                   
-      <h2 className="text-2xl font-bold text-[#00333c]">Overview</h2>
-      <p>Representing a massive paradigm shift from reactive injury treatment to proactive, deeply personalized physiological optimization, the hospital utilizes advanced genetic sequencing to decode an athlete's innate potential. Modern sports science acknowledges that gene variants (polymorphisms) heavily dictate skeletal muscle properties, cardiovascular response, and baseline metabolic efficiency.</p>
-      <p>By mapping the athlete's genome, the hospital transitions fitness programming from generalized protocols to highly precise, scientifically validated regimens tailored to the specific requirements of both elite professionals and leisure exercisers. Favorable genetic components dictate the body's ultimate capacity for endurance, the rate at which hypertrophy occurs, and the pace at which physiological fitness gains are realized.</p>
+      <p>Representing a massive paradigm shift from reactive injury treatment to proactive, deeply personalized physiological optimization, the hospital utilizes advanced genetic sequencing to decode an athlete&apos;s innate potential. Modern sports science acknowledges that gene variants (polymorphisms) heavily dictate skeletal muscle properties, cardiovascular response, and baseline metabolic efficiency.</p>
+      <p>By mapping the athlete&apos;s genome, the hospital transitions fitness programming from generalized protocols to highly precise, scientifically validated regimens tailored to the specific requirements of both elite professionals and leisure exercisers. Favorable genetic components dictate the body&apos;s ultimate capacity for endurance, the rate at which hypertrophy occurs, and the pace at which physiological fitness gains are realized.</p>
       
       <h2 className="text-2xl font-bold text-[#00333c] mt-8">Evaluated Genetic Traits</h2>
       <div className="overflow-x-auto mt-6">
@@ -81,7 +85,7 @@ export default function Page() {
           <tbody className="divide-y divide-gray-200">
             <tr>
               <td className="px-6 py-4 font-medium text-[#004b57]">Aerobic Capacity</td>
-              <td className="px-6 py-4 text-sm text-gray-700">Analyzes genes regulating cellular oxygen supply pathways. Dictates the body's maximum capacity (VO2 max) to transport and metabolize oxygen to break down fuel stores during sustained exercise.</td>
+              <td className="px-6 py-4 text-sm text-gray-700">Analyzes genes regulating cellular oxygen supply pathways. Dictates the body&apos;s maximum capacity (VO2 max) to transport and metabolize oxygen to break down fuel stores during sustained exercise.</td>
             </tr>
             <tr className="bg-gray-50">
               <td className="px-6 py-4 font-medium text-[#004b57]">Anaerobic Capacity</td>
@@ -93,7 +97,7 @@ export default function Page() {
             </tr>
             <tr className="bg-gray-50">
               <td className="px-6 py-4 font-medium text-[#004b57]">Power</td>
-              <td className="px-6 py-4 text-sm text-gray-700">Examines the genetic distribution of fast-twitch (Type II) muscle fibers and vascular oxygen efficiency, predicting the body's capability to generate sudden, explosive bursts of high-intensity kinetic energy.</td>
+              <td className="px-6 py-4 text-sm text-gray-700">Examines the genetic distribution of fast-twitch (Type II) muscle fibers and vascular oxygen efficiency, predicting the body&apos;s capability to generate sudden, explosive bursts of high-intensity kinetic energy.</td>
             </tr>
             <tr>
               <td className="px-6 py-4 font-medium text-[#004b57]">Flexibility & Tissue Integrity</td>
@@ -121,11 +125,14 @@ export default function Page() {
         <div className="container mx-auto px-6 md:px-12">
           <h3 className="text-2xl font-bold text-[#00333c] mb-6">Related Treatments & Specialities</h3>
           <ul className="flex flex-col md:flex-row gap-6 md:gap-12">
-            <li><a href="/bone-cancer-treatment" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Bone Cancer Treatment</a></li>\n<li><a href="/paediatric-orthopaedics-deformity-clinic" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Paediatric Orthopaedics Deformity Clinic</a></li>\n<li><a href="/joint-care-clinic" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Joint Care Clinic</a></li>
+            <li><Link href="/bone-cancer-treatment" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Bone Cancer Treatment</Link></li>
+<li><Link href="/paediatric-orthopaedics-deformity-clinic" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Paediatric Orthopaedics Deformity Clinic</Link></li>
+<li><Link href="/joint-care-clinic" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Joint Care Clinic</Link></li>
           </ul>
         </div>
       </section>
-  \n<Footer />
+  
+<Footer />
     </>
   );
 }

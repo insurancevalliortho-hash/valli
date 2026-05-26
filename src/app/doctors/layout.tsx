@@ -1,9 +1,12 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Doctors in Salem | Valli Super Speciality Hospital',
-  description: 'Advanced Doctors in Salem. Valli Super Speciality Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.',
-  keywords: 'Salem, Doctors, Tamil Nadu, Dr. Natanasabapathy, best doctors hospital in Salem, top orthopedic surgeon Salem, doctors treatment',
+  title: 'Our Specialists & Surgeons in Salem | Valli Super Speciality Hospital',
+  description: 'Meet our elite team of orthopedic surgeons, neurologists, general physicians, and specialists led by Dr. T. Natanasabapathy. 24/7 world-class healthcare in Salem, Tamil Nadu.',
+  keywords: 'Salem doctors, top orthopedic surgeon Salem, general physician Salem, neurosurgeon Salem, anesthetist Salem, cardiologist Salem, medical specialists Tamil Nadu',
+  alternates: {
+    canonical: 'https://vallihospital.in/doctors',
+  },
 };
 
 export default function DoctorsLayout({
