@@ -73,7 +73,7 @@ export default function AboutSection() {
                         >
                             <motion.img
                                 style={{ y: imgY, scale: imgScale }}
-                                src="/hospital.png"
+                                src="/hospital.jpg"
                                 alt="Valli Superspecialty Hospital"
                                 className="w-full h-[120%] -top-[10%] relative object-cover filter contrast-[1.05] grayscale-[5%] will-change-transform"
                             />
