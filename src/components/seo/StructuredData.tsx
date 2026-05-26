@@ -22,7 +22,7 @@ export const HospitalSchema = () => {
       "longitude": 78.1460
     },
     "openingHours": "00:00-23:59",
-    "hasMap": "https://maps.google.com/?cid=10646698621415257840",
+    "hasMap": "https://maps.app.goo.gl/c4oHsAMwjLq9UqYi8",
     "medicalSpecialty": [
       "Orthopedic Surgery",
       "Sports Medicine",
