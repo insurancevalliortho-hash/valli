@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import { Montserrat, Poppins } from "next/font/google";
 import "./globals.css";
 import { HospitalSchema, PhysicianSchema } from "../components/seo/StructuredData";
-import { Suspense } from "react";
-import PageTransitionLoader from "../components/PageTransitionLoader";
 import Script from "next/script";
+import ClientWrapper from "../components/ClientWrapper";
 
 const montserrat = Montserrat({
     variable: "--font-montserrat",
@@ -85,6 +84,7 @@ export const metadata: Metadata = {
     alternates: {
         canonical: "https://vallihospital.in/",
         languages: {
+            "en": "https://vallihospital.in/",
             "en-IN": "https://vallihospital.in/",
             "x-default": "https://vallihospital.in/",
         },
@@ -111,15 +111,14 @@ export default function RootLayout({
                         gtag('config', 'G-VALLIHOSP');
                     `}
                 </Script>
-                <Suspense fallback={null}>
-                    <PageTransitionLoader />
-                </Suspense>
-                <HospitalSchema />
-                <PhysicianSchema />
-                <div id="page-content-wrapper" className="min-h-screen">
-                    {children}
-                </div>
-            </body>
-        </html>
-    );
+                 <HospitalSchema />
+                 <PhysicianSchema />
+                 <ClientWrapper>
+                     <div id="page-content-wrapper" className="min-h-screen">
+                         {children}
+                     </div>
+                 </ClientWrapper>
+             </body>
+         </html>
+     );
 }

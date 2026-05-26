@@ -8,9 +8,9 @@ const HERO_SLIDES = [
     {
         id: 1,
         image: "/hero-surgery.png",
-        title: "WORLD-CLASS",
-        highlight: "HEALTHCARE",
-        subtitle: "Orthopedic Excellence",
+        title: "VALLI SUPER SPECIALITY",
+        highlight: "HOSPITAL",
+        subtitle: "Orthopedic Care in Salem",
         description: "Where expertise restores lives. We provide advanced care, precision healing, and excellence in every specialty."
     },
     {

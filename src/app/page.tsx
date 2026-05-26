@@ -7,8 +7,6 @@ import SurgeonProfile from "./../components/SurgeonProfile";
 import SpecialityGrid from "./../components/SpecialityGrid";
 import TechShowcase from "./../components/TechShowcase";
 import Testimonials from "./../components/Testimonials";
-import SmoothScroll from "./../components/SmoothScroll";
-import MagneticCursor from "./../components/MagneticCursor";
 import Footer from "./../components/Footer";
 
 export const metadata: Metadata = {
@@ -74,12 +72,11 @@ export default function Home() {
     ];
 
     return (
-        <SmoothScroll>
+        <>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
-            <MagneticCursor />
             <Navbar />
             <main className="min-h-screen bg-white w-full block overflow-x-hidden">
                 <Hero />
@@ -92,6 +89,6 @@ export default function Home() {
             </main>
 
             <Footer />
-        </SmoothScroll>
+        </>
     );
 }
