@@ -51,7 +51,14 @@ export default function Footer() {
                             </li>
                             <li className="pt-6 border-t border-gray-100 group">
                                 <p className="text-[10px] uppercase tracking-widest text-[#f98825] mb-2 font-bold group-hover:translate-x-1 transition-transform">Location</p>
-                                <p className="text-sm font-bold tracking-wide text-gray-500 leading-relaxed max-w-[280px]">Opp. to Sri Vidya Mandir School,<br /> Meyyanoor Road, Salem - 636 004</p>
+                                <a 
+                                    href="https://maps.app.goo.gl/c4oHsAMwjLq9UqYi8"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-sm font-bold tracking-wide text-gray-500 leading-relaxed max-w-[280px] hover:text-[#3cb3a6] transition-colors block"
+                                >
+                                    Opp. to Sri Vidya Mandir School,<br /> Meyyanoor Road, Salem - 636 004
+                                </a>
                             </li>
                         </ul>
                     </motion.div>
