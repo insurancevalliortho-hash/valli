@@ -3,7 +3,10 @@ import { Montserrat, Poppins } from "next/font/google";
 import "./globals.css";
 import { HospitalSchema, PhysicianSchema } from "../components/seo/StructuredData";
 import Script from "next/script";
-import ClientWrapper from "../components/ClientWrapper";
+import { Suspense } from "react";
+import PageTransitionLoader from "../components/PageTransitionLoader";
+import SmoothScroll from "../components/SmoothScroll";
+import MagneticCursor from "../components/MagneticCursor";
 
 const montserrat = Montserrat({
     variable: "--font-montserrat",
@@ -25,7 +28,7 @@ export const metadata: Metadata = {
         default: "Valli Super Speciality Hospital | Best Orthopedic Care",
         template: "%s | Valli Super Speciality Hospital",
     },
-    description: "Valli Super Speciality Hospital in Salem offers advanced orthopedic care, joint replacements, and spine surgery.",
+    description: "Valli Super Speciality Hospital in Salem offers advanced orthopedic care, joint replacements, and spine surgery guided by world-class clinical excellence.",
     keywords: ["Orthopedic Hospital", "Salem", "Joint Replacement", "Spine Surgery", "Valli Hospital", "Best Orthopedician", "Trauma Care", "Sports Medicine", "Super Speciality Hospital", "Orthopedic Surgeon"],
     authors: [{ name: "Valli Super Speciality Hospital", url: "https://vallihospital.in" }],
     creator: "Valli Super Speciality Hospital",
@@ -111,13 +114,17 @@ export default function RootLayout({
                         gtag('config', 'G-VALLIHOSP');
                     `}
                 </Script>
+                 <Suspense fallback={null}>
+                     <PageTransitionLoader />
+                 </Suspense>
                  <HospitalSchema />
                  <PhysicianSchema />
-                 <ClientWrapper>
+                 <SmoothScroll>
+                     <MagneticCursor />
                      <div id="page-content-wrapper" className="min-h-screen">
                          {children}
                      </div>
-                 </ClientWrapper>
+                 </SmoothScroll>
              </body>
          </html>
      );
