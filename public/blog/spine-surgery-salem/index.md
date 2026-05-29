@@ -1,7 +1,7 @@
 ---
 title: Advanced Spine Surgery in Salem | Valli Hospital Blog
 description: Learn about minimally invasive spine surgery options in Salem.
-url: https://vallihospital.in/blog/spine-surgery-salem
+url: https://www.vallihospital.in/blog/spine-surgery-salem
 last_updated: 2026-05-29
 ---
 
@@ -71,4 +71,4 @@ Absolutely. Physiotherapy is a critical component of your recovery. Our team wil
 You should consult a specialist if your back pain lasts more than a few weeks, is severe and doesn't improve with rest, radiates down one or both legs, or causes weakness, numbness, or tingling in your legs.
 
 ---
-*Clean plain-text mirror generated for AI search crawlers. Original interactive article served at: https://vallihospital.in/blog/spine-surgery-salem*
+*Clean plain-text mirror generated for AI search crawlers. Original interactive article served at: https://www.vallihospital.in/blog/spine-surgery-salem*

@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description: 'Reach out to Valli Super Speciality Hospital in Salem. Get instant access to our 24/7 emergency hotline, clinical phone directory, official address coordinates, and schedule diagnostic scans or clinical consults.',
   keywords: 'contact Valli Hospital, Salem hospital phone, orthopedic hospital Salem address, emergency trauma Salem, book diagnostic scan Salem',
   alternates: {
-    canonical: 'https://vallihospital.in/contact-us',
+    canonical: 'https://www.vallihospital.in/contact-us',
   },
 };
 

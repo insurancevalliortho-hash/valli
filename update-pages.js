@@ -41,16 +41,16 @@ export const metadata: Metadata = {
   description: '${formatDesc(specialty.name)}',
   keywords: '${formatKeywords(specialty.name)}',
   alternates: {
-    canonical: 'https://vallihospital.in/${specialty.slug}',
+    canonical: 'https://www.vallihospital.in/${specialty.slug}',
   },
 };
 `;
 
   // Insert Breadcrumb UI component and related treatments
   const breadcrumbData = `
-        { name: 'Home', url: 'https://vallihospital.in/' },
-        { name: 'Specialities', url: 'https://vallihospital.in/specialities' },
-        { name: '${specialty.name}', url: 'https://vallihospital.in/${specialty.slug}' }
+        { name: 'Home', url: 'https://www.vallihospital.in/' },
+        { name: 'Specialities', url: 'https://www.vallihospital.in/specialities' },
+        { name: '${specialty.name}', url: 'https://www.vallihospital.in/${specialty.slug}' }
   `;
   
   const relatedLinks = specialty.related.map(rel => {
@@ -130,7 +130,7 @@ export const metadata: Metadata = {
   description: '${formatDesc(page.name)}',
   keywords: '${formatKeywords(page.name)}',
   alternates: {
-    canonical: 'https://vallihospital.in/${page.slug}',
+    canonical: 'https://www.vallihospital.in/${page.slug}',
   },
 };
 `;

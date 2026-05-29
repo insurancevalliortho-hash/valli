@@ -20,7 +20,7 @@ export const metadata: Metadata = {
       "shoulder arthroscopy Salem"
   ],
   alternates: {
-    canonical: `https://vallihospital.in/arthroscopy`,
+    canonical: `https://www.vallihospital.in/arthroscopy`,
   },
 };
 
@@ -33,9 +33,9 @@ export default function Page() {
       <Navbar />
 
       <BreadcrumbSchema items={[
-        { name: 'Home', url: 'https://vallihospital.in/' },
-        { name: 'Specialities', url: 'https://vallihospital.in/specialities' },
-        { name: 'Arthroscopy', url: 'https://vallihospital.in/arthroscopy' }
+        { name: 'Home', url: 'https://www.vallihospital.in/' },
+        { name: 'Specialities', url: 'https://www.vallihospital.in/specialities' },
+        { name: 'Arthroscopy', url: 'https://www.vallihospital.in/arthroscopy' }
       ]} />
       <FAQSchema questions={[
         { question: 'What is the Arthroscopy?', answer: 'The Arthroscopy at Valli Super Speciality Hospital provides advanced, specialized care for related conditions.' },

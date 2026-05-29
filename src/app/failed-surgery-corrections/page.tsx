@@ -20,7 +20,7 @@ export const metadata: Metadata = {
       "post surgical complication Salem"
   ],
   alternates: {
-    canonical: `https://vallihospital.in/failed-surgery-corrections`,
+    canonical: `https://www.vallihospital.in/failed-surgery-corrections`,
   },
 };
 
@@ -33,9 +33,9 @@ export default function Page() {
       <Navbar />
 
       <BreadcrumbSchema items={[
-        { name: 'Home', url: 'https://vallihospital.in/' },
-        { name: 'Specialities', url: 'https://vallihospital.in/specialities' },
-        { name: 'Failed Surgery Corrections', url: 'https://vallihospital.in/failed-surgery-corrections' }
+        { name: 'Home', url: 'https://www.vallihospital.in/' },
+        { name: 'Specialities', url: 'https://www.vallihospital.in/specialities' },
+        { name: 'Failed Surgery Corrections', url: 'https://www.vallihospital.in/failed-surgery-corrections' }
   ]} />
       <FAQSchema questions={[
         { question: 'What is the Failed Surgery Corrections?', answer: 'The Failed Surgery Corrections at Valli Super Speciality Hospital provides advanced, specialized care for related conditions.' },

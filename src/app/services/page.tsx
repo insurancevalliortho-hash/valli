@@ -227,8 +227,8 @@ export default function ServicesPage() {
       {/* SEO Schema Components */}
       <BreadcrumbSchema
         items={[
-          { name: "Home", url: "https://vallihospital.in/" },
-          { name: "Services", url: "https://vallihospital.in/services" },
+          { name: "Home", url: "https://www.vallihospital.in/" },
+          { name: "Services", url: "https://www.vallihospital.in/services" },
         ]}
       />
       <FAQSchema

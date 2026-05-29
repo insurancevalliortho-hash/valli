@@ -73,6 +73,9 @@ export default function Hero() {
                         src={HERO_SLIDES[0].image}
                         alt="Valli Super Speciality Hospital"
                         className="w-full h-full object-cover object-[center_top]"
+                        fetchPriority="high"
+                        loading="eager"
+                        decoding="async"
                     />
                     <div className="absolute inset-0 bg-gradient-to-r from-[#001014]/95 via-[#001014]/60 to-transparent mix-blend-multiply" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#001014] via-[#001014]/20 to-transparent opacity-90" />
@@ -128,6 +131,9 @@ export default function Hero() {
                         initial={{ scale: 1.15 }}
                         animate={{ scale: 1 }}
                         transition={{ duration: 12, ease: "easeOut" }}
+                        fetchPriority={currentIndex === 0 ? "high" : "auto"}
+                        loading="eager"
+                        decoding="async"
                     />
                     {/* Immersive Gradients to blend colors flawlessly */}
                     <div className="absolute inset-0 bg-gradient-to-r from-[#001014]/95 via-[#001014]/60 to-transparent mix-blend-multiply" />

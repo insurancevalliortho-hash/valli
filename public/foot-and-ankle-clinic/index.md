@@ -1,7 +1,7 @@
 ---
 title: Foot and Ankle Clinic in Salem | Valli Super Speciality Hospital
 description: Specialized diagnosis and conservative-to-surgical management of all distal lower extremity diseases.
-url: https://vallihospital.in/foot-and-ankle-clinic
+url: https://www.vallihospital.in/foot-and-ankle-clinic
 last_updated: 2026-05-29
 ---
 
@@ -36,4 +36,4 @@ A: A dedicated specialty clinic covering distal extremity deformities, traumatic
 
 
 ---
-*Clean plain-text mirror generated for AI search crawlers. Original interactive page served at: https://vallihospital.in/foot-and-ankle-clinic*
+*Clean plain-text mirror generated for AI search crawlers. Original interactive page served at: https://www.vallihospital.in/foot-and-ankle-clinic*

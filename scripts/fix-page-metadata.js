@@ -96,7 +96,7 @@ for (const [slug, meta] of Object.entries(pageMetadata)) {
   description: ${JSON.stringify(meta.description)},
   keywords: ${keywordsStr},
   alternates: {
-    canonical: \`https://vallihospital.in/${slug}\`,
+    canonical: \`https://www.vallihospital.in/${slug}\`,
   },
 };`;
   

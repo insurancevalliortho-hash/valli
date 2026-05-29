@@ -1,7 +1,7 @@
 ---
 title: Specialized Paediatric Orthopaedics in Salem | Valli Hospital Blog
 description: Expert care for children
-url: https://vallihospital.in/blog/paediatric-orthopaedics-salem
+url: https://www.vallihospital.in/blog/paediatric-orthopaedics-salem
 last_updated: 2026-05-29
 ---
 
@@ -60,4 +60,4 @@ Mild bowlegs are a normal stage of development in toddlers up to age 2. If the b
 If Developmental Dysplasia of the Hip (DDH) is diagnosed early in infancy, it can almost always be treated non-surgically with a harness or brace. Surgery is typically only required if the diagnosis is delayed until the child is older or if bracing fails.
 
 ---
-*Clean plain-text mirror generated for AI search crawlers. Original interactive article served at: https://vallihospital.in/blog/paediatric-orthopaedics-salem*
+*Clean plain-text mirror generated for AI search crawlers. Original interactive article served at: https://www.vallihospital.in/blog/paediatric-orthopaedics-salem*

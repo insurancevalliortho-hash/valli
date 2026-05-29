@@ -1,7 +1,7 @@
 ---
 title: Joint Care Clinic in Salem | Valli Super Speciality Hospital
 description: Advanced management of acute and chronic joint pain including primary and revision knee and hip replacements.
-url: https://vallihospital.in/joint-care-clinic
+url: https://www.vallihospital.in/joint-care-clinic
 last_updated: 2026-05-29
 ---
 
@@ -39,4 +39,4 @@ A: Dr. T. Natanasabapathy, Chief Orthopedic Surgeon, leads our specialized joint
 
 
 ---
-*Clean plain-text mirror generated for AI search crawlers. Original interactive page served at: https://vallihospital.in/joint-care-clinic*
+*Clean plain-text mirror generated for AI search crawlers. Original interactive page served at: https://www.vallihospital.in/joint-care-clinic*

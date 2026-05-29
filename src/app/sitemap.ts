@@ -4,7 +4,7 @@ import fs from 'fs';
 import path from 'path';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://vallihospital.in';
+    const baseUrl = 'https://www.vallihospital.in';
     
     const homeRoute = [
         {

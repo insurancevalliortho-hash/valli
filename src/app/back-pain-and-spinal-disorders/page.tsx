@@ -20,7 +20,7 @@ export const metadata: Metadata = {
       "lower back pain specialist Salem"
   ],
   alternates: {
-    canonical: `https://vallihospital.in/back-pain-and-spinal-disorders`,
+    canonical: `https://www.vallihospital.in/back-pain-and-spinal-disorders`,
   },
 };
 
@@ -33,9 +33,9 @@ export default function Page() {
       <Navbar />
 
       <BreadcrumbSchema items={[
-        { name: 'Home', url: 'https://vallihospital.in/' },
-        { name: 'Specialities', url: 'https://vallihospital.in/specialities' },
-        { name: 'Back Pain and Spinal Disorders', url: 'https://vallihospital.in/back-pain-and-spinal-disorders' }
+        { name: 'Home', url: 'https://www.vallihospital.in/' },
+        { name: 'Specialities', url: 'https://www.vallihospital.in/specialities' },
+        { name: 'Back Pain and Spinal Disorders', url: 'https://www.vallihospital.in/back-pain-and-spinal-disorders' }
       ]} />
       <FAQSchema questions={[
         { question: 'What is the Back Pain and Spinal Disorders?', answer: 'The Back Pain and Spinal Disorders at Valli Super Speciality Hospital provides advanced, specialized care for related conditions.' },

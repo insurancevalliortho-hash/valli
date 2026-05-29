@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description: 'Book a consultation with our elite orthopedic surgeons, physicians, and specialists online. Easy, secure, and instant booking for patients in Salem.',
   keywords: 'book doctor appointment Salem, orthopedic consultation Salem, hospital appointment booking, online doctor consultation Salem',
   alternates: {
-    canonical: 'https://vallihospital.in/book-appointment',
+    canonical: 'https://www.vallihospital.in/book-appointment',
   },
 };
 

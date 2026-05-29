@@ -37,6 +37,6 @@ export default function robots(): MetadataRoute.Robots {
                 allow: '/',
             }
         ],
-        sitemap: 'https://vallihospital.in/sitemap.xml',
+        sitemap: 'https://www.vallihospital.in/sitemap.xml',
     };
 }

@@ -1,7 +1,7 @@
 ---
 title: 24/7 Fracture Treatment in Salem | Valli Hospital Blog
 description: Emergency trauma and fracture care at Valli Hospital.
-url: https://vallihospital.in/blog/fracture-treatment-salem
+url: https://www.vallihospital.in/blog/fracture-treatment-salem
 last_updated: 2026-05-29
 ---
 
@@ -64,4 +64,4 @@ No. Many fractures can be treated conservatively with a cast or splint. Surgery 
 Yes. Prolonged immobilization can cause muscle atrophy and joint stiffness. Physical therapy is vital to restore strength, flexibility, and full range of motion once the bone has healed sufficiently.
 
 ---
-*Clean plain-text mirror generated for AI search crawlers. Original interactive article served at: https://vallihospital.in/blog/fracture-treatment-salem*
+*Clean plain-text mirror generated for AI search crawlers. Original interactive article served at: https://www.vallihospital.in/blog/fracture-treatment-salem*

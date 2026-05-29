@@ -1,7 +1,7 @@
 ---
 title: Dr. G. Balamurugan - MBBS, MD ANAESTHESIA | Valli Hospital Salem
 description: Professional profile of Dr. G. Balamurugan, specialist in DEPT OF ANAESTHESIA & CRITICAL CARE at Valli Super Speciality Hospital.
-url: https://vallihospital.in/doctors/dr-balamurugan-g
+url: https://www.vallihospital.in/doctors/dr-balamurugan-g
 last_updated: 2026-05-29
 ---
 
@@ -24,4 +24,4 @@ Dr. G. Balamurugan is an expert in Anaesthesia and Critical care, ensuring patie
 - Emergency / Trauma Desk: ₹1,000 - ₹1,500 ($12 - $18 USD)
 
 ---
-*Clean plain-text mirror generated for AI search crawlers. Original interactive page served at: https://vallihospital.in/doctors/dr-balamurugan-g*
+*Clean plain-text mirror generated for AI search crawlers. Original interactive page served at: https://www.vallihospital.in/doctors/dr-balamurugan-g*

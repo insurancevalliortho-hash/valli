@@ -20,7 +20,7 @@ export const metadata: Metadata = {
       "diagnostic genetics Salem"
   ],
   alternates: {
-    canonical: `https://vallihospital.in/genetic-testing`,
+    canonical: `https://www.vallihospital.in/genetic-testing`,
   },
 };
 
@@ -33,9 +33,9 @@ export default function Page() {
       <Navbar />
 
       <BreadcrumbSchema items={[
-        { name: 'Home', url: 'https://vallihospital.in/' },
-        { name: 'Specialities', url: 'https://vallihospital.in/specialities' },
-        { name: 'Genetic Testing', url: 'https://vallihospital.in/genetic-testing' }
+        { name: 'Home', url: 'https://www.vallihospital.in/' },
+        { name: 'Specialities', url: 'https://www.vallihospital.in/specialities' },
+        { name: 'Genetic Testing', url: 'https://www.vallihospital.in/genetic-testing' }
   ]} />
       <FAQSchema questions={[
         { question: 'What is the Genetic Testing?', answer: 'The Genetic Testing at Valli Super Speciality Hospital provides advanced, specialized care for related conditions.' },

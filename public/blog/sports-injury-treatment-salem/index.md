@@ -1,7 +1,7 @@
 ---
 title: Top Sports Injury Treatment in Salem | Valli Hospital Blog
 description: Expert care for sports injuries, ACL tears, and more.
-url: https://vallihospital.in/blog/sports-injury-treatment-salem
+url: https://www.vallihospital.in/blog/sports-injury-treatment-salem
 last_updated: 2026-05-29
 ---
 
@@ -71,4 +71,4 @@ Platelet-Rich Plasma (PRP) therapy involves drawing a small amount of your blood
 While not all injuries are preventable, you can significantly reduce your risk by maintaining proper conditioning, warming up adequately, using the correct equipment, and avoiding sudden spikes in training intensity.
 
 ---
-*Clean plain-text mirror generated for AI search crawlers. Original interactive article served at: https://vallihospital.in/blog/sports-injury-treatment-salem*
+*Clean plain-text mirror generated for AI search crawlers. Original interactive article served at: https://www.vallihospital.in/blog/sports-injury-treatment-salem*

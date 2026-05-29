@@ -29,17 +29,17 @@ export const metadata: Metadata = {
         "24 hour emergency hospital Salem"
     ],
     alternates: {
-        canonical: "https://vallihospital.in/",
+        canonical: "https://www.vallihospital.in/",
         languages: {
-            "en": "https://vallihospital.in/",
-            "en-IN": "https://vallihospital.in/",
-            "x-default": "https://vallihospital.in/"
+            "en": "https://www.vallihospital.in/",
+            "en-IN": "https://www.vallihospital.in/",
+            "x-default": "https://www.vallihospital.in/"
         }
     },
     openGraph: {
         title: "Best Orthopedic Hospital in Salem | Valli Super Speciality Hospital",
         description: "Salem's most trusted orthopedic hospital — joint replacement, trauma care, sports injury treatment, and 24/7 emergency. Led by Dr. T. Natanasabapathy.",
-        url: "https://vallihospital.in/",
+        url: "https://www.vallihospital.in/",
         siteName: "Valli Super Speciality Hospital",
         locale: "en_IN",
         type: "website",
@@ -72,10 +72,10 @@ export default function Home() {
             "@context": "https://schema.org",
             "@type": "WebSite",
             "name": "Valli Super Speciality Hospital",
-            "url": "https://vallihospital.in",
+            "url": "https://www.vallihospital.in",
             "potentialAction": {
                 "@type": "SearchAction",
-                "target": "https://vallihospital.in/search?q={search_term_string}",
+                "target": "https://www.vallihospital.in/search?q={search_term_string}",
                 "query-input": "required name=search_term_string"
             }
         },
@@ -83,9 +83,9 @@ export default function Home() {
             "@context": "https://schema.org",
             "@type": "Hospital",
             "name": "Valli Super Speciality Hospital",
-            "image": "https://vallihospital.in/favicon.png",
-            "@id": "https://vallihospital.in",
-            "url": "https://vallihospital.in",
+            "image": "https://www.vallihospital.in/favicon.png",
+            "@id": "https://www.vallihospital.in",
+            "url": "https://www.vallihospital.in",
             "telephone": "+919003417111",
             "address": {
                 "@type": "PostalAddress",

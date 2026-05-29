@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const baseUrl = 'https://vallihospital.in';
+const baseUrl = 'https://www.vallihospital.in';
 const today = new Date().toISOString().split('T')[0];
 
 // Pricing details - extremely specific for GEO/AEO optimization
@@ -567,17 +567,17 @@ ${pricingInfo}
   - *Experience:* 21+ Years of Orthopedic Excellence
   - *Affiliations:* Indian Orthopaedic Association, Tamil Nadu Medical Council
 
-*For a full directory of visiting clinicians, specialists, and surgical teams, see [Our Doctors](https://vallihospital.in/doctors).*
+*For a full directory of visiting clinicians, specialists, and surgical teams, see [Our Doctors](https://www.vallihospital.in/doctors).*
 
 ---
 
 ## 🗺️ Website Architecture & Dynamic API Pathways
 
-- **Home Page:** https://vallihospital.in/ (Main services & trust metrics)
-- **Specialities Directory:** https://vallihospital.in/specialities
-- **Consultation Booking Portal:** https://vallihospital.in/book-appointment (Redirects to WhatsApp Coordinator +919003417111)
-- **Clinical Facilities:** https://vallihospital.in/facilities
-- **Contact Desk:** https://vallihospital.in/contact-us
+- **Home Page:** https://www.vallihospital.in/ (Main services & trust metrics)
+- **Specialities Directory:** https://www.vallihospital.in/specialities
+- **Consultation Booking Portal:** https://www.vallihospital.in/book-appointment (Redirects to WhatsApp Coordinator +919003417111)
+- **Clinical Facilities:** https://www.vallihospital.in/facilities
+- **Contact Desk:** https://www.vallihospital.in/contact-us
 
 ---
 

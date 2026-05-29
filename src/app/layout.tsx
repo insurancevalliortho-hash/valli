@@ -21,7 +21,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-    metadataBase: new URL("https://vallihospital.in"),
+    metadataBase: new URL("https://www.vallihospital.in"),
     applicationName: "Valli Super Speciality Hospital",
     generator: "Next.js",
     category: "Medical",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
         "Valli hospital Salem",
         "24 hour emergency hospital Salem"
     ],
-    authors: [{ name: "Valli Super Speciality Hospital", url: "https://vallihospital.in" }],
+    authors: [{ name: "Valli Super Speciality Hospital", url: "https://www.vallihospital.in" }],
     creator: "Valli Super Speciality Hospital",
     publisher: "Valli Super Speciality Hospital",
     formatDetection: {
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Best Orthopedic Hospital in Salem | Valli Super Speciality Hospital",
         description: "Salem's most trusted orthopedic hospital — joint replacement, trauma care, sports injury treatment, and 24/7 emergency. 16,000+ patients treated. Led by Dr. T. Natanasabapathy.",
-        url: "https://vallihospital.in",
+        url: "https://www.vallihospital.in",
         siteName: "Valli Super Speciality Hospital",
         locale: "en_IN",
         type: "website",
@@ -103,11 +103,11 @@ export const metadata: Metadata = {
         shortcut: "/favicon.png",
     },
     alternates: {
-        canonical: "https://vallihospital.in/",
+        canonical: "https://www.vallihospital.in/",
         languages: {
-            "en": "https://vallihospital.in/",
-            "en-IN": "https://vallihospital.in/",
-            "x-default": "https://vallihospital.in/",
+            "en": "https://www.vallihospital.in/",
+            "en-IN": "https://www.vallihospital.in/",
+            "x-default": "https://www.vallihospital.in/",
         },
     },
 };

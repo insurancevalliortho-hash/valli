@@ -1,7 +1,7 @@
 ---
 title: Dr. K. N. Jotheesvar - MBBS, MS ORTHO, FIAS, FIJR | Valli Hospital Salem
 description: Professional profile of Dr. K. N. Jotheesvar, specialist in DEPT OF ORTHOPAEDICS at Valli Super Speciality Hospital.
-url: https://vallihospital.in/doctors/dr-jothiswar
+url: https://www.vallihospital.in/doctors/dr-jothiswar
 last_updated: 2026-05-29
 ---
 
@@ -24,4 +24,4 @@ Dr. Jotheesvar is a highly skilled Orthopaedic Surgeon with fellowship training 
 - Emergency / Trauma Desk: ₹1,000 - ₹1,500 ($12 - $18 USD)
 
 ---
-*Clean plain-text mirror generated for AI search crawlers. Original interactive page served at: https://vallihospital.in/doctors/dr-jothiswar*
+*Clean plain-text mirror generated for AI search crawlers. Original interactive page served at: https://www.vallihospital.in/doctors/dr-jothiswar*

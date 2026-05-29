@@ -70,17 +70,17 @@ Valli Super Speciality Hospital is a premier medical institution specializing in
   - *Experience:* 21+ Years of Orthopedic Excellence
   - *Affiliations:* Indian Orthopaedic Association, Tamil Nadu Medical Council
 
-*For a full directory of visiting clinicians, specialists, and surgical teams, see [Our Doctors](https://vallihospital.in/doctors).*
+*For a full directory of visiting clinicians, specialists, and surgical teams, see [Our Doctors](https://www.vallihospital.in/doctors).*
 
 ---
 
 ## 🗺️ Website Architecture & Dynamic API Pathways
 
-- **Home Page:** https://vallihospital.in/ (Main services & trust metrics)
-- **Specialities Directory:** https://vallihospital.in/specialities
-- **Consultation Booking Portal:** https://vallihospital.in/book-appointment (Redirects to WhatsApp Coordinator +919003417111)
-- **Clinical Facilities:** https://vallihospital.in/facilities
-- **Contact Desk:** https://vallihospital.in/contact-us
+- **Home Page:** https://www.vallihospital.in/ (Main services & trust metrics)
+- **Specialities Directory:** https://www.vallihospital.in/specialities
+- **Consultation Booking Portal:** https://www.vallihospital.in/book-appointment (Redirects to WhatsApp Coordinator +919003417111)
+- **Clinical Facilities:** https://www.vallihospital.in/facilities
+- **Contact Desk:** https://www.vallihospital.in/contact-us
 
 ---
 
@@ -88,38 +88,38 @@ Valli Super Speciality Hospital is a premier medical institution specializing in
 
 Every page on this site has a plain markdown mirror. Add `/index.md` to any URL to get the clean content without navigation, scripts, or layout chrome.
 
-- [Joint Care Clinic Clean Mirror](https://vallihospital.in/joint-care-clinic/index.md)
-- [Sports Medicine Clinic Clean Mirror](https://vallihospital.in/sports-medicine-clinic/index.md)
-- [Foot and Ankle Clinic Clean Mirror](https://vallihospital.in/foot-and-ankle-clinic/index.md)
-- [Back Pain and Spinal Disorders Clean Mirror](https://vallihospital.in/back-pain-and-spinal-disorders/index.md)
-- [Paediatric Orthopaedics Deformity Clinic Clean Mirror](https://vallihospital.in/paediatric-orthopaedics-deformity-clinic/index.md)
-- [Failed Surgery Corrections Clean Mirror](https://vallihospital.in/failed-surgery-corrections/index.md)
-- [Sports Injury Clinic Clean Mirror](https://vallihospital.in/sports-injury-clinic/index.md)
-- [Fracture Clinic Clean Mirror](https://vallihospital.in/fracture-clinic/index.md)
-- [Arthroscopy Clean Mirror](https://vallihospital.in/arthroscopy/index.md)
-- [Bone Cancer Treatment Clean Mirror](https://vallihospital.in/bone-cancer-treatment/index.md)
-- [Genetic Testing Clean Mirror](https://vallihospital.in/genetic-testing/index.md)
-- [Sports Training Clean Mirror](https://vallihospital.in/sports-training/index.md)
-- [Dr. K. N. Jotheesvar Professional Profile Mirror](https://vallihospital.in/doctors/dr-jothiswar/index.md)
-- [Dr. E. Aakash Professional Profile Mirror](https://vallihospital.in/doctors/dr-aakash/index.md)
-- [Dr. G. Balamurugan Professional Profile Mirror](https://vallihospital.in/doctors/dr-balamurugan-g/index.md)
-- [Dr. Tamilkumaran Professional Profile Mirror](https://vallihospital.in/doctors/dr-tamilkumaran/index.md)
-- [Dr. R. Prabu Professional Profile Mirror](https://vallihospital.in/doctors/dr-rprabu/index.md)
-- [Dr. Ambiga Professional Profile Mirror](https://vallihospital.in/doctors/dr-ambiga/index.md)
-- [Dr. Obuli Vijay Shankar Professional Profile Mirror](https://vallihospital.in/doctors/dr-obuli-vijay-shankar/index.md)
-- [Dr. S. Senthilnathan Professional Profile Mirror](https://vallihospital.in/doctors/dr-ssenthilnathan/index.md)
-- [Dr. S. Pradeep Professional Profile Mirror](https://vallihospital.in/doctors/dr-spradeep/index.md)
-- [Dr. T. Natanasabapathy Professional Profile Mirror](https://vallihospital.in/doctors/dr-tnatanasabapathy/index.md)
-- [Valli Super Speciality Hospital | Best Orthopedic Care in Salem Mirror](https://vallihospital.in/index.md)
-- [About Us | Valli Super Speciality Hospital Salem Mirror](https://vallihospital.in/about-us/index.md)
-- [Contact Us & 24/7 Emergency Line | Valli Hospital Salem Mirror](https://vallihospital.in/contact-us/index.md)
-- [Clinical Facilities & Technology | Valli Hospital Salem Mirror](https://vallihospital.in/facilities/index.md)
-- [Blog: best orthopedic hospital salem Clean Mirror](https://vallihospital.in/blog/best-orthopedic-hospital-salem/index.md)
-- [Blog: fracture treatment salem Clean Mirror](https://vallihospital.in/blog/fracture-treatment-salem/index.md)
-- [Blog: joint replacement cost salem Clean Mirror](https://vallihospital.in/blog/joint-replacement-cost-salem/index.md)
-- [Blog: paediatric orthopaedics salem Clean Mirror](https://vallihospital.in/blog/paediatric-orthopaedics-salem/index.md)
-- [Blog: spine surgery salem Clean Mirror](https://vallihospital.in/blog/spine-surgery-salem/index.md)
-- [Blog: sports injury treatment salem Clean Mirror](https://vallihospital.in/blog/sports-injury-treatment-salem/index.md)
+- [Joint Care Clinic Clean Mirror](https://www.vallihospital.in/joint-care-clinic/index.md)
+- [Sports Medicine Clinic Clean Mirror](https://www.vallihospital.in/sports-medicine-clinic/index.md)
+- [Foot and Ankle Clinic Clean Mirror](https://www.vallihospital.in/foot-and-ankle-clinic/index.md)
+- [Back Pain and Spinal Disorders Clean Mirror](https://www.vallihospital.in/back-pain-and-spinal-disorders/index.md)
+- [Paediatric Orthopaedics Deformity Clinic Clean Mirror](https://www.vallihospital.in/paediatric-orthopaedics-deformity-clinic/index.md)
+- [Failed Surgery Corrections Clean Mirror](https://www.vallihospital.in/failed-surgery-corrections/index.md)
+- [Sports Injury Clinic Clean Mirror](https://www.vallihospital.in/sports-injury-clinic/index.md)
+- [Fracture Clinic Clean Mirror](https://www.vallihospital.in/fracture-clinic/index.md)
+- [Arthroscopy Clean Mirror](https://www.vallihospital.in/arthroscopy/index.md)
+- [Bone Cancer Treatment Clean Mirror](https://www.vallihospital.in/bone-cancer-treatment/index.md)
+- [Genetic Testing Clean Mirror](https://www.vallihospital.in/genetic-testing/index.md)
+- [Sports Training Clean Mirror](https://www.vallihospital.in/sports-training/index.md)
+- [Dr. K. N. Jotheesvar Professional Profile Mirror](https://www.vallihospital.in/doctors/dr-jothiswar/index.md)
+- [Dr. E. Aakash Professional Profile Mirror](https://www.vallihospital.in/doctors/dr-aakash/index.md)
+- [Dr. G. Balamurugan Professional Profile Mirror](https://www.vallihospital.in/doctors/dr-balamurugan-g/index.md)
+- [Dr. Tamilkumaran Professional Profile Mirror](https://www.vallihospital.in/doctors/dr-tamilkumaran/index.md)
+- [Dr. R. Prabu Professional Profile Mirror](https://www.vallihospital.in/doctors/dr-rprabu/index.md)
+- [Dr. Ambiga Professional Profile Mirror](https://www.vallihospital.in/doctors/dr-ambiga/index.md)
+- [Dr. Obuli Vijay Shankar Professional Profile Mirror](https://www.vallihospital.in/doctors/dr-obuli-vijay-shankar/index.md)
+- [Dr. S. Senthilnathan Professional Profile Mirror](https://www.vallihospital.in/doctors/dr-ssenthilnathan/index.md)
+- [Dr. S. Pradeep Professional Profile Mirror](https://www.vallihospital.in/doctors/dr-spradeep/index.md)
+- [Dr. T. Natanasabapathy Professional Profile Mirror](https://www.vallihospital.in/doctors/dr-tnatanasabapathy/index.md)
+- [Valli Super Speciality Hospital | Best Orthopedic Care in Salem Mirror](https://www.vallihospital.in/index.md)
+- [About Us | Valli Super Speciality Hospital Salem Mirror](https://www.vallihospital.in/about-us/index.md)
+- [Contact Us & 24/7 Emergency Line | Valli Hospital Salem Mirror](https://www.vallihospital.in/contact-us/index.md)
+- [Clinical Facilities & Technology | Valli Hospital Salem Mirror](https://www.vallihospital.in/facilities/index.md)
+- [Blog: best orthopedic hospital salem Clean Mirror](https://www.vallihospital.in/blog/best-orthopedic-hospital-salem/index.md)
+- [Blog: fracture treatment salem Clean Mirror](https://www.vallihospital.in/blog/fracture-treatment-salem/index.md)
+- [Blog: joint replacement cost salem Clean Mirror](https://www.vallihospital.in/blog/joint-replacement-cost-salem/index.md)
+- [Blog: paediatric orthopaedics salem Clean Mirror](https://www.vallihospital.in/blog/paediatric-orthopaedics-salem/index.md)
+- [Blog: spine surgery salem Clean Mirror](https://www.vallihospital.in/blog/spine-surgery-salem/index.md)
+- [Blog: sports injury treatment salem Clean Mirror](https://www.vallihospital.in/blog/sports-injury-treatment-salem/index.md)
 
 
 ---

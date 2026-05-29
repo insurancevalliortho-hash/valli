@@ -20,7 +20,7 @@ export const metadata: Metadata = {
       "congenital ortho deformity Salem"
   ],
   alternates: {
-    canonical: `https://vallihospital.in/paediatric-orthopaedics-deformity-clinic`,
+    canonical: `https://www.vallihospital.in/paediatric-orthopaedics-deformity-clinic`,
   },
 };
 
@@ -33,9 +33,9 @@ export default function Page() {
       <Navbar />
 
       <BreadcrumbSchema items={[
-        { name: 'Home', url: 'https://vallihospital.in/' },
-        { name: 'Specialities', url: 'https://vallihospital.in/specialities' },
-        { name: 'Paediatric Orthopaedics Deformity Clinic', url: 'https://vallihospital.in/paediatric-orthopaedics-deformity-clinic' }
+        { name: 'Home', url: 'https://www.vallihospital.in/' },
+        { name: 'Specialities', url: 'https://www.vallihospital.in/specialities' },
+        { name: 'Paediatric Orthopaedics Deformity Clinic', url: 'https://www.vallihospital.in/paediatric-orthopaedics-deformity-clinic' }
   ]} />
       <FAQSchema questions={[
         { question: 'What is the Paediatric Orthopaedics Deformity Clinic?', answer: 'The Paediatric Orthopaedics Deformity Clinic at Valli Super Speciality Hospital provides advanced, specialized care for related conditions.' },

@@ -1,7 +1,7 @@
 ---
 title: Understanding Joint Replacement Cost in Salem | Valli Hospital Blog
 description: A comprehensive guide to the costs of joint replacement.
-url: https://vallihospital.in/blog/joint-replacement-cost-salem
+url: https://www.vallihospital.in/blog/joint-replacement-cost-salem
 last_updated: 2026-05-29
 ---
 
@@ -67,4 +67,4 @@ In-hospital physiotherapy is typically included in your surgical package. Howeve
 We work with several medical financing partners to help patients manage the cost of surgery through convenient EMI options. Please inquire at our front desk for more details.
 
 ---
-*Clean plain-text mirror generated for AI search crawlers. Original interactive article served at: https://vallihospital.in/blog/joint-replacement-cost-salem*
+*Clean plain-text mirror generated for AI search crawlers. Original interactive article served at: https://www.vallihospital.in/blog/joint-replacement-cost-salem*

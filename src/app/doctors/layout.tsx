@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description: 'Meet our elite team of orthopedic surgeons, neurologists, general physicians, and specialists led by Dr. T. Natanasabapathy. 24/7 world-class healthcare in Salem, Tamil Nadu.',
   keywords: 'Salem doctors, top orthopedic surgeon Salem, general physician Salem, neurosurgeon Salem, anesthetist Salem, cardiologist Salem, medical specialists Tamil Nadu',
   alternates: {
-    canonical: 'https://vallihospital.in/doctors',
+    canonical: 'https://www.vallihospital.in/doctors',
   },
 };
 

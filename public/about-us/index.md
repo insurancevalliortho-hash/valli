@@ -1,7 +1,7 @@
 ---
 title: About Us | Valli Super Speciality Hospital Salem
 description: Learn about the legacy of Valli Hospital Salem, our co-founders Dr. Natanasabapathy & Dr. Vijayalakshmi, and our evolution into a 50-bed super speciality center.
-url: https://vallihospital.in/about-us
+url: https://www.vallihospital.in/about-us
 last_updated: 2026-05-29
 ---
 
@@ -41,4 +41,4 @@ Valli Orthopedic and Sports Hospital was co-founded on October 16, 2022, by Chie
 
 
 ---
-*Clean plain-text mirror generated for AI search crawlers. Original interactive page served at: https://vallihospital.in/about-us*
+*Clean plain-text mirror generated for AI search crawlers. Original interactive page served at: https://www.vallihospital.in/about-us*

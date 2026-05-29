@@ -20,7 +20,7 @@ export const metadata: Metadata = {
       "ortho emergency Salem"
   ],
   alternates: {
-    canonical: `https://vallihospital.in/fracture-clinic`,
+    canonical: `https://www.vallihospital.in/fracture-clinic`,
   },
 };
 
@@ -33,9 +33,9 @@ export default function Page() {
       <Navbar />
 
       <BreadcrumbSchema items={[
-        { name: 'Home', url: 'https://vallihospital.in/' },
-        { name: 'Specialities', url: 'https://vallihospital.in/specialities' },
-        { name: 'Fracture Clinic', url: 'https://vallihospital.in/fracture-clinic' }
+        { name: 'Home', url: 'https://www.vallihospital.in/' },
+        { name: 'Specialities', url: 'https://www.vallihospital.in/specialities' },
+        { name: 'Fracture Clinic', url: 'https://www.vallihospital.in/fracture-clinic' }
   ]} />
       <FAQSchema questions={[
         { question: 'What is the Fracture Clinic?', answer: 'The Fracture Clinic at Valli Super Speciality Hospital provides advanced, specialized care for related conditions.' },

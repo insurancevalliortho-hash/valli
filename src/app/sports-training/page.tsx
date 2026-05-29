@@ -20,7 +20,7 @@ export const metadata: Metadata = {
       "athlete training hospital Salem"
   ],
   alternates: {
-    canonical: `https://vallihospital.in/sports-training`,
+    canonical: `https://www.vallihospital.in/sports-training`,
   },
 };
 
@@ -33,9 +33,9 @@ export default function Page() {
       <Navbar />
 
       <BreadcrumbSchema items={[
-        { name: 'Home', url: 'https://vallihospital.in/' },
-        { name: 'Specialities', url: 'https://vallihospital.in/specialities' },
-        { name: 'Sports Training', url: 'https://vallihospital.in/sports-training' }
+        { name: 'Home', url: 'https://www.vallihospital.in/' },
+        { name: 'Specialities', url: 'https://www.vallihospital.in/specialities' },
+        { name: 'Sports Training', url: 'https://www.vallihospital.in/sports-training' }
   ]} />
       <FAQSchema questions={[
         { question: 'What is the Sports Training?', answer: 'The Sports Training at Valli Super Speciality Hospital provides advanced, specialized care for related conditions.' },

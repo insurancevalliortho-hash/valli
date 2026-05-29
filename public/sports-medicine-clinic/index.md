@@ -1,7 +1,7 @@
 ---
 title: Sports Medicine Clinic in Salem | Valli Super Speciality Hospital
 description: Comprehensive diagnostics, surgical interventions, and athletic rehabilitation for all types of sports injuries.
-url: https://vallihospital.in/sports-medicine-clinic
+url: https://www.vallihospital.in/sports-medicine-clinic
 last_updated: 2026-05-29
 ---
 
@@ -39,4 +39,4 @@ A: Dr. T. Natanasabapathy, Chief Surgeon, directs our athletic medicine and arth
 
 
 ---
-*Clean plain-text mirror generated for AI search crawlers. Original interactive page served at: https://vallihospital.in/sports-medicine-clinic*
+*Clean plain-text mirror generated for AI search crawlers. Original interactive page served at: https://www.vallihospital.in/sports-medicine-clinic*

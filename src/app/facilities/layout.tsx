@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description: 'Explore our state-of-the-art medical infrastructure in Salem including modular laminar-flow OTs, 10-bed critical care ICU, Dual Slice GE CT scanners, interventional ultrasound (USG), and 24/7 diagnostics.',
   keywords: 'hospital facilities Salem, medical infrastructure Tamil Nadu, 24/7 CT scan Salem, modular operation theatre, advanced ICU Salem',
   alternates: {
-    canonical: 'https://vallihospital.in/facilities',
+    canonical: 'https://www.vallihospital.in/facilities',
   },
 };
 

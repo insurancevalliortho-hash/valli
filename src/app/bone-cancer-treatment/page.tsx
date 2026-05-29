@@ -20,7 +20,7 @@ export const metadata: Metadata = {
       "bone cancer hospital Tamil Nadu"
   ],
   alternates: {
-    canonical: `https://vallihospital.in/bone-cancer-treatment`,
+    canonical: `https://www.vallihospital.in/bone-cancer-treatment`,
   },
 };
 
@@ -33,9 +33,9 @@ export default function Page() {
       <Navbar />
 
       <BreadcrumbSchema items={[
-        { name: 'Home', url: 'https://vallihospital.in/' },
-        { name: 'Specialities', url: 'https://vallihospital.in/specialities' },
-        { name: 'Bone Cancer Treatment', url: 'https://vallihospital.in/bone-cancer-treatment' }
+        { name: 'Home', url: 'https://www.vallihospital.in/' },
+        { name: 'Specialities', url: 'https://www.vallihospital.in/specialities' },
+        { name: 'Bone Cancer Treatment', url: 'https://www.vallihospital.in/bone-cancer-treatment' }
       ]} />
       <FAQSchema questions={[
         { question: 'What is the Bone Cancer Treatment?', answer: 'The Bone Cancer Treatment at Valli Super Speciality Hospital provides advanced, specialized care for related conditions.' },

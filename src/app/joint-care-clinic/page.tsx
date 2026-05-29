@@ -20,7 +20,7 @@ export const metadata: Metadata = {
       "Dr Natanasabapathy joint replacement"
   ],
   alternates: {
-    canonical: `https://vallihospital.in/joint-care-clinic`,
+    canonical: `https://www.vallihospital.in/joint-care-clinic`,
   },
 };
 
@@ -33,9 +33,9 @@ export default function Page() {
       <Navbar />
 
       <BreadcrumbSchema items={[
-        { name: 'Home', url: 'https://vallihospital.in/' },
-        { name: 'Specialities', url: 'https://vallihospital.in/specialities' },
-        { name: 'Joint Care Clinic', url: 'https://vallihospital.in/joint-care-clinic' }
+        { name: 'Home', url: 'https://www.vallihospital.in/' },
+        { name: 'Specialities', url: 'https://www.vallihospital.in/specialities' },
+        { name: 'Joint Care Clinic', url: 'https://www.vallihospital.in/joint-care-clinic' }
   ]} />
       <FAQSchema questions={[
         { question: 'What is the Joint Care Clinic?', answer: 'The Joint Care Clinic at Valli Super Speciality Hospital provides advanced, specialized care for related conditions.' },

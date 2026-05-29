@@ -1,7 +1,7 @@
 ---
 title: Clinical Facilities & Technology | Valli Hospital Salem
 description: Explore our high-end clinical setups, Laminar Flow OTs, ICU wings, and advanced diagnostic imaging including GE CT scanners.
-url: https://vallihospital.in/facilities
+url: https://www.vallihospital.in/facilities
 last_updated: 2026-05-29
 ---
 
@@ -35,4 +35,4 @@ Our hospital is structured around cutting-edge diagnostic and therapeutic techno
 
 
 ---
-*Clean plain-text mirror generated for AI search crawlers. Original interactive page served at: https://vallihospital.in/facilities*
+*Clean plain-text mirror generated for AI search crawlers. Original interactive page served at: https://www.vallihospital.in/facilities*

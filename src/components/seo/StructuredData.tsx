@@ -5,8 +5,8 @@ export const HospitalSchema = () => {
     "@context": "https://schema.org",
     "@type": "MedicalOrganization",
     "name": "Valli Super Speciality Hospital",
-    "url": "https://vallihospital.in",
-    "logo": "https://vallihospital.in/favicon.png",
+    "url": "https://www.vallihospital.in",
+    "logo": "https://www.vallihospital.in/favicon.png",
     "telephone": "+91-9003417111",
     "address": {
       "@type": "PostalAddress",

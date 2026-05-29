@@ -1,7 +1,7 @@
 ---
 title: Dr. S. Senthilnathan - MBBS, MD | Valli Hospital Salem
 description: Professional profile of Dr. S. Senthilnathan, specialist in DEPT OF RADIO DIAGNOSIS at Valli Super Speciality Hospital.
-url: https://vallihospital.in/doctors/dr-ssenthilnathan
+url: https://www.vallihospital.in/doctors/dr-ssenthilnathan
 last_updated: 2026-05-29
 ---
 
@@ -24,4 +24,4 @@ Dr. S. Senthilnathan is a distinguished Consultant in the Radio Diagnosis at Val
 - Emergency / Trauma Desk: ₹1,000 - ₹1,500 ($12 - $18 USD)
 
 ---
-*Clean plain-text mirror generated for AI search crawlers. Original interactive page served at: https://vallihospital.in/doctors/dr-ssenthilnathan*
+*Clean plain-text mirror generated for AI search crawlers. Original interactive page served at: https://www.vallihospital.in/doctors/dr-ssenthilnathan*

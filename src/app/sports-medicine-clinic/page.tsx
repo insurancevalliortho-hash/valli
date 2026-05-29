@@ -20,7 +20,7 @@ export const metadata: Metadata = {
       "sports doctor Salem"
   ],
   alternates: {
-    canonical: `https://vallihospital.in/sports-medicine-clinic`,
+    canonical: `https://www.vallihospital.in/sports-medicine-clinic`,
   },
 };
 
@@ -33,9 +33,9 @@ export default function Page() {
       <Navbar />
 
       <BreadcrumbSchema items={[
-        { name: 'Home', url: 'https://vallihospital.in/' },
-        { name: 'Specialities', url: 'https://vallihospital.in/specialities' },
-        { name: 'Sports Medicine Clinic', url: 'https://vallihospital.in/sports-medicine-clinic' }
+        { name: 'Home', url: 'https://www.vallihospital.in/' },
+        { name: 'Specialities', url: 'https://www.vallihospital.in/specialities' },
+        { name: 'Sports Medicine Clinic', url: 'https://www.vallihospital.in/sports-medicine-clinic' }
   ]} />
       <FAQSchema questions={[
         { question: 'What is the Sports Medicine Clinic?', answer: 'The Sports Medicine Clinic at Valli Super Speciality Hospital provides advanced, specialized care for related conditions.' },

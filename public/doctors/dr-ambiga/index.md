@@ -1,7 +1,7 @@
 ---
 title: Dr. Ambiga - MBBS | Valli Hospital Salem
 description: Professional profile of Dr. Ambiga, specialist in DEPT OF GENERAL MEDICINE at Valli Super Speciality Hospital.
-url: https://vallihospital.in/doctors/dr-ambiga
+url: https://www.vallihospital.in/doctors/dr-ambiga
 last_updated: 2026-05-29
 ---
 
@@ -24,4 +24,4 @@ Dr. Ambiga is a distinguished Consultant in the General Medicine at Valli Super 
 - Emergency / Trauma Desk: ₹1,000 - ₹1,500 ($12 - $18 USD)
 
 ---
-*Clean plain-text mirror generated for AI search crawlers. Original interactive page served at: https://vallihospital.in/doctors/dr-ambiga*
+*Clean plain-text mirror generated for AI search crawlers. Original interactive page served at: https://www.vallihospital.in/doctors/dr-ambiga*

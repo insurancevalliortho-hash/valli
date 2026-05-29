@@ -94,8 +94,8 @@ export default function ContactUsPage() {
       {/* SEO Schema Components */}
       <BreadcrumbSchema
         items={[
-          { name: "Home", url: "https://vallihospital.in/" },
-          { name: "Contact Us", url: "https://vallihospital.in/contact-us" },
+          { name: "Home", url: "https://www.vallihospital.in/" },
+          { name: "Contact Us", url: "https://www.vallihospital.in/contact-us" },
         ]}
       />
       <HospitalSchema />

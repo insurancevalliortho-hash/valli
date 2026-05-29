@@ -30,7 +30,7 @@ export async function generateMetadata(
         openGraph: {
             title: `${doctor.name} | Valli Hospital`,
             description: doctor.description.slice(0, 160),
-            url: `https://vallihospital.in/doctors/${doctor.slug}`,
+            url: `https://www.vallihospital.in/doctors/${doctor.slug}`,
             images: [
                 {
                     url: doctor.image,
@@ -63,15 +63,15 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         "@context": "https://schema.org",
         "@type": "Physician",
         "name": doctor.name,
-        "image": `https://vallihospital.in${doctor.image}`,
+        "image": `https://www.vallihospital.in${doctor.image}`,
         "description": doctor.shortDescription,
         "medicalSpecialty": doctor.department,
         "alumniOf": doctor.qualifications.split(",").map(q => q.trim()),
-        "url": `https://vallihospital.in/doctors/${doctor.slug}`,
+        "url": `https://www.vallihospital.in/doctors/${doctor.slug}`,
         "parentOrganization": {
             "@type": "Hospital",
             "name": "Valli Super Speciality Hospital",
-            "url": "https://vallihospital.in"
+            "url": "https://www.vallihospital.in"
         }
     };
 

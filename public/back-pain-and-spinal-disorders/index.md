@@ -1,7 +1,7 @@
 ---
 title: Back Pain and Spinal Disorders in Salem | Valli Super Speciality Hospital
 description: Advanced therapy and surgical correction for slips discs, spinal stenosis, sciatica, and complex scoliosis.
-url: https://vallihospital.in/back-pain-and-spinal-disorders
+url: https://www.vallihospital.in/back-pain-and-spinal-disorders
 last_updated: 2026-05-29
 ---
 
@@ -36,4 +36,4 @@ A: We focus on keyhole spinal decompression, slip disc corrections, and rigid de
 
 
 ---
-*Clean plain-text mirror generated for AI search crawlers. Original interactive page served at: https://vallihospital.in/back-pain-and-spinal-disorders*
+*Clean plain-text mirror generated for AI search crawlers. Original interactive page served at: https://www.vallihospital.in/back-pain-and-spinal-disorders*

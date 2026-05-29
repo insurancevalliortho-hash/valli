@@ -20,7 +20,7 @@ export const metadata: Metadata = {
       "ankle arthroscopy Salem"
   ],
   alternates: {
-    canonical: `https://vallihospital.in/foot-and-ankle-clinic`,
+    canonical: `https://www.vallihospital.in/foot-and-ankle-clinic`,
   },
 };
 
@@ -32,9 +32,9 @@ export default function Page() {
     <>
       <Navbar />
       <BreadcrumbSchema items={[
-        { name: 'Home', url: 'https://vallihospital.in/' },
-        { name: 'Specialities', url: 'https://vallihospital.in/specialities' },
-        { name: 'Foot and Ankle Clinic', url: 'https://vallihospital.in/foot-and-ankle-clinic' }
+        { name: 'Home', url: 'https://www.vallihospital.in/' },
+        { name: 'Specialities', url: 'https://www.vallihospital.in/specialities' },
+        { name: 'Foot and Ankle Clinic', url: 'https://www.vallihospital.in/foot-and-ankle-clinic' }
       ]} />
       <FAQSchema questions={[
         { question: 'What is the Foot and Ankle Clinic?', answer: 'The Foot and Ankle Clinic at Valli Super Speciality Hospital provides advanced, specialized care for related conditions.' },

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     'Valli Super Speciality Hospital about'
   ],
   alternates: {
-    canonical: 'https://vallihospital.in/about-us',
+    canonical: 'https://www.vallihospital.in/about-us',
   },
 };
 

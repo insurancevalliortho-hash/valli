@@ -20,7 +20,7 @@ export const metadata: Metadata = {
       "rotator cuff injury Salem"
   ],
   alternates: {
-    canonical: `https://vallihospital.in/sports-injury-clinic`,
+    canonical: `https://www.vallihospital.in/sports-injury-clinic`,
   },
 };
 
@@ -33,9 +33,9 @@ export default function Page() {
       <Navbar />
 
       <BreadcrumbSchema items={[
-        { name: 'Home', url: 'https://vallihospital.in/' },
-        { name: 'Specialities', url: 'https://vallihospital.in/specialities' },
-        { name: 'Sports Injury Clinic', url: 'https://vallihospital.in/sports-injury-clinic' }
+        { name: 'Home', url: 'https://www.vallihospital.in/' },
+        { name: 'Specialities', url: 'https://www.vallihospital.in/specialities' },
+        { name: 'Sports Injury Clinic', url: 'https://www.vallihospital.in/sports-injury-clinic' }
   ]} />
       <FAQSchema questions={[
         { question: 'What is the Sports Injury Clinic?', answer: 'The Sports Injury Clinic at Valli Super Speciality Hospital provides advanced, specialized care for related conditions.' },

@@ -1,7 +1,7 @@
 ---
 title: Dr. S. Pradeep - MBBS | Valli Hospital Salem
 description: Professional profile of Dr. S. Pradeep, specialist in DEPT OF ANAESTHESIA & CRITICAL CARE at Valli Super Speciality Hospital.
-url: https://vallihospital.in/doctors/dr-spradeep
+url: https://www.vallihospital.in/doctors/dr-spradeep
 last_updated: 2026-05-29
 ---
 
@@ -24,4 +24,4 @@ Dr. S. Pradeep is a distinguished Consultant in the Anaesthesia & Critical Care 
 - Emergency / Trauma Desk: ₹1,000 - ₹1,500 ($12 - $18 USD)
 
 ---
-*Clean plain-text mirror generated for AI search crawlers. Original interactive page served at: https://vallihospital.in/doctors/dr-spradeep*
+*Clean plain-text mirror generated for AI search crawlers. Original interactive page served at: https://www.vallihospital.in/doctors/dr-spradeep*

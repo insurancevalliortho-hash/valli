@@ -1,7 +1,7 @@
 ---
 title: Sports Training in Salem | Valli Super Speciality Hospital
 description: Biomechanical athletic profiling and strength training program to prevent injuries and optimize performance.
-url: https://vallihospital.in/sports-training
+url: https://www.vallihospital.in/sports-training
 last_updated: 2026-05-29
 ---
 
@@ -36,4 +36,4 @@ A: Both competitive athletes looking to optimize performance and active individu
 
 
 ---
-*Clean plain-text mirror generated for AI search crawlers. Original interactive page served at: https://vallihospital.in/sports-training*
+*Clean plain-text mirror generated for AI search crawlers. Original interactive page served at: https://www.vallihospital.in/sports-training*
