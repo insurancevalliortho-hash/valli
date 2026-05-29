@@ -254,6 +254,7 @@ export default function Hero() {
                         <div className="flex gap-4">
                             <button
                                 onClick={prevSlide}
+                                aria-label="Previous slide"
                                 className="group relative w-16 h-16 rounded-full border border-white/20 bg-[#001014]/40 backdrop-blur-xl flex items-center justify-center text-white overflow-hidden transition-all hover:border-[#3cb3a6]/80 shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:shadow-[0_8px_32px_rgba(60,179,166,0.3)]"
                             >
                                 <div className="absolute inset-0 bg-[#3cb3a6] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.22,1,0.36,1]" />
@@ -261,6 +262,7 @@ export default function Hero() {
                             </button>
                             <button
                                 onClick={nextSlide}
+                                aria-label="Next slide"
                                 className="group relative w-16 h-16 rounded-full border border-white/20 bg-[#001014]/40 backdrop-blur-xl flex items-center justify-center text-white overflow-hidden transition-all hover:border-[#3cb3a6]/80 shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:shadow-[0_8px_32px_rgba(60,179,166,0.3)]"
                             >
                                 <div className="absolute inset-0 bg-[#3cb3a6] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.22,1,0.36,1]" />
@@ -285,10 +287,10 @@ export default function Hero() {
                     ))}
                 </div>
                 <div className="flex gap-2">
-                    <button onClick={prevSlide} className="w-12 h-12 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white">
+                    <button onClick={prevSlide} aria-label="Previous slide" className="w-12 h-12 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white">
                         <ChevronLeft className="w-5 h-5" />
                     </button>
-                    <button onClick={nextSlide} className="w-12 h-12 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white">
+                    <button onClick={nextSlide} aria-label="Next slide" className="w-12 h-12 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white">
                         <ChevronRight className="w-5 h-5" />
                     </button>
                 </div>

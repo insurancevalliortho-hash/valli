@@ -48,9 +48,9 @@ export default function TrustBar() {
 
                 {/* Fixed Label on Left */}
                 <div className="shrink-0 flex items-center md:items-start flex-col">
-                    <h3 className="text-xl font-black text-[#00333c] tracking-tight uppercase">
+                    <h2 className="text-xl font-black text-[#00333c] tracking-tight uppercase">
                         Recognized <br className="hidden md:block" /> Partners
-                    </h3>
+                    </h2>
                     <div className="w-12 h-1 bg-[#f98825] mt-2 rounded-full hidden md:block" />
                 </div>
 

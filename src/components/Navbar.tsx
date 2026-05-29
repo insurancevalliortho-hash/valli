@@ -104,6 +104,7 @@ export default function Navbar() {
                     <button
                         className="lg:hidden relative z-50 w-10 h-10 flex items-center justify-center bg-white/80 rounded-full border border-[#bfc8ca]/30 text-[#00333c] backdrop-blur-md shadow-sm"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        aria-label="Toggle navigation menu"
                     >
                         {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
                     </button>
