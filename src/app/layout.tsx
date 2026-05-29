@@ -12,12 +12,14 @@ import ClientOnlyLoader from "../components/ClientOnlyLoader";
 const montserrat = Montserrat({
     variable: "--font-montserrat",
     subsets: ["latin"],
+    preload: false,
 });
 
 const poppins = Poppins({
     variable: "--font-poppins",
     weight: ["400", "500", "600", "700"],
     subsets: ["latin"],
+    preload: false,
 });
 
 export const metadata: Metadata = {
@@ -120,18 +122,21 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${montserrat.variable} ${poppins.variable} antialiased selection:bg-secondary selection:text-white`}>
-                <Script
+                <script
+                    async
                     src="https://www.googletagmanager.com/gtag/js?id=G-VALLIHOSP"
-                    strategy="afterInteractive"
                 />
-                <Script id="google-analytics" strategy="afterInteractive">
-                    {`
-                        window.dataLayer = window.dataLayer || [];
-                        function gtag(){dataLayer.push(arguments);}
-                        gtag('js', new Date());
-                        gtag('config', 'G-VALLIHOSP');
-                    `}
-                </Script>
+                <script
+                    id="google-analytics"
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag(){dataLayer.push(arguments);}
+                            gtag('js', new Date());
+                            gtag('config', 'G-VALLIHOSP');
+                        `
+                    }}
+                />
                 <ClientOnlyLoader />
                 <HospitalSchema />
                 <PhysicianSchema />
