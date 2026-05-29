@@ -18,8 +18,10 @@ const BlurFade = ({ children, delay = 0 }: { children: React.ReactNode, delay?: 
 );
 
 // High-end Scroll Word Reveal component (like modern Awwwards sites)
+// NOTE: Starting opacity at 0.85 (not 0.15) so SSR renders readable text for Googlebot.
+// The scroll-driven reveal still animates from 85%→100% opacity — subtle and SEO-safe.
 const WordFade = ({ children, progress, range }: { children: React.ReactNode, progress: MotionValue<number>, range: [number, number] }) => {
-    const opacity = useTransform(progress, range, [0.15, 1]);
+    const opacity = useTransform(progress, range, [0.85, 1]);
     return (
         <motion.span style={{ opacity }} className="mr-[0.25em] inline-block">
             {children}

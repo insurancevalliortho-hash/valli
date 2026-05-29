@@ -138,7 +138,7 @@ export default function SurgeonProfile() {
                                 className="flex flex-wrap gap-2 lg:gap-3 max-w-2xl"
                             >
                                 {creds.map((c, i) => (
-                                    <motion.span key={i} variants={{ hidden: { opacity: 0, scale: 0.8 }, show: { opacity: 1, scale: 1 } }}
+                                    <motion.span key={i} variants={{ hidden: { scale: 0.9 }, show: { scale: 1 } }}
                                         className="bg-[#3cb3a6]/10 border border-[#3cb3a6]/30 text-[#3cb3a6] text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.1em] px-4 py-2 rounded-full hover:bg-[#3cb3a6] hover:text-[#001014] hover:shadow-[0_0_15px_rgba(60,179,166,0.4)] transition-all duration-300"
                                     >
                                         {c}
