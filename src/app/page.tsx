@@ -116,6 +116,55 @@ export default function Home() {
                 "Sports Medicine"
             ],
             "isAcceptingNewPatients": true
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "headline": "Best Orthopedic Hospital in Salem | Valli Super Speciality Hospital",
+            "about": [
+                {
+                    "@type": "Thing",
+                    "name": "Hospital",
+                    "sameAs": "https://en.wikipedia.org/wiki/Hospital"
+                }
+            ],
+            "mentions": [
+                {
+                    "@type": "Thing",
+                    "name": "joint replacement",
+                    "sameAs": "https://en.wikipedia.org/wiki/Arthroplasty"
+                },
+                {
+                    "@type": "Thing",
+                    "name": "sports injury",
+                    "sameAs": "https://en.wikipedia.org/wiki/Sport"
+                },
+                {
+                    "@type": "Thing",
+                    "name": "treatment",
+                    "sameAs": "https://en.wikipedia.org/wiki/Therapy"
+                },
+                {
+                    "@type": "Thing",
+                    "name": "trauma care",
+                    "sameAs": "https://en.wikipedia.org/wiki/Major_trauma"
+                },
+                {
+                    "@type": "Thing",
+                    "name": "spine",
+                    "sameAs": "https://en.wikipedia.org/wiki/Spinal_cord"
+                },
+                {
+                    "@type": "Thing",
+                    "name": "emergency services",
+                    "sameAs": "https://en.wikipedia.org/wiki/Emergency_service"
+                },
+                {
+                    "@type": "City",
+                    "name": "Tamil Nadu",
+                    "sameAs": "https://en.wikipedia.org/wiki/Tamil_Nadu"
+                }
+            ]
         }
     ];
 
