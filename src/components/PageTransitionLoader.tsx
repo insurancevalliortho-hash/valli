@@ -1,10 +1,12 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, Suspense } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function PageTransitionLoader() {
+// Inner component — isolated with its own Suspense to prevent BAILOUT_TO_CLIENT_SIDE_RENDERING.
+// useSearchParams() MUST be wrapped in Suspense at the component level per Next.js App Router rules.
+function PageTransitionInner() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -176,5 +178,16 @@ export default function PageTransitionLoader() {
         </motion.div>
       )}
     </AnimatePresence>
+  );
+}
+
+// Outer shell — exported and used in layout.tsx.
+// Suspense here ensures the useSearchParams() call inside PageTransitionInner
+// is fully isolated and does NOT cause BAILOUT_TO_CLIENT_SIDE_RENDERING on the page.
+export default function PageTransitionLoader() {
+  return (
+    <Suspense fallback={null}>
+      <PageTransitionInner />
+    </Suspense>
   );
 }

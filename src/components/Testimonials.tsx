@@ -93,7 +93,7 @@ export default function Testimonials() {
                 {/* ── STICKY LEFT: THE STATS ANCHOR ── */}
                 <div className="hidden lg:flex w-[35%] xl:w-[30%] shrink-0 flex-col justify-center px-10 xl:px-20 border-r border-[#3cb3a6]/20 bg-[#001014]/60 backdrop-blur-xl z-20">
                     <motion.div
-                        initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 1 }} viewport={{ once: true }}
+                        initial={{ x: -30 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 1 }} viewport={{ once: true }}
                         className="mb-16"
                     >
                         <span className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/[0.03] border border-white/10 text-white/50 text-[10px] font-bold tracking-[0.2em] uppercase mb-8">
@@ -111,7 +111,7 @@ export default function Testimonials() {
                     </motion.div>
 
                     <motion.div
-                        initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.2 }} viewport={{ once: true }}
+                        initial={{ y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.2 }} viewport={{ once: true }}
                         className="group"
                     >
                         <div className="text-8xl xl:text-[9rem] font-black text-transparent bg-clip-text bg-gradient-to-br from-white via-white/80 to-[#3cb3a6]/30 leading-[0.8] tracking-tighter mb-4 group-hover:scale-105 transition-transform duration-700 ease-out origin-left">

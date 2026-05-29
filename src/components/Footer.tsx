@@ -16,7 +16,7 @@ export default function Footer() {
 
                     {/* Left Block - Huge Statement */}
                     <motion.div
-                        initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }} viewport={{ once: true }}
+                        initial={{ y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }} viewport={{ once: true }}
                         className="lg:col-span-5 flex flex-col justify-between items-start"
                     >
                         <div className="w-full">
@@ -36,7 +36,7 @@ export default function Footer() {
 
                     {/* Middle - Contact Grid */}
                     <motion.div
-                        initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }} viewport={{ once: true }}
+                        initial={{ y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }} viewport={{ once: true }}
                         className="lg:col-span-4 lg:col-start-7 flex flex-col gap-8 md:mt-0 mt-8"
                     >
                         <div className="text-[#f98825] text-xs font-bold uppercase tracking-[0.2em]">Contact & Info</div>
@@ -65,7 +65,7 @@ export default function Footer() {
 
                     {/* Right - Quick Links */}
                     <motion.div
-                        initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }} viewport={{ once: true }}
+                        initial={{ y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }} viewport={{ once: true }}
                         className="lg:col-span-2 flex flex-col gap-8"
                     >
                         <div className="text-[#f98825] text-xs font-bold uppercase tracking-[0.2em]">Navigation</div>
@@ -82,7 +82,7 @@ export default function Footer() {
                 {/* ── MASSIVE EDGE-TO-EDGE HOSPITAL NAME ── */}
                 <div className="w-full flex justify-center items-center py-10 lg:py-16 border-b border-gray-200 relative overflow-hidden select-none">
                     <motion.span
-                        initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 0.15, scale: 1 }} transition={{ duration: 1.5, ease: "easeOut" }} viewport={{ once: true }}
+                        initial={{ scale: 0.95 }} whileInView={{ opacity: 0.15, scale: 1 }} transition={{ duration: 1.5, ease: "easeOut" }} viewport={{ once: true }}
                         className="text-[9.5vw] md:text-[6.5vw] lg:text-[5.5vw] xl:text-[5vw] whitespace-nowrap font-black leading-none text-[#3cb3a6] tracking-tighter w-full text-center origin-bottom"
                     >
                         VALLI SUPER SPECIALITY HOSPITAL
@@ -91,7 +91,7 @@ export default function Footer() {
 
                 {/* Final Sub Bar */}
                 <motion.div
-                    initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1, delay: 0.5 }} viewport={{ once: true }}
+                    initial={{}} whileInView={{ opacity: 1 }} transition={{ duration: 1, delay: 0.5 }} viewport={{ once: true }}
                     className="pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-400"
                 >
                     <div className="flex flex-col md:flex-row items-center gap-6 text-center md:text-left">

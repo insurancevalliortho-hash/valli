@@ -108,7 +108,7 @@ function FacilityRow({ fac, idx }: { fac: typeof facilities[0]; idx: number }) {
 
                 <motion.div style={{ y: textY }} className="relative z-10 w-full">
                     <motion.div
-                        initial={{ opacity: 0, x: isEven ? 40 : -40 }}
+                        initial={{ x: isEven ? 40 : -40 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true, margin: "-60px" }}
                         transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
@@ -151,7 +151,7 @@ export default function TechShowcase() {
             {/* Section header */}
             <div className="container mx-auto px-6 md:px-12 pt-16 pb-12 text-center">
                 <motion.span
-                    initial={{ opacity: 0, y: 10 }}
+                    initial={{ y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#f98825]/10 text-[#f98825] border border-[#f98825]/20 text-xs font-bold tracking-[0.2em] uppercase mb-6"
@@ -161,7 +161,7 @@ export default function TechShowcase() {
                 </motion.span>
 
                 <motion.h2
-                    initial={{ opacity: 0, y: 24 }}
+                    initial={{ y: 24 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -171,7 +171,7 @@ export default function TechShowcase() {
                 </motion.h2>
 
                 <motion.p
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.18, duration: 0.8 }}

@@ -131,18 +131,18 @@ export default function RootLayout({
                         gtag('config', 'G-VALLIHOSP');
                     `}
                 </Script>
-                 <Suspense fallback={null}>
-                     <PageTransitionLoader />
-                 </Suspense>
-                 <HospitalSchema />
-                 <PhysicianSchema />
-                 <SmoothScroll>
-                     <MagneticCursor />
-                     <div id="page-content-wrapper" className="min-h-screen">
-                         {children}
-                     </div>
-                 </SmoothScroll>
-             </body>
-         </html>
-     );
+                <Suspense fallback={null}>
+                    <PageTransitionLoader />
+                </Suspense>
+                <HospitalSchema />
+                <PhysicianSchema />
+                <SmoothScroll>
+                    <MagneticCursor />
+                    <div id="page-content-wrapper" className="min-h-screen">
+                        {children}
+                    </div>
+                </SmoothScroll>
+            </body>
+        </html>
+    );
 }

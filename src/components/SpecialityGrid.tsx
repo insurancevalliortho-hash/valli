@@ -151,7 +151,7 @@ export default function SpecialityGrid() {
                 {/* Header */}
                 <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
                     <motion.div
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={{ y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -166,7 +166,7 @@ export default function SpecialityGrid() {
                         </h2>
                     </motion.div>
                     <motion.p
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8, delay: 0.15 }}
@@ -181,7 +181,7 @@ export default function SpecialityGrid() {
                     {specialities.map((item, index) => (
                         <motion.div
                             key={index}
-                            initial={{ opacity: 0, y: 40, scale: 0.96 }}
+                            initial={{ y: 40, scale: 0.96 }}
                             whileInView={{ opacity: 1, y: 0, scale: 1 }}
                             viewport={{ once: true, margin: "-40px" }}
                             transition={{ duration: 0.7, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}

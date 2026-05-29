@@ -71,7 +71,7 @@ export default function SurgeonProfile() {
 
                         <div className="w-full relative z-10 mb-8 lg:mb-12">
                             <motion.div
-                                initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}
+                                initial={{ x: -30 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}
                                 className="flex items-center gap-4 mb-4 lg:mb-6"
                             >
                                 <span className="w-12 h-[1px] bg-[#f98825]" />
@@ -79,13 +79,13 @@ export default function SurgeonProfile() {
                             </motion.div>
 
                             <motion.h2
-                                initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }}
+                                initial={{ y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }}
                                 className="font-light text-4xl sm:text-5xl leading-[1.1] mb-2 tracking-tight"
                             >
                                 Dr. T. <br /> <span className="font-black text-white drop-shadow-[0_0_20px_rgba(249,136,37,0.2)]">Natanasabapathy</span>
                             </motion.h2>
                             <motion.div
-                                initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.2 }}
+                                initial={{}} whileInView={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.2 }}
                                 className="text-[#3cb3a6] font-light text-xl sm:text-2xl mt-3 italic tracking-wide"
                             >
                                 Chief Orthopedic Surgeon
@@ -99,7 +99,7 @@ export default function SurgeonProfile() {
                             <div className="absolute -bottom-3 -left-3 w-16 h-16 border-b-[3px] border-l-[3px] border-[#3cb3a6]/40 opacity-70 rounded-bl-xl" />
 
                             <motion.div
-                                initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 1 }}
+                                initial={{ scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 1 }}
                                 className="relative w-full aspect-[4/5] overflow-hidden group shadow-[0_30px_80px_rgba(0,0,0,0.8)] rounded-tl-[4rem] rounded-br-[4rem] rounded-tr-lg rounded-bl-lg bg-black"
                             >
                                 <div className="absolute inset-0 bg-gradient-to-tr from-[#f98825]/20 to-[#3cb3a6]/20 mix-blend-overlay z-10 group-hover:opacity-0 transition-opacity duration-700" />
@@ -121,13 +121,13 @@ export default function SurgeonProfile() {
                         {/* Bio Block */}
                         <div className="w-full">
                             <motion.h3
-                                initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}
+                                initial={{ y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}
                                 className="text-3xl sm:text-4xl lg:text-5xl font-light leading-[1.3] mb-6"
                             >
                                 Orchestrating <span className="font-bold text-[#f98825]">movement</span>. <br /> Minimizing <span className="font-bold text-[#3cb3a6]">recovery</span>.
                             </motion.h3>
                             <motion.p
-                                initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }}
+                                initial={{ y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }}
                                 className="text-white/70 text-sm sm:text-base leading-relaxed mb-8 max-w-2xl"
                             >
                                 With over a decade and a half of relentless pursuit of excellence, Dr. Natanasabapathy stands at the absolute forefront of joint mechanics, arthroscopic reconstruction, and complex trauma recovery. His methodologies blend immediate clinical intervention with long-term, cellular-level architectural restoration.
@@ -152,7 +152,7 @@ export default function SurgeonProfile() {
                             {stats.map((stat, i) => (
                                 <motion.div
                                     key={i}
-                                    initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: i * 0.1 }}
+                                    initial={{ y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: i * 0.1 }}
                                     className="relative flex flex-col group p-6 border border-white/5 bg-white/[0.02] rounded-3xl hover:bg-white/[0.04] transition-colors"
                                 >
                                     <div className="flex items-start gap-1">
@@ -175,7 +175,7 @@ export default function SurgeonProfile() {
                 {/* ── BOTTOM SECTION: UNIFIED TIMELINE ── */}
                 <div className="w-full mt-4 lg:mt-8 pt-12 border-t border-white/10">
                     <motion.h3
-                        initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }}
+                        initial={{ x: -20 }} whileInView={{ opacity: 1, x: 0 }}
                         className="text-white font-bold text-2xl sm:text-3xl lg:text-4xl tracking-tight mb-12 sm:mb-16 flex items-center gap-6"
                     >
                         Milestones Track
@@ -187,7 +187,7 @@ export default function SurgeonProfile() {
                             {milestones.map((m, i) => (
                                 <motion.div
                                     key={m.year}
-                                    initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: i * 0.1 }}
+                                    initial={{ y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: i * 0.1 }}
                                     className="relative group pt-0 md:pt-10"
                                 >
                                     {/* Independent Top Line Connection for Grid layout */}
