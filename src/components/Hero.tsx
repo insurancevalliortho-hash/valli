@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { ArrowRight, ChevronRight, ChevronLeft } from "lucide-react";
+import Link from "next/link";
 
 const HERO_SLIDES = [
     {
@@ -213,13 +214,13 @@ export default function Hero() {
                                     }}
                                     className="mt-10 sm:mt-14"
                                 >
-                                    <button className="group relative px-8 py-4 sm:px-10 sm:py-5 bg-[#f98825] text-white font-bold text-xs sm:text-sm tracking-[0.15em] uppercase overflow-hidden rounded-full transition-all hover:scale-105 shadow-[0_10px_30px_rgba(249,136,37,0.3)] hover:shadow-[0_15px_40px_rgba(249,136,37,0.5)]">
+                                    <Link href="/book-appointment" className="group relative inline-block px-8 py-4 sm:px-10 sm:py-5 bg-[#f98825] text-white font-bold text-xs sm:text-sm tracking-[0.15em] uppercase overflow-hidden rounded-full transition-all hover:scale-105 shadow-[0_10px_30px_rgba(249,136,37,0.3)] hover:shadow-[0_15px_40px_rgba(249,136,37,0.5)]">
                                         <span className="relative z-10 flex items-center gap-3">
                                             Book Appointment
                                             <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-2 transition-transform duration-300" />
                                         </span>
                                         <div className="absolute inset-0 h-full w-full bg-[#3cb3a6] scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 ease-[0.22,1,0.36,1] z-0"></div>
-                                    </button>
+                                    </Link>
                                 </motion.div>
                             </motion.div>
                         </AnimatePresence>

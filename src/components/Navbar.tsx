@@ -16,14 +16,11 @@ export default function Navbar() {
 
     return (
         <>
-            <motion.nav
+            <nav
                 className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 border-b ${isScrolled
                     ? "bg-white/80 backdrop-blur-xl border-[#bfc8ca]/30 py-2 shadow-[0_8px_30px_rgba(0,51,60,0.06)]"
                     : "bg-transparent border-transparent py-4"
                     }`}
-                initial={{ y: -100 }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
                 <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
                     {/* Logo Area */}
@@ -111,7 +108,7 @@ export default function Navbar() {
                         {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
                     </button>
                 </div>
-            </motion.nav>
+            </nav>
 
             {/* Mobile Menu Overlay */}
             <AnimatePresence>
