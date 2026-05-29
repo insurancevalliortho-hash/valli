@@ -3,10 +3,11 @@ import { Montserrat, Poppins } from "next/font/google";
 import "./globals.css";
 import { HospitalSchema, PhysicianSchema } from "../components/seo/StructuredData";
 import Script from "next/script";
-import { Suspense } from "react";
-import PageTransitionLoader from "../components/PageTransitionLoader";
 import SmoothScroll from "../components/SmoothScroll";
 import MagneticCursor from "../components/MagneticCursor";
+// ClientOnlyLoader wraps PageTransitionLoader with next/dynamic ssr:false inside a Client Component.
+// This is required per Next.js 16 docs: ssr:false cannot be used in Server Components.
+import ClientOnlyLoader from "../components/ClientOnlyLoader";
 
 const montserrat = Montserrat({
     variable: "--font-montserrat",
@@ -131,9 +132,7 @@ export default function RootLayout({
                         gtag('config', 'G-VALLIHOSP');
                     `}
                 </Script>
-                <Suspense fallback={null}>
-                    <PageTransitionLoader />
-                </Suspense>
+                <ClientOnlyLoader />
                 <HospitalSchema />
                 <PhysicianSchema />
                 <SmoothScroll>

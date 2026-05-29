@@ -3,15 +3,15 @@
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import { useRef } from "react";
 
-// Aceternity/Magic UI inspired Blur Reveal effect
-// NOTE: We intentionally avoid initial={{ opacity: 0 }} to prevent SSR rendering blank text
-// (Googlebot reads SSR HTML and would see invisible content). Instead we animate from visible.
+// Aceternity/Magic UI inspired Blur Fade reveal.
+// NOTE: No opacity:0 or filter:blur in initial state — SSR must render visible, indexable text.
+// Animation uses only translateY so Googlebot reads clean HTML with no rendering interference.
 const BlurFade = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => (
     <motion.div
-        initial={{ filter: "blur(4px)", y: 12 }}
-        whileInView={{ filter: "blur(0px)", y: 0 }}
+        initial={{ y: 10 }}
+        whileInView={{ y: 0 }}
         viewport={{ once: true, margin: "-15%" }}
-        transition={{ duration: 0.9, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
+        transition={{ duration: 0.7, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
     >
         {children}
     </motion.div>

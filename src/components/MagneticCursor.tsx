@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export default function MagneticCursor() {
+    // mounted guard: prevent SSR/client mismatch that causes BAILOUT_TO_CLIENT_SIDE_RENDERING.
+    // The cursor is client-only. We render null on SSR and show after mount.
+    const [mounted, setMounted] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
 
     const cursorX = useMotionValue(-100);
@@ -14,6 +17,8 @@ export default function MagneticCursor() {
     const smoothY = useSpring(cursorY, springConfig);
 
     useEffect(() => {
+        setMounted(true);
+
         const moveCursor = (e: MouseEvent) => {
             cursorX.set(e.clientX - (isHovered ? 24 : 10));
             cursorY.set(e.clientY - (isHovered ? 24 : 10));
@@ -42,8 +47,9 @@ export default function MagneticCursor() {
         };
     }, [cursorX, cursorY, isHovered]);
 
-    // Don't render cursor on mobile
-    if (typeof window !== "undefined" && window.innerWidth < 768) return null;
+    // Render nothing on SSR and before mount (avoids BAILOUT).
+    // CSS class 'hidden md:block' already hides the cursor on mobile — no window.innerWidth needed.
+    if (!mounted) return null;
 
     return (
         <motion.div
