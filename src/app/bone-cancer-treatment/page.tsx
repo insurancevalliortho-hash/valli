@@ -7,11 +7,20 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Bone Cancer Treatment in Salem | Valli Super Speciality Hospital',
-  description: 'Advanced Bone Cancer Treatment in Salem. Valli Super Speciality Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.',
-  keywords: 'Salem, Bone Cancer Treatment, Tamil Nadu, Dr. Natanasabapathy, best bone cancer treatment hospital in Salem, top orthopedic surgeon Salem, bone cancer treatment treatment',
+  title: "Bone Cancer & Bone Tumour Treatment in Salem | Oncology Ortho | Valli Hospital",
+  description: "Specialised bone cancer and bone tumour treatment at Valli Super Speciality Hospital, Salem. Expert oncologic orthopaedic care for osteosarcoma, Ewing's sarcoma, chondrosarcoma, and metastatic bone disease. Limb-salvage surgery and comprehensive oncology support.",
+  keywords: [
+      "bone cancer treatment Salem",
+      "bone tumour surgery Salem",
+      "osteosarcoma treatment Tamil Nadu",
+      "oncologic orthopaedics Salem",
+      "limb salvage surgery Salem",
+      "bone metastasis treatment Salem",
+      "Ewing sarcoma Salem",
+      "bone cancer hospital Tamil Nadu"
+  ],
   alternates: {
-    canonical: 'https://vallihospital.in/bone-cancer-treatment',
+    canonical: `https://vallihospital.in/bone-cancer-treatment`,
   },
 };
 

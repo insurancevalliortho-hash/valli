@@ -7,11 +7,20 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Fracture Clinic in Salem | Valli Super Speciality Hospital',
-  description: 'Advanced Fracture Clinic in Salem. Valli Super Speciality Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.',
-  keywords: 'Salem, Fracture Clinic, Tamil Nadu, Dr. Natanasabapathy, best fracture clinic hospital in Salem, top orthopedic surgeon Salem, fracture clinic treatment',
+  title: "Fracture & Trauma Clinic Salem | Emergency Fracture Treatment | Valli Hospital",
+  description: "Valli Super Speciality Hospital's fracture & trauma clinic in Salem offers 24/7 emergency fracture treatment, complex fracture surgery, ORIF, and polytrauma management. ACLS/ATLS-certified surgeons. 30-minute arrival-to-operation protocol.",
+  keywords: [
+      "fracture treatment Salem",
+      "bone fracture surgery Salem",
+      "trauma clinic Salem",
+      "emergency fracture care Salem",
+      "complex fracture surgery Tamil Nadu",
+      "ORIF surgery Salem",
+      "24 hour fracture care Salem",
+      "ortho emergency Salem"
+  ],
   alternates: {
-    canonical: 'https://vallihospital.in/fracture-clinic',
+    canonical: `https://vallihospital.in/fracture-clinic`,
   },
 };
 

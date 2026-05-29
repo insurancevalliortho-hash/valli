@@ -7,11 +7,20 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Paediatric Orthopaedics Deformity Clinic in Salem | Valli Super Speciality Hospital',
-  description: 'Advanced Paediatric Orthopaedics Deformity Clinic in Salem. Valli Super Speciality Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.',
-  keywords: 'Salem, Paediatric Orthopaedics Deformity Clinic, Tamil Nadu, Dr. Natanasabapathy, best paediatric orthopaedics deformity clinic hospital in Salem, top orthopedic surgeon Salem, paediatric orthopaedics deformity clinic treatment',
+  title: "Paediatric Orthopaedics & Deformity Clinic Salem | Child Bone Care | Valli Hospital",
+  description: "Specialised paediatric orthopaedic care in Salem at Valli Super Speciality Hospital. Expert treatment for clubfoot, scoliosis, limb length discrepancy, congenital deformities, and childhood fractures. Child-safe anaesthesia and dedicated paediatric orthopaedic protocols.",
+  keywords: [
+      "paediatric orthopaedics Salem",
+      "children bone specialist Salem",
+      "clubfoot treatment Salem",
+      "scoliosis treatment children Salem",
+      "paediatric fracture Salem",
+      "child orthopaedic hospital Tamil Nadu",
+      "limb deformity correction Salem",
+      "congenital ortho deformity Salem"
+  ],
   alternates: {
-    canonical: 'https://vallihospital.in/paediatric-orthopaedics-deformity-clinic',
+    canonical: `https://vallihospital.in/paediatric-orthopaedics-deformity-clinic`,
   },
 };
 

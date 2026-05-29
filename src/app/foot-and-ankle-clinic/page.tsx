@@ -7,11 +7,20 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Foot and Ankle Clinic in Salem | Valli Super Speciality Hospital',
-  description: 'Advanced Foot and Ankle Clinic in Salem. Valli Super Speciality Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.',
-  keywords: 'Salem, Foot and Ankle Clinic, Tamil Nadu, Dr. Natanasabapathy, best foot and ankle clinic hospital in Salem, top orthopedic surgeon Salem, foot and ankle clinic treatment',
+  title: "Foot & Ankle Clinic Salem | Flatfoot, Plantar Fasciitis Treatment | Valli Hospital",
+  description: "Specialised foot and ankle care in Salem at Valli Super Speciality Hospital. Expert treatment for plantar fasciitis, Achilles tendon injuries, flatfoot, ankle fractures, hallux valgus, and complex foot deformities. Surgical and conservative options.",
+  keywords: [
+      "foot and ankle clinic Salem",
+      "plantar fasciitis treatment Salem",
+      "Achilles tendon repair Salem",
+      "flatfoot treatment Salem",
+      "ankle fracture Salem",
+      "hallux valgus surgery Salem",
+      "foot pain specialist Salem",
+      "ankle arthroscopy Salem"
+  ],
   alternates: {
-    canonical: 'https://vallihospital.in/foot-and-ankle-clinic',
+    canonical: `https://vallihospital.in/foot-and-ankle-clinic`,
   },
 };
 

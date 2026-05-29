@@ -7,11 +7,20 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Joint Care Clinic in Salem | Valli Super Speciality Hospital',
-  description: 'Advanced Joint Care Clinic in Salem. Valli Super Speciality Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.',
-  keywords: 'Salem, Joint Care Clinic, Tamil Nadu, Dr. Natanasabapathy, best joint care clinic hospital in Salem, top orthopedic surgeon Salem, joint care clinic treatment',
+  title: "Joint Care & Joint Replacement Clinic Salem | Knee Hip Replacement | Valli Hospital",
+  description: "Salem's leading joint care clinic at Valli Super Speciality Hospital. Expert total knee replacement, total hip replacement, shoulder replacement, and minimally invasive joint surgeries. Led by Dr. T. Natanasabapathy with 3,000+ successful joint replacements.",
+  keywords: [
+      "joint replacement Salem",
+      "knee replacement Salem",
+      "hip replacement Salem",
+      "joint care clinic Salem",
+      "total knee replacement Tamil Nadu",
+      "total hip replacement Salem",
+      "minimally invasive joint replacement Salem",
+      "Dr Natanasabapathy joint replacement"
+  ],
   alternates: {
-    canonical: 'https://vallihospital.in/joint-care-clinic',
+    canonical: `https://vallihospital.in/joint-care-clinic`,
   },
 };
 

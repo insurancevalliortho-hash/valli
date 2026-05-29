@@ -10,6 +10,54 @@ import Testimonials from "./../components/Testimonials";
 import Footer from "./../components/Footer";
 
 export const metadata: Metadata = {
+    title: "Best Orthopedic Hospital in Salem | Valli Super Speciality Hospital",
+    description: "Valli Super Speciality Hospital is Salem's leading orthopedic hospital offering joint replacement, sports injury treatment, trauma care, spine surgery, and 24/7 emergency services. Trusted by 16,000+ patients across Tamil Nadu.",
+    keywords: [
+        "best orthopedic hospital in Salem",
+        "orthopedic surgeon Salem Tamil Nadu",
+        "joint replacement Salem",
+        "knee replacement Salem",
+        "hip replacement Salem",
+        "sports injury clinic Salem",
+        "trauma hospital Salem",
+        "spine surgery Salem",
+        "Valli hospital Salem",
+        "orthopedic hospital Tamil Nadu",
+        "fracture treatment Salem",
+        "arthroscopy Salem",
+        "Dr Natanasabapathy orthopedic surgeon",
+        "24 hour emergency hospital Salem"
+    ],
+    alternates: {
+        canonical: "https://vallihospital.in/",
+        languages: {
+            "en": "https://vallihospital.in/",
+            "en-IN": "https://vallihospital.in/",
+            "x-default": "https://vallihospital.in/"
+        }
+    },
+    openGraph: {
+        title: "Best Orthopedic Hospital in Salem | Valli Super Speciality Hospital",
+        description: "Salem's most trusted orthopedic hospital — joint replacement, trauma care, sports injury treatment, and 24/7 emergency. Led by Dr. T. Natanasabapathy.",
+        url: "https://vallihospital.in/",
+        siteName: "Valli Super Speciality Hospital",
+        locale: "en_IN",
+        type: "website",
+        images: [
+            {
+                url: "/og-image.jpg",
+                width: 1200,
+                height: 630,
+                alt: "Valli Super Speciality Hospital — Best Orthopedic Hospital in Salem"
+            }
+        ]
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Best Orthopedic Hospital in Salem | Valli Super Speciality Hospital",
+        description: "Salem's most trusted orthopedic hospital — joint replacement, trauma care, sports injury treatment, and 24/7 emergency.",
+        images: ["/og-image.jpg"]
+    },
     other: {
         "geo.region": "IN-TN",
         "geo.placename": "Salem, Tamil Nadu",

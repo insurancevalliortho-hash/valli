@@ -7,11 +7,20 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Back Pain and Spinal Disorders in Salem | Valli Super Speciality Hospital',
-  description: 'Advanced Back Pain and Spinal Disorders in Salem. Valli Super Speciality Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.',
-  keywords: 'Salem, Back Pain and Spinal Disorders, Tamil Nadu, Dr. Natanasabapathy, best back pain and spinal disorders hospital in Salem, top orthopedic surgeon Salem, back pain and spinal disorders treatment',
+  title: "Back Pain & Spine Surgery in Salem | Disc, Spondylosis Treatment | Valli Hospital",
+  description: "Comprehensive back pain and spinal disorder treatment in Salem at Valli Super Speciality Hospital. Expert care for disc herniation, lumbar spondylosis, sciatica, spinal stenosis, and spondylolisthesis. Surgery and non-surgical options available.",
+  keywords: [
+      "back pain treatment Salem",
+      "spine surgery Salem",
+      "disc herniation treatment Salem",
+      "sciatica treatment Salem",
+      "lumbar spondylosis Salem",
+      "spinal stenosis treatment Tamil Nadu",
+      "spondylolisthesis surgery Salem",
+      "lower back pain specialist Salem"
+  ],
   alternates: {
-    canonical: 'https://vallihospital.in/back-pain-and-spinal-disorders',
+    canonical: `https://vallihospital.in/back-pain-and-spinal-disorders`,
   },
 };
 

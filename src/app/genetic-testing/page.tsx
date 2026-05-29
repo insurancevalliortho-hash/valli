@@ -7,11 +7,20 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Genetic Testing in Salem | Valli Super Speciality Hospital',
-  description: 'Advanced Genetic Testing in Salem. Valli Super Speciality Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.',
-  keywords: 'Salem, Genetic Testing, Tamil Nadu, Dr. Natanasabapathy, best genetic testing hospital in Salem, top orthopedic surgeon Salem, genetic testing treatment',
+  title: "Genetic Testing & Molecular Diagnostics Salem | Valli Hospital",
+  description: "Advanced genetic testing and molecular diagnostics at Valli Super Speciality Hospital Salem. Comprehensive hereditary disease screening, cancer genetic testing, chromosomal analysis, and precision medicine diagnostics to guide personalised treatment plans.",
+  keywords: [
+      "genetic testing Salem",
+      "molecular diagnostics Salem",
+      "hereditary disease testing Tamil Nadu",
+      "cancer genetic testing Salem",
+      "chromosomal analysis Salem",
+      "precision medicine Salem",
+      "genetic counselling Salem",
+      "diagnostic genetics Salem"
+  ],
   alternates: {
-    canonical: 'https://vallihospital.in/genetic-testing',
+    canonical: `https://vallihospital.in/genetic-testing`,
   },
 };
 

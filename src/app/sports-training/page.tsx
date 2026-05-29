@@ -7,11 +7,20 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Sports Training in Salem | Valli Super Speciality Hospital',
-  description: 'Advanced Sports Training in Salem. Valli Super Speciality Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.',
-  keywords: 'Salem, Sports Training, Tamil Nadu, Dr. Natanasabapathy, best sports training hospital in Salem, top orthopedic surgeon Salem, sports training treatment',
+  title: "Sports Training & Athletic Rehabilitation Salem | Valli Hospital",
+  description: "Professional sports training, conditioning, and rehabilitation programs at Valli Super Speciality Hospital Salem. Science-backed athletic performance enhancement, post-injury return-to-sport training, and physiotherapy-led conditioning programs.",
+  keywords: [
+      "sports training Salem",
+      "athletic rehabilitation Salem",
+      "return to sport Salem",
+      "sports conditioning Salem",
+      "physiotherapy rehabilitation Salem",
+      "sports performance Salem",
+      "post surgery sports rehab Salem",
+      "athlete training hospital Salem"
+  ],
   alternates: {
-    canonical: 'https://vallihospital.in/sports-training',
+    canonical: `https://vallihospital.in/sports-training`,
   },
 };
 

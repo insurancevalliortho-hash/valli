@@ -7,11 +7,20 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Sports Injury Clinic in Salem | Valli Super Speciality Hospital',
-  description: 'Advanced Sports Injury Clinic in Salem. Valli Super Speciality Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.',
-  keywords: 'Salem, Sports Injury Clinic, Tamil Nadu, Dr. Natanasabapathy, best sports injury clinic hospital in Salem, top orthopedic surgeon Salem, sports injury clinic treatment',
+  title: "Sports Injury Clinic Salem | ACL MCL Ligament Repair | Valli Hospital",
+  description: "Advanced sports injury treatment in Salem at Valli Super Speciality Hospital. Expert care for ACL tears, MCL injuries, meniscus tears, rotator cuff injuries, tennis elbow, and sports fractures. Biomechanical assessment and rehabilitation by specialist sports orthopaedic team.",
+  keywords: [
+      "sports injury clinic Salem",
+      "ACL injury treatment Salem",
+      "sports orthopaedic Salem",
+      "ligament repair Salem",
+      "MCL injury Salem",
+      "sports fracture treatment Salem",
+      "tennis elbow Salem",
+      "rotator cuff injury Salem"
+  ],
   alternates: {
-    canonical: 'https://vallihospital.in/sports-injury-clinic',
+    canonical: `https://vallihospital.in/sports-injury-clinic`,
   },
 };
 

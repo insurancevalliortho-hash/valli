@@ -7,11 +7,20 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Failed Surgery Corrections in Salem | Valli Super Speciality Hospital',
-  description: 'Advanced Failed Surgery Corrections in Salem. Valli Super Speciality Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.',
-  keywords: 'Salem, Failed Surgery Corrections, Tamil Nadu, Dr. Natanasabapathy, best failed surgery corrections hospital in Salem, top orthopedic surgeon Salem, failed surgery corrections treatment',
+  title: "Failed Surgery Revision & Correction Salem | Revision Arthroplasty | Valli Hospital",
+  description: "Expert revision and correction surgery for failed orthopaedic procedures in Salem at Valli Super Speciality Hospital. Specialised care for failed knee/hip replacement, failed spine surgery, implant failure, and post-surgical complications. Second opinion available.",
+  keywords: [
+      "failed surgery correction Salem",
+      "revision arthroplasty Salem",
+      "failed knee replacement revision Salem",
+      "failed hip replacement Salem",
+      "implant failure correction Salem",
+      "revision surgery ortho Salem",
+      "ortho second opinion Salem",
+      "post surgical complication Salem"
+  ],
   alternates: {
-    canonical: 'https://vallihospital.in/failed-surgery-corrections',
+    canonical: `https://vallihospital.in/failed-surgery-corrections`,
   },
 };
 

@@ -7,11 +7,20 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Arthroscopy in Salem | Valli Super Speciality Hospital',
-  description: 'Advanced Arthroscopy in Salem. Valli Super Speciality Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.',
-  keywords: 'Salem, Arthroscopy, Tamil Nadu, Dr. Natanasabapathy, best arthroscopy hospital in Salem, top orthopedic surgeon Salem, arthroscopy treatment',
+  title: "Arthroscopy Surgery in Salem | Keyhole Joint Surgery | Valli Hospital",
+  description: "Expert arthroscopic (keyhole) surgery in Salem at Valli Super Speciality Hospital. Minimally invasive treatment for ACL tears, meniscus injuries, rotator cuff, and shoulder disorders by Dr. T. Natanasabapathy. Fast recovery, same-day discharge.",
+  keywords: [
+      "arthroscopy Salem",
+      "arthroscopic surgery Salem",
+      "ACL tear treatment Salem",
+      "meniscus surgery Salem",
+      "keyhole surgery knee Salem",
+      "minimally invasive ortho surgery Tamil Nadu",
+      "Dr Natanasabapathy arthroscopy",
+      "shoulder arthroscopy Salem"
+  ],
   alternates: {
-    canonical: 'https://vallihospital.in/arthroscopy',
+    canonical: `https://vallihospital.in/arthroscopy`,
   },
 };
 

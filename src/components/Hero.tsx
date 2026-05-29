@@ -8,10 +8,10 @@ const HERO_SLIDES = [
     {
         id: 1,
         image: "/hero-surgery.png",
-        title: "VALLI SUPER SPECIALITY",
-        highlight: "HOSPITAL",
-        subtitle: "Orthopedic Care in Salem",
-        description: "Where expertise restores lives. We provide advanced care, precision healing, and excellence in every specialty."
+        title: "BEST ORTHOPEDIC HOSPITAL",
+        highlight: "IN SALEM",
+        subtitle: "Joint Replacement · Trauma Care · Sports Injury · Salem, Tamil Nadu",
+        description: "Valli Super Speciality Hospital — Salem's most trusted orthopedic centre for joint replacement, knee & hip surgery, fracture care, sports injuries, and spine treatment. Serving 16,000+ patients across Tamil Nadu."
     },
     {
         id: 2,

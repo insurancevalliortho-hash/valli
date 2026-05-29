@@ -7,11 +7,20 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Sports Medicine Clinic in Salem | Valli Super Speciality Hospital',
-  description: 'Advanced Sports Medicine Clinic in Salem. Valli Super Speciality Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.',
-  keywords: 'Salem, Sports Medicine Clinic, Tamil Nadu, Dr. Natanasabapathy, best sports medicine clinic hospital in Salem, top orthopedic surgeon Salem, sports medicine clinic treatment',
+  title: "Sports Medicine Clinic Salem | Athletic Performance & Injury Prevention | Valli Hospital",
+  description: "Comprehensive sports medicine services in Salem at Valli Super Speciality Hospital. Expert diagnosis, treatment, and prevention of sports-related injuries for professional and amateur athletes. PRP therapy, physiotherapy, and return-to-sport protocols.",
+  keywords: [
+      "sports medicine Salem",
+      "sports medicine clinic Salem",
+      "PRP therapy Salem",
+      "athlete injury treatment Salem",
+      "sports rehabilitation Salem",
+      "sports physiotherapy Salem",
+      "injury prevention sports Tamil Nadu",
+      "sports doctor Salem"
+  ],
   alternates: {
-    canonical: 'https://vallihospital.in/sports-medicine-clinic',
+    canonical: `https://vallihospital.in/sports-medicine-clinic`,
   },
 };
 
