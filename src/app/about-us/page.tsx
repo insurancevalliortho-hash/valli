@@ -8,21 +8,27 @@ import Footer from "../../components/Footer";
 import SmoothScroll from "../../components/SmoothScroll";
 import MagneticCursor from "../../components/MagneticCursor";
 
-const values = [
-    {
-        icon: "🏥",
-        title: "Mission",
-        desc: "To empower patients with strength, mobility, and confidence through cutting-edge medical expertise while providing advanced, compassionate care.",
-    },
+const values: { icon: string; title: string; desc: string | string[] }[] = [
     {
         icon: "🔭",
         title: "Vision",
-        desc: "To be a premier Super Specialty Hospital, setting new standards in advanced medical care and patient well-being.",
+        desc: "TO LEAD AS A CENTER OF EXCELLENCE IN ORTHOPEDIC SURGERY AND SPORTS MEDICINE.",
+    },
+    {
+        icon: "🏥",
+        title: "Mission",
+        desc: "WE AIM TO BRING COMPASSIONATE, QUALITY, AND AFFORDABLE HEALTHCARE SERVICES TO OUR PATIENTS AND TO PROVIDE EXCELLENCE IN MEDICAL EDUCATION AND RESEARCH FOR THE BENEFIT OF HUMANITY.",
     },
     {
         icon: "❤️",
         title: "Values",
-        desc: "Compassion, Innovation, Excellence, Integrity & Commitment. Your health is our priority, and we are dedicated to providing 24/7 specialized care.",
+        desc: [
+            "1. ACCOUNTABILITY: TO RUN AS AN HONORABLE/RELIABLE MEDICAL INSTITUTION IN THE COMMUNITY RENOWNED FOR ETHICAL MEDICAL PRACTICE.",
+            "2. COMPASSION: TO ADOPT A HUMAN APPROACH TOWARDS OUR PATIENTS AND COLLEAGUES TO IMPROVE EVERYONE'S LIVES.",
+            "3. EXPERTISE: CONTINUOUS MEDICAL EDUCATION FOR MEDICAL AND PARAMEDICAL PROFESSIONALS FOCUSING ON CLINICAL EXPERTISE AND QUALITY CARE.",
+            "4. GLOBALIZATION: RAISING OUR HEALTHCARE STANDARDS TO CATER TO PATIENTS WORLDWIDE.",
+            "5. QUALITY: ENSURING EXCELLENCE IN CLINICAL SERVICE DELIVERY FOR EFFECTIVE, EFFICIENT QUALITY IMPROVEMENT AND PATIENT SAFETY."
+        ],
     },
 ];
 
@@ -119,10 +125,26 @@ export default function AboutPage() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {values.map((v, i) => (
                             <motion.div key={v.title} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 * i }}
-                                className="bg-[#f9fafb] border border-[#e5eaeb] rounded-2xl p-8 hover:shadow-xl transition-shadow duration-500">
+                                className="bg-[#f9fafb] border border-[#e5eaeb] rounded-2xl p-8 hover:shadow-xl transition-shadow duration-500 flex flex-col">
                                 <div className="text-4xl mb-5">{v.icon}</div>
                                 <h3 className="text-[#00333c] font-black text-2xl mb-3 tracking-tight">{v.title}</h3>
-                                <p className="text-[#40484a] text-base leading-relaxed">{v.desc}</p>
+                                {Array.isArray(v.desc) ? (
+                                    <ul className="space-y-3 mt-2 flex-1">
+                                        {v.desc.map((item, idx) => {
+                                            const parts = item.split(": ");
+                                            const titlePart = parts[0];
+                                            const descPart = parts.slice(1).join(": ");
+                                            return (
+                                                <li key={idx} className="border-b border-gray-100 last:border-0 pb-3 last:pb-0 text-left">
+                                                    <span className="text-[#f98825] font-black text-xs md:text-sm block mb-0.5">{titlePart}</span>
+                                                    <span className="text-[#40484a] text-xs font-semibold leading-relaxed block">{descPart}</span>
+                                                </li>
+                                            );
+                                        })}
+                                    </ul>
+                                ) : (
+                                    <p className="text-[#40484a] text-base leading-relaxed font-semibold">{v.desc}</p>
+                                )}
                             </motion.div>
                         ))}
                     </div>
