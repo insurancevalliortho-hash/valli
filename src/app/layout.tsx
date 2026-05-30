@@ -28,10 +28,10 @@ export const metadata: Metadata = {
     generator: "Next.js",
     category: "Medical",
     title: {
-        default: "Best Orthopedic Hospital in Salem | Valli Super Speciality Hospital",
+        default: "Best Orthopedic Surgeon & Hospital in Salem | Dr. T. Natanasabapathy | Valli Super Speciality Hospital",
         template: "%s | Valli Super Speciality Hospital Salem",
     },
-    description: "Valli Super Speciality Hospital — Salem's #1 orthopedic hospital for joint replacement, knee replacement, hip replacement, spine surgery, trauma care, sports injury treatment, and arthroscopy. Led by Dr. T. Natanasabapathy.",
+    description: "Valli Super Speciality Hospital — Salem's #1 orthopedic surgeon Dr. T. Natanasabapathy. Specializing in knee replacement, hip replacement, spine surgery, trauma recovery, sports injury treatment, and sports medicine. 24/7 emergency.",
     keywords: [
         "best orthopedic hospital in Salem",
         "orthopedic surgeon Salem",

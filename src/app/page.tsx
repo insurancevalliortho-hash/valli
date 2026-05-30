@@ -10,8 +10,8 @@ import Testimonials from "./../components/Testimonials";
 import Footer from "./../components/Footer";
 
 export const metadata: Metadata = {
-    title: "Best Orthopedic Hospital in Salem | Valli Super Speciality Hospital",
-    description: "Valli Super Speciality Hospital is Salem's leading orthopedic hospital offering joint replacement, sports injury treatment, trauma care, spine surgery, and 24/7 emergency services. Trusted by 16,000+ patients across Tamil Nadu.",
+    title: "Best Orthopedic Surgeon & Hospital in Salem | Dr. T. Natanasabapathy | Valli Super Speciality Hospital",
+    description: "Valli Super Speciality Hospital — Salem's #1 orthopedic surgeon Dr. T. Natanasabapathy. Specializing in knee replacement, spine surgery, trauma recovery, sports injury treatment, and sports medicine. Contact us 24/7.",
     keywords: [
         "best orthopedic hospital in Salem",
         "orthopedic surgeon Salem Tamil Nadu",
