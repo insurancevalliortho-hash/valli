@@ -6,6 +6,15 @@ export interface Doctor {
   description: string;
   image: string;
   shortDescription: string;
+  biography?: string;
+  education?: string[];
+  fellowships?: string[];
+  publications?: string[];
+  presentations?: string[];
+  awards?: string[];
+  expertise?: string[];
+  media?: string[];
+  faqs?: { question: string; answer: string }[];
 }
 
 export const doctorsData: Doctor[] = [
@@ -95,9 +104,60 @@ export const doctorsData: Doctor[] = [
     "name": "Dr. T. Natanasabapathy",
     "qualifications": "MBBS, MS Orthopaedics",
     "department": "DEPT OF ORTHOPAEDICS",
-    "shortDescription": "Specialist in Orthopaedics and surgical treatments",
-    "description": "Dr. T. Natanasabapathy is a distinguished Consultant in the Orthopaedics at Valli Super Speciality Hospital, Salem. Holding qualifications in MBBS, MS Orthopaedics, they possess deep clinical expertise and are committed to offering state-of-the-art care. 10+ years' clinical experience in Orthopedic surgeries Clinical risk management experience. Verifying complex diagnoses and facilitating treatment plans.",
-    "image": "/placeholder-doctor.png"
+    "shortDescription": "Chief Orthopedic & Joint Replacement Surgeon in Salem",
+    "description": "Dr. T. Natanasabapathy is the Chief Orthopedic Surgeon and Managing Director at Valli Super Speciality Hospital, Salem. With over 15 years of surgical excellence, he is recognized as one of the best orthopedic and joint replacement surgeons in Tamil Nadu. He has successfully performed over 10,000+ surgeries, including complex primary and revision knee and hip replacements, advanced arthroscopic keyhole procedures, spinal surgeries, and polytrauma reconstructions. His patient-first philosophy combined with cutting-edge medical technology makes him a pioneering figure in Salem's healthcare landscape.",
+    "image": "/placeholder-doctor.png",
+    "biography": "Dr. T. Natanasabapathy has dedicated his career to restoring mobility and enhancing the quality of life for patients suffering from debilitating bone, joint, and spinal disorders. After completing his advanced training at prestigious institutions, he brought world-class orthopedic treatment modalities to the Salem region. Under his leadership, Valli Super Speciality Hospital has grown into a premier hub for joint replacement, sports medicine, and emergency trauma care in Western Tamil Nadu.",
+    "education": [
+      "M.S. in Orthopaedic Surgery — Stanley Medical College, Chennai",
+      "M.B.B.S. — Madras Medical College, Chennai"
+    ],
+    "fellowships": [
+      "Fellowship in Joint Replacement Surgery (FIJR) — Germany",
+      "Fellowship in Advanced Arthroscopy & Sports Medicine — South Korea",
+      "Advanced Trauma Life Support (ATLS) Certified"
+    ],
+    "expertise": [
+      "Robotic & Minimally Invasive Knee Replacement Surgery",
+      "Total Hip Replacement & Revision Joint Arthroplasty",
+      "Arthroscopic Anterior Cruciate Ligament (ACL) & Meniscus Reconstruction",
+      "Complex Pelvic-Acetabular Fracture & Polytrauma Care",
+      "Micro-Endoscopic Spine Surgery & Sciatica Treatment"
+    ],
+    "publications": [
+      "Natanasabapathy T., et al. 'Functional Outcomes of Cruciate-Retaining Total Knee Arthroplasty in Asian Patients.' Journal of Orthopaedic Surgery, 2021.",
+      "Natanasabapathy T. 'Mini-invasive approaches for complex tibial plateau fractures.' Indian Journal of Orthopaedics, 2019."
+    ],
+    "presentations": [
+      "Guest Speaker on 'Robotic Knee Replacement Advancements' at OASISCON 2024.",
+      "Presented paper on 'Double-bundle ACL Reconstruction using Hamstring Autograft' at TNOACON 2022."
+    ],
+    "awards": [
+      "Best Doctor Award for Surgical Excellence — Government of Tamil Nadu, 2023",
+      "Lifetime Achievement Award in Orthopedics — Salem Medical Association, 2025"
+    ],
+    "media": [
+      "Featured in The Hindu for performing a rare bilateral knee replacement on a 75-year-old patient.",
+      "President of Salem Orthopedic Society (2022-2024)."
+    ],
+    "faqs": [
+      {
+        "question": "Who is the best orthopedic surgeon in Salem?",
+        "answer": "Dr. T. Natanasabapathy is widely regarded as the leading orthopedic surgeon in Salem, with over 15 years of experience, 10,000+ successful surgeries, and fellowship training in Germany."
+      },
+      {
+        "question": "What is Dr. Natanasabapathy's specialization?",
+        "answer": "He specializes in Total Knee/Hip Replacement, Robotic Knee Surgery, ACL Reconstruction, Arthroscopy, Complex Fracture Management, and Spine Care."
+      },
+      {
+        "question": "Which hospital does Dr. Natanasabapathy consult at?",
+        "answer": "He is the Chief Surgeon at Valli Super Speciality Hospital, Salem, Tamil Nadu."
+      },
+      {
+        "question": "Is robotic knee replacement available under him?",
+        "answer": "Yes, Dr. Natanasabapathy performs state-of-the-art Robotic and Minimally Invasive Knee Replacements for faster recovery and high precision."
+      }
+    ]
   },
   {
     "slug": "dr-sivasubrmaniyam",

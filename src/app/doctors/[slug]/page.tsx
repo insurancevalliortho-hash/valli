@@ -59,27 +59,47 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         notFound();
     }
 
-    const jsonLd = {
-        "@context": "https://schema.org",
-        "@type": "Physician",
-        "name": doctor.name,
-        "image": `https://www.vallihospital.in${doctor.image}`,
-        "description": doctor.shortDescription,
-        "medicalSpecialty": doctor.department,
-        "alumniOf": doctor.qualifications.split(",").map(q => q.trim()),
-        "url": `https://www.vallihospital.in/doctors/${doctor.slug}`,
-        "parentOrganization": {
-            "@type": "Hospital",
-            "name": "Valli Super Speciality Hospital",
-            "url": "https://www.vallihospital.in"
+    const schemas: any[] = [
+        {
+            "@context": "https://schema.org",
+            "@type": "Physician",
+            "name": doctor.name,
+            "image": `https://www.vallihospital.in${doctor.image}`,
+            "description": doctor.shortDescription,
+            "medicalSpecialty": doctor.department,
+            "alumniOf": doctor.qualifications.split(",").map(q => q.trim()),
+            "url": `https://www.vallihospital.in/doctors/${doctor.slug}`,
+            "parentOrganization": {
+                "@type": "Hospital",
+                "name": "Valli Super Speciality Hospital",
+                "url": "https://www.vallihospital.in"
+            },
+            ...(doctor.expertise ? { "knowsAbout": doctor.expertise } : {}),
+            ...(doctor.awards ? { "award": doctor.awards } : {}),
+            ...(doctor.fellowships ? { "description": `${doctor.description} Fellowships: ${doctor.fellowships.join(', ')}` } : {})
         }
-    };
+    ];
+
+    if (doctor.faqs && doctor.faqs.length > 0) {
+        schemas.push({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": doctor.faqs.map(faq => ({
+                "@type": "Question",
+                "name": faq.question,
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": faq.answer
+                }
+            }))
+        });
+    }
 
     return (
         <>
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }}
             />
             <DoctorClientPage doctor={doctor} />
         </>

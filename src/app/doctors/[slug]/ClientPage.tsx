@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
@@ -93,8 +94,193 @@ export default function DoctorClientPage({ doctor }: { doctor: Doctor }) {
                     </div>
                 </div>
             </section>
-            
+
+            {/* Rich GEO Authority Sections */}
+            {(doctor.biography || doctor.expertise || doctor.education || doctor.fellowships || doctor.publications || doctor.faqs) && (
+                <section className="bg-gray-50 py-16 border-t border-gray-100">
+                    <div className="container mx-auto px-6 md:px-12">
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                            
+                            {/* Left Columns - Credentials & Clinical Profile */}
+                            <div className="lg:col-span-2 space-y-12">
+                                {/* Extended Biography */}
+                                {doctor.biography && (
+                                    <div className="bg-white p-8 md:p-10 rounded-[2rem] border border-gray-100 shadow-sm">
+                                        <h3 className="text-2xl font-black text-[#00333c] tracking-tight mb-4">
+                                            Comprehensive Biography & Vision
+                                        </h3>
+                                        <p className="text-gray-600 text-lg leading-relaxed font-medium">
+                                            {doctor.biography}
+                                        </p>
+                                    </div>
+                                )}
+
+                                {/* Expertise & Specialties */}
+                                {doctor.expertise && (
+                                    <div className="bg-white p-8 md:p-10 rounded-[2rem] border border-gray-100 shadow-sm">
+                                        <h3 className="text-2xl font-black text-[#00333c] tracking-tight mb-6">
+                                            Advanced Surgical & Clinical Expertise
+                                        </h3>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            {doctor.expertise.map((exp, idx) => (
+                                                <div key={idx} className="flex items-start gap-3 p-4 rounded-xl bg-gray-50 border border-gray-100 hover:border-[#3cb3a6]/30 hover:bg-[#3cb3a6]/5 transition-all">
+                                                    <span className="flex items-center justify-center w-6 h-6 rounded-full bg-[#3cb3a6]/10 text-[#3cb3a6] font-bold text-xs shrink-0 mt-0.5">
+                                                        ✓
+                                                    </span>
+                                                    <span className="text-[#00333c] font-semibold text-sm leading-snug">{exp}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Education & Academic Milestones */}
+                                {(doctor.education || doctor.fellowships || doctor.awards) && (
+                                    <div className="bg-white p-8 md:p-10 rounded-[2rem] border border-gray-100 shadow-sm space-y-8">
+                                        <h3 className="text-2xl font-black text-[#00333c] tracking-tight mb-4">
+                                            Qualifications & Global Fellowships
+                                        </h3>
+                                        
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                            {doctor.education && (
+                                                <div>
+                                                    <h4 className="text-[#f98825] font-black text-xs uppercase tracking-widest mb-3">Education History</h4>
+                                                    <ul className="space-y-3">
+                                                        {doctor.education.map((edu, idx) => (
+                                                            <li key={idx} className="flex gap-2 text-gray-600 text-sm font-medium">
+                                                                <span className="text-[#f98825]">•</span>
+                                                                {edu}
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            )}
+                                            {doctor.fellowships && (
+                                                <div>
+                                                    <h4 className="text-[#3cb3a6] font-black text-xs uppercase tracking-widest mb-3">Fellowships & Certifications</h4>
+                                                    <ul className="space-y-3">
+                                                        {doctor.fellowships.map((fellow, idx) => (
+                                                            <li key={idx} className="flex gap-2 text-gray-600 text-sm font-medium">
+                                                                <span className="text-[#3cb3a6]">•</span>
+                                                                {fellow}
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        {doctor.awards && (
+                                            <div className="pt-6 border-t border-gray-100">
+                                                <h4 className="text-[#004b57] font-black text-xs uppercase tracking-widest mb-3">Honors & Awards</h4>
+                                                <div className="space-y-3">
+                                                    {doctor.awards.map((award, idx) => (
+                                                        <div key={idx} className="flex items-center gap-3 p-3 rounded-lg bg-[#004b57]/5 border border-[#004b57]/10 text-[#004b57] text-sm font-semibold">
+                                                            <span className="text-lg">🏆</span>
+                                                            {award}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+
+                                {/* Research & Conference Publications */}
+                                {(doctor.publications || doctor.presentations) && (
+                                    <div className="bg-white p-8 md:p-10 rounded-[2rem] border border-gray-100 shadow-sm space-y-8">
+                                        <h3 className="text-2xl font-black text-[#00333c] tracking-tight mb-4">
+                                            Research, Publications & Presentations
+                                        </h3>
+                                        
+                                        {doctor.publications && (
+                                            <div>
+                                                <h4 className="text-[#004b57] font-black text-xs uppercase tracking-widest mb-3">Published Research Papers</h4>
+                                                <ul className="space-y-4">
+                                                    {doctor.publications.map((pub, idx) => (
+                                                        <li key={idx} className="flex gap-3 items-start text-gray-600 text-sm font-medium italic pl-4 border-l-2 border-[#3cb3a6]">
+                                                            "{pub}"
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        )}
+
+                                        {doctor.presentations && (
+                                            <div className="pt-6 border-t border-gray-100">
+                                                <h4 className="text-[#f98825] font-black text-xs uppercase tracking-widest mb-3">Conference Presentations & Lectures</h4>
+                                                <ul className="space-y-3">
+                                                    {doctor.presentations.map((pres, idx) => (
+                                                        <li key={idx} className="flex gap-2 text-gray-600 text-sm font-medium">
+                                                            <span className="text-[#f98825]">•</span>
+                                                            {pres}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Right Column - FAQ Accordion */}
+                            <div className="space-y-8">
+                                {doctor.faqs && (
+                                    <div className="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm sticky top-24">
+                                        <h3 className="text-xl font-black text-[#00333c] tracking-tight mb-2">
+                                            Patient FAQ Hub
+                                        </h3>
+                                        <p className="text-gray-500 text-xs font-semibold mb-6">
+                                            Common questions answered by {doctor.name}
+                                        </p>
+                                        
+                                        <div className="space-y-3">
+                                            {doctor.faqs.map((faq, idx) => (
+                                                <FaqAccordionItem key={idx} question={faq.question} answer={faq.answer} />
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+            )}
+
             <Footer />
         </SmoothScroll>
+    );
+}
+
+function FaqAccordionItem({ question, answer }: { question: string; answer: string }) {
+    const [isOpen, setIsOpen] = useState(false);
+    return (
+        <div className="border-b border-gray-100 last:border-b-0 py-3">
+            <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="w-full flex justify-between items-center text-left py-2 font-bold text-[#00333c] hover:text-[#f98825] transition-colors gap-4"
+            >
+                <span className="text-sm leading-snug">{question}</span>
+                <span className={`text-xs p-1 rounded-full bg-gray-50 border border-gray-100 transition-transform duration-300 ${isOpen ? 'rotate-180 bg-[#f98825]/10 border-[#f98825]/20 text-[#f98825]' : 'text-gray-400'}`}>
+                    ▼
+                </span>
+            </button>
+            <AnimatePresence initial={false}>
+                {isOpen && (
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25, ease: "easeInOut" }}
+                        className="overflow-hidden"
+                    >
+                        <p className="text-gray-600 text-sm leading-relaxed font-medium pt-2 pb-4 pr-4">
+                            {answer}
+                        </p>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </div>
     );
 }
