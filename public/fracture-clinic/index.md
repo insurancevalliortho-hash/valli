@@ -2,7 +2,7 @@
 title: Fracture Clinic in Salem | Valli Super Speciality Hospital
 description: Comprehensive and emergency fracture management focused on early mobilization and optimal alignment.
 url: https://www.vallihospital.in/fracture-clinic
-last_updated: 2026-05-29
+last_updated: 2026-05-30
 ---
 
 # Fracture Clinic

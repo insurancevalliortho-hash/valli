@@ -2,7 +2,7 @@
 title: Dr. E. Aakash - MBBS, MS ORTHOPAEDICS, FIJR, FIOT, FDFM | Valli Hospital Salem
 description: Professional profile of Dr. E. Aakash, specialist in DEPT OF ORTHOPAEDICS at Valli Super Speciality Hospital.
 url: https://www.vallihospital.in/doctors/dr-aakash
-last_updated: 2026-05-29
+last_updated: 2026-05-30
 ---
 
 # Professional Medical Profile: Dr. E. Aakash
