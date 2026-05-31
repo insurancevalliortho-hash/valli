@@ -9,10 +9,11 @@ const HERO_SLIDES = [
     {
         id: 1,
         image: "/hero-surgery.png",
-        title: "BEST ORTHOPEDIC HOSPITAL",
-        highlight: "IN SALEM",
-        subtitle: "Joint Replacement · Trauma Care · Sports Injury · Salem, Tamil Nadu",
-        description: "Valli Super Speciality Hospital — Salem's most trusted orthopedic centre for joint replacement, knee & hip surgery, fracture care, sports injuries, and spine treatment. Serving 16,000+ patients across Tamil Nadu."
+        title: "BEST ORTHOPEDIC",
+        highlight: "HOSPITAL IN SALEM",
+        subtitle: "Joint Replacement · Trauma Care · Sports Injury",
+        description: "Salem's most trusted centre for joint replacement, trauma care, spine surgery, and sports medicine. Serving 16,000+ patients across Tamil Nadu.",
+        alt: "Valli Super Speciality Hospital Salem - Best Orthopedic Hospital for Joint Replacement, Trauma Care & Sports Injury"
     },
     {
         id: 2,
@@ -20,7 +21,8 @@ const HERO_SLIDES = [
         title: "COMPASSIONATE",
         highlight: "PATIENT CARE",
         subtitle: "Healing with Empathy",
-        description: "Experience healthcare designed around your well-being, guided by empathy and advanced medical science."
+        description: "Experience empathetic care and advanced orthopedics designed around your complete recovery.",
+        alt: "Compassionate patient care and knee surgery recovery at Valli Hospital Salem"
     },
     {
         id: 3,
@@ -28,7 +30,8 @@ const HERO_SLIDES = [
         title: "STATE-OF-THE-ART",
         highlight: "TECHNOLOGY",
         subtitle: "Precision & Safety",
-        description: "Equipped with cutting-edge medical technology to ensure the highest standards of safety and recovery."
+        description: "Equipped with state-of-the-art robotic and minimally invasive tech for precise, safer surgeries.",
+        alt: "State-of-the-art orthopedic surgery technology and high-precision medical equipment at Valli Hospital"
     }
 ];
 
@@ -64,15 +67,39 @@ export default function Hero() {
     const nextSlide = () => setCurrentIndex((prev) => (prev + 1) % HERO_SLIDES.length);
     const prevSlide = () => setCurrentIndex((prev) => (prev === 0 ? HERO_SLIDES.length - 1 : prev - 1));
 
+    const [touchStart, setTouchStart] = useState<number | null>(null);
+    const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
+    const onTouchStart = (e: React.TouchEvent) => {
+        setTouchEnd(null);
+        setTouchStart(e.targetTouches[0].clientX);
+    };
+
+    const onTouchMove = (e: React.TouchEvent) => {
+        setTouchEnd(e.targetTouches[0].clientX);
+    };
+
+    const onTouchEnd = () => {
+        if (!touchStart || !touchEnd) return;
+        const distance = touchStart - touchEnd;
+        const isLeftSwipe = distance > 50;
+        const isRightSwipe = distance < -50;
+        if (isLeftSwipe) {
+            nextSlide();
+        } else if (isRightSwipe) {
+            prevSlide();
+        }
+    };
+
     // Wait until mounted to render animations to avoid hydration/navigation bugs
     if (mountKey === "initial") {
         return (
-            <section className="relative w-full h-[100svh] bg-[#001014] overflow-hidden flex flex-col justify-end">
+            <section className="relative w-full min-h-[100svh] lg:h-[100svh] bg-[#001014] overflow-hidden flex flex-col justify-end">
                 {/* Cinematic Background Images for SSR/First Paint */}
                 <div className="absolute inset-0 z-0">
                     <img
                         src={HERO_SLIDES[0].image}
-                        alt="Valli Super Speciality Hospital"
+                        alt={HERO_SLIDES[0].alt}
                         className="w-full h-full object-cover object-[center_top]"
                         fetchPriority="high"
                         loading="eager"
@@ -82,23 +109,23 @@ export default function Hero() {
                     <div className="absolute inset-0 bg-gradient-to-t from-[#001014] via-[#001014]/20 to-transparent opacity-90" />
                 </div>
 
-                <div className="relative z-10 w-full h-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 flex flex-col justify-center pt-32 sm:pt-40 lg:pt-32 pb-32 sm:pb-40 lg:pb-48">
+                <div className="relative z-10 w-full h-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 flex flex-col justify-center pt-24 xs:pt-28 sm:pt-36 lg:pt-28 pb-32 sm:pb-40 lg:pb-36">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-4 items-center h-full">
                         <div className="lg:col-span-8 flex flex-col items-start mt-10 lg:mt-0">
                             <div className="max-w-4xl">
-                                <div className="flex items-center gap-4 mb-6 sm:mb-8">
-                                    <span className="w-12 sm:w-16 h-[2px] bg-[#f98825]"></span>
+                                <div className="flex items-center gap-4 mb-2 sm:mb-4">
+                                    <span className="hidden sm:inline-block w-12 sm:w-16 h-[2px] bg-[#f98825]"></span>
                                     <span className="text-[#3cb3a6] tracking-[0.2em] uppercase text-xs sm:text-sm">
                                         {HERO_SLIDES[0].subtitle}
                                     </span>
                                 </div>
 
-                                <h1 className="text-white font-light text-[2.8rem] sm:text-[4.2rem] lg:text-[5rem] xl:text-[5.5rem] leading-[1] tracking-tighter mb-6">
+                                <h1 className="text-white font-light text-[1.6rem] xs:text-[2rem] sm:text-[3rem] md:text-[3.6rem] lg:text-[4.2rem] xl:text-[4.8rem] leading-[1.05] tracking-tighter mb-3 sm:mb-5">
                                     <span className="block">{HERO_SLIDES[0].title}</span>
                                     <span className="block font-black text-[#f98825]">{HERO_SLIDES[0].highlight}</span>
                                 </h1>
 
-                                <p className="text-gray-200 text-sm sm:text-lg lg:text-xl font-medium max-w-2xl leading-relaxed border-l-2 border-[#3cb3a6]/30 pl-5 sm:pl-6">
+                                <p className="text-gray-200 text-xs xs:text-sm sm:text-base lg:text-lg font-medium max-w-2xl leading-relaxed border-l-2 border-[#3cb3a6]/30 pl-5 sm:pl-6">
                                     {HERO_SLIDES[0].description}
                                 </p>
                             </div>
@@ -111,9 +138,12 @@ export default function Hero() {
 
     return (
         <section
-            className="relative w-full h-[100svh] bg-[#001014] overflow-hidden flex flex-col justify-end"
+            className="relative w-full min-h-[100svh] lg:h-[100svh] bg-[#001014] overflow-hidden flex flex-col justify-end"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchEnd={onTouchEnd}
         >
             {/* Cinematic Background Images */}
             <AnimatePresence mode="popLayout">
@@ -127,7 +157,7 @@ export default function Hero() {
                 >
                     <motion.img
                         src={HERO_SLIDES[currentIndex].image}
-                        alt="Hero background"
+                        alt={HERO_SLIDES[currentIndex].alt}
                         className="w-full h-full object-cover object-[center_top]"
                         initial={{ scale: 1.15 }}
                         animate={{ scale: 1 }}
@@ -145,7 +175,7 @@ export default function Hero() {
             </AnimatePresence>
 
             {/* Main Content Grid */}
-            <div className="relative z-10 w-full h-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 flex flex-col justify-center pt-32 sm:pt-40 lg:pt-32 pb-32 sm:pb-40 lg:pb-48">
+            <div className="relative z-10 w-full h-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 flex flex-col justify-center pt-24 xs:pt-28 sm:pt-36 lg:pt-28 pb-32 sm:pb-40 lg:pb-36">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-4 items-center h-full">
 
                     {/* Left Text Content */}
@@ -168,15 +198,15 @@ export default function Hero() {
                                         hidden: { opacity: 0, x: -20 },
                                         visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } }
                                     }}
-                                    className="flex items-center gap-4 mb-6 sm:mb-8"
+                                    className="flex items-center gap-4 mb-2 sm:mb-4"
                                 >
-                                    <span className="w-12 sm:w-16 h-[2px] bg-[#f98825] shadow-[0_0_10px_rgba(249,136,37,0.5)]"></span>
+                                    <span className="hidden sm:inline-block w-12 sm:w-16 h-[2px] bg-[#f98825] shadow-[0_0_10px_rgba(249,136,37,0.5)]"></span>
                                     <span className="text-[#3cb3a6]  tracking-[0.2em] uppercase text-xs sm:text-sm drop-shadow-lg">
                                         {HERO_SLIDES[currentIndex].subtitle}
                                     </span>
                                 </motion.div>
 
-                                <h1 className="text-white font-light text-[2.8rem] sm:text-[4.2rem] lg:text-[5rem] xl:text-[5.5rem] leading-[1] tracking-tighter mb-6">
+                                <h1 className="text-white font-light text-[1.6rem] xs:text-[2rem] sm:text-[3rem] md:text-[3.6rem] lg:text-[4.2rem] xl:text-[4.8rem] leading-[1.05] tracking-tighter mb-3 sm:mb-5">
                                     <motion.span
                                         variants={{
                                             hidden: { opacity: 0, y: 30 },
@@ -202,7 +232,7 @@ export default function Hero() {
                                         hidden: { opacity: 0, y: 20 },
                                         visible: { opacity: 1, y: 0, transition: { duration: 0.8, delay: 0.2, ease: "easeOut" } }
                                     }}
-                                    className="text-gray-200 text-sm sm:text-lg lg:text-xl font-medium max-w-2xl leading-relaxed drop-shadow-md border-l-2 border-[#3cb3a6]/30 pl-5 sm:pl-6"
+                                    className="text-gray-200 text-xs xs:text-sm sm:text-base lg:text-lg font-medium max-w-2xl leading-relaxed drop-shadow-md border-l-2 border-[#3cb3a6]/30 pl-5 sm:pl-6"
                                 >
                                     {HERO_SLIDES[currentIndex].description}
                                 </motion.p>
@@ -212,7 +242,7 @@ export default function Hero() {
                                         hidden: { opacity: 0, y: 20 },
                                         visible: { opacity: 1, y: 0, transition: { duration: 0.8, delay: 0.3, ease: "easeOut" } }
                                     }}
-                                    className="mt-10 sm:mt-14"
+                                    className="mt-5 sm:mt-8"
                                 >
                                     <Link href="/book-appointment" className="group relative inline-block px-8 py-4 sm:px-10 sm:py-5 bg-[#f98825] text-white font-bold text-xs sm:text-sm tracking-[0.15em] uppercase overflow-hidden rounded-full transition-all hover:scale-105 shadow-[0_10px_30px_rgba(249,136,37,0.3)] hover:shadow-[0_15px_40px_rgba(249,136,37,0.5)]">
                                         <span className="relative z-10 flex items-center gap-3">
@@ -274,26 +304,16 @@ export default function Hero() {
             </div>
 
             {/* Mobile Navigation (Visible only on small screens) */}
-            <div className="lg:hidden absolute bottom-32 sm:bottom-40 left-6 right-6 z-20 flex justify-between items-center">
-                <div className="flex gap-3 items-center">
-                    {HERO_SLIDES.map((_, idx) => (
-                        <button
-                            key={idx}
-                            onClick={() => setCurrentIndex(idx)}
-                            aria-label={`Go to slide ${idx + 1}`}
-                            className={`h-[3px] rounded-full transition-all duration-500 ${idx === currentIndex ? "w-10 bg-[#f98825]" : "w-4 bg-white/30"
-                                }`}
-                        />
-                    ))}
-                </div>
-                <div className="flex gap-2">
-                    <button onClick={prevSlide} aria-label="Previous slide" className="w-12 h-12 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white">
-                        <ChevronLeft className="w-5 h-5" />
-                    </button>
-                    <button onClick={nextSlide} aria-label="Next slide" className="w-12 h-12 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white">
-                        <ChevronRight className="w-5 h-5" />
-                    </button>
-                </div>
+            <div className="lg:hidden absolute bottom-8 left-0 right-0 z-20 flex justify-center items-center gap-3">
+                {HERO_SLIDES.map((_, idx) => (
+                    <button
+                        key={idx}
+                        onClick={() => setCurrentIndex(idx)}
+                        aria-label={`Go to slide ${idx + 1}`}
+                        className={`h-[4px] rounded-full transition-all duration-500 ${idx === currentIndex ? "w-8 bg-[#f98825]" : "w-3 bg-white/30"
+                            }`}
+                    />
+                ))}
             </div>
 
             {/* Ultra-Premium Glassmorphic Stats Dock - Centered at bottom */}

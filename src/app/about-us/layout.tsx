@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'About Valli Super Speciality Hospital Salem | Orthopedic Excellence Since 2021',
+  title: 'About Valli Super Speciality Hospital Salem | Advanced Orthopedic Care',
   description: 'Valli Super Speciality Hospital is a 50-bed multispecialty hospital in Salem, Tamil Nadu, led by Dr. T. Natanasabapathy — one of India\'s most skilled orthopedic surgeons. Learn our story, mission, and commitment to world-class bone, joint, and trauma care.',
   keywords: [
     'about Valli hospital Salem',
