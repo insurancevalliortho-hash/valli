@@ -8,6 +8,7 @@ import MagneticCursor from "../components/MagneticCursor";
 // ClientOnlyLoader wraps PageTransitionLoader with next/dynamic ssr:false inside a Client Component.
 // This is required per Next.js 16 docs: ssr:false cannot be used in Server Components.
 import ClientOnlyLoader from "../components/ClientOnlyLoader";
+import { Analytics } from "@vercel/analytics/next";
 
 const montserrat = Montserrat({
     variable: "--font-montserrat",
@@ -143,6 +144,7 @@ export default function RootLayout({
                 <ClientOnlyLoader />
                 <HospitalSchema />
                 <PhysicianSchema />
+                <Analytics />
                 <SmoothScroll>
                     <MagneticCursor />
                     <div id="page-content-wrapper" className="min-h-screen">
