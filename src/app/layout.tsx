@@ -9,6 +9,7 @@ import MagneticCursor from "../components/MagneticCursor";
 // This is required per Next.js 16 docs: ssr:false cannot be used in Server Components.
 import ClientOnlyLoader from "../components/ClientOnlyLoader";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const montserrat = Montserrat({
     variable: "--font-montserrat",
@@ -145,6 +146,7 @@ export default function RootLayout({
                 <HospitalSchema />
                 <PhysicianSchema />
                 <Analytics />
+                <SpeedInsights />
                 <SmoothScroll>
                     <MagneticCursor />
                     <div id="page-content-wrapper" className="min-h-screen">
