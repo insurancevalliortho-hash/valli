@@ -18,6 +18,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   return {
     title: titleMatch ? `${titleMatch[1]} | Valli Hospital` : 'Blog Post',
     description: descMatch ? descMatch[1] : '',
+    alternates: {
+      canonical: `https://www.vallihospital.in/blog/${params.slug}`,
+    },
   };
 }
 

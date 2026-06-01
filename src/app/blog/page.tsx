@@ -8,6 +8,9 @@ import path from 'path';
 export const metadata = {
   title: 'Blog | Valli Super Speciality Hospital',
   description: 'Read the latest insights and news from Valli Super Speciality Hospital.',
+  alternates: {
+    canonical: 'https://www.vallihospital.in/blog',
+  },
 };
 
 function getPosts() {

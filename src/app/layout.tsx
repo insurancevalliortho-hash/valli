@@ -31,8 +31,10 @@ export const metadata: Metadata = {
         default: "Best Orthopedic Surgeon & Hospital in Salem | Dr. T. Natanasabapathy | Valli Super Speciality Hospital",
         template: "%s | Valli Super Speciality Hospital Salem",
     },
-    description: "Valli Super Speciality Hospital — Salem's #1 orthopedic surgeon Dr. T. Natanasabapathy. Specializing in knee replacement, hip replacement, spine surgery, trauma recovery, sports injury treatment, and sports medicine. 24/7 emergency.",
+    description: "Valli Super Speciality Hospital (formerly Valli Orthopedic and Sports Hospital) — Salem's #1 orthopedic surgeon Dr. T. Natanasabapathy. Specializing in knee replacement, hip replacement, spine surgery, trauma recovery, sports injury treatment, and sports medicine. 24/7 emergency.",
     keywords: [
+        "valli orthopedic and sports hospital",
+        "valli orthopaedic and sports hospital",
         "best orthopedic hospital in Salem",
         "orthopedic surgeon Salem",
         "joint replacement Salem",
@@ -48,7 +50,8 @@ export const metadata: Metadata = {
         "best hospital Salem",
         "Dr Natanasabapathy",
         "Valli hospital Salem",
-        "24 hour emergency hospital Salem"
+        "24 hour emergency hospital Salem",
+        "valli super speciality hospital salem"
     ],
     authors: [{ name: "Valli Super Speciality Hospital", url: "https://www.vallihospital.in" }],
     creator: "Valli Super Speciality Hospital",

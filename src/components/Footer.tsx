@@ -95,7 +95,7 @@ export default function Footer() {
                     className="pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-400"
                 >
                     <div className="flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
-                        <p>© {new Date().getFullYear()} VALLI SUPER SPECIALITY HOSPITAL.<br className="md:hidden" /> ALL RIGHTS RESERVED.</p>
+                        <p>© {new Date().getFullYear()} VALLI SUPER SPECIALITY HOSPITAL (FORMERLY VALLI ORTHOPEDIC AND SPORTS HOSPITAL).<br className="md:hidden" /> ALL RIGHTS RESERVED.</p>
                         
                         {/* Social Signals for SEO & Trust */}
                         <div className="flex items-center gap-4 bg-gray-50 border border-gray-100 px-4 py-2 rounded-full">

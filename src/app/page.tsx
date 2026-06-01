@@ -8,11 +8,14 @@ import SpecialityGrid from "./../components/SpecialityGrid";
 import TechShowcase from "./../components/TechShowcase";
 import Testimonials from "./../components/Testimonials";
 import Footer from "./../components/Footer";
+import FAQSection from "./../components/FAQSection";
 
 export const metadata: Metadata = {
     title: "Best Orthopedic Surgeon & Hospital in Salem | Dr. T. Natanasabapathy | Valli Super Speciality Hospital",
-    description: "Valli Super Speciality Hospital — Salem's #1 orthopedic surgeon Dr. T. Natanasabapathy. Specializing in knee replacement, spine surgery, trauma recovery, sports injury treatment, and sports medicine. Contact us 24/7.",
+    description: "Valli Super Speciality Hospital (formerly Valli Orthopedic and Sports Hospital) — Salem's #1 orthopedic surgeon Dr. T. Natanasabapathy. Specializing in knee replacement, spine surgery, trauma recovery, sports injury treatment, and sports medicine. Contact us 24/7.",
     keywords: [
+        "valli orthopedic and sports hospital",
+        "valli orthopaedic and sports hospital",
         "best orthopedic hospital in Salem",
         "orthopedic surgeon Salem Tamil Nadu",
         "joint replacement Salem",
@@ -26,7 +29,8 @@ export const metadata: Metadata = {
         "fracture treatment Salem",
         "arthroscopy Salem",
         "Dr Natanasabapathy orthopedic surgeon",
-        "24 hour emergency hospital Salem"
+        "24 hour emergency hospital Salem",
+        "valli super speciality hospital salem"
     ],
     alternates: {
         canonical: "https://www.vallihospital.in/",
@@ -72,6 +76,11 @@ export default function Home() {
             "@context": "https://schema.org",
             "@type": "WebSite",
             "name": "Valli Super Speciality Hospital",
+            "alternateName": [
+                "Valli Orthopedic and Sports Hospital",
+                "Valli Orthopaedic and Sports Hospital",
+                "Valli Hospital Salem"
+            ],
             "url": "https://www.vallihospital.in",
             "potentialAction": {
                 "@type": "SearchAction",
@@ -83,6 +92,11 @@ export default function Home() {
             "@context": "https://schema.org",
             "@type": "Hospital",
             "name": "Valli Super Speciality Hospital",
+            "alternateName": [
+                "Valli Orthopedic and Sports Hospital",
+                "Valli Orthopaedic and Sports Hospital",
+                "Valli Hospital Salem"
+            ],
             "image": "https://www.vallihospital.in/favicon.png",
             "@id": "https://www.vallihospital.in",
             "url": "https://www.vallihospital.in",
@@ -183,6 +197,7 @@ export default function Home() {
                 <SpecialityGrid />
                 <TechShowcase />
                 <Testimonials />
+                <FAQSection />
             </main>
 
             <Footer />

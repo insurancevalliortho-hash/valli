@@ -2,7 +2,7 @@
 title: Specialized Paediatric Orthopaedics in Salem | Valli Hospital Blog
 description: Expert care for children
 url: https://www.vallihospital.in/blog/paediatric-orthopaedics-salem
-last_updated: 2026-05-31
+last_updated: 2026-06-01
 ---
 
 # Specialized Paediatric Orthopaedics in Salem

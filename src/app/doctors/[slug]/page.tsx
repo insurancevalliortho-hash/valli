@@ -27,6 +27,9 @@ export async function generateMetadata(
     return {
         title: `${doctor.name} - ${doctor.department} | Valli Hospital`,
         description: doctor.description.slice(0, 160),
+        alternates: {
+            canonical: `https://www.vallihospital.in/doctors/${doctor.slug}`,
+        },
         openGraph: {
             title: `${doctor.name} | Valli Hospital`,
             description: doctor.description.slice(0, 160),

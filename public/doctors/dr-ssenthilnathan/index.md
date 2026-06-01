@@ -2,7 +2,7 @@
 title: Dr. S. Senthilnathan - MBBS, MD | Valli Hospital Salem
 description: Professional profile of Dr. S. Senthilnathan, specialist in DEPT OF RADIO DIAGNOSIS at Valli Super Speciality Hospital.
 url: https://www.vallihospital.in/doctors/dr-ssenthilnathan
-last_updated: 2026-05-31
+last_updated: 2026-06-01
 ---
 
 # Professional Medical Profile: Dr. S. Senthilnathan

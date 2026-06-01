@@ -14,10 +14,16 @@ const departments = [
     "Orthopaedics & Joint Replacement",
     "Gastroenterology",
     "Neurosurgery & Neurology",
-    "Plastic & Vascular Surgery",
-    "Internal Medicine & Urology",
-    "Paediatrics & Surgery",
-    "24x7 Emergency",
+    "Vascular Surgery",
+    "Internal Medicine",
+    "Urology",
+    "Pediatrics",
+    "General Surgery",
+    "Dermatology and Cosmetology",
+    "ENT",
+    "Nephrology and Dialysis",
+    "Interventional Pain Medicine",
+    "All Ortho Sub Specialities"
 ];
 
 const timeSlots = [
