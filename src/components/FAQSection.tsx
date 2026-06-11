@@ -65,7 +65,7 @@ export default function FAQSection() {
                         transition={{ delay: 0.2 }}
                         className="mt-4 text-[#40484a] text-sm md:text-base leading-relaxed font-semibold max-w-xl mx-auto"
                     >
-                        Find clear, expert answers regarding Salem's leading orthopedic care, specialized surgical units, and medical treatments.
+                        Find clear, expert answers regarding Salem&apos;s leading orthopedic care, specialized surgical units, and medical treatments.
                     </motion.p>
                 </div>
 
