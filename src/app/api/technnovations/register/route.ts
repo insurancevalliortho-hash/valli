@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { saveRegistration } from "../../../../lib/db";
+import { sendRegistrationEmail } from "../../../../lib/email";
 
 export async function POST(request: Request) {
   try {
@@ -47,6 +48,26 @@ export async function POST(request: Request) {
       transactionId,
       paymentScreenshot
     });
+
+    // Dispatch email confirmation instantly
+    try {
+      await sendRegistrationEmail({
+        registrationCode,
+        teamName,
+        teamSize,
+        teamLead,
+        leadPhone,
+        coMembers: coMembers || [],
+        emailId,
+        collegeName,
+        collegeLocation: collegeLocation || "",
+        department: department || "",
+        yearOfStudy: yearOfStudy || "1st",
+        transactionId
+      });
+    } catch (emailErr) {
+      console.error("API error in dispatching registration email:", emailErr);
+    }
 
     return NextResponse.json({ success: true, registrationCode });
   } catch (error: any) {
