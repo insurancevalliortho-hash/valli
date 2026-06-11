@@ -769,6 +769,100 @@ function TechFooter() {
   );
 }
 
+// ─── Submission Workflow Section ──────────────────────────────────────────────
+function SubmissionWorkflow() {
+  return (
+    <section
+      id="submission-workflow"
+      className="relative overflow-hidden grid-bg-dots"
+      style={{
+        background: "#F8FAFC",
+        paddingTop: 80,
+        paddingBottom: 80,
+        borderTop: "1px solid var(--border)",
+      }}
+    >
+      <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-16 relative z-10">
+        {/* Title */}
+        <div style={{ marginBottom: 48 }}>
+          <span className="eyebrow">SUBMISSION PROTOCOL</span>
+          <h2 className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-[#004B57] uppercase" style={{ marginBottom: 12 }}>
+            HOW TO SUBMIT YOUR PROJECT
+          </h2>
+          <p className="text-slate-550 font-semibold text-xs sm:text-sm max-w-xl leading-relaxed">
+            Follow this simple 4-step workflow to complete your registration, access the leader portal, and upload your project presentation.
+          </p>
+        </div>
+
+        {/* Steps Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          {[
+            {
+              step: "01",
+              title: "Online Registration",
+              desc: "Fill out the registration wizard with your team details, and provide your transaction reference ID with a screenshot.",
+              badge: "₹3,000 Fee"
+            },
+            {
+              step: "02",
+              title: "Get Login Code",
+              desc: "Upon submission, you will receive a unique Registration Code (e.g. TECH26-XXXX) on screen and via email.",
+              badge: "Instant Code"
+            },
+            {
+              step: "03",
+              title: "Leader Portal Login",
+              desc: "Navigate to the Leader Portal. Authenticate using your Registration Code and the Leader's email/phone number.",
+              badge: "Secure Access"
+            },
+            {
+              step: "04",
+              title: "Upload Presentation",
+              desc: "Upload your project pitch slides in PPT, PPTX, or PDF format (maximum size 5MB) before the submission deadline.",
+              badge: "Deadline: July 15"
+            }
+          ].map((s, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.1 }}
+              className="bg-white border border-slate-200 rounded-3xl p-6 relative shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between"
+            >
+              <div className="space-y-4">
+                <div className="flex justify-between items-start">
+                  <span className="font-display text-4xl font-black text-[#FF8C00]/25 select-none">{s.step}</span>
+                  <span className="pill pill-teal text-[9px] uppercase tracking-wider">{s.badge}</span>
+                </div>
+                <h3 className="font-display text-sm font-extrabold uppercase text-[#004B57] tracking-tight">{s.title}</h3>
+                <p className="text-xs text-slate-500 font-semibold leading-relaxed">{s.desc}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Call to action card */}
+        <div className="mt-12 bg-white border border-slate-200 rounded-[2rem] p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
+          <div className="text-left space-y-1">
+            <h4 className="font-display text-base font-extrabold uppercase text-[#004B57]">Ready to access your dashboard?</h4>
+            <p className="text-xs text-slate-500 font-semibold">Registered team leads can manage their uploads and check verification status anytime.</p>
+          </div>
+          <div className="flex flex-wrap gap-4 w-full sm:w-auto">
+            <Link
+              href="/iyakkam/technnovations/portal"
+              className="btn-primary btn-teal text-xs w-full sm:w-auto justify-center"
+              style={{ padding: "12px 24px", borderRadius: 12 }}
+            >
+              Access Leader Portal
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ─── Main Page Assembly ───────────────────────────────────────────────────────
 export default function TechnnovationsPage() {
   return (
@@ -777,6 +871,7 @@ export default function TechnnovationsPage() {
       <HeroSection />
       <TopicTracks />
       <PrizeSection />
+      <SubmissionWorkflow />
       <RegisterSection />
       <Footer />
     </main>

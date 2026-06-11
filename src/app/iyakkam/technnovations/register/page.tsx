@@ -471,6 +471,7 @@ export default function RegisterPage() {
                               }`}
                           />
                           {errors.mobileNumber && <p className="text-[10px] text-red-500 font-semibold">{errors.mobileNumber}</p>}
+                          <p className="text-[9px] text-slate-400 mt-1">Used alongside your Registration Code to log in to the Leader Portal later.</p>
                         </div>
                       </div>
 
@@ -606,6 +607,7 @@ export default function RegisterPage() {
                               }`}
                           />
                           {errors.emailId && <p className="text-[10px] text-red-500 font-semibold">{errors.emailId}</p>}
+                          <p className="text-[9px] text-slate-400 mt-1">Used alongside your Registration Code to log in to the Leader Portal later.</p>
                         </div>
                       </div>
 
