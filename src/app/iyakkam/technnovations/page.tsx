@@ -190,6 +190,18 @@ function HeroSection() {
               </a>
             </motion.div>
 
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.45 }}
+              className="text-xs font-semibold text-slate-400 mt-2 text-left"
+            >
+              Already registered? Upload project presentation slides at the{" "}
+              <Link href="/iyakkam/technnovations/portal" className="text-teal hover:underline font-bold">
+                Leader Submission Portal
+              </Link>
+            </motion.p>
+
             {/* Telemetry info ribbon (Minimalist / Editorial) */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
@@ -522,6 +534,11 @@ function RegisterSection() {
                   title: "Verification Gate",
                   desc: "Standard entry fee of ₹3,000 on submission. Free to initial team draft setup.",
                   icon: <svg className="w-5 h-5 text-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                },
+                {
+                  title: "Leader Submission Portal",
+                  desc: "Log in with your Team Registration Code and Email to upload project PPT/PDF (up to 5MB).",
+                  icon: <svg className="w-5 h-5 text-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
                 },
                 {
                   title: "Acceptance Notice",
