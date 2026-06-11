@@ -25,7 +25,8 @@ import {
   ChevronDown,
   ChevronUp,
   Copy,
-  Check
+  Check,
+  Upload
 } from "lucide-react";
 import Navbar from "../../../../components/Navbar";
 import Footer from "../../../../components/Footer";
@@ -439,13 +440,31 @@ const RegistrationRow = ({
               </span>
             </div>
             
-            <span className={`text-[8px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md text-center border ${
-              r.is_verified 
-                ? "bg-emerald-50 text-emerald-600 border-emerald-100" 
-                : "bg-amber-50 text-amber-600 border-amber-100"
-            }`}>
-              {r.is_verified ? "Verified" : "Pending"}
-            </span>
+            <div className="flex items-center gap-1.5">
+              <span className={`text-[8px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md text-center border ${
+                r.is_verified 
+                  ? "bg-emerald-50 text-emerald-600 border-emerald-100" 
+                  : "bg-amber-50 text-amber-600 border-amber-100"
+              }`}>
+                {r.is_verified ? "Verified" : "Pending"}
+              </span>
+
+              <span className={`text-[8px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md text-center border flex items-center gap-1 ${
+                r.ppt_filename 
+                  ? "bg-green-55 text-white border-green-600" 
+                  : "bg-amber-50 text-amber-600 border-amber-100"
+              }`}>
+                {r.ppt_filename ? (
+                  <>
+                    <Check size={8} /> PPT
+                  </>
+                ) : (
+                  <>
+                    <AlertTriangle size={8} /> Pending
+                  </>
+                )}
+              </span>
+            </div>
           </div>
 
           <button
@@ -928,6 +947,7 @@ export default function AdminPage() {
   const totalVerifiedTeams = registrations.filter((r) => r.is_verified).length;
   const totalParticipants = registrations.reduce((acc, curr) => acc + curr.team_size, 0);
   const totalRevenue = totalVerifiedTeams * 3000;
+  const totalPPTsUploaded = registrations.filter((r) => r.ppt_filename).length;
 
   const trendData = useMemo(() => {
     const last7Days = Array.from({ length: 7 }, (_, i) => {
@@ -1073,7 +1093,7 @@ export default function AdminPage() {
               </div>
 
               {/* Statistics Cards Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 {[
                   {
                     title: "Registered Teams",
@@ -1088,6 +1108,13 @@ export default function AdminPage() {
                     icon: <Users size={22} />,
                     color: "text-orange",
                     bg: "bg-orange-tint/40 border-orange/10 hover:border-orange/30"
+                  },
+                  {
+                    title: "PPT Submissions",
+                    value: `${totalPPTsUploaded} / ${totalTeams}`,
+                    icon: <Upload size={22} />,
+                    color: "text-teal-dark",
+                    bg: "bg-[#F0FAF9] border-teal/10 hover:border-teal/30"
                   },
                   {
                     title: "Revenue Collections (Verified)",

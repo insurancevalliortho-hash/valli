@@ -296,6 +296,49 @@ export default function RegisterPage() {
                   </div>
                 </div>
 
+                {/* Next Steps / PPT Portal Instruction */}
+                <div className="bg-[#E8F7F5]/35 border border-[#B2E0DA] rounded-[2rem] p-6 text-left space-y-4 max-w-lg mx-auto shadow-inner-sm">
+                  <div className="flex items-center gap-2 pb-2 border-b border-[#B2E0DA]/40">
+                    <div className="w-6 h-6 rounded-lg bg-teal text-white flex items-center justify-center flex-shrink-0">
+                      <Info size={13} />
+                    </div>
+                    <h4 className="text-xs font-bold uppercase tracking-widest text-[#004B57]">
+                      CRITICAL NEXT STEPS: PPT SUBMISSION
+                    </h4>
+                  </div>
+                  
+                  <div className="space-y-3 text-xs leading-relaxed text-slate-600 font-medium">
+                    <p>
+                      To finalize your submission, the Team Leader must log in to the <span className="font-bold text-[#1A1A2E]">Leader Portal</span> using the credentials below to upload the project slides:
+                    </p>
+                    
+                    <ul className="list-disc list-inside space-y-1.5 pl-1 text-[11px] text-slate-500">
+                      <li>
+                        Portal Link: <Link href="/iyakkam/technnovations/portal" className="text-teal font-bold hover:underline">/iyakkam/technnovations/portal</Link>
+                      </li>
+                      <li>
+                        Username / Registration Code: <span className="font-mono font-bold text-[#1A1A2E] bg-slate-100 px-1.5 py-0.5 rounded border border-slate-250">{regCode}</span>
+                      </li>
+                      <li>
+                        Authentication: Use the Team Leader's Email (<span className="font-bold text-[#1A1A2E]">{emailId}</span>) or Mobile Number (<span className="font-bold text-[#1A1A2E]">{mobileNumber}</span>) to log in.
+                      </li>
+                      <li>
+                        Format: <span className="font-bold text-[#1A1A2E]">PPT, PPTX, or PDF</span> (Max size <span className="font-bold">5MB</span>).
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="pt-2">
+                    <Link
+                      href="/iyakkam/technnovations/portal"
+                      className="btn-primary btn-orange w-full justify-center text-xs"
+                      style={{ padding: "10px 20px", borderRadius: 10 }}
+                    >
+                      Go to Leader Portal <ArrowRight size={14} className="ml-1" />
+                    </Link>
+                  </div>
+                </div>
+
                 {/* Return Button */}
                 <div className="pt-2 flex justify-center">
                   <Link
@@ -594,6 +637,17 @@ export default function RegisterPage() {
                       <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
                         <span className="w-7 h-7 rounded-xl bg-[#E0F2F1] text-teal text-xs font-bold flex items-center justify-center font-mono">03</span>
                         <h2 className="font-display text-base font-bold text-[#004B57] uppercase tracking-wider">Secure Billing Gateway</h2>
+                      </div>
+
+                      {/* Info alert about next steps (PPT upload & Login details) */}
+                      <div className="p-4 bg-[#E8F7F5]/60 border border-[#B2E0DA] rounded-2xl text-left flex items-start gap-2.5">
+                        <Info className="w-4 h-4 text-teal flex-shrink-0 mt-0.5" />
+                        <div className="space-y-0.5">
+                          <span className="block text-[10px] font-bold text-[#004B57] uppercase tracking-wider">PPT Submission after registration</span>
+                          <p className="text-[10px] text-slate-500 font-medium leading-relaxed">
+                            Upon successful registration, you will get a unique Registration Code. The Team Leader will use this code and email/phone to log in to the <span className="font-bold text-[#1A1A2E]">Leader Portal</span> to upload the project presentation (.ppt, .pptx, or .pdf, max 5MB).
+                          </p>
+                        </div>
                       </div>
 
                       {/* UPI Only Scanner UI */}
