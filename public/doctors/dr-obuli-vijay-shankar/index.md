@@ -2,7 +2,7 @@
 title: Dr. Obuli Vijay Shankar - MBBS, MS, FNB | Valli Hospital Salem
 description: Professional profile of Dr. Obuli Vijay Shankar, specialist in DEPT OF HAND & MICRO SURGERY at Valli Super Speciality Hospital.
 url: https://www.vallihospital.in/doctors/dr-obuli-vijay-shankar
-last_updated: 2026-06-01
+last_updated: 2026-06-11
 ---
 
 # Professional Medical Profile: Dr. Obuli Vijay Shankar

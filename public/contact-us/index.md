@@ -2,7 +2,7 @@
 title: Contact Us & 24/7 Emergency Line | Valli Hospital Salem
 description: Get immediate phone contacts, clinical directory, interactive route maps, and book consultations at Valli Super Speciality Hospital Salem.
 url: https://www.vallihospital.in/contact-us
-last_updated: 2026-06-01
+last_updated: 2026-06-11
 ---
 
 
