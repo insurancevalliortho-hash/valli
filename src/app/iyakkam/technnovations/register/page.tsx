@@ -228,12 +228,12 @@ export default function RegisterPage() {
             <div className="max-w-2xl mx-auto bg-white border border-[#E2E8F0] rounded-[2rem] shadow-2xl relative overflow-hidden mt-8 animate-float">
               {/* Colorful top strip */}
               <div className="h-4 bg-teal" />
-              
+
               <div className="p-8 md:p-12 text-center space-y-8">
                 <div className="w-16 h-16 bg-[#E0F2F1] text-teal rounded-full flex items-center justify-center mx-auto shadow-inner border border-teal/10">
                   <CheckCircle2 className="w-10 h-10" />
                 </div>
-                
+
                 <div className="space-y-3">
                   <h2 className="font-display text-3xl font-extrabold tracking-tight uppercase text-[#004B57] leading-none">
                     REGISTRATION<br />
@@ -250,7 +250,7 @@ export default function RegisterPage() {
                     <span className="font-mono text-[9px] tracking-wider text-slate-500 uppercase">OFFICIAL RECEIPT</span>
                     <span className="font-mono text-teal font-bold">{regCode}</span>
                   </div>
-                  
+
                   <div className="divide-y divide-slate-200 font-medium">
                     <div className="p-4 grid grid-cols-3 gap-2">
                       <span className="text-slate-400 text-[10px] uppercase tracking-wider self-center">Team Details</span>
@@ -312,9 +312,8 @@ export default function RegisterPage() {
             <div className="max-w-2xl mx-auto">
               {/* Header Titles */}
               <div className="mb-10 text-center space-y-2">
-                <span className="eyebrow">Innovation Challenge Gateway</span>
-                <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-[#004B57] uppercase tracking-tight leading-none">
-                  CHALLENGE REGISTRATION
+                <h1 className="font-display text-3xl sm:text-4xl font-extrabold text-[#004B57] tracking-tight leading-none">
+                  Sport<span className="text-[#FF8C00]">AI</span>thon Registration
                 </h1>
                 <p className="text-slate-500 font-semibold text-xs sm:text-sm">
                   Technovations 2026 AI Sports Rehabilitation Expo &amp; SportAlthon
@@ -330,7 +329,7 @@ export default function RegisterPage() {
                 <div className="p-5 border-b border-slate-100 bg-slate-50/50">
                   <div className="flex items-center justify-between relative max-w-sm mx-auto">
                     <div className="absolute left-6 right-6 top-1/2 -translate-y-1/2 h-[2px] bg-slate-200 -z-0" />
-                    
+
                     {[
                       { number: 1, label: "Identity" },
                       { number: 2, label: "University" },
@@ -338,18 +337,16 @@ export default function RegisterPage() {
                     ].map((s) => (
                       <div key={s.number} className="flex flex-col items-center gap-1 relative z-10 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-100 shadow-sm">
                         <div
-                          className={`w-7 h-7 rounded-full border-2 font-mono text-[10px] font-bold flex items-center justify-center transition-colors duration-300 ${
-                            step >= s.number
-                              ? "bg-teal border-teal text-white shadow-md shadow-teal/20"
-                              : "bg-white border-slate-300 text-slate-400"
-                          }`}
+                          className={`w-7 h-7 rounded-full border-2 font-mono text-[10px] font-bold flex items-center justify-center transition-colors duration-300 ${step >= s.number
+                            ? "bg-teal border-teal text-white shadow-md shadow-teal/20"
+                            : "bg-white border-slate-300 text-slate-400"
+                            }`}
                         >
                           {step > s.number ? <CheckCircle2 size={13} className="text-white" /> : `0${s.number}`}
                         </div>
                         <span
-                          className={`text-[9px] font-bold uppercase tracking-wider transition-colors duration-300 ${
-                            step >= s.number ? "text-teal" : "text-slate-400"
-                          }`}
+                          className={`text-[9px] font-bold uppercase tracking-wider transition-colors duration-300 ${step >= s.number ? "text-teal" : "text-slate-400"
+                            }`}
                         >
                           {s.label}
                         </span>
@@ -377,9 +374,8 @@ export default function RegisterPage() {
                           value={teamName}
                           onChange={(e) => setTeamName(e.target.value)}
                           placeholder="e.g. BioSync Dynamics"
-                          className={`w-full bg-white border rounded-xl px-4 py-3 text-xs font-medium text-[#1A1A2E] transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${
-                            errors.teamName ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-300"
-                          }`}
+                          className={`w-full bg-white border rounded-xl px-4 py-3 text-xs font-medium text-[#1A1A2E] transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${errors.teamName ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-300"
+                            }`}
                         />
                         {errors.teamName && <p className="text-[10px] text-red-500 font-semibold">{errors.teamName}</p>}
                       </div>
@@ -412,9 +408,8 @@ export default function RegisterPage() {
                             value={teamLead}
                             onChange={(e) => setTeamLead(e.target.value)}
                             placeholder="Full Name"
-                            className={`w-full bg-white border rounded-xl px-4 py-3 text-xs font-medium text-[#1A1A2E] transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${
-                              errors.teamLead ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-300"
-                            }`}
+                            className={`w-full bg-white border rounded-xl px-4 py-3 text-xs font-medium text-[#1A1A2E] transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${errors.teamLead ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-300"
+                              }`}
                           />
                           {errors.teamLead && <p className="text-[10px] text-red-500 font-semibold">{errors.teamLead}</p>}
                         </div>
@@ -429,9 +424,8 @@ export default function RegisterPage() {
                             value={mobileNumber}
                             onChange={(e) => setMobileNumber(e.target.value.replace(/\D/g, ""))}
                             placeholder="10-digit phone number"
-                            className={`w-full bg-white border rounded-xl px-4 py-3 text-xs font-medium text-[#1A1A2E] transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${
-                              errors.mobileNumber ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-350"
-                            }`}
+                            className={`w-full bg-white border rounded-xl px-4 py-3 text-xs font-medium text-[#1A1A2E] transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${errors.mobileNumber ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-350"
+                              }`}
                           />
                           {errors.mobileNumber && <p className="text-[10px] text-red-500 font-semibold">{errors.mobileNumber}</p>}
                         </div>
@@ -455,9 +449,8 @@ export default function RegisterPage() {
                                         value={memberNames[idx] || ""}
                                         onChange={(e) => handleMemberNameChange(idx, e.target.value)}
                                         placeholder={`Member ${idx + 2} Name`}
-                                        className={`w-full bg-white border rounded-xl px-4 py-2 text-xs font-medium text-[#1A1A2E] focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${
-                                          errors[errNameKey] ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-300"
-                                        }`}
+                                        className={`w-full bg-white border rounded-xl px-4 py-2 text-xs font-medium text-[#1A1A2E] focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${errors[errNameKey] ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-300"
+                                          }`}
                                       />
                                       {errors[errNameKey] && <p className="text-[10px] text-red-500 font-semibold">{errors[errNameKey]}</p>}
                                     </div>
@@ -469,9 +462,8 @@ export default function RegisterPage() {
                                         value={memberPhones[idx] || ""}
                                         onChange={(e) => handleMemberPhoneChange(idx, e.target.value)}
                                         placeholder="10-digit phone number"
-                                        className={`w-full bg-white border rounded-xl px-4 py-2 text-xs font-medium text-[#1A1A2E] focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${
-                                          errors[errPhoneKey] ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-300"
-                                        }`}
+                                        className={`w-full bg-white border rounded-xl px-4 py-2 text-xs font-medium text-[#1A1A2E] focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${errors[errPhoneKey] ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-300"
+                                          }`}
                                       />
                                       {errors[errPhoneKey] && <p className="text-[10px] text-red-500 font-semibold">{errors[errPhoneKey]}</p>}
                                     </div>
@@ -503,9 +495,8 @@ export default function RegisterPage() {
                             value={collegeName}
                             onChange={(e) => setCollegeName(e.target.value)}
                             placeholder="College or University Name"
-                            className={`w-full bg-white border rounded-xl px-4 py-3 text-xs font-medium text-[#1A1A2E] transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${
-                              errors.collegeName ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-300"
-                            }`}
+                            className={`w-full bg-white border rounded-xl px-4 py-3 text-xs font-medium text-[#1A1A2E] transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${errors.collegeName ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-300"
+                              }`}
                           />
                           {errors.collegeName && <p className="text-[10px] text-red-500 font-semibold">{errors.collegeName}</p>}
                         </div>
@@ -519,9 +510,8 @@ export default function RegisterPage() {
                             value={collegeLocation}
                             onChange={(e) => setCollegeLocation(e.target.value)}
                             placeholder="City, State"
-                            className={`w-full bg-white border rounded-xl px-4 py-3 text-xs font-medium text-[#1A1A2E] transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${
-                              errors.collegeLocation ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-300"
-                            }`}
+                            className={`w-full bg-white border rounded-xl px-4 py-3 text-xs font-medium text-[#1A1A2E] transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${errors.collegeLocation ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-300"
+                              }`}
                           />
                           {errors.collegeLocation && <p className="text-[10px] text-red-500 font-semibold">{errors.collegeLocation}</p>}
                         </div>
@@ -535,9 +525,8 @@ export default function RegisterPage() {
                             value={department}
                             onChange={(e) => setDepartment(e.target.value)}
                             placeholder="e.g. Biomedical, CS"
-                            className={`w-full bg-white border rounded-xl px-4 py-3 text-xs font-medium text-[#1A1A2E] transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${
-                              errors.department ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-300"
-                            }`}
+                            className={`w-full bg-white border rounded-xl px-4 py-3 text-xs font-medium text-[#1A1A2E] transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${errors.department ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-300"
+                              }`}
                           />
                           {errors.department && <p className="text-[10px] text-red-500 font-semibold">{errors.department}</p>}
                         </div>
@@ -570,9 +559,8 @@ export default function RegisterPage() {
                             value={emailId}
                             onChange={(e) => setEmailId(e.target.value)}
                             placeholder="lead.email@example.com"
-                            className={`w-full bg-white border rounded-xl px-4 py-3 text-xs font-medium text-[#1A1A2E] transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${
-                              errors.emailId ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-300"
-                            }`}
+                            className={`w-full bg-white border rounded-xl px-4 py-3 text-xs font-medium text-[#1A1A2E] transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${errors.emailId ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-300"
+                              }`}
                           />
                           {errors.emailId && <p className="text-[10px] text-red-500 font-semibold">{errors.emailId}</p>}
                         </div>
@@ -625,8 +613,8 @@ export default function RegisterPage() {
                           <div className="md:col-span-7 space-y-4">
                             <div className="bg-white border border-slate-200 rounded-xl p-3 flex items-center justify-between shadow-sm">
                               <div>
-                                  <span className="block text-[8px] font-bold text-slate-400 uppercase tracking-wider">OFFICIAL UPI VPA</span>
-                                  <span className="font-mono text-xs font-bold text-[#1A1A2E]">valli.hosp@upi</span>
+                                <span className="block text-[8px] font-bold text-slate-400 uppercase tracking-wider">OFFICIAL UPI VPA</span>
+                                <span className="font-mono text-xs font-bold text-[#1A1A2E]">valli.hosp@upi</span>
                               </div>
                               <button
                                 type="button"
@@ -667,9 +655,8 @@ export default function RegisterPage() {
                               value={transactionId}
                               onChange={(e) => setTransactionId(e.target.value.replace(/\D/g, ""))}
                               placeholder="e.g. 329012345678"
-                              className={`w-full bg-white border rounded-xl pl-4 pr-12 py-3 text-xs font-mono tracking-widest text-[#1A1A2E] transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${
-                                errors.transactionId ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-300"
-                              }`}
+                              className={`w-full bg-white border rounded-xl pl-4 pr-12 py-3 text-xs font-mono tracking-widest text-[#1A1A2E] transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${errors.transactionId ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-300"
+                                }`}
                             />
                             <div className="absolute right-3.5 top-1/2 -translate-y-1/2 flex items-center text-slate-400 pointer-events-none">
                               {transactionId.length === 12 ? (
@@ -690,7 +677,7 @@ export default function RegisterPage() {
                           <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
                             <Upload className="w-3.5 h-3.5 text-teal" /> Upload Payment Screenshot
                           </label>
-                          
+
                           {!screenshot ? (
                             <div className="border-2 border-dashed border-slate-200 hover:border-teal/50 transition-colors rounded-xl p-5 text-center cursor-pointer relative bg-slate-50/30">
                               <input

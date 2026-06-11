@@ -49,6 +49,9 @@ interface Registration {
   created_at: string;
   payment_screenshot?: string;
   is_verified: boolean;
+  ppt_filename?: string | null;
+  ppt_file?: string | null;
+  ppt_uploaded_at?: string | null;
 }
 
 // ─── CHART 1: REGISTRATION TREND (SLEEK AREA CHART) ──────────────────────────
@@ -667,6 +670,31 @@ const RegistrationRow = ({
                     <span className="font-semibold text-slate-700 block mt-0.5">
                       {new Date(r.created_at).toLocaleString()}
                     </span>
+                  </div>
+                  <div>
+                    <span className="block text-[8px] font-bold text-slate-400 uppercase">
+                      Project Presentation
+                    </span>
+                    {r.ppt_filename && r.ppt_file ? (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          const link = document.createElement("a");
+                          link.href = r.ppt_file || "";
+                          link.download = r.ppt_filename || "presentation.pptx";
+                          document.body.appendChild(link);
+                          link.click();
+                          document.body.removeChild(link);
+                        }}
+                        className="inline-flex items-center gap-1 font-bold text-teal hover:underline mt-0.5 text-xs leading-none animate-fadeIn"
+                      >
+                        <Download size={11} /> Download PPT
+                      </button>
+                    ) : (
+                      <span className="text-[10px] text-slate-400 font-semibold italic block mt-0.5">
+                        Not uploaded yet
+                      </span>
+                    )}
                   </div>
                 </div>
 

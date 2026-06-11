@@ -14,8 +14,10 @@ import {
   ChevronRight,
   TrendingUp
 } from "lucide-react";
+
 import Navbar from "../../../components/Navbar";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import Footer from "../../../components/Footer";
 
 // ─── Animated Number Component ────────────────────────────────────────────────
 function AnimatedNumber({ value, duration = 1.5 }: { value: number; duration?: number }) {
@@ -159,9 +161,9 @@ function HeroSection() {
                 lineHeight: 1.65,
               }}
             >
-              The premier national project expo and SportAlthon for college innovators. Build the future of athletic recovery, wearable telemetry, and computer-vision kinesiology.
+              The premier national project expo and Sport<span className="text-[#FF8C00]">AI</span>thon for college innovators. Build the future of athletic recovery, wearable telemetry, and computer-vision kinesiology.
               <span className="block text-xs font-bold text-slate-400 mt-3 uppercase tracking-wider">
-                Organised by Valli Super Speciality Hospital &amp; Iyakkam Rehab
+                Organised by Valli Super Speciality Hospital - Iyakkam CME
               </span>
             </motion.p>
 
@@ -247,7 +249,7 @@ const TRACKS = [
   },
   {
     icon: <Activity size={24} strokeWidth={1.8} style={{ color: "var(--teal)" }} />,
-    title: "Return to Play Assess",
+    title: "Return to Play Assessment",
     desc: "Create dynamic logic engines to gauge athlete load tolerance, compute range-of-motion metrics, and declare recovery thresholds.",
     ideas: ["Real-time dynamic knee range-of-motion capture app", "Shoulder rotation asymmetry mapping for cricketers", "Biomechanical recovery countdown model"],
     stack: "TensorFlow Lite, MediaPipe, Swift, Kotlin",
@@ -255,7 +257,7 @@ const TRACKS = [
   },
   {
     icon: <Watch size={24} strokeWidth={1.8} style={{ color: "var(--teal)" }} />,
-    title: "Wearable Tech Rehab",
+    title: "Wearable Rehab Tech",
     desc: "Build telemetry channels linking muscle sensors, IoT bands, and mobile graphs to monitor post-op joint movements.",
     ideas: ["EMG-integrated wearable knee brace transmitter", "Cadence analysis band with haptic footbed correction", "Smartwatch ECG recovery tracker dashboard"],
     stack: "ESP32, BLE Protocol, Arduino, Next.js WebSockets",
@@ -263,7 +265,7 @@ const TRACKS = [
   },
   {
     icon: <BarChart3 size={24} strokeWidth={1.8} style={{ color: "var(--teal)" }} />,
-    title: "AI Sports Analytics",
+    title: "AI in Sports Analytics",
     desc: "Harness predictive algorithms to isolate speed leaks, refine athletic posture, and calculate athletic potential indices.",
     ideas: ["Running cadence telemetry tracker with speech feedback", "Pose-estimation platform for weightlifting velocity", "Athlete kinetic energy expenditure calculator"],
     stack: "Python, Scikit-Learn, React, Chart.js",
@@ -322,12 +324,6 @@ function TopicTracks() {
                 </p>
               </div>
 
-              <div className="pt-4 mt-6 border-t border-slate-100 flex items-center justify-between relative z-10">
-                <span className="text-[10px] font-bold text-[#FF8C00] uppercase tracking-wider">
-                  Select Track in Wizard
-                </span>
-                <ChevronRight size={14} className="text-[#FF8C00]" />
-              </div>
             </motion.div>
           ))}
         </div>
@@ -522,18 +518,18 @@ function RegisterSection() {
 
             <div className="grid grid-cols-1 gap-4 pt-2">
               {[
-                { 
-                  title: "Verification Gate", 
+                {
+                  title: "Verification Gate",
                   desc: "Standard entry fee of ₹3,000 on submission. Free to initial team draft setup.",
                   icon: <svg className="w-5 h-5 text-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
                 },
-                { 
-                  title: "Acceptance Notice", 
+                {
+                  title: "Acceptance Notice",
                   desc: "Review notifications dispatched within 48 hours of document uploads.",
                   icon: <svg className="w-5 h-5 text-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M3 19v-8.93a2 2 0 01.89-1.664l8-5.333a2 2 0 012.22 0l8 5.333A2 2 0 0121 10.07V19M3 19a2 2 0 002 2h14a2 2 0 002-2M3 19l6.75-4.5M21 19l-6.75-4.5M3 10l6.75 4.5M21 10l-6.75 4.5m0 0l-2.25-1.5a2 2 0 00-2.5 0l-2.25 1.5" /></svg>
                 },
-                { 
-                  title: "Submission Deadline", 
+                {
+                  title: "Submission Deadline",
                   desc: "July 15, 2026 midnight IST. Absolutely no late entries permitted.",
                   icon: <svg className="w-5 h-5 text-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 }
@@ -577,7 +573,7 @@ function RegisterSection() {
                   BUILD THE FUTURE<br />OF ATHLETICS
                 </h3>
               </div>
-              
+
               <p className="text-slate-500 font-semibold text-xs leading-relaxed">
                 Join engineering and medical stream teams across the nation. Register your team online to secure your slot.
               </p>
@@ -587,7 +583,7 @@ function RegisterSection() {
                   "Draft configuration takes under 5 minutes",
                   "Open to all departments & year classes",
                   "Includes challenge entry, certificate & mentorship",
-                  "Fast-track verification via UPI"
+
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-3">
                     <div className="w-5 h-5 bg-[#E0F2F1] text-teal rounded-full flex items-center justify-center flex-shrink-0">
@@ -600,7 +596,7 @@ function RegisterSection() {
             </div>
 
             {/* Lower section */}
-            <div className="p-8 pt-6 bg-slate-50 border-t border-slate-100 flex flex-col justify-center min-h-[120px] gap-3">
+            <div className="p-8 pt-6 bg-slate-50 border-t border-slate-100 flex flex-col justify-center min-h-[120px] gap-3.5">
               <Link
                 href="/iyakkam/technnovations/register"
                 className="btn-primary btn-orange group/btn"
@@ -614,6 +610,12 @@ function RegisterSection() {
               >
                 Register Online Now
                 <ArrowRight size={16} className="group-hover/btn:translate-x-1.5 transition-transform" />
+              </Link>
+              <Link
+                href="/iyakkam/technnovations/portal"
+                className="text-center text-xs font-bold text-teal hover:text-teal-dark transition-colors mt-1 block uppercase tracking-wider"
+              >
+                Already registered? Log in to Leader Portal
               </Link>
             </div>
           </motion.div>
@@ -759,7 +761,7 @@ export default function TechnnovationsPage() {
       <TopicTracks />
       <PrizeSection />
       <RegisterSection />
-      <TechFooter />
+      <Footer />
     </main>
   );
 }
