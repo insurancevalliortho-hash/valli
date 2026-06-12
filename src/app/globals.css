@@ -63,7 +63,6 @@ h6 {
 #page-content-wrapper {
     transition: transform 900ms cubic-bezier(0.85, 0, 0.15, 1), filter 900ms cubic-bezier(0.85, 0, 0.15, 1), opacity 900ms cubic-bezier(0.85, 0, 0.15, 1);
     transform-origin: center center;
-    will-change: transform, filter, opacity;
 }
 
 #page-content-wrapper.transitioning {

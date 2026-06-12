@@ -763,8 +763,6 @@ export default function RegisterPage() {
                               title="Click to expand QR Code"
                             >
                               <img src="/assets/payment-qr.jpg" alt="UPI QR Code" className="w-[135px] h-[135px] object-contain" />
-                              {/* Scanning line */}
-                              <div className="absolute left-3 right-3 h-[1.5px] bg-[#FF8C00] top-3 animate-sweep" />
                               <div className="absolute inset-0 bg-teal/5 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity flex items-center justify-center">
                                 <span className="bg-white/95 text-teal text-[9px] font-bold px-2.5 py-1 rounded-full shadow-md border border-teal/10">Click to Expand</span>
                               </div>
@@ -774,6 +772,26 @@ export default function RegisterPage() {
 
                           {/* Payment instructions */}
                           <div className="md:col-span-7 space-y-4">
+                            {/* UPI VPA ID Box */}
+                            <div className="bg-white border border-slate-200 rounded-xl p-3 flex items-center justify-between shadow-sm">
+                              <div>
+                                <span className="block text-[8px] font-bold text-slate-400 uppercase tracking-wider">Quick Pay / UPI VPA</span>
+                                <span className="font-mono text-xs font-bold text-[#1A1A2E]">drvjl79-2@okicici</span>
+                              </div>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  navigator.clipboard.writeText("drvjl79-2@okicici");
+                                  setCopied(true);
+                                  setTimeout(() => setCopied(false), 2000);
+                                }}
+                                className="p-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-slate-500 transition-colors cursor-pointer"
+                                title="Copy UPI VPA"
+                              >
+                                {copied ? <Check size={14} className="text-emerald-500" /> : <Copy size={14} />}
+                              </button>
+                            </div>
+
                             <div className="text-xs space-y-2 text-[#004B57] font-semibold leading-relaxed">
                               <p className="text-teal font-bold flex items-center gap-1.5 text-sm">
                                 <Info className="w-4 h-4" /> UPI Payment Steps:
