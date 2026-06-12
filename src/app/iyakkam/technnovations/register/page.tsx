@@ -23,7 +23,8 @@ import {
   Lock,
   Upload,
   X,
-  Download
+  Download,
+  Zap
 } from "lucide-react";
 import Navbar from "../../../../components/Navbar";
 import Footer from "../../../../components/Footer";
@@ -790,6 +791,19 @@ export default function RegisterPage() {
                               >
                                 {copied ? <Check size={14} className="text-emerald-500" /> : <Copy size={14} />}
                               </button>
+                            </div>
+
+                            {/* Direct Instant UPI Pay Link Button */}
+                            <div className="space-y-1.5">
+                              <a
+                                href="upi://pay?pa=drvjl79-2@okicici&pn=Valli%20Hospital&am=3000&cu=INR"
+                                className="w-full bg-[#FF8C00] hover:bg-[#E07B00] text-white py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-md flex items-center justify-center gap-2 cursor-pointer"
+                              >
+                                <Zap size={14} /> Pay Instantly via UPI App
+                              </a>
+                              <span className="block text-[9px] text-slate-400 font-semibold text-center italic leading-none">
+                                *Direct pay works on mobile devices with active UPI apps (Google Pay, PhonePe, Paytm, etc.).
+                              </span>
                             </div>
 
                             <div className="text-xs space-y-2 text-[#004B57] font-semibold leading-relaxed">
