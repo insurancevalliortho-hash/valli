@@ -874,7 +874,7 @@ export default function TechnnovationsPage() {
       <PrizeSection />
       <SubmissionWorkflow />
       <RegisterSection />
-      <Footer />
+
     </main>
   );
 }
