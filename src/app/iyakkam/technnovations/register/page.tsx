@@ -630,7 +630,7 @@ export default function RegisterPage() {
                       </div>
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="space-y-1.5 col-span-2">
+                        <div className="space-y-1.5 col-span-1 md:col-span-2">
                           <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
                             <Building className="w-3.5 h-3.5 text-teal" /> College Name
                           </label>
@@ -719,7 +719,7 @@ export default function RegisterPage() {
                           {errors.department && <p className="text-[10px] text-red-500 font-semibold">{errors.department}</p>}
                         </div>
 
-                        <div className="space-y-1.5 col-span-2">
+                        <div className="space-y-1.5 col-span-1 md:col-span-2">
                           <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
                             <Calendar className="w-3.5 h-3.5 text-teal" /> Year of Study
                           </label>
@@ -738,7 +738,7 @@ export default function RegisterPage() {
                           </div>
                         </div>
 
-                        <div className="space-y-1.5 col-span-2">
+                        <div className="space-y-1.5 col-span-1 md:col-span-2">
                           <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
                             <Mail className="w-3.5 h-3.5 text-teal" /> Lead Email ID
                           </label>
