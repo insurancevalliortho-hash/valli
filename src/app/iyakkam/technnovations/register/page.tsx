@@ -21,7 +21,9 @@ import {
   Copy,
   Check,
   Lock,
-  Upload
+  Upload,
+  X,
+  Download
 } from "lucide-react";
 import Navbar from "../../../../components/Navbar";
 import Footer from "../../../../components/Footer";
@@ -50,6 +52,7 @@ export default function RegisterPage() {
 
   // Payment Overhaul States
   const [copied, setCopied] = useState(false);
+  const [qrModalOpen, setQrModalOpen] = useState(false);
 
   // UI status states
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -130,7 +133,7 @@ export default function RegisterPage() {
       return Math.random() * (max - min) + min;
     }
 
-    const interval: NodeJS.Timeout = setInterval(function() {
+    const interval: NodeJS.Timeout = setInterval(function () {
       const timeLeft = animationEnd - Date.now();
 
       if (timeLeft <= 0) {
@@ -327,7 +330,7 @@ export default function RegisterPage() {
                       </h3>
                       <p className="text-[10px] text-slate-400 font-semibold mt-0.5">{collegeName}</p>
                     </div>
-                    
+
                     <span className="text-[8px] font-bold tracking-widest bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded-md uppercase">
                       ACTIVE PASS
                     </span>
@@ -380,7 +383,8 @@ export default function RegisterPage() {
                   </div>
 
                   {/* Inline Holographic styling keyframes */}
-                  <style dangerouslySetInnerHTML={{ __html: `
+                  <style dangerouslySetInnerHTML={{
+                    __html: `
                     @keyframes hologram {
                       0% { transform: translateX(-100%); }
                       100% { transform: translateX(100%); }
@@ -401,12 +405,12 @@ export default function RegisterPage() {
                       CRITICAL NEXT STEPS: PPT SUBMISSION
                     </h4>
                   </div>
-                  
+
                   <div className="space-y-3 text-xs leading-relaxed text-slate-600 font-medium">
                     <p>
                       To finalize your submission, the Team Leader must log in to the <span className="font-bold text-[#1A1A2E]">Leader Portal</span> using the credentials below to upload the project slides:
                     </p>
-                    
+
                     <ul className="list-disc list-inside space-y-1.5 pl-1 text-[11px] text-slate-500">
                       <li>
                         Portal Link: <Link href="/iyakkam/technnovations/portal" className="text-teal font-bold hover:underline">/iyakkam/technnovations/portal</Link>
@@ -752,12 +756,20 @@ export default function RegisterPage() {
                         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center bg-[#F0FAF9]/60 border border-teal/15 p-5 rounded-2xl">
                           {/* QR code scanner wrapper */}
                           <div className="md:col-span-5 flex flex-col items-center">
-                            <div className="relative bg-white border border-slate-200 rounded-2xl p-3 shadow-md">
+                            <button
+                              type="button"
+                              onClick={() => setQrModalOpen(true)}
+                              className="relative bg-white border border-slate-200 rounded-2xl p-3 shadow-md hover:shadow-lg hover:border-teal/30 hover:scale-105 transition-all duration-300 cursor-pointer group"
+                              title="Click to expand QR Code"
+                            >
                               <img src="/assets/payment-qr.jpg" alt="UPI QR Code" className="w-[135px] h-[135px] object-contain" />
                               {/* Scanning line */}
                               <div className="absolute left-3 right-3 h-[1.5px] bg-[#FF8C00] top-3 animate-sweep" />
-                            </div>
-                            <span className="text-[8px] font-mono text-slate-400 mt-2 tracking-widest uppercase">SCAN TO PAY</span>
+                              <div className="absolute inset-0 bg-teal/5 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity flex items-center justify-center">
+                                <span className="bg-white/95 text-teal text-[9px] font-bold px-2.5 py-1 rounded-full shadow-md border border-teal/10">Click to Expand</span>
+                              </div>
+                            </button>
+                            <span className="text-[8px] font-mono text-slate-450 mt-2 tracking-widest uppercase">Click to scan / save</span>
                           </div>
 
                           {/* Payment instructions */}
@@ -902,6 +914,59 @@ export default function RegisterPage() {
           )}
         </div>
       </div>
+
+      {/* Google Pay QR Code Expanded Lightbox Modal */}
+      {qrModalOpen && (
+        <div 
+          className="fixed inset-0 z-50 bg-[#1A1A2E]/80 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200"
+          onClick={() => setQrModalOpen(false)}
+        >
+          <div 
+            className="bg-white rounded-[2rem] p-6 sm:p-8 max-w-sm w-full border border-teal/10 shadow-2xl relative flex flex-col items-center gap-5 text-center animate-in fade-in zoom-in-95 duration-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setQrModalOpen(false)}
+              className="absolute top-4 right-4 p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-colors"
+            >
+              <X size={18} />
+            </button>
+
+            <div className="space-y-1 mt-2">
+              <h3 className="font-display text-lg font-bold uppercase text-[#004B57]">Google Pay QR Code</h3>
+              <p className="text-[11px] text-slate-500 font-semibold leading-relaxed">
+                Scan this QR code with Google Pay, PhonePe, Paytm, or any UPI app to transfer the ₹3,000 entry fee.
+              </p>
+            </div>
+
+            <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 shadow-inner flex items-center justify-center">
+              <img 
+                src="/assets/payment-qr.jpg" 
+                alt="UPI QR Code Expanded" 
+                className="w-[260px] h-[260px] object-contain rounded-xl bg-white shadow-sm"
+              />
+            </div>
+
+            <div className="w-full flex flex-col gap-2.5">
+              <a
+                href="/assets/payment-qr.jpg"
+                download="valli-hospital-payment-qr.jpg"
+                className="bg-[#00A896] hover:bg-[#008B7A] text-white w-full py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-md flex items-center justify-center gap-2"
+              >
+                <Download size={14} /> Save QR to Device
+              </a>
+              <button
+                type="button"
+                onClick={() => setQrModalOpen(false)}
+                className="bg-slate-100 hover:bg-slate-200 text-[#004B57] w-full py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300"
+              >
+                Close View
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <Footer />
     </SmoothScroll>
