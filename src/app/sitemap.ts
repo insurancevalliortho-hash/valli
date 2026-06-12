@@ -58,6 +58,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.8,
     }));
 
+    const iyakkamRoutes = [
+        '/iyakkam',
+        '/iyakkam/ai-sports-rehab',
+        '/iyakkam/technnovations',
+        '/iyakkam/technnovations/register',
+        '/iyakkam/technnovations/portal'
+    ].map((route) => ({
+        url: `${baseUrl}${route}`,
+        lastModified: new Date().toISOString(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.85,
+    }));
+
     // Dynamically read MDX blog posts
     let blogRoutes: { url: string; lastModified: string; changeFrequency: 'monthly'; priority: number }[] = [];
     try {
@@ -80,5 +93,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
         console.error('Error generating dynamic blog routes for sitemap:', error);
     }
 
-    return [...homeRoute, ...specialtyRoutes, ...otherPages, ...doctorRoutes, ...blogRoutes];
+    return [...homeRoute, ...specialtyRoutes, ...otherPages, ...iyakkamRoutes, ...doctorRoutes, ...blogRoutes];
 }
