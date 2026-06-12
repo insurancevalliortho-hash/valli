@@ -70,12 +70,12 @@ const TESTIMONIALS = [
 // ─── Interactive Biomechanics Scanner Component ──────────────────────────────
 function BiomechanicsScanner() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  
+
   // Interactive control states
   const [showJoints, setShowJoints] = useState(true);
   const [showForces, setShowForces] = useState(true);
   const [cadence, setCadence] = useState(170); // steps per minute
-  
+
   // HUD state variables
   const [metrics, setMetrics] = useState({ kneeAngle: 120, ankleFlexion: 85, hipExtension: 145 });
   const [logs, setLogs] = useState<string[]>([
@@ -138,9 +138,9 @@ function BiomechanicsScanner() {
       // Speed factor derived from Cadence (Base cadence 170)
       const speedFactor = cadence / 170;
       time += 0.04 * speedFactor;
-      
+
       const hipOffset = Math.sin(time * 2) * 5 * scale;
-      
+
       // Spine and head
       const shoulderX = hipX - 8 * scale + Math.cos(time * 2) * 2 * scale;
       const shoulderY = hipY - 55 * scale + hipOffset;
@@ -221,7 +221,7 @@ function BiomechanicsScanner() {
         ctx.moveTo(hipX, hipY + hipOffset);
         ctx.lineTo(hipX, hipY + hipOffset + 40 * scale);
         ctx.stroke();
-        
+
         ctx.fillStyle = "#F26522";
         ctx.beginPath();
         ctx.moveTo(hipX - 4 * scale, hipY + hipOffset + 36 * scale);
@@ -467,11 +467,10 @@ function ShowcaseGallery() {
               setTab(t.id as "gait" | "rehab");
               setActiveHotspot(null);
             }}
-            className={`font-display text-xs font-extrabold uppercase tracking-wider px-5 py-2.5 rounded-xl border transition-all cursor-pointer ${
-              tab === t.id
+            className={`font-display text-xs font-extrabold uppercase tracking-wider px-5 py-2.5 rounded-xl border transition-all cursor-pointer ${tab === t.id
                 ? "bg-[#1A1A2E] text-white border-[#1A1A2E] shadow-lg shadow-slate-900/10"
                 : "bg-white text-slate-500 border-slate-200 hover:border-slate-350"
-            }`}
+              }`}
           >
             {t.label}
           </button>
@@ -498,9 +497,8 @@ function ShowcaseGallery() {
               {/* Outer pulsing ring */}
               <div className="w-6 h-6 rounded-full bg-orange/40 absolute -top-1.5 -left-1.5 animate-ping" />
               {/* Solid inner core */}
-              <div className={`w-3.5 h-3.5 rounded-full border border-white shadow-md flex items-center justify-center transition-colors ${
-                activeHotspot === h.id ? "bg-teal" : "bg-orange hover:bg-teal"
-              }`}>
+              <div className={`w-3.5 h-3.5 rounded-full border border-white shadow-md flex items-center justify-center transition-colors ${activeHotspot === h.id ? "bg-teal" : "bg-orange hover:bg-teal"
+                }`}>
                 <span className="block w-1 h-1 rounded-full bg-white" />
               </div>
             </div>
@@ -546,7 +544,7 @@ export default function IyakkamPage() {
       <Navbar />
 
       <div className="font-body text-[#1A1A2E] bg-white min-h-screen selection:bg-orange selection:text-white">
-        
+
         {/* Hero Section */}
         <section className="relative min-h-[90vh] flex items-center bg-white text-navy overflow-hidden pt-32 pb-20">
           <div className="absolute inset-0 z-0">
@@ -558,37 +556,37 @@ export default function IyakkamPage() {
 
           <div className="container mx-auto px-6 md:px-12 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              
+
               {/* Left Content */}
               <div className="lg:col-span-7 space-y-6">
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#00A896]/5 border border-[#00A896]/10 text-[#00A896] text-xs font-bold tracking-[0.2em] uppercase">
                   <span className="w-2 h-2 rounded-full bg-[#00A896] animate-pulse" />
                   Valli Super Speciality Hospital
                 </div>
-                
+
                 <h1 className="text-5xl sm:text-7xl lg:text-8xl font-display tracking-tight leading-none text-[#1A1A2E] uppercase">
                   IYAKKAM<br />
                   <span className="text-[#F26522]">SPORTS REHAB</span>
                 </h1>
-              
+
                 <p className="text-[#004B57] text-xs font-bold uppercase tracking-[0.25em]">
                   &ldquo;Iyakkam&rdquo; &mdash; Flagship Movement Initiative
                 </p>
-                
+
                 <p className="text-slate-500 text-sm max-w-xl leading-relaxed font-semibold">
                   As the premier Sports Rehabilitation &amp; Biomechanics center of Valli Hospital, we combine clinical orthopedic expertise with advanced motion-capture telemetry. We restore movement, prevent injury, and elevate athletic performance.
                 </p>
-                
+
                 <div className="flex flex-wrap gap-4 pt-4">
-                  <Link 
-                    href="/iyakkam/ai-sports-rehab" 
+                  <Link
+                    href="/iyakkam/ai-sports-rehab"
                     className="bg-[#00A896] hover:bg-[#008B7A] text-white px-8 py-3.5 rounded-full font-bold text-sm transition-all duration-300 shadow-lg shadow-[#00A896]/15 flex items-center gap-2 hover:-translate-y-0.5"
                   >
                     AI Sports Rehab Symposium
                     <ArrowRight className="w-4 h-4" />
                   </Link>
-                  <Link 
-                    href="/iyakkam/technnovations" 
+                  <Link
+                    href="/iyakkam/technnovations"
                     className="bg-[#F26522] hover:bg-[#D44E0E] text-white px-8 py-3.5 rounded-full font-bold text-sm transition-all duration-300 shadow-lg shadow-[#F26522]/15 flex items-center gap-2 hover:-translate-y-0.5"
                   >
                     Technovations Challenge
@@ -636,7 +634,7 @@ export default function IyakkamPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16">
               {SERVICES.map((srv, idx) => (
-                <div 
+                <div
                   key={idx}
                   className="bg-white border border-[#E2E8F0] border-t-4 border-t-[#00A896] rounded-3xl p-8 hover:border-[#B2E0DA] hover:shadow-xl hover:shadow-[#00A896]/5 hover:-translate-y-1.5 transition-all duration-300 ease-out"
                 >
@@ -709,7 +707,7 @@ export default function IyakkamPage() {
             backgroundImage: "radial-gradient(circle, #00A896 1.5px, transparent 1.5px)",
             backgroundSize: "28px 28px"
           }} />
-          
+
           <div className="container mx-auto px-6 md:px-12 relative z-10">
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-16">
@@ -723,8 +721,8 @@ export default function IyakkamPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {TESTIMONIALS.map((t, idx) => (
-                  <div 
-                    key={idx} 
+                  <div
+                    key={idx}
                     className="bg-white border border-[#E2E8F0] border-l-4 border-l-[#00A896] rounded-3xl p-8 shadow-sm flex flex-col justify-between hover:border-[#B2E0DA] hover:shadow-xl hover:shadow-[#00A896]/5 hover:-translate-y-1.5 transition-all duration-300 ease-out"
                   >
                     <p className="text-slate-500 italic leading-relaxed text-sm font-semibold mb-6">
@@ -775,8 +773,8 @@ export default function IyakkamPage() {
                   </div>
                 </div>
                 <div className="pt-8 flex">
-                  <Link 
-                    href="/iyakkam/ai-sports-rehab" 
+                  <Link
+                    href="/iyakkam/ai-sports-rehab"
                     className="bg-[#00A896] hover:bg-[#008B7A] text-white px-8 py-3.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-lg shadow-[#00A896]/15 hover:scale-105 inline-flex items-center gap-2"
                   >
                     Symposium Details
@@ -803,8 +801,8 @@ export default function IyakkamPage() {
                   </div>
                 </div>
                 <div className="pt-8 flex">
-                  <Link 
-                    href="/iyakkam/technnovations" 
+                  <Link
+                    href="/iyakkam/technnovations"
                     className="bg-[#F26522] hover:bg-[#D44E0E] text-white px-8 py-3.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-lg shadow-[#F26522]/15 hover:scale-105 inline-flex items-center gap-2"
                   >
                     Join the Challenge
@@ -816,8 +814,6 @@ export default function IyakkamPage() {
           </div>
         </section>
       </div>
-
-      <Footer />
     </SmoothScroll>
   );
 }

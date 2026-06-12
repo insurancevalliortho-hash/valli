@@ -57,19 +57,15 @@ function AnimatedNumber({ value, duration = 1.5 }: { value: number; duration?: n
 // ─── Countdown Timer Component ────────────────────────────────────────────────
 function CountdownTimer() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-
   React.useEffect(() => {
-    const targetDate = new Date("2026-07-15T23:59:59").getTime();
-
+    const targetDate = new Date("2026-07-19T23:59:59").getTime();
     const updateTimer = () => {
       const now = new Date().getTime();
       const difference = targetDate - now;
-
       if (difference <= 0) {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
         return;
       }
-
       const days = Math.floor(difference / (1000 * 60 * 60 * 24));
       const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
@@ -213,7 +209,7 @@ function HeroSection() {
                 {[
                   { label: "Prize Pool", val: "₹60,000+", color: "text-[#FF8C00]" },
                   { label: "Category Tracks", val: "4 Paths", color: "text-[#004B57]" },
-                  { label: "Submission", val: "July 15", color: "text-[#004B57]" }
+                  { label: "Submission", val: "July 19", color: "text-[#004B57]" }
                 ].map((s, idx) => (
                   <div key={idx} className="space-y-1">
                     <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">
@@ -547,7 +543,7 @@ function RegisterSection() {
                 },
                 {
                   title: "Submission Deadline",
-                  desc: "July 15, 2026 midnight IST. Absolutely no late entries permitted.",
+                  desc: "July 19, 2026 midnight IST. Absolutely no late entries permitted.",
                   icon: <svg className="w-5 h-5 text-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 }
               ].map((d, idx) => (
@@ -819,7 +815,7 @@ function SubmissionWorkflow() {
               step: "04",
               title: "Upload Presentation",
               desc: "Upload your project pitch slides in PPT, PPTX, or PDF format (maximum size 5MB) before the submission deadline.",
-              badge: "Deadline: July 15"
+              badge: "Deadline: July 19"
             }
           ].map((s, idx) => (
             <motion.div

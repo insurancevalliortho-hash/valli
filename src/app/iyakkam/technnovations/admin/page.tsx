@@ -387,9 +387,8 @@ const RegistrationRow = ({
 
   return (
     <div
-      className={`bg-white border transition-all duration-300 rounded-[2.25rem] overflow-hidden shadow-sm hover:shadow-md ${
-        isExpanded ? "border-teal ring-8 ring-teal/5" : "border-slate-200/60"
-      }`}
+      className={`bg-white border transition-all duration-300 rounded-[2.25rem] overflow-hidden shadow-sm hover:shadow-md ${isExpanded ? "border-teal ring-8 ring-teal/5" : "border-slate-200/60"
+        }`}
     >
       {/* Spacious Card Header */}
       <div
@@ -439,21 +438,19 @@ const RegistrationRow = ({
                 {r.transaction_id}
               </span>
             </div>
-            
+
             <div className="flex items-center gap-1.5">
-              <span className={`text-[8px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md text-center border ${
-                r.is_verified 
-                  ? "bg-emerald-50 text-emerald-600 border-emerald-100" 
+              <span className={`text-[8px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md text-center border ${r.is_verified
+                  ? "bg-emerald-50 text-emerald-600 border-emerald-100"
                   : "bg-amber-50 text-amber-600 border-amber-100"
-              }`}>
+                }`}>
                 {r.is_verified ? "Verified" : "Pending"}
               </span>
 
-              <span className={`text-[8px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md text-center border flex items-center gap-1 ${
-                r.ppt_filename 
-                  ? "bg-green-55 text-white border-green-600" 
+              <span className={`text-[8px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md text-center border flex items-center gap-1 ${r.ppt_filename
+                  ? "bg-green-55 text-white border-green-600"
                   : "bg-amber-50 text-amber-600 border-amber-100"
-              }`}>
+                }`}>
                 {r.ppt_filename ? (
                   <>
                     <Check size={8} /> PPT
@@ -1247,8 +1244,6 @@ export default function AdminPage() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      <Footer />
     </SmoothScroll>
   );
 }

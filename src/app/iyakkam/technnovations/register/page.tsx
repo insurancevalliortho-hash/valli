@@ -797,9 +797,9 @@ export default function RegisterPage() {
                             <div className="space-y-1.5">
                               <a
                                 href="upi://pay?pa=drvjl79-2@okicici&pn=Valli%20Hospital&am=3000&cu=INR"
-                                className="w-full bg-[#FF8C00] hover:bg-[#E07B00] text-white py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-md flex items-center justify-center gap-2 cursor-pointer"
+                                className="w-full bg-[#F26522] hover:bg-[#C94F0E] text-white py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-md flex items-center justify-center gap-2 cursor-pointer"
                               >
-                                <Zap size={14} /> Pay Instantly via UPI App
+                                <Zap size={14} /> Quick Pay (UPI)
                               </a>
                               <span className="block text-[9px] text-slate-400 font-semibold text-center italic leading-none">
                                 *Direct pay works on mobile devices with active UPI apps (Google Pay, PhonePe, Paytm, etc.).
