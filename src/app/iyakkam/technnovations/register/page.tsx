@@ -26,7 +26,6 @@ import {
 import Navbar from "../../../../components/Navbar";
 import Footer from "../../../../components/Footer";
 import SmoothScroll from "../../../../components/SmoothScroll";
-import QRCodePlaceholder from "../../../../components/svg/QRCodePlaceholder";
 import confetti from "canvas-confetti";
 
 export default function RegisterPage() {
@@ -754,7 +753,7 @@ export default function RegisterPage() {
                           {/* QR code scanner wrapper */}
                           <div className="md:col-span-5 flex flex-col items-center">
                             <div className="relative bg-white border border-slate-200 rounded-2xl p-3 shadow-md">
-                              <QRCodePlaceholder size={135} />
+                              <img src="/assets/payment-qr.jpg" alt="UPI QR Code" className="w-[135px] h-[135px] object-contain" />
                               {/* Scanning line */}
                               <div className="absolute left-3 right-3 h-[1.5px] bg-[#FF8C00] top-3 animate-sweep" />
                             </div>
@@ -763,33 +762,15 @@ export default function RegisterPage() {
 
                           {/* Payment instructions */}
                           <div className="md:col-span-7 space-y-4">
-                            <div className="bg-white border border-slate-200 rounded-xl p-3 flex items-center justify-between shadow-sm">
-                              <div>
-                                <span className="block text-[8px] font-bold text-slate-400 uppercase tracking-wider">OFFICIAL UPI VPA</span>
-                                <span className="font-mono text-xs font-bold text-[#1A1A2E]">valli.hosp@upi</span>
-                              </div>
-                              <button
-                                type="button"
-                                onClick={() => {
-                                  navigator.clipboard.writeText("valli.hosp@upi");
-                                  setCopied(true);
-                                  setTimeout(() => setCopied(false), 2000);
-                                }}
-                                className="p-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-slate-500 transition-colors"
-                              >
-                                {copied ? <Check size={14} className="text-emerald-500" /> : <Copy size={14} />}
-                              </button>
-                            </div>
-
-                            <div className="text-xs space-y-2 text-slate-600 font-semibold leading-relaxed">
-                              <p className="text-teal font-bold flex items-center gap-1.5">
-                                <Info className="w-3.5 h-3.5" /> Payment Steps:
+                            <div className="text-xs space-y-2 text-[#004B57] font-semibold leading-relaxed">
+                              <p className="text-teal font-bold flex items-center gap-1.5 text-sm">
+                                <Info className="w-4 h-4" /> UPI Payment Steps:
                               </p>
-                              <ol className="list-decimal list-inside text-[11px] text-slate-500 pl-1 space-y-1">
-                                <li>Scan the QR with any standard UPI app.</li>
-                                <li>Enter the entry fee amount of <span className="font-bold text-[#1A1A2E]">₹3,000</span>.</li>
-                                <li>Verify recipient is <span className="font-bold text-slate-800">Valli Hospital Trust</span>.</li>
-                                <li>Copy the 12-digit UPI Transaction reference ID.</li>
+                              <ol className="list-decimal list-inside text-[11px] text-slate-500 pl-1 space-y-2">
+                                <li>Scan this QR code using Google Pay, PhonePe, Paytm, or any standard UPI app.</li>
+                                <li>Pay the entry fee amount of <span className="font-bold text-[#1A1A2E]">₹3,000</span>.</li>
+                                <li>Verify that the recipient name displays as <span className="font-bold text-[#1A1A2E]">Valli Hospital</span>.</li>
+                                <li>Copy the 12-digit UPI Transaction/Reference ID and enter it below.</li>
                               </ol>
                             </div>
                           </div>
