@@ -27,6 +27,7 @@ import Navbar from "../../../../components/Navbar";
 import Footer from "../../../../components/Footer";
 import SmoothScroll from "../../../../components/SmoothScroll";
 import QRCodePlaceholder from "../../../../components/svg/QRCodePlaceholder";
+import confetti from "canvas-confetti";
 
 export default function RegisterPage() {
   // Current step state (1, 2, or 3)
@@ -82,6 +83,72 @@ export default function RegisterPage() {
     const randNum = Math.floor(1000 + Math.random() * 9000);
     setRegCode(`TECH26-${randNum}`);
   }, []);
+
+  // Trigger rich, impressive confetti bursts
+  const triggerConfetti = () => {
+    // Left side burst
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { x: 0.1, y: 0.6 },
+      colors: ["#00A896", "#F26522", "#004B57", "#FF8C00", "#FFF4EE"],
+    });
+    // Right side burst
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { x: 0.9, y: 0.6 },
+      colors: ["#00A896", "#F26522", "#004B57", "#FF8C00", "#FFF4EE"],
+    });
+
+    // Central fireworks-like delays
+    setTimeout(() => {
+      confetti({
+        particleCount: 60,
+        angle: 60,
+        spread: 60,
+        origin: { x: 0, y: 0.7 },
+        colors: ["#00A896", "#F26522", "#FF8C00"],
+      });
+    }, 200);
+
+    setTimeout(() => {
+      confetti({
+        particleCount: 60,
+        angle: 120,
+        spread: 60,
+        origin: { x: 1, y: 0.7 },
+        colors: ["#00A896", "#F26522", "#FF8C00"],
+      });
+    }, 350);
+
+    // Continuous soft confetti snowfall from the top
+    const duration = 4000;
+    const animationEnd = Date.now() + duration;
+    const defaults = { startVelocity: 25, spread: 360, ticks: 60, zIndex: 1000 };
+
+    function randomInRange(min: number, max: number) {
+      return Math.random() * (max - min) + min;
+    }
+
+    const interval: NodeJS.Timeout = setInterval(function() {
+      const timeLeft = animationEnd - Date.now();
+
+      if (timeLeft <= 0) {
+        return clearInterval(interval);
+      }
+
+      const particleCount = 30 * (timeLeft / duration);
+      confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } });
+      confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } });
+    }, 200);
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      triggerConfetti();
+    }
+  }, [isSuccess]);
 
   // Handle member name inputs
   const handleMemberNameChange = (index: number, value: string) => {
@@ -244,56 +311,85 @@ export default function RegisterPage() {
                   </p>
                 </div>
 
-                {/* Receipt Details Table */}
-                <div className="bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden text-left text-xs font-semibold text-slate-700 max-w-lg mx-auto shadow-sm">
-                  <div className="p-4 bg-slate-100 border-b border-slate-200 flex justify-between items-center">
-                    <span className="font-mono text-[9px] tracking-wider text-slate-500 uppercase">OFFICIAL RECEIPT</span>
-                    <span className="font-mono text-teal font-bold">{regCode}</span>
+                {/* Impressive Holographic Team Pass Card */}
+                <div className="relative max-w-lg mx-auto bg-gradient-to-br from-[#1A1A2E] to-[#0A0A15] border border-slate-800 rounded-[2.5rem] p-6 sm:p-8 text-white text-left shadow-2xl overflow-hidden group">
+                  {/* Holographic scanning line effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#00A896]/10 to-transparent -translate-x-full group-hover:animate-hologram pointer-events-none" />
+
+                  {/* Radial neon glow backdrops */}
+                  <div className="absolute -top-12 -right-12 w-36 h-36 bg-[#00A896]/20 rounded-full blur-2xl pointer-events-none" />
+                  <div className="absolute -bottom-12 -left-12 w-36 h-36 bg-[#FF8C00]/15 rounded-full blur-2xl pointer-events-none" />
+
+                  <div className="flex justify-between items-start border-b border-slate-800/80 pb-4">
+                    <div>
+                      <span className="font-mono text-[9px] tracking-[0.2em] text-[#00A896] uppercase font-bold">OFFICIAL ENTRY PASS</span>
+                      <h3 className="font-display text-2xl font-black tracking-tight text-white uppercase mt-1">
+                        {teamName}
+                      </h3>
+                      <p className="text-[10px] text-slate-400 font-semibold mt-0.5">{collegeName}</p>
+                    </div>
+                    
+                    <span className="text-[8px] font-bold tracking-widest bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded-md uppercase">
+                      ACTIVE PASS
+                    </span>
                   </div>
 
-                  <div className="divide-y divide-slate-200 font-medium">
-                    <div className="p-4 grid grid-cols-3 gap-2">
-                      <span className="text-slate-400 text-[10px] uppercase tracking-wider self-center">Team Details</span>
-                      <span className="col-span-2 text-slate-800 font-bold">{teamName} ({teamSize} Members)</span>
-                    </div>
-
-                    <div className="p-4 grid grid-cols-3 gap-2">
-                      <span className="text-slate-400 text-[10px] uppercase tracking-wider">Team Lead</span>
-                      <span className="col-span-2 text-slate-800 font-bold">
-                        {teamLead}
-                        <span className="block text-[10px] text-slate-500 font-semibold mt-0.5">{mobileNumber}</span>
+                  {/* Core Ticket Code Centerpiece */}
+                  <div className="my-6 p-5 bg-black/45 border border-slate-800/60 rounded-2xl flex items-center justify-between shadow-inner">
+                    <div className="space-y-1">
+                      <span className="block text-[8px] font-bold text-slate-400 uppercase tracking-widest">REGISTRATION / LOGIN CODE</span>
+                      <span className="font-mono text-2xl sm:text-3xl font-black text-[#FF8C00] tracking-wider block">
+                        {regCode}
                       </span>
                     </div>
 
-                    {teamSize > 1 && (
-                      <div className="p-4 grid grid-cols-3 gap-2">
-                        <span className="text-slate-400 text-[10px] uppercase tracking-wider">Co-Members</span>
-                        <div className="col-span-2 space-y-2 text-slate-800">
-                          {memberNames.slice(0, teamSize - 1).map((name, i) => (
-                            <div key={i} className="font-semibold flex items-center justify-between">
-                              <span>{name}</span>
-                              <span className="text-[10px] text-slate-500 font-mono">({memberPhones[i] || "No mobile"})</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        navigator.clipboard.writeText(regCode);
+                        setCopied(true);
+                        setTimeout(() => setCopied(false), 2000);
+                      }}
+                      className="flex items-center gap-1.5 px-4 py-2 bg-slate-900 hover:bg-slate-800 border border-slate-800 text-[#00A896] hover:text-[#00c2ad] transition-all rounded-xl text-xs font-bold shadow-md cursor-pointer"
+                    >
+                      {copied ? (
+                        <>
+                          <Check size={14} className="text-emerald-400" />
+                          <span className="text-emerald-400 font-mono">COPIED</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy size={14} />
+                          <span className="font-mono">COPY CODE</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
 
-                    <div className="p-4 grid grid-cols-3 gap-2">
-                      <span className="text-slate-400 text-[10px] uppercase tracking-wider">Institution</span>
-                      <span className="col-span-2 text-slate-800 font-bold">
-                        {collegeName}
-                        <span className="block text-[10px] text-slate-500 font-semibold mt-0.5">{department} Department - {year} Year</span>
-                      </span>
+                  {/* Bottom Stub details */}
+                  <div className="grid grid-cols-2 gap-4 text-xs pt-4 border-t border-dashed border-slate-800/80">
+                    <div>
+                      <span className="block text-[8px] font-bold text-slate-400 uppercase tracking-wider">TEAM LEADER</span>
+                      <span className="font-bold text-slate-200 mt-0.5 block">{teamLead}</span>
+                      <span className="text-[10px] text-slate-500 block">{mobileNumber}</span>
                     </div>
-
-                    <div className="p-4 grid grid-cols-3 gap-2 bg-[#E0F2F1]/30">
-                      <span className="text-[#004B57] text-[10px] uppercase tracking-wider self-center font-bold">Payment Status</span>
-                      <span className="col-span-2 font-mono text-teal font-black text-xs self-center">
-                        UPI REF ID: {transactionId}
-                      </span>
+                    <div>
+                      <span className="block text-[8px] font-bold text-slate-400 uppercase tracking-wider">CAPACITY</span>
+                      <span className="font-bold text-slate-200 mt-0.5 block">{teamSize} Members</span>
+                      <span className="text-[10px] text-slate-500 block">{department} Dept</span>
                     </div>
                   </div>
+
+                  {/* Inline Holographic styling keyframes */}
+                  <style dangerouslySetInnerHTML={{ __html: `
+                    @keyframes hologram {
+                      0% { transform: translateX(-100%); }
+                      100% { transform: translateX(100%); }
+                    }
+                    .group:hover .group-hover\\:animate-hologram {
+                      animation: hologram 2s infinite linear;
+                    }
+                  `}} />
                 </div>
 
                 {/* Next Steps / PPT Portal Instruction */}
