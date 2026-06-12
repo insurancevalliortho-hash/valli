@@ -274,7 +274,7 @@ export async function sendRegistrationEmail(data: EmailPayload) {
                 <li>Log in using your Registration Code <strong>${data.registrationCode}</strong> and the Leader's Email (<strong>${data.emailId}</strong>) or Phone (<strong>${data.leadPhone}</strong>).</li>
                 <li>Upload your slides in <strong>PPT, PPTX, or PDF</strong> format.</li>
                 <li>Ensure the file size is under <strong>5MB</strong>.</li>
-                <li>All submissions must be completed before the deadline on <strong>July 15, 2026</strong>.</li>
+                <li>All submissions must be completed before the deadline on <strong style="color: #00A896;">July 19, 2026</strong>. Selected teams will present at the live exhibition on <strong style="color: #F26522;">August 2, 2026</strong>.</li>
               </ul>
               
               <div style="text-align: center;">

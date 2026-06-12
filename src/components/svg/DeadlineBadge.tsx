@@ -69,14 +69,14 @@ export const DeadlineBadge: React.FC<DeadlineBadgeProps> = ({
         dominantBaseline="central"
       >
         <tspan
-          fill="#1A1A2E"
+          fill="#00A896"
           fontSize="32"
           fontWeight="bold"
         >
-          JULY 15
+          JULY 19
         </tspan>
         <tspan
-          fill="#F26522"
+          fill="#1A1A2E"
           fontSize="14"
           dx="8"
           dy="-4"

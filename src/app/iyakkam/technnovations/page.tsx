@@ -205,17 +205,17 @@ function HeroSection() {
               transition={{ duration: 0.5, delay: 0.5 }}
               className="pt-6 border-t border-slate-200 max-w-[480px]"
             >
-              <div className="grid grid-cols-3 gap-6 text-slate-800">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-slate-800">
                 {[
                   { label: "Prize Pool", val: "₹60,000+", color: "text-[#FF8C00]" },
-                  { label: "Category Tracks", val: "4 Paths", color: "text-[#004B57]" },
-                  { label: "Submission", val: "July 19", color: "text-[#004B57]" }
+                  { label: "Last Submission", val: "July 19", color: "text-[#00A896]" },
+                  { label: "Event Date", val: "August 2", color: "text-[#F26522]" }
                 ].map((s, idx) => (
-                  <div key={idx} className="space-y-1">
-                    <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                  <div key={idx} className="space-y-2">
+                    <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">
                       {s.label}
                     </span>
-                    <span className={`font-display text-2xl font-black tracking-tight block ${s.color}`}>
+                    <span className={`font-display text-xl font-black tracking-tight block ${s.color}`}>
                       {s.val}
                     </span>
                   </div>
@@ -358,7 +358,6 @@ function PrizeSection() {
 
         {/* Title */}
         <div style={{ textAlign: "center", marginBottom: 64 }}>
-          <span className="eyebrow" style={{ textAlign: "center", display: "block" }}>HONOUR ROLL &amp; COMPENSATION</span>
           <h2 className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-[#004B57] uppercase" style={{ marginBottom: 12 }}>
             Prize Pool &amp; Incubation Perks
           </h2>
@@ -392,9 +391,6 @@ function PrizeSection() {
                 Outstanding technical execution, functional prototype deployment, and accurate gait mapping logic.
               </p>
             </div>
-            <div className="pt-4 border-t border-slate-100 mt-6 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
-              INCLUDES SILVER MEDAL
-            </div>
           </motion.div>
 
           {/* 1st Place: Elevated Center */}
@@ -426,8 +422,7 @@ function PrizeSection() {
                 Highest scoring project across all vectors of feasibility, clinical depth, wearable execution, and presentation pitch.
               </p>
             </div>
-            <div className="pt-4 border-t border-slate-100 mt-8 flex justify-between items-center text-[10px] font-bold text-slate-400 uppercase tracking-wider font-mono">
-              <span>GOLD CUP + SHIELD</span>
+            <div className="pt-4 border-t border-slate-100 mt-8 flex justify-end items-center text-[10px] font-bold text-slate-400 uppercase tracking-wider font-mono">
               <span className="text-[#FF8C00] font-black">TOP SCORE</span>
             </div>
           </motion.div>
@@ -453,9 +448,6 @@ function PrizeSection() {
               <p className="text-slate-500 font-semibold text-xs leading-relaxed">
                 Outstanding presentation, unique problem-solving methodology, or high novelty in biomechanical research vectors.
               </p>
-            </div>
-            <div className="pt-4 border-t border-slate-100 mt-6 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
-              INCLUDES BRONZE MEDAL
             </div>
           </motion.div>
         </div>
@@ -543,8 +535,21 @@ function RegisterSection() {
                 },
                 {
                   title: "Submission Deadline",
-                  desc: "July 19, 2026 midnight IST. Absolutely no late entries permitted.",
+                  desc: (
+                    <span>
+                      <strong className="text-[#00A896] bg-[#E8F7F5] px-1.5 py-0.5 rounded border border-[#B2E0DA]/30 font-bold">July 19, 2026</strong> midnight IST. Absolutely no late entries permitted.
+                    </span>
+                  ),
                   icon: <svg className="w-5 h-5 text-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                },
+                {
+                  title: "Event Date & Expo",
+                  desc: (
+                    <span>
+                      <strong className="text-[#F26522] bg-[#FFF4EE] px-1.5 py-0.5 rounded border border-[#FF8C00]/10 font-bold">August 2, 2026</strong>. Final exhibition and project pitch presentation.
+                    </span>
+                  ),
+                  icon: <svg className="w-5 h-5 text-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                 }
               ].map((d, idx) => (
                 <motion.div
@@ -595,7 +600,7 @@ function RegisterSection() {
                 {[
                   "Draft configuration takes under 5 minutes",
                   "Open to all departments & year classes",
-                  "Includes challenge entry, certificate & mentorship",
+                  "Includes challenge entry & certificate",
 
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-3">
@@ -814,7 +819,7 @@ function SubmissionWorkflow() {
             {
               step: "04",
               title: "Upload Presentation",
-              desc: "Upload your project pitch slides in PPT, PPTX, or PDF format (maximum size 5MB) before the submission deadline.",
+              desc: "Upload your project pitch slides in PPT, PPTX, or PDF format (maximum size 5MB) before the July 19 submission deadline. Selected teams will present at the live exhibition on August 2.",
               badge: "Deadline: July 19"
             }
           ].map((s, idx) => (
@@ -829,7 +834,7 @@ function SubmissionWorkflow() {
               <div className="space-y-4">
                 <div className="flex justify-between items-start">
                   <span className="font-display text-4xl font-black text-[#FF8C00]/25 select-none">{s.step}</span>
-                  <span className="pill pill-teal text-[9px] uppercase tracking-wider">{s.badge}</span>
+                  <span className={`pill text-[9px] uppercase tracking-wider ${idx === 3 ? "bg-[#F26522] text-white animate-pulse shadow-md shadow-[#F26522]/20 border-none font-bold" : "pill-teal"}`}>{s.badge}</span>
                 </div>
                 <h3 className="font-display text-sm font-extrabold uppercase text-[#004B57] tracking-tight">{s.title}</h3>
                 <p className="text-xs text-slate-500 font-semibold leading-relaxed">{s.desc}</p>

@@ -337,7 +337,7 @@ export default function LeaderPortal() {
 
                 {/* Dashboard Grid split */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  
+
                   {/* Card 1: Team & Academic Profile details */}
                   <div className="bg-white border border-slate-200/80 p-8 rounded-[2.25rem] shadow-sm flex flex-col justify-between">
                     <div className="space-y-6 text-left">
@@ -465,7 +465,6 @@ export default function LeaderPortal() {
         </div>
       </div>
 
-      <Footer />
     </SmoothScroll>
   );
 }

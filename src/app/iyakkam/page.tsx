@@ -796,7 +796,8 @@ export default function IyakkamPage() {
                     Calling all student innovators! Design, build, and submit your AI models, IoT telemetry, and biomechanical sports analytics applications. Compete for prizes and clinical validation.
                   </p>
                   <div className="flex flex-wrap gap-4 text-[10px] font-bold text-slate-400">
-                    <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4 text-[#00A896]" /> July 15 Submission</span>
+                    <span className="flex items-center gap-1.5 bg-[#FFF4EE] text-[#F26522] border border-[#FF8C00]/20 font-extrabold px-3 py-1 rounded-full"><Calendar className="w-3.5 h-3.5 text-[#F26522]" /> August 2 Event</span>
+                    <span className="flex items-center gap-1.5 bg-[#E8F7F5] text-[#00A896] border border-[#B2E0DA]/30 font-extrabold px-3 py-1 rounded-full"><Calendar className="w-3.5 h-3.5 text-[#00A896]" /> July 19 Deadline</span>
                     <span className="flex items-center gap-1.5"><Award className="w-4 h-4 text-[#F26522]" /> ₹60,000 Prize Pool</span>
                   </div>
                 </div>

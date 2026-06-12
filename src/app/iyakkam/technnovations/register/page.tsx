@@ -664,14 +664,58 @@ export default function RegisterPage() {
                           <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
                             <FileText className="w-3.5 h-3.5 text-teal" /> Department
                           </label>
-                          <input
-                            type="text"
-                            value={department}
-                            onChange={(e) => setDepartment(e.target.value)}
-                            placeholder="e.g. Biomedical, CS"
-                            className={`w-full bg-white border rounded-xl px-4 py-3 text-xs font-medium text-[#1A1A2E] transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${errors.department ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-300"
-                              }`}
-                          />
+                          <div className="relative">
+                            <select
+                              value={department}
+                              onChange={(e) => setDepartment(e.target.value)}
+                              className={`w-full bg-white border rounded-xl px-4 py-3 text-xs font-medium text-[#1A1A2E] transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%234A4A6A%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:0.6rem_auto] bg-[right_1.25rem_center] bg-no-repeat pr-10 ${errors.department ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-300"
+                                }`}
+                            >
+                              <option value="" disabled>Select Department</option>
+
+                              <optgroup label="Computing &amp; IT">
+                                <option value="Artificial Intelligence &amp; Machine Learning (AI &amp; ML)">Artificial Intelligence &amp; Machine Learning (AI &amp; ML)</option>
+                                <option value="Artificial Intelligence &amp; Data Science (AI &amp; DS)">Artificial Intelligence &amp; Data Science (AI &amp; DS)</option>
+                                <option value="Computer Science &amp; Engineering (CSE)">Computer Science &amp; Engineering (CSE)</option>
+                                <option value="Information Technology (IT)">Information Technology (IT)</option>
+                                <option value="Cyber Security">Cyber Security</option>
+                                <option value="Data Science">Data Science</option>
+                                <option value="Computer Applications (BCA / MCA)">Computer Applications (BCA / MCA)</option>
+                                <option value="Software Engineering">Software Engineering</option>
+                              </optgroup>
+
+                              <optgroup label="Electrical &amp; Electronics">
+                                <option value="Electronics &amp; Communication Engineering (ECE)">Electronics &amp; Communication Engineering (ECE)</option>
+                                <option value="Electrical &amp; Electronics Engineering (EEE)">Electrical &amp; Electronics Engineering (EEE)</option>
+                                <option value="Electronics &amp; Instrumentation Engineering (EIE)">Electronics &amp; Instrumentation Engineering (EIE)</option>
+                                <option value="Instrumentation &amp; Control Engineering">Instrumentation &amp; Control Engineering</option>
+                              </optgroup>
+
+                              <optgroup label="Bio &amp; Medical Engineering">
+                                <option value="Biomedical Engineering">Biomedical Engineering</option>
+                                <option value="Medical Electronics">Medical Electronics</option>
+                                <option value="Bioinformatics">Bioinformatics</option>
+                                <option value="Biotechnology">Biotechnology</option>
+                              </optgroup>
+
+                              <optgroup label="Mechanical &amp; Robotics">
+                                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                <option value="Mechatronics Engineering">Mechatronics Engineering</option>
+                                <option value="Robotics &amp; Automation">Robotics &amp; Automation</option>
+                                <option value="Automobile Engineering">Automobile Engineering</option>
+                              </optgroup>
+
+                              <optgroup label="Allied Health &amp; Physiotherapy">
+                                <option value="Physiotherapy (BPT / MPT)">Physiotherapy (BPT / MPT)</option>
+                              </optgroup>
+
+
+                              <optgroup label="Basic Sciences">
+                                <option value="Science (Statistics)">Computer Science and Related Fields</option>
+                              </optgroup>
+
+                            </select>
+                          </div>
                           {errors.department && <p className="text-[10px] text-red-500 font-semibold">{errors.department}</p>}
                         </div>
 
@@ -949,11 +993,11 @@ export default function RegisterPage() {
 
       {/* Google Pay QR Code Expanded Lightbox Modal */}
       {qrModalOpen && (
-        <div 
+        <div
           className="fixed inset-0 z-50 bg-[#1A1A2E]/80 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200"
           onClick={() => setQrModalOpen(false)}
         >
-          <div 
+          <div
             className="bg-white rounded-[2rem] p-6 sm:p-8 max-w-sm w-full border border-teal/10 shadow-2xl relative flex flex-col items-center gap-5 text-center animate-in fade-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
@@ -973,9 +1017,9 @@ export default function RegisterPage() {
             </div>
 
             <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 shadow-inner flex items-center justify-center">
-              <img 
-                src="/assets/payment-qr.jpg" 
-                alt="UPI QR Code Expanded" 
+              <img
+                src="/assets/payment-qr.jpg"
+                alt="UPI QR Code Expanded"
                 className="w-[260px] h-[260px] object-contain rounded-xl bg-white shadow-sm"
               />
             </div>
@@ -999,8 +1043,6 @@ export default function RegisterPage() {
           </div>
         </div>
       )}
-
-      <Footer />
     </SmoothScroll>
   );
 }
