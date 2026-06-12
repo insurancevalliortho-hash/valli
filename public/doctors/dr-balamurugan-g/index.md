@@ -2,7 +2,7 @@
 title: Dr. G. Balamurugan - MBBS, MD ANAESTHESIA | Valli Hospital Salem
 description: Professional profile of Dr. G. Balamurugan, specialist in DEPT OF ANAESTHESIA & CRITICAL CARE at Valli Super Speciality Hospital.
 url: https://www.vallihospital.in/doctors/dr-balamurugan-g
-last_updated: 2026-06-11
+last_updated: 2026-06-12
 ---
 
 # Professional Medical Profile: Dr. G. Balamurugan
