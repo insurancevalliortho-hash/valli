@@ -17,7 +17,8 @@ import {
   Info,
   Sliders,
   CheckCircle,
-  Eye
+  Eye,
+  MapPin
 } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
@@ -579,12 +580,13 @@ export default function IyakkamPage() {
                 </p>
                 
                 <div className="flex flex-wrap gap-4 pt-4">
-                  <a 
-                    href="#services" 
-                    className="bg-[#00A896] hover:bg-[#008B7A] text-white px-8 py-3.5 rounded-full font-bold text-sm transition-all duration-300 shadow-lg shadow-[#00A896]/15 hover:-translate-y-0.5"
+                  <Link 
+                    href="/iyakkam/ai-sports-rehab" 
+                    className="bg-[#00A896] hover:bg-[#008B7A] text-white px-8 py-3.5 rounded-full font-bold text-sm transition-all duration-300 shadow-lg shadow-[#00A896]/15 flex items-center gap-2 hover:-translate-y-0.5"
                   >
-                    Our Services
-                  </a>
+                    AI Sports Rehab Symposium
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
                   <Link 
                     href="/iyakkam/technnovations" 
                     className="bg-[#F26522] hover:bg-[#D44E0E] text-white px-8 py-3.5 rounded-full font-bold text-sm transition-all duration-300 shadow-lg shadow-[#F26522]/15 flex items-center gap-2 hover:-translate-y-0.5"
@@ -739,34 +741,71 @@ export default function IyakkamPage() {
           </div>
         </section>
 
-        {/* Technovations CTA Banner */}
+        {/* Active Symposiums & Challenges */}
         <section className="bg-white py-24 relative z-10 border-t border-slate-200">
-          <div className="container mx-auto px-6 md:px-12 max-w-5xl">
-            <div className="relative bg-slate-50 rounded-[3rem] p-10 md:p-16 text-[#1A1A2E] border border-[#00A896]/20 overflow-hidden shadow-xl shadow-[#004B57]/5 font-body">
+          <div className="container mx-auto px-6 md:px-12 max-w-6xl">
+            <div className="text-center mb-16 space-y-3">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#00A896]/5 text-[#00A896] border border-[#00A896]/10 text-xs font-bold tracking-[0.2em] uppercase">
+                <Sparkles className="w-4 h-4 text-[#00A896]" /> ACTIVE INITIATIVES
+              </span>
+              <h2 className="text-4xl font-display text-[#1A1A2E] uppercase tracking-tight font-extrabold">
+                SYMPOSIUMS &amp; CHALLENGES
+              </h2>
+              <p className="mt-4 text-slate-500 font-semibold text-xs sm:text-sm leading-relaxed max-w-xl mx-auto">
+                Explore our current major events combining clinical excellence, academic collaboration, and artificial intelligence in orthopaedics.
+              </p>
+            </div>
 
-              <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <div className="lg:col-span-8 space-y-6">
-                  <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F26522]/5 text-[#F26522] border border-[#F26522]/10 text-xs font-bold tracking-[0.15em] uppercase">
-                    <Flame className="w-3.5 h-3.5 animate-pulse text-[#F26522]" /> CHALLENGE ACTIVE
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Card 1: AI Sports Rehab Symposium */}
+              <div className="relative bg-gradient-to-br from-[#E0F2F1]/30 to-[#FCFDFD] rounded-[2.5rem] p-8 md:p-12 text-[#1A1A2E] border border-[#B2E0DA] flex flex-col justify-between hover:shadow-xl hover:shadow-[#00A896]/5 hover:-translate-y-1.5 transition-all duration-300 font-body">
+                <div className="space-y-6">
+                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00A896]/5 text-[#00A896] border border-[#00A896]/10 text-xs font-bold tracking-[0.1em] uppercase">
+                    <Sparkles className="w-3 h-3 text-[#00A896]" /> CME Symposium
                   </span>
-                  <h2 className="text-4xl md:text-5xl font-display tracking-tight leading-none uppercase text-[#1A1A2E] font-extrabold">
-                    Technovations 2026
-                  </h2>
-                  <h3 className="text-lg font-bold text-[#00A896] leading-tight uppercase">
-                    AI Sports Rehabilitation &amp; Biomechanics Challenge
+                  <h3 className="text-3xl font-display tracking-tight leading-none uppercase text-[#1A1A2E] font-black">
+                    AI IN SPORTS<br />REHABILITATION
                   </h3>
-                  <p className="text-slate-500 text-xs sm:text-sm leading-relaxed max-w-xl font-semibold">
-                    We invite engineering, tech, and medical college students to build innovative AI models, wear-tech applications, and biomechanical analytics systems. Showcase your project and compete for a total prize pool of ₹60,000.
+                  <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-semibold">
+                    A premier symposium bridging technology, academic research, and clinical orthopaedics. Learn from top surgeons and tech experts about wearable sensors, deep learning, and predictive loading models.
                   </p>
                   <div className="flex flex-wrap gap-4 text-[10px] font-bold text-slate-400">
-                    <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4 text-[#00A896]" /> July 15, 2026 Submission</span>
-                    <span className="flex items-center gap-1.5"><Award className="w-4 h-4 text-[#F26522]" /> INR 30K Top Prize</span>
+                    <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4 text-[#00A896]" /> Date TBA</span>
+                    <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4 text-[#FF8C00]" /> Salem, Tamil Nadu</span>
                   </div>
                 </div>
-                <div className="lg:col-span-4 flex justify-start lg:justify-end">
+                <div className="pt-8 flex">
+                  <Link 
+                    href="/iyakkam/ai-sports-rehab" 
+                    className="bg-[#00A896] hover:bg-[#008B7A] text-white px-8 py-3.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-lg shadow-[#00A896]/15 hover:scale-105 inline-flex items-center gap-2"
+                  >
+                    Symposium Details
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
+
+              {/* Card 2: Technovations 2026 Challenge */}
+              <div className="relative bg-gradient-to-br from-[#FFF8F0]/30 to-[#FCFDFD] rounded-[2.5rem] p-8 md:p-12 text-[#1A1A2E] border border-[#FF8C00]/25 flex flex-col justify-between hover:shadow-xl hover:shadow-[#FF8C00]/5 hover:-translate-y-1.5 transition-all duration-300 font-body">
+                <div className="space-y-6">
+                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F26522]/5 text-[#F26522] border border-[#F26522]/10 text-xs font-bold tracking-[0.1em] uppercase">
+                    <Flame className="w-3 h-3 text-[#F26522] animate-pulse" /> Challenge Active
+                  </span>
+                  <h3 className="text-3xl font-display tracking-tight leading-none uppercase text-[#1A1A2E] font-black">
+                    TECHNOVATIONS<br />2026
+                  </h3>
+                  <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-semibold">
+                    Calling all student innovators! Design, build, and submit your AI models, IoT telemetry, and biomechanical sports analytics applications. Compete for prizes and clinical validation.
+                  </p>
+                  <div className="flex flex-wrap gap-4 text-[10px] font-bold text-slate-400">
+                    <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4 text-[#00A896]" /> July 15 Submission</span>
+                    <span className="flex items-center gap-1.5"><Award className="w-4 h-4 text-[#F26522]" /> ₹60,000 Prize Pool</span>
+                  </div>
+                </div>
+                <div className="pt-8 flex">
                   <Link 
                     href="/iyakkam/technnovations" 
-                    className="bg-[#F26522] hover:bg-[#D44E0E] text-white px-8 py-4 rounded-full font-bold text-sm transition-all duration-300 shadow-xl shadow-[#F26522]/20 hover:scale-105 inline-flex items-center gap-2"
+                    className="bg-[#F26522] hover:bg-[#D44E0E] text-white px-8 py-3.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-lg shadow-[#F26522]/15 hover:scale-105 inline-flex items-center gap-2"
                   >
                     Join the Challenge
                     <ArrowRight className="w-4 h-4" />
