@@ -452,30 +452,7 @@ function PrizeSection() {
           </motion.div>
         </div>
 
-        {/* Incubation Perks ribbon */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mt-16 max-w-4xl mx-auto bg-slate-50 border border-slate-200 rounded-2xl p-6"
-        >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { title: "Clinical Mentoring", desc: "Coaching by Valli Hospital orthopaedic surgeons and biomechanics physical therapists." },
-              { title: "Lab Workspace Access", desc: "Gain permission to execute testing cycles at the Iyakkam Rehabilitation Center labs." },
-              { title: "Fast-Track Incubation", desc: "Direct evaluation pathway for Seed funding pathways via Valli Incubation division." }
-            ].map((p, idx) => (
-              <div key={idx} className="flex gap-3">
-                <div className="text-[#FF8C00] font-bold font-mono text-sm">✓</div>
-                <div>
-                  <h4 className="font-display text-xs font-bold uppercase text-[#004B57] tracking-wider">{p.title}</h4>
-                  <p className="text-[11px] text-slate-500 font-semibold mt-1 leading-relaxed">{p.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
+
 
       </div>
     </section>
