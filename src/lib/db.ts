@@ -57,3 +57,94 @@ export async function saveRegistration(data: {
   `;
   return result;
 }
+
+export async function getDelegateByEmail(email: string) {
+  const cleanEmail = email.trim().toLowerCase();
+  const result = await sql`
+    SELECT * FROM delegates 
+    WHERE LOWER(TRIM(email)) = ${cleanEmail}
+    LIMIT 1;
+  `;
+  if (result.length > 0) return result[0];
+
+  // Fallback for .gmail.con typos
+  const alternativeEmail = cleanEmail.endsWith('.com') 
+    ? cleanEmail.replace(/\.com$/, '.con') 
+    : cleanEmail.endsWith('.con') 
+      ? cleanEmail.replace(/\.con$/, '.com') 
+      : cleanEmail;
+
+  if (alternativeEmail !== cleanEmail) {
+    const fallbackResult = await sql`
+      SELECT * FROM delegates 
+      WHERE LOWER(TRIM(email)) = ${alternativeEmail}
+      LIMIT 1;
+    `;
+    if (fallbackResult.length > 0) return fallbackResult[0];
+  }
+
+  return null;
+}
+
+export async function checkFeedbackSubmitted(delegateId: number) {
+  const result = await sql`
+    SELECT id FROM feedback_responses 
+    WHERE delegate_id = ${delegateId} 
+    LIMIT 1;
+  `;
+  return result.length > 0;
+}
+
+export async function saveFeedbackResponse(data: {
+  delegateId: number;
+  email: string;
+  q1EventQuality: number;
+  q2SessionRelevance: number;
+  q3SpeakerEffectiveness: number;
+  q4OrganizationVenue: number;
+  comments: string;
+}) {
+  const result = await sql`
+    INSERT INTO feedback_responses (
+      delegate_id,
+      email,
+      q1_event_quality,
+      q2_session_relevance,
+      q3_speaker_effectiveness,
+      q4_organization_venue,
+      comments
+    ) VALUES (
+      ${data.delegateId},
+      ${data.email},
+      ${data.q1EventQuality},
+      ${data.q2SessionRelevance},
+      ${data.q3SpeakerEffectiveness},
+      ${data.q4OrganizationVenue},
+      ${data.comments}
+    )
+    RETURNING id;
+  `;
+  return result;
+}
+
+export async function getAllDelegatesWithFeedback() {
+  const result = await sql`
+    SELECT 
+      d.delegate_id,
+      d.name,
+      d.email,
+      d.phone,
+      d.reg_no,
+      f.id as feedback_id,
+      f.q1_event_quality,
+      f.q2_session_relevance,
+      f.q3_speaker_effectiveness,
+      f.q4_organization_venue,
+      f.comments,
+      f.submitted_at
+    FROM delegates d
+    LEFT JOIN feedback_responses f ON d.delegate_id = f.delegate_id
+    ORDER BY d.delegate_id ASC;
+  `;
+  return result;
+}
