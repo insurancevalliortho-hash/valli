@@ -47,11 +47,11 @@ export default function CertificatePage() {
   const [error, setError] = useState<string | null>(null);
   const [delegate, setDelegate] = useState<Delegate | null>(null);
 
-  // 4 Specific Feedback Questions State
-  const [q1EventQuality, setQ1EventQuality] = useState<number>(5);
-  const [q2SessionRelevance, setQ2SessionRelevance] = useState<number>(5);
-  const [q3SpeakerEffectiveness, setQ3SpeakerEffectiveness] = useState<number>(5);
-  const [q4OrganizationVenue, setQ4OrganizationVenue] = useState<number>(5);
+  // 4 Specific Feedback Questions State - By default 0 (None selected)
+  const [q1EventQuality, setQ1EventQuality] = useState<number>(0);
+  const [q2SessionRelevance, setQ2SessionRelevance] = useState<number>(0);
+  const [q3SpeakerEffectiveness, setQ3SpeakerEffectiveness] = useState<number>(0);
+  const [q4OrganizationVenue, setQ4OrganizationVenue] = useState<number>(0);
   const [comments, setComments] = useState<string>("");
   const [submittingFeedback, setSubmittingFeedback] = useState(false);
 
@@ -111,6 +111,11 @@ export default function CertificatePage() {
     e.preventDefault();
     if (!delegate) return;
 
+    if (q1EventQuality === 0 || q2SessionRelevance === 0 || q3SpeakerEffectiveness === 0 || q4OrganizationVenue === 0) {
+      alert("Please provide a rating for all 4 questions before submitting.");
+      return;
+    }
+
     try {
       setSubmittingFeedback(true);
       const res = await fetch("/api/certificate/feedback", {
@@ -142,43 +147,46 @@ export default function CertificatePage() {
     }
   };
 
-  // Apple-style tactile Segmented Rating Control
-  const renderSegmentedControl = (
+  // Apple-style Gold Star Rating Control (Default None Selected)
+  const renderGoldStarRating = (
     value: number,
     onChange: (val: number) => void
   ) => {
     return (
-      <div className="space-y-2">
-        <div className="bg-[#F5F5F7] p-1.5 rounded-2xl border border-[#E5E5EA] flex items-center justify-between gap-1.5">
-          {[1, 2, 3, 4, 5].map((rating) => {
-            const isSelected = value === rating;
+      <div className="space-y-2.5">
+        <div className="bg-[#F5F5F7] p-2.5 sm:p-3 rounded-2xl border border-[#E5E5EA] flex items-center justify-between gap-1 max-w-xs">
+          {[1, 2, 3, 4, 5].map((star) => {
+            const isFilled = value >= star;
             return (
               <motion.button
-                key={rating}
+                key={star}
                 type="button"
-                whileTap={{ scale: 0.95 }}
-                onClick={() => onChange(rating)}
-                className={`relative flex-1 py-2.5 sm:py-3 rounded-xl flex items-center justify-center gap-1 transition-all duration-200 cursor-pointer select-none touch-manipulation ${
-                  isSelected
-                    ? "bg-white text-[#004B57] shadow-[0_2px_8px_rgba(0,0,0,0.06)] font-bold border border-black/[0.04]"
-                    : "text-slate-500 hover:text-slate-900 font-medium hover:bg-black/[0.02]"
-                }`}
+                whileTap={{ scale: 0.88 }}
+                onClick={() => onChange(star)}
+                className="p-1.5 sm:p-2 hover:scale-110 transition-transform cursor-pointer touch-manipulation flex-1 flex items-center justify-center"
               >
                 <Star
-                  className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${
-                    isSelected ? "text-[#004B57] fill-[#004B57]" : "text-slate-300"
+                  className={`w-7 h-7 sm:w-8 sm:h-8 transition-colors duration-200 ${
+                    isFilled
+                      ? "text-amber-400 fill-amber-400 drop-shadow-sm"
+                      : "text-slate-300 hover:text-amber-200"
                   }`}
                 />
-                <span className="text-xs sm:text-sm font-semibold tracking-tight">{rating}</span>
               </motion.button>
             );
           })}
         </div>
-        <div className="flex justify-between items-center px-1">
+        <div className="flex justify-between items-center px-1 max-w-xs text-xs">
           <span className="text-[11px] font-medium text-slate-400">1 - Poor</span>
-          <span className="text-[11px] font-semibold text-[#004B57] bg-[#004B57]/5 px-2.5 py-0.5 rounded-full border border-[#004B57]/10">
-            {RATING_LABELS[value]}
-          </span>
+          {value > 0 ? (
+            <span className="text-[11px] font-semibold text-amber-800 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200/60">
+              {value} / 5 — {RATING_LABELS[value]}
+            </span>
+          ) : (
+            <span className="text-[11px] font-medium text-slate-400 italic">
+              Tap to rate
+            </span>
+          )}
           <span className="text-[11px] font-medium text-slate-400">5 - Outstanding</span>
         </div>
       </div>
@@ -326,7 +334,7 @@ export default function CertificatePage() {
               <div className="border-b border-black/[0.05] pb-3">
                 <h4 className="text-base sm:text-lg font-bold text-[#1D1D1F] tracking-tight">Summit Evaluation</h4>
                 <p className="text-xs text-slate-500 mt-0.5">
-                  Please take a moment to rate your experience before downloading your certificate.
+                  Please rate all 4 questions below to generate your official certificate.
                 </p>
               </div>
 
@@ -336,7 +344,7 @@ export default function CertificatePage() {
                   <label className="block text-xs sm:text-sm font-semibold text-[#1D1D1F] leading-snug">
                     1. How would you rate the overall quality of the event?
                   </label>
-                  {renderSegmentedControl(q1EventQuality, setQ1EventQuality)}
+                  {renderGoldStarRating(q1EventQuality, setQ1EventQuality)}
                 </div>
 
                 {/* QUESTION 2 */}
@@ -344,7 +352,7 @@ export default function CertificatePage() {
                   <label className="block text-xs sm:text-sm font-semibold text-[#1D1D1F] leading-snug">
                     2. Were the scientific sessions relevant to your clinical practice?
                   </label>
-                  {renderSegmentedControl(q2SessionRelevance, setQ2SessionRelevance)}
+                  {renderGoldStarRating(q2SessionRelevance, setQ2SessionRelevance)}
                 </div>
 
                 {/* QUESTION 3 */}
@@ -352,7 +360,7 @@ export default function CertificatePage() {
                   <label className="block text-xs sm:text-sm font-semibold text-[#1D1D1F] leading-snug">
                     3. How effective were the speakers in explaining the topics clearly?
                   </label>
-                  {renderSegmentedControl(q3SpeakerEffectiveness, setQ3SpeakerEffectiveness)}
+                  {renderGoldStarRating(q3SpeakerEffectiveness, setQ3SpeakerEffectiveness)}
                 </div>
 
                 {/* QUESTION 4 */}
@@ -360,7 +368,7 @@ export default function CertificatePage() {
                   <label className="block text-xs sm:text-sm font-semibold text-[#1D1D1F] leading-snug">
                     4. Was the event schedule, venue, and overall organization satisfactory?
                   </label>
-                  {renderSegmentedControl(q4OrganizationVenue, setQ4OrganizationVenue)}
+                  {renderGoldStarRating(q4OrganizationVenue, setQ4OrganizationVenue)}
                 </div>
 
                 {/* Additional Comments */}
@@ -377,7 +385,6 @@ export default function CertificatePage() {
                   />
                 </div>
 
-                {/* Submit Button */}
                 <motion.button
                   type="submit"
                   disabled={submittingFeedback}
