@@ -67,17 +67,17 @@ export async function getDelegateByEmail(email: string) {
   `;
   if (result.length > 0) return result[0];
 
-  // Fallback for .gmail.con typos
-  const alternativeEmail = cleanEmail.endsWith('.com') 
-    ? cleanEmail.replace(/\.com$/, '.con') 
-    : cleanEmail.endsWith('.con') 
-      ? cleanEmail.replace(/\.con$/, '.com') 
-      : cleanEmail;
+  // Fallbacks for common email domain typos (.gmail.con, .gmai.com, etc.)
+  let altEmail = cleanEmail;
+  if (cleanEmail.endsWith('.com')) altEmail = cleanEmail.replace(/\.com$/, '.con');
+  else if (cleanEmail.endsWith('.con')) altEmail = cleanEmail.replace(/\.con$/, '.com');
+  else if (cleanEmail.endsWith('@gmai.com')) altEmail = cleanEmail.replace(/@gmai\.com$/, '@gmail.com');
+  else if (cleanEmail.endsWith('@gmail.com')) altEmail = cleanEmail.replace(/@gmail\.com$/, '@gmai.com');
 
-  if (alternativeEmail !== cleanEmail) {
+  if (altEmail !== cleanEmail) {
     const fallbackResult = await sql`
       SELECT * FROM delegates 
-      WHERE LOWER(TRIM(email)) = ${alternativeEmail}
+      WHERE LOWER(TRIM(email)) = ${altEmail}
       LIMIT 1;
     `;
     if (fallbackResult.length > 0) return fallbackResult[0];

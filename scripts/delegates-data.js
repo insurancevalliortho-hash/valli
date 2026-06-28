@@ -147,6 +147,14 @@ module.exports = [
   { id: 146, name: "Vuggam Srikanth", email: "Srikanth.vuggam256@gmail.com", phone: "9448904683", regNo: "183198" },
   { id: 147, name: "Dr. K. Gokulprasath", email: "gokulprasath.k20@gmail.com", phone: "", regNo: "" },
   { id: 148, name: "Dr. T. Mohammed Arif", email: "mohammedarif2303@gmail.com", phone: "", regNo: "" },
-  { id: 149, name: "Dr. V. Dinesh", email: "dineshbbcvj32@gmail.com", phone: "", regNo: "" }
+  { id: 149, name: "Dr. V. Dinesh", email: "dineshbbcvj32@gmail.com", phone: "", regNo: "" },
+  { id: 150, name: "Dr. M. Mohaideen Noufin Fathima", email: "mohaideenfathima221@gmail.com", phone: "", regNo: "69411" },
+  { id: 151, name: "Dr. K. Nithya", email: "drnithyamanoj@gmail.com", phone: "", regNo: "69227" },
+  { id: 152, name: "Dr. Maharani", email: "iswarya46@gmail.com", phone: "", regNo: "" },
+  { id: 153, name: "Dr. M. M Kevin", email: "mmkevin1990@gmail.com", phone: "", regNo: "" },
+  { id: 154, name: "Dr. S. Soorya", email: "sooryabec@gmail.com", phone: "", regNo: "" },
+  { id: 155, name: "Dr. G. Vaishnavi", email: "vaishnaci7901488007@gmai.com", phone: "", regNo: "" },
+  { id: 156, name: "Dr. Parthiban", email: "parrtha.mgm36@gmail.com", phone: "", regNo: "" }
 ];
+
 
