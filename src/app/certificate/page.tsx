@@ -412,7 +412,7 @@ export default function CertificatePage() {
               animate={{ opacity: 1, scale: 1 }}
               transition={springTransition}
             >
-              <CertificateTemplate delegateName={delegate.name} regNo={delegate.regNo} showPreview={false} />
+              <CertificateTemplate delegateName={delegate.name} email={delegate.email} regNo={delegate.regNo} showPreview={false} />
             </motion.div>
           )}
         </AnimatePresence>

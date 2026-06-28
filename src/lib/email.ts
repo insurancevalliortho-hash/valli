@@ -313,3 +313,210 @@ export async function sendRegistrationEmail(data: EmailPayload) {
     return { success: false, error };
   }
 }
+
+export async function sendCertificateEmail(data: {
+  delegateName: string;
+  email: string;
+  pdfBase64: string;
+}) {
+  try {
+    const { transporter } = await getTransporter();
+
+    const formattedName = data.delegateName.toLowerCase().startsWith("dr.") || data.delegateName.toLowerCase().startsWith("dr ")
+      ? data.delegateName
+      : `Dr. ${data.delegateName}`;
+
+    const senderName = process.env.SENDER_NAME || "Valli Hospital";
+    const replyTo = process.env.REPLY_TO || "info@vallihospital.in";
+    const from = `"${senderName}" <${process.env.SMTP_USER || "info@vallihospital.in"}>`;
+    const subject = process.env.EMAIL_SUBJECT || `Your Official Certificate - The Practical Ortho Rheumat Summit 2026`;
+
+    const pdfBuffer = Buffer.from(data.pdfBase64.replace(/^data:application\/pdf;base64,/, ""), "base64");
+
+    const emailHtml = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Official Participation Certificate</title>
+        <style>
+          body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8fafc;
+            margin: 0;
+            padding: 0;
+            color: #1e293b;
+            -webkit-font-smoothing: antialiased;
+          }
+          .wrapper {
+            width: 100%;
+            background-color: #f8fafc;
+            padding: 40px 15px;
+            box-sizing: border-box;
+          }
+          .card {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,75,87,0.06);
+            border: 1px solid #e2e8f0;
+          }
+          .header {
+            background-color: #004B57;
+            padding: 36px 30px;
+            text-align: center;
+            color: #ffffff;
+          }
+          .header h1 {
+            margin: 0;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+          }
+          .header p {
+            margin: 6px 0 0 0;
+            font-size: 13px;
+            color: #b2e0da;
+            font-weight: 500;
+          }
+          .body-content {
+            padding: 36px 32px;
+          }
+          .greeting {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0F172A;
+            margin-bottom: 16px;
+          }
+          .paragraph {
+            font-size: 14px;
+            line-height: 1.65;
+            color: #475569;
+            margin-bottom: 20px;
+          }
+          .highlight-box {
+            background-color: #f0fdfa;
+            border: 1px solid #ccfbf1;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 24px 0;
+            text-align: center;
+          }
+          .highlight-title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #0D9488;
+            margin-bottom: 6px;
+          }
+          .highlight-[#004B57] {
+            font-size: 16px;
+            font-weight: 700;
+            color: #004B57;
+          }
+          .signature-section {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #f1f5f9;
+            display: table;
+            width: 100%;
+          }
+          .signature-col {
+            display: table-cell;
+            width: 50%;
+            vertical-align: top;
+          }
+          .sig-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1e293b;
+          }
+          .sig-sub {
+            font-size: 11px;
+            color: #64748b;
+          }
+          .footer {
+            background-color: #f1f5f9;
+            padding: 24px 32px;
+            text-align: center;
+            font-size: 12px;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="wrapper">
+          <div class="card">
+            <div class="header">
+              <h1>Valli Super Speciality Hospital</h1>
+              <p>The Practical Ortho Rheumat Summit 2026</p>
+            </div>
+            
+            <div class="body-content">
+              <div class="greeting">Dear ${formattedName},</div>
+              
+              <div class="paragraph">
+                Thank you for participating in <strong>The Practical Ortho Rheumat Summit 2026</strong> held on 28th June, 2026 at Hotel Grand Estancia, Salem, Tamil Nadu. We sincerely appreciate your valuable feedback and presence.
+              </div>
+              
+              <div class="highlight-box">
+                <div class="highlight-title">Official Certificate Attached</div>
+                <div class="highlight-[#004B57]">Certificate of Participation</div>
+                <div style="font-size: 12px; color: #64748b; margin-top: 4px;">Attached to this email as a high-resolution PDF document</div>
+              </div>
+
+              <div class="paragraph">
+                We hope the scientific topics and clinical sessions proved valuable to your clinical practice. We wish you continued success in all your professional endeavors.
+              </div>
+
+              <div class="signature-section">
+                <div class="signature-col">
+                  <div class="sig-title">Dr. T. Natanasabapathy</div>
+                  <div class="sig-sub">Organizing Chairman</div>
+                </div>
+                <div class="signature-col" style="text-align: right;">
+                  <div class="sig-title">Dr. K. N. Jotheesvar</div>
+                  <div class="sig-sub">Organizing Secretary</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="footer">
+              <p style="margin: 0; font-weight: 600;">Valli Super Speciality Hospital</p>
+              <p style="margin: 4px 0 0 0;">Salem, Tamil Nadu • Contact: info@vallihospital.in</p>
+            </div>
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
+
+    const mailOptions = {
+      from,
+      replyTo,
+      to: data.email,
+      subject,
+      html: emailHtml,
+      attachments: [
+        {
+          filename: `Certificate_${data.delegateName.replace(/\s+/g, "_")}.pdf`,
+          content: pdfBuffer,
+          contentType: "application/pdf",
+        },
+      ],
+    };
+
+    const info = await transporter.sendMail(mailOptions);
+    console.log(`Certificate email sent to ${data.email}. Message ID: ${info.messageId}`);
+    return { success: true, messageId: info.messageId };
+  } catch (error) {
+    console.error("Failed to send certificate email:", error);
+    return { success: false, error };
+  }
+}
+

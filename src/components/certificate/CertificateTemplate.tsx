@@ -1,80 +1,117 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import jsPDF from "jspdf";
 import { motion } from "framer-motion";
-import { Download, CheckCircle2, Award } from "lucide-react";
+import { Download, CheckCircle2, Award, MailCheck, Send } from "lucide-react";
 
 interface CertificateTemplateProps {
   delegateName: string;
+  email?: string;
   regNo?: string;
   showPreview?: boolean;
 }
 
-export default function CertificateTemplate({ delegateName, regNo, showPreview = false }: CertificateTemplateProps) {
+export default function CertificateTemplate({ delegateName, email, regNo, showPreview = false }: CertificateTemplateProps) {
   const [downloading, setDownloading] = useState(false);
+  const [emailStatus, setEmailStatus] = useState<"idle" | "sending" | "sent" | "failed">("idle");
+  const hasSentEmail = useRef(false);
 
   // Ensure "Dr." prefix if appropriate
   const formattedName = delegateName.toLowerCase().startsWith("dr.") || delegateName.toLowerCase().startsWith("dr ")
     ? delegateName
     : `Dr. ${delegateName}`;
 
+  const generatePDFBase64 = async (): Promise<{ pdfBase64: string; pdfObj: jsPDF }> => {
+    const canvas = document.createElement("canvas");
+    const width = 2000;
+    const height = 1414;
+    canvas.width = width;
+    canvas.height = height;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) {
+      throw new Error("Failed to get 2D canvas context");
+    }
+
+    const img = new window.Image();
+    img.crossOrigin = "anonymous";
+    img.src = "/certificate-template.png";
+
+    await new Promise((resolve, reject) => {
+      img.onload = resolve;
+      img.onerror = () => reject(new Error("Failed to load certificate template image"));
+    });
+
+    ctx.drawImage(img, 0, 0, width, height);
+
+    let fontSize = 84;
+    if (formattedName.length > 25) fontSize = 60;
+    else if (formattedName.length > 20) fontSize = 72;
+
+    ctx.font = `bold ${fontSize}px Georgia, "Times New Roman", serif`;
+    ctx.fillStyle = "#0f5947";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+
+    const yPosition = height * 0.542;
+    ctx.fillText(formattedName, width / 2, yPosition);
+
+    const imgData = canvas.toDataURL("image/png", 1.0);
+    const pdf = new jsPDF({
+      orientation: "landscape",
+      unit: "mm",
+      format: "a4"
+    });
+
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+
+    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+    const pdfBase64 = pdf.output("datauristring");
+
+    return { pdfBase64, pdfObj: pdf };
+  };
+
+  // Automatically dispatch certificate PDF to delegate's email upon loading
+  useEffect(() => {
+    if (!email || hasSentEmail.current) return;
+    hasSentEmail.current = true;
+
+    const dispatchEmail = async () => {
+      try {
+        setEmailStatus("sending");
+        const { pdfBase64 } = await generatePDFBase64();
+
+        const res = await fetch("/api/certificate/send-email", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            delegateName,
+            email,
+            pdfBase64
+          }),
+        });
+
+        if (res.ok) {
+          setEmailStatus("sent");
+        } else {
+          setEmailStatus("failed");
+        }
+      } catch (err) {
+        console.error("Auto email dispatch error:", err);
+        setEmailStatus("failed");
+      }
+    };
+
+    dispatchEmail();
+  }, [email, delegateName]);
+
   const handleDownloadPDF = async () => {
     try {
       setDownloading(true);
-
-      // Native HTML5 Canvas generation for 100% crisp high-res output without html2canvas CSS errors
-      const canvas = document.createElement("canvas");
-      // High resolution 300 DPI canvas (2000 x 1414 pixels)
-      const width = 2000;
-      const height = 1414;
-      canvas.width = width;
-      canvas.height = height;
-
-      const ctx = canvas.getContext("2d");
-      if (!ctx) {
-        throw new Error("Failed to get 2D canvas context");
-      }
-
-      const img = new window.Image();
-      img.crossOrigin = "anonymous";
-      img.src = "/certificate-template.png";
-
-      await new Promise((resolve, reject) => {
-        img.onload = resolve;
-        img.onerror = () => reject(new Error("Failed to load certificate template image"));
-      });
-
-      // 1. Draw Background Template Image
-      ctx.drawImage(img, 0, 0, width, height);
-
-      // 2. Configure Exact Teal Green Typography
-      let fontSize = 84;
-      if (formattedName.length > 25) fontSize = 60;
-      else if (formattedName.length > 20) fontSize = 72;
-
-      ctx.font = `bold ${fontSize}px Georgia, "Times New Roman", serif`;
-      ctx.fillStyle = "#0f5947"; // Dark Teal Green matching CERTIFICATE OF PARTICIPATION
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-
-      // 3. Draw Participant Name at Exact Vertical Position (54.2% of height)
-      const yPosition = height * 0.542;
-      ctx.fillText(formattedName, width / 2, yPosition);
-
-      // 4. Generate High-Quality PDF
-      const imgData = canvas.toDataURL("image/png", 1.0);
-      const pdf = new jsPDF({
-        orientation: "landscape",
-        unit: "mm",
-        format: "a4"
-      });
-
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = pdf.internal.pageSize.getHeight();
-
-      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-      pdf.save(`Certificate_${delegateName.replace(/\s+/g, "_")}.pdf`);
+      const { pdfObj } = await generatePDFBase64();
+      pdfObj.save(`Certificate_${delegateName.replace(/\s+/g, "_")}.pdf`);
     } catch (err) {
       console.error("Failed to generate PDF:", err);
       alert("There was an error generating your certificate PDF. Please try again.");
@@ -99,9 +136,33 @@ export default function CertificateTemplate({ delegateName, regNo, showPreview =
         <h2 className="text-2xl sm:text-3xl font-bold text-[#1D1D1F] tracking-tight mb-2">
           Thank You, {formattedName}!
         </h2>
-        <p className="text-slate-500 text-xs sm:text-sm max-w-md mx-auto mb-8 leading-relaxed font-normal">
-          Your feedback for <span className="font-semibold text-[#1D1D1F]">The Practical Ortho Rheumat Summit 2026</span> has been safely saved. Your official certificate is generated and ready for instant download.
+        <p className="text-slate-500 text-xs sm:text-sm max-w-md mx-auto mb-6 leading-relaxed font-normal">
+          Your feedback for <span className="font-semibold text-[#1D1D1F]">The Practical Ortho Rheumat Summit 2026</span> has been safely saved. Your official certificate is ready below.
         </p>
+
+        {/* Email Dispatch Status Badge */}
+        {email && (
+          <div className="mb-8 max-w-sm mx-auto">
+            {emailStatus === "sending" && (
+              <div className="inline-flex items-center gap-2 bg-[#004B57]/5 text-[#004B57] border border-[#004B57]/15 px-4 py-2 rounded-xl text-xs font-semibold">
+                <div className="w-3.5 h-3.5 border-2 border-[#004B57] border-t-transparent rounded-full animate-spin" />
+                <span>Sending certificate PDF to {email}...</span>
+              </div>
+            )}
+            {emailStatus === "sent" && (
+              <div className="inline-flex items-center gap-2 bg-emerald-50 text-emerald-800 border border-emerald-200/80 px-4 py-2 rounded-xl text-xs font-semibold shadow-sm">
+                <MailCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Certificate PDF sent to <strong>{email}</strong></span>
+              </div>
+            )}
+            {emailStatus === "failed" && (
+              <div className="inline-flex items-center gap-2 bg-amber-50 text-amber-800 border border-amber-200 px-4 py-2 rounded-xl text-xs font-medium">
+                <Send className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                <span>Download your PDF below (Email delivery pending)</span>
+              </div>
+            )}
+          </div>
+        )}
 
         <motion.button
           onClick={handleDownloadPDF}
