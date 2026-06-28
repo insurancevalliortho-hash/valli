@@ -81,15 +81,12 @@ export default function CertificateTemplate({ delegateName, email, regNo, showPr
     const dispatchEmail = async () => {
       try {
         setEmailStatus("sending");
-        const { pdfBase64 } = await generatePDFBase64();
-
         const res = await fetch("/api/certificate/send-email", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             delegateName,
-            email,
-            pdfBase64
+            email
           }),
         });
 

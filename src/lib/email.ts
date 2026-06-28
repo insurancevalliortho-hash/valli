@@ -1,4 +1,7 @@
 import nodemailer from "nodemailer";
+import fs from "fs";
+import path from "path";
+import jsPDF from "jspdf";
 
 interface EmailPayload {
   registrationCode: string;
@@ -317,7 +320,7 @@ export async function sendRegistrationEmail(data: EmailPayload) {
 export async function sendCertificateEmail(data: {
   delegateName: string;
   email: string;
-  pdfBase64: string;
+  pdfBase64?: string;
 }) {
   try {
     const { transporter } = await getTransporter();
@@ -331,10 +334,38 @@ export async function sendCertificateEmail(data: {
     const from = `"${senderName}" <${process.env.SMTP_USER || "info@vallihospital.in"}>`;
     const subject = process.env.EMAIL_SUBJECT || `Your Official Certificate - The Practical Ortho Rheumat Summit 2026`;
 
-    const cleanBase64 = data.pdfBase64.includes(";base64,")
-      ? data.pdfBase64.split(";base64,")[1]
-      : data.pdfBase64.replace(/^data:application\/pdf;.*base64,/, "");
-    const pdfBuffer = Buffer.from(cleanBase64, "base64");
+    let pdfBuffer: Buffer;
+    if (data.pdfBase64 && data.pdfBase64.length > 500000) {
+      const cleanBase64 = data.pdfBase64.includes(";base64,")
+        ? data.pdfBase64.split(";base64,")[1]
+        : data.pdfBase64.replace(/^data:application\/pdf;.*base64,/, "");
+      pdfBuffer = Buffer.from(cleanBase64, "base64");
+    } else {
+      // Server-side PDF generation for 100% reliable 2.09MB attachment
+      const imgPath = path.join(process.cwd(), "public/certificate-template.png");
+      const imgBuffer = fs.readFileSync(imgPath);
+      const imgBase64 = `data:image/png;base64,${imgBuffer.toString("base64")}`;
+
+      const pdf = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+
+      pdf.addImage(imgBase64, "PNG", 0, 0, pdfWidth, pdfHeight);
+
+      let fontSize = 42;
+      if (formattedName.length > 25) fontSize = 30;
+      else if (formattedName.length > 20) fontSize = 36;
+
+      pdf.setFont("times", "bold");
+      pdf.setFontSize(fontSize);
+      pdf.setTextColor(15, 89, 71); // #0f5947
+
+      const yPos = pdfHeight * 0.542;
+      pdf.text(formattedName, pdfWidth / 2, yPos, { align: "center" });
+
+      const pdfArrayBuffer = pdf.output("arraybuffer");
+      pdfBuffer = Buffer.from(pdfArrayBuffer);
+    }
 
     const emailHtml = `
       <!DOCTYPE html>

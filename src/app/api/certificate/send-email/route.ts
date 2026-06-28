@@ -5,7 +5,7 @@ export async function POST(req: Request) {
   try {
     const { delegateName, email, pdfBase64 } = await req.json();
 
-    if (!delegateName || !email || !pdfBase64) {
+    if (!delegateName || !email) {
       return NextResponse.json(
         { error: "Missing required parameters for emailing certificate." },
         { status: 400 }
