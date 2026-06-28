@@ -331,7 +331,10 @@ export async function sendCertificateEmail(data: {
     const from = `"${senderName}" <${process.env.SMTP_USER || "info@vallihospital.in"}>`;
     const subject = process.env.EMAIL_SUBJECT || `Your Official Certificate - The Practical Ortho Rheumat Summit 2026`;
 
-    const pdfBuffer = Buffer.from(data.pdfBase64.replace(/^data:application\/pdf;base64,/, ""), "base64");
+    const cleanBase64 = data.pdfBase64.includes(";base64,")
+      ? data.pdfBase64.split(";base64,")[1]
+      : data.pdfBase64.replace(/^data:application\/pdf;.*base64,/, "");
+    const pdfBuffer = Buffer.from(cleanBase64, "base64");
 
     const emailHtml = `
       <!DOCTYPE html>
