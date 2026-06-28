@@ -19,11 +19,8 @@ async function main() {
     );
   `;
 
-  // Drop old table if columns don't match, or recreate for clean schema
-  await sql`DROP TABLE IF EXISTS feedback_responses;`;
-
   await sql`
-    CREATE TABLE feedback_responses (
+    CREATE TABLE IF NOT EXISTS feedback_responses (
       id SERIAL PRIMARY KEY,
       delegate_id INT REFERENCES delegates(delegate_id),
       email TEXT NOT NULL,

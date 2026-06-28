@@ -144,5 +144,9 @@ module.exports = [
   { id: 143, name: "Vishnu Prasanth.C.S", email: "sachumoogly@gmail.com", phone: "8122420061", regNo: "74838" },
   { id: 144, name: "Viswajit", email: "viswakarthi248@gmail.com", phone: "7358447413", regNo: "190812" },
   { id: 145, name: "Vivek Muthu Krishnan", email: "drvivekmuthu12@gmail.com", phone: "97882 32453", regNo: "113658" },
-  { id: 146, name: "Vuggam Srikanth", email: "Srikanth.vuggam256@gmail.com", phone: "9448904683", regNo: "183198" }
+  { id: 146, name: "Vuggam Srikanth", email: "Srikanth.vuggam256@gmail.com", phone: "9448904683", regNo: "183198" },
+  { id: 147, name: "Dr. K. Gokulprasath", email: "gokulprasath.k20@gmail.com", phone: "", regNo: "" },
+  { id: 148, name: "Dr. T. Mohammed Arif", email: "mohammedarif2303@gmail.com", phone: "", regNo: "" },
+  { id: 149, name: "Dr. V. Dinesh", email: "dineshbbcvj32@gmail.com", phone: "", regNo: "" }
 ];
+
