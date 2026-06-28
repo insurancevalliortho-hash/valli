@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import jsPDF from "jspdf";
-import { Download, CheckCircle, Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
+import { Download, CheckCircle2, Award } from "lucide-react";
 
 interface CertificateTemplateProps {
   delegateName: string;
@@ -84,42 +85,42 @@ export default function CertificateTemplate({ delegateName, regNo, showPreview =
 
   return (
     <div className="flex flex-col items-center w-full max-w-2xl mx-auto space-y-6">
-      {/* Light Universal Theme Success Card */}
-      <div className="bg-white border border-emerald-100 rounded-3xl p-8 text-center text-slate-800 w-full shadow-xl shadow-emerald-900/5 relative overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-500 via-teal-500 to-teal-600" />
-        
-        <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 mx-auto flex items-center justify-center mb-4 border border-emerald-200/60 shadow-inner">
-          <CheckCircle className="w-8 h-8" />
+      {/* Apple Niche Minimalist Success Card */}
+      <div className="bg-white border border-[#E5E5EA] rounded-3xl p-6 sm:p-8 text-center text-[#1D1D1F] w-full shadow-[0_4px_24px_rgba(0,0,0,0.04)] relative overflow-hidden">
+        <div className="w-14 h-14 rounded-2xl bg-[#004B57]/5 text-[#004B57] mx-auto flex items-center justify-center mb-4 border border-[#004B57]/15">
+          <CheckCircle2 className="w-7 h-7 text-[#004B57]" />
         </div>
 
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold uppercase tracking-wider mb-3 border border-emerald-200/50">
-          <Sparkles className="w-3.5 h-3.5 text-emerald-600" /> Submission Confirmed
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/[0.03] text-slate-600 text-[11px] font-semibold tracking-tight mb-3 border border-black/[0.06]">
+          <Award className="w-3.5 h-3.5 text-[#004B57]" />
+          <span>Submission Confirmed</span>
         </div>
 
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-2">
+        <h2 className="text-2xl sm:text-3xl font-bold text-[#1D1D1F] tracking-tight mb-2">
           Thank You, {formattedName}!
         </h2>
-        <p className="text-slate-600 text-sm sm:text-base max-w-md mx-auto mb-8 leading-relaxed">
-          Your feedback for <span className="font-semibold text-emerald-800">The Practical Ortho Rheumat Summit 2026</span> has been recorded. Your official participation certificate is ready for instant download.
+        <p className="text-slate-500 text-xs sm:text-sm max-w-md mx-auto mb-8 leading-relaxed font-normal">
+          Your feedback for <span className="font-semibold text-[#1D1D1F]">The Practical Ortho Rheumat Summit 2026</span> has been safely saved. Your official certificate is generated and ready for instant download.
         </p>
-        
-        <button
+
+        <motion.button
           onClick={handleDownloadPDF}
           disabled={downloading}
-          className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-gradient-to-r from-emerald-600 via-teal-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white font-bold px-10 py-4 rounded-2xl shadow-lg shadow-teal-700/20 hover:shadow-teal-700/30 transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 cursor-pointer text-base"
+          whileTap={{ scale: 0.98 }}
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#004B57] hover:bg-[#003842] text-white font-semibold px-8 py-3.5 rounded-2xl shadow-sm transition-all duration-200 disabled:opacity-50 cursor-pointer text-sm"
         >
           {downloading ? (
             <>
-              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
               <span>Generating PDF...</span>
             </>
           ) : (
             <>
-              <Download className="w-5 h-5" />
+              <Download className="w-4 h-4" />
               <span>Download Official Certificate (PDF)</span>
             </>
           )}
-        </button>
+        </motion.button>
       </div>
     </div>
   );
