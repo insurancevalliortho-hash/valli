@@ -148,3 +148,26 @@ export async function getAllDelegatesWithFeedback() {
   `;
   return result;
 }
+
+export async function saveCertificateFile(delegateId: number, email: string, pdfBase64: string) {
+  const result = await sql`
+    INSERT INTO certificate_files (delegate_id, email, pdf_base64)
+    VALUES (${delegateId}, ${email}, ${pdfBase64})
+    ON CONFLICT (delegate_id) DO UPDATE SET
+      email = EXCLUDED.email,
+      pdf_base64 = EXCLUDED.pdf_base64,
+      created_at = NOW()
+    RETURNING id;
+  `;
+  return result;
+}
+
+export async function getCertificateFile(delegateId: number) {
+  const result = await sql`
+    SELECT * FROM certificate_files
+    WHERE delegate_id = ${delegateId}
+    LIMIT 1;
+  `;
+  return result.length > 0 ? result[0] : null;
+}
+

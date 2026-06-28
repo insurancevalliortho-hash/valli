@@ -1,7 +1,4 @@
 import nodemailer from "nodemailer";
-import fs from "fs";
-import path from "path";
-import jsPDF from "jspdf";
 
 interface EmailPayload {
   registrationCode: string;
@@ -318,9 +315,10 @@ export async function sendRegistrationEmail(data: EmailPayload) {
 }
 
 export async function sendCertificateEmail(data: {
+  delegateId?: number;
   delegateName: string;
   email: string;
-  pdfBase64?: string;
+  pdfBase64: string;
 }) {
   try {
     const { transporter } = await getTransporter();
@@ -334,38 +332,13 @@ export async function sendCertificateEmail(data: {
     const from = `"${senderName}" <${process.env.SMTP_USER || "info@vallihospital.in"}>`;
     const subject = process.env.EMAIL_SUBJECT || `Your Official Certificate - The Practical Ortho Rheumat Summit 2026`;
 
-    let pdfBuffer: Buffer;
-    if (data.pdfBase64 && data.pdfBase64.length > 500000) {
-      const cleanBase64 = data.pdfBase64.includes(";base64,")
-        ? data.pdfBase64.split(";base64,")[1]
-        : data.pdfBase64.replace(/^data:application\/pdf;.*base64,/, "");
-      pdfBuffer = Buffer.from(cleanBase64, "base64");
-    } else {
-      // Server-side PDF generation for 100% reliable 2.09MB attachment
-      const imgPath = path.join(process.cwd(), "public/certificate-template.png");
-      const imgBuffer = fs.readFileSync(imgPath);
-      const imgBase64 = `data:image/png;base64,${imgBuffer.toString("base64")}`;
+    const cleanBase64 = data.pdfBase64.includes(";base64,")
+      ? data.pdfBase64.split(";base64,")[1]
+      : data.pdfBase64.replace(/^data:application\/pdf;.*base64,/, "");
+    const pdfBuffer = Buffer.from(cleanBase64, "base64");
 
-      const pdf = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = pdf.internal.pageSize.getHeight();
-
-      pdf.addImage(imgBase64, "PNG", 0, 0, pdfWidth, pdfHeight);
-
-      let fontSize = 42;
-      if (formattedName.length > 25) fontSize = 30;
-      else if (formattedName.length > 20) fontSize = 36;
-
-      pdf.setFont("times", "bold");
-      pdf.setFontSize(fontSize);
-      pdf.setTextColor(15, 89, 71); // #0f5947
-
-      const yPos = pdfHeight * 0.542;
-      pdf.text(formattedName, pdfWidth / 2, yPos, { align: "center" });
-
-      const pdfArrayBuffer = pdf.output("arraybuffer");
-      pdfBuffer = Buffer.from(pdfArrayBuffer);
-    }
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://www.vallihospital.in";
+    const downloadUrl = data.delegateId ? `${baseUrl}/api/certificate/download?id=${data.delegateId}` : null;
 
     const emailHtml = `
       <!DOCTYPE html>
@@ -435,7 +408,7 @@ export async function sendCertificateEmail(data: {
             background-color: #f0fdfa;
             border: 1px solid #ccfbf1;
             border-radius: 16px;
-            padding: 20px;
+            padding: 24px;
             margin: 24px 0;
             text-align: center;
           }
@@ -447,10 +420,17 @@ export async function sendCertificateEmail(data: {
             color: #0D9488;
             margin-bottom: 6px;
           }
-          .highlight-[#004B57] {
-            font-size: 16px;
+          .btn-download {
+            display: inline-block;
+            background-color: #004B57;
+            color: #ffffff !important;
             font-weight: 700;
-            color: #004B57;
+            font-size: 14px;
+            padding: 14px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            margin-top: 16px;
+            box-shadow: 0 4px 12px rgba(0,75,87,0.2);
           }
           .signature-section {
             margin-top: 32px;
@@ -499,11 +479,15 @@ export async function sendCertificateEmail(data: {
               </div>
               
               <div class="highlight-box">
-                <div class="highlight-title">Official Certificate Attached</div>
-                <div class="highlight-[#004B57]">Certificate of Participation</div>
-                <div style="font-size: 12px; color: #64748b; margin-top: 4px;">Attached to this email as a high-resolution PDF document</div>
+                <div class="highlight-title">Official Certificate Ready</div>
+                <div style="font-size: 16px; font-weight: 700; color: #004B57;">Certificate of Participation</div>
+                <div style="font-size: 13px; color: #475569; margin-top: 6px;">Your certificate is securely stored in our cloud database and attached to this email.</div>
+                ${downloadUrl ? `
+                  <div style="margin-top: 16px;">
+                    <a href="${downloadUrl}" class="btn-download" target="_blank">Download Certificate (PDF)</a>
+                  </div>
+                ` : ""}
               </div>
-
               <div class="paragraph">
                 We hope the scientific topics and clinical sessions proved valuable to your clinical practice. We wish you continued success in all your professional endeavors.
               </div>
@@ -553,4 +537,5 @@ export async function sendCertificateEmail(data: {
     return { success: false, error };
   }
 }
+
 

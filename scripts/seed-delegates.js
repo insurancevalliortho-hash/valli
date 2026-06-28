@@ -33,6 +33,16 @@ async function main() {
     );
   `;
 
+  await sql`
+    CREATE TABLE IF NOT EXISTS certificate_files (
+      id SERIAL PRIMARY KEY,
+      delegate_id INT UNIQUE REFERENCES delegates(delegate_id),
+      email TEXT NOT NULL,
+      pdf_base64 TEXT NOT NULL,
+      created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+    );
+  `;
+
   console.log("Seeding delegates data...");
   for (const d of delegates) {
     await sql`

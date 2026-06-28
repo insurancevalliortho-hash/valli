@@ -6,13 +6,14 @@ import { motion } from "framer-motion";
 import { Download, CheckCircle2, Award, MailCheck, Send } from "lucide-react";
 
 interface CertificateTemplateProps {
+  delegateId?: number;
   delegateName: string;
   email?: string;
   regNo?: string;
   showPreview?: boolean;
 }
 
-export default function CertificateTemplate({ delegateName, email, regNo, showPreview = false }: CertificateTemplateProps) {
+export default function CertificateTemplate({ delegateId, delegateName, email, regNo, showPreview = false }: CertificateTemplateProps) {
   const [downloading, setDownloading] = useState(false);
   const [emailStatus, setEmailStatus] = useState<"idle" | "sending" | "sent" | "failed">("idle");
   const hasSentEmail = useRef(false);
@@ -81,12 +82,16 @@ export default function CertificateTemplate({ delegateName, email, regNo, showPr
     const dispatchEmail = async () => {
       try {
         setEmailStatus("sending");
+        const { pdfBase64 } = await generatePDFBase64();
+
         const res = await fetch("/api/certificate/send-email", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
+            delegateId,
             delegateName,
-            email
+            email,
+            pdfBase64
           }),
         });
 
