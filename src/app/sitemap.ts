@@ -17,6 +17,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     const specialtyRoutes = [
         '/joint-care-clinic',
+        '/knee-replacement',
+        '/rheumatology',
         '/sports-medicine-clinic',
         '/foot-and-ankle-clinic',
         '/back-pain-and-spinal-disorders',

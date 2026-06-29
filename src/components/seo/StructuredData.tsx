@@ -33,6 +33,9 @@ export const HospitalSchema = () => {
       "Sports Medicine",
       "Spine Surgery",
       "Trauma Surgery",
+      "Rheumatology",
+      "Joint Replacement Surgery",
+      "Arthroscopic Surgery",
       "Pediatric Orthopedics",
       "Gastroenterology",
       "Neurosurgery"
@@ -57,16 +60,17 @@ export const PhysicianSchema = () => {
     "@context": "https://schema.org",
     "@type": "Physician",
     "name": "Dr. T. Natanasabapathy",
-    "jobTitle": "Chief Orthopedic Surgeon",
+    "jobTitle": "Chief Orthopedic Surgeon & Joint Replacement Specialist",
     "worksFor": {
       "@type": "MedicalOrganization",
       "name": "Valli Super Speciality Hospital"
     },
-    "medicalSpecialty": "Orthopedic Surgery",
-    "alumniOf": {
-      "@type": "Organization",
-      "name": "Medical College" // Add real college if known
-    },
+    "medicalSpecialty": [
+      "Orthopedic Surgery",
+      "Joint Replacement Surgery",
+      "Arthroscopic Surgery",
+      "Sports Medicine"
+    ],
     "yearsOfExperience": "16+"
   };
 
@@ -119,3 +123,72 @@ export const BreadcrumbSchema = ({ items }: { items: { name: string; url: string
     />
   );
 };
+
+export const MedicalProcedureSchema = ({
+  name,
+  description,
+  bodyLocation,
+  procedureType = "SurgicalProcedure"
+}: {
+  name: string;
+  description: string;
+  bodyLocation: string;
+  procedureType?: string;
+}) => {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": procedureType,
+    "name": name,
+    "description": description,
+    "bodyLocation": bodyLocation,
+    "procedureDevice": "Advanced Arthroscopy & Robotic Surgical Systems",
+    "howPerformed": "Performed by senior orthopedic specialists under sterile operative conditions.",
+    "provider": {
+      "@type": "MedicalOrganization",
+      "name": "Valli Super Speciality Hospital",
+      "url": "https://www.vallihospital.in"
+    }
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
+};
+
+export const MedicalSpecialtySchema = ({
+  name,
+  description,
+  url
+}: {
+  name: string;
+  description: string;
+  url: string;
+}) => {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "MedicalWebPage",
+    "name": name,
+    "description": description,
+    "url": url,
+    "aspect": "Overview, Treatments, Specialists, FAQs",
+    "specialty": {
+      "@type": "MedicalSpecialty",
+      "name": name
+    },
+    "publisher": {
+      "@type": "MedicalOrganization",
+      "name": "Valli Super Speciality Hospital"
+    }
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
+};
+
