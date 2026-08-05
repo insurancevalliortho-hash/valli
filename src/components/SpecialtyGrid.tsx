@@ -1,9 +1,9 @@
-"use client";
+﻿"use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
-const specialities = [
+const Specialties = [
     {
         title: "Orthopaedics & Joint Replacement",
         description: "Comprehensive bone and joint care, sports injuries, and minimally invasive total joint replacements.",
@@ -125,18 +125,18 @@ const specialities = [
     },
 ];
 
-export default function SpecialityGrid() {
+export default function SpecialtyGrid() {
     const ref = useRef<HTMLElement>(null);
     const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
     const bgShapeY = useTransform(scrollYProgress, [0, 1], ["-6%", "6%"]);
 
     return (
-        <section id="specialities" ref={ref} className="py-16 md:py-24 bg-[#f9fafb] relative overflow-hidden">
+        <section id="Specialties" ref={ref} className="py-16 md:py-24 bg-[#f9fafb] relative overflow-hidden">
 
             {/* ── Hero-language geometric background shapes ── */}
             <motion.div
                 style={{ y: bgShapeY }}
-                className="absolute top-0 right-[-15%] w-[45vw] h-[45vw] max-w-[550px] max-h-[550px] bg-[#f98825]/6 rounded-[5rem] rotate-45 pointer-events-none"
+                className="parallax-layer absolute top-0 right-[-15%] w-[45vw] h-[45vw] max-w-[550px] max-h-[550px] bg-[#f98825]/6 rounded-[5rem] rotate-45 pointer-events-none"
             />
             <div className="absolute bottom-0 left-[-10%] w-[40vw] h-[40vw] max-w-[480px] max-h-[480px] bg-[#004b57]/5 rounded-[4.5rem] rotate-45 pointer-events-none" />
             {/* Dotted grid pattern */}
@@ -151,7 +151,7 @@ export default function SpecialityGrid() {
                 {/* Header */}
                 <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
                     <motion.div
-                        initial={{ y: 30 }}
+                        initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -166,7 +166,7 @@ export default function SpecialityGrid() {
                         </h2>
                     </motion.div>
                     <motion.p
-                        initial={{ y: 20 }}
+                        initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8, delay: 0.15 }}
@@ -178,11 +178,11 @@ export default function SpecialityGrid() {
 
                 {/* Bento grid */}
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-4 auto-rows-[220px] xl:auto-rows-[240px]">
-                    {specialities.map((item, index) => (
+                    {Specialties.map((item, index) => (
                         <motion.div
                             key={index}
-                            initial={{ y: 40, scale: 0.96 }}
-                            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-40px" }}
                             transition={{ duration: 0.7, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
                             whileHover={{ y: -6 }}

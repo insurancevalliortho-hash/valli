@@ -1,9 +1,17 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { useState, useEffect } from "react";
-import { ArrowRight, ChevronRight, ChevronLeft } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+
+const MotionImage = motion.create(Image);
+
+// Tiny 1×1 dark-teal placeholder PNG — shown immediately while the LCP image loads.
+// Matches the hero background colour (#001014) so there is no white flash.
+const HERO_BLUR_DATA_URL =
+    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
 
 const HERO_SLIDES = [
     {
@@ -12,8 +20,8 @@ const HERO_SLIDES = [
         title: "BEST ORTHOPEDIC",
         highlight: "HOSPITAL IN SALEM",
         subtitle: "Joint Replacement · Trauma Care · Sports Injury",
-        description: "Salem's most trusted centre for joint replacement, trauma care, spine surgery, and sports medicine. Serving 16,000+ patients across Tamil Nadu.",
-        alt: "Valli Super Speciality Hospital Salem - Best Orthopedic Hospital for Joint Replacement, Trauma Care & Sports Injury"
+        description: "Salem's most trusted centre for joint replacement, trauma care, spine surgery, and sports medicine. Serving 19,000+ patients across Tamil Nadu.",
+        alt: "Valli Super Specialty Hospital Salem - Best Orthopedic Hospital for Joint Replacement, Trauma Care & Sports Injury"
     },
     {
         id: 2,
@@ -37,23 +45,14 @@ const HERO_SLIDES = [
 
 const STATS = [
     { value: "3+", label: "Years of Excellence" },
-    { value: "16K+", label: "Patients Treated" },
+    { value: "19K+", label: "Patients Treated" },
     { value: "95%", label: "Success Rate" },
-    { value: "15+", label: "Specialities" },
+    { value: "15+", label: "Specialties" },
 ];
 
 export default function Hero() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
-    const [mountKey, setMountKey] = useState("initial");
-
-    // Force a fresh key on mount to prevent Framer Motion from getting stuck during Next.js client navigation
-    useEffect(() => {
-        const handle = requestAnimationFrame(() => {
-            setMountKey(Math.random().toString());
-        });
-        return () => cancelAnimationFrame(handle);
-    }, []);
 
     // Auto-play with pause on hover
     useEffect(() => {
@@ -91,51 +90,6 @@ export default function Hero() {
         }
     };
 
-    // Wait until mounted to render animations to avoid hydration/navigation bugs
-    if (mountKey === "initial") {
-        return (
-            <section className="relative w-full min-h-[100svh] lg:h-[100svh] bg-[#001014] overflow-hidden flex flex-col justify-end">
-                {/* Cinematic Background Images for SSR/First Paint */}
-                <div className="absolute inset-0 z-0">
-                    <img
-                        src={HERO_SLIDES[0].image}
-                        alt={HERO_SLIDES[0].alt}
-                        className="w-full h-full object-cover object-[center_top]"
-                        fetchPriority="high"
-                        loading="eager"
-                        decoding="async"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#001014]/95 via-[#001014]/60 to-transparent mix-blend-multiply" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#001014] via-[#001014]/20 to-transparent opacity-90" />
-                </div>
-
-                <div className="relative z-10 w-full h-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 flex flex-col justify-center pt-24 xs:pt-28 sm:pt-36 lg:pt-28 pb-32 sm:pb-40 lg:pb-36">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-4 items-center h-full">
-                        <div className="lg:col-span-8 flex flex-col items-start mt-10 lg:mt-0">
-                            <div className="max-w-4xl">
-                                <div className="flex items-center gap-4 mb-2 sm:mb-4">
-                                    <span className="hidden sm:inline-block w-12 sm:w-16 h-[2px] bg-[#f98825]"></span>
-                                    <span className="text-[#3cb3a6] tracking-[0.2em] uppercase text-xs sm:text-sm">
-                                        {HERO_SLIDES[0].subtitle}
-                                    </span>
-                                </div>
-
-                                <h1 className="text-white font-light text-[1.6rem] xs:text-[2rem] sm:text-[3rem] md:text-[3.6rem] lg:text-[4.2rem] xl:text-[4.8rem] leading-[1.05] tracking-tighter mb-3 sm:mb-5">
-                                    <span className="block">{HERO_SLIDES[0].title}</span>
-                                    <span className="block font-black text-[#f98825]">{HERO_SLIDES[0].highlight}</span>
-                                </h1>
-
-                                <p className="text-gray-200 text-xs xs:text-sm sm:text-base lg:text-lg font-medium max-w-2xl leading-relaxed border-l-2 border-[#3cb3a6]/30 pl-5 sm:pl-6">
-                                    {HERO_SLIDES[0].description}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        );
-    }
-
     return (
         <section
             className="relative w-full min-h-[100svh] lg:h-[100svh] bg-[#001014] overflow-hidden flex flex-col justify-end"
@@ -146,25 +100,27 @@ export default function Hero() {
             onTouchEnd={onTouchEnd}
         >
             {/* Cinematic Background Images */}
-            <AnimatePresence mode="popLayout">
+            <AnimatePresence mode="popLayout" initial={false}>
                 <motion.div
-                    key={`bg-${mountKey}-${currentIndex}`}
+                    key={`bg-${currentIndex}`}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
                     className="absolute inset-0 z-0"
                 >
-                    <motion.img
+                    <MotionImage
                         src={HERO_SLIDES[currentIndex].image}
                         alt={HERO_SLIDES[currentIndex].alt}
-                        className="w-full h-full object-cover object-[center_top]"
-                        initial={{ scale: 1.15 }}
+                        fill
+                        sizes="100vw"
+                        placeholder="blur"
+                        blurDataURL={HERO_BLUR_DATA_URL}
+                        className="object-cover object-[center_top]"
+                        priority={currentIndex === 0}
+                        initial={{ scale: currentIndex === 0 ? 1 : 1.15 }}
                         animate={{ scale: 1 }}
                         transition={{ duration: 12, ease: "easeOut" }}
-                        fetchPriority={currentIndex === 0 ? "high" : "auto"}
-                        loading="eager"
-                        decoding="async"
                     />
                     {/* Immersive Gradients to blend colors flawlessly */}
                     <div className="absolute inset-0 bg-gradient-to-r from-[#001014]/95 via-[#001014]/60 to-transparent mix-blend-multiply" />
@@ -180,9 +136,9 @@ export default function Hero() {
 
                     {/* Left Text Content */}
                     <div className="lg:col-span-8 flex flex-col items-start mt-10 lg:mt-0">
-                        <AnimatePresence mode="popLayout">
+                        <AnimatePresence mode="popLayout" initial={false}>
                             <motion.div
-                                key={`text-${mountKey}-${currentIndex}`}
+                                key={`text-${currentIndex}`}
                                 initial="hidden"
                                 animate="visible"
                                 exit="exit"
@@ -201,7 +157,7 @@ export default function Hero() {
                                     className="flex items-center gap-4 mb-2 sm:mb-4"
                                 >
                                     <span className="hidden sm:inline-block w-12 sm:w-16 h-[2px] bg-[#f98825] shadow-[0_0_10px_rgba(249,136,37,0.5)]"></span>
-                                    <span className="text-[#3cb3a6]  tracking-[0.2em] uppercase text-xs sm:text-sm drop-shadow-lg">
+                                    <span className="text-[#3cb3a6] tracking-[0.2em] uppercase text-xs sm:text-sm drop-shadow-lg">
                                         {HERO_SLIDES[currentIndex].subtitle}
                                     </span>
                                 </motion.div>
@@ -319,7 +275,6 @@ export default function Hero() {
             {/* Ultra-Premium Glassmorphic Stats Dock - Centered at bottom */}
             <div className="absolute bottom-6 sm:bottom-10 left-0 w-full z-30 px-6 sm:px-10 lg:px-16 hidden md:block">
                 <motion.div
-                    key={`stats-${mountKey}`}
                     initial={{ y: 50, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -331,7 +286,7 @@ export default function Hero() {
                         <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
                         {STATS.map((stat, i) => (
-                            <div key={i} className={`flex flex-col items-center justify-center text-center relative group ${i !== 0 ? "border-l border-white/10" : ""}`}>
+                            <div key={i} className={`flex flex-col items-center justify-center text-center relative group ${i !== 0 ? "border-l border-[#ffffff1a]" : ""}`}>
                                 <span className={`text-4xl lg:text-5xl font-black tracking-tighter mb-2 transition-transform duration-500 group-hover:scale-105 ${i % 2 === 0 ? "text-[#f98825]" : "text-[#3cb3a6]"}`}>
                                     {stat.value}
                                 </span>
@@ -346,3 +301,4 @@ export default function Hero() {
         </section>
     );
 }
+

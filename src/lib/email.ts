@@ -1,4 +1,4 @@
-import nodemailer from "nodemailer";
+﻿import nodemailer from "nodemailer";
 
 interface EmailPayload {
   registrationCode: string;
@@ -467,7 +467,7 @@ export async function sendCertificateEmail(data: {
         <div class="wrapper">
           <div class="card">
             <div class="header">
-              <h1>Valli Super Speciality Hospital</h1>
+              <h1>Valli Super Specialty Hospital</h1>
               <p>The Practical Ortho Rheumat Summit 2026</p>
             </div>
             
@@ -505,7 +505,7 @@ export async function sendCertificateEmail(data: {
             </div>
 
             <div class="footer">
-              <p style="margin: 0; font-weight: 600;">Valli Super Speciality Hospital</p>
+              <p style="margin: 0; font-weight: 600;">Valli Super Specialty Hospital</p>
               <p style="margin: 4px 0 0 0;">Salem, Tamil Nadu • Contact: info@vallihospital.in</p>
             </div>
           </div>

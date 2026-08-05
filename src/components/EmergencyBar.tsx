@@ -1,5 +1,3 @@
-"use client";
-
 import { Phone, Navigation2 } from "lucide-react";
 
 export default function EmergencyBar() {

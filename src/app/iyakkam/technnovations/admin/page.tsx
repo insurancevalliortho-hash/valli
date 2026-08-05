@@ -30,7 +30,6 @@ import {
 } from "lucide-react";
 import Navbar from "../../../../components/Navbar";
 import Footer from "../../../../components/Footer";
-import SmoothScroll from "../../../../components/SmoothScroll";
 
 interface Registration {
   id: number;
@@ -241,10 +240,11 @@ const DeptBarChart = ({ data }: { data: { name: string; count: number }[] }) => 
                 </div>
                 <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
                   <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: `${pct}%` }}
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: pct / 100 }}
+                    style={{ originX: 0 }}
                     transition={{ duration: 0.8, delay: i * 0.08, ease: "easeOut" }}
-                    className="h-full bg-gradient-to-r from-teal to-[#004B57] rounded-full"
+                    className="h-full w-full bg-gradient-to-r from-teal to-[#004B57] rounded-full"
                   />
                 </div>
               </div>
@@ -265,23 +265,25 @@ const YearDonutChart = ({ data }: { data: { name: string; count: number }[] }) =
 
   const colors = ["#004B57", "#00A896", "#FF8C00", "#FFA53D", "#94A3B8"];
 
-  let accumulatedPercent = 0;
-
   const segments = data
-    .map((d, i) => {
-      const percent = total > 0 ? d.count / total : 0;
-      const strokeDashoffset = circumference - percent * circumference;
-      const rotation = accumulatedPercent * 360;
-      accumulatedPercent += percent;
-      return {
-        ...d,
-        percent,
-        strokeDashoffset,
-        rotation,
-        color: colors[i % colors.length]
-      };
-    })
-    .filter((s) => s.count > 0);
+    .reduce(
+      (
+        acc: { name: string; count: number; percent: number; strokeDashoffset: number; rotation: number; color: string }[],
+        d,
+        i
+      ) => {
+        const percent = total > 0 ? d.count / total : 0;
+        const strokeDashoffset = circumference - percent * circumference;
+        const runningPercent = acc.reduce((s, seg) => s + seg.percent, 0);
+        const rotation = runningPercent * 360;
+        if (d.count === 0) return acc;
+        return [
+          ...acc,
+          { ...d, percent, strokeDashoffset, rotation, color: colors[i % colors.length] },
+        ];
+      },
+      []
+    );
 
   return (
     <div className="bg-white border border-[#E2E8F0] p-8 rounded-[2.25rem] shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between h-[340px]">
@@ -593,6 +595,7 @@ const RegistrationRow = ({
                           }}
                           className="relative w-full h-24 bg-slate-100 rounded-xl overflow-hidden border border-slate-200 cursor-zoom-in group shadow-inner-sm"
                         >
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src={r.payment_screenshot}
                             alt="Payment Receipt"
@@ -1003,7 +1006,7 @@ export default function AdminPage() {
   }, [registrations]);
 
   return (
-    <SmoothScroll>
+    <>
       <Navbar />
 
       <div className="min-h-screen bg-slate-50/50 text-[#1A1A2E] font-body selection:bg-orange selection:text-white pt-32 pb-28 px-4 sm:px-6 md:px-8 relative overflow-hidden grid-bg-dots">
@@ -1224,6 +1227,7 @@ export default function AdminPage() {
               className="relative max-w-4xl max-h-[90vh] bg-white rounded-3xl overflow-hidden shadow-2xl p-2 border border-slate-200 flex flex-col"
               onClick={(e) => e.stopPropagation()}
             >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={previewImage}
                 alt="Payment Screenshot Zoom"
@@ -1244,6 +1248,6 @@ export default function AdminPage() {
           </motion.div>
         )}
       </AnimatePresence>
-    </SmoothScroll>
+    </>
   );
 }

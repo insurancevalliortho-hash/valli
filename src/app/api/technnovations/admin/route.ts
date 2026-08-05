@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { sql } from "../../../../lib/db";
 
-const ADMIN_PASSWORD = "ValliAdmin2026!";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "ValliAdmin2026!";
 
 // GET / POST to fetch all registrations securely
 export async function POST(request: Request) {

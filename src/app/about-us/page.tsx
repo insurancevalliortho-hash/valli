@@ -3,9 +3,9 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import SmoothScroll from "../../components/SmoothScroll";
 import MagneticCursor from "../../components/MagneticCursor";
 
 const VISION = {
@@ -73,9 +73,9 @@ const milestones = [
 
 const stats = [
     { value: "3+", label: "Years of Excellence" },
-    { value: "16K+", label: "Patients Treated" },
+    { value: "19K+", label: "Patients Treated" },
     { value: "95%", label: "Success Rate" },
-    { value: "15+", label: "Specialities" },
+    { value: "15+", label: "Specialties" },
     { value: "24/7", label: "Trauma Emergency" },
     { value: "Salem", label: "Heart of Tamil Nadu" },
 ];
@@ -89,19 +89,19 @@ const accreditations = [
 const FAQ_ITEMS = [
     {
         question: "Who is the best ortho doctor in Salem at Valli Hospital?",
-        answer: "Dr. T. Natanasabapathy, Chairman and Chief Orthopedic Surgeon at Valli Super Speciality Hospital, is widely recognized as the best ortho doctor in Salem. With over 30 years of clinical experience, he specializes in high-precision knee replacement, fracture clinic trauma care, and arthroscopy."
+        answer: "Dr. T. Natanasabapathy, Chairman and Chief Orthopedic Surgeon at Valli Super Specialty Hospital, is widely recognized as the best ortho doctor in Salem. With over 30 years of clinical experience, he specializes in high-precision knee replacement, fracture clinic trauma care, and arthroscopy."
     },
     {
-        question: "What makes Valli Super Speciality Hospital the best ortho hospital in Salem?",
-        answer: "Valli Super Speciality Hospital is the premier ortho hospital in Salem, co-founded as a specialized trauma center and upgraded into a 50-bed multispecialty hospital Opp. to Sri Vidya Mandir School, Meyyanur Bypass Road. It is renowned for advanced diagnostics, computer-guided joint replacement, and full NABH accreditation."
+        question: "What makes Valli Super Specialty Hospital the best ortho hospital in Salem?",
+        answer: "Valli Super Specialty Hospital is the premier ortho hospital in Salem, co-founded as a specialized trauma center and upgraded into a 50-bed multispecialty hospital Opp. to Sri Vidya Mandir School, Meyyanur Bypass Road. It is renowned for advanced diagnostics, computer-guided joint replacement, and full NABH accreditation."
     },
     {
         question: "Does Valli Hospital have a lady ortho doctor in Salem?",
-        answer: "Yes, Valli Super Speciality Hospital provides comprehensive patient care including consulting with top specialists. For patients seeking a lady ortho doctor in Salem, our dedicated orthopedic and sports medicine departments ensure comfortable, customized care."
+        answer: "Yes, Valli Super Specialty Hospital provides comprehensive patient care including consulting with top specialists. For patients seeking a lady ortho doctor in Salem, our dedicated orthopedic and sports medicine departments ensure comfortable, customized care."
     },
     {
         question: "Do you have the best rheumatologist in Salem at Valli Hospital?",
-        answer: "Yes, Valli Super Speciality Hospital has a dedicated department for joint pain and rheumatology. Our expert rheumatologist in Salem provides advanced medical therapy for rheumatoid arthritis treatment, gout, and autoimmune disorders."
+        answer: "Yes, Valli Super Specialty Hospital has a dedicated department for joint pain and rheumatology. Our expert rheumatologist in Salem provides advanced medical therapy for rheumatoid arthritis treatment, gout, and autoimmune disorders."
     },
     {
         question: "What surgical specialties are performed at Valli Orthopedic and Sports Hospital?",
@@ -122,8 +122,8 @@ export default function AboutPage() {
                 "@type": "AboutPage",
                 "@id": "https://www.vallihospital.in/about-us#webpage",
                 "url": "https://www.vallihospital.in/about-us",
-                "name": "About Valli Super Speciality Hospital Salem | Advanced Orthopedic Care",
-                "description": "Learn about Valli Super Speciality Hospital, a 50-bed multispecialty center in Salem co-founded by Dr. T. Natanasabapathy Thiagarajan and Dr. Vijayalakshmi Irulappan. Specialized in joint replacement, advanced arthroscopy, and trauma care.",
+                "name": "About Valli Super Specialty Hospital Salem | Advanced Orthopedic Care",
+                "description": "Learn about Valli Super Specialty Hospital, a 50-bed multispecialty center in Salem co-founded by Dr. T. Natanasabapathy Thiagarajan and Dr. Vijayalakshmi Irulappan. Specialized in joint replacement, advanced arthroscopy, and trauma care.",
                 "publisher": {
                     "@id": "https://www.vallihospital.in/#organization"
                 },
@@ -131,7 +131,7 @@ export default function AboutPage() {
                     {
                         "@type": "Hospital",
                         "@id": "https://www.vallihospital.in/#hospital",
-                        "name": "Valli Super Speciality Hospital",
+                        "name": "Valli Super Specialty Hospital",
                         "url": "https://www.vallihospital.in/",
                         "logo": "https://www.vallihospital.in/favicon.png",
                         "telephone": "+919003417111",
@@ -178,7 +178,7 @@ export default function AboutPage() {
     };
 
     return (
-        <SmoothScroll>
+        <>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }}
@@ -370,7 +370,7 @@ export default function AboutPage() {
 
                         <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                             className="relative rounded-[2rem] overflow-hidden h-80 lg:h-[480px]">
-                            <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&q=85&w=900" alt="Valli Hospital" className="w-full h-full object-cover" />
+                            <Image src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&q=85&w=900" alt="Valli Hospital" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
                             <div className="absolute inset-0 bg-gradient-to-t from-[#001f25]/60 via-transparent to-transparent" />
                             <div className="absolute bottom-6 left-6 right-6 bg-[#001f25]/70 backdrop-blur-md border border-white/15 rounded-xl px-5 py-4">
                                 <div className="text-[9px] uppercase tracking-widest text-white/40 font-bold mb-1">Location</div>
@@ -525,6 +525,6 @@ export default function AboutPage() {
             </section>
 
             <Footer />
-        </SmoothScroll>
+        </>
     );
 }

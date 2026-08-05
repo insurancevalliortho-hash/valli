@@ -2,14 +2,17 @@
 
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
+
+const MotionImage = motion.create(Image);
 
 // Aceternity/Magic UI inspired Blur Fade reveal.
 // NOTE: No opacity:0 or filter:blur in initial state — SSR must render visible, indexable text.
 // Animation uses only translateY so Googlebot reads clean HTML with no rendering interference.
 const BlurFade = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => (
     <motion.div
-        initial={{ y: 10 }}
-        whileInView={{ y: 0 }}
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-15%" }}
         transition={{ duration: 0.7, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
     >
@@ -75,11 +78,13 @@ export default function AboutSection() {
                         <motion.div
                             className="absolute inset-0 w-full h-full origin-top"
                         >
-                            <motion.img
+                            <MotionImage
                                 style={{ y: imgY, scale: imgScale }}
                                 src="/hospital.jpg"
-                                alt="Valli Superspecialty Hospital"
-                                className="w-full h-[120%] -top-[10%] relative object-cover filter contrast-[1.05] grayscale-[5%] will-change-transform"
+                                alt="Valli Superspecialty Hospital building — Salem, Tamil Nadu"
+                                fill
+                                sizes="(max-width: 1024px) 100vw, 42vw"
+                                className="object-cover filter contrast-[1.05] grayscale-[5%] will-change-transform"
                             />
                             {/* Elegant Cinematic Overlays (Minimal) */}
                             <div className="absolute inset-0 bg-gradient-to-t from-[#00333c]/80 via-transparent to-transparent opacity-80" />

@@ -1,11 +1,10 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import SmoothScroll from "../../components/SmoothScroll";
 import MagneticCursor from "../../components/MagneticCursor";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import ObfuscatedEmail from "../../components/ObfuscatedEmail";
@@ -23,7 +22,7 @@ const departments = [
     "ENT",
     "Nephrology and Dialysis",
     "Interventional Pain Medicine",
-    "All Ortho Sub Specialities"
+    "All Ortho Sub Specialties"
 ];
 
 const timeSlots = [
@@ -79,7 +78,7 @@ export default function BookAppointmentPage() {
             `*Preferred Date:* ${form.date}\n` +
             `*Preferred Time:* ${form.time}\n\n` +
             `*Patient Brief / Symptoms:* \n${form.notes || "No additional details provided."}\n\n` +
-            `_This request was generated via the Valli Super Speciality Hospital website._`;
+            `_This request was generated via the Valli Super Specialty Hospital website._`;
 
         const encodedText = encodeURIComponent(messageText);
         const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedText}`;
@@ -92,7 +91,7 @@ export default function BookAppointmentPage() {
     const today = new Date().toISOString().split("T")[0];
 
     return (
-        <SmoothScroll>
+        <>
             <MagneticCursor />
             <Navbar />
 
@@ -364,6 +363,6 @@ export default function BookAppointmentPage() {
             </section>
 
             <Footer />
-        </SmoothScroll>
+        </>
     );
 }

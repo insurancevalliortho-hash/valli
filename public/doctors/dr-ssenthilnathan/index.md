@@ -1,8 +1,8 @@
 ---
 title: Dr. S. Senthilnathan - MBBS, MD | Valli Hospital Salem
-description: Professional profile of Dr. S. Senthilnathan, specialist in DEPT OF RADIO DIAGNOSIS at Valli Super Speciality Hospital.
+description: Professional profile of Dr. S. Senthilnathan, specialist in DEPT OF RADIO DIAGNOSIS at Valli Super Specialty Hospital.
 url: https://www.vallihospital.in/doctors/dr-ssenthilnathan
-last_updated: 2026-06-29
+last_updated: 2026-08-05
 ---
 
 # Professional Medical Profile: Dr. S. Senthilnathan
@@ -17,7 +17,7 @@ last_updated: 2026-06-29
 Specialist in Radio Diagnosis and patient-centered care
 
 ## Professional Background & Biography
-Dr. S. Senthilnathan is a distinguished Consultant in the Radio Diagnosis at Valli Super Speciality Hospital, Salem. Holding qualifications in MBBS, MD, they possess deep clinical expertise and are committed to offering state-of-the-art care. Job Title: Consultant Radio Diagnosis Performing or directing radiology staff to carry out image-guided, diagnostic procedures. Interpreting the results from diagnostic imaging procedures to determine diagnoses.
+Dr. S. Senthilnathan is a distinguished Consultant in the Radio Diagnosis at Valli Super Specialty Hospital, Salem. Holding qualifications in MBBS, MD, they possess deep clinical expertise and are committed to offering state-of-the-art care. Job Title: Consultant Radio Diagnosis Performing or directing radiology staff to carry out image-guided, diagnostic procedures. Interpreting the results from diagnostic imaging procedures to determine diagnoses.
 
 ## OPD Consultation Fee
 - Standard Clinical Consultation: ₹500 - ₹800 ($6 - $10 USD)

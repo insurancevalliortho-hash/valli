@@ -1,7 +1,8 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Calendar,
   MapPin,
@@ -25,7 +26,6 @@ import {
 } from "lucide-react";
 import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
-import SmoothScroll from "../../../components/SmoothScroll";
 // @ts-ignore
 import { animate, stagger } from "animejs";
 
@@ -275,7 +275,7 @@ export default function AISportsRehabEventPage() {
   };
 
   return (
-    <SmoothScroll>
+    <>
       <Navbar />
 
       <div className="font-body text-slate-800 bg-[#FCFDFD] min-h-screen selection:bg-[#FF8C00] selection:text-white relative overflow-hidden">
@@ -299,7 +299,7 @@ export default function AISportsRehabEventPage() {
               <div className="lg:col-span-7 space-y-6 text-left">
                 <div className="hero-badge opacity-0 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#E0F2F1] border border-[#B2E0DA] text-[#004B57] text-xs font-bold tracking-[0.2em] uppercase">
                   <span className="w-2 h-2 rounded-full bg-[#00A896] animate-pulse" />
-                  Valli Super Speciality Hospital CME
+                  Valli Super Specialty Hospital CME
                 </div>
 
                 <h1
@@ -372,9 +372,11 @@ export default function AISportsRehabEventPage() {
 
                 {/* Main Runner Image Overlay */}
                 <div className="relative z-10 w-full max-w-[340px] sm:max-w-[400px]">
-                  <img
+                  <Image
                     src="/assets/runner-overlay.png"
                     alt="AI Sports Rehabilitation telemetry scan"
+                    width={400}
+                    height={400}
                     className="w-full h-auto object-contain drop-shadow-[0_10px_30px_rgba(0,168,150,0.12)]"
                   />
                   
@@ -436,7 +438,7 @@ export default function AISportsRehabEventPage() {
               </div>
               <div className="text-center border-l border-slate-100">
                 <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">NABH STATUS</span>
-                <span className="text-xl font-display font-black text-[#004B57]">ACCREDITED SUPER SPECIALITY</span>
+                <span className="text-xl font-display font-black text-[#004B57]">ACCREDITED Super Specialty</span>
               </div>
             </div>
           </div>
@@ -754,6 +756,6 @@ export default function AISportsRehabEventPage() {
       </div>
 
       <Footer />
-    </SmoothScroll>
+    </>
   );
 }

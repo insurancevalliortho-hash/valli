@@ -1,10 +1,10 @@
-import React from 'react';
+﻿import React from 'react';
 
 export const HospitalSchema = () => {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "MedicalOrganization",
-    "name": "Valli Super Speciality Hospital",
+    "name": "Valli Super Specialty Hospital",
     "alternateName": [
       "Valli Orthopedic and Sports Hospital",
       "Valli Orthopaedic and Sports Hospital",
@@ -63,7 +63,7 @@ export const PhysicianSchema = () => {
     "jobTitle": "Chief Orthopedic Surgeon & Joint Replacement Specialist",
     "worksFor": {
       "@type": "MedicalOrganization",
-      "name": "Valli Super Speciality Hospital"
+      "name": "Valli Super Specialty Hospital"
     },
     "medicalSpecialty": [
       "Orthopedic Surgery",
@@ -145,7 +145,7 @@ export const MedicalProcedureSchema = ({
     "howPerformed": "Performed by senior orthopedic specialists under sterile operative conditions.",
     "provider": {
       "@type": "MedicalOrganization",
-      "name": "Valli Super Speciality Hospital",
+      "name": "Valli Super Specialty Hospital",
       "url": "https://www.vallihospital.in"
     }
   };
@@ -180,7 +180,7 @@ export const MedicalSpecialtySchema = ({
     },
     "publisher": {
       "@type": "MedicalOrganization",
-      "name": "Valli Super Speciality Hospital"
+      "name": "Valli Super Specialty Hospital"
     }
   };
 

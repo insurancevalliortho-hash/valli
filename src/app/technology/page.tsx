@@ -1,10 +1,9 @@
-"use client";
+﻿"use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import SmoothScroll from "../../components/SmoothScroll";
 import MagneticCursor from "../../components/MagneticCursor";
 import Link from "next/link";
 
@@ -464,7 +463,7 @@ export default function TechnologyPage() {
     const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "28%"]);
 
     return (
-        <SmoothScroll>
+        <>
             <MagneticCursor />
             <Navbar />
 
@@ -570,12 +569,12 @@ export default function TechnologyPage() {
                     <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
                         className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Link href="/book-appointment" className="bg-[#f98825] text-white px-8 py-4 rounded-full font-bold text-sm hover:bg-[#e0751e] transition-colors shadow-lg">Book a Consultation</Link>
-                        <Link href="/specialities" className="bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-full font-bold text-sm border border-white/20 transition-colors">View Specialities</Link>
+                        <Link href="/specialties" className="bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-full font-bold text-sm border border-white/20 transition-colors">View Specialties</Link>
                     </motion.div>
                 </div>
             </section>
 
             <Footer />
-        </SmoothScroll>
+        </>
     );
 }

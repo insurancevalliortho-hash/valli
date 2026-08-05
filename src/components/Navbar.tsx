@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Navbar() {
     const { scrollY } = useScroll();
@@ -26,13 +27,31 @@ export default function Navbar() {
                     {/* Logo Area */}
                     <Link href="/" className="flex items-center gap-3 group cursor-pointer">
                         {/* Mobile: full logo.png (has Tamil text), no extra label */}
-                        <img src="/logo.png" alt="Valli Hospital" className="h-10 w-auto sm:hidden" />
+                        <Image
+                            src="/logo.png"
+                            alt="Valli Super Specialty Hospital logo"
+                            width={522}
+                            height={245}
+                            priority
+                            sizes="(max-width: 640px) 160px, 200px"
+                            className="h-10 w-auto sm:hidden object-contain"
+                            style={{ width: "auto" }}
+                        />
 
                         {/* Desktop: favicon icon + 2-line name */}
-                        <img src="/favicon.png" alt="Valli Hospital" className="hidden sm:block h-10 xl:h-11 w-auto" />
+                        <Image
+                            src="/favicon.png"
+                            alt="Valli Super Specialty Hospital emblem"
+                            width={151}
+                            height={166}
+                            priority
+                            sizes="(max-width: 1280px) 40px, 44px"
+                            className="hidden sm:block h-10 xl:h-11 w-auto object-contain"
+                            style={{ width: "auto" }}
+                        />
                         <div className={`hidden sm:flex flex-col justify-center transition-colors duration-500 ${isScrolled ? "text-[#004b57]" : "text-[#f98825]"}`}>
                             <span className="text-lg xl:text-xl font-black leading-none tracking-tight">Valli</span>
-                            <span className="text-[10px] xl:text-xs font-bold tracking-[0.15em] uppercase mt-0.5 opacity-80">Super Speciality Hospital</span>
+                            <span className="text-[10px] xl:text-xs font-bold tracking-[0.15em] uppercase mt-0.5 opacity-80">Super Specialty Hospital</span>
                         </div>
                     </Link>
 
@@ -44,20 +63,46 @@ export default function Navbar() {
                             <div className="absolute inset-0 bg-[#f98825]/15 rounded-full translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0" />
                         </Link>
 
-                        {/* Specialities Dropdown */}
+                        {/* Specialties Dropdown */}
                         <div className="relative group/dropdown">
                             <button className="relative text-[13px] xl:text-sm font-medium text-[#40484a] hover:text-[#f98825] hover:font-bold px-3 xl:px-5 py-2 rounded-full transition-colors overflow-hidden focus:outline-none">
-                                <span className="relative z-10 flex items-center gap-1 whitespace-nowrap">Specialities <svg className="w-3 h-3 transition-transform group-hover/dropdown:rotate-180 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg></span>
+                                <span className="relative z-10 flex items-center gap-1 whitespace-nowrap">Specialties <svg className="w-3 h-3 transition-transform group-hover/dropdown:rotate-180 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg></span>
                             </button>
-                            <div className="absolute top-full left-0 mt-4 w-64 bg-white border border-[#bfc8ca]/40 rounded-xl shadow-xl opacity-0 invisible group-hover/dropdown:opacity-100 group-hover/dropdown:visible transition-all duration-300 origin-top-left z-50 flex flex-col py-2">
-                                <Link href="/joint-care-clinic" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Joint Care Clinic</Link>
-                                <Link href="/sports-medicine-clinic" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Sports Medicine</Link>
-                                <Link href="/foot-and-ankle-clinic" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Foot & Ankle Clinic</Link>
-                                <Link href="/back-pain-and-spinal-disorders" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Back Pain & Spinal Disorders</Link>
-                                <Link href="/paediatric-orthopaedics-deformity-clinic" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Paediatric Orthopaedics & Deformity Clinic</Link>
-                                <Link href="/failed-surgery-corrections" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Failed Surgery Corrections</Link>
-                                <Link href="/sports-injury-clinic" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Sports Injury Clinic</Link>
-                                <Link href="/fracture-clinic" className="px-4 py-2 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825]">Fracture Clinic</Link>
+                            {/* 2-column mega-menu */}
+                            <div className="absolute top-full left-0 mt-4 w-[540px] bg-white border border-[#bfc8ca]/40 rounded-xl shadow-xl opacity-0 invisible group-hover/dropdown:opacity-100 group-hover/dropdown:visible transition-all duration-300 origin-top-left z-50 p-2">
+                                <div className="grid grid-cols-2 divide-x divide-[#e5eaeb]">
+                                    {/* Left column */}
+                                    <div className="flex flex-col pr-1">
+                                        <span className="px-4 pt-2 pb-1 text-[10px] font-black uppercase tracking-widest text-[#3cb3a6]">Orthopaedics</span>
+                                        <Link href="/joint-care-clinic" className="px-4 py-1.5 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825] rounded-lg">Joint Care Clinic</Link>
+                                        <Link href="/sports-medicine-clinic" className="px-4 py-1.5 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825] rounded-lg">Sports Medicine</Link>
+                                        <Link href="/sports-injury-clinic" className="px-4 py-1.5 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825] rounded-lg">Sports Injury Clinic</Link>
+                                        <Link href="/foot-and-ankle-clinic" className="px-4 py-1.5 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825] rounded-lg">Foot &amp; Ankle Clinic</Link>
+                                        <Link href="/fracture-clinic" className="px-4 py-1.5 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825] rounded-lg">Fracture Clinic</Link>
+                                        <Link href="/back-pain-and-spinal-disorders" className="px-4 py-1.5 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825] rounded-lg">Back Pain &amp; Spinal Disorders</Link>
+                                        <Link href="/paediatric-orthopaedics-deformity-clinic" className="px-4 py-1.5 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825] rounded-lg">Paediatric Orthopaedics</Link>
+                                        <Link href="/failed-surgery-corrections" className="px-4 py-1.5 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825] rounded-lg">Failed Surgery Corrections</Link>
+                                        <Link href="/brachial-plexus-nerve-surgery" className="px-4 py-1.5 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#3cb3a6] rounded-lg">Brachial Plexus &amp; Nerve Surgery</Link>
+                                        <Link href="/oral-maxillofacial-surgery" className="px-4 py-1.5 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#004b57] rounded-lg">Oral &amp; Maxillofacial Surgery</Link>
+                                    </div>
+                                    {/* Right column */}
+                                    <div className="flex flex-col pl-1">
+                                        <span className="px-4 pt-2 pb-1 text-[10px] font-black uppercase tracking-widest text-[#f98825]">Medicine &amp; Critical Care</span>
+                                        <Link href="/neurosurgery-neurological-care" className="px-4 py-1.5 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825] rounded-lg">Neurosurgery &amp; Neurology</Link>
+                                        <Link href="/critical-care-anaesthesia" className="px-4 py-1.5 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825] rounded-lg">Critical Care &amp; Anaesthesia</Link>
+                                        <Link href="/respiratory-care-pulmonology" className="px-4 py-1.5 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#3cb3a6] rounded-lg">Respiratory Care &amp; Pulmonology</Link>
+                                        <Link href="/surgical-gastroenterology" className="px-4 py-1.5 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825] rounded-lg">Surgical Gastroenterology</Link>
+                                        <Link href="/hematology-blood-disorders" className="px-4 py-1.5 text-sm text-[#40484a] hover:bg-gray-50 hover:text-red-600 rounded-lg">Hematology &amp; Blood Disorders</Link>
+                                        <Link href="/interventional-ultrasound-pain-management" className="px-4 py-1.5 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#3cb3a6] rounded-lg">Interventional Ultrasound &amp; Pain</Link>
+                                        <Link href="/dialysis-kidney-care" className="px-4 py-1.5 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825] rounded-lg">24/7 Dialysis &amp; Kidney Care</Link>
+                                        <Link href="/plastic-reconstructive-surgery" className="px-4 py-1.5 text-sm text-[#40484a] hover:bg-gray-50 hover:text-rose-600 rounded-lg">Plastic &amp; Reconstructive Surgery</Link>
+                                        <div className="my-1 mx-4 border-t border-[#e5eaeb]" />
+                                        <Link href="/specialties" className="px-4 py-1.5 text-sm font-semibold text-[#004b57] hover:bg-gray-50 hover:text-[#f98825] rounded-lg flex items-center gap-1">
+                                            View All Specialties
+                                            <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+                                        </Link>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -128,7 +173,7 @@ export default function Navbar() {
                         <div className="flex flex-col space-y-8 text-center relative z-10">
                             {[
                                 { label: "About us", href: "/about-us" },
-                                { label: "Specialities", href: "/specialities" },
+                                { label: "Specialties", href: "/specialties" },
                                 { label: "Services", href: "/services" },
                                 { label: "Facilities", href: "/facilities" },
                                 { label: "Doctors", href: "/doctors" },
@@ -169,3 +214,4 @@ export default function Navbar() {
         </>
     );
 }
+

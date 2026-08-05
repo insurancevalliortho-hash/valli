@@ -1,8 +1,8 @@
 ---
 title: Dr. K. N. Jotheesvar - MBBS, MS ORTHO, FIAS, FIJR | Valli Hospital Salem
-description: Professional profile of Dr. K. N. Jotheesvar, specialist in DEPT OF ORTHOPAEDICS at Valli Super Speciality Hospital.
+description: Professional profile of Dr. K. N. Jotheesvar, specialist in DEPT OF ORTHOPAEDICS at Valli Super Specialty Hospital.
 url: https://www.vallihospital.in/doctors/dr-jothiswar
-last_updated: 2026-06-29
+last_updated: 2026-08-05
 ---
 
 # Professional Medical Profile: Dr. K. N. Jotheesvar

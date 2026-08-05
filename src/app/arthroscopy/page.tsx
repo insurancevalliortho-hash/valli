@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Navbar from '../../components/Navbar';
@@ -7,7 +7,7 @@ import { BreadcrumbSchema, FAQSchema, MedicalProcedureSchema, MedicalSpecialtySc
 
 export const metadata: Metadata = {
   title: "Arthroscopy Surgery & Keyhole Joint Specialists in Salem | Valli Hospital",
-  description: "Advanced Keyhole Arthroscopic Surgery in Salem at Valli Super Speciality Hospital. Expert ACL reconstruction, meniscus tear repair, shoulder dislocation surgery, and Bankart repair by Dr. T. Natanasabapathy. Day-care surgery with rapid recovery.",
+  description: "Advanced Keyhole Arthroscopic Surgery in Salem at Valli Super Specialty Hospital. Expert ACL reconstruction, meniscus tear repair, shoulder dislocation surgery, and Bankart repair by Dr. T. Natanasabapathy. Day-care surgery with rapid recovery.",
   keywords: [
     "arthroscopy Salem",
     "arthroscopic surgery Salem",
@@ -33,7 +33,7 @@ export default function ArthroscopyPage() {
     },
     {
       question: "How long is the hospital stay for an ACL or Meniscus arthroscopy?",
-      answer: "Most arthroscopic surgeries at Valli Super Speciality Hospital are performed as day-care or 24-hour stay procedures. Patients are often able to walk with supportive braces on the same day or day after surgery."
+      answer: "Most arthroscopic surgeries at Valli Super Specialty Hospital are performed as day-care or 24-hour stay procedures. Patients are often able to walk with supportive braces on the same day or day after surgery."
     },
     {
       question: "What joints can be treated with arthroscopy at Valli Hospital Salem?",
@@ -51,7 +51,7 @@ export default function ArthroscopyPage() {
 
       <BreadcrumbSchema items={[
         { name: 'Home', url: 'https://www.vallihospital.in/' },
-        { name: 'Specialities', url: 'https://www.vallihospital.in/specialities' },
+        { name: 'Specialties', url: 'https://www.vallihospital.in/specialties' },
         { name: 'Arthroscopy', url: 'https://www.vallihospital.in/arthroscopy' }
       ]} />
       <FAQSchema questions={faqList} />
@@ -72,7 +72,7 @@ export default function ArthroscopyPage() {
           <ol className="flex space-x-2 text-sm text-gray-400">
             <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
             <li><span className="mx-2">›</span></li>
-            <li><Link href="/specialities" className="hover:text-white transition-colors">Specialities</Link></li>
+            <li><Link href="/specialties" className="hover:text-white transition-colors">Specialties</Link></li>
             <li><span className="mx-2">›</span></li>
             <li className="text-[#f98825] truncate" aria-current="page">Arthroscopy</li>
           </ol>
@@ -190,7 +190,7 @@ export default function ArthroscopyPage() {
       {/* Related Treatments */}
       <section className="py-16 bg-white border-t border-gray-100">
         <div className="container mx-auto px-6 md:px-12">
-          <h3 className="text-2xl font-bold text-[#00333c] mb-6">Related Clinics & Specialities</h3>
+          <h3 className="text-2xl font-bold text-[#00333c] mb-6">Related Clinics & Specialties</h3>
           <ul className="flex flex-wrap gap-6 md:gap-12">
             <li><Link href="/sports-medicine-clinic" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Sports Medicine Clinic</Link></li>
             <li><Link href="/sports-injury-clinic" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Sports Injury Clinic</Link></li>

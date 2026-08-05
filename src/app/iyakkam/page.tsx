@@ -1,8 +1,9 @@
-"use client";
+﻿"use client";
 
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Activity,
   Shield,
@@ -22,7 +23,6 @@ import {
 } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import SmoothScroll from "../../components/SmoothScroll";
 
 const SERVICES = [
   {
@@ -480,10 +480,12 @@ function ShowcaseGallery() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         {/* Hotspot image block */}
         <div className="lg:col-span-7 relative bg-slate-50 rounded-3xl overflow-hidden border border-slate-200 shadow-xl aspect-video select-none">
-          <img
+          <Image
             src={tab === "gait" ? "/assets/iyakkam-gait.png" : "/assets/iyakkam-rehab.png"}
             alt={tab === "gait" ? "Treadmill Gait Analysis Lab" : "Joint Rehab assessment Lab"}
-            className="w-full h-full object-cover opacity-95"
+            fill
+            sizes="(max-width: 1024px) 100vw, 60vw"
+            className="object-cover opacity-95"
           />
 
           {/* Overlay pulsing hotspot indicators */}
@@ -540,7 +542,7 @@ function ShowcaseGallery() {
 
 export default function IyakkamPage() {
   return (
-    <SmoothScroll>
+    <>
       <Navbar />
 
       <div className="font-body text-[#1A1A2E] bg-white min-h-screen selection:bg-orange selection:text-white">
@@ -561,7 +563,7 @@ export default function IyakkamPage() {
               <div className="lg:col-span-7 space-y-6">
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#00A896]/5 border border-[#00A896]/10 text-[#00A896] text-xs font-bold tracking-[0.2em] uppercase">
                   <span className="w-2 h-2 rounded-full bg-[#00A896] animate-pulse" />
-                  Valli Super Speciality Hospital
+                  Valli Super Specialty Hospital
                 </div>
 
                 <h1 className="text-5xl sm:text-7xl lg:text-8xl font-display tracking-tight leading-none text-[#1A1A2E] uppercase">
@@ -815,6 +817,6 @@ export default function IyakkamPage() {
           </div>
         </section>
       </div>
-    </SmoothScroll>
+    </>
   );
 }

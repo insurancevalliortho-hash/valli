@@ -1,5 +1,38 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+/* Inter and Plus Jakarta Sans are loaded via next/font/google in layout.tsx */
+
 @import "tailwindcss";
+
+/* ─── Scroll Primitives ───────────────────────────────────────────────────
+   1. scroll-behavior: auto  →  prevents the browser's own smooth-scroll from
+      double-smoothing on top of Lenis (observed on Chrome ≥ 115, Firefox).
+   2. overscroll-behavior-y: none  →  stops pull-to-refresh / bounce from
+      competing with Lenis on mobile, eliminating the "stuck" feeling.
+   3. touch-action: pan-y  →  hands vertical panning cleanly to the browser
+      compositor on touch devices; Lenis owns horizontal/custom logic.
+   ─────────────────────────────────────────────────────────────────────── */
+html {
+    scroll-behavior: auto !important;
+    overscroll-behavior-y: none;
+}
+body {
+    touch-action: pan-y;
+    overscroll-behavior-y: none;
+}
+
+/* ─── GPU Compositor Promotion ────────────────────────────────────────────
+   Promote Lenis's root scroll container and all known parallax motion.div
+   wrappers to their own compositor layers. This eliminates main-thread
+   repaints during scroll and is the primary fix for stutter on mid-range
+   devices.
+   ─────────────────────────────────────────────────────────────────────── */
+[data-lenis-prevent],
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+.parallax-layer {
+    will-change: transform;
+    transform: translateZ(0);
+}
 
 @theme {
     --color-primary: #004B57;
@@ -29,7 +62,7 @@
 body {
     color: var(--foreground);
     background: var(--mint);
-    font-family: var(--font-poppins), sans-serif;
+    font-family: var(--font-plus-jakarta-sans), system-ui, sans-serif;
 }
 
 h1,
@@ -38,7 +71,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: var(--font-montserrat), sans-serif;
+    font-family: var(--font-montserrat), system-ui, sans-serif;
 }
 
 @keyframes marquee {
@@ -60,16 +93,21 @@ h6 {
     scrollbar-width: none;
 }
 
-#page-content-wrapper {
+#page-content-wrapper.transitioning {
     transition: transform 900ms cubic-bezier(0.85, 0, 0.15, 1), filter 900ms cubic-bezier(0.85, 0, 0.15, 1), opacity 900ms cubic-bezier(0.85, 0, 0.15, 1);
     transform-origin: center center;
-}
-
-#page-content-wrapper.transitioning {
     transform: scale(0.94) translateY(12px);
     filter: blur(10px) saturate(0.7);
     opacity: 0.45;
     pointer-events: none;
+}
+
+#page-content-wrapper.transition-ending {
+    transition: transform 700ms cubic-bezier(0.85, 0, 0.15, 1), filter 700ms cubic-bezier(0.85, 0, 0.15, 1), opacity 700ms cubic-bezier(0.85, 0, 0.15, 1);
+    transform-origin: center center;
+    transform: scale(1) translateY(0);
+    filter: blur(0px) saturate(1);
+    opacity: 1;
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -91,8 +129,8 @@ h6 {
   --color-border-teal: #E0F2F1;
   --font-reliesta: 'Reliesta', Georgia, serif;
   --font-manjari: 'Manjari', system-ui, sans-serif;
-  --font-display: 'Plus Jakarta Sans', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-display: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', system-ui, sans-serif;
 }
 
 :root {
@@ -118,8 +156,8 @@ h6 {
 /* Font utility classes */
 .font-reliesta { font-family: 'Reliesta', Georgia, serif; }
 .font-manjari  { font-family: 'Manjari', system-ui, sans-serif; }
-.font-display  { font-family: 'Plus Jakarta Sans', sans-serif; }
-.font-body     { font-family: 'Inter', sans-serif; }
+.font-display  { font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', system-ui, sans-serif; }
+.font-body     { font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', system-ui, sans-serif; }
 
 /* Diagonal stripe (hero signature element) */
 .tv-diagonal-rule {
@@ -287,7 +325,7 @@ h6 {
 }
 
 .prize-count {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
   font-weight: 800;
   letter-spacing: -0.02em;
   color: var(--orange);
@@ -306,7 +344,7 @@ h6 {
 }
 
 .btn-primary {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
   font-weight: 600;
   font-size: 14px;
   letter-spacing: 0.01em;

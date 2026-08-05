@@ -1,4 +1,4 @@
-import { MetadataRoute } from 'next';
+﻿import { MetadataRoute } from 'next';
 import { doctorsData } from '../data/doctors';
 import fs from 'fs';
 import path from 'path';
@@ -42,7 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/facilities',
         '/about-us',
         '/contact-us',
-        '/specialities',
+        '/specialties',
         '/services',
         '/technology',
         '/blog'

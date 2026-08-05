@@ -1,41 +1,39 @@
-"use client";
-
-import { motion } from "framer-motion";
+import Image from "next/image";
 
 const logos = [
     { 
         name: "NABH", 
-        src: "https://images.seeklogo.com/logo-png/39/1/nabh-logo-png_seeklogo-398755.png",
+        src: "/partners/nabh.png",
         width: 56,
         height: 56
     },
     { 
         name: "HDFC ERGO", 
-        src: "https://upload.wikimedia.org/wikipedia/en/thumb/5/56/HDFC_ERGO_Logo_2025.png/330px-HDFC_ERGO_Logo_2025.png",
+        src: "/partners/hdfc-ergo.png",
         width: 150,
         height: 50
     },
     { 
         name: "Star Health", 
-        src: "https://play-lh.googleusercontent.com/JEcrbamGiWvHjDBubpjIfDAZ5-aqy-z1oDXag4XSDptHSYtGftWcH_sfENba-lSlBQ",
+        src: "/partners/star-health.png",
         width: 56,
         height: 56
     },
     { 
         name: "SBI General", 
-        src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTX6sXAMSiLW6oopymkkFE-wP0yltVNNBVqeA&s",
+        src: "/partners/sbi-general.png",
         width: 150,
         height: 50
     },
     { 
         name: "ICICI Lombard", 
-        src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPtAPFlH1QOyJWzuOfQcrkTIorAkeeGWhtdA&s",
+        src: "/partners/icici-lombard.png",
         width: 150,
         height: 50
     },
     { 
         name: "Care Health", 
-        src: "https://play-lh.googleusercontent.com/ZBdHZIdRgt-8pMRTHrSiJqLLQ_03SDr9LVfj_wZOUOgEb5CXA2_Dy-0pJdNKVicex-BS",
+        src: "/partners/care-health.png",
         width: 56,
         height: 56
     },
@@ -56,32 +54,31 @@ export default function TrustBar() {
 
                 <div className="w-full h-12 md:h-[80px] w-px bg-gray-200 hidden md:block opacity-50 mx-4" />
 
-                {/* Infinite Marquee */}
-                <div className="flex-1 overflow-hidden relative w-full mask-image-linear">
+                {/* Infinite Marquee — CSS-driven, zero JS hydration */}
+                <div className="flex-1 overflow-hidden relative w-full">
                     {/* Gradient masks for smooth fade on edges */}
                     <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
                     <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
-                    <motion.div
-                        initial={{ x: 0 }}
-                        animate={{ x: "-50%" }}
-                        transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+                    <div
                         className="flex items-center gap-16 md:gap-24 w-max"
+                        style={{ animation: "marquee 40s linear infinite" }}
                     >
-                        {/* Double the array for seamless infinite scroll */}
+                        {/* Triple the array for seamless infinite scroll */}
                         {[...logos, ...logos, ...logos].map((logo, index) => (
                             <div key={index} className="flex items-center justify-center shrink-0 group">
-                                <img
+                                <Image
                                     src={logo.src}
-                                    alt={logo.name}
+                                    alt={`${logo.name} partner logo`}
                                     width={logo.width}
                                     height={logo.height}
-                                    referrerPolicy="no-referrer"
-                                    className="h-10 md:h-14 w-auto transition-all duration-300 drop-shadow-sm group-hover:drop-shadow-md"
+                                    loading="lazy"
+                                    className="h-10 md:h-14 w-auto object-contain transition-all duration-300 drop-shadow-sm group-hover:drop-shadow-md"
+                                    style={{ width: "auto" }}
                                 />
                             </div>
                         ))}
-                    </motion.div>
+                    </div>
                 </div>
             </div>
         </section>

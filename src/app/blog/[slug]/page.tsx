@@ -6,9 +6,11 @@ import path from 'path';
 import { notFound } from 'next/navigation';
 import { FAQSchema } from '../../../components/seo/StructuredData';
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+// Next.js 16: params is a Promise — must be typed and awaited accordingly.
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const dir = path.join(process.cwd(), 'src', 'content', 'blog');
-  const file = path.join(dir, `${params.slug}.mdx`);
+  const file = path.join(dir, `${slug}.mdx`);
   if (!fs.existsSync(file)) return {};
   
   const content = fs.readFileSync(file, 'utf8');
@@ -19,14 +21,15 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     title: titleMatch ? `${titleMatch[1]} | Valli Hospital` : 'Blog Post',
     description: descMatch ? descMatch[1] : '',
     alternates: {
-      canonical: `https://www.vallihospital.in/blog/${params.slug}`,
+      canonical: `https://www.vallihospital.in/blog/${slug}`,
     },
   };
 }
 
-export default function BlogPost({ params }: { params: { slug: string } }) {
+export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const dir = path.join(process.cwd(), 'src', 'content', 'blog');
-  const file = path.join(dir, `${params.slug}.mdx`);
+  const file = path.join(dir, `${slug}.mdx`);
   
   if (!fs.existsSync(file)) {
     notFound();
@@ -46,7 +49,7 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
       <article className="pt-32 pb-20 bg-white min-h-screen">
         <div className="container mx-auto px-6 md:px-12 max-w-4xl">
           <h1 className="text-3xl md:text-5xl font-black text-[#00333c] mb-8">
-            {titleMatch ? titleMatch[1] : params.slug}
+            {titleMatch ? titleMatch[1] : slug}
           </h1>
           <div className="prose prose-lg prose-blue max-w-none text-gray-700">
             <pre className="whitespace-pre-wrap font-sans text-base">{body.trim()}</pre>

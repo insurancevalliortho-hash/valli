@@ -1,4 +1,4 @@
-const fs = require('fs');
+﻿const fs = require('fs');
 const path = require('path');
 
 const baseUrl = 'https://www.vallihospital.in';
@@ -83,7 +83,7 @@ const doctorList = [
     qualifications: "MBBS",
     department: "DEPT OF ORTHOPAEDICS",
     shortDescription: "Specialist in Orthopaedics and surgical treatments",
-    description: "Dr. R. Prabu is a distinguished Consultant in the Orthopaedics at Valli Super Speciality Hospital, Salem. Holding qualifications in MBBS, they possess deep clinical expertise and are committed to offering state-of-the-art care. 5 years' clinical experience in Orthopedic Department Clinical risk management experience. Verifying complex diagnoses and facilitating treatment plans."
+    description: "Dr. R. Prabu is a distinguished Consultant in the Orthopaedics at Valli Super Specialty Hospital, Salem. Holding qualifications in MBBS, they possess deep clinical expertise and are committed to offering state-of-the-art care. 5 years' clinical experience in Orthopedic Department Clinical risk management experience. Verifying complex diagnoses and facilitating treatment plans."
   },
   {
     slug: "dr-ambiga",
@@ -91,7 +91,7 @@ const doctorList = [
     qualifications: "MBBS",
     department: "DEPT OF GENERAL MEDICINE",
     shortDescription: "Specialist in General Medicine and patient-centered care",
-    description: "Dr. Ambiga is a distinguished Consultant in the General Medicine at Valli Super Speciality Hospital, Salem. Holding qualifications in MBBS, they possess deep clinical expertise and are committed to offering state-of-the-art care. Explaining procedures and discussing test results or prescribed treatments with patients. Monitoring patients' conditions and progress, and re-evaluating treatments, as necessary. Knowledge and experience in diagnosing and treating a wide variety of illnesses."
+    description: "Dr. Ambiga is a distinguished Consultant in the General Medicine at Valli Super Specialty Hospital, Salem. Holding qualifications in MBBS, they possess deep clinical expertise and are committed to offering state-of-the-art care. Explaining procedures and discussing test results or prescribed treatments with patients. Monitoring patients' conditions and progress, and re-evaluating treatments, as necessary. Knowledge and experience in diagnosing and treating a wide variety of illnesses."
   },
   {
     slug: "dr-obuli-vijay-shankar",
@@ -99,7 +99,7 @@ const doctorList = [
     qualifications: "MBBS, MS, FNB",
     department: "DEPT OF HAND & MICRO SURGERY",
     shortDescription: "Specialist in Hand & Micro Surgery and surgical treatments",
-    description: "Dr. Obuli Vijay Shankar is a distinguished Consultant in the Hand & Micro Surgery at Valli Super Speciality Hospital, Salem. Holding qualifications in MBBS, MS, FNB, they possess deep clinical expertise and are committed to offering state-of-the-art care. FNB in Hand & Microvascular surgery in Ganga Hospital ( 2021 - 2023) Examines, diagnoses, and treats diseases and injuries to the musculoskeletal system. Prescribes course of treatment for patients with injuries, disorders, or malformations and performs required surgery."
+    description: "Dr. Obuli Vijay Shankar is a distinguished Consultant in the Hand & Micro Surgery at Valli Super Specialty Hospital, Salem. Holding qualifications in MBBS, MS, FNB, they possess deep clinical expertise and are committed to offering state-of-the-art care. FNB in Hand & Microvascular surgery in Ganga Hospital ( 2021 - 2023) Examines, diagnoses, and treats diseases and injuries to the musculoskeletal system. Prescribes course of treatment for patients with injuries, disorders, or malformations and performs required surgery."
   },
   {
     slug: "dr-ssenthilnathan",
@@ -107,7 +107,7 @@ const doctorList = [
     qualifications: "MBBS, MD",
     department: "DEPT OF RADIO DIAGNOSIS",
     shortDescription: "Specialist in Radio Diagnosis and patient-centered care",
-    description: "Dr. S. Senthilnathan is a distinguished Consultant in the Radio Diagnosis at Valli Super Speciality Hospital, Salem. Holding qualifications in MBBS, MD, they possess deep clinical expertise and are committed to offering state-of-the-art care. Job Title: Consultant Radio Diagnosis Performing or directing radiology staff to carry out image-guided, diagnostic procedures. Interpreting the results from diagnostic imaging procedures to determine diagnoses."
+    description: "Dr. S. Senthilnathan is a distinguished Consultant in the Radio Diagnosis at Valli Super Specialty Hospital, Salem. Holding qualifications in MBBS, MD, they possess deep clinical expertise and are committed to offering state-of-the-art care. Job Title: Consultant Radio Diagnosis Performing or directing radiology staff to carry out image-guided, diagnostic procedures. Interpreting the results from diagnostic imaging procedures to determine diagnoses."
   },
   {
     slug: "dr-spradeep",
@@ -115,7 +115,7 @@ const doctorList = [
     qualifications: "MBBS",
     department: "DEPT OF ANAESTHESIA & CRITICAL CARE",
     shortDescription: "Specialist in Anaesthesia & Critical Care and patient-centered care",
-    description: "Dr. S. Pradeep is a distinguished Consultant in the Anaesthesia & Critical Care at Valli Super Speciality Hospital, Salem. Holding qualifications in MBBS, they possess deep clinical expertise and are committed to offering state-of-the-art care. Dedicated to ensuring the highest standards of safety, comfort, and clinical precision during surgical procedures and post-operative intensive care, specializing in advanced nerve blocks and painless labor."
+    description: "Dr. S. Pradeep is a distinguished Consultant in the Anaesthesia & Critical Care at Valli Super Specialty Hospital, Salem. Holding qualifications in MBBS, they possess deep clinical expertise and are committed to offering state-of-the-art care. Dedicated to ensuring the highest standards of safety, comfort, and clinical precision during surgical procedures and post-operative intensive care, specializing in advanced nerve blocks and painless labor."
   },
   {
     slug: "dr-tnatanasabapathy",
@@ -123,7 +123,7 @@ const doctorList = [
     qualifications: "MBBS, MS Orthopaedics",
     department: "DEPT OF ORTHOPAEDICS",
     shortDescription: "Specialist in Orthopaedics and surgical treatments",
-    description: "Dr. T. Natanasabapathy is a distinguished Consultant in the Orthopaedics at Valli Super Speciality Hospital, Salem. Holding qualifications in MBBS, MS Orthopaedics, they possess deep clinical expertise and are committed to offering state-of-the-art care. 10+ years' clinical experience in Orthopedic surgeries Clinical risk management experience. Verifying complex diagnoses and facilitating treatment plans."
+    description: "Dr. T. Natanasabapathy is a distinguished Consultant in the Orthopaedics at Valli Super Specialty Hospital, Salem. Holding qualifications in MBBS, MS Orthopaedics, they possess deep clinical expertise and are committed to offering state-of-the-art care. 10+ years' clinical experience in Orthopedic surgeries Clinical risk management experience. Verifying complex diagnoses and facilitating treatment plans."
   }
 ];
 
@@ -136,7 +136,7 @@ const specialties = [
     clinicalFocus: 'The Joint Care Clinic operates as a dedicated center for the comprehensive, evidence-based management of both acute and chronic joint pain. The department aims at alleviating debilitating discomfort, rebuilding musculoskeletal strength, and promoting optimal joint kinematics for patients suffering from degenerative or inflammatory arthropathies. The clinic operates on a core philosophy of joint preservation whenever possible, addressing pathologies across all major articulations, including the knees, hips, shoulders, ankles, elbows, and wrists.',
     procedures: 'The clinic utilizes advanced Magnetic Resonance Imaging (MRI), High-Resolution Ultrasound (USG), Computed Tomography (CT), and full-length lower limb radiographs (hip-to-ankle alignment films) which are critical for assessing mechanical axis deviation and planning precise corrective osteotomies or arthroplasties. When conservative options (physical therapy, pharmacological management, joint injections) are exhausted, the clinic provides primary and revision total joint replacements (arthroplasty) and targeted corrective surgery for failed arthroplasties performed at other institutions.',
     faqs: [
-      { q: "What is the Joint Care Clinic?", a: "The Joint Care Clinic at Valli Super Speciality Hospital provides advanced, specialized care for joint pain, degenerative arthropathies, and primary/revision joint replacements." },
+      { q: "What is the Joint Care Clinic?", a: "The Joint Care Clinic at Valli Super Specialty Hospital provides advanced, specialized care for joint pain, degenerative arthropathies, and primary/revision joint replacements." },
       { q: "Who is the lead doctor?", a: "Dr. T. Natanasabapathy, Chief Orthopedic Surgeon, leads our specialized joint reconstruction and preservation teams." }
     ]
   },
@@ -263,7 +263,7 @@ function writeMirror(filePath, content) {
 // 1. Generate Specialty Mirrors
 specialties.forEach(spec => {
   const content = `---
-title: ${spec.name} in Salem | Valli Super Speciality Hospital
+title: ${spec.name} in Salem | Valli Super Specialty Hospital
 description: ${spec.desc}
 url: ${baseUrl}/${spec.slug}
 last_updated: ${today}
@@ -295,7 +295,7 @@ ${spec.faqs.map(f => `### Q: ${f.q}\nA: ${f.a}\n`).join('\n')}
 doctorList.forEach(doc => {
   const content = `---
 title: ${doc.name} - ${doc.qualifications} | Valli Hospital Salem
-description: Professional profile of ${doc.name}, specialist in ${doc.department} at Valli Super Speciality Hospital.
+description: Professional profile of ${doc.name}, specialist in ${doc.department} at Valli Super Specialty Hospital.
 url: ${baseUrl}/doctors/${doc.slug}
 last_updated: ${today}
 ---
@@ -372,20 +372,20 @@ ${cleanedContent}
   });
 }
 
-// 4. Generate Main Page Mirrors (Home, About, Facilities, Blog Index, Doctors Index, Contact, Specialities, Services, Technology)
+// 4. Generate Main Page Mirrors (Home, About, Facilities, Blog Index, Doctors Index, Contact, Specialties, Services, Technology)
 const mainPages = [
   {
     slug: '',
-    title: 'Valli Super Speciality Hospital | Best Orthopedic Care in Salem',
-    desc: 'Valli Super Speciality Hospital in Salem offers advanced orthopedic care, joint replacements, and spine surgery guided by world-class clinical excellence.',
+    title: 'Valli Super Specialty Hospital | Best Orthopedic Care in Salem',
+    desc: 'Valli Super Specialty Hospital in Salem offers advanced orthopedic care, joint replacements, and spine surgery guided by world-class clinical excellence.',
     content: `
-# Valli Super Speciality Hospital
+# Valli Super Specialty Hospital
 
-Welcome to Valli Super Speciality Hospital, Salem's premier institution for comprehensive orthopedic care, joint replacement, spine surgery, and 24/7 advanced trauma management.
+Welcome to Valli Super Specialty Hospital, Salem's premier institution for comprehensive orthopedic care, joint replacement, spine surgery, and 24/7 advanced trauma management.
 
 ## Clinical Foundations
 - **Founders**: Dr. T. Natanasabapathy, MBBS, MS (Ortho) & Dr. Vijayalakshmi Irulappan, M.D.
-- **Milestone Growth**: Established in 2022 as a specialized 17-bed trauma care hospital. Transformed in 2025 into an advanced **50-bed** multidisciplinary tertiary-care super speciality hospital.
+- **Milestone Growth**: Established in 2022 as a specialized 17-bed trauma care hospital. Transformed in 2025 into an advanced **50-bed** multidisciplinary tertiary-care Super Specialty hospital.
 - **Philosophy**: "Movement is Life, Life is Movement."
 
 ## Core Diagnostics & Facilities
@@ -404,17 +404,17 @@ Welcome to Valli Super Speciality Hospital, Salem's premier institution for comp
   },
   {
     slug: 'about-us',
-    title: 'About Us | Valli Super Speciality Hospital Salem',
-    desc: 'Learn about the legacy of Valli Hospital Salem, our co-founders Dr. Natanasabapathy & Dr. Vijayalakshmi, and our evolution into a 50-bed super speciality center.',
+    title: 'About Us | Valli Super Specialty Hospital Salem',
+    desc: 'Learn about the legacy of Valli Hospital Salem, our co-founders Dr. Natanasabapathy & Dr. Vijayalakshmi, and our evolution into a 50-bed Super Specialty center.',
     content: `
-# About Valli Super Speciality Hospital
+# About Valli Super Specialty Hospital
 
 ## Our Heritage & Mission
 Valli Orthopedic and Sports Hospital was co-founded on October 16, 2022, by Chief Orthopedic Surgeon Dr. T. Natanasabapathy and Director Dr. Vijayalakshmi Irulappan. Their mission was to deliver compassionate, world-class orthopedic care to Salem—a booming region of 3.5 million people—and surrounding districts.
 
 ## Evolution of Infrastructure
 - **2022 Launch**: Opened as a highly focused 17-bed Trauma and Emergency hospital.
-- **2025 Upgrade**: Transformed into the **50-bedded Valli Super Speciality Hospital**, incorporating advanced neurosurgery, surgical gastroenterology, pediatric emergency care, and laminar flow OTs.
+- **2025 Upgrade**: Transformed into the **50-bedded Valli Super Specialty Hospital**, incorporating advanced neurosurgery, surgical gastroenterology, pediatric emergency care, and laminar flow OTs.
 
 ## Clinical Leadership
 - **Chief Surgeon**: Dr. T. Natanasabapathy (MBBS, MS Ortho)
@@ -427,9 +427,9 @@ Valli Orthopedic and Sports Hospital was co-founded on October 16, 2022, by Chie
   {
     slug: 'contact-us',
     title: 'Contact Us & 24/7 Emergency Line | Valli Hospital Salem',
-    desc: 'Get immediate phone contacts, clinical directory, interactive route maps, and book consultations at Valli Super Speciality Hospital Salem.',
+    desc: 'Get immediate phone contacts, clinical directory, interactive route maps, and book consultations at Valli Super Specialty Hospital Salem.',
     content: `
-# Contact Valli Super Speciality Hospital
+# Contact Valli Super Specialty Hospital
 
 ## Immediate Helplines
 - **24/7 Emergency Trauma Desk**: +91 90034 17111
@@ -509,11 +509,11 @@ if (fs.existsSync(blogSrcDir)) {
   });
 }
 
-const llmsContent = `# Valli Super Speciality Hospital
+const llmsContent = `# Valli Super Specialty Hospital
 
 > Advanced Orthopedic Care, Joint Replacements, Spine Surgery, and Comprehensive Medical Excellence in Salem, Tamil Nadu, India.
 
-Valli Super Speciality Hospital is a premier medical institution specializing in comprehensive orthopedic care, trauma rehabilitation, and surgical precision. Spearheaded by renowned orthopedic surgeon Dr. T. Natanasabapathy, the hospital integrates advanced diagnostic facilities, ultra-modern operation suites, and patient-centric recovery programs to restore mobility and transform lives.
+Valli Super Specialty Hospital is a premier medical institution specializing in comprehensive orthopedic care, trauma rehabilitation, and surgical precision. Spearheaded by renowned orthopedic surgeon Dr. T. Natanasabapathy, the hospital integrates advanced diagnostic facilities, ultra-modern operation suites, and patient-centric recovery programs to restore mobility and transform lives.
 
 ---
 
@@ -551,7 +551,7 @@ ${pricingInfo}
 - Minimally invasive keyhole spine surgeries (MISS)
 - Deformity corrections
 
-### 4. Speciality Clinics & Trauma
+### 4. Specialty Clinics & Trauma
 - Bone Cancer Treatment (Orthopedic Oncology)
 - Paediatric Orthopaedics & Deformity Clinic
 - Failed Surgery Correction Clinic
@@ -574,7 +574,7 @@ ${pricingInfo}
 ## 🗺️ Website Architecture & Dynamic API Pathways
 
 - **Home Page:** https://www.vallihospital.in/ (Main services & trust metrics)
-- **Specialities Directory:** https://www.vallihospital.in/specialities
+- **Specialties Directory:** https://www.vallihospital.in/specialties
 - **Consultation Booking Portal:** https://www.vallihospital.in/book-appointment (Redirects to WhatsApp Coordinator +919003417111)
 - **Clinical Facilities:** https://www.vallihospital.in/facilities
 - **Contact Desk:** https://www.vallihospital.in/contact-us

@@ -1,4 +1,4 @@
-const fs = require('fs');
+﻿const fs = require('fs');
 const path = require('path');
 
 const specialties = [
@@ -22,7 +22,7 @@ const otherPages = [
   { slug: 'about-us', name: 'About Us' }
 ];
 
-const formatDesc = (name) => `Advanced ${name} in Salem. Valli Super Speciality Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.`;
+const formatDesc = (name) => `Advanced ${name} in Salem. Valli Super Specialty Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.`;
 const formatKeywords = (name) => `Salem, ${name}, Tamil Nadu, Dr. Natanasabapathy, best ${name.toLowerCase()} hospital in Salem, top orthopedic surgeon Salem, ${name.toLowerCase()} treatment`;
 
 function processSpecialty(specialty) {
@@ -37,7 +37,7 @@ function processSpecialty(specialty) {
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '${specialty.name} in Salem | Valli Super Speciality Hospital',
+  title: '${specialty.name} in Salem | Valli Super Specialty Hospital',
   description: '${formatDesc(specialty.name)}',
   keywords: '${formatKeywords(specialty.name)}',
   alternates: {
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   // Insert Breadcrumb UI component and related treatments
   const breadcrumbData = `
         { name: 'Home', url: 'https://www.vallihospital.in/' },
-        { name: 'Specialities', url: 'https://www.vallihospital.in/specialities' },
+        { name: 'Specialties', url: 'https://www.vallihospital.in/specialties' },
         { name: '${specialty.name}', url: 'https://www.vallihospital.in/${specialty.slug}' }
   `;
   
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
       {/* Related Treatments */}
       <section className="py-16 bg-white border-t border-gray-100">
         <div className="container mx-auto px-6 md:px-12">
-          <h3 className="text-2xl font-bold text-[#00333c] mb-6">Related Treatments & Specialities</h3>
+          <h3 className="text-2xl font-bold text-[#00333c] mb-6">Related Treatments & Specialties</h3>
           <ul className="flex flex-col md:flex-row gap-6 md:gap-12">
             ${relatedLinks}
           </ul>
@@ -82,7 +82,7 @@ import Link from 'next/link';
           <ol className="flex space-x-2 text-sm text-gray-400">
             <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
             <li><span className="mx-2">›</span></li>
-            <li><Link href="/specialities" className="hover:text-white transition-colors">Specialities</Link></li>
+            <li><Link href="/specialties" className="hover:text-white transition-colors">Specialties</Link></li>
             <li><span className="mx-2">›</span></li>
             <li className="text-[#f98825] truncate" aria-current="page">${specialty.name}</li>
           </ol>
@@ -93,7 +93,7 @@ import Link from 'next/link';
   const schemas = `
       <BreadcrumbSchema items={[${breadcrumbData}]} />
       <FAQSchema questions={[
-        { question: 'What is the ${specialty.name}?', answer: 'The ${specialty.name} at Valli Super Speciality Hospital provides advanced, specialized care for related conditions.' },
+        { question: 'What is the ${specialty.name}?', answer: 'The ${specialty.name} at Valli Super Specialty Hospital provides advanced, specialized care for related conditions.' },
         { question: 'Who is the lead doctor?', answer: 'Dr. T. Natanasabapathy, Chief Orthopedic Surgeon, leads our specialized care teams.' }
       ]} />
   `;
@@ -126,7 +126,7 @@ function processOther(page) {
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '${page.name} in Salem | Valli Super Speciality Hospital',
+  title: '${page.name} in Salem | Valli Super Specialty Hospital',
   description: '${formatDesc(page.name)}',
   keywords: '${formatKeywords(page.name)}',
   alternates: {

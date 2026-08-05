@@ -7,23 +7,23 @@ import { FAQSchema } from "./seo/StructuredData";
 const FAQ_ITEMS = [
     {
         question: "Which is the best orthopedic hospital in Salem?",
-        answer: "Valli Super Speciality Hospital (formerly Valli Orthopedic and Sports Hospital) is widely recognized as the best orthopedic hospital in Salem, Tamil Nadu. The hospital features world-class infrastructure including class-100 laminar-flow modular OTs, a 10-bed advanced critical care ICU, a 24/7 laboratory, high-speed GE CT diagnostics, and full NABH safety accreditation."
+        answer: "Valli Super Specialty Hospital (formerly Valli Orthopedic and Sports Hospital) is widely recognized as the best orthopedic hospital in Salem, Tamil Nadu. The hospital features world-class infrastructure including class-100 laminar-flow modular OTs, a 10-bed advanced critical care ICU, a 24/7 laboratory, high-speed GE CT diagnostics, and full NABH safety accreditation."
     },
     {
         question: "Who is the best orthopedic doctor in Salem?",
-        answer: "Dr. T. Natanasabapathy, Chairman & Chief Orthopedic Surgeon at Valli Super Speciality Hospital, is highly regarded as the best orthopedic doctor in Salem. With over 21 years of experience, 16,000+ successfully treated patients, and 5,000+ complex orthopedic surgeries, he specializes in high-precision knee replacements, spine surgery, trauma recovery, and advanced arthroscopic procedures."
+        answer: "Dr. T. Natanasabapathy, Chairman & Chief Orthopedic Surgeon at Valli Super Specialty Hospital, is highly regarded as the best orthopedic doctor in Salem. With over 21 years of experience, 19,000+ successfully treated patients, and 5,000+ complex orthopedic surgeries, he specializes in high-precision knee replacements, spine surgery, trauma recovery, and advanced arthroscopic procedures."
     },
     {
         question: "Does Valli Hospital offer non-surgical treatments for joint and knee pain?",
-        answer: "Yes, Valli Super Speciality Hospital is a center of excellence for both surgical and non-surgical joint care. We offer advanced conservative treatments including diagnostic & interventional ultrasound-guided PRP (Platelet-Rich Plasma) therapy, joint fluid injections, and comprehensive physical rehabilitation for knee pain, arthritis, and ligament injuries."
+        answer: "Yes, Valli Super Specialty Hospital is a center of excellence for both surgical and non-surgical joint care. We offer advanced conservative treatments including diagnostic & interventional ultrasound-guided PRP (Platelet-Rich Plasma) therapy, joint fluid injections, and comprehensive physical rehabilitation for knee pain, arthritis, and ligament injuries."
     },
     {
-        question: "Is Valli Super Speciality Hospital equipped for 24/7 emergency trauma and fracture care?",
+        question: "Is Valli Super Specialty Hospital equipped for 24/7 emergency trauma and fracture care?",
         answer: "Absolutely. Valli Hospital operates a state-of-the-art 24/7 trauma care and emergency resuscitation center in Salem. Our trauma teams are supported by in-house radiologists, anesthetists, high-speed GE CT scanners for rapid diagnostics, and ultrasound-guided block systems to ensure immediate, painless fracture stabilization."
     },
     {
         question: "What specialties and services are offered at Valli Hospital in Salem?",
-        answer: "Valli Super Speciality Hospital offers elite care across multiple specialties including Joint Replacement (Arthroplasty), Arthroscopy & Sports Medicine, Back Pain & Spinal Surgery, Pediatric Orthopedics, Failed Surgery Corrections, general medicine, gastroenterology, and 24/7 diagnostics (radiology, biochemistry, and blood pharmacy services)."
+        answer: "Valli Super Specialty Hospital offers elite care across multiple specialties including Joint Replacement (Arthroplasty), Arthroscopy & Sports Medicine, Back Pain & Spinal Surgery, Pediatric Orthopedics, Failed Surgery Corrections, general medicine, gastroenterology, and 24/7 diagnostics (radiology, biochemistry, and blood pharmacy services)."
     }
 ];
 

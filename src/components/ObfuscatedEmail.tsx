@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useSyncExternalStore } from "react";
 
 interface ObfuscatedEmailProps {
   className?: string;
@@ -8,15 +8,17 @@ interface ObfuscatedEmailProps {
   children?: React.ReactNode;
 }
 
-export default function ObfuscatedEmail({ className = "", domain = "in", children }: ObfuscatedEmailProps) {
-  const [email, setEmail] = useState("");
+const emptySubscribe = () => () => {};
 
-  useEffect(() => {
-    // Dynamically assemble to prevent standard scraper bots from finding it in static HTML
-    const user = "info";
-    const host = `vallihospital.${domain}`;
-    setEmail(`${user}@${host}`);
-  }, [domain]);
+export default function ObfuscatedEmail({ className = "", domain = "in", children }: ObfuscatedEmailProps) {
+  // Returns true on the client, false on the server (SSR/Hydration safe)
+  const isClient = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
+
+  const email = isClient ? `info@vallihospital.${domain}` : "";
 
   if (!email) {
     // Semantic placeholder that looks clean during SSR

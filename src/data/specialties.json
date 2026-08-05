@@ -3,19 +3,19 @@
     "route": "/joint-care-clinic",
     "name": "Joint Care Clinic",
     "metadata": {
-      "title": "Joint Care Clinic in Salem | Valli Super Speciality Hospital",
-      "description": "Advanced Joint Care Clinic in Salem. Valli Super Speciality Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.",
+      "title": "Joint Care Clinic in Salem | Valli Super Specialty Hospital",
+      "description": "Advanced Joint Care Clinic in Salem. Valli Super Specialty Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.",
       "keywords": "Salem, Joint Care Clinic, Tamil Nadu, Dr. Natanasabapathy, best joint care clinic hospital in Salem, top orthopedic surgeon Salem, joint care clinic treatment"
     },
     "breadcrumb": [
       { "name": "Home", "url": "https://www.vallihospital.in/" },
-      { "name": "Specialities", "url": "https://www.vallihospital.in/specialities" },
+      { "name": "Specialties", "url": "https://www.vallihospital.in/specialties" },
       { "name": "Joint Care Clinic", "url": "https://www.vallihospital.in/joint-care-clinic" }
     ],
     "faq": [
       {
         "question": "What is the Joint Care Clinic?",
-        "answer": "The Joint Care Clinic at Valli Super Speciality Hospital provides advanced, specialized care for related conditions."
+        "answer": "The Joint Care Clinic at Valli Super Specialty Hospital provides advanced, specialized care for related conditions."
       },
       {
         "question": "Who is the lead doctor?",
@@ -23,7 +23,7 @@
       }
     ],
     "hero": {
-      "badge": "Speciality Clinic",
+      "badge": "Specialty Clinic",
       "title": "The Joint Care Clinic"
     },
     "content": [
@@ -52,19 +52,19 @@
     "route": "/sports-medicine-clinic",
     "name": "Sports Medicine Clinic",
     "metadata": {
-      "title": "Sports Medicine Clinic in Salem | Valli Super Speciality Hospital",
-      "description": "Advanced Sports Medicine Clinic in Salem. Valli Super Speciality Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.",
+      "title": "Sports Medicine Clinic in Salem | Valli Super Specialty Hospital",
+      "description": "Advanced Sports Medicine Clinic in Salem. Valli Super Specialty Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.",
       "keywords": "Salem, Sports Medicine Clinic, Tamil Nadu, Dr. Natanasabapathy, best sports medicine clinic hospital in Salem, top orthopedic surgeon Salem, sports medicine clinic treatment"
     },
     "breadcrumb": [
       { "name": "Home", "url": "https://www.vallihospital.in/" },
-      { "name": "Specialities", "url": "https://www.vallihospital.in/specialities" },
+      { "name": "Specialties", "url": "https://www.vallihospital.in/specialties" },
       { "name": "Sports Medicine Clinic", "url": "https://www.vallihospital.in/sports-medicine-clinic" }
     ],
     "faq": [
       {
         "question": "What is the Sports Medicine Clinic?",
-        "answer": "The Sports Medicine Clinic at Valli Super Speciality Hospital provides advanced, specialized care for related conditions."
+        "answer": "The Sports Medicine Clinic at Valli Super Specialty Hospital provides advanced, specialized care for related conditions."
       },
       {
         "question": "Who is the lead doctor?",
@@ -72,7 +72,7 @@
       }
     ],
     "hero": {
-      "badge": "Speciality Clinic",
+      "badge": "Specialty Clinic",
       "title": "The Sports Medicine Clinic"
     },
     "content": [
@@ -109,19 +109,19 @@
     "route": "/foot-and-ankle-clinic",
     "name": "Foot and Ankle Clinic",
     "metadata": {
-      "title": "Foot and Ankle Clinic in Salem | Valli Super Speciality Hospital",
-      "description": "Advanced Foot and Ankle Clinic in Salem. Valli Super Speciality Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.",
+      "title": "Foot and Ankle Clinic in Salem | Valli Super Specialty Hospital",
+      "description": "Advanced Foot and Ankle Clinic in Salem. Valli Super Specialty Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.",
       "keywords": "Salem, Foot and Ankle Clinic, Tamil Nadu, Dr. Natanasabapathy, best foot and ankle clinic hospital in Salem, top orthopedic surgeon Salem, foot and ankle clinic treatment"
     },
     "breadcrumb": [
       { "name": "Home", "url": "https://www.vallihospital.in/" },
-      { "name": "Specialities", "url": "https://www.vallihospital.in/specialities" },
+      { "name": "Specialties", "url": "https://www.vallihospital.in/specialties" },
       { "name": "Foot and Ankle Clinic", "url": "https://www.vallihospital.in/foot-and-ankle-clinic" }
     ],
     "faq": [
       {
         "question": "What is the Foot and Ankle Clinic?",
-        "answer": "The Foot and Ankle Clinic at Valli Super Speciality Hospital provides advanced, specialized care for related conditions."
+        "answer": "The Foot and Ankle Clinic at Valli Super Specialty Hospital provides advanced, specialized care for related conditions."
       },
       {
         "question": "Who is the lead doctor?",
@@ -129,7 +129,7 @@
       }
     ],
     "hero": {
-      "badge": "Speciality Clinic",
+      "badge": "Specialty Clinic",
       "title": "The Foot and Ankle Clinic"
     },
     "content": [
@@ -165,19 +165,19 @@
     "route": "/back-pain-and-spinal-disorders",
     "name": "Back Pain & Spinal Disorders Clinic",
     "metadata": {
-      "title": "Back Pain and Spinal Disorders in Salem | Valli Super Speciality Hospital",
-      "description": "Advanced Back Pain and Spinal Disorders in Salem. Valli Super Speciality Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.",
+      "title": "Back Pain and Spinal Disorders in Salem | Valli Super Specialty Hospital",
+      "description": "Advanced Back Pain and Spinal Disorders in Salem. Valli Super Specialty Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.",
       "keywords": "Salem, Back Pain and Spinal Disorders, Tamil Nadu, Dr. Natanasabapathy, best back pain and spinal disorders hospital in Salem, top orthopedic surgeon Salem, back pain and spinal disorders treatment"
     },
     "breadcrumb": [
       { "name": "Home", "url": "https://www.vallihospital.in/" },
-      { "name": "Specialities", "url": "https://www.vallihospital.in/specialities" },
+      { "name": "Specialties", "url": "https://www.vallihospital.in/specialties" },
       { "name": "Back Pain and Spinal Disorders", "url": "https://www.vallihospital.in/back-pain-and-spinal-disorders" }
     ],
     "faq": [
       {
         "question": "What is the Back Pain and Spinal Disorders?",
-        "answer": "The Back Pain and Spinal Disorders at Valli Super Speciality Hospital provides advanced, specialized care for related conditions."
+        "answer": "The Back Pain and Spinal Disorders at Valli Super Specialty Hospital provides advanced, specialized care for related conditions."
       },
       {
         "question": "Who is the lead doctor?",
@@ -185,7 +185,7 @@
       }
     ],
     "hero": {
-      "badge": "Speciality Clinic",
+      "badge": "Specialty Clinic",
       "title": "Back Pain and Spinal Disorders Clinic"
     },
     "content": [
@@ -217,19 +217,19 @@
     "route": "/paediatric-orthopaedics-deformity-clinic",
     "name": "Paediatric Orthopaedics & Deformity Clinic",
     "metadata": {
-      "title": "Paediatric Orthopaedics Deformity Clinic in Salem | Valli Super Speciality Hospital",
-      "description": "Advanced Paediatric Orthopaedics Deformity Clinic in Salem. Valli Super Speciality Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.",
+      "title": "Paediatric Orthopaedics Deformity Clinic in Salem | Valli Super Specialty Hospital",
+      "description": "Advanced Paediatric Orthopaedics Deformity Clinic in Salem. Valli Super Specialty Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.",
       "keywords": "Salem, Paediatric Orthopaedics Deformity Clinic, Tamil Nadu, Dr. Natanasabapathy, best paediatric orthopaedics deformity clinic hospital in Salem, top orthopedic surgeon Salem, paediatric orthopaedics deformity clinic treatment"
     },
     "breadcrumb": [
       { "name": "Home", "url": "https://www.vallihospital.in/" },
-      { "name": "Specialities", "url": "https://www.vallihospital.in/specialities" },
+      { "name": "Specialties", "url": "https://www.vallihospital.in/specialties" },
       { "name": "Paediatric Orthopaedics Deformity Clinic", "url": "https://www.vallihospital.in/paediatric-orthopaedics-deformity-clinic" }
     ],
     "faq": [
       {
         "question": "What is the Paediatric Orthopaedics Deformity Clinic?",
-        "answer": "The Paediatric Orthopaedics Deformity Clinic at Valli Super Speciality Hospital provides advanced, specialized care for related conditions."
+        "answer": "The Paediatric Orthopaedics Deformity Clinic at Valli Super Specialty Hospital provides advanced, specialized care for related conditions."
       },
       {
         "question": "Who is the lead doctor?",
@@ -237,7 +237,7 @@
       }
     ],
     "hero": {
-      "badge": "Speciality Clinic",
+      "badge": "Specialty Clinic",
       "title": "Paediatric Orthopaedics & Deformity Clinic"
     },
     "content": [
@@ -268,19 +268,19 @@
     "route": "/failed-surgery-corrections",
     "name": "Failed Surgery Corrections Clinic",
     "metadata": {
-      "title": "Failed Surgery Corrections in Salem | Valli Super Speciality Hospital",
-      "description": "Advanced Failed Surgery Corrections in Salem. Valli Super Speciality Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.",
+      "title": "Failed Surgery Corrections in Salem | Valli Super Specialty Hospital",
+      "description": "Advanced Failed Surgery Corrections in Salem. Valli Super Specialty Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.",
       "keywords": "Salem, Failed Surgery Corrections, Tamil Nadu, Dr. Natanasabapathy, best failed surgery corrections hospital in Salem, top orthopedic surgeon Salem, failed surgery corrections treatment"
     },
     "breadcrumb": [
       { "name": "Home", "url": "https://www.vallihospital.in/" },
-      { "name": "Specialities", "url": "https://www.vallihospital.in/specialities" },
+      { "name": "Specialties", "url": "https://www.vallihospital.in/specialties" },
       { "name": "Failed Surgery Corrections", "url": "https://www.vallihospital.in/failed-surgery-corrections" }
     ],
     "faq": [
       {
         "question": "What is the Failed Surgery Corrections?",
-        "answer": "The Failed Surgery Corrections at Valli Super Speciality Hospital provides advanced, specialized care for related conditions."
+        "answer": "The Failed Surgery Corrections at Valli Super Specialty Hospital provides advanced, specialized care for related conditions."
       },
       {
         "question": "Who is the lead doctor?",
@@ -288,7 +288,7 @@
       }
     ],
     "hero": {
-      "badge": "Speciality Clinic",
+      "badge": "Specialty Clinic",
       "title": "Failed Surgery Corrections Clinic"
     },
     "content": [
@@ -318,19 +318,19 @@
     "route": "/sports-injury-clinic",
     "name": "Sports Injury Clinic",
     "metadata": {
-      "title": "Sports Injury Clinic in Salem | Valli Super Speciality Hospital",
-      "description": "Advanced Sports Injury Clinic in Salem. Valli Super Speciality Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.",
+      "title": "Sports Injury Clinic in Salem | Valli Super Specialty Hospital",
+      "description": "Advanced Sports Injury Clinic in Salem. Valli Super Specialty Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.",
       "keywords": "Salem, Sports Injury Clinic, Tamil Nadu, Dr. Natanasabapathy, best sports injury clinic hospital in Salem, top orthopedic surgeon Salem, sports injury clinic treatment"
     },
     "breadcrumb": [
       { "name": "Home", "url": "https://www.vallihospital.in/" },
-      { "name": "Specialities", "url": "https://www.vallihospital.in/specialities" },
+      { "name": "Specialties", "url": "https://www.vallihospital.in/specialties" },
       { "name": "Sports Injury Clinic", "url": "https://www.vallihospital.in/sports-injury-clinic" }
     ],
     "faq": [
       {
         "question": "What is the Sports Injury Clinic?",
-        "answer": "The Sports Injury Clinic at Valli Super Speciality Hospital provides advanced, specialized care for related conditions."
+        "answer": "The Sports Injury Clinic at Valli Super Specialty Hospital provides advanced, specialized care for related conditions."
       },
       {
         "question": "Who is the lead doctor?",
@@ -338,7 +338,7 @@
       }
     ],
     "hero": {
-      "badge": "Speciality Clinic",
+      "badge": "Specialty Clinic",
       "title": "Sports Injury Clinic"
     },
     "content": [
@@ -371,19 +371,19 @@
     "route": "/fracture-clinic",
     "name": "Fracture Clinic",
     "metadata": {
-      "title": "Fracture Clinic in Salem | Valli Super Speciality Hospital",
-      "description": "Advanced Fracture Clinic in Salem. Valli Super Speciality Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.",
+      "title": "Fracture Clinic in Salem | Valli Super Specialty Hospital",
+      "description": "Advanced Fracture Clinic in Salem. Valli Super Specialty Hospital offers precision treatments, expert care by Dr. Natanasabapathy, and world-class orthopedic facilities.",
       "keywords": "Salem, Fracture Clinic, Tamil Nadu, Dr. Natanasabapathy, best fracture clinic hospital in Salem, top orthopedic surgeon Salem, fracture clinic treatment"
     },
     "breadcrumb": [
       { "name": "Home", "url": "https://www.vallihospital.in/" },
-      { "name": "Specialities", "url": "https://www.vallihospital.in/specialities" },
+      { "name": "Specialties", "url": "https://www.vallihospital.in/specialties" },
       { "name": "Fracture Clinic", "url": "https://www.vallihospital.in/fracture-clinic" }
     ],
     "faq": [
       {
         "question": "What is the Fracture Clinic?",
-        "answer": "The Fracture Clinic at Valli Super Speciality Hospital provides advanced, specialized care for related conditions."
+        "answer": "The Fracture Clinic at Valli Super Specialty Hospital provides advanced, specialized care for related conditions."
       },
       {
         "question": "Who is the lead doctor?",
@@ -391,7 +391,7 @@
       }
     ],
     "hero": {
-      "badge": "Speciality Clinic",
+      "badge": "Specialty Clinic",
       "title": "The Fracture Clinic"
     },
     "content": [
@@ -418,6 +418,145 @@
       { "name": "Joint Care Clinic", "url": "/joint-care-clinic" },
       { "name": "Sports Injury Clinic", "url": "/sports-injury-clinic" },
       { "name": "Paediatric Orthopaedics Deformity Clinic", "url": "/paediatric-orthopaedics-deformity-clinic" }
+    ]
+  },
+  {
+    "route": "/interventional-ultrasound-pain-management",
+    "name": "Interventional Ultrasound & Pain Management",
+    "metadata": {
+      "title": "Interventional Ultrasound & Pain Management Salem | GE Versana PRP Nerve Block | Valli Hospital",
+      "description": "Advanced Interventional Ultrasound & Pain Management at Valli Super Specialty Hospital, Salem. Expert nerve blocks, PRP, stem cell therapy, epidural injections, cancer pain management, and USG-guided biopsies using two GE Versana machines.",
+      "keywords": "interventional ultrasound Salem, pain management Salem, nerve block Salem, PRP injection Salem, stem cell Salem, epidural injection Salem, USG biopsy Salem"
+    },
+    "breadcrumb": [
+      { "name": "Home", "url": "https://www.vallihospital.in/" },
+      { "name": "Specialties", "url": "https://www.vallihospital.in/specialties" },
+      { "name": "Interventional Ultrasound & Pain Management", "url": "https://www.vallihospital.in/interventional-ultrasound-pain-management" }
+    ],
+    "faq": [
+      {
+        "question": "What is Interventional Ultrasound & Pain Management?",
+        "answer": "A precision-guided specialty at Valli Super Specialty Hospital using two GE Versana USG machines to perform nerve blocks, PRP injections, stem cell therapy, epidural injections, and ultrasound-guided biopsies."
+      },
+      {
+        "question": "Who leads the Interventional Ultrasound team?",
+        "answer": "Our multidisciplinary team includes a senior Radiologist, an Anesthetist, a specialized Pain Medicine Consultant, and three expert technicians."
+      }
+    ],
+    "hero": {
+      "badge": "Specialty Clinic",
+      "title": "Interventional Ultrasound & Pain Management"
+    },
+    "content": [
+      {
+        "heading": "Department Overview",
+        "paragraphs": [
+          "The Interventional Ultrasound Department at Valli Superspeciality Hospital, Salem, is a premier center for precision-guided diagnostics and advanced pain relief. Equipped with two high-end GE Versana USG machines, our facility ensures crystal-clear imaging for the most delicate medical interventions. Our multidisciplinary team features three expert technicians, a senior Radiologist, an Anesthetist, and a specialized Pain Medicine Consultant."
+        ]
+      },
+      {
+        "heading": "Trauma Pain Management & Nerve Blocks",
+        "paragraphs": [
+          "We provide life-changing nerve blocks for trauma pain management, ensuring immediate relief for patients suffering from acute injuries. Our specialists excel in ultrasound-guided therapeutic procedures, including PRP (Platelet-Rich Plasma) and Stem Cell injections tailored for sports injury treatment and arthritis management. For those battling chronic back conditions, we perform precise epidural and caudal injections to target spinal pain at its source.",
+          "Our expertise extends to complex neurological pain, offering plexus and ganglion blocks for conditions like Trigeminal Neuralgia and TMJ (Temporomandibular Joint) pain. We are a vital resource for oncology patients, providing compassionate interventional care for chronic cancer pain and pancreatic pain."
+        ]
+      }
+    ],
+    "related_treatments": [
+      { "name": "Joint Care Clinic", "url": "/joint-care-clinic" },
+      { "name": "Sports Medicine Clinic", "url": "/sports-medicine-clinic" },
+      { "name": "Fracture Clinic", "url": "/fracture-clinic" }
+    ]
+  },
+  {
+    "route": "/dialysis-kidney-care",
+    "name": "24/7 Dialysis & Kidney Care",
+    "metadata": {
+      "title": "24/7 Dialysis & Kidney Care Salem | Fresenius Hemodialysis | Valli Hospital",
+      "description": "24-hour Dialysis & Kidney Care unit at Valli Super Specialty Hospital, Salem. Fresenius Kabi 4008S hemodialysis, emergency renal failure treatment, qualified nephrologists, and round-the-clock renal transplant bridge therapy.",
+      "keywords": "dialysis Salem, kidney care Salem, hemodialysis Salem, Fresenius Kabi 4008S Salem, kidney failure Salem, nephrology Salem, 24 hour dialysis Tamil Nadu"
+    },
+    "breadcrumb": [
+      { "name": "Home", "url": "https://www.vallihospital.in/" },
+      { "name": "Specialties", "url": "https://www.vallihospital.in/specialties" },
+      { "name": "24/7 Dialysis & Kidney Care", "url": "https://www.vallihospital.in/dialysis-kidney-care" }
+    ],
+    "faq": [
+      {
+        "question": "Does Valli Hospital offer 24/7 dialysis?",
+        "answer": "Yes. Our 24-hour Dialysis and Kidney Care unit operates around the clock, featuring the Fresenius Kabi 4008S machine for high-precision hemodialysis, staffed by qualified nephrologists, renal technicians, and intensivists."
+      },
+      {
+        "question": "What dialysis machine does Valli Hospital use?",
+        "answer": "We use the world-renowned Fresenius Kabi 4008S machine, offering standalone high-precision hemodialysis with the latest German technology."
+      }
+    ],
+    "hero": {
+      "badge": "Specialty Clinic",
+      "title": "24/7 Dialysis & Kidney Care"
+    },
+    "content": [
+      {
+        "heading": "Department Overview",
+        "paragraphs": [
+          "The 24-hour Dialysis and Kidney Care unit at Valli Super Specialty Hospital, Salem, is a specialized center of excellence dedicated to treating acute and chronic renal conditions. Featuring the world-renowned Fresenius Kabi 4008S machine, we provide standalone, high-precision hemodialysis that serves as a critical lifeline for patients in distress."
+        ]
+      },
+      {
+        "heading": "Emergency Renal Therapy & Bridge to Transplant",
+        "paragraphs": [
+          "Our unit offers emergency life-saving therapy for kidney failure, severe poisoning, major accidents, and trauma-induced renal shock. Manned by qualified nephrologists, renal technicians, and intensivists, we ensure constant clinical vigilance for every patient. We are experts in managing medically compromised patients, including those with complex co-morbidities like alcoholic liver disease and acute pancreatitis.",
+          "This advanced support system is designed to stabilize and sustain patients, serving as a vital bridge until a credible renal transplant can be arranged. At Valli Hospital, we combine cutting-edge German technology with compassionate care to protect your kidney health."
+        ]
+      }
+    ],
+    "related_treatments": [
+      { "name": "Joint Care Clinic", "url": "/joint-care-clinic" },
+      { "name": "Interventional Ultrasound & Pain Management", "url": "/interventional-ultrasound-pain-management" },
+      { "name": "Fracture Clinic", "url": "/fracture-clinic" }
+    ]
+  },
+  {
+    "route": "/plastic-reconstructive-surgery",
+    "name": "Advanced Plastic Surgery",
+    "metadata": {
+      "title": "Advanced Plastic & Reconstructive Surgery Salem | Valli Hospital",
+      "description": "Expert Plastic, Reconstructive & Cosmetic Surgery at Valli Super Specialty Hospital, Salem. Treatment for complex wounds, hand trauma, varicose veins, and aesthetic rejuvenation.",
+      "keywords": "plastic surgery Salem, reconstructive surgery Salem, cosmetic surgery Salem, hand surgery Salem"
+    },
+    "breadcrumb": [
+      { "name": "Home", "url": "https://www.vallihospital.in/" },
+      { "name": "Specialties", "url": "https://www.vallihospital.in/specialties" },
+      { "name": "Advanced Plastic Surgery", "url": "https://www.vallihospital.in/plastic-reconstructive-surgery" }
+    ],
+    "faq": [
+      {
+        "question": "What plastic surgery services are offered?",
+        "answer": "We specialize in diabetic foot wounds, traumatic wounds, hand trauma, maxillo-facial trauma, varicose veins laser surgery, cosmetic surgeries (Gynaecomastia correction, abdominoplasty, hair transplant, breast surgery), and non-surgical aesthetic rejuvenation."
+      }
+    ],
+    "hero": {
+      "badge": "Specialty Clinic",
+      "title": "Advanced Plastic & Reconstructive Surgery"
+    },
+    "content": [
+      {
+        "heading": "Department Overview",
+        "paragraphs": [
+          "At Valli Superspecialty Hospital, Salem, our Department of Plastic, Reconstructive & Cosmetic Surgery combines microsurgical precision with aesthetic artistry within a high-performance, multispecialty infrastructure dedicated to restoring both function and form. We specialize in the definitive management of complex wounds and tissue loss, including Diabetic Foot Wounds, Traumatic Wounds, Pressure Sores, and Post-Surgical Wound Complications, alongside intricate Hand Trauma reconstruction covering Tendon Injuries, Nerve Injuries, Crush Injuries, and Soft Tissue Repair."
+        ]
+      },
+      {
+        "heading": "Cosmetic and Aesthetic Rejuvenation",
+        "paragraphs": [
+          "Our surgical capabilities extend into advanced Cosmetic and Vascular Care, offering Minimally Invasive Laser Surgery for Varicose Veins that addresses visible enlarged veins, leg pain, heaviness, and swelling with faster recovery and superior cosmetic outcomes. Our Cosmetic Surgery division delivers Gynaecomastia Correction, Abdominoplasty, Hair Transplantation, Breast Augmentation, and Breast Reduction, each guided by personalized surgical planning tailored to individual anatomy and goals."
+        ]
+      }
+    ],
+    "related_treatments": [
+      { "name": "Oral & Maxillofacial Surgery", "url": "/oral-maxillofacial-surgery" },
+      { "name": "Interventional Ultrasound & Pain Management", "url": "/interventional-ultrasound-pain-management" },
+      { "name": "Brachial Plexus & Nerve Surgery", "url": "/brachial-plexus-nerve-surgery" }
     ]
   }
 ]

@@ -74,7 +74,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
             "url": `https://www.vallihospital.in/doctors/${doctor.slug}`,
             "parentOrganization": {
                 "@type": "Hospital",
-                "name": "Valli Super Speciality Hospital",
+                "name": "Valli Super Specialty Hospital",
                 "url": "https://www.vallihospital.in"
             },
             ...(doctor.expertise ? { "knowsAbout": doctor.expertise } : {}),

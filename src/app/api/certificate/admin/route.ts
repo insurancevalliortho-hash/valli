@@ -1,8 +1,19 @@
 import { NextResponse } from "next/server";
 import { getAllDelegatesWithFeedback } from "@/lib/db";
 
-export async function GET() {
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "ValliAdmin2026!";
+
+export async function POST(request: Request) {
   try {
+    const { password } = await request.json();
+
+    if (password !== ADMIN_PASSWORD) {
+      return NextResponse.json(
+        { success: false, error: "Unauthorized: Invalid password" },
+        { status: 401 }
+      );
+    }
+
     const records = await getAllDelegatesWithFeedback();
 
     const totalDelegates = records.length;
