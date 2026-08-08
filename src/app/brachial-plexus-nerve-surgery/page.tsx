@@ -49,15 +49,9 @@ export default function Page() {
             <span className="w-1.5 h-1.5 rounded-full bg-[#3cb3a6]" />
             Specialty Clinic
           </span>
-          <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-3xl">
-            Brachial Plexus &amp;<br /><span className="text-[#3cb3a6]">Peripheral Nerve Surgery</span>
+          <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-5xl">
+            Brachial Plexus &amp;<br /><span className="text-[#3cb3a6]">Peripheral Nerve Surgery - <span className="whitespace-nowrap">Dr. Sethuraja</span></span>
           </h1>
-          <div className="mt-6 flex flex-wrap items-center gap-3">
-            <span className="text-white/60 text-xs font-bold uppercase tracking-widest">Lead Specialist:</span>
-            <span className="text-white bg-[#3cb3a6] px-3 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider">
-              Dr. Sethuraja
-            </span>
-          </div>
           <p className="mt-6 text-white/60 text-lg max-w-2xl leading-relaxed font-medium">
             Elite microscopic precision for restoring upper limb function — nerve grafting, neurotization, and microsurgical reconstruction for complex nerve injuries in Salem.
           </p>

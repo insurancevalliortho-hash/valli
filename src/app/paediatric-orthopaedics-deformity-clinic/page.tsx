@@ -68,15 +68,9 @@ export default function Page() {
                 <span className="w-1.5 h-1.5 rounded-full bg-[#f98825]" />
                 Specialty Clinic
               </span>
-              <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-3xl">
-                  Paediatric Orthopaedics <br/> <span className="text-[#f98825]">& Deformity Clinic</span>
+              <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-5xl">
+                  Paediatric Orthopaedics <br/> <span className="text-[#f98825]">& Deformity Clinic - <span className="whitespace-nowrap">Dr. Tamilkumaran</span></span>
               </h1>
-              <div className="mt-6 flex flex-wrap items-center gap-3">
-                <span className="text-white/60 text-xs font-bold uppercase tracking-widest">Lead Specialist:</span>
-                <span className="text-white bg-[#f98825] px-3 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider">
-                  Dr. Tamilkumaran
-                </span>
-              </div>
           </div>
       </section>
 

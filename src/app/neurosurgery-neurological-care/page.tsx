@@ -49,23 +49,9 @@ export default function Page() {
             <span className="w-1.5 h-1.5 rounded-full bg-[#f98825]" />
             Specialty Clinic
           </span>
-          <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-3xl">
-            Advanced Neurosurgery &amp;<br /><span className="text-[#f98825]">Neurological Critical Care</span>
+          <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-5xl">
+            Advanced Neurosurgery &amp;<br /><span className="text-[#f98825]">Neurological Critical Care - <span className="whitespace-nowrap">Dr. Hariharasudh</span> &amp; <span className="whitespace-nowrap">Dr. Dhivya</span></span>
           </h1>
-          <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
-            <div className="flex items-center gap-3">
-              <span className="text-white/60 text-xs font-bold uppercase tracking-widest">Neurosurgery:</span>
-              <span className="text-white bg-[#f98825] px-3 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider">
-                Dr. Hariharasudh
-              </span>
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="text-white/60 text-xs font-bold uppercase tracking-widest">Neurology:</span>
-              <span className="text-white bg-[#f98825] px-3 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider">
-                Dr. Dhivya
-              </span>
-            </div>
-          </div>
           <p className="mt-6 text-white/60 text-lg max-w-2xl leading-relaxed font-medium">
             Elite surgical precision for brain tumors, cerebrovascular emergencies, and spine disorders — powered by neuro-microscope technology and 24/7 ICU support in Salem.
           </p>

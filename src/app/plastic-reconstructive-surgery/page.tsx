@@ -74,16 +74,10 @@ export default function Page() {
             <span className="w-1.5 h-1.5 rounded-full bg-rose-400" />
             Specialty Clinic
           </span>
-          <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-3xl">
+          <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-5xl">
             Advanced Plastic &amp;<br />
-            <span className="text-rose-400">Reconstructive Surgery</span>
+            <span className="text-rose-400">Reconstructive Surgery - <span className="whitespace-nowrap">Dr. Gokul</span></span>
           </h1>
-          <div className="mt-6 flex flex-wrap items-center gap-3">
-            <span className="text-white/60 text-xs font-bold uppercase tracking-widest">Lead Specialist:</span>
-            <span className="text-white bg-rose-500 px-3 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider">
-              Dr. Gokul
-            </span>
-          </div>
           <p className="mt-6 text-white/60 text-lg max-w-2xl leading-relaxed font-medium">
             Microsurgical precision meets aesthetic artistry — restoring function, form, and confidence through reconstructive mastery and modern cosmetic medicine in Salem.
           </p>

@@ -66,15 +66,9 @@ export default function Page() {
             <span className="w-1.5 h-1.5 rounded-full bg-[#f98825]" />
             Specialty Clinic
           </span>
-          <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-3xl">
-            The Foot and Ankle <br /> <span className="text-[#f98825]">Clinic</span>
+          <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-5xl">
+            The Foot and Ankle <br /> <span className="text-[#f98825]">Clinic - <span className="whitespace-nowrap">Dr. E. Aakash</span></span>
           </h1>
-          <div className="mt-6 flex flex-wrap items-center gap-3">
-            <span className="text-white/60 text-xs font-bold uppercase tracking-widest">Lead Specialist:</span>
-            <span className="text-white bg-[#f98825] px-3 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider">
-              Dr. E. Aakash
-            </span>
-          </div>
         </div>
       </section>
 

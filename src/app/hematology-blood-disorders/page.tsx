@@ -49,15 +49,9 @@ export default function Page() {
             <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
             Specialty Clinic
           </span>
-          <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-3xl">
-            Hematology &amp;<br /><span className="text-red-400">Blood Disorders</span>
+          <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-5xl">
+            Hematology &amp;<br /><span className="text-red-400">Blood Disorders - <span className="whitespace-nowrap">Dr. Karthika</span></span>
           </h1>
-          <div className="mt-6 flex flex-wrap items-center gap-3">
-            <span className="text-white/60 text-xs font-bold uppercase tracking-widest">Lead Specialist:</span>
-            <span className="text-white bg-red-500 px-3 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider">
-              Dr. Karthika
-            </span>
-          </div>
           <p className="mt-6 text-white/60 text-lg max-w-2xl leading-relaxed font-medium">
             Expert, high-velocity blood disorder care within a 50-bedded multispecialty framework — 24/7 ICU-backed, ACLS &amp; ATLS certified, Salem.
           </p>
