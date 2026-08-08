@@ -52,6 +52,12 @@ export default function Page() {
           <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-3xl">
             Surgical Gastroenterology<br /><span className="text-[#f98825]">&amp; Digestive Care</span>
           </h1>
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <span className="text-white/60 text-xs font-bold uppercase tracking-widest">Lead Specialist:</span>
+            <span className="text-white bg-[#f98825] px-3 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider">
+              Dr. Arunraj
+            </span>
+          </div>
           <p className="mt-6 text-white/60 text-lg max-w-2xl leading-relaxed font-medium">
             High-performance surgical management of complex abdominal conditions — powered by laparoscopy, advanced endoscopy, and 24/7 ICU-backed emergency readiness in Salem.
           </p>

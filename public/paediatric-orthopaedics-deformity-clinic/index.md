@@ -2,7 +2,7 @@
 title: Paediatric Orthopaedics Deformity Clinic in Salem | Valli Super Specialty Hospital
 description: Corrective care for congenital bone diseases, clubfoot, pediatric fractures, and limb-length discrepancies.
 url: https://www.vallihospital.in/paediatric-orthopaedics-deformity-clinic
-last_updated: 2026-08-05
+last_updated: 2026-08-08
 ---
 
 # Paediatric Orthopaedics Deformity Clinic

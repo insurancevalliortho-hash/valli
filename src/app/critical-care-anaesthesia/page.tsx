@@ -52,6 +52,12 @@ export default function Page() {
           <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-3xl">
             The Shield of<br /><span className="text-[#f98825]">Critical Care &amp; Anaesthesia</span>
           </h1>
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <span className="text-white/60 text-xs font-bold uppercase tracking-widest">Lead Specialist:</span>
+            <span className="text-white bg-[#f98825] px-3 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider">
+              Dr. G. Balamurugan
+            </span>
+          </div>
           <p className="mt-6 text-white/60 text-lg max-w-2xl leading-relaxed font-medium">
             The high-velocity clinical engine of our 50-bedded multispecialty hospital — precision anaesthesia and rapid-response critical care safeguarding every heartbeat 24/7.
           </p>

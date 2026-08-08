@@ -70,6 +70,12 @@ export default function Page() {
             24/7 Dialysis &amp;<br />
             <span className="text-[#f98825]">Kidney Care</span>
           </h1>
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <span className="text-white/60 text-xs font-bold uppercase tracking-widest">Lead Specialist:</span>
+            <span className="text-white bg-[#f98825] px-3 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider">
+              Dr. Ambiga
+            </span>
+          </div>
           <p className="mt-6 text-white/60 text-lg max-w-2xl leading-relaxed font-medium">
             A specialized center of excellence for acute and chronic renal conditions — powered by the Fresenius Kabi 4008S and staffed by qualified nephrologists around the clock in Salem.
           </p>

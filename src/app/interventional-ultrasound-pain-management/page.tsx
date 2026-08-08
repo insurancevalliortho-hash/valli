@@ -70,6 +70,12 @@ export default function Page() {
             Interventional Ultrasound<br />
             <span className="text-[#3cb3a6]">&amp; Pain Management</span>
           </h1>
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <span className="text-white/60 text-xs font-bold uppercase tracking-widest">Lead Specialist:</span>
+            <span className="text-white bg-[#3cb3a6] px-3 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider">
+              Dr. G. Balamurugan
+            </span>
+          </div>
           <p className="mt-6 text-white/60 text-lg max-w-2xl leading-relaxed font-medium">
             Premier precision-guided diagnostics and advanced pain relief — powered by two GE Versana USG machines and a specialist multidisciplinary team in Salem.
           </p>

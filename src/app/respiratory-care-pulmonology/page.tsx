@@ -52,6 +52,12 @@ export default function Page() {
           <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-3xl">
             Respiratory Care &amp;<br /><span className="text-[#3cb3a6]">Interventional Pulmonology</span>
           </h1>
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <span className="text-white/60 text-xs font-bold uppercase tracking-widest">Lead Specialist:</span>
+            <span className="text-white bg-[#3cb3a6] px-3 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider">
+              Dr. Samuthiran
+            </span>
+          </div>
           <p className="mt-6 text-white/60 text-lg max-w-2xl leading-relaxed font-medium">
             Elite respiratory care for Asthma, COPD, TB, and life-threatening emergencies like ARDS — backed by advanced bronchoscopy, ICU, and 24/7 critical care in Salem.
           </p>

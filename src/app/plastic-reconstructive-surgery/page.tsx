@@ -78,6 +78,12 @@ export default function Page() {
             Advanced Plastic &amp;<br />
             <span className="text-rose-400">Reconstructive Surgery</span>
           </h1>
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <span className="text-white/60 text-xs font-bold uppercase tracking-widest">Lead Specialist:</span>
+            <span className="text-white bg-rose-500 px-3 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider">
+              Dr. Gokul
+            </span>
+          </div>
           <p className="mt-6 text-white/60 text-lg max-w-2xl leading-relaxed font-medium">
             Microsurgical precision meets aesthetic artistry — restoring function, form, and confidence through reconstructive mastery and modern cosmetic medicine in Salem.
           </p>

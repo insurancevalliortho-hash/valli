@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 
 import { BreadcrumbSchema, FAQSchema } from '../../components/seo/StructuredData';
 import Link from 'next/link';
@@ -71,6 +71,12 @@ export default function Page() {
               <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-3xl">
                   Sports Injury <br/> <span className="text-[#f98825]">Clinic</span>
               </h1>
+              <div className="mt-6 flex flex-wrap items-center gap-3">
+                <span className="text-white/60 text-xs font-bold uppercase tracking-widest">Lead Specialist:</span>
+                <span className="text-white bg-[#f98825] px-3 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-wider">
+                  Dr. T. Natanasabapathy
+                </span>
+              </div>
           </div>
       </section>
 
