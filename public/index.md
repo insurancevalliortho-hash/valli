@@ -2,11 +2,7 @@
 title: Valli Super Specialty Hospital | Best Orthopedic Care in Salem
 description: Valli Super Specialty Hospital in Salem offers advanced orthopedic care, joint replacements, and spine surgery guided by world-class clinical excellence.
 url: https://www.vallihospital.in/
-<<<<<<< HEAD
-last_updated: 2026-06-30
-=======
-last_updated: 2026-08-21
->>>>>>> 9fdf1bfba3153219b309ae46133f0eb4a253a949
+last_updated: 2026-08-26
 ---
 
 

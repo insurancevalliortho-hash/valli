@@ -2,11 +2,7 @@
 title: Best Orthopedic Hospital in Salem: Why Valli Super Specialty Hospital Leads | Valli Hospital Blog
 description: Discover why Valli Super Specialty Hospital is recognized as the best orthopedic hospital in Salem, offering advanced treatments for knee replacement, spine surgery, and sports injuries.
 url: https://www.vallihospital.in/blog/best-orthopedic-hospital-salem
-<<<<<<< HEAD
-last_updated: 2026-06-30
-=======
-last_updated: 2026-08-21
->>>>>>> 9fdf1bfba3153219b309ae46133f0eb4a253a949
+last_updated: 2026-08-26
 ---
 
 # Best Orthopedic Hospital in Salem: Why Valli Super Specialty Hospital Leads

@@ -54,6 +54,33 @@ export const doctorsData: Doctor[] = [
     "description": "Dr. Tamilkumaran is a specialist in Hand Surgery and Orthopedics, dedicated to the diagnosis, treatment, and rehabilitation of conditions affecting the hand, wrist, and upper extremities.",
     "image": "/placeholder-doctor.png"
   },
+  {
+    "slug": "dr-rprabu",
+    "name": "Dr. R. Prabu",
+    "qualifications": "MBBS",
+    "department": "DEPT OF ORTHOPAEDICS",
+    "shortDescription": "Specialist in Orthopaedics and surgical treatments",
+    "description": "Dr. R. Prabu is a distinguished Consultant in the Orthopaedics at Valli Super Specialty Hospital, Salem. Holding qualifications in MBBS, they possess deep clinical expertise and are committed to offering state-of-the-art care. 5 years' clinical experience in Orthopedic Department Clinical risk management experience. Verifying complex diagnoses and facilitating treatment plans.",
+    "image": "/placeholder-doctor.png"
+  },
+  {
+    "slug": "dr-obuli-vijay-shankar",
+    "name": "Dr. Obuli Vijay Shankar",
+    "qualifications": "MBBS, MS, FNB",
+    "department": "DEPT OF HAND & MICRO SURGERY",
+    "shortDescription": "Specialist in Hand & Micro Surgery and surgical treatments",
+    "description": "Dr. Obuli Vijay Shankar is a distinguished Consultant in the Hand & Micro Surgery at Valli Super Specialty Hospital, Salem. Holding qualifications in MBBS, MS, FNB, they possess deep clinical expertise and are committed to offering state-of-the-art care. FNB in Hand & Microvascular surgery in Ganga Hospital ( 2021 - 2023) Examines, diagnoses, and treats diseases and injuries to the musculoskeletal system. Prescribes course of treatment for patients with injuries, disorders, or malformations and performs required surgery.",
+    "image": "/placeholder-doctor.png"
+  },
+  {
+    "slug": "dr-spradeep",
+    "name": "Dr. S. Pradeep",
+    "qualifications": "MBBS",
+    "department": "DEPT OF ANAESTHESIA & CRITICAL CARE",
+    "shortDescription": "Specialist in Anaesthesia & Critical Care and patient-centered care",
+    "description": "Dr. S. Pradeep is a distinguished Consultant in the Anaesthesia & Critical Care at Valli Super Specialty Hospital, Salem. Holding qualifications in MBBS, they possess deep clinical expertise and are committed to offering state-of-the-art care. Dedicated to ensuring the highest standards of safety, comfort, and clinical precision during surgical procedures and post-operative intensive care, specializing in advanced nerve blocks and painless labor.",
+    "image": "/placeholder-doctor.png"
+  },
 
   {
     "slug": "dr-ambiga",

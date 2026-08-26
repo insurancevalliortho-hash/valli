@@ -2,11 +2,7 @@
 title: Advanced Spine Surgery in Salem | Valli Hospital Blog
 description: Learn about minimally invasive spine surgery options in Salem.
 url: https://www.vallihospital.in/blog/spine-surgery-salem
-<<<<<<< HEAD
-last_updated: 2026-06-30
-=======
-last_updated: 2026-08-21
->>>>>>> 9fdf1bfba3153219b309ae46133f0eb4a253a949
+last_updated: 2026-08-26
 ---
 
 # Advanced Spine Surgery in Salem

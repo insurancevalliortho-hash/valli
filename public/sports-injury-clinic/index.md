@@ -2,11 +2,7 @@
 title: Sports Injury Clinic in Salem | Valli Super Specialty Hospital
 description: Rapid diagnostic assessment and acute treatment for ligament tears, joint dislocations, and sprains.
 url: https://www.vallihospital.in/sports-injury-clinic
-<<<<<<< HEAD
-last_updated: 2026-06-30
-=======
-last_updated: 2026-08-21
->>>>>>> 9fdf1bfba3153219b309ae46133f0eb4a253a949
+last_updated: 2026-08-26
 ---
 
 # Sports Injury Clinic

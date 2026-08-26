@@ -12,11 +12,11 @@
    ─────────────────────────────────────────────────────────────────────── */
 html {
     scroll-behavior: auto !important;
-    overscroll-behavior-y: none;
+    overscroll-behavior-y: contain;
 }
 body {
     touch-action: pan-y;
-    overscroll-behavior-y: none;
+    overscroll-behavior-y: contain;
 }
 
 /* ─── GPU Compositor Promotion ────────────────────────────────────────────
