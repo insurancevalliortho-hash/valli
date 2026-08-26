@@ -171,3 +171,69 @@ export async function getCertificateFile(delegateId: number) {
   return result.length > 0 ? result[0] : null;
 }
 
+export async function saveAriseRegistration(data: {
+  registrationCode: string;
+  fullName: string;
+  emailId: string;
+  mobileNumber: string;
+  category: string;
+  includeWorkshop: boolean;
+  institution: string;
+  department?: string;
+  city?: string;
+  source?: string;
+  transactionId: string;
+  paymentScreenshot?: string;
+  designation?: string;
+  qualification?: string;
+  bonafideCertificate?: string;
+  foodPreference?: string;
+  iapCreditPoints?: boolean;
+  iapMembershipNumber?: string;
+}) {
+  const result = await sql`
+    INSERT INTO arise_registrations (
+      registration_code,
+      full_name,
+      email_id,
+      mobile_number,
+      category,
+      include_workshop,
+      institution,
+      department,
+      city,
+      source,
+      transaction_id,
+      payment_screenshot,
+      designation,
+      qualification,
+      bonafide_certificate,
+      food_preference,
+      iap_credit_points,
+      iap_membership_number
+    ) VALUES (
+      ${data.registrationCode},
+      ${data.fullName},
+      ${data.emailId},
+      ${data.mobileNumber},
+      ${data.category},
+      ${data.includeWorkshop},
+      ${data.institution},
+      ${data.department || null},
+      ${data.city || null},
+      ${data.source || null},
+      ${data.transactionId},
+      ${data.paymentScreenshot || null},
+      ${data.designation || null},
+      ${data.qualification || null},
+      ${data.bonafideCertificate || null},
+      ${data.foodPreference || null},
+      ${data.iapCreditPoints || false},
+      ${data.iapMembershipNumber || null}
+    )
+    RETURNING id;
+  `;
+  return result;
+}
+
+

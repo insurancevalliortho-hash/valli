@@ -2,7 +2,7 @@
 title: Dr. Tamilkumaran - MBBS, DNB ORTHOPEDICS | Valli Hospital Salem
 description: Professional profile of Dr. Tamilkumaran, specialist in DEPT OF HAND & MICRO SURGERY at Valli Super Specialty Hospital.
 url: https://www.vallihospital.in/doctors/dr-tamilkumaran
-last_updated: 2026-08-08
+last_updated: 2026-08-21
 ---
 
 # Professional Medical Profile: Dr. Tamilkumaran

@@ -668,7 +668,7 @@ export default function SpecialtiesPage() {
                                                     "pulmonology": { slug: "sports-training", name: "Sports Training & Rehab" },
                                                     "hematology": { slug: "bone-cancer-treatment", name: "Bone Cancer Clinic" },
                                                     "critical-care": { slug: "arthroscopy", name: "Arthroscopy Specialist" },
-                                                    "internal-medicine": { slug: "foot-and-ankle-clinic", name: "Foot & Ankle Clinic" },
+                                                    "internal-medicine": { slug: "internal-medicine", name: "Internal Medicine & Diabetology" },
                                                     "paediatrics": { slug: "paediatric-orthopaedics-deformity-clinic", name: "Paediatric Deformity Clinic" },
                                                     "emergency": { slug: "fracture-clinic", name: "Fracture & Trauma Clinic" },
                                                     "brachial-plexus": { slug: "back-pain-and-spinal-disorders", name: "Spine & Nerve Clinic" },

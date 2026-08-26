@@ -2,6 +2,10 @@
 const nextConfig = {
   reactCompiler: true,
   allowedDevOrigins: ['192.168.1.85', '192.168.1.75'],
+  experimental: {
+    cpus: 1,
+    workerThreads: false,
+  },
 
   images: {
     remotePatterns: [

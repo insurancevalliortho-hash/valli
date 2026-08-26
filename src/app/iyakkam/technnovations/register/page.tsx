@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useLenis } from "lenis/react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -32,6 +33,8 @@ import Footer from "../../../../components/Footer";
 import confetti from "canvas-confetti";
 
 export default function RegisterPage() {
+  const lenis = useLenis();
+
   // Current step state (1, 2, or 3)
   const [step, setStep] = useState(1);
 
@@ -209,11 +212,21 @@ export default function RegisterPage() {
   const handleNext = () => {
     if (validateStep(step)) {
       setStep((prev) => prev + 1);
+      if (lenis) {
+        lenis.scrollTo(0, { immediate: true });
+      } else {
+        window.scrollTo(0, 0);
+      }
     }
   };
 
   const handlePrev = () => {
     setStep((prev) => Math.max(1, prev - 1));
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
   };
 
   // Form submission
@@ -259,7 +272,11 @@ export default function RegisterPage() {
 
       if (response.ok) {
         setIsSuccess(true);
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        if (lenis) {
+          lenis.scrollTo(0, { immediate: true });
+        } else {
+          window.scrollTo(0, 0);
+        }
       } else {
         setErrors({
           transactionId: result.error || "Failed to submit registration.",

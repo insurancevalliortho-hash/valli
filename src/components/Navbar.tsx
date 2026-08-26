@@ -88,6 +88,7 @@ export default function Navbar() {
                                     {/* Right column */}
                                     <div className="flex flex-col pl-1">
                                         <span className="px-4 pt-2 pb-1 text-[10px] font-black uppercase tracking-widest text-[#f98825]">Medicine &amp; Critical Care</span>
+                                        <Link href="/internal-medicine" className="px-4 py-1.5 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825] rounded-lg">Internal Medicine &amp; Diabetology</Link>
                                         <Link href="/neurosurgery-neurological-care" className="px-4 py-1.5 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825] rounded-lg">Neurosurgery &amp; Neurology</Link>
                                         <Link href="/critical-care-anaesthesia" className="px-4 py-1.5 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#f98825] rounded-lg">Critical Care &amp; Anaesthesia</Link>
                                         <Link href="/respiratory-care-pulmonology" className="px-4 py-1.5 text-sm text-[#40484a] hover:bg-gray-50 hover:text-[#3cb3a6] rounded-lg">Respiratory Care &amp; Pulmonology</Link>

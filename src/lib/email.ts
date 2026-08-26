@@ -1,4 +1,4 @@
-﻿import nodemailer from "nodemailer";
+import nodemailer from "nodemailer";
 
 interface EmailPayload {
   registrationCode: string;
@@ -537,5 +537,242 @@ export async function sendCertificateEmail(data: {
     return { success: false, error };
   }
 }
+
+export interface AriseEmailPayload {
+  registrationCode: string;
+  fullName: string;
+  emailId: string;
+  mobileNumber: string;
+  category: string;
+  includeWorkshop: boolean;
+  institution: string;
+  department?: string;
+  city?: string;
+  transactionId: string;
+  designation?: string;
+  qualification?: string;
+  foodPreference?: string;
+  iapCreditPoints?: boolean;
+  iapMembershipNumber?: string;
+  bonafideCertificate?: string;
+}
+
+export async function sendAriseRegistrationEmail(data: AriseEmailPayload) {
+  try {
+    const { transporter, from } = await getTransporter();
+
+    const amountPaid = (data.designation === "Student / Intern" && data.bonafideCertificate) ? 500 : 2000;
+
+    const workshopStatus = data.includeWorkshop 
+      ? "Yes (Includes Hands-on VR Workshop)" 
+      : "No";
+
+    const emailHtml = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="utf-8">
+        <title>ARISE 2026 Registration Confirmed</title>
+        <style>
+          body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f1f5f9;
+            margin: 0;
+            padding: 0;
+            color: #1e293b;
+          }
+          .container {
+            max-width: 600px;
+            margin: 30px auto;
+            background-color: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid #e2e8f0;
+          }
+          .header {
+            background: linear-gradient(135deg, #004B57 0%, #00A896 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: #ffffff;
+          }
+          .header h1 {
+            margin: 0;
+            font-size: 26px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+          }
+          .header p {
+            margin: 10px 0 0 0;
+            font-size: 14px;
+            opacity: 0.9;
+          }
+          .content {
+            padding: 30px 40px;
+            line-height: 1.6;
+          }
+          .welcome-text {
+            font-size: 16px;
+            font-weight: bold;
+            color: #0f172a;
+          }
+          .code-box {
+            background-color: #f0faf9;
+            border: 2px dashed #00a896;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin: 24px 0;
+          }
+          .code-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #007a6e;
+            font-weight: bold;
+            margin-bottom: 6px;
+          }
+          .code-val {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 32px;
+            font-weight: 900;
+            color: #ff8c00;
+            margin: 0;
+            letter-spacing: 1px;
+          }
+          .section-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #64748b;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 6px;
+            margin-top: 30px;
+            margin-bottom: 14px;
+            font-weight: bold;
+          }
+          .details-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+          }
+          .details-list li {
+            margin-bottom: 10px;
+            font-size: 14px;
+          }
+          .details-list strong {
+            color: #475569;
+            width: 150px;
+            display: inline-block;
+          }
+          .footer {
+            background-color: #f8fafc;
+            padding: 24px;
+            text-align: center;
+            font-size: 12px;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+          }
+          .signature-section {
+            margin-top: 35px;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 20px;
+          }
+          .sig-block {
+            flex: 1;
+            text-align: center;
+          }
+          .sig-name {
+            font-size: 13px;
+            font-weight: bold;
+            color: #0f172a;
+          }
+          .sig-title {
+            font-size: 11px;
+            color: #64748b;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>ARISE 2026</h1>
+            <p>Advancements in Recovery, Intelligence & Sports Engineering</p>
+          </div>
+          <div class="content">
+            <p class="welcome-text">Dear ${data.fullName},</p>
+            <p>Congratulations! Your registration for <strong>ARISE 2026 CME & Workshop</strong> has been received and is pending payment verification.</p>
+            
+            <div class="code-box">
+              <div class="code-label">Your Registration Code</div>
+              <div class="code-val">${data.registrationCode}</div>
+            </div>
+
+            <div class="section-title">Registration Summary</div>
+            <ul class="details-list">
+              <li><strong>Category:</strong> ${data.category}</li>
+              ${data.designation ? `<li><strong>Designation:</strong> ${data.designation}</li>` : ""}
+              ${data.qualification ? `<li><strong>Qualification:</strong> ${data.qualification}</li>` : ""}
+              <li><strong>Workshop Included:</strong> ${workshopStatus}</li>
+              <li><strong>Amount:</strong> ₹${amountPaid}</li>
+              <li><strong>UPI Reference ID:</strong> ${data.transactionId}</li>
+              <li><strong>Institution:</strong> ${data.institution}</li>
+              ${data.department ? `<li><strong>Department:</strong> ${data.department}</li>` : ""}
+              ${data.city ? `<li><strong>City:</strong> ${data.city}</li>` : ""}
+              ${data.foodPreference ? `<li><strong>Food Preference:</strong> ${data.foodPreference}</li>` : ""}
+              ${data.iapCreditPoints ? `<li><strong>IAP Credit Points:</strong> Yes${data.iapMembershipNumber ? ` (ID: ${data.iapMembershipNumber})` : ""}</li>` : ""}
+            </ul>
+
+            <div class="section-title">Event Schedule & Venue</div>
+            <ul class="details-list">
+              <li><strong>Date:</strong> 17 October 2026</li>
+              <li><strong>Time:</strong> 8:00 AM - 5:00 PM</li>
+              <li><strong>Venue:</strong> Valli Super Speciality Hospital, Salem, Tamil Nadu</li>
+            </ul>
+
+            <p style="margin-top: 24px; font-size: 13px; color: #475569;">
+              * Note: Please save this email and present your Registration Code at the reception desk on the day of the event. Our admin team will verify your transaction reference ID within 24-48 hours.
+            </p>
+
+            <div class="signature-section">
+              <div class="sig-block">
+                <div class="sig-name">DR. T. NATANASABAPATHY</div>
+                <div class="sig-title">Organising Chairman</div>
+              </div>
+              <div class="sig-block">
+                <div class="sig-name">DR. E. AAKASH</div>
+                <div class="sig-title">Organising Secretary</div>
+              </div>
+            </div>
+          </div>
+          <div class="footer">
+            <p style="margin: 0 0 6px 0; font-weight: bold; color: #334155;">Valli Super Speciality Hospital</p>
+            <p style="margin: 0;">Meyyanoor Road, Salem, Tamil Nadu, 636004</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
+
+    const mailOptions = {
+      from: from.includes("Technovations") 
+        ? `"ARISE 2026" <${from.match(/<([^>]+)>/)?.[1] || from}>`
+        : `"ARISE 2026" ${from}`,
+      to: data.emailId,
+      subject: `ARISE 2026 Registration Confirmed [${data.registrationCode}]`,
+      html: emailHtml,
+    };
+
+    const info = await transporter.sendMail(mailOptions);
+    console.log(`ARISE registration email sent to ${data.emailId}. Message ID: ${info.messageId}`);
+    return { success: true, messageId: info.messageId };
+  } catch (error) {
+    console.error("Failed to send ARISE registration email:", error);
+    return { success: false, error };
+  }
+}
+
 
 

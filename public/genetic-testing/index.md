@@ -2,7 +2,7 @@
 title: Genetic Testing in Salem | Valli Super Specialty Hospital
 description: Advanced DNA sequencing to map hereditary risks for bone diseases and connective tissue disorders.
 url: https://www.vallihospital.in/genetic-testing
-last_updated: 2026-08-08
+last_updated: 2026-08-21
 ---
 
 # Genetic Testing

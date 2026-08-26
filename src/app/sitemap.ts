@@ -1,4 +1,4 @@
-﻿import { MetadataRoute } from 'next';
+import { MetadataRoute } from 'next';
 import { doctorsData } from '../data/doctors';
 import fs from 'fs';
 import path from 'path';
@@ -65,7 +65,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/iyakkam/ai-sports-rehab',
         '/iyakkam/technnovations',
         '/iyakkam/technnovations/register',
-        '/iyakkam/technnovations/portal'
+        '/iyakkam/technnovations/portal',
+        '/iyakkam/arise',
+        '/iyakkam/arise/register'
     ].map((route) => ({
         url: `${baseUrl}${route}`,
         lastModified: new Date().toISOString(),

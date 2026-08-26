@@ -558,5 +558,52 @@
       { "name": "Interventional Ultrasound & Pain Management", "url": "/interventional-ultrasound-pain-management" },
       { "name": "Brachial Plexus & Nerve Surgery", "url": "/brachial-plexus-nerve-surgery" }
     ]
+  },
+  {
+    "route": "/internal-medicine",
+    "name": "Internal Medicine",
+    "metadata": {
+      "title": "Internal Medicine & Diabetology Salem | Valli Hospital",
+      "description": "Comprehensive Internal Medicine & Diabetology care at Valli Super Specialty Hospital, Salem. Expert management of diabetes, hypertension, infectious diseases, and 24/7 emergency medical support.",
+      "keywords": "internal medicine Salem, diabetologist Salem, general physician Salem, hypertension treatment Salem, infectious disease doctor Salem"
+    },
+    "breadcrumb": [
+      { "name": "Home", "url": "https://www.vallihospital.in/" },
+      { "name": "Specialties", "url": "https://www.vallihospital.in/specialties" },
+      { "name": "Internal Medicine", "url": "https://www.vallihospital.in/internal-medicine" }
+    ],
+    "faq": [
+      {
+        "question": "What conditions are treated by the Internal Medicine department?",
+        "answer": "We treat a wide range of acute and chronic conditions including diabetes, hypertension, gastric/liver disorders, respiratory illnesses, urinary tract infections, jaundice, fevers, and infectious diseases."
+      },
+      {
+        "question": "Does the Internal Medicine department offer 24/7 care?",
+        "answer": "Yes. The department functions round the clock, providing 24-hour emergency medical services in close collaboration with our Department of Critical Care Medicine."
+      }
+    ],
+    "hero": {
+      "badge": "Specialty Clinic",
+      "title": "Internal Medicine"
+    },
+    "content": [
+      {
+        "heading": "Department Overview",
+        "paragraphs": [
+          "The Department of Internal Medicine and Diabetology at Valli Superspecialty Hospital provides comprehensive, evidence-based care for a wide range of acute and chronic medical conditions. Our experienced physicians specialize in the diagnosis, treatment, and long-term management of diabetes, hypertension, gastric and liver disorders, respiratory illnesses, urinary tract infections, and various infectious diseases. Patients presenting with jaundice, fever, metabolic disorders, and other complex medical problems receive prompt evaluation and individualized treatment plans. Emphasis is placed on preventive care, patient education, and regular follow-up to promote long-term health and improve quality of life. Equipped with modern diagnostic facilities and supported by a multidisciplinary team, the department ensures accurate diagnosis and timely intervention for patients of all age groups."
+        ]
+      },
+      {
+        "heading": "24/7 Emergency & ICU Collaboration",
+        "paragraphs": [
+          "The department functions round the clock, delivering 24-hour emergency medical services in close collaboration with the Department of Critical Care Medicine. Patients with acute heart conditions, severe respiratory distress, septicemia, uncontrolled diabetes, hypertensive emergencies, and other life-threatening illnesses receive immediate stabilization and intensive monitoring. Those requiring advanced life support or prolonged observation are seamlessly transferred to the Intensive Care Unit, where expert intensivists and physicians work together to provide coordinated, high-quality care. This integrated approach enables rapid decision-making, early intervention, and continuous monitoring, leading to improved clinical outcomes. With a commitment to compassion, clinical excellence, and patient safety, the Department of Internal Medicine and Diabetology remains a trusted center for comprehensive medical care at all hours."
+        ]
+      }
+    ],
+    "related_treatments": [
+      { "name": "24/7 Dialysis & Kidney Care", "url": "/dialysis-kidney-care" },
+      { "name": "Critical Care & Anaesthesia", "url": "/critical-care-anaesthesia" },
+      { "name": "Respiratory Care & Pulmonology", "url": "/respiratory-care-pulmonology" }
+    ]
   }
 ]

@@ -2,7 +2,7 @@
 title: Dr. S. Pradeep - MBBS | Valli Hospital Salem
 description: Professional profile of Dr. S. Pradeep, specialist in DEPT OF ANAESTHESIA & CRITICAL CARE at Valli Super Specialty Hospital.
 url: https://www.vallihospital.in/doctors/dr-spradeep
-last_updated: 2026-08-08
+last_updated: 2026-08-21
 ---
 
 # Professional Medical Profile: Dr. S. Pradeep

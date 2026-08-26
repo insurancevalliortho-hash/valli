@@ -1,4 +1,4 @@
-﻿const fs = require('fs');
+const fs = require('fs');
 const path = require('path');
 
 const baseUrl = 'https://www.vallihospital.in';
@@ -124,6 +124,14 @@ const doctorList = [
     department: "DEPT OF ORTHOPAEDICS",
     shortDescription: "Specialist in Orthopaedics and surgical treatments",
     description: "Dr. T. Natanasabapathy is a distinguished Consultant in the Orthopaedics at Valli Super Specialty Hospital, Salem. Holding qualifications in MBBS, MS Orthopaedics, they possess deep clinical expertise and are committed to offering state-of-the-art care. 10+ years' clinical experience in Orthopedic surgeries Clinical risk management experience. Verifying complex diagnoses and facilitating treatment plans."
+  },
+  {
+    slug: "dr-vasunthara-devi",
+    name: "Dr. Vasunthara Devi",
+    qualifications: "MBBS, MD (Internal Medicine)",
+    department: "DEPT OF INTERNAL MEDICINE & DIABETOLOGY",
+    shortDescription: "Senior Consultant Physician in Internal Medicine & Diabetology",
+    description: "Dr. Vasunthara Devi is a senior physician specializing in Internal Medicine and Diabetology. She has extensive experience in managing acute infections, lifestyle disorders, diabetes, hypertension, and complex metabolic conditions, delivering comprehensive evidence-based patient care."
   }
 ];
 
@@ -249,6 +257,16 @@ const specialties = [
     procedures: 'Functional movement screening (FMS), gait analysis, plyometric and agility training, muscular balance testing, and personalized athletic development programs.',
     faqs: [
       { q: "Who is sports training for?", a: "Both competitive athletes looking to optimize performance and active individuals seeking to build injury resilience." }
+    ]
+  },
+  {
+    slug: 'internal-medicine',
+    name: 'Internal Medicine',
+    desc: 'Comprehensive, evidence-based care for diabetes, hypertension, metabolic, gastric, respiratory, and infectious diseases.',
+    clinicalFocus: 'The Department of Internal Medicine and Diabetology provides comprehensive care for acute and chronic conditions, emphasizing preventive care, patient education, and long-term health management.',
+    procedures: 'Diagnostics and clinical management of diabetes, hypertension, liver disorders, fevers, infectious diseases, and 24/7 emergency medical stabilization collaborating with Critical Care.',
+    faqs: [
+      { q: "Does the Internal Medicine department offer 24/7 care?", a: "Yes, our department functions round the clock, delivering 24-hour emergency medical services in close collaboration with the Department of Critical Care Medicine." }
     ]
   }
 ];

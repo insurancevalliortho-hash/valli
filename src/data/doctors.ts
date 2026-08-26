@@ -246,5 +246,14 @@ export const doctorsData: Doctor[] = [
     "shortDescription": "Specialist in Paediatric Surgery and surgical treatments",
     "description": "Dr. Sultana Dhilras is a distinguished Consultant in the Paediatric Surgery at Valli Super Specialty Hospital, Salem. Holding qualifications in MBBS, they possess deep clinical expertise and are committed to offering state-of-the-art care. A Medical degree and the successful completion of a residency and fellowship in pediatric surgery. A state license and certification to practice pediatric surgery. A keen interest in the treatment for and needs of children.",
     "image": "/placeholder-doctor.png"
+  },
+  {
+    "slug": "dr-vasunthara-devi",
+    "name": "Dr. Vasunthara Devi",
+    "qualifications": "MBBS, MD (Internal Medicine)",
+    "department": "DEPT OF INTERNAL MEDICINE & DIABETOLOGY",
+    "shortDescription": "Senior Consultant Physician in Internal Medicine & Diabetology",
+    "description": "Dr. Vasunthara Devi is a senior physician specializing in Internal Medicine and Diabetology. She has extensive experience in managing acute infections, lifestyle disorders, diabetes, hypertension, and complex metabolic conditions, delivering comprehensive evidence-based patient care.",
+    "image": "/placeholder-doctor.png"
   }
 ];
