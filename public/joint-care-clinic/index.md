@@ -1,8 +1,12 @@
 ---
-title: Joint Care Clinic in Salem | Valli Super Speciality Hospital
+title: Joint Care Clinic in Salem | Valli Super Specialty Hospital
 description: Advanced management of acute and chronic joint pain including primary and revision knee and hip replacements.
 url: https://www.vallihospital.in/joint-care-clinic
+<<<<<<< HEAD
 last_updated: 2026-06-30
+=======
+last_updated: 2026-08-21
+>>>>>>> 9fdf1bfba3153219b309ae46133f0eb4a253a949
 ---
 
 # Joint Care Clinic
@@ -32,7 +36,7 @@ The clinic utilizes advanced Magnetic Resonance Imaging (MRI), High-Resolution U
 
 ## Frequently Asked Questions
 ### Q: What is the Joint Care Clinic?
-A: The Joint Care Clinic at Valli Super Speciality Hospital provides advanced, specialized care for joint pain, degenerative arthropathies, and primary/revision joint replacements.
+A: The Joint Care Clinic at Valli Super Specialty Hospital provides advanced, specialized care for joint pain, degenerative arthropathies, and primary/revision joint replacements.
 
 ### Q: Who is the lead doctor?
 A: Dr. T. Natanasabapathy, Chief Orthopedic Surgeon, leads our specialized joint reconstruction and preservation teams.

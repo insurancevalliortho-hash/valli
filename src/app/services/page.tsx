@@ -5,7 +5,6 @@ import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import SmoothScroll from "../../components/SmoothScroll";
 import MagneticCursor from "../../components/MagneticCursor";
 import { BreadcrumbSchema, FAQSchema } from "../../components/seo/StructuredData";
 
@@ -220,7 +219,7 @@ export default function ServicesPage() {
   );
 
   return (
-    <SmoothScroll>
+    <>
       <MagneticCursor />
       <Navbar />
 
@@ -337,11 +336,11 @@ export default function ServicesPage() {
           </div>
 
           {/* Catalog Grid */}
-          <motion.div layout className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <motion.div layout="position" className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <AnimatePresence mode="popLayout">
               {filteredServices.map((service, idx) => (
                 <motion.div
-                  layout
+                  layout="position"
                   initial={{ opacity: 0, y: 30, scale: 0.98 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
@@ -495,6 +494,6 @@ export default function ServicesPage() {
       </section>
 
       <Footer />
-    </SmoothScroll>
+    </>
   );
 }

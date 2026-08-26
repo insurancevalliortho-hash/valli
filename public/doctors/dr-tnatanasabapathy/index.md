@@ -1,8 +1,12 @@
 ---
 title: Dr. T. Natanasabapathy - MBBS, MS Orthopaedics | Valli Hospital Salem
-description: Professional profile of Dr. T. Natanasabapathy, specialist in DEPT OF ORTHOPAEDICS at Valli Super Speciality Hospital.
+description: Professional profile of Dr. T. Natanasabapathy, specialist in DEPT OF ORTHOPAEDICS at Valli Super Specialty Hospital.
 url: https://www.vallihospital.in/doctors/dr-tnatanasabapathy
+<<<<<<< HEAD
 last_updated: 2026-06-30
+=======
+last_updated: 2026-08-21
+>>>>>>> 9fdf1bfba3153219b309ae46133f0eb4a253a949
 ---
 
 # Professional Medical Profile: Dr. T. Natanasabapathy
@@ -17,7 +21,7 @@ last_updated: 2026-06-30
 Specialist in Orthopaedics and surgical treatments
 
 ## Professional Background & Biography
-Dr. T. Natanasabapathy is a distinguished Consultant in the Orthopaedics at Valli Super Speciality Hospital, Salem. Holding qualifications in MBBS, MS Orthopaedics, they possess deep clinical expertise and are committed to offering state-of-the-art care. 10+ years' clinical experience in Orthopedic surgeries Clinical risk management experience. Verifying complex diagnoses and facilitating treatment plans.
+Dr. T. Natanasabapathy is a distinguished Consultant in the Orthopaedics at Valli Super Specialty Hospital, Salem. Holding qualifications in MBBS, MS Orthopaedics, they possess deep clinical expertise and are committed to offering state-of-the-art care. 10+ years' clinical experience in Orthopedic surgeries Clinical risk management experience. Verifying complex diagnoses and facilitating treatment plans.
 
 ## OPD Consultation Fee
 - Standard Clinical Consultation: ₹500 - ₹800 ($6 - $10 USD)

@@ -1,8 +1,8 @@
-import { Metadata } from "next";
+﻿import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Iyakkam Sports Rehab & Biomechanics | Valli Super Speciality Hospital",
-  description: "Iyakkam is Valli Super Speciality Hospital's flagship Sports Rehabilitation & Biomechanics center. We combine clinical orthopedic expertise with advanced motion-capture telemetry to analyze gait, prevent injury, and restore athletic performance.",
+  title: "Iyakkam Sports Rehab & Biomechanics | Valli Super Specialty Hospital",
+  description: "Iyakkam is Valli Super Specialty Hospital's flagship Sports Rehabilitation & Biomechanics center. We combine clinical orthopedic expertise with advanced motion-capture telemetry to analyze gait, prevent injury, and restore athletic performance.",
   keywords: [
     "Iyakkam Sports Rehab",
     "sports rehabilitation Salem",
@@ -13,12 +13,12 @@ export const metadata: Metadata = {
     "orthopedic rehabilitation India",
     "motion capture gait analysis"
   ],
-  authors: [{ name: "Valli Super Speciality Hospital" }],
+  authors: [{ name: "Valli Super Specialty Hospital" }],
   openGraph: {
-    title: "Iyakkam Sports Rehab & Biomechanics | Valli Super Speciality Hospital",
+    title: "Iyakkam Sports Rehab & Biomechanics | Valli Super Specialty Hospital",
     description: "Discover Iyakkam, the flagship sports rehabilitation and biomechanics center of Valli Hospital. Benefit from dynamic gait analysis, injury screening, and specialized return-to-play assessment.",
     url: "https://www.vallihospital.in/iyakkam",
-    siteName: "Valli Super Speciality Hospital",
+    siteName: "Valli Super Specialty Hospital",
     images: [
       {
         url: "/assets/runner-overlay.png",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Iyakkam Sports Rehab & Biomechanics | Valli Super Speciality Hospital",
+    title: "Iyakkam Sports Rehab & Biomechanics | Valli Super Specialty Hospital",
     description: "Get dynamic biomechanical analysis, clinical sports rehabilitation, and peak performance training at Valli Hospital's Iyakkam center.",
     images: ["/assets/runner-overlay.png"],
   },

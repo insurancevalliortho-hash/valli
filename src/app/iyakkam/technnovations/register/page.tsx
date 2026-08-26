@@ -1,7 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useLenis } from "lenis/react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowLeft,
   ArrowRight,
@@ -28,10 +30,11 @@ import {
 } from "lucide-react";
 import Navbar from "../../../../components/Navbar";
 import Footer from "../../../../components/Footer";
-import SmoothScroll from "../../../../components/SmoothScroll";
 import confetti from "canvas-confetti";
 
 export default function RegisterPage() {
+  const lenis = useLenis();
+
   // Current step state (1, 2, or 3)
   const [step, setStep] = useState(1);
 
@@ -209,11 +212,21 @@ export default function RegisterPage() {
   const handleNext = () => {
     if (validateStep(step)) {
       setStep((prev) => prev + 1);
+      if (lenis) {
+        lenis.scrollTo(0, { immediate: true });
+      } else {
+        window.scrollTo(0, 0);
+      }
     }
   };
 
   const handlePrev = () => {
     setStep((prev) => Math.max(1, prev - 1));
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
   };
 
   // Form submission
@@ -259,7 +272,11 @@ export default function RegisterPage() {
 
       if (response.ok) {
         setIsSuccess(true);
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        if (lenis) {
+          lenis.scrollTo(0, { immediate: true });
+        } else {
+          window.scrollTo(0, 0);
+        }
       } else {
         setErrors({
           transactionId: result.error || "Failed to submit registration.",
@@ -276,7 +293,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <SmoothScroll>
+    <>
       <Navbar />
 
       <div className="min-h-screen bg-slate-50 text-[#1A1A2E] font-body selection:bg-orange selection:text-white pt-28 pb-24 px-4 sm:px-6 relative overflow-hidden grid-bg-dots">
@@ -420,7 +437,7 @@ export default function RegisterPage() {
                         Username / Registration Code: <span className="font-mono font-bold text-[#1A1A2E] bg-slate-100 px-1.5 py-0.5 rounded border border-slate-250">{regCode}</span>
                       </li>
                       <li>
-                        Authentication: Use the Team Leader's Email (<span className="font-bold text-[#1A1A2E]">{emailId}</span>) or Mobile Number (<span className="font-bold text-[#1A1A2E]">{mobileNumber}</span>) to log in.
+                        Authentication: Use the Team Leader&apos;s Email (<span className="font-bold text-[#1A1A2E]">{emailId}</span>) or Mobile Number (<span className="font-bold text-[#1A1A2E]">{mobileNumber}</span>) to log in.
                       </li>
                       <li>
                         Format: <span className="font-bold text-[#1A1A2E]">PPT, PPTX, or PDF</span> (Max size <span className="font-bold">5MB</span>).
@@ -807,7 +824,7 @@ export default function RegisterPage() {
                               className="relative bg-white border border-slate-200 rounded-2xl p-3 shadow-md hover:shadow-lg hover:border-teal/30 hover:scale-105 transition-all duration-300 cursor-pointer group"
                               title="Click to expand QR Code"
                             >
-                              <img src="/assets/payment-qr.jpg" alt="UPI QR Code" className="w-[135px] h-[135px] object-contain" />
+                              <Image src="/assets/payment-qr.jpg" alt="UPI QR Code" width={135} height={135} className="w-[135px] h-[135px] object-contain" />
                               <div className="absolute inset-0 bg-teal/5 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity flex items-center justify-center">
                                 <span className="bg-white/95 text-teal text-[9px] font-bold px-2.5 py-1 rounded-full shadow-md border border-teal/10">Click to Expand</span>
                               </div>
@@ -918,6 +935,7 @@ export default function RegisterPage() {
                           ) : (
                             <div className="relative border border-slate-200 rounded-xl p-3 bg-slate-50/50 flex items-center gap-3">
                               <div className="w-12 h-12 bg-white rounded-lg overflow-hidden border border-slate-200 flex-shrink-0">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img src={screenshot} alt="Payment SS" className="w-full h-full object-cover" />
                               </div>
                               <div className="min-w-0 flex-1">
@@ -1017,9 +1035,11 @@ export default function RegisterPage() {
             </div>
 
             <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 shadow-inner flex items-center justify-center">
-              <img
+              <Image
                 src="/assets/payment-qr.jpg"
                 alt="UPI QR Code Expanded"
+                width={260}
+                height={260}
                 className="w-[260px] h-[260px] object-contain rounded-xl bg-white shadow-sm"
               />
             </div>
@@ -1043,6 +1063,6 @@ export default function RegisterPage() {
           </div>
         </div>
       )}
-    </SmoothScroll>
+    </>
   );
 }

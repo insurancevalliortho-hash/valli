@@ -1,7 +1,8 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import {
   ArrowRight,
@@ -159,7 +160,7 @@ function HeroSection() {
             >
               The premier national project expo and Sport<span className="text-[#FF8C00]">AI</span>thon for college innovators. Build the future of athletic recovery, wearable telemetry, and computer-vision kinesiology.
               <span className="block text-xs font-bold text-slate-400 mt-3 uppercase tracking-wider">
-                Organised by Valli Super Speciality Hospital - Iyakkam CME
+                Organised by Valli Super Specialty Hospital - Iyakkam CME
               </span>
             </motion.p>
 
@@ -647,14 +648,13 @@ function TechFooter() {
         >
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-              <img
-                src="/logo.png"
-                alt="Valli Super Speciality Hospital"
-                style={{ height: 32, width: "auto" }}
-                onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = "none";
-                }}
-              />
+               <Image
+                 src="/logo.png"
+                 alt="Valli Super Specialty Hospital"
+                 width={100}
+                 height={32}
+                 style={{ height: 32, width: "auto" }}
+               />
             </div>
             <div
               style={{
@@ -663,7 +663,7 @@ function TechFooter() {
                 color: "var(--ink-mid)",
               }}
             >
-              Valli Super Speciality Hospital · NABH Accredited
+              Valli Super Specialty Hospital · NABH Accredited
             </div>
           </div>
           <div
@@ -716,7 +716,7 @@ function TechFooter() {
               color: "var(--ink-light)",
             }}
           >
-            © 2026 Technovations. Organised by Valli Super Speciality Hospital.
+            © 2026 Technovations. Organised by Valli Super Specialty Hospital.
           </div>
           <div style={{ display: "flex", gap: 24 }}>
             {["Terms", "Privacy", "Contact"].map((l) => (

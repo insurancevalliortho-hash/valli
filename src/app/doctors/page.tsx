@@ -1,13 +1,13 @@
-"use client";
+﻿"use client";
 
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import SmoothScroll from "../../components/SmoothScroll";
 import MagneticCursor from "../../components/MagneticCursor";
 import { doctorsData } from "../../data/doctors";
 import Link from "next/link";
+import Image from "next/image";
 
 const filterCategories = [
     { id: "ALL", label: "All Specialists" },
@@ -29,13 +29,13 @@ const stats = [
     { value: "21+", label: "Years Experience" },
     { value: "5,000+", label: "Surgeries" },
     { value: "98%", label: "Success Rate" },
-    { value: "15+", label: "Specialities" },
+    { value: "15+", label: "Specialties" },
 ];
 
 const creds = ["M.S. Orthopaedics", "FIAS", "Joint Replacement", "Arthroscopy Specialist", "Trauma & Spine", "Sports Medicine"];
 
 const milestones = [
-    { year: "2003", title: "Founded Valli Super Speciality Hospital in Salem" },
+    { year: "2003", title: "Founded Valli Super Specialty Hospital in Salem" },
     { year: "2010", title: "Pioneered minimally invasive joint replacement in Salem" },
     { year: "2015", title: "First C-ARM guided arthroscopy in the district" },
     { year: "2018", title: "Reached 3,000 successful knee replacements" },
@@ -59,7 +59,7 @@ export default function DoctorsPage() {
     const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
 
     return (
-        <SmoothScroll>
+        <>
             <MagneticCursor />
             <Navbar />
 
@@ -100,7 +100,7 @@ export default function DoctorsPage() {
                             <div className="lg:w-[360px] shrink-0 relative overflow-hidden">
                                 <div className="absolute inset-0 bg-gradient-to-br from-[#004b57] via-[#f98825]/30 to-[#3cb3a6]/50" />
                                 <div className="relative h-80 lg:h-full min-h-[400px]">
-                                    <img src="surgeon.jpeg" alt="Dr. T. Natanasabapathy" className="w-full h-full object-cover object-top" />
+                                    <Image src="/surgeon.jpeg" alt="Dr. T. Natanasabapathy" fill className="object-cover object-top" sizes="(max-width: 1024px) 100vw, 360px" priority />
                                     <div className="absolute inset-0 bg-gradient-to-t from-[#001f25]/70 via-transparent to-transparent" />
                                     <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#001825]/40 hidden lg:block" />
                                 </div>
@@ -246,7 +246,7 @@ export default function DoctorsPage() {
                         })}
                     </div>
 
-                    <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <motion.div layout="position" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                         <AnimatePresence mode="popLayout">
                             {doctorsData
                                 .filter((doc) => selectedCategory === "ALL" || getDocCategory(doc.department) === selectedCategory)
@@ -255,7 +255,7 @@ export default function DoctorsPage() {
                                     return (
                                         <motion.div
                                             key={doc.slug}
-                                            layout
+                                            layout="position"
                                             initial={{ opacity: 0, scale: 0.9 }}
                                             animate={{ opacity: 1, scale: 1 }}
                                             exit={{ opacity: 0, scale: 0.9 }}
@@ -267,11 +267,13 @@ export default function DoctorsPage() {
                                                     <div>
                                                         <div className="flex justify-between items-start mb-5">
                                                             {hasPhoto ? (
-                                                                <div className="w-16 h-16 rounded-2xl bg-[#004b57]/10 overflow-hidden shrink-0 border border-black/5 shadow-inner">
-                                                                    <img
+                                                                <div className="w-16 h-16 rounded-2xl bg-[#004b57]/10 overflow-hidden shrink-0 border border-black/5 shadow-inner relative">
+                                                                    <Image
                                                                         src={doc.image}
                                                                         alt={doc.name}
-                                                                        className="w-full h-full object-cover object-top opacity-95 group-hover:scale-110 transition-transform duration-500"
+                                                                        fill
+                                                                        sizes="64px"
+                                                                        className="object-cover object-top opacity-95 group-hover:scale-110 transition-transform duration-500"
                                                                     />
                                                                 </div>
                                                             ) : (
@@ -317,6 +319,6 @@ export default function DoctorsPage() {
             </section>
 
             <Footer />
-        </SmoothScroll>
+        </>
     );
 }

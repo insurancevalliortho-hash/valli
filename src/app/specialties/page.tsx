@@ -4,11 +4,10 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import SmoothScroll from "../../components/SmoothScroll";
 import MagneticCursor from "../../components/MagneticCursor";
 import Link from "next/link";
 
-const specialities = [
+const Specialties = [
     {
         id: "orthopaedics",
         title: "Orthopaedics & Joint Replacement",
@@ -309,16 +308,266 @@ const specialities = [
         ],
         stat: { value: "24/7", label: "Lab Operations" },
     },
+    {
+        id: "interventional-usg",
+        title: "Interventional Ultrasound & Pain Management",
+        subtitle: "Precision Pain Relief",
+        accentColor: "#3cb3a6",
+        bg: "bg-gradient-to-br from-[#f0faf9] to-[#ffffff]",
+        dark: false,
+        tag: "Pain Medicine",
+        tagBg: "bg-[#3cb3a6]/10 text-[#3cb3a6]",
+        icon: (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-8 h-8">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
+            </svg>
+        ),
+        description: "Premier precision-guided diagnostics and advanced pain relief using two GE Versana USG machines — from nerve blocks and PRP therapy to USG-guided biopsies and cancer pain management.",
+        bullets: [
+            "Nerve blocks for trauma pain management — immediate acute pain relief.",
+            "PRP (Platelet-Rich Plasma) & Stem Cell injections for sports injuries and arthritis.",
+            "Epidural & caudal injections for precise spinal pain targeting.",
+            "Plexus & ganglion blocks for Trigeminal Neuralgia and TMJ disorders.",
+            "Chronic cancer pain, pancreatic pain, and stroke-related pain protocols.",
+            "Ultrasound-guided biopsies for definitive diagnostic clarity.",
+        ],
+        stat: { value: "2×GE", label: "Versana USG Machines" },
+    },
+    {
+        id: "dialysis-kidney-care",
+        title: "24/7 Dialysis & Kidney Care",
+        subtitle: "Lifeline for Renal Health",
+        accentColor: "#f98825",
+        bg: "bg-gradient-to-br from-[#001f25] to-[#004b57]",
+        dark: true,
+        tag: "Renal Care",
+        tagBg: "bg-[#f98825]/20 text-[#f98825]",
+        icon: (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-8 h-8">
+                <path d="M12 2a7 7 0 017 7c0 5-7 13-7 13S5 14 5 9a7 7 0 017-7z" />
+            </svg>
+        ),
+        description: "24-hour dedicated renal care center featuring the Fresenius Kabi 4008S for high-precision hemodialysis — a critical lifeline for kidney failure, poisoning, trauma shock, and transplant bridge therapy.",
+        bullets: [
+            "High-precision hemodialysis with Fresenius Kabi 4008S (German technology).",
+            "Emergency dialysis for acute kidney failure, severe poisoning & trauma-induced renal shock.",
+            "Expert management of medically compromised patients — alcoholic liver disease & pancreatitis.",
+            "Qualified nephrologists, renal technicians & intensivists on duty 24/7/365.",
+            "Sterile, infection-controlled environment prioritizing patient safety.",
+            "Bridge dialysis therapy to support patients awaiting renal transplant.",
+        ],
+        stat: { value: "24/7", label: "Renal Emergency Ready" },
+    },
+    {
+        id: "hematology-blood-disorders",
+        title: "Hematology & Blood Disorders",
+        subtitle: "Safeguarding Your Vital Life Force",
+        accentColor: "#ba1a1a",
+        bg: "bg-[#fff5f5]",
+        dark: false,
+        tag: "Blood Disorders",
+        tagBg: "bg-red-100 text-red-700",
+        icon: (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-8 h-8">
+                <path d="M12 2a7 7 0 017 7c0 5-7 13-7 13S5 14 5 9a7 7 0 017-7z" />
+            </svg>
+        ),
+        description: "Expert diagnosis and management of Anemia, Thalassemia, Hemophilia, DVT, Leukemia, Lymphoma, and DIC within a 50-bedded multispecialty framework with 24/7 ACLS/ATLS-certified ICU care.",
+        bullets: [
+            "Iron Deficiency, Megaloblastic & Sickle Cell Anemia management.",
+            "Thalassemia, Hemophilia & Von Willebrand Disease treatment.",
+            "Life-threatening DVT, Pulmonary Embolism & DIC emergency care.",
+            "Septicemia & Thrombocytopenia — ICU-backed ACLS/ATLS response.",
+            "Leukemia, Lymphoma & Multiple Myeloma oncology workups.",
+            "Laparoscopic Splenectomy for ITP & surgical synergy.",
+        ],
+        stat: { value: "24/7", label: "Emergency Hematology" },
+    },
+    {
+        id: "surgical-gastroenterology",
+        title: "Surgical Gastroenterology & Digestive Care",
+        subtitle: "Precision Abdominal Surgery",
+        accentColor: "#f98825",
+        bg: "bg-white",
+        dark: false,
+        tag: "Digestive Care",
+        tagBg: "bg-[#f98825]/10 text-[#f98825]",
+        icon: (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-8 h-8">
+                <path d="M8 7v4m8-4v4m-4-8v12m-6 4h12c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H6c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2z" />
+            </svg>
+        ),
+        description: "High-performance laparoscopic and open surgery for gallstones, GI cancers, pancreatitis, hernias, and emergency laparotomies — backed by advanced endoscopy and 24/7 ICU-ready critical care.",
+        bullets: [
+            "Laparoscopic Cholecystectomy for gallstones & hernia repair.",
+            "GI Cancer surgery — esophagus, stomach, colon & rectum.",
+            "Chronic Pancreatitis, Pseudocyst & Liver Abscess management.",
+            "Emergency Laparotomy for GI Perforations & Peritonitis.",
+            "Advanced Endoscopy & Colonoscopy for GI Bleeding & Polyps.",
+            "Colorectal surgery, Hemorrhoidectomy & Splenectomy.",
+        ],
+        stat: { value: "24/7", label: "Surgical Readiness" },
+    },
+    {
+        id: "respiratory-care-pulmonology",
+        title: "Respiratory Care & Interventional Pulmonology",
+        subtitle: "Elite Lung & Airway Care",
+        accentColor: "#3cb3a6",
+        bg: "bg-gradient-to-br from-[#f0faf9] to-[#ffffff]",
+        dark: false,
+        tag: "Respiratory Care",
+        tagBg: "bg-[#3cb3a6]/10 text-[#3cb3a6]",
+        icon: (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-8 h-8">
+                <path d="M12 3c0 0-4 4-4 9s2 6 4 6 4-1 4-6-4-9-4-9z" />
+            </svg>
+        ),
+        description: "Elite respiratory care for Asthma, COPD, TB, and life-threatening ARDS — with interventional bronchoscopy, BiPAP/CPAP therapy, and 24/7 ICU-backed pulmonary emergency readiness.",
+        bullets: [
+            "Asthma, COPD, Bronchiectasis & ILD management.",
+            "Pneumonia, TB, Pleural Effusion & Sleep Apnea treatment.",
+            "ARDS, Pneumothorax & Massive Hemoptysis emergency care.",
+            "Flexible Bronchoscopy for Lung Cancer diagnosis.",
+            "Pulmonary Embolism & Sarcoidosis — multidisciplinary synergy.",
+            "Thoracocentesis, BiPAP/CPAP & Pulmonary Rehabilitation.",
+        ],
+        stat: { value: "24/7", label: "Respiratory ICU" },
+    },
+    {
+        id: "neurosurgery-neurological-care",
+        title: "Advanced Neurosurgery & Neurological Critical Care",
+        subtitle: "Brain & Spine Precision",
+        accentColor: "#f98825",
+        bg: "bg-gradient-to-br from-[#001f25] to-[#003340]",
+        dark: true,
+        tag: "Brain & Spine",
+        tagBg: "bg-[#f98825]/20 text-[#f98825]",
+        icon: (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-8 h-8">
+                <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+        ),
+        description: "Elite surgical precision for brain tumors, cerebrovascular emergencies, TBI, and spine disorders — powered by neuro-microscope technology, 24/7 ICU, and ACLS/ATLS-certified emergency response.",
+        bullets: [
+            "Brain Tumor surgery (Gliomas, Meningiomas, Pituitary Adenomas).",
+            "Cerebrovascular surgery for Aneurysms, AVM & Stroke.",
+            "Emergency TBI, Epidural & Subdural Hematoma management.",
+            "Herniated Disc, Spondylolisthesis & Spinal Stenosis surgery.",
+            "VP Shunting for Hydrocephalus & Congenital Anomalies.",
+            "Trigeminal Neuralgia & Chronic Back Pain management.",
+        ],
+        stat: { value: "Neuro", label: "Microscope Precision" },
+    },
+    {
+        id: "critical-care-anaesthesia",
+        title: "Critical Care & Anaesthesia",
+        subtitle: "The Shield of Critical Care",
+        accentColor: "#f98825",
+        bg: "bg-white",
+        dark: false,
+        tag: "Critical Care",
+        tagBg: "bg-[#f98825]/10 text-[#f98825]",
+        icon: (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-8 h-8">
+                <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+        ),
+        description: "Precision anaesthesia and rapid-response critical care — the clinical engine safeguarding every heartbeat across surgery, trauma, ICU, and post-operative recovery 24/7.",
+        bullets: [
+            "General, Spinal & Epidural Anaesthesia for all surgical specialties.",
+            "Ultrasound-Guided Nerve Blocks & Regional Anaesthesia.",
+            "24/7 ICU for Septic Shock, MODS, ARDS & Status Epilepticus.",
+            "Polytrauma, TBI & Hemorrhagic Shock primary response.",
+            "POCUS diagnostics, ABG analysis & hemodynamic monitoring.",
+            "Poisoning, DKA & Acute Renal Failure critical management.",
+        ],
+        stat: { value: "10-Bed", label: "Advanced ICU" },
+    },
+    {
+        id: "oral-maxillofacial-surgery",
+        title: "Oral & Maxillofacial Surgery",
+        subtitle: "Restoring Facial Harmony",
+        accentColor: "#004b57",
+        bg: "bg-gradient-to-br from-[#f0faf9] to-[#ffffff]",
+        dark: false,
+        tag: "Facial Surgery",
+        tagBg: "bg-[#004b57]/10 text-[#004b57]",
+        icon: (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-8 h-8">
+                <circle cx="12" cy="8" r="4" /><path d="M6 20v-2a6 6 0 0112 0v2" />
+            </svg>
+        ),
+        description: "Elite surgical precision for complex facial trauma, oral cancers, TMJ disorders, and orthognathic reconstruction — combining 3D CT mapping with microsurgical mastery for complete facial restoration.",
+        bullets: [
+            "Mandibular, ZMC & Orbital Fracture repair.",
+            "Oral Cancer (SCC), Odontogenic Cysts & Ameloblastoma surgery.",
+            "TMJ Ankylosis & Salivary Gland Tumor management.",
+            "Cleft Lip & Palate orthognathic correction.",
+            "3D CT Facial Reconstruction & precision nerve repair.",
+            "Ludwig's Angina & airway emergency management.",
+        ],
+        stat: { value: "Elite", label: "Facial Reconstruction" },
+    },
+    {
+        id: "brachial-plexus-nerve-surgery",
+        title: "Brachial Plexus & Peripheral Nerve Surgery",
+        subtitle: "Microscopic Nerve Restoration",
+        accentColor: "#3cb3a6",
+        bg: "bg-white",
+        dark: false,
+        tag: "Nerve Surgery",
+        tagBg: "bg-[#3cb3a6]/10 text-[#3cb3a6]",
+        icon: (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-8 h-8">
+                <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+        ),
+        description: "Elite microscopic precision for upper limb nerve restoration — nerve grafting, neurotization, Carpal Tunnel, Erb's Palsy, TOS, and Schwannoma surgery with high-resolution CT myelography.",
+        bullets: [
+            "Traumatic Brachial Plexus Injury repair (Avulsions, Ruptures).",
+            "Erb's Palsy & Klumpke's Palsy surgical correction.",
+            "Nerve Grafting, Neurotization & Microneurolysis.",
+            "Carpal Tunnel, Ulnar Nerve Entrapment & TOS surgery.",
+            "Schwannoma & Neurofibroma excision with CT Myelography.",
+            "Neuropathic Pain management & Muscle Re-education Physio.",
+        ],
+        stat: { value: "Micro", label: "Precision Nerve Surgery" },
+    },
+    {
+        id: "plastic-reconstructive-surgery",
+        title: "Advanced Plastic, Reconstructive & Cosmetic Surgery",
+        subtitle: "Artistry Meets Precision",
+        accentColor: "#db2777",
+        bg: "bg-white",
+        dark: false,
+        tag: "Plastic Surgery",
+        tagBg: "bg-rose-100 text-rose-700",
+        icon: (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-8 h-8">
+                <path d="M12 4v16m8-8H4M12 4a8 8 0 018 8m-8-8a8 8 0 00-8 8m8 8a8 8 0 018-8m-8 8a8 8 0 00-8-8" />
+            </svg>
+        ),
+        description: "Elite plastic, reconstructive, and cosmetic surgery combining microsurgical precision with aesthetic artistry for complex wounds, hand trauma, varicose veins, and aesthetic rejuvenation.",
+        bullets: [
+            "Diabetic foot wounds, Traumatic wounds & pressure sore management.",
+            "Hand Trauma — Tendon, nerve, crush injuries & soft tissue repair.",
+            "Maxillo-facial surgery for facial trauma & jaw injuries.",
+            "Minimally invasive laser surgery for Varicose Veins.",
+            "Cosmetic surgery — Gynaecomastia correction & Abdominoplasty.",
+            "Non-surgical rejuvenation — PRP, Exosomes, Microneedling & Peels.",
+        ],
+        stat: { value: "24/7", label: "Reconstructive Care" },
+    },
 ];
 
-export default function SpecialitiesPage() {
+export default function SpecialtiesPage() {
     const heroRef = useRef<HTMLElement>(null);
     const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
     const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
     const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
     return (
-        <SmoothScroll>
+        <>
             <MagneticCursor />
             <Navbar />
 
@@ -353,11 +602,11 @@ export default function SpecialitiesPage() {
                 </div>
             </section>
 
-            {/* Speciality Cards */}
+            {/* Specialty Cards */}
             <main className="bg-[#f9fafb] py-20">
                 <div className="container mx-auto px-6 md:px-12">
                     <div className="space-y-8">
-                        {specialities.map((item, index) => (
+                        {Specialties.map((item, index) => (
                             <motion.div
                                 key={item.id}
                                 id={item.id}
@@ -419,11 +668,21 @@ export default function SpecialitiesPage() {
                                                     "pulmonology": { slug: "sports-training", name: "Sports Training & Rehab" },
                                                     "hematology": { slug: "bone-cancer-treatment", name: "Bone Cancer Clinic" },
                                                     "critical-care": { slug: "arthroscopy", name: "Arthroscopy Specialist" },
-                                                    "internal-medicine": { slug: "foot-and-ankle-clinic", name: "Foot & Ankle Clinic" },
+                                                    "internal-medicine": { slug: "internal-medicine", name: "Internal Medicine & Diabetology" },
                                                     "paediatrics": { slug: "paediatric-orthopaedics-deformity-clinic", name: "Paediatric Deformity Clinic" },
                                                     "emergency": { slug: "fracture-clinic", name: "Fracture & Trauma Clinic" },
                                                     "brachial-plexus": { slug: "back-pain-and-spinal-disorders", name: "Spine & Nerve Clinic" },
-                                                    "laboratory": { slug: "genetic-testing", name: "Genetic Diagnostic Lab" }
+                                                    "laboratory": { slug: "genetic-testing", name: "Genetic Diagnostic Lab" },
+                                                    "interventional-usg": { slug: "interventional-ultrasound-pain-management", name: "Pain Management Clinic" },
+                                                    "dialysis-kidney-care": { slug: "dialysis-kidney-care", name: "Dialysis & Kidney Care" },
+                                                    "hematology-blood-disorders": { slug: "hematology-blood-disorders", name: "Hematology & Blood Disorders" },
+                                                    "surgical-gastroenterology": { slug: "surgical-gastroenterology", name: "Surgical Gastroenterology" },
+                                                    "respiratory-care-pulmonology": { slug: "respiratory-care-pulmonology", name: "Respiratory Care & Pulmonology" },
+                                                    "neurosurgery-neurological-care": { slug: "neurosurgery-neurological-care", name: "Neurosurgery & Neurological Care" },
+                                                    "critical-care-anaesthesia": { slug: "critical-care-anaesthesia", name: "Critical Care & Anaesthesia" },
+                                                    "oral-maxillofacial-surgery": { slug: "oral-maxillofacial-surgery", name: "Oral & Maxillofacial Surgery" },
+                                                    "brachial-plexus-nerve-surgery": { slug: "brachial-plexus-nerve-surgery", name: "Brachial Plexus & Nerve Surgery" },
+                                                    "plastic-reconstructive-surgery": { slug: "plastic-reconstructive-surgery", name: "Plastic & Reconstructive Surgery" }
                                                 };
                                                 const cluster = clusterMap[item.id];
                                                 if (cluster) {
@@ -473,6 +732,6 @@ export default function SpecialitiesPage() {
             </section>
 
             <Footer />
-        </SmoothScroll>
+        </>
     );
 }

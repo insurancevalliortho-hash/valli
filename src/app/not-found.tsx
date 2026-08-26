@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
@@ -6,7 +6,6 @@ import { Home, Calendar, Stethoscope, PhoneCall, AlertTriangle } from "lucide-re
 import React, { useRef, useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import SmoothScroll from "../components/SmoothScroll";
 import MagneticCursor from "../components/MagneticCursor";
 
 // Premium Mouse Tilt Hook for buttery-smooth interactive 3D Tilting
@@ -64,7 +63,7 @@ export default function NotFound() {
     }, []);
 
     return (
-        <SmoothScroll>
+        <>
             <MagneticCursor />
             <Navbar />
             <main className="min-h-screen bg-[#000d10] text-white flex flex-col justify-center items-center relative overflow-hidden pt-36 pb-24">
@@ -192,9 +191,9 @@ export default function NotFound() {
                                 delay: 0.2
                             },
                             {
-                                href: "/specialities",
+                                href: "/specialties",
                                 icon: <Stethoscope size={22} />,
-                                title: "Specialities",
+                                title: "Specialties",
                                 desc: "Explore our wings.",
                                 accent: "#3cb3a6",
                                 delay: 0.3
@@ -246,6 +245,6 @@ export default function NotFound() {
                 </div>
             </main>
             <Footer />
-        </SmoothScroll>
+        </>
     );
 }

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
@@ -202,7 +202,7 @@ export default function CertificatePage() {
             <div className="relative h-8 sm:h-10 w-36 sm:w-48">
               <Image
                 src="/logo.png"
-                alt="Valli Super Speciality Hospital"
+                alt="Valli Super Specialty Hospital"
                 fill
                 className="object-contain object-left"
                 priority
@@ -420,7 +420,7 @@ export default function CertificatePage() {
 
       {/* Footer */}
       <footer className="mt-16 text-center text-xs text-slate-400 space-y-1">
-        <p className="font-medium text-slate-500">© 2026 Valli Super Speciality Hospital. All Rights Reserved.</p>
+        <p className="font-medium text-slate-500">© 2026 Valli Super Specialty Hospital. All Rights Reserved.</p>
         <p className="text-[11px] text-slate-400">The Practical Ortho Rheumat Summit 2026 • Hotel Grand Estancia, Salem</p>
       </footer>
     </div>

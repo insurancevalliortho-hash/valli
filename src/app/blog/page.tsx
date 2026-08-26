@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import Link from 'next/link';
@@ -6,8 +6,8 @@ import fs from 'fs';
 import path from 'path';
 
 export const metadata = {
-  title: 'Blog | Valli Super Speciality Hospital',
-  description: 'Read the latest insights and news from Valli Super Speciality Hospital.',
+  title: 'Blog | Valli Super Specialty Hospital',
+  description: 'Read the latest insights and news from Valli Super Specialty Hospital.',
   alternates: {
     canonical: 'https://www.vallihospital.in/blog',
   },

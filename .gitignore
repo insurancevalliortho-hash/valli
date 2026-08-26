@@ -42,3 +42,8 @@ next-env.d.ts
 
 # local clones
 /marketingskills
+
+# local dev artifacts
+lh-report.json
+/scratch/
+task.md

@@ -7,7 +7,7 @@ import { BreadcrumbSchema, FAQSchema, MedicalProcedureSchema, MedicalSpecialtySc
 
 export const metadata: Metadata = {
   title: "Best Knee Replacement Hospital in Salem | Robotic & Cooled RFA | Valli Hospital",
-  description: "Advanced Total & Partial Knee Replacement in Salem at Valli Super Speciality Hospital. Led by Dr. T. Natanasabapathy. Specializing in Robotic Knee Surgery, Cooled RFA, and PRP injections for rapid knee pain relief.",
+  description: "Advanced Total & Partial Knee Replacement in Salem at Valli Super Specialty Hospital. Led by Dr. T. Natanasabapathy. Specializing in Robotic Knee Surgery, Cooled RFA, and PRP injections for rapid knee pain relief.",
   keywords: [
     "knee replacement surgery Salem",
     "best hospital for knee replacement Salem",
@@ -37,7 +37,7 @@ export default function KneeReplacementPage() {
     },
     {
       question: "Do you offer non-surgical treatments like PRP platelet injections?",
-      answer: "Yes, Valli Super Speciality Hospital offers Regenerative Platelet-Rich Plasma (PRP) therapy and Viscosupplementation injections to reduce joint inflammation and promote cartilage healing in mild to moderate osteoarthritis."
+      answer: "Yes, Valli Super Specialty Hospital offers Regenerative Platelet-Rich Plasma (PRP) therapy and Viscosupplementation injections to reduce joint inflammation and promote cartilage healing in mild to moderate osteoarthritis."
     },
     {
       question: "Who is the lead knee specialist at Valli Hospital Salem?",
@@ -51,7 +51,7 @@ export default function KneeReplacementPage() {
 
       <BreadcrumbSchema items={[
         { name: 'Home', url: 'https://www.vallihospital.in/' },
-        { name: 'Specialities', url: 'https://www.vallihospital.in/specialities' },
+        { name: 'Specialties', url: 'https://www.vallihospital.in/specialties' },
         { name: 'Knee Replacement', url: 'https://www.vallihospital.in/knee-replacement' }
       ]} />
       <FAQSchema questions={faqList} />
@@ -72,7 +72,7 @@ export default function KneeReplacementPage() {
           <ol className="flex space-x-2 text-sm text-gray-400">
             <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
             <li><span className="mx-2">›</span></li>
-            <li><Link href="/specialities" className="hover:text-white transition-colors">Specialities</Link></li>
+            <li><Link href="/specialties" className="hover:text-white transition-colors">Specialties</Link></li>
             <li><span className="mx-2">›</span></li>
             <li className="text-[#f98825] truncate" aria-current="page">Knee Replacement</li>
           </ol>
@@ -121,7 +121,7 @@ export default function KneeReplacementPage() {
             <div>
               <h2 className="text-3xl font-bold text-[#00333c] mb-4">Comprehensive Knee Care at Valli Hospital Salem</h2>
               <p>
-                Knee pain from severe osteoarthritis, rheumatoid arthritis, or traumatic cartilage erosion can drastically restrict everyday life. At <strong>Valli Super Speciality Hospital (formerly Valli Orthopedic and Sports Hospital)</strong>, we combine world-class surgical expertise led by <strong>Dr. T. Natanasabapathy</strong> with cutting-edge medical technologies to deliver permanent pain relief and restoration of natural joint movement.
+                Knee pain from severe osteoarthritis, rheumatoid arthritis, or traumatic cartilage erosion can drastically restrict everyday life. At <strong>Valli Super Specialty Hospital (formerly Valli Orthopedic and Sports Hospital)</strong>, we combine world-class surgical expertise led by <strong>Dr. T. Natanasabapathy</strong> with cutting-edge medical technologies to deliver permanent pain relief and restoration of natural joint movement.
               </p>
             </div>
 
@@ -151,12 +151,12 @@ export default function KneeReplacementPage() {
             </div>
 
             <div>
-              <h2 className="text-2xl font-bold text-[#00333c] mb-4">Why Choose Valli Super Speciality Hospital?</h2>
+              <h2 className="text-2xl font-bold text-[#00333c] mb-4">Why Choose Valli Super Specialty Hospital?</h2>
               <div className="bg-[#001f25] text-white p-8 rounded-2xl space-y-4">
                 <div className="flex items-start gap-4">
                   <span className="text-[#f98825] text-2xl">✓</span>
                   <div>
-                    <strong className="text-lg block text-white">16,000+ Successful Procedures</strong>
+                    <strong className="text-lg block text-white">19,000+ Successful Procedures</strong>
                     <span className="text-gray-300 text-sm">Recognized across Tamil Nadu for exceptional surgical success rates and minimal post-op infection records.</span>
                   </div>
                 </div>
@@ -198,7 +198,7 @@ export default function KneeReplacementPage() {
       <section className="py-16 bg-[#00333c] text-white text-center">
         <div className="container mx-auto px-6 md:px-12">
           <h2 className="text-3xl font-bold mb-4">Consult Salem&apos;s Top Knee Specialists Today</h2>
-          <p className="text-gray-300 max-w-xl mx-auto mb-8">Take the first step toward living free from knee pain. Schedule your consultation at Valli Super Speciality Hospital.</p>
+          <p className="text-gray-300 max-w-xl mx-auto mb-8">Take the first step toward living free from knee pain. Schedule your consultation at Valli Super Specialty Hospital.</p>
           <Link
             href="/book-appointment"
             className="inline-block px-8 py-4 bg-[#f98825] text-white font-bold rounded-xl shadow-lg hover:bg-[#e07516] transition-all"

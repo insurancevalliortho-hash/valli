@@ -1,17 +1,17 @@
-import { Metadata } from 'next';
+﻿import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'About Valli Super Speciality Hospital Salem | Advanced Orthopedic Care',
-  description: 'Valli Super Speciality Hospital is a 50-bed multispecialty hospital in Salem, Tamil Nadu, led by Dr. T. Natanasabapathy — one of India\'s most skilled orthopedic surgeons. Learn our story, mission, and commitment to world-class bone, joint, and trauma care.',
+  title: 'About Valli Super Specialty Hospital Salem | Advanced Orthopedic Care',
+  description: 'Valli Super Specialty Hospital is a 50-bed multispecialty hospital in Salem, Tamil Nadu, led by Dr. T. Natanasabapathy — one of India\'s most skilled orthopedic surgeons. Learn our story, mission, and commitment to world-class bone, joint, and trauma care.',
   keywords: [
     'about Valli hospital Salem',
     'Valli hospital history',
     'Dr Natanasabapathy orthopedic surgeon Salem',
     'best orthopedic hospital Salem',
-    'Salem multispeciality hospital',
+    'Salem multiSpecialty hospital',
     '50 bed hospital Salem',
     'orthopedic hospital Tamil Nadu history',
-    'Valli Super Speciality Hospital about'
+    'Valli Super Specialty Hospital about'
   ],
   alternates: {
     canonical: 'https://www.vallihospital.in/about-us',

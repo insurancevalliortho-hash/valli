@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { Users, CheckCircle2, Clock, Star, Download, Search, RefreshCw, Eye, X, ShieldCheck, BarChart3, MessageSquare } from "lucide-react";
+import { Users, CheckCircle2, Clock, Star, Download, Search, RefreshCw, Eye, X, ShieldCheck, BarChart3, MessageSquare, LogOut } from "lucide-react";
 
 interface DelegateRecord {
   delegate_id: number;
@@ -20,32 +20,68 @@ interface DelegateRecord {
 }
 
 export default function AdminPage() {
-  const [loading, setLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
+  const [loading, setLoading] = useState(false);
   const [stats, setStats] = useState<any>(null);
   const [delegates, setDelegates] = useState<DelegateRecord[]>([]);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<"all" | "submitted" | "pending">("all");
   const [selectedDelegate, setSelectedDelegate] = useState<DelegateRecord | null>(null);
 
-  const fetchAdminData = async () => {
+  const fetchAdminData = async (pw: string) => {
     try {
       setLoading(true);
-      const res = await fetch("/api/certificate/admin");
+      setLoginError("");
+      const res = await fetch("/api/certificate/admin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: pw }),
+      });
       const data = await res.json();
-      if (res.ok) {
+      if (res.ok && data.success) {
         setStats(data.stats);
         setDelegates(data.delegates);
+        setIsAuthenticated(true);
+        sessionStorage.setItem("cert_admin_pw", pw);
+        setPassword(pw);
+      } else {
+        setLoginError(data.error || "Authentication failed.");
+        sessionStorage.removeItem("cert_admin_pw");
+        setIsAuthenticated(false);
       }
     } catch (err) {
       console.error("Failed to fetch admin data", err);
+      setLoginError("Failed to connect to the server.");
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchAdminData();
+    const savedPassword = sessionStorage.getItem("cert_admin_pw");
+    if (savedPassword) {
+      fetchAdminData(savedPassword);
+    }
   }, []);
+
+  const handleLoginSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!password.trim()) {
+      setLoginError("Please enter password.");
+      return;
+    }
+    fetchAdminData(password);
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("cert_admin_pw");
+    setIsAuthenticated(false);
+    setStats(null);
+    setDelegates([]);
+    setPassword("");
+  };
 
   const filteredDelegates = delegates.filter((d) => {
     const matchesSearch =
@@ -88,6 +124,50 @@ export default function AdminPage() {
     document.body.removeChild(link);
   };
 
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-slate-50 text-slate-900 font-sans flex items-center justify-center p-4">
+        <div className="max-w-md w-full bg-white border border-slate-200 rounded-[2.5rem] shadow-xl p-8 space-y-6">
+          <div className="text-center space-y-2">
+            <div className="w-12 h-12 bg-teal-50 text-teal-700 rounded-2xl flex items-center justify-center mx-auto shadow-inner border border-teal-100">
+              <ShieldCheck className="w-6 h-6 animate-pulse" />
+            </div>
+            <h2 className="text-2xl font-black uppercase text-slate-800 tracking-tight">
+              Summit Admin Portal
+            </h2>
+            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+              Verification Dashboard Access
+            </p>
+          </div>
+
+          <form onSubmit={handleLoginSubmit} className="space-y-4">
+            <div className="space-y-1.5">
+              <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                Password
+              </label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter admin password"
+                className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs font-semibold text-slate-900 focus:outline-none focus:border-teal-600 focus:ring-4 focus:ring-teal-100"
+              />
+              {loginError && <p className="text-[10px] text-red-500 font-bold mt-1">{loginError}</p>}
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full justify-center bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition-colors cursor-pointer"
+            >
+              {loading ? "Authenticating..." : "Unlock Dashboard"}
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans">
       {/* Header */}
@@ -102,7 +182,7 @@ export default function AdminPage() {
           </div>
           <div className="flex items-center gap-3">
             <button
-              onClick={fetchAdminData}
+              onClick={() => fetchAdminData(password)}
               className="p-2 text-slate-600 hover:text-teal-700 bg-slate-100 hover:bg-teal-50 rounded-xl transition-colors cursor-pointer"
               title="Refresh Data"
             >
@@ -113,6 +193,12 @@ export default function AdminPage() {
               className="inline-flex items-center gap-2 bg-teal-700 hover:bg-teal-800 text-white font-semibold text-xs px-4 py-2.5 rounded-xl shadow-sm transition-all cursor-pointer"
             >
               <Download className="w-4 h-4" /> Export CSV Report
+            </button>
+            <button
+              onClick={handleLogout}
+              className="inline-flex items-center gap-1.5 bg-slate-100 hover:bg-red-50 text-slate-600 hover:text-red-750 font-semibold text-xs px-4 py-2.5 rounded-xl shadow-sm transition-all border border-slate-200 cursor-pointer"
+            >
+              <LogOut className="w-4 h-4" /> Log Out
             </button>
           </div>
         </div>

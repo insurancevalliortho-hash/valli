@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 
 import { BreadcrumbSchema, FAQSchema } from '../../components/seo/StructuredData';
 import Link from 'next/link';
@@ -8,7 +8,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: "Genetic Testing & Molecular Diagnostics Salem | Valli Hospital",
-  description: "Advanced genetic testing and molecular diagnostics at Valli Super Speciality Hospital Salem. Comprehensive hereditary disease screening, cancer genetic testing, chromosomal analysis, and precision medicine diagnostics to guide personalised treatment plans.",
+  description: "Advanced genetic testing and molecular diagnostics at Valli Super Specialty Hospital Salem. Comprehensive hereditary disease screening, cancer genetic testing, chromosomal analysis, and precision medicine diagnostics to guide personalised treatment plans.",
   keywords: [
       "genetic testing Salem",
       "molecular diagnostics Salem",
@@ -34,11 +34,11 @@ export default function Page() {
 
       <BreadcrumbSchema items={[
         { name: 'Home', url: 'https://www.vallihospital.in/' },
-        { name: 'Specialities', url: 'https://www.vallihospital.in/specialities' },
+        { name: 'Specialties', url: 'https://www.vallihospital.in/specialties' },
         { name: 'Genetic Testing', url: 'https://www.vallihospital.in/genetic-testing' }
   ]} />
       <FAQSchema questions={[
-        { question: 'What is the Genetic Testing?', answer: 'The Genetic Testing at Valli Super Speciality Hospital provides advanced, specialized care for related conditions.' },
+        { question: 'What is the Genetic Testing?', answer: 'The Genetic Testing at Valli Super Specialty Hospital provides advanced, specialized care for related conditions.' },
         { question: 'Who is the lead doctor?', answer: 'Dr. T. Natanasabapathy, Chief Orthopedic Surgeon, leads our specialized care teams.' }
       ]} />
   
@@ -49,7 +49,7 @@ export default function Page() {
           <ol className="flex space-x-2 text-sm text-gray-400">
             <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
             <li><span className="mx-2">›</span></li>
-            <li><Link href="/specialities" className="hover:text-white transition-colors">Specialities</Link></li>
+            <li><Link href="/specialties" className="hover:text-white transition-colors">Specialties</Link></li>
             <li><span className="mx-2">›</span></li>
             <li className="text-[#f98825] truncate" aria-current="page">Genetic Testing</li>
           </ol>
@@ -132,7 +132,7 @@ export default function Page() {
       {/* Related Treatments */}
       <section className="py-16 bg-white border-t border-gray-100">
         <div className="container mx-auto px-6 md:px-12">
-          <h3 className="text-2xl font-bold text-[#00333c] mb-6">Related Treatments & Specialities</h3>
+          <h3 className="text-2xl font-bold text-[#00333c] mb-6">Related Treatments & Specialties</h3>
           <ul className="flex flex-col md:flex-row gap-6 md:gap-12">
             <li><Link href="/bone-cancer-treatment" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Bone Cancer Treatment</Link></li>
 <li><Link href="/paediatric-orthopaedics-deformity-clinic" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Paediatric Orthopaedics Deformity Clinic</Link></li>

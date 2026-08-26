@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Navbar from '../../components/Navbar';
@@ -7,7 +7,7 @@ import { BreadcrumbSchema, FAQSchema, MedicalSpecialtySchema } from '../../compo
 
 export const metadata: Metadata = {
   title: "Best Rheumatologist & Arthritis Treatment in Salem | Valli Hospital",
-  description: "Expert Rheumatology care in Salem at Valli Super Speciality Hospital. Advanced treatment for Rheumatoid Arthritis, Ankylosing Spondylitis, Gout, Lupus (SLE), and Osteoarthritis by senior rheumatology specialists.",
+  description: "Expert Rheumatology care in Salem at Valli Super Specialty Hospital. Advanced treatment for Rheumatoid Arthritis, Ankylosing Spondylitis, Gout, Lupus (SLE), and Osteoarthritis by senior rheumatology specialists.",
   keywords: [
     "best rheumatologist in salem",
     "rheumatologist in salem",
@@ -51,7 +51,7 @@ export default function RheumatologyPage() {
 
       <BreadcrumbSchema items={[
         { name: 'Home', url: 'https://www.vallihospital.in/' },
-        { name: 'Specialities', url: 'https://www.vallihospital.in/specialities' },
+        { name: 'Specialties', url: 'https://www.vallihospital.in/specialties' },
         { name: 'Rheumatology', url: 'https://www.vallihospital.in/rheumatology' }
       ]} />
       <FAQSchema questions={faqList} />
@@ -67,7 +67,7 @@ export default function RheumatologyPage() {
           <ol className="flex space-x-2 text-sm text-gray-400">
             <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
             <li><span className="mx-2">›</span></li>
-            <li><Link href="/specialities" className="hover:text-white transition-colors">Specialities</Link></li>
+            <li><Link href="/specialties" className="hover:text-white transition-colors">Specialties</Link></li>
             <li><span className="mx-2">›</span></li>
             <li className="text-[#f98825] truncate" aria-current="page">Rheumatology</li>
           </ol>
@@ -116,7 +116,7 @@ export default function RheumatologyPage() {
             <div>
               <h2 className="text-3xl font-bold text-[#00333c] mb-4">Leading Rheumatology Clinic in Salem</h2>
               <p>
-                Rheumatic and autoimmune diseases affect millions, causing persistent joint swelling, morning stiffness, and systemic tissue inflammation. At <strong>Valli Super Speciality Hospital</strong>, our specialized Rheumatology division focuses on early detection, precision immune-targeted therapies, and long-term disease remission to protect joint mobility and quality of life.
+                Rheumatic and autoimmune diseases affect millions, causing persistent joint swelling, morning stiffness, and systemic tissue inflammation. At <strong>Valli Super Specialty Hospital</strong>, our specialized Rheumatology division focuses on early detection, precision immune-targeted therapies, and long-term disease remission to protect joint mobility and quality of life.
               </p>
             </div>
 
@@ -179,7 +179,7 @@ export default function RheumatologyPage() {
       <section className="py-16 bg-[#00333c] text-white text-center">
         <div className="container mx-auto px-6 md:px-12">
           <h2 className="text-3xl font-bold mb-4">Schedule Your Rheumatology Consultation</h2>
-          <p className="text-gray-300 max-w-xl mx-auto mb-8">Get expert evaluation and long-term joint pain relief at Valli Super Speciality Hospital, Salem.</p>
+          <p className="text-gray-300 max-w-xl mx-auto mb-8">Get expert evaluation and long-term joint pain relief at Valli Super Specialty Hospital, Salem.</p>
           <Link
             href="/book-appointment"
             className="inline-block px-8 py-4 bg-[#f98825] text-white font-bold rounded-xl shadow-lg hover:bg-[#e07516] transition-all"

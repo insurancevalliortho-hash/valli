@@ -1,19 +1,23 @@
 ---
-title: About Us | Valli Super Speciality Hospital Salem
-description: Learn about the legacy of Valli Hospital Salem, our co-founders Dr. Natanasabapathy & Dr. Vijayalakshmi, and our evolution into a 50-bed super speciality center.
+title: About Us | Valli Super Specialty Hospital Salem
+description: Learn about the legacy of Valli Hospital Salem, our co-founders Dr. Natanasabapathy & Dr. Vijayalakshmi, and our evolution into a 50-bed Super Specialty center.
 url: https://www.vallihospital.in/about-us
+<<<<<<< HEAD
 last_updated: 2026-06-30
+=======
+last_updated: 2026-08-21
+>>>>>>> 9fdf1bfba3153219b309ae46133f0eb4a253a949
 ---
 
 
-# About Valli Super Speciality Hospital
+# About Valli Super Specialty Hospital
 
 ## Our Heritage & Mission
 Valli Orthopedic and Sports Hospital was co-founded on October 16, 2022, by Chief Orthopedic Surgeon Dr. T. Natanasabapathy and Director Dr. Vijayalakshmi Irulappan. Their mission was to deliver compassionate, world-class orthopedic care to Salem—a booming region of 3.5 million people—and surrounding districts.
 
 ## Evolution of Infrastructure
 - **2022 Launch**: Opened as a highly focused 17-bed Trauma and Emergency hospital.
-- **2025 Upgrade**: Transformed into the **50-bedded Valli Super Speciality Hospital**, incorporating advanced neurosurgery, surgical gastroenterology, pediatric emergency care, and laminar flow OTs.
+- **2025 Upgrade**: Transformed into the **50-bedded Valli Super Specialty Hospital**, incorporating advanced neurosurgery, surgical gastroenterology, pediatric emergency care, and laminar flow OTs.
 
 ## Clinical Leadership
 - **Chief Surgeon**: Dr. T. Natanasabapathy (MBBS, MS Ortho)

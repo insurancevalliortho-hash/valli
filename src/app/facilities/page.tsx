@@ -1,8 +1,8 @@
 "use client";
 
 
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from "framer-motion";
+import { useRef, useState } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import SmoothScroll from "../../components/SmoothScroll";
@@ -22,7 +22,7 @@ const facilities = [
         ),
         paragraphs: [
             "Our premier 24-hour Radiology Department in Salem is dedicated to providing rapid and precise diagnostic imaging for all medical emergencies. Powered by a dedicated team of seven round-the-clock radiology technicians, we ensure seamless service delivery at any hour.",
-            "The core of our emergency diagnostics is the Dual Slice GE Prospeed 2 CT machine, producing whole-body trauma CT films in well under 30 minutes—a critical factor in saving lives during the 'golden hour'."
+            "The core of our emergency diagnostics is the Dual Slice GE Prospeed 2 CT machine, producing whole-body trauma CT films in well under 30 minutesΓÇöa critical factor in saving lives during the 'golden hour'."
         ],
         capabilities: [
             "CR & DR X-ray units for trauma",
@@ -133,25 +133,16 @@ export default function FacilitiesPage() {
     const horizontalRef = useRef<HTMLElement>(null);
     const { scrollYProgress } = useScroll({ target: horizontalRef });
 
-    // Animate X translation from 0% to -80% (to scroll through the 5 items)
-    const x = useTransform(scrollYProgress, [0, 1], ["0%", "-80%"]);
+    // Spring-damped x — eliminates shutter/snap on scroll direction changes
+    const xRaw = useTransform(scrollYProgress, [0, 1], ["0%", "-80%"]);
+    const x = useSpring(xRaw, { stiffness: 80, damping: 20, mass: 0.5 });
 
-    // Dynamic background color transition based on scroll progress
-    const bgColor = useTransform(scrollYProgress,
-        [0, 0.25, 0.5, 0.75, 1],
-        facilities.map(f => f.theme.bg)
-    );
-
-    // Dynamic nav/logo color logic
-    const [isDarkBg, setIsDarkBg] = useState(true);
-
-    useEffect(() => {
-        return scrollYProgress.onChange((latest) => {
-            // Determine active index roughly based on progress
-            const index = Math.min(Math.floor(latest * 5), 4);
-            setIsDarkBg(facilities[index].theme.isDark);
-        });
-    }, [scrollYProgress]);
+    // Snap background via state — no per-frame animated color paint
+    const [activeIndex, setActiveIndex] = useState(0);
+    useMotionValueEvent(scrollYProgress, "change", (latest) => {
+        const next = Math.min(Math.floor(latest * 5), 4);
+        if (next !== activeIndex) setActiveIndex(next);
+    });
 
     return (
         <SmoothScroll>
@@ -226,16 +217,16 @@ export default function FacilitiesPage() {
             </section>
 
             {/* Horizontal Scroll Gallery Section */}
-            <motion.section
+            <section
                 ref={horizontalRef}
-                style={{ backgroundColor: bgColor }}
-                className="relative h-[600vh]" // 600vh gives enough scroll distance for 5 items
+                className="relative h-[600vh] transition-colors duration-500"
+                style={{ backgroundColor: facilities[activeIndex].theme.bg }}
             >
                 <div className="sticky top-0 h-screen flex items-center overflow-hidden">
                     <motion.div style={{ x }} className="flex gap-10 px-[10vw] md:px-[5vw] w-[500vw] md:w-[400vw] items-center">
                         {facilities.map((facility, index) => (
-                            <div key={facility.id} className="w-[85vw] md:w-[75vw] h-[80vh] flex-shrink-0 relative group perspective-[2000px]">
-                                <motion.div
+                            <div key={facility.id} className="w-[85vw] md:w-[75vw] h-[80vh] flex-shrink-0 relative group perspective-[2000px]" style={{ willChange: "transform" }}>
+                                <div
                                     className={`w-full h-full rounded-[2.5rem] border shadow-2xl overflow-hidden ${facility.theme.cardBg} ${facility.theme.border} backdrop-blur-xl relative flex flex-col`}
                                     style={{
                                         boxShadow: facility.theme.isDark ? "0 20px 60px rgba(0,0,0,0.4)" : "0 20px 60px rgba(0,0,0,0.05)"
@@ -316,12 +307,12 @@ export default function FacilitiesPage() {
                                         </div>
 
                                     </div>
-                                </motion.div>
+                                </div>
                             </div>
                         ))}
                     </motion.div>
                 </div>
-            </motion.section>
+            </section>
 
             {/* Ultra-Premium CTA */}
             <section className="bg-[#001f25] py-32 relative overflow-hidden">

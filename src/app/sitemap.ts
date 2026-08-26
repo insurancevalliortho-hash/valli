@@ -42,7 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/facilities',
         '/about-us',
         '/contact-us',
-        '/specialities',
+        '/specialties',
         '/services',
         '/technology',
         '/blog'
@@ -65,7 +65,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/iyakkam/ai-sports-rehab',
         '/iyakkam/technnovations',
         '/iyakkam/technnovations/register',
-        '/iyakkam/technnovations/portal'
+        '/iyakkam/technnovations/portal',
+        '/iyakkam/arise',
+        '/iyakkam/arise/register'
     ].map((route) => ({
         url: `${baseUrl}${route}`,
         lastModified: new Date().toISOString(),

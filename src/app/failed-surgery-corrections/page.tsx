@@ -8,7 +8,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: "Failed Surgery Revision & Correction Salem | Revision Arthroplasty | Valli Hospital",
-  description: "Expert revision and correction surgery for failed orthopaedic procedures in Salem at Valli Super Speciality Hospital. Specialised care for failed knee/hip replacement, failed spine surgery, implant failure, and post-surgical complications. Second opinion available.",
+  description: "Expert revision and correction surgery for failed orthopaedic procedures in Salem at Valli Super Specialty Hospital. Specialised care for failed knee/hip replacement, failed spine surgery, implant failure, and post-surgical complications. Second opinion available.",
   keywords: [
       "failed surgery correction Salem",
       "revision arthroplasty Salem",
@@ -34,11 +34,11 @@ export default function Page() {
 
       <BreadcrumbSchema items={[
         { name: 'Home', url: 'https://www.vallihospital.in/' },
-        { name: 'Specialities', url: 'https://www.vallihospital.in/specialities' },
+        { name: 'Specialties', url: 'https://www.vallihospital.in/specialties' },
         { name: 'Failed Surgery Corrections', url: 'https://www.vallihospital.in/failed-surgery-corrections' }
   ]} />
       <FAQSchema questions={[
-        { question: 'What is the Failed Surgery Corrections?', answer: 'The Failed Surgery Corrections at Valli Super Speciality Hospital provides advanced, specialized care for related conditions.' },
+        { question: 'What is the Failed Surgery Corrections?', answer: 'The Failed Surgery Corrections at Valli Super Specialty Hospital provides advanced, specialized care for related conditions.' },
         { question: 'Who is the lead doctor?', answer: 'Dr. T. Natanasabapathy, Chief Orthopedic Surgeon, leads our specialized care teams.' }
       ]} />
   
@@ -49,7 +49,7 @@ export default function Page() {
           <ol className="flex space-x-2 text-sm text-gray-400">
             <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
             <li><span className="mx-2">›</span></li>
-            <li><Link href="/specialities" className="hover:text-white transition-colors">Specialities</Link></li>
+            <li><Link href="/specialties" className="hover:text-white transition-colors">Specialties</Link></li>
             <li><span className="mx-2">›</span></li>
             <li className="text-[#f98825] truncate" aria-current="page">Failed Surgery Corrections</li>
           </ol>
@@ -66,10 +66,10 @@ export default function Page() {
           <div className="container mx-auto px-6 md:px-12 relative z-10">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/8 border border-white/12 text-[#f98825] text-xs font-bold tracking-[0.2em] uppercase mb-6">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#f98825]" />
-                Speciality Clinic
+                Specialty Clinic
               </span>
-              <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-3xl">
-                  Failed Surgery <br/> <span className="text-[#f98825]">Corrections Clinic</span>
+              <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-5xl">
+                  Failed Surgery <br/> <span className="text-[#f98825]">Corrections Clinic - <span className="whitespace-nowrap">Dr. K. N. Jotheesvar</span></span>
               </h1>
           </div>
       </section>
@@ -96,7 +96,7 @@ export default function Page() {
       {/* Related Treatments */}
       <section className="py-16 bg-white border-t border-gray-100">
         <div className="container mx-auto px-6 md:px-12">
-          <h3 className="text-2xl font-bold text-[#00333c] mb-6">Related Treatments & Specialities</h3>
+          <h3 className="text-2xl font-bold text-[#00333c] mb-6">Related Treatments & Specialties</h3>
           <ul className="flex flex-col md:flex-row gap-6 md:gap-12">
             <li><a href="/joint-care-clinic" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Joint Care Clinic</a></li>
 <li><a href="/back-pain-and-spinal-disorders" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Back Pain and Spinal Disorders</a></li>

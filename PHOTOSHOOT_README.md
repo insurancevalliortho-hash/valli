@@ -1,6 +1,6 @@
-# 📸 Valli Super Speciality Hospital - Website Photoshoot Guide
+﻿# 📸 Valli Super Specialty Hospital - Website Photoshoot Guide
 
-This README serves as a comprehensive guide for the photographer to capture the exact assets needed for the Valli Super Speciality Hospital website. The shots are organized by the specific pages and sections on the website where they will be used.
+This README serves as a comprehensive guide for the photographer to capture the exact assets needed for the Valli Super Specialty Hospital website. The shots are organized by the specific pages and sections on the website where they will be used.
 
 ---
 
@@ -68,8 +68,8 @@ This README serves as a comprehensive guide for the photographer to capture the 
 
 ---
 
-## 5. 🏥 Specialities / Clinic Pages
-*Each specific route under `/specialities` needs a representing photo. These can be a mix of equipment, models/patients, or specific clinical actions.*
+## 5. 🏥 Specialties / Clinic Pages
+*Each specific route under `/specialties` needs a representing photo. These can be a mix of equipment, models/patients, or specific clinical actions.*
 
 - [ ] **Joint Care & Arthroscopy** (Knee models, arthroscopic tools)
 - [ ] **Sports Medicine & Injury Clinic** (Physiotherapy equipment, dynamic movement)

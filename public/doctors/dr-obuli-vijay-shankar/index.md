@@ -1,8 +1,12 @@
 ---
 title: Dr. Obuli Vijay Shankar - MBBS, MS, FNB | Valli Hospital Salem
-description: Professional profile of Dr. Obuli Vijay Shankar, specialist in DEPT OF HAND & MICRO SURGERY at Valli Super Speciality Hospital.
+description: Professional profile of Dr. Obuli Vijay Shankar, specialist in DEPT OF HAND & MICRO SURGERY at Valli Super Specialty Hospital.
 url: https://www.vallihospital.in/doctors/dr-obuli-vijay-shankar
+<<<<<<< HEAD
 last_updated: 2026-06-30
+=======
+last_updated: 2026-08-21
+>>>>>>> 9fdf1bfba3153219b309ae46133f0eb4a253a949
 ---
 
 # Professional Medical Profile: Dr. Obuli Vijay Shankar
@@ -17,7 +21,7 @@ last_updated: 2026-06-30
 Specialist in Hand & Micro Surgery and surgical treatments
 
 ## Professional Background & Biography
-Dr. Obuli Vijay Shankar is a distinguished Consultant in the Hand & Micro Surgery at Valli Super Speciality Hospital, Salem. Holding qualifications in MBBS, MS, FNB, they possess deep clinical expertise and are committed to offering state-of-the-art care. FNB in Hand & Microvascular surgery in Ganga Hospital ( 2021 - 2023) Examines, diagnoses, and treats diseases and injuries to the musculoskeletal system. Prescribes course of treatment for patients with injuries, disorders, or malformations and performs required surgery.
+Dr. Obuli Vijay Shankar is a distinguished Consultant in the Hand & Micro Surgery at Valli Super Specialty Hospital, Salem. Holding qualifications in MBBS, MS, FNB, they possess deep clinical expertise and are committed to offering state-of-the-art care. FNB in Hand & Microvascular surgery in Ganga Hospital ( 2021 - 2023) Examines, diagnoses, and treats diseases and injuries to the musculoskeletal system. Prescribes course of treatment for patients with injuries, disorders, or malformations and performs required surgery.
 
 ## OPD Consultation Fee
 - Standard Clinical Consultation: ₹500 - ₹800 ($6 - $10 USD)

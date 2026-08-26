@@ -1,20 +1,25 @@
-"use client";
+﻿"use client";
 
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 
 export default function SurgeonProfile() {
     const sectionRef = useRef<HTMLElement>(null);
 
-    // Parallax mapping for subtle background
+    // Parallax mapping for subtle background.
+    // NOTE: useSpring has been removed — Lenis already provides smooth scroll
+    // inertia. Adding useSpring on top creates double-smoothing which causes
+    // the rubbery / sticky feel reported across display sizes.
     const { scrollYProgress } = useScroll({
         target: sectionRef,
         offset: ["start end", "end start"]
     });
 
-    const smoothScroll = useSpring(scrollYProgress, { damping: 20, stiffness: 80, mass: 0.1 });
-    const textY1 = useTransform(smoothScroll, [0, 1], ["0%", "-50%"]);
-    const gridY = useTransform(smoothScroll, [0, 1], ["0%", "10%"]);
+    // Ranges tightened (0% → -18%, 0% → 5%) to prevent overflow clipping
+    // on narrow viewports (375px – 768px) and avoid main-thread repaints.
+    const textY1 = useTransform(scrollYProgress, [0, 1], ["0%", "-18%"]);
+    const gridY = useTransform(scrollYProgress, [0, 1], ["0%", "5%"]);
 
     const stats = [
         { value: "16", symbol: "+", label: "Years Excellence" },
@@ -38,7 +43,7 @@ export default function SurgeonProfile() {
             {/* ── PARALLAX TYPOGRAPHY BACKGROUND ── */}
             <motion.div
                 style={{ y: textY1 }}
-                className="absolute left-[10%] lg:left-1/3 top-0 bottom-0 pointer-events-none z-0 opacity-[0.03] overflow-hidden flex items-center"
+                className="parallax-layer absolute left-[10%] lg:left-1/3 top-0 bottom-0 pointer-events-none z-0 opacity-[0.03] overflow-hidden flex items-center"
             >
                 <div className="text-[25vh] font-black leading-none uppercase whitespace-nowrap rotate-[-90deg] origin-left text-[#3cb3a6] mix-blend-screen">
                     MASTERMIND
@@ -105,10 +110,12 @@ export default function SurgeonProfile() {
                                 <div className="absolute inset-0 bg-gradient-to-tr from-[#f98825]/20 to-[#3cb3a6]/20 mix-blend-overlay z-10 group-hover:opacity-0 transition-opacity duration-700" />
                                 <div className="absolute inset-0 bg-gradient-to-t from-[#001014] via-transparent to-transparent z-10 opacity-70" />
 
-                                <img
-                                    src="surgeon.jpeg"
-                                    alt="Dr. T. Natanasabapathy"
-                                    className="w-full h-full object-cover filter grayscale-[20%] contrast-[1.1] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                                <Image
+                                    src="/surgeon.jpeg"
+                                    alt="Dr. T. Natanasabapathy — Chief Orthopedic Surgeon, Valli Super Specialty Hospital Salem"
+                                    fill
+                                    sizes="(max-width: 768px) 100vw, 45vw"
+                                    className="object-cover filter grayscale-[20%] contrast-[1.1] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]"
                                 />
                             </motion.div>
                         </div>

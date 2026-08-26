@@ -1,8 +1,12 @@
 ---
-title: Failed Surgery Corrections in Salem | Valli Super Speciality Hospital
+title: Failed Surgery Corrections in Salem | Valli Super Specialty Hospital
 description: Advanced rescue surgery and corrective treatments for unsuccessful orthopedic operations performed elsewhere.
 url: https://www.vallihospital.in/failed-surgery-corrections
+<<<<<<< HEAD
 last_updated: 2026-06-30
+=======
+last_updated: 2026-08-21
+>>>>>>> 9fdf1bfba3153219b309ae46133f0eb4a253a949
 ---
 
 # Failed Surgery Corrections

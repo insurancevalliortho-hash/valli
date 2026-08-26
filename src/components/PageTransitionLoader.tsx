@@ -14,21 +14,40 @@ export default function PageTransitionLoader() {
   const [isNavigating, setIsNavigating] = useState(false);
   const lastPathname = useRef(pathname);
   const lastSearchParams = useRef(searchParams);
+  const isInitialLoad = useRef(true);
+  const transitionTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Manage the global page content push-back styling
   useEffect(() => {
-    const wrapper = document.getElementById("page-content-wrapper");
-    if (wrapper) {
-      if (isNavigating) {
-        wrapper.classList.add("transitioning");
-      } else {
-        wrapper.classList.remove("transitioning");
-      }
+    // Prevent any transition effect during initial page render / hydration
+    if (isInitialLoad.current) {
+      isInitialLoad.current = false;
+      return;
     }
+
+    const wrapper = document.getElementById("page-content-wrapper");
+    if (!wrapper) return;
+
+    if (transitionTimerRef.current) {
+      clearTimeout(transitionTimerRef.current);
+    }
+
+    if (isNavigating) {
+      wrapper.classList.remove("transition-ending");
+      wrapper.classList.add("transitioning");
+    } else {
+      wrapper.classList.remove("transitioning");
+      wrapper.classList.add("transition-ending");
+
+      // Remove transition-ending class after transition duration completes
+      transitionTimerRef.current = setTimeout(() => {
+        wrapper.classList.remove("transition-ending");
+      }, 700);
+    }
+
     return () => {
-      const activeWrapper = document.getElementById("page-content-wrapper");
-      if (activeWrapper && !isNavigating) {
-        activeWrapper.classList.remove("transitioning");
+      if (transitionTimerRef.current) {
+        clearTimeout(transitionTimerRef.current);
       }
     };
   }, [isNavigating]);
@@ -86,14 +105,14 @@ export default function PageTransitionLoader() {
             setIsNavigating(true);
             setTimeout(() => {
               router.push(href);
-            }, 750);
+            }, 400);
           } catch (err) {
             if (window.location.pathname === href) return;
             e.preventDefault();
             setIsNavigating(true);
             setTimeout(() => {
               router.push(href);
-            }, 750);
+            }, 400);
           }
         }
       }

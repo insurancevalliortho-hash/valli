@@ -1,12 +1,16 @@
 ---
 title: Contact Us & 24/7 Emergency Line | Valli Hospital Salem
-description: Get immediate phone contacts, clinical directory, interactive route maps, and book consultations at Valli Super Speciality Hospital Salem.
+description: Get immediate phone contacts, clinical directory, interactive route maps, and book consultations at Valli Super Specialty Hospital Salem.
 url: https://www.vallihospital.in/contact-us
+<<<<<<< HEAD
 last_updated: 2026-06-30
+=======
+last_updated: 2026-08-21
+>>>>>>> 9fdf1bfba3153219b309ae46133f0eb4a253a949
 ---
 
 
-# Contact Valli Super Speciality Hospital
+# Contact Valli Super Specialty Hospital
 
 ## Immediate Helplines
 - **24/7 Emergency Trauma Desk**: +91 90034 17111

@@ -1,18 +1,23 @@
-import { Metadata } from "next";
+﻿import { Metadata } from "next";
 import Navbar from "./../components/Navbar";
 import Hero from "./../components/Hero";
 import TrustBar from "./../components/TrustBar";
 import AboutSection from "./../components/AboutSection";
 import SurgeonProfile from "./../components/SurgeonProfile";
-import SpecialityGrid from "./../components/SpecialityGrid";
+import SpecialtyGrid from "./../components/SpecialtyGrid";
 import TechShowcase from "./../components/TechShowcase";
 import Testimonials from "./../components/Testimonials";
 import Footer from "./../components/Footer";
 import FAQSection from "./../components/FAQSection";
 
+// Force static pre-rendering: page is generated at build time and served from CDN edge.
+// This eliminates TTFB variance caused by cold-start SSR. Revalidation is on-demand only.
+export const dynamic = "force-static";
+export const revalidate = false;
+
 export const metadata: Metadata = {
-    title: "Best Orthopedic Surgeon & Hospital in Salem | Dr. T. Natanasabapathy | Valli Super Speciality Hospital",
-    description: "Valli Super Speciality Hospital (formerly Valli Orthopedic and Sports Hospital) — Salem's #1 orthopedic surgeon Dr. T. Natanasabapathy. Specializing in knee replacement, spine surgery, trauma recovery, sports injury treatment, and sports medicine. Contact us 24/7.",
+    title: "Best Orthopedic Surgeon & Hospital in Salem | Dr. T. Natanasabapathy | Valli Super Specialty Hospital",
+    description: "Valli Super Specialty Hospital (formerly Valli Orthopedic and Sports Hospital) — Salem's #1 orthopedic surgeon Dr. T. Natanasabapathy. Specializing in knee replacement, spine surgery, trauma recovery, sports injury treatment, and sports medicine. Contact us 24/7.",
     keywords: [
         "valli orthopedic and sports hospital",
         "valli orthopaedic and sports hospital",
@@ -30,7 +35,7 @@ export const metadata: Metadata = {
         "arthroscopy Salem",
         "Dr Natanasabapathy orthopedic surgeon",
         "24 hour emergency hospital Salem",
-        "valli super speciality hospital salem"
+        "valli Super Specialty hospital salem"
     ],
     alternates: {
         canonical: "https://www.vallihospital.in/",
@@ -41,10 +46,10 @@ export const metadata: Metadata = {
         }
     },
     openGraph: {
-        title: "Best Orthopedic Hospital in Salem | Valli Super Speciality Hospital",
+        title: "Best Orthopedic Hospital in Salem | Valli Super Specialty Hospital",
         description: "Salem's most trusted orthopedic hospital — joint replacement, trauma care, sports injury treatment, and 24/7 emergency. Led by Dr. T. Natanasabapathy.",
         url: "https://www.vallihospital.in/",
-        siteName: "Valli Super Speciality Hospital",
+        siteName: "Valli Super Specialty Hospital",
         locale: "en_IN",
         type: "website",
         images: [
@@ -52,13 +57,13 @@ export const metadata: Metadata = {
                 url: "/og-image.jpg",
                 width: 1200,
                 height: 630,
-                alt: "Valli Super Speciality Hospital — Best Orthopedic Hospital in Salem"
+                alt: "Valli Super Specialty Hospital — Best Orthopedic Hospital in Salem"
             }
         ]
     },
     twitter: {
         card: "summary_large_image",
-        title: "Best Orthopedic Hospital in Salem | Valli Super Speciality Hospital",
+        title: "Best Orthopedic Hospital in Salem | Valli Super Specialty Hospital",
         description: "Salem's most trusted orthopedic hospital — joint replacement, trauma care, sports injury treatment, and 24/7 emergency.",
         images: ["/og-image.jpg"]
     },
@@ -75,7 +80,7 @@ export default function Home() {
         {
             "@context": "https://schema.org",
             "@type": "WebSite",
-            "name": "Valli Super Speciality Hospital",
+            "name": "Valli Super Specialty Hospital",
             "alternateName": [
                 "Valli Orthopedic and Sports Hospital",
                 "Valli Orthopaedic and Sports Hospital",
@@ -91,7 +96,7 @@ export default function Home() {
         {
             "@context": "https://schema.org",
             "@type": "Hospital",
-            "name": "Valli Super Speciality Hospital",
+            "name": "Valli Super Specialty Hospital",
             "alternateName": [
                 "Valli Orthopedic and Sports Hospital",
                 "Valli Orthopaedic and Sports Hospital",
@@ -134,7 +139,7 @@ export default function Home() {
         {
             "@context": "https://schema.org",
             "@type": "WebPage",
-            "headline": "Best Orthopedic Hospital in Salem | Valli Super Speciality Hospital",
+            "headline": "Best Orthopedic Hospital in Salem | Valli Super Specialty Hospital",
             "about": [
                 {
                     "@type": "Thing",
@@ -194,7 +199,7 @@ export default function Home() {
                 <TrustBar />
                 <AboutSection />
                 <SurgeonProfile />
-                <SpecialityGrid />
+                <SpecialtyGrid />
                 <TechShowcase />
                 <Testimonials />
                 <FAQSection />

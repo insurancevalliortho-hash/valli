@@ -1,8 +1,8 @@
-# Valli Super Speciality Hospital
+# Valli Super Specialty Hospital
 
 > Advanced Orthopedic Care, Joint Replacements, Spine Surgery, and Comprehensive Medical Excellence in Salem, Tamil Nadu, India.
 
-Valli Super Speciality Hospital is a premier medical institution specializing in comprehensive orthopedic care, trauma rehabilitation, and surgical precision. Spearheaded by renowned orthopedic surgeon Dr. T. Natanasabapathy, the hospital integrates advanced diagnostic facilities, ultra-modern operation suites, and patient-centric recovery programs to restore mobility and transform lives.
+Valli Super Specialty Hospital is a premier medical institution specializing in comprehensive orthopedic care, trauma rehabilitation, and surgical precision. Spearheaded by renowned orthopedic surgeon Dr. T. Natanasabapathy, the hospital integrates advanced diagnostic facilities, ultra-modern operation suites, and patient-centric recovery programs to restore mobility and transform lives.
 
 ---
 
@@ -54,7 +54,7 @@ Valli Super Speciality Hospital is a premier medical institution specializing in
 - Minimally invasive keyhole spine surgeries (MISS)
 - Deformity corrections
 
-### 4. Speciality Clinics & Trauma
+### 4. Specialty Clinics & Trauma
 - Bone Cancer Treatment (Orthopedic Oncology)
 - Paediatric Orthopaedics & Deformity Clinic
 - Failed Surgery Correction Clinic
@@ -77,7 +77,7 @@ Valli Super Speciality Hospital is a premier medical institution specializing in
 ## 🗺️ Website Architecture & Dynamic API Pathways
 
 - **Home Page:** https://www.vallihospital.in/ (Main services & trust metrics)
-- **Specialities Directory:** https://www.vallihospital.in/specialities
+- **Specialties Directory:** https://www.vallihospital.in/specialties
 - **Consultation Booking Portal:** https://www.vallihospital.in/book-appointment (Redirects to WhatsApp Coordinator +919003417111)
 - **Clinical Facilities:** https://www.vallihospital.in/facilities
 - **Contact Desk:** https://www.vallihospital.in/contact-us
@@ -100,6 +100,7 @@ Every page on this site has a plain markdown mirror. Add `/index.md` to any URL 
 - [Bone Cancer Treatment Clean Mirror](https://www.vallihospital.in/bone-cancer-treatment/index.md)
 - [Genetic Testing Clean Mirror](https://www.vallihospital.in/genetic-testing/index.md)
 - [Sports Training Clean Mirror](https://www.vallihospital.in/sports-training/index.md)
+- [Internal Medicine Clean Mirror](https://www.vallihospital.in/internal-medicine/index.md)
 - [Dr. K. N. Jotheesvar Professional Profile Mirror](https://www.vallihospital.in/doctors/dr-jothiswar/index.md)
 - [Dr. E. Aakash Professional Profile Mirror](https://www.vallihospital.in/doctors/dr-aakash/index.md)
 - [Dr. G. Balamurugan Professional Profile Mirror](https://www.vallihospital.in/doctors/dr-balamurugan-g/index.md)
@@ -110,8 +111,9 @@ Every page on this site has a plain markdown mirror. Add `/index.md` to any URL 
 - [Dr. S. Senthilnathan Professional Profile Mirror](https://www.vallihospital.in/doctors/dr-ssenthilnathan/index.md)
 - [Dr. S. Pradeep Professional Profile Mirror](https://www.vallihospital.in/doctors/dr-spradeep/index.md)
 - [Dr. T. Natanasabapathy Professional Profile Mirror](https://www.vallihospital.in/doctors/dr-tnatanasabapathy/index.md)
-- [Valli Super Speciality Hospital | Best Orthopedic Care in Salem Mirror](https://www.vallihospital.in/index.md)
-- [About Us | Valli Super Speciality Hospital Salem Mirror](https://www.vallihospital.in/about-us/index.md)
+- [Dr. Vasunthara Devi Professional Profile Mirror](https://www.vallihospital.in/doctors/dr-vasunthara-devi/index.md)
+- [Valli Super Specialty Hospital | Best Orthopedic Care in Salem Mirror](https://www.vallihospital.in/index.md)
+- [About Us | Valli Super Specialty Hospital Salem Mirror](https://www.vallihospital.in/about-us/index.md)
 - [Contact Us & 24/7 Emergency Line | Valli Hospital Salem Mirror](https://www.vallihospital.in/contact-us/index.md)
 - [Clinical Facilities & Technology | Valli Hospital Salem Mirror](https://www.vallihospital.in/facilities/index.md)
 - [Blog: best orthopedic hospital salem Clean Mirror](https://www.vallihospital.in/blog/best-orthopedic-hospital-salem/index.md)

@@ -1,18 +1,22 @@
 ---
-title: Valli Super Speciality Hospital | Best Orthopedic Care in Salem
-description: Valli Super Speciality Hospital in Salem offers advanced orthopedic care, joint replacements, and spine surgery guided by world-class clinical excellence.
+title: Valli Super Specialty Hospital | Best Orthopedic Care in Salem
+description: Valli Super Specialty Hospital in Salem offers advanced orthopedic care, joint replacements, and spine surgery guided by world-class clinical excellence.
 url: https://www.vallihospital.in/
+<<<<<<< HEAD
 last_updated: 2026-06-30
+=======
+last_updated: 2026-08-21
+>>>>>>> 9fdf1bfba3153219b309ae46133f0eb4a253a949
 ---
 
 
-# Valli Super Speciality Hospital
+# Valli Super Specialty Hospital
 
-Welcome to Valli Super Speciality Hospital, Salem's premier institution for comprehensive orthopedic care, joint replacement, spine surgery, and 24/7 advanced trauma management.
+Welcome to Valli Super Specialty Hospital, Salem's premier institution for comprehensive orthopedic care, joint replacement, spine surgery, and 24/7 advanced trauma management.
 
 ## Clinical Foundations
 - **Founders**: Dr. T. Natanasabapathy, MBBS, MS (Ortho) & Dr. Vijayalakshmi Irulappan, M.D.
-- **Milestone Growth**: Established in 2022 as a specialized 17-bed trauma care hospital. Transformed in 2025 into an advanced **50-bed** multidisciplinary tertiary-care super speciality hospital.
+- **Milestone Growth**: Established in 2022 as a specialized 17-bed trauma care hospital. Transformed in 2025 into an advanced **50-bed** multidisciplinary tertiary-care Super Specialty hospital.
 - **Philosophy**: "Movement is Life, Life is Movement."
 
 ## Core Diagnostics & Facilities

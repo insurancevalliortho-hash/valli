@@ -1,11 +1,10 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import SmoothScroll from "../../components/SmoothScroll";
 import MagneticCursor from "../../components/MagneticCursor";
 import { BreadcrumbSchema, HospitalSchema } from "../../components/seo/StructuredData";
 import ObfuscatedEmail from "../../components/ObfuscatedEmail";
@@ -13,14 +12,14 @@ import ObfuscatedEmail from "../../components/ObfuscatedEmail";
 interface FormState {
   fullName: string;
   phone: string;
-  speciality: string;
+  Specialty: string;
   message: string;
 }
 
 interface FormErrors {
   fullName?: string;
   phone?: string;
-  speciality?: string;
+  Specialty?: string;
   message?: string;
 }
 
@@ -28,7 +27,7 @@ export default function ContactUsPage() {
   const [form, setForm] = useState<FormState>({
     fullName: "",
     phone: "",
-    speciality: "",
+    Specialty: "",
     message: "",
   });
 
@@ -56,7 +55,7 @@ export default function ContactUsPage() {
     } else if (!/^\+?[0-9]{10,12}$/.test(form.phone.replace(/[\s-]/g, ""))) {
       tempErrors.phone = "Please enter a valid 10-12 digit phone number.";
     }
-    if (!form.speciality) tempErrors.speciality = "Please select a specialty clinical interest.";
+    if (!form.Specialty) tempErrors.Specialty = "Please select a specialty clinical interest.";
     if (!form.message.trim()) tempErrors.message = "Message cannot be blank.";
 
     setErrors(tempErrors);
@@ -80,14 +79,14 @@ export default function ContactUsPage() {
     setForm({
       fullName: "",
       phone: "",
-      speciality: "",
+      Specialty: "",
       message: "",
     });
     setSubmitSuccess(false);
   };
 
   return (
-    <SmoothScroll>
+    <>
       <MagneticCursor />
       <Navbar />
 
@@ -335,18 +334,18 @@ export default function ContactUsPage() {
                       {/* Specialty select */}
                       <div>
                         <label
-                          htmlFor="speciality"
+                          htmlFor="Specialty"
                           className="block text-xs font-bold text-[#00333c] uppercase tracking-wider mb-2"
                         >
                           Clinical specialty interest
                         </label>
                         <select
-                          id="speciality"
-                          name="speciality"
-                          value={form.speciality}
+                          id="Specialty"
+                          name="Specialty"
+                          value={form.Specialty}
                           onChange={handleChange}
                           className={`w-full px-5 py-4 rounded-xl border font-semibold text-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#004b57]/20 appearance-none bg-white ${
-                            errors.speciality
+                            errors.Specialty
                               ? "border-red-400 bg-red-50/20 focus:border-red-400"
                               : "border-[#e5eaeb] focus:border-[#004b57]"
                           }`}
@@ -360,9 +359,9 @@ export default function ContactUsPage() {
                           <option value="diagnostics">Diagnostics Labs & DNA Profiling</option>
                           <option value="other">General Medical Enquiry</option>
                         </select>
-                        {errors.speciality && (
+                        {errors.Specialty && (
                           <span className="text-red-500 text-xs font-bold mt-1.5 block">
-                            {errors.speciality}
+                            {errors.Specialty}
                           </span>
                         )}
                       </div>
@@ -514,14 +513,14 @@ export default function ContactUsPage() {
 
                 <div className="relative border border-[#e5eaeb] rounded-[2rem] h-[280px] bg-white overflow-hidden shadow-lg">
                   <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4065.106559033785!2d78.12971567505521!3d11.666995088541135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3babf1c2ea9b3a3f%3A0x93bd1e1b0c15d6f0!2sValli%20Super%20Speciality%20Hospital!5e1!3m2!1sen!2sin!4v1779286929212!5m2!1sen!2sin" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4065.106559033785!2d78.12971567505521!3d11.666995088541135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3babf1c2ea9b3a3f%3A0x93bd1e1b0c15d6f0!2sValli%20Super%20Specialty%20Hospital!5e1!3m2!1sen!2sin!4v1779286929212!5m2!1sen!2sin" 
                     width="100%" 
                     height="100%" 
                     style={{ border: 0 }} 
                     allowFullScreen 
                     loading="lazy" 
                     referrerPolicy="no-referrer-when-downgrade"
-                    title="Valli Super Speciality Hospital Salem Google Maps Location"
+                    title="Valli Super Specialty Hospital Salem Google Maps Location"
                   />
                 </div>
               </div>
@@ -531,6 +530,6 @@ export default function ContactUsPage() {
       </section>
 
       <Footer />
-    </SmoothScroll>
+    </>
   );
 }

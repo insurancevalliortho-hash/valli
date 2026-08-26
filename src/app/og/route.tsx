@@ -1,7 +1,5 @@
 import { ImageResponse } from 'next/og';
 
-export const runtime = 'edge';
-
 export async function GET() {
   return new ImageResponse(
     (
@@ -39,7 +37,7 @@ export async function GET() {
             opacity: 0.9,
           }}
         >
-          Salem&apos;s Premier Orthopedic & Super Speciality Hospital
+          Salem&apos;s Premier Orthopedic & Super Specialty Hospital
         </div>
       </div>
     ),

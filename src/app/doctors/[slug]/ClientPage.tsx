@@ -3,9 +3,10 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
-import SmoothScroll from "../../../components/SmoothScroll";
+
 import MagneticCursor from "../../../components/MagneticCursor";
 import { Doctor } from "../../../data/doctors";
 
@@ -13,7 +14,7 @@ export default function DoctorClientPage({ doctor }: { doctor: Doctor }) {
     const creds = doctor.qualifications.split(", ").map(c => c.trim()).filter(Boolean);
 
     return (
-        <SmoothScroll>
+        <>
             <MagneticCursor />
             <Navbar />
 
@@ -45,7 +46,7 @@ export default function DoctorClientPage({ doctor }: { doctor: Doctor }) {
                             <div className="lg:w-[400px] shrink-0 relative overflow-hidden">
                                 <div className="absolute inset-0 bg-gradient-to-br from-[#004b57] via-[#f98825]/30 to-[#3cb3a6]/50" />
                                 <div className="relative h-96 lg:h-full min-h-[500px]">
-                                    <img src={doctor.image} alt={doctor.name} className="w-full h-full object-cover object-top opacity-90 mix-blend-luminosity" />
+                                    <Image src={doctor.image} alt={doctor.name} fill sizes="(max-width: 1024px) 100vw, 400px" priority className="object-cover object-top opacity-90 mix-blend-luminosity" />
                                     <div className="absolute inset-0 bg-gradient-to-t from-[#001f25]/90 via-transparent to-transparent" />
                                     <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#001825]/40 hidden lg:block" />
                                 </div>
@@ -199,7 +200,7 @@ export default function DoctorClientPage({ doctor }: { doctor: Doctor }) {
                                                 <ul className="space-y-4">
                                                     {doctor.publications.map((pub, idx) => (
                                                         <li key={idx} className="flex gap-3 items-start text-gray-600 text-sm font-medium italic pl-4 border-l-2 border-[#3cb3a6]">
-                                                            "{pub}"
+                                                            &ldquo;{pub}&rdquo;
                                                         </li>
                                                     ))}
                                                 </ul>
@@ -249,7 +250,7 @@ export default function DoctorClientPage({ doctor }: { doctor: Doctor }) {
             )}
 
             <Footer />
-        </SmoothScroll>
+        </>
     );
 }
 

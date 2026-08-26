@@ -1,11 +1,11 @@
-import { Metadata } from "next";
+﻿import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
     default: "Technovations 2026 | National AI Sports Rehabilitation Innovation Challenge",
     template: "%s | Technovations 2026",
   },
-  description: "Join the premier national project expo & SportAIthon organized by Valli Super Speciality Hospital. Innovate in AI injury detection, wearable rehab tech, and sports biomechanics. Win ₹60,000+ in cash prizes and get incubated.",
+  description: "Join the premier national project expo & SportAIthon organized by Valli Super Specialty Hospital. Innovate in AI injury detection, wearable rehab tech, and sports biomechanics. Win ₹60,000+ in cash prizes and get incubated.",
   keywords: [
     "Technovations 2026",
     "SportAIthon",
@@ -19,12 +19,12 @@ export const metadata: Metadata = {
     "sports injury prevention",
     "athletic assessment tool"
   ],
-  authors: [{ name: "Valli Super Speciality Hospital" }],
+  authors: [{ name: "Valli Super Specialty Hospital" }],
   openGraph: {
     title: "Technovations 2026 | National AI Sports Rehabilitation Innovation Challenge",
-    description: "Register for the premier national project expo & SportAIthon. Win ₹60,000+ in cash prizes, receive clinical mentoring from orthopaedic surgeons, and get fast-track incubation at Valli Super Speciality Hospital.",
+    description: "Register for the premier national project expo & SportAIthon. Win ₹60,000+ in cash prizes, receive clinical mentoring from orthopaedic surgeons, and get fast-track incubation at Valli Super Specialty Hospital.",
     url: "https://valli-hospital.com/iyakkam/technnovations",
-    siteName: "Valli Super Speciality Hospital",
+    siteName: "Valli Super Specialty Hospital",
     images: [
       {
         url: "/assets/runner-overlay.png",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Technovations 2026 | National AI Sports Rehabilitation Innovation Challenge",
-    description: "Register for the premier national project expo & SportAIthon. Win ₹60,000+ in cash prizes and get incubated at Valli Super Speciality Hospital.",
+    description: "Register for the premier national project expo & SportAIthon. Win ₹60,000+ in cash prizes and get incubated at Valli Super Specialty Hospital.",
     images: ["/assets/runner-overlay.png"],
   },
   robots: {

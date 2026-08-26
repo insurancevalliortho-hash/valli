@@ -2,16 +2,27 @@
 title: Specialized Paediatric Orthopaedics in Salem | Valli Hospital Blog
 description: Expert care for children
 url: https://www.vallihospital.in/blog/paediatric-orthopaedics-salem
+<<<<<<< HEAD
 last_updated: 2026-06-30
+=======
+last_updated: 2026-08-21
+>>>>>>> 9fdf1bfba3153219b309ae46133f0eb4a253a949
 ---
 
 # Specialized Paediatric Orthopaedics in Salem
+
+---
+title: "Specialized Paediatric Orthopaedics in Salem"
+date: "2026-05-17"
+description: "Expert care for children's bone and joint deformities."
+keywords: ["paediatric orthopaedics Salem", "child bone doctor Salem", "deformity correction clinic"]
+---
 
 # Specialized Paediatric Orthopaedics in Salem: Caring for Growing Bones
 
 Children are not just small adults. Their growing bodies, particularly their skeletal systems, require highly specialized care and attention. A child's bones possess unique growth plates and have an incredible potential to heal and remodel—but they are also susceptible to specific deformities and injuries that adults do not face.
 
-At Valli Super Speciality Hospital, our dedicated **Paediatric Orthopaedics Clinic in Salem** provides compassionate, expert care for infants, children, and adolescents. From congenital deformities to complex fractures, we are the trusted choice for parents seeking a top-tier **child bone doctor in Salem**.
+At Valli Super Specialty Hospital, our dedicated **Paediatric Orthopaedics Clinic in Salem** provides compassionate, expert care for infants, children, and adolescents. From congenital deformities to complex fractures, we are the trusted choice for parents seeking a top-tier **child bone doctor in Salem**.
 
 ## Why Paediatric Orthopaedics is Different
 

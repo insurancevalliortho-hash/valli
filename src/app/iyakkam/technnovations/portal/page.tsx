@@ -22,7 +22,6 @@ import {
 } from "lucide-react";
 import Navbar from "../../../../components/Navbar";
 import Footer from "../../../../components/Footer";
-import SmoothScroll from "../../../../components/SmoothScroll";
 
 interface TeamData {
   id: number;
@@ -203,7 +202,7 @@ export default function LeaderPortal() {
   }, [teamData?.co_members]);
 
   return (
-    <SmoothScroll>
+    <>
       <Navbar />
 
       <div className="min-h-screen bg-slate-50/50 text-[#1A1A2E] font-body pt-32 pb-28 px-4 sm:px-6 md:px-8 relative overflow-hidden grid-bg-dots">
@@ -465,6 +464,6 @@ export default function LeaderPortal() {
         </div>
       </div>
 
-    </SmoothScroll>
+    </>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import jsPDF from "jspdf";
 import { motion } from "framer-motion";
 import { Download, CheckCircle2, Award, MailCheck, Send } from "lucide-react";
@@ -23,7 +23,7 @@ export default function CertificateTemplate({ delegateId, delegateName, email, r
     ? delegateName
     : `Dr. ${delegateName}`;
 
-  const generatePDFBase64 = async (): Promise<{ pdfBase64: string; pdfObj: jsPDF }> => {
+  const generatePDFBase64 = useCallback(async (): Promise<{ pdfBase64: string; pdfObj: jsPDF }> => {
     const canvas = document.createElement("canvas");
     const width = 2000;
     const height = 1414;
@@ -72,7 +72,7 @@ export default function CertificateTemplate({ delegateId, delegateName, email, r
     const pdfBase64 = pdf.output("datauristring");
 
     return { pdfBase64, pdfObj: pdf };
-  };
+  }, [formattedName]);
 
   // Automatically dispatch certificate PDF to delegate's email upon loading
   useEffect(() => {
@@ -107,7 +107,7 @@ export default function CertificateTemplate({ delegateId, delegateName, email, r
     };
 
     dispatchEmail();
-  }, [email, delegateName]);
+  }, [email, delegateId, delegateName, generatePDFBase64]);
 
   const handleDownloadPDF = async () => {
     try {
