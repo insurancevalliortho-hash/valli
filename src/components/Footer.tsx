@@ -86,7 +86,7 @@ export default function Footer() {
                         initial={{ scale: 0.95 }} whileInView={{ opacity: 0.15, scale: 1 }} transition={{ duration: 1.5, ease: "easeOut" }} viewport={{ once: true }}
                         className="text-[9.5vw] md:text-[6.5vw] lg:text-[5.5vw] xl:text-[5vw] whitespace-nowrap font-black leading-none text-[#3cb3a6] tracking-tighter w-full text-center origin-bottom"
                     >
-                        VALLI Super Specialty HOSPITAL
+                        VALLI SUPER SPECIALTY HOSPITAL
                     </motion.span>
                 </div>
 
@@ -96,7 +96,7 @@ export default function Footer() {
                     className="pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-400"
                 >
                     <div className="flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
-                        <p>© {new Date().getFullYear()} VALLI Super Specialty HOSPITAL.<br className="md:hidden" /> ALL RIGHTS RESERVED.</p>
+                        <p>© {new Date().getFullYear()} VALLI SUPER SPECIALTY HOSPITAL.<br className="md:hidden" /> ALL RIGHTS RESERVED.</p>
 
                         {/* Social Signals for SEO & Trust */}
                         <div className="flex items-center gap-4 bg-gray-50 border border-gray-100 px-4 py-2 rounded-full">

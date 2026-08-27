@@ -78,11 +78,23 @@ export default function AriseRegisterPage() {
     if (designation === "Student / Intern" && bonafideCertificate) {
       return 500;
     }
+    if (category === "Conference with Workshop") {
+      return 2500;
+    }
+    if (category === "Workshop") {
+      return 500;
+    }
     return 2000;
   };
 
   const totalFee = calculateTotalFee();
   const includeWorkshop = category === "Conference with Workshop" || category === "Workshop";
+
+  useEffect(() => {
+    if (designation === "Student / Intern" || designation === "Other") {
+      setCategory("Conference");
+    }
+  }, [designation]);
 
   const handleScreenshotChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -263,7 +275,7 @@ export default function AriseRegisterPage() {
     <>
       <Navbar />
 
-      <div className="min-h-screen bg-slate-50 text-slate-800 font-body selection:bg-orange selection:text-white pt-28 pb-24 px-4 sm:px-6 relative overflow-hidden grid-bg-dots text-left">
+      <div className="min-h-screen bg-slate-50 text-slate-800 font-body selection:bg-orange selection:text-white pt-28 pb-24 px-4 sm:px-6 relative overflow-x-hidden grid-bg-dots text-left">
         <div className="relative z-10 max-w-4xl mx-auto">
           {/* Back button */}
           <div className="mb-6 max-w-2xl mx-auto">
@@ -382,7 +394,7 @@ export default function AriseRegisterPage() {
                         {/* Full Name */}
                         <div className="space-y-1.5">
                           <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
-                            <User className="w-3.5 h-3.5 text-teal" /> Full Name *
+                            <User className="w-3.5 h-3.5 text-teal" /> Full Name (As Per Your Identity) *
                           </label>
                           <input
                             type="text"
@@ -457,8 +469,11 @@ export default function AriseRegisterPage() {
                               className="w-full bg-white border border-[#E2E8F0] hover:border-slate-355 rounded-xl px-4 py-3 text-xs font-medium text-slate-800 transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%234A4A6A%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:0.6rem_auto] bg-[right_1.25rem_center] bg-no-repeat pr-10"
                             >
                               <option value="Conference">Conference</option>
-                              <option value="Conference with Workshop">Conference with Workshop</option>
-                              <option value="Workshop">Workshop</option>
+                              {!(designation === "Student / Intern" || designation === "Other") && (
+                                <>
+                                  <option value="Conference with Workshop">Conference with Workshop</option>
+                                </>
+                              )}
                             </select>
                           </div>
                         </div>
