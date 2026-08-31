@@ -107,7 +107,7 @@ function HeroSection() {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#00A896]/5 border border-[#00A896]/15 text-[#00A896] text-xs font-bold tracking-wider uppercase"
             >
               <span className="w-2 h-2 rounded-full bg-[#00A896] animate-pulse" />
-              Valli Super Speciality Hospital Presents
+              Valli Super Specialty Hospital Presents
             </motion.div>
 
             <motion.div
@@ -167,6 +167,23 @@ function HeroSection() {
               </a>
             </motion.div>
 
+            {/* Bulk Orders & Helpline Contact Ribbon in Hero */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.42 }}
+              className="pt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-[#004B57] font-bold text-sm sm:text-base"
+            >
+              <span className="flex items-center gap-2 text-[#00A896] font-extrabold uppercase text-xs sm:text-sm tracking-wider">
+                <Phone className="w-4.5 h-4.5 text-[#FF8C00]" /> Bulk Orders & Helpline:
+              </span>
+              <div className="flex items-center gap-3 font-extrabold text-sm sm:text-base text-[#004B57]">
+                <a href="tel:+917092777764" className="hover:text-[#00A896] transition-colors">+91 7092777764</a>
+                <span className="text-slate-300">•</span>
+                <a href="tel:+918220377047" className="hover:text-[#00A896] transition-colors">+91 82203 77047</a>
+              </div>
+            </motion.div>
+
             {/* Quick Details Ribbon */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
@@ -177,7 +194,7 @@ function HeroSection() {
               <div className="grid grid-cols-3 gap-4 text-slate-800">
                 {[
                   { label: "Event Date", val: "Oct 17, 2026", color: "text-[#004B57]", icon: <Calendar className="w-3.5 h-3.5 text-[#00A896]" /> },
-                  { label: "Venue Location", val: "Salem, TN", color: "text-[#00A896]", icon: <MapPin className="w-3.5 h-3.5 text-[#FF8C00]" /> },
+                  { label: "Venue Location", val: "Salem (Yet To Be Announced)", color: "text-[#00A896]", icon: <MapPin className="w-3.5 h-3.5 text-[#FF8C00]" /> },
                   { label: "Timing", val: "8:00 AM Onwards", color: "text-[#FF8C00]", icon: <Clock className="w-3.5 h-3.5 text-teal" /> }
                 ].map((s, idx) => (
                   <div key={idx} className="space-y-1.5 text-left">
@@ -208,7 +225,7 @@ function HeroSection() {
             <div className="relative w-full h-full rounded-full overflow-hidden p-6 bg-white/40 backdrop-blur-md shadow-2xl border border-white/50 flex items-center justify-center">
               <div className="relative w-full h-full rounded-full overflow-hidden bg-slate-950 flex items-center justify-center">
                 <Image
-                  src="/assets/arise_telemetry_v2.png"
+                  src="/assets/arise_telemetry_v4.png"
                   alt="AI sports telemetry and biomechanics visual"
                   width={800}
                   height={800}
@@ -377,15 +394,15 @@ function WhoShouldAttendSection() {
 function FacultySection() {
   const faculty = [
     {
-      name: "DR. KARTHIKEYAN, M.B.B.S, M.D",
-      title: "Physical Medicine & Rehabilitation",
+      name: "DR. R.KARTHIKEYAN, M.B.B.S, M.D (PMR)",
+      title: "Prof & Head, Dept of Physical Medicine & Rehabilitation",
       affiliation: "SRM Medical College Hospital and Research Centre, Tamil Nadu",
       img: "/SpeakersIMG/Karthikeyan.png",
       position: "object-center"
     },
     {
       name: "MR. TAMBI MEDABALAN, M.SC",
-      title: "HPD (Sports Science) Exercise Physiology",
+      title: "High Performance Director (Sports Science) Exercise Physiology & Human Performance",
       affiliation: "Sports Authority of India (SAI), NSNIS Patiala",
       img: "/SpeakersIMG/Tambi.png",
       position: "object-center"
@@ -405,9 +422,9 @@ function FacultySection() {
       position: "object-center"
     },
     {
-      name: "DR. BHARAT PULAVARTI, MBBS, MD PMR",
-      title: "Physical Medicine and Rehabilitation Specialist",
-      affiliation: "Physiatrist, VMMC & Safdarjung, New Delhi",
+      name: "DR. BHARAT PULAVARTI, M.B.B.S, M.D (PMR)",
+      title: "Physical Medicine and Rehabilitation",
+      affiliation: "Sports Injury Centre New Delhi",
       img: "/SpeakersIMG/BharatPulavarti.jpg",
       position: "object-center"
     },
@@ -446,7 +463,7 @@ function FacultySection() {
               className="bg-white border border-slate-200 rounded-3xl p-6 flex items-start gap-4 shadow-sm hover:shadow-md transition-all duration-300"
             >
               {/* Doctor Avatar */}
-              <div className="w-20 h-25 rounded-2xl bg-slate-100 overflow-hidden flex-shrink-0 border border-slate-200">
+              <div className="w-18 h-22 rounded-2xl bg-slate-100 overflow-hidden flex-shrink-0 border border-slate-200">
                 <Image
                   src={f.img}
                   alt={f.name}
@@ -473,41 +490,72 @@ function FacultySection() {
         </div>
 
         {/* Committees Section */}
-        <div className="mt-20 border-t border-slate-200 pt-16 max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-            <div>
-              <span className="block text-[9px] font-bold uppercase text-slate-400 tracking-widest">
-                Organising Chairman
-              </span>
-              <span className="block font-display text-sm font-black text-[#004B57] mt-1.5 uppercase">
-                Dr. T. Natanasabapathy
-              </span>
-              <span className="block text-[10px] text-slate-500 font-semibold">
-                MBBS, MS(ORTHO), FIAS, FDFM
-              </span>
-            </div>
-            <div>
-              <span className="block text-[9px] font-bold uppercase text-slate-400 tracking-widest">
-                Organising Secretary
-              </span>
-              <span className="block font-display text-sm font-black text-[#004B57] mt-1.5 uppercase">
-                Dr. E. Aakash
-              </span>
-              <span className="block text-[10px] text-slate-500 font-semibold">
-                MBBS, MS ORTHO, FIJR, FIOT, FDEM
-              </span>
-            </div>
-            <div>
-              <span className="block text-[9px] font-bold uppercase text-slate-400 tracking-widest">
-                Scientific Committee
-              </span>
-              <span className="block font-display text-sm font-black text-[#004B57] mt-1.5 uppercase">
-                Prof. Dr. A. Rajan Samuel
-              </span>
-              <span className="block text-[10px] text-slate-500 font-semibold">
-                Ph.D(PT), MIAP, MCMT, VMRF Director (Academics)
-              </span>
-            </div>
+        <div className="mt-20 border-t border-slate-200 pt-16 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                role: "Organising Chairman",
+                name: "Dr. T. Natanasabapathy",
+                credentials: "MBBS, MS(ORTHO), FIAS, FDFM",
+                img: "/SpeakersIMG/natanasabapathy.jpeg"
+              },
+              {
+                role: "Organising Secretary",
+                name: "Dr. E. Aakash",
+                credentials: "MBBS, MS ORTHO, FIJR, FIOT, FDEM",
+                img: "/SpeakersIMG/aakash.jpeg"
+              },
+              {
+                role: "Scientific Committee",
+                name: "Prof. Dr. A. Rajan Samuel",
+                credentials: "Ph.D(PT), MIAP, MCMT, VMRF Director (Academics)",
+                img: "/SpeakersIMG/rajansamuel.jpeg"
+              },
+              {
+                role: "Organising Coordinators",
+                name: "Dr. V. Kaviya Sri (PT)",
+                credentials: "BPT, FDFM",
+                img: "/SpeakersIMG/Img1.jpeg"
+              },
+              {
+                role: "Organising Coordinators",
+                name: "Dr. D. Leela Kumari (PT)",
+                credentials: "BPT, FDFM",
+                img: "/SpeakersIMG/Img2.jpeg"
+              }
+            ].map((c, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="bg-white border border-slate-200 rounded-3xl p-5 flex items-center gap-4 shadow-sm hover:shadow-md transition-all duration-300"
+              >
+                {/* Avatar */}
+                <div className="w-16 h-20 rounded-2xl bg-slate-100 overflow-hidden flex-shrink-0 border border-slate-200 relative">
+                  <Image
+                    src={c.img}
+                    alt={c.name}
+                    width={100}
+                    height={125}
+                    className="w-full h-full object-cover object-center"
+                  />
+                </div>
+                {/* Details */}
+                <div className="space-y-1 text-left min-w-0">
+                  <span className="block text-[9px] font-bold uppercase text-[#00A896] tracking-wider">
+                    {c.role}
+                  </span>
+                  <h4 className="font-display text-xs sm:text-sm font-black text-[#004B57] uppercase tracking-wide leading-tight break-words">
+                    {c.name}
+                  </h4>
+                  <p className="text-[10px] text-slate-500 font-semibold leading-snug break-words">
+                    {c.credentials}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>
@@ -580,17 +628,16 @@ function PricingSection() {
               ))}
             </div>
 
-            {/* Contacts */}
-            <div className="flex items-center gap-6 pt-4 text-slate-500 font-semibold text-xs">
-              <span className="flex items-center gap-1.5 text-[#004B57]">
-                <Phone className="w-4 h-4 text-[#00A896]" /> Helpline: +91 7092777764
+            {/* Contacts & Bulk Orders */}
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-4 border-t border-slate-100 text-slate-800 font-bold text-sm sm:text-base">
+              <span className="flex items-center gap-2 text-[#00A896] font-extrabold uppercase text-xs sm:text-sm tracking-wider">
+                <Phone className="w-4.5 h-4.5 text-[#00A896]" /> Contact
               </span>
-              <span>
-                •
-              </span>
-              <span className="text-[#004B57]">
-                Helpline: +91 82203 77047
-              </span>
+              <div className="flex items-center gap-3 font-extrabold text-sm sm:text-base text-[#004B57]">
+                <a href="tel:+917092777764" className="hover:text-[#00A896] transition-colors">+91 7092777764</a>
+                <span className="text-slate-300">•</span>
+                <a href="tel:+918220377047" className="hover:text-[#00A896] transition-colors">+91 82203 77047</a>
+              </div>
             </div>
           </div>
 
@@ -658,7 +705,7 @@ function PricingSection() {
 // ─── Main Page Assembly ───────────────────────────────────────────────────────
 export default function ArisePage() {
   return (
-    <main style={{ overflowX: "hidden" }} className="bg-slate-50 text-slate-800 select-none">
+    <main className="bg-slate-50 text-slate-800 select-none overflow-x-clip">
       <Navbar />
       <HeroSection />
       <WhyAttendSection />

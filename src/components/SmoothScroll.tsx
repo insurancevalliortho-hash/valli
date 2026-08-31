@@ -65,11 +65,8 @@ const LENIS_OPTIONS = {
     syncTouch: false,
     prevent: (node: HTMLElement) => {
         return (
-            node.tagName === "TEXTAREA" ||
-            node.tagName === "SELECT" ||
-            node.tagName === "INPUT" ||
-            node.dataset.lenisPrevent === "" ||
-            node.dataset.lenisPrevent === "true"
+            Boolean(node.closest?.("[data-lenis-prevent]")) ||
+            (node.tagName === "TEXTAREA" && node.scrollHeight > node.clientHeight)
         );
     },
 };

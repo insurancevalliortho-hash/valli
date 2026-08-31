@@ -115,6 +115,65 @@ export default function SportsMedicineClinicPage() {
             >
               📞 Direct Line: +91 90034 17111
             </a>
+  
+      
+      {/* Hero Section - Concept 1 */}
+      <section className="relative min-h-[45vh] flex items-center bg-[#001f25] pt-12 pb-16 overflow-hidden text-left">
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <div className="absolute top-[-20%] right-[-10%] w-[40vw] h-[40vw] bg-[#004b57]/30 rounded-[6rem] rotate-12 blur-3xl" />
+          <div className="absolute bottom-[-20%] left-[-10%] w-[35vw] h-[35vw] bg-[#f98825]/10 rounded-[5rem] rotate-45 blur-2xl" />
+        </div>
+        <div className="container mx-auto px-6 md:px-12 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            {/* Left Content */}
+            <div className="lg:col-span-7 space-y-6">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/15 text-[#f98825] text-xs font-bold tracking-[0.2em] uppercase">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#f98825]" />
+                Specialty Clinic
+              </span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight">
+                The Sports Medicine <br /> <span className="text-[#f98825]">Clinic</span>
+              </h1>
+              <p className="text-gray-300 text-base md:text-lg max-w-xl font-normal leading-relaxed">
+                Premier referral institute for sports science, athletic physical assessments, and non-surgical orthobiologic therapies.
+              </p>
+              <div className="pt-2 flex flex-wrap gap-4">
+                <Link
+                  href="/book-appointment"
+                  className="bg-[#f98825] hover:bg-[#e0751e] text-white px-7 py-3.5 rounded-full font-bold text-sm shadow-lg transition-all"
+                >
+                  Book Consultation
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Doctor Card */}
+            <div className="lg:col-span-5 relative">
+              <div className="relative mx-auto max-w-xs sm:max-w-sm bg-gradient-to-b from-white/15 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-4 shadow-2xl">
+                <div className="relative w-full h-72 rounded-2xl overflow-hidden bg-[#00333c] border border-white/10">
+                  <Image
+                    src="/SpeakersIMG/natanasabapathy.jpeg"
+                    alt="Dr. T. Natanasabapathy"
+                    fill
+                    className="object-cover object-top"
+                  />
+                </div>
+                <div className="mt-4 text-left space-y-1">
+                  <span className="text-[10px] font-bold tracking-widest text-[#f98825] uppercase block">
+                    Chief Orthopedic Surgeon
+                  </span>
+                  <h3 className="text-lg sm:text-xl font-black text-white">Dr. T. Natanasabapathy</h3>
+                  <p className="text-xs text-gray-300 font-medium">
+                    MBBS, MS(ORTHO), FIAS, FDFM
+                  </p>
+                </div>
+                <div className="absolute -top-3 -right-3 bg-[#f98825] text-white px-3.5 py-1.5 rounded-xl text-xs font-bold shadow-lg border border-white/20">
+                  Chief Surgeon
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
