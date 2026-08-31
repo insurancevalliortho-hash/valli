@@ -561,7 +561,14 @@ export async function sendAriseRegistrationEmail(data: AriseEmailPayload) {
   try {
     const { transporter, from } = await getTransporter();
 
-    const amountPaid = (data.designation === "Student / Intern" && data.bonafideCertificate) ? 500 : 2000;
+    let amountPaid = 2000;
+    if (data.designation === "Student / Intern" && data.bonafideCertificate) {
+      amountPaid = 500;
+    } else if (data.category === "Conference with Workshop") {
+      amountPaid = 2500;
+    } else if (data.category === "Workshop") {
+      amountPaid = 500;
+    }
 
     const workshopStatus = data.includeWorkshop 
       ? "Yes (Includes Hands-on VR Workshop)" 
