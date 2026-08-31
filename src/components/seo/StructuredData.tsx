@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 
 export const HospitalSchema = () => {
   const jsonLd = {
@@ -180,7 +180,8 @@ export const MedicalSpecialtySchema = ({
     },
     "publisher": {
       "@type": "MedicalOrganization",
-      "name": "Valli Super Specialty Hospital"
+      "name": "Valli Super Specialty Hospital",
+      "url": "https://www.vallihospital.in"
     }
   };
 
@@ -191,4 +192,61 @@ export const MedicalSpecialtySchema = ({
     />
   );
 };
+
+export const ArticleSchema = ({
+  title,
+  description,
+  url,
+  datePublished,
+  dateModified,
+  authorName = "Dr. T. Natanasabapathy",
+  image = "https://www.vallihospital.in/og-image.jpg"
+}: {
+  title: string;
+  description: string;
+  url: string;
+  datePublished: string;
+  dateModified?: string;
+  authorName?: string;
+  image?: string;
+}) => {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "MedicalScholarlyArticle",
+    "headline": title,
+    "description": description,
+    "image": image,
+    "datePublished": datePublished,
+    "dateModified": dateModified || datePublished,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": url
+    },
+    "author": {
+      "@type": "Person",
+      "name": authorName,
+      "jobTitle": "Chief Orthopedic Surgeon",
+      "worksFor": {
+        "@type": "MedicalOrganization",
+        "name": "Valli Super Specialty Hospital"
+      }
+    },
+    "publisher": {
+      "@type": "MedicalOrganization",
+      "name": "Valli Super Specialty Hospital",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.vallihospital.in/favicon.png"
+      }
+    }
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
+};
+
 

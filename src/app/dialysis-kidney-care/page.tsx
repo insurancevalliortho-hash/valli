@@ -1,5 +1,5 @@
 import React from 'react';
-import { BreadcrumbSchema, FAQSchema } from '../../components/seo/StructuredData';
+import { BreadcrumbSchema, FAQSchema, MedicalProcedureSchema, MedicalSpecialtySchema } from '../../components/seo/StructuredData';
 import Link from 'next/link';
 import { Metadata } from 'next';
 
@@ -37,10 +37,20 @@ export default function Page() {
         { name: '24/7 Dialysis & Kidney Care', url: 'https://www.vallihospital.in/dialysis-kidney-care' }
       ]} />
       <FAQSchema questions={[
-        { question: 'Does Valli Hospital offer 24/7 dialysis?', answer: 'Yes. Our 24-hour Dialysis and Kidney Care unit operates around the clock, featuring the Fresenius Kabi 4008S machine for high-precision hemodialysis, staffed by qualified nephrologists, renal technicians, and intensivists.' },
-        { question: 'What kidney conditions are treated at Valli Hospital?', answer: 'We treat acute kidney failure, chronic renal disease, severe poisoning, trauma-induced renal shock, alcoholic liver disease, acute pancreatitis with renal complications, and provide bridging therapy for renal transplant candidates.' },
-        { question: 'What dialysis machine does Valli Hospital use?', answer: 'We use the world-renowned Fresenius Kabi 4008S machine, offering standalone high-precision hemodialysis with the latest German technology for patient safety and clinical accuracy.' },
+        { question: 'Does Valli Hospital offer 24/7 dialysis in Salem?', answer: 'Yes. Our 24-hour Dialysis and Kidney Care unit operates around the clock, featuring the Fresenius Kabi 4008S machine for high-precision hemodialysis, staffed by qualified nephrologists, renal technicians, and intensivists.' },
+        { question: 'What kidney conditions are treated at Valli Hospital Salem?', answer: 'We treat acute kidney injury (AKI), chronic kidney disease (CKD), severe toxicology poisoning, trauma-induced renal shock, and provide bridging therapy for renal transplant candidates.' },
+        { question: 'What dialysis technology does Valli Hospital use?', answer: 'We use the world-renowned German Fresenius Kabi 4008S system, offering standalone high-precision hemodialysis, automated fluid balance, and volumetric ultrafiltration control.' },
       ]} />
+      <MedicalSpecialtySchema
+        name="Nephrology & 24/7 Dialysis Center"
+        description="Round-the-clock emergency and maintenance hemodialysis, renal care, and acute kidney injury treatment in Salem."
+        url="https://www.vallihospital.in/dialysis-kidney-care"
+      />
+      <MedicalProcedureSchema
+        name="Emergency & Maintenance Hemodialysis"
+        description="High-precision blood filtration and solute clearance using Fresenius German dialyzers."
+        bodyLocation="Renal & Circulatory System"
+      />
 
       {/* Breadcrumb UI */}
       <div className="mx-auto px-6 md:px-12 pt-28 pb-4 bg-[#001f25]">

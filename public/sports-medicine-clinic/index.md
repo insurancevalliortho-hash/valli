@@ -2,7 +2,7 @@
 title: Sports Medicine Clinic in Salem | Valli Super Specialty Hospital
 description: Comprehensive diagnostics, surgical interventions, and athletic rehabilitation for all types of sports injuries.
 url: https://www.vallihospital.in/sports-medicine-clinic
-last_updated: 2026-08-26
+last_updated: 2026-08-31
 ---
 
 # Sports Medicine Clinic

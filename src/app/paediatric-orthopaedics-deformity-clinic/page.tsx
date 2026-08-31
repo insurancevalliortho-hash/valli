@@ -1,33 +1,60 @@
 import React from 'react';
-
-import { BreadcrumbSchema, FAQSchema } from '../../components/seo/StructuredData';
-import Link from 'next/link';
-
-
 import { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: "Paediatric Orthopaedics & Deformity Clinic Salem | Child Bone Care | Valli Hospital",
-  description: "Specialised paediatric orthopaedic care in Salem at Valli Super Specialty Hospital. Expert treatment for clubfoot, scoliosis, limb length discrepancy, congenital deformities, and childhood fractures. Child-safe anaesthesia and dedicated paediatric orthopaedic protocols.",
-  keywords: [
-      "paediatric orthopaedics Salem",
-      "children bone specialist Salem",
-      "clubfoot treatment Salem",
-      "scoliosis treatment children Salem",
-      "paediatric fracture Salem",
-      "child orthopaedic hospital Tamil Nadu",
-      "limb deformity correction Salem",
-      "congenital ortho deformity Salem"
-  ],
-  alternates: {
-    canonical: `https://www.vallihospital.in/paediatric-orthopaedics-deformity-clinic`,
-  },
-};
-
+import Link from 'next/link';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
+import { BreadcrumbSchema, FAQSchema, MedicalProcedureSchema, MedicalSpecialtySchema } from '../../components/seo/StructuredData';
 
-export default function Page() {
+export const metadata: Metadata = {
+  title: "Paediatric Orthopaedics & Child Bone Specialist in Salem | Valli Hospital",
+  description: "Specialized Pediatric Orthopedic & Deformity Clinic in Salem at Valli Super Specialty Hospital. Expert treatment for clubfoot (Ponseti method), pediatric fractures, scoliosis, knock knees, bow legs, and congenital limb deformities.",
+  keywords: [
+    "paediatric orthopaedics Salem",
+    "pediatric orthopedic near me",
+    "children bone specialist Salem",
+    "kids bone doctor near me",
+    "clubfoot treatment Salem",
+    "knock knee treatment Salem",
+    "bow legs doctor Salem",
+    "pediatric ortho doctor near me",
+    "child orthopaedic hospital Tamil Nadu",
+    "limb deformity correction Salem"
+  ],
+  alternates: {
+    canonical: "https://www.vallihospital.in/paediatric-orthopaedics-deformity-clinic",
+  },
+  openGraph: {
+    title: "Child Orthopedics & Deformity Clinic Salem | Valli Hospital",
+    description: "Gentle, expert bone and joint care for infants, children, and adolescents by senior pediatric orthopedic specialists in Salem.",
+    url: "https://www.vallihospital.in/paediatric-orthopaedics-deformity-clinic",
+    type: "website",
+  }
+};
+
+export default function PaediatricOrthopaedicsPage() {
+  const faqList = [
+    {
+      question: "What conditions are treated at the Pediatric Orthopedic Clinic in Salem?",
+      answer: "We treat congenital clubfoot (CTEV), developmental dysplasia of the hip (DDH), bow legs (genu varum), knock knees (genu valgum), pediatric fractures, bone infections (osteomyelitis), and juvenile scoliosis."
+    },
+    {
+      question: "What is the Ponseti method for clubfoot correction?",
+      answer: "The Ponseti method is a gentle, non-surgical technique using a series of specialized weekly plaster casts to gradually correct clubfoot in newborns, followed by a minor Achilles tenotomy if needed and bracing."
+    },
+    {
+      question: "When should parents consult a pediatric bone specialist for bow legs or knock knees?",
+      answer: "While mild bowing or knock knees can be part of normal developmental stages, consultation is essential if the deformity is asymmetrical, worsens after age 2 for bow legs or age 7 for knock knees, causes pain, or leads to an abnormal limp."
+    },
+    {
+      question: "How are childhood fractures managed differently from adults?",
+      answer: "Children's bones contain delicate growth plates (physeal plates) that dictate future bone growth. Our specialists utilize specialized pediatric reduction and minimally invasive flexible k-wires to safeguard growth plates and prevent limb length discrepancy."
+    },
+    {
+      question: "Who leads the Pediatric Orthopedics service at Valli Hospital?",
+      answer: "Our pediatric orthopedic team is led by Dr. T. Natanasabapathy (Chief Orthopedic Surgeon) in coordination with Dr. Parthiban (Consultant Pediatrician) and Dr. Sultana Dhilras (Pediatric Surgeon)."
+    }
+  ];
+
   return (
     <>
       <Navbar />
@@ -35,13 +62,19 @@ export default function Page() {
       <BreadcrumbSchema items={[
         { name: 'Home', url: 'https://www.vallihospital.in/' },
         { name: 'Specialties', url: 'https://www.vallihospital.in/specialties' },
-        { name: 'Paediatric Orthopaedics Deformity Clinic', url: 'https://www.vallihospital.in/paediatric-orthopaedics-deformity-clinic' }
-  ]} />
-      <FAQSchema questions={[
-        { question: 'What is the Paediatric Orthopaedics Deformity Clinic?', answer: 'The Paediatric Orthopaedics Deformity Clinic at Valli Super Specialty Hospital provides advanced, specialized care for related conditions.' },
-        { question: 'Who is the lead doctor?', answer: 'Dr. T. Natanasabapathy, Chief Orthopedic Surgeon, leads our specialized care teams.' }
+        { name: 'Pediatric Orthopedics', url: 'https://www.vallihospital.in/paediatric-orthopaedics-deformity-clinic' }
       ]} />
-  
+      <FAQSchema questions={faqList} />
+      <MedicalSpecialtySchema
+        name="Pediatric Orthopedics & Deformity Correction Center"
+        description="Comprehensive child bone care, clubfoot casting, growth modulation, and deformity correction in Salem."
+        url="https://www.vallihospital.in/paediatric-orthopaedics-deformity-clinic"
+      />
+      <MedicalProcedureSchema
+        name="Ponseti Clubfoot Casting & Guided Growth Deformity Correction"
+        description="Non-surgical casting for congenital clubfoot and 8-plate guided growth for pediatric angular limb deformities."
+        bodyLocation="Lower Limbs / Pediatric Skeletal System"
+      />
 
       {/* Breadcrumb UI */}
       <div className="mx-auto px-6 md:px-12 pt-28 pb-4 bg-[#001f25]">
@@ -51,62 +84,137 @@ export default function Page() {
             <li><span className="mx-2">›</span></li>
             <li><Link href="/specialties" className="hover:text-white transition-colors">Specialties</Link></li>
             <li><span className="mx-2">›</span></li>
-            <li className="text-[#f98825] truncate" aria-current="page">Paediatric Orthopaedics Deformity Clinic</li>
+            <li className="text-[#f98825] truncate" aria-current="page">Pediatric Orthopedics</li>
           </ol>
         </nav>
       </div>
-  
-      
+
       {/* Hero Section */}
-      <section className="relative min-h-[40vh] flex items-center bg-[#001f25] pt-32 pb-20 overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none z-0">
-             <div className="absolute top-[-20%] right-[-10%] w-[40vw] h-[40vw] bg-[#004b57]/30 rounded-[6rem] rotate-12" />
-             <div className="absolute bottom-[-20%] left-[-10%] w-[35vw] h-[35vw] bg-[#f98825]/10 rounded-[5rem] rotate-45" />
+      <section className="relative min-h-[45vh] flex items-center bg-[#001f25] pt-12 pb-20 overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <div className="absolute top-[-20%] right-[-10%] w-[40vw] h-[40vw] bg-[#004b57]/30 rounded-[6rem] rotate-12" />
+          <div className="absolute bottom-[-20%] left-[-10%] w-[35vw] h-[35vw] bg-[#f98825]/10 rounded-[5rem] rotate-45" />
+        </div>
+        <div className="container mx-auto px-6 md:px-12 relative z-10">
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/8 border border-white/12 text-[#f98825] text-xs font-bold tracking-[0.2em] uppercase mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#f98825]" />
+            Center for Pediatric Bone & Deformity Care
+          </span>
+          <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-4xl">
+            Pediatric Orthopedics & <br /> <span className="text-[#f98825]">Deformity Clinic in Salem</span>
+          </h1>
+          <p className="mt-6 text-gray-300 text-lg max-w-2xl font-normal">
+            Gentle, specialized bone and joint care for growing children. From Ponseti clubfoot treatment to guided growth for knock knees and bow legs.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Link
+              href="/book-appointment"
+              className="px-8 py-4 bg-[#f98825] text-white font-bold rounded-xl shadow-lg hover:bg-[#e07516] transition-all transform hover:-translate-y-0.5"
+            >
+              Book Child Consultation
+            </Link>
+            <a
+              href="tel:+919003417111"
+              className="px-8 py-4 bg-white/10 text-white font-bold rounded-xl border border-white/20 hover:bg-white/20 transition-all"
+            >
+              📞 Child Helpline: +91 90034 17111
+            </a>
           </div>
-          <div className="container mx-auto px-6 md:px-12 relative z-10">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/8 border border-white/12 text-[#f98825] text-xs font-bold tracking-[0.2em] uppercase mb-6">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#f98825]" />
-                Specialty Clinic
-              </span>
-              <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-5xl">
-                  Paediatric Orthopaedics <br/> <span className="text-[#f98825]">& Deformity Clinic - <span className="whitespace-nowrap">Dr. Tamilkumaran</span></span>
-              </h1>
-          </div>
+        </div>
       </section>
 
-      {/* Content Section */}
+      {/* Main Content */}
       <section className="py-20 md:py-28 bg-[#f9fafb]">
-          <div className="container mx-auto px-6 md:px-12">
-              <div className="max-w-4xl mx-auto space-y-6 text-[#40484a] text-lg leading-relaxed font-medium">
-                  
-      <h2 className="text-2xl font-bold text-[#00333c]">Clinical Focus and Overview</h2>
-      <p>Recognizing the fundamental physiological truth that the anatomical, physiological, and psychological development of a child is not merely a scaled-down version of an adult, this clinic is entirely dedicated to the specialized care of the growing skeleton. The ultimate goal is to maximize the functionality and independence of children suffering from congenital or developmental musculoskeletal and neuromuscular anomalies.</p>
-      
-      <h2 className="text-2xl font-bold text-[#00333c] mt-8">Pathophysiology, Procedures, and Treatments</h2>
-      <p>The presence of a musculoskeletal deformity subjects a developing child to significant physiological limitations and profound, often lifelong, psychosocial stigmatization. The clinic rejects a purely mechanical approach, instead adopting a highly inclusive, multidisciplinary diagnostic framework that explicitly factors in the medical, socioeconomic, and cultural variables influencing a child&apos;s overall health and development.</p>
-      <p>The clinical team treats a vast and complex array of conditions. These encompass congenital anomalies (present at birth) and developmental disorders (appearing during skeletal maturation). The scope includes clubfoot (talipes equinovarus), club hand, severe limb length discrepancies, intoeing gait, arthrogryposis multiplex congenita, and complex post-fracture deformities affecting the physis (growth plate). Furthermore, the clinic expertly manages systemic genetic conditions such as Duchenne muscular dystrophy, Osteogenesis Imperfecta (brittle bone disease), profound growth dysplasias like dwarfism, and inflammatory conditions such as juvenile arthritis and axial spondyloarthritis. The clinic is also equipped to manage highly aggressive pediatric bone tumors, including Osteosarcoma, Osteochondroma, and Ewing’s sarcoma.</p>
-      <p>Early and precise intervention is paramount to leverage the remodeling potential of the immature skeleton. The clinic utilizes sequential cast correction, most notably the Ponseti method for clubfoot, alongside the application of custom-fabricated orthotic braces and callipers. Pharmacological interventions are advanced, utilizing Botox injections to manage severe muscular spasticity in neuromuscular disorders, hormonal therapies for growth regulation, and coordinated chemotherapy for oncological presentations.</p>
-      <p>When anatomical correction is strictly required, surgeons perform highly nuanced growth regulation surgeries (epiphysiodesis), complex spinal surgeries for early-onset scoliosis, and precise angular deformity corrections. Reconstructive plastic surgery is seamlessly integrated to correct congenital digit anomalies such as syndactyly (conjoined or webbed fingers) and polydactyly (supernumerary digits).</p>
-      <p>A unique and highly compassionate feature of this department is its dedication to long-term psychosocial support. The clinic maintains a meticulous disease registry for epidemiological documentation and actively encourages families to enroll in targeted support groups for rare conditions like Osteogenesis Imperfecta. Continuous follow-up, educational support for parents, and uninterrupted rehabilitation sessions are provided until the child reaches a state of functional independence.</p>
-    
+        <div className="container mx-auto px-6 md:px-12">
+          <div className="max-w-4xl mx-auto space-y-10 text-[#40484a] text-lg leading-relaxed font-medium">
+
+            <div>
+              <h2 className="text-3xl font-bold text-[#00333c] mb-4">Dedicated Orthopedic Care for Growing Bones</h2>
+              <p>
+                A child&apos;s musculoskeletal system is constantly growing and remodelling. At <strong>Valli Super Specialty Hospital</strong>, our pediatric orthopedic team combines clinical gentleness with specialized surgical and non-surgical deformity correction techniques to ensure children develop healthy, straight, and fully functional limbs.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 my-8">
+              <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                <div className="w-12 h-12 rounded-xl bg-[#f98825]/10 flex items-center justify-center text-[#f98825] font-black text-xl mb-4">👶</div>
+                <h3 className="text-xl font-bold text-[#00333c] mb-2">Ponseti Clubfoot Program</h3>
+                <p className="text-base text-gray-600">Gold-standard non-surgical weekly corrective casting for congenital talipes equinovarus (CTEV), achieving full normal foot posture without major invasive surgery.</p>
               </div>
+              <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                <div className="w-12 h-12 rounded-xl bg-[#004d66]/10 flex items-center justify-center text-[#004d66] font-black text-xl mb-4">🌱</div>
+                <h3 className="text-xl font-bold text-[#00333c] mb-2">Guided Growth (Hemi-epiphysiodesis)</h3>
+                <p className="text-base text-gray-600">Minimally invasive tension-band plate application that harnesses the child&apos;s natural growth to gently straighten severe knock knees and bow legs.</p>
+              </div>
+            </div>
+
+            {/* Lead Specialists Module */}
+            <div className="bg-[#001f25] text-white p-8 rounded-3xl space-y-6">
+              <h3 className="text-2xl font-bold text-white">Multidisciplinary Pediatric Team</h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="bg-white/5 border border-white/10 p-6 rounded-2xl">
+                  <div className="text-[#f98825] text-xs font-bold uppercase tracking-widest mb-1">Chief Orthopedic Surgeon</div>
+                  <div className="text-xl font-bold text-white">Dr. T. Natanasabapathy</div>
+                  <p className="text-sm text-gray-300 mt-2">15+ years experience in congenital deformity correction, pediatric trauma, and growth plate preservation.</p>
+                  <Link href="/doctors/dr-tnatanasabapathy" className="mt-4 inline-block text-xs font-bold text-[#f98825] hover:underline">
+                    View Doctor Profile &rarr;
+                  </Link>
+                </div>
+                <div className="bg-white/5 border border-white/10 p-6 rounded-2xl">
+                  <div className="text-[#f98825] text-xs font-bold uppercase tracking-widest mb-1">Consultant Paediatrician</div>
+                  <div className="text-xl font-bold text-white">Dr. Parthiban</div>
+                  <p className="text-sm text-gray-300 mt-2">Expert in neonatal assessment, childhood development, and comprehensive pediatric clinical care.</p>
+                  <Link href="/doctors/dr-parthiban" className="mt-4 inline-block text-xs font-bold text-[#f98825] hover:underline">
+                    View Doctor Profile &rarr;
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* FAQs */}
+            <div className="mt-12">
+              <h2 className="text-3xl font-bold text-[#00333c] mb-6">Frequently Asked Questions</h2>
+              <div className="space-y-6">
+                {faqList.map((faq, idx) => (
+                  <div key={idx} className="bg-white p-6 rounded-xl border border-gray-200">
+                    <h3 className="text-xl font-bold text-[#00333c] mb-2">{faq.question}</h3>
+                    <p className="text-gray-600 text-base">{faq.answer}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
           </div>
+        </div>
       </section>
 
-      
+      {/* CTA Banner */}
+      <section className="py-16 bg-[#00333c] text-white text-center">
+        <div className="container mx-auto px-6 md:px-12">
+          <h2 className="text-3xl font-bold mb-4">Give Your Child the Best Start in Mobility</h2>
+          <p className="text-gray-300 max-w-xl mx-auto mb-8">Schedule a pediatric orthopedic consultation with our compassionate specialists at Valli Super Specialty Hospital.</p>
+          <Link
+            href="/book-appointment"
+            className="inline-block px-8 py-4 bg-[#f98825] text-white font-bold rounded-xl shadow-lg hover:bg-[#e07516] transition-all"
+          >
+            Book Child Appointment
+          </Link>
+        </div>
+      </section>
+
       {/* Related Treatments */}
       <section className="py-16 bg-white border-t border-gray-100">
         <div className="container mx-auto px-6 md:px-12">
-          <h3 className="text-2xl font-bold text-[#00333c] mb-6">Related Treatments & Specialties</h3>
-          <ul className="flex flex-col md:flex-row gap-6 md:gap-12">
-            <li><Link href="/genetic-testing" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Genetic Testing</Link></li>
-<li><Link href="/joint-care-clinic" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Joint Care Clinic</Link></li>
-<li><Link href="/foot-and-ankle-clinic" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Foot and Ankle Clinic</Link></li>
+          <h3 className="text-2xl font-bold text-[#00333c] mb-6">Related Clinics</h3>
+          <ul className="flex flex-wrap gap-6 md:gap-12">
+            <li><Link href="/fracture-clinic" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Fracture Clinic</Link></li>
+            <li><Link href="/foot-and-ankle-clinic" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Foot & Ankle Center</Link></li>
+            <li><Link href="/genetic-testing" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Genetic Testing Lab</Link></li>
           </ul>
         </div>
       </section>
-  
-<Footer />
+
+      <Footer />
     </>
   );
 }

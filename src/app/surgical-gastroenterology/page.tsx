@@ -1,5 +1,5 @@
 import React from 'react';
-import { BreadcrumbSchema, FAQSchema } from '../../components/seo/StructuredData';
+import { BreadcrumbSchema, FAQSchema, MedicalProcedureSchema, MedicalSpecialtySchema } from '../../components/seo/StructuredData';
 import Link from 'next/link';
 import { Metadata } from 'next';
 
@@ -23,9 +23,20 @@ export default function Page() {
         { name: 'Surgical Gastroenterology', url: 'https://www.vallihospital.in/surgical-gastroenterology' }
       ]} />
       <FAQSchema questions={[
-        { question: 'What surgeries are performed at the Gastroenterology department?', answer: 'We perform laparoscopic gallstone removal, hernia repair, appendectomy, colorectal surgery, hemorrhoidectomy, splenectomy, and emergency laparotomies for GI perforations and trauma.' },
-        { question: 'Is emergency gastroenterology surgery available 24/7?', answer: 'Yes. Our ACLS and ATLS certified team with advanced ICU backup is on standby around the clock for emergency laparotomies, GI bleeding, and peritonitis.' },
+        { question: 'What surgeries are performed at the Gastroenterology department in Salem?', answer: 'We perform advanced laparoscopic gallstone cholecystectomy, hernia mesh repair, laparoscopic appendectomy, colorectal surgery, hemorrhoidectomy, splenectomy, and emergency laparotomies for GI perforations.' },
+        { question: 'Is emergency gastroenterology surgery available 24/7 in Salem?', answer: 'Yes. Our emergency surgical team with advanced ICU backup is on standby around the clock for acute abdomen, appendicitis, GI bleeding, and peritonitis.' },
+        { question: 'What diagnostic endoscopy services are available at Valli Hospital?', answer: 'We provide upper GI endoscopy, colonoscopy, and image-guided diagnostic evaluations with sedation for complete patient comfort.' }
       ]} />
+      <MedicalSpecialtySchema
+        name="Surgical Gastroenterology & GI Endoscopy Center"
+        description="Minimally invasive laparoscopic GI surgery, gallstone removal, hernia repair, and emergency acute abdomen care in Salem."
+        url="https://www.vallihospital.in/surgical-gastroenterology"
+      />
+      <MedicalProcedureSchema
+        name="Laparoscopic Cholecystectomy & Hernia Repair"
+        description="Keyhole surgical removal of gallstones and advanced tension-free mesh hernia repairs."
+        bodyLocation="Gastrointestinal Tract & Abdomen"
+      />
 
       <div className="mx-auto px-6 md:px-12 pt-28 pb-4 bg-[#001f25]">
         <nav aria-label="breadcrumb">

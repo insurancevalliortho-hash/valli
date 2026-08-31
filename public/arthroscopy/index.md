@@ -2,7 +2,7 @@
 title: Arthroscopy in Salem | Valli Super Specialty Hospital
 description: Minimally invasive keyhole joint surgery for knees, shoulders, and ankles with rapid recovery times.
 url: https://www.vallihospital.in/arthroscopy
-last_updated: 2026-08-26
+last_updated: 2026-08-31
 ---
 
 # Arthroscopy

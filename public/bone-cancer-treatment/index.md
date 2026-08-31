@@ -2,7 +2,7 @@
 title: Bone Cancer Treatment in Salem | Valli Super Specialty Hospital
 description: Orthopedic oncology services specializing in limb-salvage surgery and tumor resections.
 url: https://www.vallihospital.in/bone-cancer-treatment
-last_updated: 2026-08-26
+last_updated: 2026-08-31
 ---
 
 # Bone Cancer Treatment
