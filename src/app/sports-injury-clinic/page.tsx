@@ -1,31 +1,31 @@
 import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import { BreadcrumbSchema, FAQSchema, MedicalProcedureSchema, MedicalSpecialtySchema } from '../../components/seo/StructuredData';
 
 export const metadata: Metadata = {
-  title: "Sports Injury & Ligament Surgery Hospital in Salem | ACL, Meniscus | Valli Hospital",
-  description: "Advanced Sports Injury Clinic in Salem at Valli Super Specialty Hospital. Specializing in arthroscopic ACL reconstruction, PCL & meniscus repair, rotator cuff surgery, and athlete return-to-play rehabilitation.",
+  title: "Sports Injury Clinic & ACL Reconstruction in Salem | Valli Hospital",
+  description: "Specialized Sports Injury Clinic & Arthroscopy Center in Salem at Valli Super Specialty Hospital. Advanced treatment for ACL/PCL tears, meniscus injuries, rotator cuff tears, shoulder dislocations, and athletic rehabilitation.",
   keywords: [
-    "sports injury clinic Salem",
-    "ACL surgery Salem",
-    "ACL doctor near me",
-    "knee ligament reconstruction surgery",
-    "treatment for ligament tear",
-    "meniscus tear surgery Salem",
     "sports injury doctor near me",
-    "sports medicine Salem",
-    "rotator cuff surgery Salem",
-    "tennis elbow doctor Salem"
+    "sports injury clinic Salem",
+    "sports doctor near me",
+    "ACL tear surgery Salem",
+    "meniscus surgery Salem",
+    "shoulder arthroscopy Salem",
+    "sports medicine specialist Salem",
+    "ligament repair hospital Tamil Nadu",
+    "sports orthopedic Salem"
   ],
   alternates: {
     canonical: "https://www.vallihospital.in/sports-injury-clinic",
   },
   openGraph: {
-    title: "Sports Injury & Arthroscopic Ligament Clinic Salem | Valli Hospital",
-    description: "Keyhole arthroscopic surgery and accelerated sports rehabilitation for athletes and active individuals in Salem.",
+    title: "Sports Injury Clinic & Arthroscopy Center Salem | Valli Hospital",
+    description: "Minimally invasive keyhole arthroscopy, ACL reconstruction, and rapid return-to-sport programs by leading orthopedic sports specialists in Salem.",
     url: "https://www.vallihospital.in/sports-injury-clinic",
     type: "website",
   }
@@ -34,24 +34,24 @@ export const metadata: Metadata = {
 export default function SportsInjuryClinicPage() {
   const faqList = [
     {
-      question: "What are the common symptoms of an ACL or ligament tear?",
-      answer: "A sudden popping sensation in the knee followed by immediate swelling, inability to bear weight, and a feeling of instability or the knee 'giving way' are classic signs of an ACL ligament rupture."
+      question: "What are the most common sports injuries treated at Valli Hospital?",
+      answer: "We frequently treat anterior cruciate ligament (ACL) and posterior cruciate ligament (PCL) tears, meniscus tears, shoulder labral (Bankart) tears, rotator cuff tears, ankle ligament sprains, and hamstring muscle avulsions."
     },
     {
-      question: "Is arthroscopic keyhole surgery required for an ACL tear?",
-      answer: "Complete ACL tears causing recurrent knee instability in active individuals typically require Arthroscopic ACL Reconstruction. Minor partial tears may be managed conservatively with PRP regenerative injections, bracing, and specialized sports physiotherapy."
+      question: "What is Keyhole Arthroscopic ACL Reconstruction?",
+      answer: "Arthroscopic ACL reconstruction is a minimally invasive keyhole procedure where a high-definition 4K camera is inserted through tiny 4mm incisions to reconstruct the torn ligament using a strong autograft (hamstring or bone-patellar tendon). It ensures minimal scarring, faster healing, and lower post-op pain."
     },
     {
-      question: "How long is the recovery timeline for return to sports after ACL surgery?",
-      answer: "Jogging and straight-line running typically begin around 3 to 4 months post-surgery. Full clearance for competitive pivoting sports (football, cricket, athletics) occurs around 6 to 9 months, validated by objective biomechanical testing in our Iyakkam AI Sports Rehab lab."
+      question: "How long does recovery take after ACL surgery?",
+      answer: "Patients walk with crutches within 24 hours. Light jogging and straight-line running typically resume at 3 to 4 months, while full return to high-demand cutting sports (football, cricket, badminton) occurs around 6 to 9 months following our structured sports rehab protocol."
     },
     {
-      question: "Do you treat shoulder rotator cuff tears and dislocations?",
-      answer: "Yes. We perform minimally invasive arthroscopic rotator cuff repairs, Bankart labral repairs for recurrent shoulder dislocations, and subacromial decompressions."
+      question: "Can meniscus tears heal without surgery?",
+      answer: "Minor tears in the outer 'red zone' of the meniscus with good blood supply may heal with rest, physiotherapy, and ultrasound-guided PRP injections. Complex tears or mechanical locking of the knee require arthroscopic meniscus repair or partial meniscectomy."
     },
     {
-      question: "Who is the lead sports orthopedic surgeon?",
-      answer: "Dr. T. Natanasabapathy (Fellowship in Arthroscopy & Sports Medicine, South Korea) and Dr. E. Aakash (FIFA Diploma in Football Medicine) lead our dedicated sports injury surgical team."
+      question: "Who leads the Sports Injury & Arthroscopy team?",
+      answer: "Our sports surgery department is led by Dr. T. Natanasabapathy (Chief Orthopedic Surgeon with fellowships in arthroscopy from South Korea) and Dr. E. Aakash (FIFA Diploma in Football Medicine)."
     }
   ];
 
@@ -66,14 +66,14 @@ export default function SportsInjuryClinicPage() {
       ]} />
       <FAQSchema questions={faqList} />
       <MedicalSpecialtySchema
-        name="Sports Injury & Arthroscopic Surgery Clinic"
-        description="Center of excellence for athletic ligament repair, arthroscopy, and functional sports performance restoration in Salem."
+        name="Sports Medicine & Keyhole Arthroscopy Center"
+        description="Comprehensive athletic injury management, ligament reconstruction, and return-to-sport rehabilitation in Salem."
         url="https://www.vallihospital.in/sports-injury-clinic"
       />
       <MedicalProcedureSchema
-        name="Arthroscopic ACL & Ligament Reconstruction"
-        description="Minimally invasive keyhole anatomical reconstruction using hamstring/patellar tendon autografts."
-        bodyLocation="Knee & Shoulder Ligaments"
+        name="Arthroscopic ACL Reconstruction & Meniscus Repair"
+        description="Minimally invasive 4K arthroscopic anatomic ligament reconstruction and meniscus preservation."
+        bodyLocation="Knee Joint / Shoulder Joint / Musculoskeletal System"
       />
 
       {/* Breadcrumb UI */}
@@ -90,38 +90,6 @@ export default function SportsInjuryClinicPage() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative min-h-[45vh] flex items-center bg-[#001f25] pt-12 pb-20 overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none z-0">
-          <div className="absolute top-[-20%] right-[-10%] w-[40vw] h-[40vw] bg-[#004b57]/30 rounded-[6rem] rotate-12" />
-          <div className="absolute bottom-[-20%] left-[-10%] w-[35vw] h-[35vw] bg-[#f98825]/10 rounded-[5rem] rotate-45" />
-        </div>
-        <div className="container mx-auto px-6 md:px-12 relative z-10">
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/8 border border-white/12 text-[#f98825] text-xs font-bold tracking-[0.2em] uppercase mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#f98825]" />
-            Center for Athletic Medicine & Arthroscopy
-          </span>
-          <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-4xl">
-            Advanced Sports Injury & <br /> <span className="text-[#f98825]">ACL Surgery in Salem</span>
-          </h1>
-          <p className="mt-6 text-gray-300 text-lg max-w-2xl font-normal">
-            Precision arthroscopic repair for ACL, PCL, meniscus, and rotator cuff tears. Get back in the game with Salem&apos;s premier sports medicine team.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <Link
-              href="/book-appointment"
-              className="px-8 py-4 bg-[#f98825] text-white font-bold rounded-xl shadow-lg hover:bg-[#e07516] transition-all transform hover:-translate-y-0.5"
-            >
-              Book Sports Injury Consultation
-            </Link>
-            <a
-              href="tel:+919003417111"
-              className="px-8 py-4 bg-white/10 text-white font-bold rounded-xl border border-white/20 hover:bg-white/20 transition-all"
-            >
-              📞 Athlete Helpline: +91 90034 17111
-            </a>
-  
-      
-      {/* Hero Section - Concept 1 */}
       <section className="relative min-h-[45vh] flex items-center bg-[#001f25] pt-12 pb-16 overflow-hidden text-left">
         <div className="absolute inset-0 pointer-events-none z-0">
           <div className="absolute top-[-20%] right-[-10%] w-[40vw] h-[40vw] bg-[#004b57]/30 rounded-[6rem] rotate-12 blur-3xl" />
@@ -140,15 +108,21 @@ export default function SportsInjuryClinicPage() {
                 Sports Injury <br /> <span className="text-[#f98825]">Clinic</span>
               </h1>
               <p className="text-gray-300 text-base md:text-lg max-w-xl font-normal leading-relaxed">
-                Dedicated acute and chronic athletic trauma rehabilitation, arthroscopic keyhole repairs, and ligament reconstructions.
+                Dedicated acute and chronic athletic trauma rehabilitation, arthroscopic keyhole repairs, and ligament reconstructions in Salem.
               </p>
               <div className="pt-2 flex flex-wrap gap-4">
                 <Link
                   href="/book-appointment"
                   className="bg-[#f98825] hover:bg-[#e0751e] text-white px-7 py-3.5 rounded-full font-bold text-sm shadow-lg transition-all"
                 >
-                  Book Consultation
+                  Book Sports Injury Consultation
                 </Link>
+                <a
+                  href="tel:+919003417111"
+                  className="px-7 py-3.5 bg-white/10 text-white font-bold text-sm rounded-full border border-white/20 hover:bg-white/20 transition-all"
+                >
+                  📞 Athlete Helpline: +91 90034 17111
+                </a>
               </div>
             </div>
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import { BreadcrumbSchema, FAQSchema, MedicalProcedureSchema, MedicalSpecialtySchema } from '../../components/seo/StructuredData';
@@ -86,38 +87,6 @@ export default function SportsMedicineClinicPage() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative min-h-[45vh] flex items-center bg-[#001f25] pt-12 pb-20 overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none z-0">
-          <div className="absolute top-[-20%] right-[-10%] w-[40vw] h-[40vw] bg-[#004b57]/30 rounded-[6rem] rotate-12" />
-          <div className="absolute bottom-[-20%] left-[-10%] w-[35vw] h-[35vw] bg-[#f98825]/10 rounded-[5rem] rotate-45" />
-        </div>
-        <div className="container mx-auto px-6 md:px-12 relative z-10">
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/8 border border-white/12 text-[#f98825] text-xs font-bold tracking-[0.2em] uppercase mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#f98825]" />
-            Center for Athletic Medicine & Recovery
-          </span>
-          <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-4xl">
-            Sports Medicine & <br /> <span className="text-[#f98825]">Athletic Care in Salem</span>
-          </h1>
-          <p className="mt-6 text-gray-300 text-lg max-w-2xl font-normal">
-            Specialized sports medicine care for competitive athletes and fitness enthusiasts. Rapid injury recovery, PRP orthobiologics, and data-backed return-to-sport testing.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <Link
-              href="/book-appointment"
-              className="px-8 py-4 bg-[#f98825] text-white font-bold rounded-xl shadow-lg hover:bg-[#e07516] transition-all transform hover:-translate-y-0.5"
-            >
-              Book Sports Consultation
-            </Link>
-            <a
-              href="tel:+919003417111"
-              className="px-8 py-4 bg-white/10 text-white font-bold rounded-xl border border-white/20 hover:bg-white/20 transition-all"
-            >
-              📞 Direct Line: +91 90034 17111
-            </a>
-  
-      
-      {/* Hero Section - Concept 1 */}
       <section className="relative min-h-[45vh] flex items-center bg-[#001f25] pt-12 pb-16 overflow-hidden text-left">
         <div className="absolute inset-0 pointer-events-none z-0">
           <div className="absolute top-[-20%] right-[-10%] w-[40vw] h-[40vw] bg-[#004b57]/30 rounded-[6rem] rotate-12 blur-3xl" />
@@ -136,15 +105,21 @@ export default function SportsMedicineClinicPage() {
                 The Sports Medicine <br /> <span className="text-[#f98825]">Clinic</span>
               </h1>
               <p className="text-gray-300 text-base md:text-lg max-w-xl font-normal leading-relaxed">
-                Premier referral institute for sports science, athletic physical assessments, and non-surgical orthobiologic therapies.
+                Specialized sports medicine care for competitive athletes and fitness enthusiasts. Rapid injury recovery, PRP orthobiologics, and data-backed return-to-sport testing in Salem.
               </p>
               <div className="pt-2 flex flex-wrap gap-4">
                 <Link
                   href="/book-appointment"
                   className="bg-[#f98825] hover:bg-[#e0751e] text-white px-7 py-3.5 rounded-full font-bold text-sm shadow-lg transition-all"
                 >
-                  Book Consultation
+                  Book Sports Consultation
                 </Link>
+                <a
+                  href="tel:+919003417111"
+                  className="px-7 py-3.5 bg-white/10 text-white font-bold text-sm rounded-full border border-white/20 hover:bg-white/20 transition-all"
+                >
+                  📞 Direct Line: +91 90034 17111
+                </a>
               </div>
             </div>
 
