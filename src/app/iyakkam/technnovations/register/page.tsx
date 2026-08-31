@@ -296,7 +296,7 @@ export default function RegisterPage() {
     <>
       <Navbar />
 
-      <div className="min-h-screen bg-slate-50 text-[#1A1A2E] font-body selection:bg-orange selection:text-white pt-28 pb-24 px-4 sm:px-6 relative overflow-x-hidden grid-bg-dots">
+      <div className="min-h-screen bg-slate-50 text-[#1A1A2E] font-body selection:bg-orange selection:text-white pt-28 pb-24 px-4 sm:px-6 relative overflow-x-clip grid-bg-dots">
 
         <div className="relative z-10 max-w-6xl mx-auto">
           {/* Back button */}

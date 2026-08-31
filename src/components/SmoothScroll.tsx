@@ -68,14 +68,11 @@ const LENIS_OPTIONS = {
     smoothWheel: true,
     // Disable touch sync — let the browser compositor handle native momentum scroll
     syncTouch: false,
-    // Prevent Lenis from capturing scroll inside interactive/scrollable elements
+    // Prevent Lenis from capturing scroll inside scroll-prevent containers or overflowing textareas
     prevent: (node: HTMLElement) => {
         return (
-            node.tagName === "TEXTAREA" ||
-            node.tagName === "SELECT" ||
-            node.tagName === "INPUT" ||
-            node.dataset.lenisPrevent === "" ||
-            node.dataset.lenisPrevent === "true"
+            Boolean(node.closest?.("[data-lenis-prevent]")) ||
+            (node.tagName === "TEXTAREA" && node.scrollHeight > node.clientHeight)
         );
     },
 };

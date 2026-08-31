@@ -275,7 +275,7 @@ export default function AriseRegisterPage() {
     <>
       <Navbar />
 
-      <div className="min-h-screen bg-slate-50 text-slate-800 font-body selection:bg-orange selection:text-white pt-28 pb-24 px-4 sm:px-6 relative overflow-x-hidden grid-bg-dots text-left">
+      <div className="min-h-screen bg-slate-50 text-slate-800 font-body selection:bg-orange selection:text-white pt-28 pb-24 px-4 sm:px-6 relative overflow-x-clip grid-bg-dots text-left">
         <div className="relative z-10 max-w-4xl mx-auto">
           {/* Back button */}
           <div className="mb-6 max-w-2xl mx-auto">

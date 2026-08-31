@@ -167,6 +167,23 @@ function HeroSection() {
               </a>
             </motion.div>
 
+            {/* Bulk Orders & Helpline Contact Ribbon in Hero */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.42 }}
+              className="pt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-[#004B57] font-bold text-sm sm:text-base"
+            >
+              <span className="flex items-center gap-2 text-[#00A896] font-extrabold uppercase text-xs sm:text-sm tracking-wider">
+                <Phone className="w-4.5 h-4.5 text-[#FF8C00]" /> Bulk Orders & Helpline:
+              </span>
+              <div className="flex items-center gap-3 font-extrabold text-sm sm:text-base text-[#004B57]">
+                <a href="tel:+917092777764" className="hover:text-[#00A896] transition-colors">+91 7092777764</a>
+                <span className="text-slate-300">•</span>
+                <a href="tel:+918220377047" className="hover:text-[#00A896] transition-colors">+91 82203 77047</a>
+              </div>
+            </motion.div>
+
             {/* Quick Details Ribbon */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
@@ -495,13 +512,13 @@ function FacultySection() {
                 img: "/SpeakersIMG/rajansamuel.jpeg"
               },
               {
-                role: "persons",
+                role: "Organising Coordinators",
                 name: "Dr. V. Kaviya Sri (PT)",
                 credentials: "BPT, FDFM",
                 img: "/SpeakersIMG/Img1.jpeg"
               },
               {
-                role: "persons",
+                role: "Organising Coordinators",
                 name: "Dr. D. Leela Kumari (PT)",
                 credentials: "BPT, FDFM",
                 img: "/SpeakersIMG/Img2.jpeg"
@@ -611,17 +628,16 @@ function PricingSection() {
               ))}
             </div>
 
-            {/* Contacts */}
-            <div className="flex items-center gap-6 pt-4 text-slate-500 font-semibold text-xs">
-              <span className="flex items-center gap-1.5 text-[#004B57]">
-                <Phone className="w-4 h-4 text-[#00A896]" /> Helpline: +91 7092777764
+            {/* Contacts & Bulk Orders */}
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-4 border-t border-slate-100 text-slate-800 font-bold text-sm sm:text-base">
+              <span className="flex items-center gap-2 text-[#00A896] font-extrabold uppercase text-xs sm:text-sm tracking-wider">
+                <Phone className="w-4.5 h-4.5 text-[#00A896]" /> Contact
               </span>
-              <span>
-                •
-              </span>
-              <span className="text-[#004B57]">
-                Helpline: +91 82203 77047
-              </span>
+              <div className="flex items-center gap-3 font-extrabold text-sm sm:text-base text-[#004B57]">
+                <a href="tel:+917092777764" className="hover:text-[#00A896] transition-colors">+91 7092777764</a>
+                <span className="text-slate-300">•</span>
+                <a href="tel:+918220377047" className="hover:text-[#00A896] transition-colors">+91 82203 77047</a>
+              </div>
             </div>
           </div>
 
@@ -689,7 +705,7 @@ function PricingSection() {
 // ─── Main Page Assembly ───────────────────────────────────────────────────────
 export default function ArisePage() {
   return (
-    <main style={{ overflowX: "hidden" }} className="bg-slate-50 text-slate-800 select-none">
+    <main className="bg-slate-50 text-slate-800 select-none overflow-x-clip">
       <Navbar />
       <HeroSection />
       <WhyAttendSection />
