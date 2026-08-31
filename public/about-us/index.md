@@ -2,11 +2,7 @@
 title: About Us | Valli Super Specialty Hospital Salem
 description: Learn about the legacy of Valli Hospital Salem, our co-founders Dr. Natanasabapathy & Dr. Vijayalakshmi, and our evolution into a 50-bed Super Specialty center.
 url: https://www.vallihospital.in/about-us
-<<<<<<< HEAD
-last_updated: 2026-06-30
-=======
-last_updated: 2026-08-21
->>>>>>> 9fdf1bfba3153219b309ae46133f0eb4a253a949
+last_updated: 2026-08-31
 ---
 
 

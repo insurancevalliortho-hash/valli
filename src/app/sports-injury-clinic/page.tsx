@@ -1,34 +1,60 @@
 import React from 'react';
-import Image from 'next/image';
-
-import { BreadcrumbSchema, FAQSchema } from '../../components/seo/StructuredData';
-import Link from 'next/link';
-
-
 import { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: "Sports Injury Clinic Salem | ACL MCL Ligament Repair | Valli Hospital",
-  description: "Advanced sports injury treatment in Salem at Valli Super Specialty Hospital. Expert care for ACL tears, MCL injuries, meniscus tears, rotator cuff injuries, tennis elbow, and sports fractures. Biomechanical assessment and rehabilitation by specialist sports orthopaedic team.",
-  keywords: [
-      "sports injury clinic Salem",
-      "ACL injury treatment Salem",
-      "sports orthopaedic Salem",
-      "ligament repair Salem",
-      "MCL injury Salem",
-      "sports fracture treatment Salem",
-      "tennis elbow Salem",
-      "rotator cuff injury Salem"
-  ],
-  alternates: {
-    canonical: `https://www.vallihospital.in/sports-injury-clinic`,
-  },
-};
-
+import Link from 'next/link';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
+import { BreadcrumbSchema, FAQSchema, MedicalProcedureSchema, MedicalSpecialtySchema } from '../../components/seo/StructuredData';
 
-export default function Page() {
+export const metadata: Metadata = {
+  title: "Sports Injury & Ligament Surgery Hospital in Salem | ACL, Meniscus | Valli Hospital",
+  description: "Advanced Sports Injury Clinic in Salem at Valli Super Specialty Hospital. Specializing in arthroscopic ACL reconstruction, PCL & meniscus repair, rotator cuff surgery, and athlete return-to-play rehabilitation.",
+  keywords: [
+    "sports injury clinic Salem",
+    "ACL surgery Salem",
+    "ACL doctor near me",
+    "knee ligament reconstruction surgery",
+    "treatment for ligament tear",
+    "meniscus tear surgery Salem",
+    "sports injury doctor near me",
+    "sports medicine Salem",
+    "rotator cuff surgery Salem",
+    "tennis elbow doctor Salem"
+  ],
+  alternates: {
+    canonical: "https://www.vallihospital.in/sports-injury-clinic",
+  },
+  openGraph: {
+    title: "Sports Injury & Arthroscopic Ligament Clinic Salem | Valli Hospital",
+    description: "Keyhole arthroscopic surgery and accelerated sports rehabilitation for athletes and active individuals in Salem.",
+    url: "https://www.vallihospital.in/sports-injury-clinic",
+    type: "website",
+  }
+};
+
+export default function SportsInjuryClinicPage() {
+  const faqList = [
+    {
+      question: "What are the common symptoms of an ACL or ligament tear?",
+      answer: "A sudden popping sensation in the knee followed by immediate swelling, inability to bear weight, and a feeling of instability or the knee 'giving way' are classic signs of an ACL ligament rupture."
+    },
+    {
+      question: "Is arthroscopic keyhole surgery required for an ACL tear?",
+      answer: "Complete ACL tears causing recurrent knee instability in active individuals typically require Arthroscopic ACL Reconstruction. Minor partial tears may be managed conservatively with PRP regenerative injections, bracing, and specialized sports physiotherapy."
+    },
+    {
+      question: "How long is the recovery timeline for return to sports after ACL surgery?",
+      answer: "Jogging and straight-line running typically begin around 3 to 4 months post-surgery. Full clearance for competitive pivoting sports (football, cricket, athletics) occurs around 6 to 9 months, validated by objective biomechanical testing in our Iyakkam AI Sports Rehab lab."
+    },
+    {
+      question: "Do you treat shoulder rotator cuff tears and dislocations?",
+      answer: "Yes. We perform minimally invasive arthroscopic rotator cuff repairs, Bankart labral repairs for recurrent shoulder dislocations, and subacromial decompressions."
+    },
+    {
+      question: "Who is the lead sports orthopedic surgeon?",
+      answer: "Dr. T. Natanasabapathy (Fellowship in Arthroscopy & Sports Medicine, South Korea) and Dr. E. Aakash (FIFA Diploma in Football Medicine) lead our dedicated sports injury surgical team."
+    }
+  ];
+
   return (
     <>
       <Navbar />
@@ -37,12 +63,18 @@ export default function Page() {
         { name: 'Home', url: 'https://www.vallihospital.in/' },
         { name: 'Specialties', url: 'https://www.vallihospital.in/specialties' },
         { name: 'Sports Injury Clinic', url: 'https://www.vallihospital.in/sports-injury-clinic' }
-  ]} />
-      <FAQSchema questions={[
-        { question: 'What is the Sports Injury Clinic?', answer: 'The Sports Injury Clinic at Valli Super Specialty Hospital provides advanced, specialized care for related conditions.' },
-        { question: 'Who is the lead doctor?', answer: 'Dr. T. Natanasabapathy, Chief Orthopedic Surgeon, leads our specialized care teams.' }
       ]} />
-  
+      <FAQSchema questions={faqList} />
+      <MedicalSpecialtySchema
+        name="Sports Injury & Arthroscopic Surgery Clinic"
+        description="Center of excellence for athletic ligament repair, arthroscopy, and functional sports performance restoration in Salem."
+        url="https://www.vallihospital.in/sports-injury-clinic"
+      />
+      <MedicalProcedureSchema
+        name="Arthroscopic ACL & Ligament Reconstruction"
+        description="Minimally invasive keyhole anatomical reconstruction using hamstring/patellar tendon autografts."
+        bodyLocation="Knee & Shoulder Ligaments"
+      />
 
       {/* Breadcrumb UI */}
       <div className="mx-auto px-6 md:px-12 pt-28 pb-4 bg-[#001f25]">
@@ -56,6 +88,37 @@ export default function Page() {
           </ol>
         </nav>
       </div>
+
+      {/* Hero Section */}
+      <section className="relative min-h-[45vh] flex items-center bg-[#001f25] pt-12 pb-20 overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <div className="absolute top-[-20%] right-[-10%] w-[40vw] h-[40vw] bg-[#004b57]/30 rounded-[6rem] rotate-12" />
+          <div className="absolute bottom-[-20%] left-[-10%] w-[35vw] h-[35vw] bg-[#f98825]/10 rounded-[5rem] rotate-45" />
+        </div>
+        <div className="container mx-auto px-6 md:px-12 relative z-10">
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/8 border border-white/12 text-[#f98825] text-xs font-bold tracking-[0.2em] uppercase mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#f98825]" />
+            Center for Athletic Medicine & Arthroscopy
+          </span>
+          <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-4xl">
+            Advanced Sports Injury & <br /> <span className="text-[#f98825]">ACL Surgery in Salem</span>
+          </h1>
+          <p className="mt-6 text-gray-300 text-lg max-w-2xl font-normal">
+            Precision arthroscopic repair for ACL, PCL, meniscus, and rotator cuff tears. Get back in the game with Salem&apos;s premier sports medicine team.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Link
+              href="/book-appointment"
+              className="px-8 py-4 bg-[#f98825] text-white font-bold rounded-xl shadow-lg hover:bg-[#e07516] transition-all transform hover:-translate-y-0.5"
+            >
+              Book Sports Injury Consultation
+            </Link>
+            <a
+              href="tel:+919003417111"
+              className="px-8 py-4 bg-white/10 text-white font-bold rounded-xl border border-white/20 hover:bg-white/20 transition-all"
+            >
+              📞 Athlete Helpline: +91 90034 17111
+            </a>
   
       
       {/* Hero Section - Concept 1 */}
@@ -119,41 +182,99 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Content Section */}
+      {/* Main Content */}
       <section className="py-20 md:py-28 bg-[#f9fafb]">
-          <div className="container mx-auto px-6 md:px-12">
-              <div className="max-w-4xl mx-auto space-y-6 text-[#40484a] text-lg leading-relaxed font-medium">
-                  
-      <h2 className="text-2xl font-bold text-[#00333c]">Clinical Focus and Overview</h2>
-      <p>Distinct from the performance-enhancement focus of the Sports Medicine Clinic, the Sports Injury Clinic is dedicated to the acute and chronic rehabilitation of athletic trauma. The clinic employs a holistic, patient-centric strategy that evaluates posture, biomechanics, lifestyle, age, and whole-body alignment to treat the actual root cause of sports-related musculoskeletal injuries, thereby strictly minimizing the likelihood of recurrence.</p>
-      
-      <h2 className="text-2xl font-bold text-[#00333c] mt-8">Pathophysiology, Procedures, and Treatments</h2>
-      <p>The clinical specialists offer advanced, evidence-based treatments for a variety of debilitating conditions:</p>
-      <ul className="list-disc pl-5 mt-4 space-y-2">
-        <li><strong>Acute Soft Tissue Pathologies:</strong> Sprains (ligamentous injury) and strains (musculotendinous injury) trigger an acute inflammatory cascade. Treatment immediately focuses on mitigating edematous swelling and relieving intra-compartmental pressure. This is followed by a carefully phased rehabilitation process involving manual therapy, electrical stimulation modalities, and tailored proprioceptive exercises to safely restore the joint&apos;s full physiological range of motion.</li>
-        <li><strong>Specific Overuse Syndromes:</strong> Conditions resulting from repetitive microtrauma, such as Epicondylitis (Tennis Elbow) and Groin Pulls, involve micro-tearing of muscle fibers and subsequent fibrotic scarring. These are managed primarily with targeted physical therapy, dynamic stretching, adequate rest, and anti-inflammatories. Surgical excision of damaged, fibrotic tissue is judiciously reserved only for refractory cases that fail prolonged conservative management.</li>
-        <li><strong>Shoulder Kinematics and Injuries:</strong> The shoulder joint trades absolute stability for maximum mobility, making it highly susceptible to injury from repetitive overhead motions in sports. The majority of shoulder issues involve the dynamic stabilizers—the rotator cuff muscles, tendons, and ligaments—rather than the static bony structures. Early clinical identification and targeted kinetic chain strengthening are the absolute cornerstones of treatment to prevent chronic, career-ending glenohumeral instability.</li>
-        <li><strong>Fracture Management:</strong> When mechanical force exceeds the sheer strength of the bone, fractures occur. The clinic focuses on providing optimal biological and mechanical conditions for natural osteogenesis (bone healing) while meticulously maintaining the function of the adjacent joints.</li>
-      </ul>
-    
+        <div className="container mx-auto px-6 md:px-12">
+          <div className="max-w-4xl mx-auto space-y-10 text-[#40484a] text-lg leading-relaxed font-medium">
+
+            <div>
+              <h2 className="text-3xl font-bold text-[#00333c] mb-4">Elite Athletic Care & Minimally Invasive Arthroscopy</h2>
+              <p>
+                Sports injuries require rapid diagnosis, anatomical ligament repair, and structured return-to-play protocols. At <strong>Valli Super Specialty Hospital</strong>, our sports medicine division integrates fellowship-trained arthroscopic surgeons with cutting-edge rehabilitation technology at <strong>Iyakkam</strong> to ensure athletes regain full speed, agility, and joint stability.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 my-8">
+              <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                <div className="w-12 h-12 rounded-xl bg-[#f98825]/10 flex items-center justify-center text-[#f98825] font-black text-xl mb-4">⚡</div>
+                <h3 className="text-xl font-bold text-[#00333c] mb-2">Arthroscopic ACL Reconstruction</h3>
+                <p className="text-base text-gray-600">High-definition 4K keyhole surgery reconstructing the anterior cruciate ligament with exact anatomical tunnel placement and rigid fixation.</p>
               </div>
+              <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                <div className="w-12 h-12 rounded-xl bg-[#004d66]/10 flex items-center justify-center text-[#004d66] font-black text-xl mb-4">🎯</div>
+                <h3 className="text-xl font-bold text-[#00333c] mb-2">Meniscus & Cartilage Repair</h3>
+                <p className="text-base text-gray-600">Advanced inside-out and all-inside meniscus suturing techniques that preserve shock-absorbing cartilage and prevent early osteoarthritis.</p>
+              </div>
+            </div>
+
+            {/* Lead Specialists Module */}
+            <div className="bg-[#001f25] text-white p-8 rounded-3xl space-y-6">
+              <h3 className="text-2xl font-bold text-white">Lead Sports Orthopedic Specialists</h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="bg-white/5 border border-white/10 p-6 rounded-2xl">
+                  <div className="text-[#f98825] text-xs font-bold uppercase tracking-widest mb-1">Chief Arthroscopy Surgeon</div>
+                  <div className="text-xl font-bold text-white">Dr. T. Natanasabapathy</div>
+                  <p className="text-sm text-gray-300 mt-2">Fellowship in Advanced Arthroscopy & Sports Medicine (South Korea), 10,000+ procedures.</p>
+                  <Link href="/doctors/dr-tnatanasabapathy" className="mt-4 inline-block text-xs font-bold text-[#f98825] hover:underline">
+                    View Doctor Profile &rarr;
+                  </Link>
+                </div>
+                <div className="bg-white/5 border border-white/10 p-6 rounded-2xl">
+                  <div className="text-[#f98825] text-xs font-bold uppercase tracking-widest mb-1">Sports Medicine Registrar</div>
+                  <div className="text-xl font-bold text-white">Dr. E. Aakash</div>
+                  <p className="text-sm text-gray-300 mt-2">FIFA Diploma in Football Medicine (FDFM) & Fellowship in Joint Replacement (FIJR).</p>
+                  <Link href="/doctors/dr-aakash" className="mt-4 inline-block text-xs font-bold text-[#f98825] hover:underline">
+                    View Doctor Profile &rarr;
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* FAQs */}
+            <div className="mt-12">
+              <h2 className="text-3xl font-bold text-[#00333c] mb-6">Frequently Asked Questions</h2>
+              <div className="space-y-6">
+                {faqList.map((faq, idx) => (
+                  <div key={idx} className="bg-white p-6 rounded-xl border border-gray-200">
+                    <h3 className="text-xl font-bold text-[#00333c] mb-2">{faq.question}</h3>
+                    <p className="text-gray-600 text-base">{faq.answer}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
           </div>
+        </div>
       </section>
 
-      
+      {/* CTA Banner */}
+      <section className="py-16 bg-[#00333c] text-white text-center">
+        <div className="container mx-auto px-6 md:px-12">
+          <h2 className="text-3xl font-bold mb-4">Fast-Track Your Return to Sport</h2>
+          <p className="text-gray-300 max-w-xl mx-auto mb-8">Consult Salem&apos;s leading sports injury surgeons for accurate diagnosis, MRI review, and treatment.</p>
+          <Link
+            href="/book-appointment"
+            className="inline-block px-8 py-4 bg-[#f98825] text-white font-bold rounded-xl shadow-lg hover:bg-[#e07516] transition-all"
+          >
+            Book Sports Injury Appointment
+          </Link>
+        </div>
+      </section>
+
       {/* Related Treatments */}
       <section className="py-16 bg-white border-t border-gray-100">
         <div className="container mx-auto px-6 md:px-12">
-          <h3 className="text-2xl font-bold text-[#00333c] mb-6">Related Treatments & Specialties</h3>
-          <ul className="flex flex-col md:flex-row gap-6 md:gap-12">
+          <h3 className="text-2xl font-bold text-[#00333c] mb-6">Related Clinics</h3>
+          <ul className="flex flex-wrap gap-6 md:gap-12">
+            <li><Link href="/arthroscopy" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Arthroscopy Center</Link></li>
             <li><Link href="/sports-medicine-clinic" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Sports Medicine Clinic</Link></li>
-<li><Link href="/sports-training" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Sports Training</Link></li>
-<li><Link href="/arthroscopy" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Arthroscopy</Link></li>
+            <li><Link href="/iyakkam/ai-sports-rehab" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Iyakkam AI Sports Rehab</Link></li>
+            <li><Link href="/sports-training" className="text-[#004d66] hover:text-[#f98825] font-semibold underline decoration-2 underline-offset-4 transition-colors">Sports Performance Training</Link></li>
           </ul>
         </div>
       </section>
-  
-<Footer />
+
+      <Footer />
     </>
   );
 }

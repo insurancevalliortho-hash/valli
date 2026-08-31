@@ -29,7 +29,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/arthroscopy',
         '/bone-cancer-treatment',
         '/genetic-testing',
-        '/sports-training'
+        '/sports-training',
+        '/brachial-plexus-nerve-surgery',
+        '/critical-care-anaesthesia',
+        '/dialysis-kidney-care',
+        '/hematology-blood-disorders',
+        '/internal-medicine',
+        '/interventional-ultrasound-pain-management',
+        '/neurosurgery-neurological-care',
+        '/oral-maxillofacial-surgery',
+        '/plastic-reconstructive-surgery',
+        '/respiratory-care-pulmonology',
+        '/surgical-gastroenterology'
     ].map((route) => ({
         url: `${baseUrl}${route}`,
         lastModified: new Date().toISOString(),
@@ -42,10 +53,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/facilities',
         '/about-us',
         '/contact-us',
+        '/book-appointment',
         '/specialties',
         '/services',
         '/technology',
-        '/blog'
+        '/blog',
+        '/privacy-policy',
+        '/terms-of-use'
     ].map((route) => ({
         url: `${baseUrl}${route}`,
         lastModified: new Date().toISOString(),

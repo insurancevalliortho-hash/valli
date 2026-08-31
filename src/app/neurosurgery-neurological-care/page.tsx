@@ -1,5 +1,5 @@
 import React from 'react';
-import { BreadcrumbSchema, FAQSchema } from '../../components/seo/StructuredData';
+import { BreadcrumbSchema, FAQSchema, MedicalProcedureSchema, MedicalSpecialtySchema } from '../../components/seo/StructuredData';
 import Link from 'next/link';
 import { Metadata } from 'next';
 
@@ -23,9 +23,20 @@ export default function Page() {
         { name: 'Neurosurgery & Neurological Care', url: 'https://www.vallihospital.in/neurosurgery-neurological-care' }
       ]} />
       <FAQSchema questions={[
-        { question: 'What neurosurgical procedures are available at Valli Hospital?', answer: 'We perform brain tumor surgery, craniotomies, VP shunting, spinal decompression, disc surgery, cerebrovascular surgery for aneurysms, emergency TBI management, and Trigeminal Neuralgia treatment.' },
-        { question: 'Is emergency neurosurgery available 24/7?', answer: 'Yes. Our ICU-backed, ACLS and ATLS certified neurosurgical team handles Traumatic Brain Injury, Epidural and Subdural Hematomas, and raised ICP emergencies around the clock.' },
+        { question: 'What neurosurgical procedures are available at Valli Hospital Salem?', answer: 'We perform brain tumor surgery, craniotomies, VP shunting, spinal decompression, disc surgery, cerebrovascular surgery for aneurysms, emergency TBI management, and Trigeminal Neuralgia treatment.' },
+        { question: 'Is emergency neurosurgery and head injury care available 24/7 in Salem?', answer: 'Yes. Our ICU-backed, ACLS and ATLS certified neurosurgical team handles Traumatic Brain Injury (TBI), Epidural and Subdural Hematomas, and stroke emergencies around the clock.' },
+        { question: 'Who are the specialists for brain and nerve care?', answer: 'Our neurological care division features Dr. Dhivya (MBBS, MD - Consultant Neurologist) and senior consultant neurosurgeons.' }
       ]} />
+      <MedicalSpecialtySchema
+        name="Neurosurgery & Neurological Care Center"
+        description="24/7 advanced neurosurgical emergency center, brain tumor resection, and neurological ICU in Salem."
+        url="https://www.vallihospital.in/neurosurgery-neurological-care"
+      />
+      <MedicalProcedureSchema
+        name="Microsurgical Craniotomy & Neural Decompression"
+        description="High-precision neuro-microscopic surgery for intracranial tumors, hematomas, and spinal nerve compression."
+        bodyLocation="Brain, Spine & Central Nervous System"
+      />
 
       <div className="mx-auto px-6 md:px-12 pt-28 pb-4 bg-[#001f25]">
         <nav aria-label="breadcrumb">

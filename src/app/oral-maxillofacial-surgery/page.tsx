@@ -1,5 +1,5 @@
 import React from 'react';
-import { BreadcrumbSchema, FAQSchema } from '../../components/seo/StructuredData';
+import { BreadcrumbSchema, FAQSchema, MedicalProcedureSchema, MedicalSpecialtySchema } from '../../components/seo/StructuredData';
 import Link from 'next/link';
 import { Metadata } from 'next';
 
@@ -23,9 +23,20 @@ export default function Page() {
         { name: 'Oral & Maxillofacial Surgery', url: 'https://www.vallihospital.in/oral-maxillofacial-surgery' }
       ]} />
       <FAQSchema questions={[
-        { question: 'What does the Oral & Maxillofacial Surgery department treat?', answer: 'We treat complex facial trauma (mandibular, ZMC, orbital fractures), oral cancers, TMJ disorders, odontogenic cysts, cleft lip and palate, impacted wisdom teeth, and deep neck space infections.' },
-        { question: 'Is emergency maxillofacial care available?', answer: "Yes. Our ACLS and ATLS certified surgical team handles acute maxillofacial emergencies including Ludwig's Angina, airway compromise, and facial lacerations 24/7." },
+        { question: 'What does the Oral & Maxillofacial Surgery department treat in Salem?', answer: 'We treat complex facial trauma (mandibular, ZMC, orbital fractures), oral cancers, TMJ disorders, odontogenic cysts, cleft lip and palate, impacted wisdom teeth, and deep neck space infections.' },
+        { question: 'Is emergency maxillofacial trauma care available 24/7?', answer: "Yes. Our surgical trauma team handles acute maxillofacial emergencies including facial bone fractures, Ludwig's Angina, airway compromise, and soft tissue lacerations 24/7." },
+        { question: 'Who is the lead Maxillofacial Surgeon at Valli Hospital?', answer: 'Dr. B. S. Saravanan (MD, BDS, MDS - Oral and Facio-Maxilla Surgery) leads our specialized oral and maxillofacial reconstructive surgical team.' }
       ]} />
+      <MedicalSpecialtySchema
+        name="Oral and Maxillofacial Surgery Center"
+        description="24/7 facial bone trauma reconstruction, orthognathic jaw surgery, TMJ therapy, and oral surgical procedures in Salem."
+        url="https://www.vallihospital.in/oral-maxillofacial-surgery"
+      />
+      <MedicalProcedureSchema
+        name="Open Reduction of Facial Fractures & Orthognathic Surgery"
+        description="Titanium micro-plating for jaw fractures and corrective functional jaw realignment."
+        bodyLocation="Maxillofacial & Craniofacial Skeleton"
+      />
 
       <div className="mx-auto px-6 md:px-12 pt-28 pb-4 bg-[#001f25]">
         <nav aria-label="breadcrumb">

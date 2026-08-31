@@ -1,5 +1,5 @@
 import React from 'react';
-import { BreadcrumbSchema, FAQSchema } from '../../components/seo/StructuredData';
+import { BreadcrumbSchema, FAQSchema, MedicalSpecialtySchema } from '../../components/seo/StructuredData';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import Navbar from '../../components/Navbar';
@@ -35,10 +35,15 @@ export default function Page() {
         { name: 'Internal Medicine', url: 'https://www.vallihospital.in/internal-medicine' }
       ]} />
       <FAQSchema questions={[
-        { question: 'What conditions are treated by the Internal Medicine department?', answer: 'We treat a wide range of acute and chronic conditions including diabetes, hypertension, gastric/liver disorders, respiratory illnesses, urinary tract infections, jaundice, fevers, and infectious diseases.' },
-        { question: 'Does the Internal Medicine department offer 24/7 care?', answer: 'Yes. The department functions round the clock, providing 24-hour emergency medical services in close collaboration with our Department of Critical Care Medicine.' },
-        { question: 'Who is the lead specialist for Internal Medicine at Valli Hospital?', answer: 'Dr. Vasunthara Devi is the lead consultant physician for our Internal Medicine and Diabetology department.' },
+        { question: 'What conditions are treated by the Internal Medicine department?', answer: 'We treat a wide range of acute and chronic conditions including diabetes mellitus, hypertension, metabolic disorders, respiratory infections, fever management, and lifestyle diseases.' },
+        { question: 'Does the Internal Medicine department offer 24/7 care in Salem?', answer: 'Yes. The department functions round the clock, providing 24-hour emergency medical services in close collaboration with our Department of Critical Care Medicine.' },
+        { question: 'Who are the consultant physicians for Internal Medicine at Valli Hospital?', answer: 'Dr. Vasunthara Devi (Senior Consultant in Internal Medicine & Diabetology), Dr. I. Vijayalakshmi (MD General Medicine), and Dr. Ambiga provide comprehensive outpatient and inpatient medical care.' },
       ]} />
+      <MedicalSpecialtySchema
+        name="Internal Medicine & Diabetology Center"
+        description="Comprehensive chronic disease management, diabetes care, hypertension clinic, and internal medical diagnostics in Salem."
+        url="https://www.vallihospital.in/internal-medicine"
+      />
 
       {/* Breadcrumb UI */}
       <div className="mx-auto px-6 md:px-12 pt-28 pb-4 bg-[#001f25]">

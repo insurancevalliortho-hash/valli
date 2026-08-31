@@ -1,12 +1,27 @@
-﻿import { Metadata } from 'next';
+import { Metadata } from 'next';
+import { BreadcrumbSchema } from '../../components/seo/StructuredData';
 
 export const metadata: Metadata = {
-  title: 'Our Specialised Services | Valli Super Specialty Hospital Salem',
-  description: 'Explore the highly advanced clinical services and surgical Specialties at Valli Super Specialty Hospital. Discover our Joint Care, Arthroscopy, Pediatric Orthopedics, Bone Cancer Treatment, and Trauma services led by expert surgeons.',
-  keywords: 'orthopedics Salem, bone cancer treatment, joint replacement, arthroscopy, pediatric orthopedics, sports medicine, trauma clinic, Valli Hospital services',
+  title: 'Specialised Hospital Services & Surgeries in Salem | Valli Hospital',
+  description: 'Comprehensive clinical & surgical services at Valli Super Specialty Hospital Salem: Joint Replacement, Robotic Knee Care, Micro-Spine Surgery, 24/7 Trauma, and Emergency ICU.',
+  keywords: [
+    'orthopedic services Salem',
+    'hospital services in Salem',
+    'joint replacement surgery Salem',
+    'arthroscopy services Salem',
+    'trauma and fracture care Salem',
+    'emergency medical services Salem',
+    'Valli hospital services'
+  ],
   alternates: {
     canonical: 'https://www.vallihospital.in/services',
   },
+  openGraph: {
+    title: 'Hospital Services & Clinical Centers | Valli Super Specialty Hospital Salem',
+    description: 'Comprehensive surgical, diagnostic, and emergency medical services in Salem, Tamil Nadu.',
+    url: 'https://www.vallihospital.in/services',
+    type: 'website',
+  }
 };
 
 export default function ServicesLayout({
@@ -14,5 +29,14 @@ export default function ServicesLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return (
+    <>
+      <BreadcrumbSchema items={[
+        { name: 'Home', url: 'https://www.vallihospital.in/' },
+        { name: 'Services', url: 'https://www.vallihospital.in/services' }
+      ]} />
+      {children}
+    </>
+  );
 }
+

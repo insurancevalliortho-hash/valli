@@ -1,5 +1,5 @@
 import React from 'react';
-import { BreadcrumbSchema, FAQSchema } from '../../components/seo/StructuredData';
+import { BreadcrumbSchema, FAQSchema, MedicalProcedureSchema, MedicalSpecialtySchema } from '../../components/seo/StructuredData';
 import Link from 'next/link';
 import { Metadata } from 'next';
 
@@ -37,18 +37,28 @@ export default function Page() {
       ]} />
       <FAQSchema questions={[
         {
-          question: 'What reconstructive procedures are available at Valli Hospital?',
+          question: 'What reconstructive procedures are available at Valli Hospital Salem?',
           answer: 'We treat Diabetic Foot Wounds, Traumatic Wounds, Pressure Sores, Post-Surgical Wound Complications, Hand Trauma (Tendon, Nerve, Crush Injuries), and Facial Trauma reconstruction including Jaw Injuries and Maxillo-Facial Surgery.'
         },
         {
-          question: 'Does Valli Hospital offer cosmetic surgery?',
+          question: 'Does Valli Hospital offer cosmetic surgery in Salem?',
           answer: 'Yes. We provide Gynaecomastia Correction, Abdominoplasty, Hair Transplantation, Breast Augmentation, Breast Reduction, Varicose Vein Laser Surgery, and non-surgical treatments including PRP, PRF, GFC, Exosomes, Microneedling, and Chemical Peels.'
         },
         {
-          question: 'Is varicose vein treatment available at Valli Hospital?',
-          answer: 'Yes. We offer Minimally Invasive Laser Surgery for Varicose Veins, addressing visible enlarged veins, leg pain, heaviness, and swelling with faster recovery and superior cosmetic outcomes.'
+          question: 'Is varicose vein laser treatment available in Salem?',
+          answer: 'Yes. We offer Minimally Invasive Endovenous Laser Therapy (EVLT) for Varicose Veins, addressing visible enlarged veins, leg pain, heaviness, and chronic venous ulcers with zero scarring.'
         },
       ]} />
+      <MedicalSpecialtySchema
+        name="Plastic, Reconstructive & Aesthetic Surgery Center"
+        description="Comprehensive trauma flap reconstruction, microvascular repair, varicose vein laser treatment, and cosmetic surgery in Salem."
+        url="https://www.vallihospital.in/plastic-reconstructive-surgery"
+      />
+      <MedicalProcedureSchema
+        name="Reconstructive Flap Surgery & Varicose Vein Laser Ablation"
+        description="Complex tissue transfer, microvascular reconstruction, and endovenous laser treatment."
+        bodyLocation="Integumentary System, Limbs & Face"
+      />
 
       {/* Breadcrumb UI */}
       <div className="mx-auto px-6 md:px-12 pt-28 pb-4 bg-[#001f25]">

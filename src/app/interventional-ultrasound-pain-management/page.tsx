@@ -1,6 +1,5 @@
 import React from 'react';
-import Image from 'next/image';
-import { BreadcrumbSchema, FAQSchema } from '../../components/seo/StructuredData';
+import { BreadcrumbSchema, FAQSchema, MedicalProcedureSchema, MedicalSpecialtySchema } from '../../components/seo/StructuredData';
 import Link from 'next/link';
 import { Metadata } from 'next';
 
@@ -38,10 +37,20 @@ export default function Page() {
         { name: 'Interventional Ultrasound & Pain Management', url: 'https://www.vallihospital.in/interventional-ultrasound-pain-management' }
       ]} />
       <FAQSchema questions={[
-        { question: 'What is Interventional Ultrasound & Pain Management?', answer: 'It is a precision-guided specialty at Valli Super Specialty Hospital using two GE Versana USG machines to perform nerve blocks, PRP injections, stem cell therapy, epidural injections, and ultrasound-guided biopsies for pain relief and diagnostics.' },
-        { question: 'What conditions are treated at Valli Hospital Pain Management clinic?', answer: 'We treat trauma pain, arthritis, chronic back pain, Trigeminal Neuralgia, TMJ disorders, cancer pain, pancreatic pain, stroke-related pain, and sports injuries using advanced interventional techniques.' },
-        { question: 'Who leads the Interventional Ultrasound team?', answer: 'Our multidisciplinary team includes a senior Radiologist, an Anesthetist, a specialized Pain Medicine Consultant, and three expert technicians.' },
+        { question: 'What is Interventional Ultrasound & Pain Management?', answer: 'It is a precision-guided specialty at Valli Super Specialty Hospital using high-definition GE Versana USG systems to perform targeted nerve blocks, regenerative PRP injections, epidural injections, and ultrasound-guided biopsies for instant and sustained pain relief.' },
+        { question: 'What pain conditions are treated at Valli Hospital Pain Management clinic?', answer: 'We treat severe joint arthritis, chronic back/neck pain, sciatica, Trigeminal Neuralgia, TMJ disorders, intractable cancer pain, and acute sports injuries without heavy reliance on oral opioids.' },
+        { question: 'Who leads the Interventional Ultrasound and Radiology team?', answer: 'Our imaging and interventional team is led by Dr. S. Senthilnathan (MBBS, MD - Consultant Radio Diagnosis) and senior anaesthetists.' },
       ]} />
+      <MedicalSpecialtySchema
+        name="Interventional Pain Management & Radio Diagnosis Center"
+        description="Ultrasound-guided targeted nerve blocks, regenerative therapies, and non-surgical pain management in Salem."
+        url="https://www.vallihospital.in/interventional-ultrasound-pain-management"
+      />
+      <MedicalProcedureSchema
+        name="Ultrasound-Guided Targeted Nerve Infiltration & PRP Therapy"
+        description="Real-time sonographic precision needle targeting of inflamed nerve bundles and degenerative joints."
+        bodyLocation="Peripheral Nerves & Musculoskeletal System"
+      />
 
       {/* Breadcrumb UI */}
       <div className="mx-auto px-6 md:px-12 pt-28 pb-4 bg-[#001f25]">
