@@ -175,7 +175,7 @@ function HeroSection() {
               className="pt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-[#004B57] font-bold text-sm sm:text-base"
             >
               <span className="flex items-center gap-2 text-[#00A896] font-extrabold uppercase text-xs sm:text-sm tracking-wider">
-                <Phone className="w-4.5 h-4.5 text-[#FF8C00]" /> Bulk Orders & Helpline:
+                <Phone className="w-4.5 h-4.5 text-[#FF8C00]" /> Bulk Registration & Helpline:
               </span>
               <div className="flex items-center gap-3 font-extrabold text-sm sm:text-base text-[#004B57]">
                 <a href="tel:+917092777764" className="hover:text-[#00A896] transition-colors">+91 7092777764</a>
