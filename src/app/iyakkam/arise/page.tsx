@@ -513,16 +513,17 @@ function FacultySection() {
               },
               {
                 role: "Organising Coordinators",
-                name: "Dr. V. Kaviya Sri (PT)",
-                credentials: "BPT, FDFM",
-                img: "/SpeakersIMG/Img1.jpeg"
-              },
-              {
-                role: "Organising Coordinators",
                 name: "Dr. D. Leela Kumari (PT)",
                 credentials: "BPT, FDFM",
                 img: "/SpeakersIMG/Img2.jpeg"
+              },
+              {
+                role: "Organising Coordinators",
+                name: "Dr. V. Kaviya Sri (PT)",
+                credentials: "BPT, FDFM",
+                img: "/SpeakersIMG/Img1.jpeg"
               }
+
             ].map((c, idx) => (
               <motion.div
                 key={idx}
