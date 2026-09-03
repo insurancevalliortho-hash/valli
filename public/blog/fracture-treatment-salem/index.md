@@ -2,7 +2,7 @@
 title: 24/7 Fracture Treatment in Salem | Valli Hospital Blog
 description: Emergency trauma and fracture care at Valli Hospital.
 url: https://www.vallihospital.in/blog/fracture-treatment-salem
-last_updated: 2026-08-31
+last_updated: 2026-09-03
 ---
 
 # 24/7 Fracture Treatment in Salem

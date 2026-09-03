@@ -3,19 +3,26 @@ import React from 'react';
 export const HospitalSchema = () => {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "MedicalOrganization",
+    "@type": ["Hospital", "MedicalOrganization", "EmergencyService"],
     "name": "Valli Super Specialty Hospital",
     "alternateName": [
       "Valli Orthopedic and Sports Hospital",
       "Valli Orthopaedic and Sports Hospital",
-      "Valli Hospital Salem"
+      "Valli Hospital Salem",
+      "வள்ளி மருத்துவமனை சேலம்",
+      "Salem Bone Hospital",
+      "Valli Ortho Hospital Salem"
     ],
     "url": "https://www.vallihospital.in",
     "logo": "https://www.vallihospital.in/favicon.png",
+    "image": "https://www.vallihospital.in/og-image.jpg",
     "telephone": "+91-9003417111",
+    "priceRange": "$$",
+    "currenciesAccepted": "INR",
+    "paymentAccepted": "Cash, Credit Card, Debit Card, UPI, Cashless Health Insurance (Star Health, Medi Assist, Vidal Health, Paramount, ICICI Lombard, HDFC ERGO, Care Health)",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Meyyanoor Road",
+      "streetAddress": "Meyyanoor Road, Near 5 Roads",
       "addressLocality": "Salem",
       "addressRegion": "Tamil Nadu",
       "postalCode": "636004",
@@ -26,24 +33,66 @@ export const HospitalSchema = () => {
       "latitude": 11.6643,
       "longitude": 78.1460
     },
-    "openingHours": "00:00-23:59",
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "00:00",
+        "closes": "23:59"
+      }
+    ],
     "hasMap": "https://maps.app.goo.gl/c4oHsAMwjLq9UqYi8",
     "medicalSpecialty": [
       "Orthopedic Surgery",
-      "Sports Medicine",
-      "Spine Surgery",
-      "Trauma Surgery",
-      "Rheumatology",
       "Joint Replacement Surgery",
+      "Robotic Knee Replacement",
+      "Spine Surgery",
+      "Sports Medicine",
+      "Trauma Surgery",
       "Arthroscopic Surgery",
+      "Rheumatology",
       "Pediatric Orthopedics",
+      "Physiotherapy & Sports Rehabilitation",
+      "Critical Care & Emergency Medicine",
       "Gastroenterology",
       "Neurosurgery"
+    ],
+    "availableService": [
+      {
+        "@type": "MedicalProcedure",
+        "name": "Robotic Knee Replacement Surgery & Cooled RFA",
+        "description": "High-precision computer-assisted total knee replacement and non-surgical Cooled Radiofrequency Ablation for knee arthritis in Salem."
+      },
+      {
+        "@type": "MedicalProcedure",
+        "name": "Minimally Invasive Spine Surgery & Sciatica Relief",
+        "description": "Keyhole spine decompression, microdiscectomy, and ultrasound-guided epidural nerve blocks for disc prolapse."
+      },
+      {
+        "@type": "MedicalProcedure",
+        "name": "24/7 Emergency Fracture Stabilization & ORIF",
+        "description": "Immediate round-the-clock polytrauma care, fracture reduction, and titanium fixation."
+      },
+      {
+        "@type": "MedicalProcedure",
+        "name": "Arthroscopy & Sports Ligament Reconstruction",
+        "description": "Keyhole ACL/PCL ligament reconstruction, meniscus repair, and rotator cuff shoulder surgery."
+      }
     ],
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "4.7",
-      "reviewCount": "920"
+      "reviewCount": "920",
+      "bestRating": "5",
+      "worstRating": "1"
     }
   };
 
@@ -60,18 +109,43 @@ export const PhysicianSchema = () => {
     "@context": "https://schema.org",
     "@type": "Physician",
     "name": "Dr. T. Natanasabapathy",
-    "jobTitle": "Chief Orthopedic Surgeon & Joint Replacement Specialist",
+    "alternateName": [
+      "Dr. Natanasabapathy",
+      "Dr Natanasabapathy Salem",
+      "Dr. T. Natanasabapathy Orthopedic Surgeon"
+    ],
+    "jobTitle": "Chief Orthopedic Surgeon & Managing Director",
     "worksFor": {
       "@type": "MedicalOrganization",
-      "name": "Valli Super Specialty Hospital"
+      "name": "Valli Super Specialty Hospital",
+      "url": "https://www.vallihospital.in"
     },
     "medicalSpecialty": [
       "Orthopedic Surgery",
       "Joint Replacement Surgery",
+      "Robotic Knee Surgery",
       "Arthroscopic Surgery",
-      "Sports Medicine"
+      "Spine Surgery",
+      "Sports Medicine",
+      "Complex Trauma Surgery"
     ],
-    "yearsOfExperience": "16+"
+    "knowsAbout": [
+      "Total Knee Replacement",
+      "Robotic Joint Replacement",
+      "Cooled Radiofrequency Ablation (Cooled RFA)",
+      "Total Hip Arthroplasty",
+      "ACL Reconstruction",
+      "Micro-endoscopic Spine Surgery",
+      "Complex Fracture Management"
+    ],
+    "yearsOfExperience": "21+",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Salem",
+      "addressRegion": "Tamil Nadu",
+      "addressCountry": "IN"
+    },
+    "url": "https://www.vallihospital.in/doctors"
   };
 
   return (

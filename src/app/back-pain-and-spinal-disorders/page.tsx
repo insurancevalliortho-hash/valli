@@ -7,17 +7,19 @@ import { BreadcrumbSchema, FAQSchema, MedicalProcedureSchema, MedicalSpecialtySc
 
 export const metadata: Metadata = {
   title: "Back Pain Treatment & Spine Surgery in Salem | Disc, Sciatica Specialist | Valli Hospital",
-  description: "Advanced back pain relief and spine surgery in Salem at Valli Super Specialty Hospital. Specializing in sciatica, herniated disc, lumbar spondylosis, and micro-endoscopic spine surgery. Non-surgical and robotic spine care.",
+  description: "Advanced back pain relief and spine surgery in Salem at Valli Super Specialty Hospital. Specializing in sciatica, herniated disc, lumbar spondylosis, and micro-endoscopic spine surgery. Cashless insurance available.",
   keywords: [
-    "back pain treatment in Salem",
-    "spine surgeon in Salem",
+    "spine surgeon in salem",
+    "back pain treatment in salem",
+    "back pain doctor near me",
+    "sciatica treatment salem",
+    "spine surgery in salem",
     "best hospital for back pain treatment",
-    "sciatica treatment Salem",
-    "disc herniation surgery Salem",
-    "lumbar spondylosis doctor Salem",
+    "disc herniation surgery salem",
+    "lumbar spondylosis doctor salem",
     "lower back pain specialist near me",
-    "back pain best hospital in Salem",
-    "spine specialist doctor Salem",
+    "iduppu vali doctor salem",
+    "spine specialist doctor salem",
     "ultrasound guided spine injection"
   ],
   alternates: {
@@ -40,6 +42,10 @@ export default function BackPainSpinalDisordersPage() {
     {
       question: "Can back pain be treated without open spine surgery at Valli Hospital?",
       answer: "Yes. Over 85% of back pain patients recover successfully without open surgery. Our tiered approach includes targeted physiotherapy, core stabilization, and advanced ultrasound-guided epidural nerve blocks that eliminate pain signals at the exact root."
+    },
+    {
+      question: "Is cashless health insurance accepted for spine surgery at Valli Hospital?",
+      answer: "Yes. Valli Super Specialty Hospital provides comprehensive cashless hospitalization for spine surgeries (including microdiscectomy, endoscopic decompression, and spinal fusion) with Star Health, Medi Assist, Vidal Health, ICICI Lombard, HDFC ERGO, and other major TPAs."
     },
     {
       question: "When is spine surgery necessary for disc herniation?",

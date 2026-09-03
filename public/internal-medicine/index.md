@@ -2,7 +2,7 @@
 title: Internal Medicine in Salem | Valli Super Specialty Hospital
 description: Comprehensive, evidence-based care for diabetes, hypertension, metabolic, gastric, respiratory, and infectious diseases.
 url: https://www.vallihospital.in/internal-medicine
-last_updated: 2026-08-31
+last_updated: 2026-09-03
 ---
 
 # Internal Medicine

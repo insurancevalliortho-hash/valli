@@ -10,8 +10,16 @@ const FAQ_ITEMS = [
         answer: "Valli Super Specialty Hospital (formerly Valli Orthopedic and Sports Hospital) is widely recognized as the best orthopedic hospital in Salem, Tamil Nadu. The hospital features world-class infrastructure including class-100 laminar-flow modular OTs, a 10-bed advanced critical care ICU, a 24/7 laboratory, high-speed GE CT diagnostics, and full NABH safety accreditation."
     },
     {
-        question: "Who is the best orthopedic doctor in Salem?",
-        answer: "Dr. T. Natanasabapathy, Chairman & Chief Orthopedic Surgeon at Valli Super Specialty Hospital, is highly regarded as the best orthopedic doctor in Salem. With over 21 years of experience, 19,000+ successfully treated patients, and 5,000+ complex orthopedic surgeries, he specializes in high-precision knee replacements, spine surgery, trauma recovery, and advanced arthroscopic procedures."
+        question: "Who is the best orthopedic doctor (elumbu doctor) in Salem?",
+        answer: "Dr. T. Natanasabapathy, Chairman & Chief Orthopedic Surgeon at Valli Super Specialty Hospital, is widely recognized as the best orthopedic doctor (elumbu doctor) in Salem. With over 21 years of surgical excellence and 10,000+ successful surgeries, he specializes in high-precision robotic knee replacements, spine surgery, trauma recovery, and advanced arthroscopic keyhole procedures."
+    },
+    {
+        question: "Does Valli Hospital provide cashless insurance facility for orthopedic surgeries in Salem?",
+        answer: "Yes. Valli Super Specialty Hospital is an empaneled network hospital offering hassle-free cashless hospitalization across leading health insurance providers and TPAs, including Star Health, Medi Assist, Vidal Health, Paramount TPA, ICICI Lombard, HDFC ERGO, Care Health, and government health schemes. Dedicated insurance desk assistance is available 24/7."
+    },
+    {
+        question: "What is the cost of knee replacement surgery in Salem at Valli Hospital?",
+        answer: "Knee replacement surgery at Valli Super Specialty Hospital ranges from ₹1,40,000 to ₹2,10,000 depending on single/bilateral joint requirement, implant choice (US FDA-approved high-flexion implants), and robotic assistance. For non-surgical knee pain relief, advanced Cooled Radiofrequency Ablation (Cooled RFA) and PRP regenerative injections are also offered at transparent outpatient packages."
     },
     {
         question: "Does Valli Hospital offer non-surgical treatments for joint and knee pain?",
@@ -19,7 +27,11 @@ const FAQ_ITEMS = [
     },
     {
         question: "Is Valli Super Specialty Hospital equipped for 24/7 emergency trauma and fracture care?",
-        answer: "Absolutely. Valli Hospital operates a state-of-the-art 24/7 trauma care and emergency resuscitation center in Salem. Our trauma teams are supported by in-house radiologists, anesthetists, high-speed GE CT scanners for rapid diagnostics, and ultrasound-guided block systems to ensure immediate, painless fracture stabilization."
+        answer: "Absolutely. Valli Hospital operates a state-of-the-art 24/7 trauma care and emergency resuscitation center in Salem near Meyyanur 5 Roads. Our trauma teams are supported by in-house radiologists, anesthetists, high-speed GE CT scanners for rapid diagnostics, and ultrasound-guided block systems to ensure immediate, painless fracture stabilization."
+    },
+    {
+        question: "Where is Valli Hospital located in Salem, and how can I book an appointment?",
+        answer: "Valli Super Specialty Hospital is conveniently located on Meyyanoor Road (near 5 Roads), Salem, Tamil Nadu 636004. Patients from Salem, Omalur, Attur, Namakkal, and Dharmapuri can book appointments by calling +91 90034 17111 or directly via our website book-appointment portal."
     },
     {
         question: "What specialties and services are offered at Valli Hospital in Salem?",

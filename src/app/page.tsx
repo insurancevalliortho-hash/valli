@@ -1,4 +1,4 @@
-﻿import { Metadata } from "next";
+import { Metadata } from "next";
 import Navbar from "./../components/Navbar";
 import Hero from "./../components/Hero";
 import TrustBar from "./../components/TrustBar";
@@ -16,25 +16,29 @@ export const dynamic = "force-static";
 export const revalidate = false;
 
 export const metadata: Metadata = {
-    title: "Best Orthopedic Surgeon & Hospital in Salem | Dr. T. Natanasabapathy | Valli Super Specialty Hospital",
-    description: "Valli Super Specialty Hospital (formerly Valli Orthopedic and Sports Hospital) — Salem's #1 orthopedic surgeon Dr. T. Natanasabapathy. Specializing in knee replacement, spine surgery, trauma recovery, sports injury treatment, and sports medicine. Contact us 24/7.",
+    title: "Best Ortho Doctor & Orthopedic Hospital in Salem | Dr. T. Natanasabapathy | Valli Hospital",
+    description: "Consult Salem's top orthopedic doctor Dr. T. Natanasabapathy at Valli Super Specialty Hospital. Specializing in robotic knee replacement, spine surgery, sports injury & 24/7 emergency fracture care. Cashless insurance available.",
     keywords: [
-        "valli orthopedic and sports hospital",
-        "valli orthopaedic and sports hospital",
+        "best ortho doctor in salem",
+        "orthopedic doctor in salem",
         "best orthopedic hospital in Salem",
-        "orthopedic surgeon Salem Tamil Nadu",
-        "joint replacement Salem",
-        "knee replacement Salem",
-        "hip replacement Salem",
-        "sports injury clinic Salem",
-        "trauma hospital Salem",
-        "spine surgery Salem",
-        "Valli hospital Salem",
-        "orthopedic hospital Tamil Nadu",
-        "fracture treatment Salem",
-        "arthroscopy Salem",
-        "Dr Natanasabapathy orthopedic surgeon",
-        "24 hour emergency hospital Salem",
+        "salem orthopedic doctors",
+        "best orthopedician in salem",
+        "bone doctor salem",
+        "salem bone specialist hospital",
+        "orthopedic hospital near me",
+        "elumbu doctor near me",
+        "knee replacement in salem",
+        "robotic knee replacement salem",
+        "knee replacement cost in salem",
+        "spine surgeon in salem",
+        "back pain treatment in salem",
+        "24 hour emergency hospital salem",
+        "fracture treatment salem",
+        "sports injury clinic salem",
+        "cashless insurance hospital in salem",
+        "dr natanasabapathy orthopedic surgeon",
+        "valli orthopedic and sports hospital",
         "valli Super Specialty hospital salem"
     ],
     alternates: {
@@ -46,8 +50,8 @@ export const metadata: Metadata = {
         }
     },
     openGraph: {
-        title: "Best Orthopedic Hospital in Salem | Valli Super Specialty Hospital",
-        description: "Salem's most trusted orthopedic hospital — joint replacement, trauma care, sports injury treatment, and 24/7 emergency. Led by Dr. T. Natanasabapathy.",
+        title: "Best Ortho Doctor & Orthopedic Hospital in Salem | Valli Hospital",
+        description: "Salem's most trusted orthopedic hospital — robotic knee replacement, spine surgery, trauma care, sports injury, and 24/7 emergency. Led by Dr. T. Natanasabapathy.",
         url: "https://www.vallihospital.in/",
         siteName: "Valli Super Specialty Hospital",
         locale: "en_IN",
@@ -63,8 +67,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "Best Orthopedic Hospital in Salem | Valli Super Specialty Hospital",
-        description: "Salem's most trusted orthopedic hospital — joint replacement, trauma care, sports injury treatment, and 24/7 emergency.",
+        title: "Best Ortho Doctor & Orthopedic Hospital in Salem | Valli Hospital",
+        description: "Salem's most trusted orthopedic hospital — robotic knee replacement, spine surgery, trauma care, sports injury treatment, and 24/7 emergency.",
         images: ["/og-image.jpg"]
     },
     other: {
@@ -84,7 +88,8 @@ export default function Home() {
             "alternateName": [
                 "Valli Orthopedic and Sports Hospital",
                 "Valli Orthopaedic and Sports Hospital",
-                "Valli Hospital Salem"
+                "Valli Hospital Salem",
+                "வள்ளி மருத்துவமனை சேலம்"
             ],
             "url": "https://www.vallihospital.in",
             "potentialAction": {
@@ -95,20 +100,25 @@ export default function Home() {
         },
         {
             "@context": "https://schema.org",
-            "@type": "Hospital",
+            "@type": ["Hospital", "MedicalOrganization", "EmergencyService"],
             "name": "Valli Super Specialty Hospital",
             "alternateName": [
                 "Valli Orthopedic and Sports Hospital",
                 "Valli Orthopaedic and Sports Hospital",
-                "Valli Hospital Salem"
+                "Valli Hospital Salem",
+                "வள்ளி மருத்துவமனை சேலம்",
+                "Salem Bone Specialist Hospital"
             ],
             "image": "https://www.vallihospital.in/favicon.png",
             "@id": "https://www.vallihospital.in",
             "url": "https://www.vallihospital.in",
             "telephone": "+919003417111",
+            "priceRange": "$$",
+            "currenciesAccepted": "INR",
+            "paymentAccepted": "Cash, Credit Card, Debit Card, UPI, Cashless Health Insurance (Star Health, Medi Assist, Vidal Health, Paramount, ICICI Lombard, HDFC ERGO)",
             "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "Meyyanur Bypass Road",
+                "streetAddress": "Meyyanur Bypass Road, Near 5 Roads",
                 "addressLocality": "Salem",
                 "addressRegion": "Tamil Nadu",
                 "postalCode": "636004",
@@ -128,11 +138,14 @@ export default function Home() {
                 "closes": "23:59"
             },
             "medicalSpecialty": [
-                "Orthopedic",
+                "Orthopedic Surgery",
+                "Robotic Knee Replacement",
                 "Spine Surgery",
                 "Joint Replacement",
                 "Trauma Care",
-                "Sports Medicine"
+                "Sports Medicine",
+                "Arthroscopy",
+                "Rheumatology"
             ],
             "isAcceptingNewPatients": true
         },
