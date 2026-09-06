@@ -94,7 +94,7 @@ export default function Page() {
               <div className="relative mx-auto max-w-xs sm:max-w-sm bg-gradient-to-b from-white/15 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-4 shadow-2xl">
                 <div className="relative w-full h-72 rounded-2xl overflow-hidden bg-[#00333c] border border-white/10">
                   <Image
-                    src="/SpeakersIMG/Dr.tamilkumaran.jpeg"
+                    src="/doctorsIMG/Dr.tamilkumaran.jpeg"
                     alt="Dr. Tamilkumaran"
                     fill
                     className="object-cover object-top"

@@ -2,7 +2,7 @@
 title: Dr. Vasunthara Devi - MBBS, MD (Internal Medicine) | Valli Hospital Salem
 description: Professional profile of Dr. Vasunthara Devi, specialist in DEPT OF INTERNAL MEDICINE & DIABETOLOGY at Valli Super Specialty Hospital.
 url: https://www.vallihospital.in/doctors/dr-vasunthara-devi
-last_updated: 2026-08-21
+last_updated: 2026-08-31
 ---
 
 # Professional Medical Profile: Dr. Vasunthara Devi

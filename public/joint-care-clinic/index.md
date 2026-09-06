@@ -2,11 +2,7 @@
 title: Joint Care Clinic in Salem | Valli Super Specialty Hospital
 description: Advanced management of acute and chronic joint pain including primary and revision knee and hip replacements.
 url: https://www.vallihospital.in/joint-care-clinic
-<<<<<<< HEAD
-last_updated: 2026-06-30
-=======
-last_updated: 2026-08-21
->>>>>>> 9fdf1bfba3153219b309ae46133f0eb4a253a949
+last_updated: 2026-08-31
 ---
 
 # Joint Care Clinic

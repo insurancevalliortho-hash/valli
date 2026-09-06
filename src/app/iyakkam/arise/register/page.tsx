@@ -75,61 +75,79 @@ export default function AriseRegisterPage() {
 
   // Compute total fee amount to pay
   const calculateTotalFee = () => {
-    if (designation === "Student / Intern" && bonafideCertificate) {
-      return 500;
-    }
+    const isStudentWithBonafide = designation === "Student / Intern" && Boolean(bonafideCertificate);
     if (category === "Conference with Workshop") {
-      return 2500;
+      return isStudentWithBonafide ? 1000 : 2500;
     }
     if (category === "Workshop") {
       return 500;
     }
-    return 2000;
+    return isStudentWithBonafide ? 500 : 2000;
   };
 
   const totalFee = calculateTotalFee();
   const includeWorkshop = category === "Conference with Workshop" || category === "Workshop";
 
-  useEffect(() => {
-    if (designation === "Student / Intern" || designation === "Other") {
-      setCategory("Conference");
-    }
-  }, [designation]);
+  // Helper to compress image before state to ensure light JSON payload and instant processing
+  const compressImage = (file: File, maxWidth = 1000, quality = 0.75): Promise<string> => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = document.createElement("img");
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          let width = img.width;
+          let height = img.height;
+          if (width > maxWidth) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          }
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext("2d");
+          if (ctx) {
+            ctx.drawImage(img, 0, 0, width, height);
+            resolve(canvas.toDataURL("image/jpeg", quality));
+          } else {
+            resolve(e.target?.result as string);
+          }
+        };
+        img.onerror = () => resolve(e.target?.result as string);
+        img.src = e.target?.result as string;
+      };
+      reader.onerror = () => resolve("");
+      reader.readAsDataURL(file);
+    });
+  };
 
-  const handleScreenshotChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleScreenshotChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-
-    if (file.size > 2 * 1024 * 1024) {
-      alert("Screenshot file size should be less than 2MB");
-      return;
+    try {
+      const compressed = await compressImage(file);
+      setScreenshot(compressed);
+    } catch {
+      const reader = new FileReader();
+      reader.onload = (event) => setScreenshot(event.target?.result as string);
+      reader.readAsDataURL(file);
     }
-
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      setScreenshot(event.target?.result as string);
-    };
-    reader.readAsDataURL(file);
   };
 
   const handleClearScreenshot = () => {
     setScreenshot(null);
   };
 
-  const handleBonafideChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleBonafideChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-
-    if (file.size > 2 * 1024 * 1024) {
-      alert("Bonafide Certificate file size should be less than 2MB");
-      return;
+    try {
+      const compressed = await compressImage(file);
+      setBonafideCertificate(compressed);
+    } catch {
+      const reader = new FileReader();
+      reader.onload = (event) => setBonafideCertificate(event.target?.result as string);
+      reader.readAsDataURL(file);
     }
-
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      setBonafideCertificate(event.target?.result as string);
-    };
-    reader.readAsDataURL(file);
   };
 
   const handleClearBonafide = () => {
@@ -469,11 +487,7 @@ export default function AriseRegisterPage() {
                               className="w-full bg-white border border-[#E2E8F0] hover:border-slate-355 rounded-xl px-4 py-3 text-xs font-medium text-slate-800 transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%234A4A6A%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:0.6rem_auto] bg-[right_1.25rem_center] bg-no-repeat pr-10"
                             >
                               <option value="Conference">Conference</option>
-                              {!(designation === "Student / Intern" || designation === "Other") && (
-                                <>
-                                  <option value="Conference with Workshop">Conference with Workshop</option>
-                                </>
-                              )}
+                              <option value="Conference with Workshop">Conference with Workshop</option>
                             </select>
                           </div>
                         </div>
@@ -485,7 +499,7 @@ export default function AriseRegisterPage() {
                               <Upload className="w-3.5 h-3.5 text-[#FF8C00]" /> Upload Bonafide Certificate (Mandatory for Student discount)
                             </label>
                             <p className="text-[9px] text-slate-500 font-semibold leading-normal">
-                              Upload a scan/photo of your Student ID card or college bonafide certificate to avail the student discount rate (₹500). Without it, you will be charged ₹2,000.
+                              Upload a scan/photo of your Student ID card or college bonafide certificate to avail the student discount rate (₹500 for Conference / ₹1,000 for Conference with Workshop). Without it, standard rate applies (₹2,000 / ₹2,500).
                             </p>
 
                             {!bonafideCertificate ? (

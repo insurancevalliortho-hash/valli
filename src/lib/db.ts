@@ -191,49 +191,206 @@ export async function saveAriseRegistration(data: {
   iapCreditPoints?: boolean;
   iapMembershipNumber?: string;
 }) {
-  const result = await sql`
-    INSERT INTO arise_registrations (
-      registration_code,
-      full_name,
-      email_id,
-      mobile_number,
-      category,
-      include_workshop,
-      institution,
-      department,
-      city,
-      source,
-      transaction_id,
-      payment_screenshot,
-      designation,
-      qualification,
-      bonafide_certificate,
-      food_preference,
-      iap_credit_points,
-      iap_membership_number
-    ) VALUES (
-      ${data.registrationCode},
-      ${data.fullName},
-      ${data.emailId},
-      ${data.mobileNumber},
-      ${data.category},
-      ${data.includeWorkshop},
-      ${data.institution},
-      ${data.department || null},
-      ${data.city || null},
-      ${data.source || null},
-      ${data.transactionId},
-      ${data.paymentScreenshot || null},
-      ${data.designation || null},
-      ${data.qualification || null},
-      ${data.bonafideCertificate || null},
-      ${data.foodPreference || null},
-      ${data.iapCreditPoints || false},
-      ${data.iapMembershipNumber || null}
-    )
-    RETURNING id;
-  `;
-  return result;
+  try {
+    const result = await sql`
+      INSERT INTO arise_registrations (
+        registration_code,
+        full_name,
+        email_id,
+        mobile_number,
+        category,
+        include_workshop,
+        institution,
+        department,
+        city,
+        source,
+        transaction_id,
+        payment_screenshot,
+        designation,
+        qualification,
+        bonafide_certificate,
+        food_preference,
+        iap_credit_points,
+        iap_membership_number
+      ) VALUES (
+        ${data.registrationCode},
+        ${data.fullName},
+        ${data.emailId},
+        ${data.mobileNumber},
+        ${data.category},
+        ${data.includeWorkshop},
+        ${data.institution},
+        ${data.department || null},
+        ${data.city || null},
+        ${data.source || null},
+        ${data.transactionId},
+        ${data.paymentScreenshot || null},
+        ${data.designation || null},
+        ${data.qualification || null},
+        ${data.bonafideCertificate || null},
+        ${data.foodPreference || null},
+        ${data.iapCreditPoints || false},
+        ${data.iapMembershipNumber || null}
+      )
+      RETURNING id;
+    `;
+    return result;
+  } catch (err: any) {
+    console.warn("Neon sql insert failed or reset, executing pg fallback insert:", err?.message || err);
+    
+    // Fallback to standard pg client
+    const { Pool } = await import("pg");
+    const pool = new Pool({
+      connectionString: process.env.DATABASE_URL || "postgresql://neondb_owner:npg_UbVtH6u1ToyO@ep-icy-lab-ah4q57yb-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require",
+      ssl: { rejectUnauthorized: false }
+    });
+
+    try {
+      const res = await pool.query(
+        `INSERT INTO arise_registrations (
+          registration_code, full_name, email_id, mobile_number, category, include_workshop,
+          institution, department, city, source, transaction_id, payment_screenshot,
+          designation, qualification, bonafide_certificate, food_preference,
+          iap_credit_points, iap_membership_number
+        ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18) RETURNING id;`,
+        [
+          data.registrationCode,
+          data.fullName,
+          data.emailId,
+          data.mobileNumber,
+          data.category,
+          data.includeWorkshop,
+          data.institution,
+          data.department || null,
+          data.city || null,
+          data.source || null,
+          data.transactionId,
+          data.paymentScreenshot || null,
+          data.designation || null,
+          data.qualification || null,
+          data.bonafideCertificate || null,
+          data.foodPreference || null,
+          data.iapCreditPoints || false,
+          data.iapMembershipNumber || null
+        ]
+      );
+      await pool.end();
+      return res.rows;
+    } catch (pgErr) {
+      await pool.end();
+      throw pgErr;
+    }
+  }
 }
+
+export async function saveActiveSalemRegistration(data: {
+  registrationCode: string;
+  fullName: string;
+  emailId: string;
+  mobileNumber: string;
+  category: string; // "5KM" | "10KM"
+  tshirtSize: string; // "S" | "M" | "L" | "XL" | "XXL"
+  gender: string;
+  age: number;
+  emergencyContact?: string;
+  city?: string;
+  source?: string;
+  transactionId: string;
+  paymentScreenshot?: string;
+}) {
+  try {
+    const result = await sql`
+      INSERT INTO active_salem_registrations (
+        registration_code,
+        full_name,
+        email_id,
+        mobile_number,
+        category,
+        tshirt_size,
+        gender,
+        age,
+        emergency_contact,
+        city,
+        source,
+        transaction_id,
+        payment_screenshot
+      ) VALUES (
+        ${data.registrationCode},
+        ${data.fullName},
+        ${data.emailId},
+        ${data.mobileNumber},
+        ${data.category},
+        ${data.tshirtSize},
+        ${data.gender},
+        ${data.age},
+        ${data.emergencyContact || null},
+        ${data.city || null},
+        ${data.source || null},
+        ${data.transactionId},
+        ${data.paymentScreenshot || null}
+      )
+      RETURNING id;
+    `;
+    return result;
+  } catch (err: any) {
+    // If table doesn't exist yet, attempt to create table dynamically and retry
+    if (err.message && err.message.toLowerCase().includes("does not exist")) {
+      await sql`
+        CREATE TABLE IF NOT EXISTS active_salem_registrations (
+          id SERIAL PRIMARY KEY,
+          registration_code VARCHAR(100) UNIQUE NOT NULL,
+          full_name VARCHAR(255) NOT NULL,
+          email_id VARCHAR(255) NOT NULL,
+          mobile_number VARCHAR(50) NOT NULL,
+          category VARCHAR(50) NOT NULL,
+          tshirt_size VARCHAR(20) NOT NULL,
+          gender VARCHAR(20) NOT NULL,
+          age INTEGER NOT NULL,
+          emergency_contact VARCHAR(50),
+          city VARCHAR(100),
+          source VARCHAR(100),
+          transaction_id VARCHAR(100) UNIQUE NOT NULL,
+          payment_screenshot TEXT,
+          created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+        );
+      `;
+      const retryResult = await sql`
+        INSERT INTO active_salem_registrations (
+          registration_code,
+          full_name,
+          email_id,
+          mobile_number,
+          category,
+          tshirt_size,
+          gender,
+          age,
+          emergency_contact,
+          city,
+          source,
+          transaction_id,
+          payment_screenshot
+        ) VALUES (
+          ${data.registrationCode},
+          ${data.fullName},
+          ${data.emailId},
+          ${data.mobileNumber},
+          ${data.category},
+          ${data.tshirtSize},
+          ${data.gender},
+          ${data.age},
+          ${data.emergencyContact || null},
+          ${data.city || null},
+          ${data.source || null},
+          ${data.transactionId},
+          ${data.paymentScreenshot || null}
+        )
+        RETURNING id;
+      `;
+      return retryResult;
+    }
+    throw err;
+  }
+}
+
 
 

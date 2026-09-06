@@ -48,7 +48,7 @@ export default function Page() {
         </div>
         <div className="container mx-auto px-6 md:px-12 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            
+
             {/* Left Content */}
             <div className="lg:col-span-7 space-y-6">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/15 text-[#f98825] text-xs font-bold tracking-[0.2em] uppercase">
@@ -76,7 +76,7 @@ export default function Page() {
               <div className="relative mx-auto max-w-xs sm:max-w-sm bg-gradient-to-b from-white/15 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-4 shadow-2xl">
                 <div className="relative w-full h-72 rounded-2xl overflow-hidden bg-[#00333c] border border-white/10">
                   <Image
-                    src="/SpeakersIMG/Dr.balamurugan.jpeg"
+                    src="/doctorsIMG/Balamurugan.jpeg"
                     alt="Dr. G. Balamurugan"
                     fill
                     className="object-cover object-top"
@@ -104,7 +104,7 @@ export default function Page() {
       <section className="bg-[#001f25] border-t border-white/10 py-10">
         <div className="container mx-auto px-6 md:px-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            {[['10-Bed','Advanced ICU'],['24/7','Emergency Response'],['ACLS','ATLS Certified'],['USG-Guided','Nerve Blocks']].map(([v,l]) => (
+            {[['10-Bed', 'Advanced ICU'], ['24/7', 'Emergency Response'], ['ACLS', 'ATLS Certified'], ['USG-Guided', 'Nerve Blocks']].map(([v, l]) => (
               <div key={l}><div className="text-3xl font-black text-[#f98825]">{v}</div><div className="text-white/50 text-xs font-bold uppercase tracking-wider mt-1">{l}</div></div>
             ))}
           </div>
@@ -123,7 +123,7 @@ export default function Page() {
             <div className="bg-white rounded-3xl border border-[#e5eaeb] p-8 mt-10">
               <h2 className="text-xl font-bold text-[#00333c] mb-6">Key Capabilities</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {['General, Spinal & Epidural Anaesthesia for all surgical specialties','Ultrasound-Guided Nerve Blocks & Regional Anaesthesia','24/7 ICU management — Septic Shock, MODS, ARDS','Status Epilepticus & neurological emergency ICU care','Polytrauma, TBI & Hemorrhagic Shock management','POCUS diagnostics & real-time hemodynamic monitoring','ABG analysis for ventilator & acid-base management','Poisoning, Toxicology & DKA critical management','Acute Renal Failure & electrolyte emergency care','Sedation for Endoscopy & Colonoscopy procedures','Post-operative high-risk patient recovery management','Seamless ICU synergy across all surgical departments'].map(cap => (
+                {['General, Spinal & Epidural Anaesthesia for all surgical specialties', 'Ultrasound-Guided Nerve Blocks & Regional Anaesthesia', '24/7 ICU management — Septic Shock, MODS, ARDS', 'Status Epilepticus & neurological emergency ICU care', 'Polytrauma, TBI & Hemorrhagic Shock management', 'POCUS diagnostics & real-time hemodynamic monitoring', 'ABG analysis for ventilator & acid-base management', 'Poisoning, Toxicology & DKA critical management', 'Acute Renal Failure & electrolyte emergency care', 'Sedation for Endoscopy & Colonoscopy procedures', 'Post-operative high-risk patient recovery management', 'Seamless ICU synergy across all surgical departments'].map(cap => (
                   <div key={cap} className="flex items-start gap-3">
                     <div className="w-5 h-5 rounded-full bg-[#f98825]/15 flex items-center justify-center shrink-0 mt-0.5">
                       <svg className="w-3 h-3 text-[#f98825]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>

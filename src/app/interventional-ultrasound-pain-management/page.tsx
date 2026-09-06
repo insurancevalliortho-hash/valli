@@ -64,7 +64,7 @@ export default function Page() {
         </div>
         <div className="container mx-auto px-6 md:px-12 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            
+
             {/* Left Content */}
             <div className="lg:col-span-7 space-y-6">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/15 text-[#3cb3a6] text-xs font-bold tracking-[0.2em] uppercase">
@@ -92,7 +92,7 @@ export default function Page() {
               <div className="relative mx-auto max-w-xs sm:max-w-sm bg-gradient-to-b from-white/15 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-4 shadow-2xl">
                 <div className="relative w-full h-72 rounded-2xl overflow-hidden bg-[#00333c] border border-white/10">
                   <Image
-                    src="/SpeakersIMG/Dr.balamurugan.jpeg"
+                    src="/doctorsIMG/Balamurugan.jpeg"
                     alt="Dr. G. Balamurugan"
                     fill
                     className="object-cover object-top"
