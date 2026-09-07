@@ -7,18 +7,21 @@ import { BreadcrumbSchema, FAQSchema, MedicalProcedureSchema, MedicalSpecialtySc
 
 export const metadata: Metadata = {
   title: "Best Knee Replacement Hospital in Salem | Robotic & Cooled RFA | Valli Hospital",
-  description: "Advanced Total & Partial Knee Replacement in Salem at Valli Super Specialty Hospital. Led by Dr. T. Natanasabapathy. Specializing in Robotic Knee Surgery, Cooled RFA, and PRP injections for rapid knee pain relief.",
+  description: "Advanced Robotic Knee Replacement and Cooled RFA non-surgical pain relief in Salem at Valli Hospital. Led by Dr. T. Natanasabapathy. Transparent costs & cashless insurance.",
   keywords: [
+    "knee replacement in salem",
     "knee replacement surgery Salem",
     "best hospital for knee replacement Salem",
+    "knee replacement cost in salem",
     "robotic knee replacement Salem",
+    "robotic assisted knee replacement near me",
     "cooled rfa treatment for knee pain",
-    "knee pain hospital near me",
+    "knee pain doctor near me",
+    "moottu vali doctor salem",
     "platelet injection for knee pain",
     "total knee replacement surgery",
-    "knee replacement surgery cost Salem",
     "Dr Natanasabapathy knee replacement",
-    "knee pain doctor near me"
+    "knee pain hospital near me"
   ],
   alternates: {
     canonical: `https://www.vallihospital.in/knee-replacement`,
@@ -32,16 +35,20 @@ export default function KneeReplacementPage() {
       answer: "Most patients walk with assistance within 24 hours of surgery thanks to our rapid-recovery protocols and advanced pain management. Full daily activity recovery typically ranges from 4 to 6 weeks."
     },
     {
+      question: "What is the cost of knee replacement surgery in Salem and is insurance accepted?",
+      answer: "At Valli Super Specialty Hospital, total knee replacement packages range between ₹1,40,000 to ₹2,10,000 depending on implant choice (US FDA-approved high-flexion implants) and single/bilateral surgery. We provide 100% cashless insurance coverage across Star Health, Medi Assist, Paramount, ICICI Lombard, Vidal Health, and other major TPAs."
+    },
+    {
       question: "What is Cooled RFA treatment for knee pain?",
       answer: "Cooled Radiofrequency Ablation (Cooled RFA) is a non-surgical, minimally invasive outpatient procedure that targets sensory nerves causing chronic knee pain. It provides sustained relief (1 to 2 years) for patients not candidate for surgery or wishing to delay joint replacement."
     },
     {
-      question: "Do you offer non-surgical treatments like PRP platelet injections?",
-      answer: "Yes, Valli Super Specialty Hospital offers Regenerative Platelet-Rich Plasma (PRP) therapy and Viscosupplementation injections to reduce joint inflammation and promote cartilage healing in mild to moderate osteoarthritis."
+      question: "Do you offer non-surgical treatments like PRP platelet injections for knee arthritis?",
+      answer: "Yes, Valli Super Specialty Hospital offers Regenerative Platelet-Rich Plasma (PRP) therapy and Viscosupplementation injections to reduce joint inflammation and promote cartilage healing in mild to moderate osteoarthritis (moottu theimanum)."
     },
     {
       question: "Who is the lead knee specialist at Valli Hospital Salem?",
-      answer: "Dr. T. Natanasabapathy, Chief Orthopedic Surgeon with 16+ years of clinical excellence, personally oversees advanced joint replacement and robotic knee procedures."
+      answer: "Dr. T. Natanasabapathy, Chief Orthopedic Surgeon with 21+ years of clinical excellence and 10,000+ surgeries, personally oversees advanced joint replacement and robotic knee procedures."
     }
   ];
 

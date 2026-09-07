@@ -1,5 +1,5 @@
 import React from 'react';
-import { BreadcrumbSchema, FAQSchema } from '../../components/seo/StructuredData';
+import { BreadcrumbSchema, FAQSchema, MedicalProcedureSchema, MedicalSpecialtySchema } from '../../components/seo/StructuredData';
 import Link from 'next/link';
 import { Metadata } from 'next';
 
@@ -23,9 +23,20 @@ export default function Page() {
         { name: 'Respiratory Care & Pulmonology', url: 'https://www.vallihospital.in/respiratory-care-pulmonology' }
       ]} />
       <FAQSchema questions={[
-        { question: 'What respiratory conditions are treated at Valli Hospital?', answer: 'We treat Asthma, COPD, Bronchiectasis, ILD, Pneumonia, TB, Pleural Effusion, Obstructive Sleep Apnea, ARDS, Pneumothorax, Lung Cancer, and Pulmonary Embolism.' },
-        { question: 'Does Valli Hospital offer bronchoscopy?', answer: 'Yes. Our Interventional Pulmonology team performs Flexible Bronchoscopy for precise diagnosis of Lung Cancer and therapeutic removal of foreign bodies.' },
+        { question: 'What respiratory conditions are treated at Valli Hospital Salem?', answer: 'We treat Asthma, Chronic Obstructive Pulmonary Disease (COPD), Bronchiectasis, Interstitial Lung Disease (ILD), severe Pneumonia, Tuberculosis (TB), Pleural Effusion, Sleep Apnea, ARDS, and Pulmonary Embolism.' },
+        { question: 'Does Valli Hospital offer advanced diagnostic bronchoscopy in Salem?', answer: 'Yes. Our Interventional Pulmonology unit performs diagnostic and therapeutic Flexible Video Bronchoscopy, transbronchial lung biopsy, and foreign body extraction with 24/7 ICU support.' },
+        { question: 'When should I see a pulmonologist for chronic cough or breathlessness?', answer: 'Consult a pulmonology specialist if cough persists over 3 weeks, if you experience shortness of breath while resting or climbing stairs, chest tightness, wheezing, or coughing up blood (hemoptysis).' }
       ]} />
+      <MedicalSpecialtySchema
+        name="Pulmonology & Respiratory Care Center"
+        description="Comprehensive diagnostic bronchoscopy, asthma management, COPD therapy, and respiratory ICU in Salem."
+        url="https://www.vallihospital.in/respiratory-care-pulmonology"
+      />
+      <MedicalProcedureSchema
+        name="Flexible Video Bronchoscopy & Pulmonary Function Testing"
+        description="Advanced diagnostic endoscopy of airways and complete spirometric lung function assessments."
+        bodyLocation="Respiratory System & Lungs"
+      />
 
       <div className="mx-auto px-6 md:px-12 pt-28 pb-4 bg-[#001f25]">
         <nav aria-label="breadcrumb">

@@ -1,12 +1,27 @@
-﻿import { Metadata } from 'next';
+import { Metadata } from 'next';
+import { BreadcrumbSchema } from '../../components/seo/StructuredData';
 
 export const metadata: Metadata = {
-  title: 'Book an Appointment Online | Valli Super Specialty Hospital',
-  description: 'Book a consultation with our elite orthopedic surgeons, physicians, and specialists online. Easy, secure, and instant booking for patients in Salem.',
-  keywords: 'book doctor appointment Salem, orthopedic consultation Salem, hospital appointment booking, online doctor consultation Salem',
+  title: 'Book Doctor Appointment Online in Salem | Valli Hospital',
+  description: 'Book your consultation online with Dr. T. Natanasabapathy and senior orthopedic specialists at Valli Super Specialty Hospital Salem. Fast, secure, and confirmed appointments.',
+  keywords: [
+    'book appointment valli hospital',
+    'book doctor appointment Salem',
+    'orthopedic consultation Salem',
+    'ortho doctor near me open now',
+    'knee pain doctor appointment salem',
+    'spine consultation booking salem',
+    'online doctor consultation Salem'
+  ],
   alternates: {
     canonical: 'https://www.vallihospital.in/book-appointment',
   },
+  openGraph: {
+    title: 'Book Doctor Consultation Online | Valli Super Specialty Hospital Salem',
+    description: 'Instant appointment scheduling with leading joint replacement, spine, sports injury, and trauma surgeons in Salem.',
+    url: 'https://www.vallihospital.in/book-appointment',
+    type: 'website',
+  }
 };
 
 export default function BookAppointmentLayout({
@@ -14,5 +29,14 @@ export default function BookAppointmentLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return (
+    <>
+      <BreadcrumbSchema items={[
+        { name: 'Home', url: 'https://www.vallihospital.in/' },
+        { name: 'Book Appointment', url: 'https://www.vallihospital.in/book-appointment' }
+      ]} />
+      {children}
+    </>
+  );
 }
+

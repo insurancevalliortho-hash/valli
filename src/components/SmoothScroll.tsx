@@ -58,17 +58,11 @@ import type { LenisRef } from "lenis/react";
  */
 
 const LENIS_OPTIONS = {
-    // Reduced from 1.2 → 0.9 to avoid the "stuck" feel on fast flicks.
-    // 0.9s is still perceptibly smooth without the rubbery delay.
-    duration: 0.9,
-    easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    duration: 1.2,
+    lerp: 0.1,
     orientation: "vertical" as const,
-    // Explicitly enable smooth wheel — prevents native-scroll fallback on
-    // some macOS / Windows trackpad configurations.
     smoothWheel: true,
-    // Disable touch sync — let the browser compositor handle native momentum scroll
     syncTouch: false,
-    // Prevent Lenis from capturing scroll inside scroll-prevent containers or overflowing textareas
     prevent: (node: HTMLElement) => {
         return (
             Boolean(node.closest?.("[data-lenis-prevent]")) ||

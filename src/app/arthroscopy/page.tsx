@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Navbar from '../../components/Navbar';
@@ -7,17 +7,18 @@ import { BreadcrumbSchema, FAQSchema, MedicalProcedureSchema, MedicalSpecialtySc
 
 export const metadata: Metadata = {
   title: "Arthroscopy Surgery & Keyhole Joint Specialists in Salem | Valli Hospital",
-  description: "Advanced Keyhole Arthroscopic Surgery in Salem at Valli Super Specialty Hospital. Expert ACL reconstruction, meniscus tear repair, shoulder dislocation surgery, and Bankart repair by Dr. T. Natanasabapathy. Day-care surgery with rapid recovery.",
+  description: "Advanced Keyhole Arthroscopic Surgery in Salem at Valli Super Specialty Hospital. Expert ACL reconstruction, meniscus tear repair, shoulder surgery by Dr. T. Natanasabapathy. Cashless insurance available.",
   keywords: [
-    "arthroscopy Salem",
+    "arthroscopy salem",
+    "arthroscopy surgery in salem",
+    "acl surgery in salem",
     "arthroscopic surgery Salem",
+    "keyhole joint surgery salem",
     "ACL tear treatment Salem",
     "meniscus surgery Salem",
     "keyhole surgery knee Salem",
-    "minimally invasive ortho surgery Tamil Nadu",
     "Dr Natanasabapathy arthroscopy",
     "shoulder arthroscopy Salem",
-    "arthroscopy bankart repair",
     "knee ligament reconstruction surgery"
   ],
   alternates: {
@@ -30,6 +31,10 @@ export default function ArthroscopyPage() {
     {
       question: "What is Keyhole Arthroscopic Surgery?",
       answer: "Arthroscopy is a minimally invasive surgical procedure where a tiny fiber-optic camera (arthroscope) and specialized micro-instruments are inserted through small incisions (keyholes) to diagnose and repair joint damage with minimal tissue disruption."
+    },
+    {
+      question: "Is arthroscopic joint surgery covered by health insurance in Salem?",
+      answer: "Yes, arthroscopic ACL reconstruction, meniscus repair, and shoulder cuff surgeries are covered under cashless health insurance policies. Valli Hospital provides direct cashless claim settlement through Star Health, Medi Assist, Vidal Health, ICICI Lombard, and all major TPAs."
     },
     {
       question: "How long is the hospital stay for an ACL or Meniscus arthroscopy?",

@@ -2,7 +2,7 @@ import React from 'react';
 
 interface QRCodePlaceholderProps extends React.SVGProps<SVGSVGElement> {
   size?: number;
-  // QR Target URL: https://vallihospital.in/iyakkam/technnovations/register
+  // QR Target URL: https://www.vallihospital.in/iyakkam/technnovations/register
 }
 
 export const QRCodePlaceholder: React.FC<QRCodePlaceholderProps> = ({
