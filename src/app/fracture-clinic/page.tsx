@@ -7,25 +7,28 @@ import { BreadcrumbSchema, FAQSchema, MedicalProcedureSchema, MedicalSpecialtySc
 
 export const metadata: Metadata = {
   title: "24/7 Fracture & Trauma Hospital in Salem | Emergency Bone Care | Valli Hospital",
-  description: "24/7 emergency bone fracture treatment & trauma care in Salem at Valli Super Specialty Hospital. Open Reduction Internal Fixation (ORIF), complex pelvic fractures, pediatric casts, and polytrauma surgery.",
+  description: "24/7 emergency bone fracture treatment & trauma surgery in Salem at Valli Super Specialty Hospital. ORIF, compound fractures, pediatric care & cashless insurance.",
   keywords: [
     "fracture treatment Salem",
     "bone fracture surgery Salem",
+    "elumbu doctor near me",
+    "elumbu murivu hospital salem",
+    "24 hour emergency hospital salem",
+    "bone doctor salem",
+    "salem bone specialist hospital",
     "best hospital for bone fracture",
     "emergency fracture care Salem",
-    "complex fracture surgery Tamil Nadu",
+    "emergency ortho hospital near me",
     "ORIF surgery Salem",
     "24 hour fracture care Salem",
-    "bone hospital near me open now",
-    "bone specialist hospital near me",
-    "elumbu doctor near me"
+    "bone hospital near me open now"
   ],
   alternates: {
     canonical: "https://www.vallihospital.in/fracture-clinic",
   },
   openGraph: {
     title: "24/7 Fracture & Emergency Trauma Clinic Salem | Valli Hospital",
-    description: "Rapid trauma management, zero delay fracture stabilization, and anatomical reconstruction by senior orthopedic trauma surgeons.",
+    description: "Rapid trauma management, zero delay fracture stabilization, and anatomical reconstruction by senior orthopedic trauma surgeons. 24/7 cashless mediclaim support.",
     url: "https://www.vallihospital.in/fracture-clinic",
     type: "website",
   }
@@ -36,6 +39,10 @@ export default function FractureClinicPage() {
     {
       question: "Is emergency fracture care available 24/7 at Valli Hospital Salem?",
       answer: "Yes. Our trauma casualty, digital X-ray, emergency operating theatres, and orthopedic surgical team operate 24 hours a day, 7 days a week for immediate fracture stabilization and acute injury management."
+    },
+    {
+      question: "Can I use cashless health insurance for emergency accident and fracture surgery?",
+      answer: "Yes. Valli Hospital provides immediate cashless insurance processing for emergency trauma and fracture admissions through Star Health, Medi Assist, Paramount, Vidal Health, ICICI Lombard, and major insurance providers. Our 24/7 insurance desk coordinates fast approval."
     },
     {
       question: "What is ORIF (Open Reduction Internal Fixation) surgery?",
@@ -50,7 +57,7 @@ export default function FractureClinicPage() {
       answer: "Yes. We provide specialized pediatric fracture management ensuring growth plates (epiphyses) are safeguarded to prevent long-term limb length discrepancy or angular deformity."
     },
     {
-      question: "Who are the lead orthopedic trauma surgeons?",
+      question: "Who are the lead orthopedic trauma surgeons (elumbu doctors) at Valli Hospital?",
       answer: "Trauma surgery is led by Dr. T. Natanasabapathy (Chief Orthopedic Surgeon), Dr. E. Aakash (Fellowship in Orthopedic Trauma - FIOT), and Dr. K. N. Jotheesvar (Fellowship in Periarticular Trauma)."
     }
   ];

@@ -7,25 +7,27 @@ import Footer from '../../components/Footer';
 import { BreadcrumbSchema, FAQSchema, MedicalProcedureSchema, MedicalSpecialtySchema } from '../../components/seo/StructuredData';
 
 export const metadata: Metadata = {
-  title: "Sports Injury Clinic & ACL Reconstruction in Salem | Valli Hospital",
-  description: "Specialized Sports Injury Clinic & Arthroscopy Center in Salem at Valli Super Specialty Hospital. Advanced treatment for ACL/PCL tears, meniscus injuries, rotator cuff tears, shoulder dislocations, and athletic rehabilitation.",
+  title: "Sports Injury Clinic & ACL Surgery in Salem | Keyhole Arthroscopy | Valli Hospital",
+  description: "Specialized Sports Injury Clinic & Arthroscopy Center in Salem at Valli Hospital. Advanced ACL/PCL ligament reconstruction, meniscus repair, rotator cuff treatment & cashless insurance.",
   keywords: [
+    "acl surgery in salem",
+    "acl tear treatment salem",
+    "sports injury clinic salem",
+    "sports medicine doctor in salem",
+    "arthroscopy surgery in salem",
+    "keyhole joint surgery salem",
     "sports injury doctor near me",
-    "sports injury clinic Salem",
-    "sports doctor near me",
-    "ACL tear surgery Salem",
-    "meniscus surgery Salem",
-    "shoulder arthroscopy Salem",
-    "sports medicine specialist Salem",
-    "ligament repair hospital Tamil Nadu",
-    "sports orthopedic Salem"
+    "meniscus surgery salem",
+    "shoulder arthroscopy salem",
+    "ligament repair hospital tamil nadu",
+    "sports physiotherapy salem"
   ],
   alternates: {
     canonical: "https://www.vallihospital.in/sports-injury-clinic",
   },
   openGraph: {
-    title: "Sports Injury Clinic & Arthroscopy Center Salem | Valli Hospital",
-    description: "Minimally invasive keyhole arthroscopy, ACL reconstruction, and rapid return-to-sport programs by leading orthopedic sports specialists in Salem.",
+    title: "Sports Injury Clinic & ACL Surgery Center Salem | Valli Hospital",
+    description: "Minimally invasive keyhole arthroscopy, ACL reconstruction, and rapid return-to-sport programs by leading orthopedic sports specialists in Salem. Cashless insurance support.",
     url: "https://www.vallihospital.in/sports-injury-clinic",
     type: "website",
   }
@@ -40,6 +42,10 @@ export default function SportsInjuryClinicPage() {
     {
       question: "What is Keyhole Arthroscopic ACL Reconstruction?",
       answer: "Arthroscopic ACL reconstruction is a minimally invasive keyhole procedure where a high-definition 4K camera is inserted through tiny 4mm incisions to reconstruct the torn ligament using a strong autograft (hamstring or bone-patellar tendon). It ensures minimal scarring, faster healing, and lower post-op pain."
+    },
+    {
+      question: "Does health insurance cover ACL reconstruction and arthroscopic ligament surgery?",
+      answer: "Yes. ACL reconstruction and arthroscopic meniscus/ligament repairs are fully eligible for cashless health insurance claims. Valli Hospital provides direct cashless processing with Star Health, Medi Assist, Vidal Health, ICICI Lombard, HDFC ERGO, and other leading insurers."
     },
     {
       question: "How long does recovery take after ACL surgery?",

@@ -4,13 +4,16 @@ import { doctorsData } from '../../data/doctors';
 
 export const metadata: Metadata = {
   title: 'Best Ortho Doctor in Salem | Top Orthopedic Surgeons | Valli Hospital',
-  description: 'Consult Salem\'s best orthopedic doctors and surgeons at Valli Super Specialty Hospital. Led by Dr. T. Natanasabapathy (10,000+ surgeries) specializing in robotic knee replacement, spine care, arthroscopy, and trauma surgery.',
+  description: 'Consult Salem\'s best orthopedic doctors (elumbu doctors) at Valli Super Specialty Hospital. Led by Dr. T. Natanasabapathy (10,000+ surgeries) specializing in robotic knee surgery, spine care, arthroscopy & trauma. Cashless insurance available.',
   keywords: [
     'best ortho doctor in salem',
     'orthopedic doctor in salem',
+    'elumbu doctor near me',
+    'elumbu doctor in salem',
     'salem orthopedic doctors',
     'best orthopedic surgeon salem',
     'bone doctor salem',
+    'salem bone specialist hospital',
     'spine surgeon in salem',
     'best orthopedician in salem',
     'dr natanasabapathy salem',
@@ -22,7 +25,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Best Orthopedic Doctors & Surgeons in Salem | Valli Hospital',
-    description: 'Book consultation with leading orthopedic and multi-specialty doctors in Salem. Over 19,000 patients treated with high success rates.',
+    description: 'Book consultation with leading orthopedic doctors and surgeons in Salem. Over 19,000 patients treated. Cashless insurance desk available.',
     url: 'https://www.vallihospital.in/doctors',
     siteName: 'Valli Super Specialty Hospital',
     type: 'website',
