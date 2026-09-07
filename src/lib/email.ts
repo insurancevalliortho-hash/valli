@@ -562,12 +562,13 @@ export async function sendAriseRegistrationEmail(data: AriseEmailPayload) {
     const { transporter, from } = await getTransporter();
 
     let amountPaid = 2000;
-    if (data.designation === "Student / Intern" && data.bonafideCertificate) {
-      amountPaid = 500;
-    } else if (data.category === "Conference with Workshop") {
-      amountPaid = 2500;
+    const isStudentWithBonafide = data.designation === "Student / Intern" && Boolean(data.bonafideCertificate);
+    if (data.category === "Conference with Workshop") {
+      amountPaid = isStudentWithBonafide ? 1000 : 2500;
     } else if (data.category === "Workshop") {
       amountPaid = 500;
+    } else {
+      amountPaid = isStudentWithBonafide ? 500 : 2000;
     }
 
     const workshopStatus = data.includeWorkshop 

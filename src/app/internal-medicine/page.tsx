@@ -1,5 +1,6 @@
 import React from 'react';
-import { BreadcrumbSchema, FAQSchema, MedicalSpecialtySchema } from '../../components/seo/StructuredData';
+import Image from 'next/image';
+import { BreadcrumbSchema, FAQSchema } from '../../components/seo/StructuredData';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import Navbar from '../../components/Navbar';
@@ -35,15 +36,10 @@ export default function Page() {
         { name: 'Internal Medicine', url: 'https://www.vallihospital.in/internal-medicine' }
       ]} />
       <FAQSchema questions={[
-        { question: 'What conditions are treated by the Internal Medicine department?', answer: 'We treat a wide range of acute and chronic conditions including diabetes mellitus, hypertension, metabolic disorders, respiratory infections, fever management, and lifestyle diseases.' },
-        { question: 'Does the Internal Medicine department offer 24/7 care in Salem?', answer: 'Yes. The department functions round the clock, providing 24-hour emergency medical services in close collaboration with our Department of Critical Care Medicine.' },
-        { question: 'Who are the consultant physicians for Internal Medicine at Valli Hospital?', answer: 'Dr. Vasunthara Devi (Senior Consultant in Internal Medicine & Diabetology), Dr. I. Vijayalakshmi (MD General Medicine), and Dr. Ambiga provide comprehensive outpatient and inpatient medical care.' },
+        { question: 'What conditions are treated by the Internal Medicine department?', answer: 'We treat a wide range of acute and chronic conditions including diabetes, hypertension, gastric/liver disorders, respiratory illnesses, urinary tract infections, jaundice, fevers, and infectious diseases.' },
+        { question: 'Does the Internal Medicine department offer 24/7 care?', answer: 'Yes. The department functions round the clock, providing 24-hour emergency medical services in close collaboration with our Department of Critical Care Medicine.' },
+        { question: 'Who is the lead specialist for Internal Medicine at Valli Hospital?', answer: 'Dr. Vasunthara Devi is the lead consultant physician for our Internal Medicine and Diabetology department.' },
       ]} />
-      <MedicalSpecialtySchema
-        name="Internal Medicine & Diabetology Center"
-        description="Comprehensive chronic disease management, diabetes care, hypertension clinic, and internal medical diagnostics in Salem."
-        url="https://www.vallihospital.in/internal-medicine"
-      />
 
       {/* Breadcrumb UI */}
       <div className="mx-auto px-6 md:px-12 pt-28 pb-4 bg-[#001f25]">
@@ -59,23 +55,65 @@ export default function Page() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative min-h-[40vh] flex items-center bg-[#001f25] pt-32 pb-20 overflow-hidden">
+      <section className="relative min-h-[45vh] flex items-center bg-[#001f25] pt-12 pb-16 overflow-hidden text-left">
         <div className="absolute inset-0 pointer-events-none z-0">
-          <div className="absolute top-[-20%] right-[-10%] w-[40vw] h-[40vw] bg-[#004b57]/30 rounded-[6rem] rotate-12" />
-          <div className="absolute bottom-[-20%] left-[-10%] w-[35vw] h-[35vw] bg-[#f98825]/10 rounded-[5rem] rotate-45" />
+          <div className="absolute top-[-20%] right-[-10%] w-[40vw] h-[40vw] bg-[#004b57]/30 rounded-[6rem] rotate-12 blur-3xl" />
+          <div className="absolute bottom-[-20%] left-[-10%] w-[35vw] h-[35vw] bg-[#f98825]/10 rounded-[5rem] rotate-45 blur-2xl" />
         </div>
         <div className="container mx-auto px-6 md:px-12 relative z-10">
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/8 border border-white/12 text-[#f98825] text-xs font-bold tracking-[0.2em] uppercase mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#f98825]" />
-            Specialty Clinic
-          </span>
-          <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-5xl">
-            Internal Medicine &amp;<br />
-            <span className="text-[#f98825]">Diabetology - <span className="whitespace-nowrap">Dr. Vasunthara Devi</span></span>
-          </h1>
-          <p className="mt-6 text-white/60 text-lg max-w-2xl leading-relaxed font-medium">
-            Comprehensive diagnostic evaluation, evidence-based management of lifestyle disorders, infectious diseases, and 24/7 critical ICU backup support in Salem.
-          </p>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+
+            {/* Left Content */}
+            <div className="lg:col-span-7 space-y-6">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/15 text-[#f98825] text-xs font-bold tracking-[0.2em] uppercase">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#f98825]" />
+                Specialty Clinic
+              </span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight">
+                Internal Medicine &amp;<br />
+                <span className="text-[#f98825]">Diabetology</span>
+              </h1>
+              <p className="text-gray-300 text-base md:text-lg max-w-xl font-normal leading-relaxed">
+                Comprehensive diagnostic evaluation, evidence-based management of lifestyle disorders, infectious diseases, and 24/7 critical ICU backup support in Salem.
+              </p>
+              <div className="pt-2 flex flex-wrap gap-4">
+                <Link
+                  href="/book-appointment"
+                  className="bg-[#f98825] hover:bg-[#e0751e] text-white px-7 py-3.5 rounded-full font-bold text-sm shadow-lg transition-all"
+                >
+                  Book Consultation
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Doctor Card */}
+            <div className="lg:col-span-5 relative">
+              <div className="relative mx-auto max-w-xs sm:max-w-sm bg-gradient-to-b from-white/15 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-4 shadow-2xl">
+                <div className="relative w-full h-72 rounded-2xl overflow-hidden bg-[#00333c] border border-white/10">
+                  <Image
+
+                    src="/doctorsIMG/vasuntharadevi.jpeg"
+                    alt="Dr. Vasunthara Devi"
+                    fill
+                    className="object-cover object-top"
+                  />
+                </div>
+                <div className="mt-4 text-left space-y-1">
+                  <span className="text-[10px] font-bold tracking-widest text-[#f98825] uppercase block">
+                    Internal Medicine &amp; Diabetology Specialist
+                  </span>
+                  <h3 className="text-lg sm:text-xl font-black text-white">Dr. Vasunthara Devi</h3>
+                  <p className="text-xs text-gray-300 font-medium">
+                    MBBS, MD (INTERNAL MEDICINE)
+                  </p>
+                </div>
+                <div className="absolute -top-3 -right-3 bg-[#f98825] text-white px-3.5 py-1.5 rounded-xl text-xs font-bold shadow-lg border border-white/20">
+                  Lead Specialist
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
       </section>
 

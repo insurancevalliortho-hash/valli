@@ -1,5 +1,6 @@
 import React from 'react';
-import { BreadcrumbSchema, FAQSchema, MedicalProcedureSchema, MedicalSpecialtySchema } from '../../components/seo/StructuredData';
+import Image from 'next/image';
+import { BreadcrumbSchema, FAQSchema } from '../../components/seo/StructuredData';
 import Link from 'next/link';
 import { Metadata } from 'next';
 
@@ -23,20 +24,9 @@ export default function Page() {
         { name: 'Neurosurgery & Neurological Care', url: 'https://www.vallihospital.in/neurosurgery-neurological-care' }
       ]} />
       <FAQSchema questions={[
-        { question: 'What neurosurgical procedures are available at Valli Hospital Salem?', answer: 'We perform brain tumor surgery, craniotomies, VP shunting, spinal decompression, disc surgery, cerebrovascular surgery for aneurysms, emergency TBI management, and Trigeminal Neuralgia treatment.' },
-        { question: 'Is emergency neurosurgery and head injury care available 24/7 in Salem?', answer: 'Yes. Our ICU-backed, ACLS and ATLS certified neurosurgical team handles Traumatic Brain Injury (TBI), Epidural and Subdural Hematomas, and stroke emergencies around the clock.' },
-        { question: 'Who are the specialists for brain and nerve care?', answer: 'Our neurological care division features Dr. Dhivya (MBBS, MD - Consultant Neurologist) and senior consultant neurosurgeons.' }
+        { question: 'What neurosurgical procedures are available at Valli Hospital?', answer: 'We perform brain tumor surgery, craniotomies, VP shunting, spinal decompression, disc surgery, cerebrovascular surgery for aneurysms, emergency TBI management, and Trigeminal Neuralgia treatment.' },
+        { question: 'Is emergency neurosurgery available 24/7?', answer: 'Yes. Our ICU-backed, ACLS and ATLS certified neurosurgical team handles Traumatic Brain Injury, Epidural and Subdural Hematomas, and raised ICP emergencies around the clock.' },
       ]} />
-      <MedicalSpecialtySchema
-        name="Neurosurgery & Neurological Care Center"
-        description="24/7 advanced neurosurgical emergency center, brain tumor resection, and neurological ICU in Salem."
-        url="https://www.vallihospital.in/neurosurgery-neurological-care"
-      />
-      <MedicalProcedureSchema
-        name="Microsurgical Craniotomy & Neural Decompression"
-        description="High-precision neuro-microscopic surgery for intracranial tumors, hematomas, and spinal nerve compression."
-        bodyLocation="Brain, Spine & Central Nervous System"
-      />
 
       <div className="mx-auto px-6 md:px-12 pt-28 pb-4 bg-[#001f25]">
         <nav aria-label="breadcrumb">
@@ -50,22 +40,64 @@ export default function Page() {
         </nav>
       </div>
 
-      <section className="relative min-h-[40vh] flex items-center bg-[#001f25] pt-32 pb-20 overflow-hidden">
+      <section className="relative min-h-[45vh] flex items-center bg-[#001f25] pt-12 pb-16 overflow-hidden text-left">
         <div className="absolute inset-0 pointer-events-none z-0">
-          <div className="absolute top-[-20%] right-[-10%] w-[40vw] h-[40vw] bg-[#004b57]/30 rounded-[6rem] rotate-12" />
-          <div className="absolute bottom-[-20%] left-[-10%] w-[35vw] h-[35vw] bg-red-900/20 rounded-[5rem] rotate-45" />
+          <div className="absolute top-[-20%] right-[-10%] w-[40vw] h-[40vw] bg-[#004b57]/30 rounded-[6rem] rotate-12 blur-3xl" />
+          <div className="absolute bottom-[-20%] left-[-10%] w-[35vw] h-[35vw] bg-red-900/20 rounded-[5rem] rotate-45 blur-2xl" />
         </div>
         <div className="container mx-auto px-6 md:px-12 relative z-10">
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/8 border border-white/12 text-[#f98825] text-xs font-bold tracking-[0.2em] uppercase mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#f98825]" />
-            Specialty Clinic
-          </span>
-          <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-5xl">
-            Advanced Neurosurgery &amp;<br /><span className="text-[#f98825]">Neurological Critical Care - <span className="whitespace-nowrap">Dr. Hariharasudh</span> &amp; <span className="whitespace-nowrap">Dr. Dhivya</span></span>
-          </h1>
-          <p className="mt-6 text-white/60 text-lg max-w-2xl leading-relaxed font-medium">
-            Elite surgical precision for brain tumors, cerebrovascular emergencies, and spine disorders — powered by neuro-microscope technology and 24/7 ICU support in Salem.
-          </p>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+
+            {/* Left Content */}
+            <div className="lg:col-span-7 space-y-6">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/15 text-[#f98825] text-xs font-bold tracking-[0.2em] uppercase">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#f98825]" />
+                Specialty Clinic
+              </span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight">
+                Advanced Neurosurgery &amp;<br />
+                <span className="text-[#f98825]">Neurological Critical Care</span>
+              </h1>
+              <p className="text-gray-300 text-base md:text-lg max-w-xl font-normal leading-relaxed">
+                Elite surgical precision for brain tumors, cerebrovascular emergencies, and spine disorders — powered by neuro-microscope technology and 24/7 ICU support in Salem.
+              </p>
+              <div className="pt-2 flex flex-wrap gap-4">
+                <Link
+                  href="/book-appointment"
+                  className="bg-[#f98825] hover:bg-[#e0751e] text-white px-7 py-3.5 rounded-full font-bold text-sm shadow-lg transition-all"
+                >
+                  Book Consultation
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Doctor Card */}
+            <div className="lg:col-span-5 relative">
+              <div className="relative mx-auto max-w-xs sm:max-w-sm bg-gradient-to-b from-white/15 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-4 shadow-2xl">
+                <div className="relative w-full h-72 rounded-2xl overflow-hidden bg-[#00333c] border border-white/10">
+                  <Image
+                    src="/doctorsIMG/Hariharasudan.jpeg"
+                    alt="Dr. Hariharasudhan & Dr. Dhivya"
+                    fill
+                    className="object-cover object-top"
+                  />
+                </div>
+                <div className="mt-4 text-left space-y-1">
+                  <span className="text-[10px] font-bold tracking-widest text-[#f98825] uppercase block">
+                    Neurosurgery &amp; Neurological Specialist
+                  </span>
+                  <h3 className="text-lg sm:text-xl font-black text-white">Dr. Hariharasudhan &amp; Dr. Dhivya</h3>
+                  <p className="text-xs text-gray-300 font-medium">
+                    Neurosurgery &amp; Neurological Care Team
+                  </p>
+                </div>
+                <div className="absolute -top-3 -right-3 bg-[#f98825] text-white px-3.5 py-1.5 rounded-xl text-xs font-bold shadow-lg border border-white/20">
+                  Lead Specialist
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
       </section>
 

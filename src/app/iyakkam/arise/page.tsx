@@ -194,7 +194,7 @@ function HeroSection() {
               <div className="grid grid-cols-3 gap-4 text-slate-800">
                 {[
                   { label: "Event Date", val: "Oct 17, 2026", color: "text-[#004B57]", icon: <Calendar className="w-3.5 h-3.5 text-[#00A896]" /> },
-                  { label: "Venue Location", val: "Salem (Yet To Be Announced)", color: "text-[#00A896]", icon: <MapPin className="w-3.5 h-3.5 text-[#FF8C00]" /> },
+                  { label: "Venue Location", val: "KIOT College of Engineering", color: "text-[#00A896]", icon: <MapPin className="w-3.5 h-3.5 text-[#FF8C00]" /> },
                   { label: "Timing", val: "8:00 AM Onwards", color: "text-[#FF8C00]", icon: <Clock className="w-3.5 h-3.5 text-teal" /> }
                 ].map((s, idx) => (
                   <div key={idx} className="space-y-1.5 text-left">
@@ -489,15 +489,84 @@ function FacultySection() {
           ))}
         </div>
 
+        {/* Featured Workshop & Acrophase Section */}
+        <div className="mt-16 max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="bg-gradient-to-br from-[#004B57] to-[#002D35] rounded-[2.5rem] p-8 sm:p-10 text-white relative overflow-hidden border border-[#00A896]/30 shadow-2xl text-left"
+          >
+            {/* Background Glow Orbs */}
+            <div className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-[#FF8C00]/15 blur-3xl pointer-events-none" />
+            <div className="absolute -left-20 -top-20 w-80 h-80 rounded-full bg-[#00A896]/20 blur-3xl pointer-events-none" />
+
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              {/* Left / Acrophase Logo & Facilitator Card */}
+              <div className="lg:col-span-5 flex flex-col items-center text-center p-6 bg-white/10 backdrop-blur-md rounded-3xl border border-white/15 shadow-inner">
+                <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-white p-3 shadow-xl border-2 border-[#FF8C00]/40 flex items-center justify-center overflow-hidden mb-4 hover:scale-105 transition-transform duration-300">
+                  <Image
+                    src="/assets/acrophase-logo.jpg"
+                    alt="Acrophase Logo"
+                    width={128}
+                    height={128}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#FF8C00] bg-[#FF8C00]/15 border border-[#FF8C00]/30 px-3 py-1 rounded-full mb-2">
+                  Hands-on Workshop Lead
+                </span>
+                <h3 className="font-display text-xl font-black text-white uppercase tracking-wide">
+                  Sri Gayathri.G
+                </h3>
+                <p className="text-xs text-[#00A896] font-bold uppercase tracking-wider mt-1">
+                  Lead Researcher
+                </p>
+                <p className="text-[11px] text-slate-300 font-semibold mt-1 leading-snug">
+                  Acrophase, Human Performance Lab, IIT Madras
+                </p>
+              </div>
+
+              {/* Right / Workshop Details & Topic */}
+              <div className="lg:col-span-7 space-y-5">
+                <div className="inline-flex items-center gap-2 text-xs font-bold text-[#00A896] uppercase tracking-widest bg-[#00A896]/15 border border-[#00A896]/30 px-3.5 py-1.5 rounded-full">
+                  <Activity size={14} className="text-[#00A896]" /> Special Workshop Session
+                </div>
+                <div className="space-y-2">
+                  <span className="block text-[11px] font-bold uppercase tracking-widest text-[#FF8C00]">
+                    Workshop Topic
+                  </span>
+                  <h4 className="font-display text-2xl sm:text-3xl font-black text-white uppercase tracking-tight leading-snug">
+                    Cardiac Load Monitoring Using Wearable Sensors
+                  </h4>
+                </div>
+                <p className="text-xs sm:text-sm text-slate-200 font-semibold leading-relaxed">
+                  An exclusive interactive session showcasing real-time telemetry, continuous cardiovascular monitoring, and wearable sensor research engineered at the Human Performance Lab, IIT Madras.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
         {/* Committees Section */}
         <div className="mt-20 border-t border-slate-200 pt-16 max-w-5xl mx-auto">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <span className="text-[#00A896] text-[10px] font-bold uppercase tracking-widest bg-white border border-[#00A896]/15 px-3.5 py-1.5 rounded-full shadow-sm">
+              Event Leadership
+            </span>
+            <h3 className="font-display text-2xl sm:text-3xl font-black tracking-tight text-[#004B57] uppercase mt-3">
+              Organising Committee
+            </h3>
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
                 role: "Organising Chairman",
                 name: "Dr. T. Natanasabapathy",
                 credentials: "MBBS, MS(ORTHO), FIAS, FDFM",
-                img: "/SpeakersIMG/natanasabapathy.jpeg"
+                img: "/SpeakersIMG/TNS.jpeg"
               },
               {
                 role: "Organising Secretary",
@@ -515,13 +584,13 @@ function FacultySection() {
                 role: "Organising Coordinators",
                 name: "Dr. D. Leela Kumari (PT)",
                 credentials: "BPT, FDFM",
-                img: "/SpeakersIMG/Img2.jpeg"
+                img: "/SpeakersIMG/leela.jpeg"
               },
               {
                 role: "Organising Coordinators",
                 name: "Dr. V. Kaviya Sri (PT)",
                 credentials: "BPT, FDFM",
-                img: "/SpeakersIMG/Img1.jpeg"
+                img: "/SpeakersIMG/kavya.jpeg"
               }
 
             ].map((c, idx) => (
