@@ -161,7 +161,7 @@ function HeroSection() {
                 </div>
                 <div>
                   <span className="block text-[9px] font-bold uppercase text-slate-400 tracking-wider">Entry Fee</span>
-                  <span className="font-display text-xl font-black text-[#004B57]">₹149/-</span>
+                  <span className="font-display text-xl font-black text-[#004B57]">₹249/-</span>
                 </div>
               </div>
 
@@ -171,7 +171,7 @@ function HeroSection() {
                 </div>
                 <div>
                   <span className="block text-[9px] font-bold uppercase text-slate-400 tracking-wider">Entry Fee</span>
-                  <span className="font-display text-xl font-black text-[#F26522]">₹199/-</span>
+                  <span className="font-display text-xl font-black text-[#F26522]">₹299/-</span>
                 </div>
               </div>
             </motion.div>
@@ -275,11 +275,11 @@ function HeroSection() {
               <div className="grid grid-cols-2 gap-3 text-left">
                 <div className="p-3 bg-[#E8F7F5] border border-[#B2E0DA] rounded-xl space-y-1">
                   <span className="block text-[9px] font-bold text-[#007A6E] uppercase">5KM Category</span>
-                  <span className="font-display text-lg font-black text-[#004B57]">₹149</span>
+                  <span className="font-display text-lg font-black text-[#004B57]">₹249</span>
                 </div>
                 <div className="p-3 bg-[#FFF4EE] border border-[#FFD8C2] rounded-xl space-y-1">
                   <span className="block text-[9px] font-bold text-[#C94F0E] uppercase">10KM Category</span>
-                  <span className="font-display text-lg font-black text-[#F26522]">₹199</span>
+                  <span className="font-display text-lg font-black text-[#F26522]">₹299</span>
                 </div>
               </div>
 
@@ -440,9 +440,8 @@ function PrizesSection() {
 function AmenitiesSection() {
   const items = [
     { title: "Official Valli T-Shirt", desc: "High-performance moisture-wicking Valli Marathon running tee.", icon: <Shirt className="w-6 h-6 text-[#F26522]" /> },
-    { title: "Official E-Certificate", desc: "Verified digital finisher certificate with time record.", icon: <FileCheck className="w-6 h-6 text-[#00A896]" /> },
-    { title: "Refreshments & Water", desc: "Hydration points along route plus post-race fruits & snacks.", icon: <Apple className="w-6 h-6 text-[#F26522]" /> },
-    { title: "Goodies & BIBS Bag", desc: "Exclusive event goodie bag with sponsor items & extras.", icon: <Gift className="w-6 h-6 text-[#00A896]" /> }
+    { title: "Certificate", desc: "Verified finisher certificate with time record.", icon: <FileCheck className="w-6 h-6 text-[#00A896]" /> },
+    { title: "Refreshments & Water", desc: "Hydration points along route plus post-race fruits & snacks.", icon: <Apple className="w-6 h-6 text-[#F26522]" /> }
   ];
 
   return (
@@ -460,7 +459,7 @@ function AmenitiesSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {items.map((item, idx) => (
             <motion.div
               key={idx}
@@ -551,7 +550,7 @@ function CTASection() {
             </div>
 
             <p className="text-slate-600 font-semibold text-sm sm:text-base max-w-xl leading-relaxed">
-              Secure your spot online in under 2 minutes! Choose your distance (5KM @ ₹149 or 10KM @ ₹199), select your T-shirt size, pay securely via UPI QR, and get instant ticket confirmation.
+              Secure your spot online in under 2 minutes! Choose your distance (5KM @ ₹249 or 10KM @ ₹299), select your T-shirt size, pay securely via UPI QR, and get instant ticket confirmation.
             </p>
 
             {/* Countdown Clock */}

@@ -70,9 +70,9 @@ export default function ActiveSalemRegistrationPage() {
   // Compute total entry fee
   const calculateTotalFee = () => {
     if (category === "10KM") {
-      return 199;
+      return 299;
     }
-    return 149;
+    return 249;
   };
 
   const totalFee = calculateTotalFee();
@@ -355,7 +355,7 @@ export default function ActiveSalemRegistrationPage() {
                               className={`p-4 rounded-2xl border-2 text-left transition-all cursor-pointer flex flex-col justify-between ${category === "5KM" ? "border-[#00A896] bg-[#E8F7F5]" : "border-slate-200 bg-white hover:border-slate-300"}`}
                             >
                               <span className="text-xs font-black text-[#004B57] uppercase">5KM Run</span>
-                              <span className="font-display text-xl font-black text-[#004B57] mt-1">₹149/-</span>
+                              <span className="font-display text-xl font-black text-[#004B57] mt-1">₹249/-</span>
                             </button>
 
                             <button
@@ -364,7 +364,7 @@ export default function ActiveSalemRegistrationPage() {
                               className={`p-4 rounded-2xl border-2 text-left transition-all cursor-pointer flex flex-col justify-between ${category === "10KM" ? "border-[#F26522] bg-[#FFF4EE]" : "border-slate-200 bg-white hover:border-slate-300"}`}
                             >
                               <span className="text-xs font-black text-[#F26522] uppercase">10KM Run</span>
-                              <span className="font-display text-xl font-black text-[#F26522] mt-1">₹199/-</span>
+                              <span className="font-display text-xl font-black text-[#F26522] mt-1">₹299/-</span>
                             </button>
                           </div>
                         </div>
