@@ -226,7 +226,7 @@ function HeroSection() {
                 {[
                   { label: "Race Day Date", val: "Sun 18 Oct 2026", color: "text-[#004B57]", icon: <Calendar className="w-3.5 h-3.5 text-[#00A896]" /> },
                   { label: "Venue Location", val: "Salem City Route", color: "text-[#00A896]", icon: <MapPin className="w-3.5 h-3.5 text-[#F26522]" /> },
-                  { label: "Timing", val: "8:00 AM – 5:00 PM", color: "text-[#F26522]", icon: <Clock className="w-3.5 h-3.5 text-teal" /> }
+                  { label: "Timing", val: "5:00 AM – 8:00 AM", color: "text-[#F26522]", icon: <Clock className="w-3.5 h-3.5 text-teal" /> }
                 ].map((s, idx) => (
                   <div key={idx} className="space-y-1.5 text-left">
                     <span className="flex items-center gap-1.5 text-[9px] font-bold text-slate-400 uppercase tracking-widest">

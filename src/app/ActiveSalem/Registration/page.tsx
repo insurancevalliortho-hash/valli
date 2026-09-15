@@ -32,6 +32,7 @@ import {
 import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
 import confetti from "canvas-confetti";
+import RazorpayCheckout from "../../../components/RazorpayCheckout";
 
 export default function ActiveSalemRegistrationPage() {
   const lenis = useLenis();
@@ -50,6 +51,7 @@ export default function ActiveSalemRegistrationPage() {
   const [emergencyContact, setEmergencyContact] = useState("");
   const [city, setCity] = useState("Salem");
   const [source, setSource] = useState("Social Media");
+  const [paymentMethod, setPaymentMethod] = useState<"online" | "upi_qr">("online");
   const [transactionId, setTransactionId] = useState("");
   const [screenshot, setScreenshot] = useState<string | null>(null);
 
@@ -167,6 +169,56 @@ export default function ActiveSalemRegistrationPage() {
       lenis.scrollTo(0, { immediate: true });
     } else {
       window.scrollTo(0, 0);
+    }
+  };
+
+  // Handle successful Razorpay payment submission
+  const handleRazorpaySuccess = async (details: { paymentId: string; orderId: string; signature: string }) => {
+    setIsSubmitting(true);
+    setErrors({});
+    setTransactionId(details.paymentId);
+    setScreenshot("RAZORPAY_ONLINE_PAYMENT");
+
+    try {
+      const response = await fetch("/api/active-salem/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          registrationCode: regCode,
+          fullName,
+          emailId,
+          mobileNumber,
+          category,
+          tshirtSize,
+          gender,
+          age: Number(age),
+          emergencyContact,
+          city,
+          source,
+          transactionId: details.paymentId,
+          paymentScreenshot: "RAZORPAY_ONLINE_PAYMENT",
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setIsSuccess(true);
+        if (lenis) {
+          lenis.scrollTo(0, { immediate: true });
+        } else {
+          window.scrollTo(0, 0);
+        }
+      } else {
+        alert(result.error || "Failed to submit registration after online payment.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Network error submitting registration. Payment ID: " + details.paymentId);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -297,7 +349,7 @@ export default function ActiveSalemRegistrationPage() {
                       <span className="text-[#00A896] font-bold">₹{totalFee}</span>
                     </li>
                     <li className="flex justify-between">
-                      <span className="text-slate-400">UPI Ref ID:</span>
+                      <span className="text-slate-400">Transaction ID:</span>
                       <span className="text-slate-700 font-mono tracking-wider">{transactionId}</span>
                     </li>
                   </ul>
@@ -539,136 +591,29 @@ export default function ActiveSalemRegistrationPage() {
                         </div>
                       </div>
 
-                      {/* UPI QR Details */}
-                      <div className="space-y-6">
-                        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center bg-[#F0FAF9]/60 border border-teal/15 p-5 rounded-2xl">
-                          {/* QR Image */}
-                          <div className="md:col-span-5 flex flex-col items-center">
-                            <button
-                              type="button"
-                              onClick={() => setQrModalOpen(true)}
-                              className="relative bg-white border border-slate-200 rounded-2xl p-3 shadow-md hover:shadow-lg hover:scale-105 transition-all cursor-pointer group"
-                              title="Click to expand QR Code"
-                            >
-                              <Image src="/assets/payment-qr.jpg" alt="UPI QR Code" width={135} height={135} className="w-[135px] h-[135px] object-contain rounded-lg bg-white" />
-                              <div className="absolute inset-0 bg-[#F26522]/5 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity flex items-center justify-center">
-                                <span className="bg-white/95 text-[#F26522] text-[9px] font-bold px-2.5 py-1 rounded-full shadow-md border border-orange-200">Click to Expand</span>
-                              </div>
-                            </button>
-                            <span className="text-[8px] font-mono text-slate-400 mt-2 tracking-widest uppercase">Click to scan / save</span>
-                          </div>
-
-                          {/* Pay Instructions */}
-                          <div className="md:col-span-7 space-y-4">
-                            {/* Copy VPA */}
-                            <div className="bg-white border border-slate-200 rounded-xl p-3 flex items-center justify-between shadow-sm">
-                              <div>
-                                <span className="block text-[8px] font-bold text-slate-400 uppercase tracking-wider">Quick Pay / UPI VPA</span>
-                                <span className="font-mono text-xs font-bold text-[#1A1A2E]">drvjl79-2@okicici</span>
-                              </div>
-                              <button
-                                type="button"
-                                onClick={() => {
-                                  navigator.clipboard.writeText("drvjl79-2@okicici");
-                                  setCopied(true);
-                                  setTimeout(() => setCopied(false), 2000);
-                                }}
-                                className="p-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-slate-500 transition-colors cursor-pointer"
-                                title="Copy UPI VPA"
-                              >
-                                {copied ? <Check size={14} className="text-emerald-500" /> : <Copy size={14} />}
-                              </button>
-                            </div>
-
-                            {/* Mobile deep link */}
-                            <div className="space-y-1.5">
-                              <a
-                                href={`upi://pay?pa=drvjl79-2@okicici&pn=Valli%20Hospital&am=${totalFee}&cu=INR`}
-                                className="w-full bg-[#F26522] hover:bg-[#C94F0E] text-white py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
-                              >
-                                <Zap size={14} /> Quick Pay (UPI App)
-                              </a>
-                            </div>
-
-                            <div className="text-xs space-y-2 text-[#004B57] font-semibold leading-relaxed text-left">
-                              <ol className="list-decimal list-inside text-[11px] text-slate-500 pl-1 space-y-1">
-                                <li>Scan QR code using Google Pay, PhonePe, Paytm, or BHIM UPI app.</li>
-                                <li>Pay exact registration entry fee of <span className="font-bold text-[#1A1A2E]">₹{totalFee}</span>.</li>
-                                <li>Recipient name will display as <span className="font-bold text-[#1A1A2E]">Valli Hospital</span>.</li>
-                                <li>Enter the 12-digit UPI Transaction / UTR ID below.</li>
-                              </ol>
-                            </div>
-                          </div>
+                      {/* Razorpay Online Payment Box */}
+                      <div className="p-6 bg-[#FFF8F3]/70 border border-[#FFD8C2] rounded-2xl space-y-4 text-center">
+                        <div className="space-y-1">
+                          <h3 className="font-display text-sm font-bold text-[#004B57] uppercase tracking-wider">
+                            Fast & Secure Online Checkout
+                          </h3>
+                          <p className="text-[11px] text-slate-500 font-medium max-w-sm mx-auto">
+                            Pay ₹{totalFee} instantly using UPI (GPay, PhonePe, Paytm), Credit/Debit Card, Net Banking, or Wallets.
+                          </p>
                         </div>
 
-                        {/* UPI Transaction ID Input */}
-                        <div className="space-y-1.5 text-left">
-                          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
-                            <Lock className="w-3.5 h-3.5 text-[#F26522]" /> Payment Transaction ID / UTR Number *
-                          </label>
-                          <div className="relative">
-                            <input
-                              type="text"
-                              maxLength={12}
-                              value={transactionId}
-                              onChange={(e) => setTransactionId(e.target.value.replace(/\D/g, ""))}
-                              placeholder="e.g. 329012345678"
-                              className={`w-full bg-white border rounded-xl pl-4 pr-12 py-3 text-xs font-mono tracking-widest text-[#1A1A2E] transition-all focus:outline-none focus:border-[#F26522] focus:ring-4 focus:ring-[#F26522]/10 ${errors.transactionId ? "border-red-500" : "border-slate-200"}`}
-                            />
-                            <div className="absolute right-3.5 top-1/2 -translate-y-1/2 flex items-center text-slate-400 pointer-events-none">
-                              {transactionId.length === 12 ? (
-                                <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-                              ) : (
-                                <span className="text-[9px] font-bold font-mono">{transactionId.length}/12</span>
-                              )}
-                            </div>
-                          </div>
-                          {errors.transactionId && <p className="text-[10px] text-red-500 font-semibold">{errors.transactionId}</p>}
-                        </div>
-
-                        {/* Screenshot upload */}
-                        <div className="space-y-1.5 mt-4 text-left">
-                          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
-                            <Upload className="w-3.5 h-3.5 text-[#F26522]" /> Upload Payment Screenshot *
-                          </label>
-
-                          {!screenshot ? (
-                            <div className="border-2 border-dashed border-slate-200 hover:border-[#F26522]/50 transition-colors rounded-xl p-5 text-center cursor-pointer relative bg-slate-50/30">
-                              <input
-                                type="file"
-                                accept="image/*"
-                                onChange={handleScreenshotChange}
-                                className="absolute inset-0 opacity-0 cursor-pointer"
-                              />
-                              <div className="space-y-2">
-                                <div className="w-8 h-8 bg-orange-50 text-[#F26522] rounded-lg flex items-center justify-center mx-auto shadow-inner border border-orange-200">
-                                  <Upload size={14} />
-                                </div>
-                                <p className="text-[11px] font-bold text-slate-700">Click or Drag screenshot here</p>
-                                <p className="text-[9px] text-slate-400 font-medium">JPEG, PNG up to 2MB. Ensure the 12-digit UTR ID is visible.</p>
-                              </div>
-                            </div>
-                          ) : (
-                            <div className="relative border border-slate-200 rounded-xl p-3 bg-slate-50/50 flex items-center gap-3">
-                              <div className="w-12 h-12 bg-white rounded-lg overflow-hidden border border-slate-200 flex-shrink-0">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img src={screenshot} alt="Payment SS" className="w-full h-full object-cover" />
-                              </div>
-                              <div className="min-w-0 flex-1">
-                                <p className="text-[11px] font-bold text-slate-700 truncate">payment_screenshot.png</p>
-                                <p className="text-[9px] text-[#00A896] font-bold">Image loaded successfully</p>
-                              </div>
-                              <button
-                                type="button"
-                                onClick={handleClearScreenshot}
-                                className="p-1.5 bg-red-50 hover:bg-red-100 text-red-500 rounded-lg transition-colors text-xs font-bold"
-                              >
-                                Remove
-                              </button>
-                            </div>
-                          )}
-                          {errors.screenshot && <p className="text-[10px] text-red-500 font-semibold">{errors.screenshot}</p>}
-                        </div>
+                        <RazorpayCheckout
+                          amount={totalFee}
+                          title="Active Salem Marathon"
+                          description={`${category} Run Registration Fee - ${fullName}`}
+                          prefillName={fullName}
+                          prefillEmail={emailId}
+                          prefillPhone={mobileNumber}
+                          onSuccess={handleRazorpaySuccess}
+                          onFailure={(errMsg) => setErrors({ transactionId: errMsg })}
+                          buttonText={`Pay ₹${totalFee} via Razorpay`}
+                          buttonClassName="w-full bg-[#F26522] hover:bg-[#C94F0E] text-white py-4 px-6 rounded-2xl font-bold text-sm tracking-wide transition-all duration-300 shadow-lg shadow-orange/20 hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2 cursor-pointer"
+                        />
                       </div>
                     </div>
                   )}
@@ -700,24 +645,9 @@ export default function ActiveSalemRegistrationPage() {
                       Continue <ChevronRight size={16} />
                     </button>
                   ) : (
-                    <button
-                      type="button"
-                      onClick={handleSubmit}
-                      disabled={isSubmitting}
-                      className="btn-primary btn-orange"
-                      style={{ padding: "12px 28px", fontSize: 13, borderRadius: 10 }}
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                          Submitting...
-                        </>
-                      ) : (
-                        <>
-                          Submit Registration <ArrowRight size={16} />
-                        </>
-                      )}
-                    </button>
+                    <div className="text-[11px] text-slate-400 font-semibold italic">
+                      Click the Pay button above to proceed via Razorpay
+                    </div>
                   )}
                 </div>
               </div>
@@ -725,61 +655,6 @@ export default function ActiveSalemRegistrationPage() {
           )}
         </div>
       </div>
-
-      {/* QR Code Expanded Modal */}
-      {qrModalOpen && (
-        <div
-          className="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200"
-          onClick={() => setQrModalOpen(false)}
-        >
-          <div
-            className="bg-white rounded-[2rem] p-6 max-w-sm w-full border border-orange-200 shadow-2xl relative flex flex-col items-center gap-5 text-center animate-in fade-in zoom-in-95 duration-200"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              type="button"
-              onClick={() => setQrModalOpen(false)}
-              className="absolute top-4 right-4 p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-colors"
-            >
-              <X size={18} />
-            </button>
-
-            <div className="space-y-1 mt-2 text-center">
-              <h3 className="font-display text-lg font-bold uppercase text-[#004B57]">Marathon UPI QR</h3>
-              <p className="text-[11px] text-slate-500 font-semibold leading-relaxed">
-                Scan using Google Pay, PhonePe, Paytm, or any UPI app to pay ₹{totalFee}.
-              </p>
-            </div>
-
-            <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex items-center justify-center">
-              <Image
-                src="/assets/payment-qr.jpg"
-                alt="UPI QR Code Expanded"
-                width={260}
-                height={260}
-                className="w-[260px] h-[260px] object-contain rounded-xl bg-white shadow-sm"
-              />
-            </div>
-
-            <div className="w-full flex flex-col gap-2.5">
-              <a
-                href="/assets/payment-qr.jpg"
-                download="valli-marathon-payment-qr.jpg"
-                className="bg-[#F26522] hover:bg-[#C94F0E] text-white w-full py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-2"
-              >
-                <Download size={14} /> Save QR Code
-              </a>
-              <button
-                type="button"
-                onClick={() => setQrModalOpen(false)}
-                className="bg-slate-100 hover:bg-slate-200 text-[#004B57] w-full py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all"
-              >
-                Close View
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       <Footer />
     </>

@@ -34,6 +34,7 @@ import {
 import Navbar from "../../../../components/Navbar";
 import Footer from "../../../../components/Footer";
 import confetti from "canvas-confetti";
+import RazorpayCheckout from "../../../../components/RazorpayCheckout";
 
 export default function AriseRegisterPage() {
   const lenis = useLenis();
@@ -56,6 +57,7 @@ export default function AriseRegisterPage() {
   const [iapCreditPoints, setIapCreditPoints] = useState(false);
   const [iapMembershipNumber, setIapMembershipNumber] = useState("");
   const [source, setSource] = useState("Social Media");
+  const [paymentMethod, setPaymentMethod] = useState<"online" | "upi_qr">("online");
   const [transactionId, setTransactionId] = useState("");
   const [screenshot, setScreenshot] = useState<string | null>(null);
 
@@ -75,14 +77,17 @@ export default function AriseRegisterPage() {
 
   // Compute total fee amount to pay
   const calculateTotalFee = () => {
-    const isStudentWithBonafide = designation === "Student / Intern" && Boolean(bonafideCertificate);
+    if (category.toLowerCase().includes("bulk")) {
+      return 15000;
+    }
+    const isStudent = designation === "Student / Intern";
     if (category === "Conference with Workshop") {
-      return isStudentWithBonafide ? 1000 : 2500;
+      return isStudent ? 1500 : 2500;
     }
     if (category === "Workshop") {
       return 500;
     }
-    return isStudentWithBonafide ? 500 : 2000;
+    return isStudent ? 1000 : 2000;
   };
 
   const totalFee = calculateTotalFee();
@@ -229,6 +234,61 @@ export default function AriseRegisterPage() {
     }
   };
 
+  // Handle successful Razorpay payment submission
+  const handleRazorpaySuccess = async (details: { paymentId: string; orderId: string; signature: string }) => {
+    setIsSubmitting(true);
+    setErrors({});
+    setTransactionId(details.paymentId);
+    setScreenshot("RAZORPAY_ONLINE_PAYMENT");
+
+    try {
+      const response = await fetch("/api/arise/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          registrationCode: regCode,
+          fullName,
+          emailId,
+          mobileNumber,
+          category,
+          includeWorkshop,
+          institution,
+          department,
+          city,
+          source,
+          transactionId: details.paymentId,
+          paymentScreenshot: "RAZORPAY_ONLINE_PAYMENT",
+          designation,
+          qualification,
+          bonafideCertificate,
+          foodPreference,
+          iapCreditPoints,
+          iapMembershipNumber: iapCreditPoints ? iapMembershipNumber : ""
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setIsSuccess(true);
+        if (lenis) {
+          lenis.scrollTo(0, { immediate: true });
+        } else {
+          window.scrollTo(0, 0);
+        }
+      } else {
+        alert(result.error || "Failed to complete registration after online payment.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Network error submitting registration. Payment ID: " + details.paymentId);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   // Submit registration form
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -359,7 +419,7 @@ export default function AriseRegisterPage() {
                       <span className="text-[#00A896] font-bold">₹{totalFee.toLocaleString("en-IN")}</span>
                     </li>
                     <li className="flex justify-between">
-                      <span className="text-slate-400">Transaction VPA ID:</span>
+                      <span className="text-slate-400">Transaction ID:</span>
                       <span className="text-slate-700 font-mono tracking-wider">{transactionId}</span>
                     </li>
                     <li className="flex justify-between">
@@ -463,7 +523,13 @@ export default function AriseRegisterPage() {
                           <div className="relative">
                             <select
                               value={designation}
-                              onChange={(e) => setDesignation(e.target.value)}
+                              onChange={(e) => {
+                                const val = e.target.value;
+                                setDesignation(val);
+                                if (val !== "Student / Intern" && category.toLowerCase().includes("bulk")) {
+                                  setCategory("Conference");
+                                }
+                              }}
                               className="w-full bg-white border border-[#E2E8F0] hover:border-slate-355 rounded-xl px-4 py-3 text-xs font-medium text-slate-800 transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%234A4A6A%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:0.6rem_auto] bg-[right_1.25rem_center] bg-no-repeat pr-10"
                             >
                               <option value="Student / Intern">Student / Intern</option>
@@ -488,6 +554,9 @@ export default function AriseRegisterPage() {
                             >
                               <option value="Conference">Conference</option>
                               <option value="Conference with Workshop">Conference with Workshop</option>
+                              {designation === "Student / Intern" && (
+                                <option value="Bulk Student Registration (30 Students - 50% OFF)">Bulk Student Registration (30 Students @ 50% OFF - ₹15,000 Total)</option>
+                              )}
                             </select>
                           </div>
                         </div>
@@ -496,10 +565,10 @@ export default function AriseRegisterPage() {
                         {designation === "Student / Intern" && (
                           <div className="space-y-2 p-5 bg-amber-50/55 border border-amber-200/50 rounded-2xl animate-in slide-in-from-top-2 duration-300 text-left md:col-span-2">
                             <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
-                              <Upload className="w-3.5 h-3.5 text-[#FF8C00]" /> Upload Bonafide Certificate (Mandatory for Student discount)
+                              <Upload className="w-3.5 h-3.5 text-[#FF8C00]" /> Upload Bonafide Certificate / Student ID (Recommended)
                             </label>
                             <p className="text-[9px] text-slate-500 font-semibold leading-normal">
-                              Upload a scan/photo of your Student ID card or college bonafide certificate to avail the student discount rate (₹500 for Conference / ₹1,000 for Conference with Workshop). Without it, standard rate applies (₹2,000 / ₹2,500).
+                              Upload a scan/photo of your Student ID card or college bonafide certificate for verification. Student designation rate is ₹1,000 for Conference / ₹1,500 for Conference with Workshop. For group bookings of 30 students, select Bulk Student Registration for 50% OFF (₹500 each, total ₹15,000).
                             </p>
 
                             {!bonafideCertificate ? (
@@ -698,145 +767,29 @@ export default function AriseRegisterPage() {
                         </div>
                       </div>
 
-                      {/* UPI QR Details */}
-                      <div className="space-y-6">
-                        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center bg-[#F0FAF9]/60 border border-teal/15 p-5 rounded-2xl">
-                          {/* QR Image */}
-                          <div className="md:col-span-5 flex flex-col items-center">
-                            <button
-                              type="button"
-                              onClick={() => setQrModalOpen(true)}
-                              className="relative bg-white border border-slate-200 rounded-2xl p-3 shadow-md hover:shadow-lg hover:border-teal/30 hover:scale-105 transition-all duration-300 cursor-pointer group"
-                              title="Click to expand QR Code"
-                            >
-                              <Image src="/assets/payment-qr.jpg" alt="UPI QR Code" width={135} height={135} className="w-[135px] h-[135px] object-contain rounded-lg bg-white" />
-                              <div className="absolute inset-0 bg-teal/5 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity flex items-center justify-center">
-                                <span className="bg-white/95 text-teal text-[9px] font-bold px-2.5 py-1 rounded-full shadow-md border border-teal/10">Click to Expand</span>
-                              </div>
-                            </button>
-                            <span className="text-[8px] font-mono text-slate-400 mt-2 tracking-widest uppercase">Click to scan / save</span>
-                          </div>
-
-                          {/* Pay Instructions */}
-                          <div className="md:col-span-7 space-y-4">
-                            {/* Copy VPA */}
-                            <div className="bg-white border border-slate-200 rounded-xl p-3 flex items-center justify-between shadow-sm">
-                              <div>
-                                <span className="block text-[8px] font-bold text-slate-400 uppercase tracking-wider">Quick Pay / UPI VPA</span>
-                                <span className="font-mono text-xs font-bold text-[#1A1A2E]">drvjl79-2@okicici</span>
-                              </div>
-                              <button
-                                type="button"
-                                onClick={() => {
-                                  navigator.clipboard.writeText("drvjl79-2@okicici");
-                                  setCopied(true);
-                                  setTimeout(() => setCopied(false), 2000);
-                                }}
-                                className="p-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-slate-500 transition-colors cursor-pointer"
-                                title="Copy UPI VPA"
-                              >
-                                {copied ? <Check size={14} className="text-emerald-500" /> : <Copy size={14} />}
-                              </button>
-                            </div>
-
-                            {/* Mobile deep link */}
-                            <div className="space-y-1.5">
-                              <a
-                                href={`upi://pay?pa=drvjl79-2@okicici&pn=Valli%20Hospital&am=${totalFee}&cu=INR`}
-                                className="w-full bg-[#F26522] hover:bg-[#C94F0E] text-white py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-md flex items-center justify-center gap-2 cursor-pointer"
-                              >
-                                <Zap size={14} /> Quick Pay (UPI)
-                              </a>
-                              <span className="block text-[9px] text-slate-400 font-semibold text-center italic leading-none">
-                                *Direct pay works on mobile devices with active UPI apps (Google Pay, PhonePe, Paytm, etc.).
-                              </span>
-                            </div>
-
-                            <div className="text-xs space-y-2 text-[#004B57] font-semibold leading-relaxed text-left">
-                              <p className="text-teal font-bold flex items-center gap-1.5 text-xs uppercase">
-                                <Info className="w-4 h-4" /> UPI Payment Steps:
-                              </p>
-                              <ol className="list-decimal list-inside text-[11px] text-slate-500 pl-1 space-y-1.5">
-                                <li>Scan this QR code using Google Pay, PhonePe, Paytm, or any standard UPI app.</li>
-                                <li>Pay the entry fee amount of <span className="font-bold text-[#1A1A2E]">₹{totalFee}</span>.</li>
-                                <li>Verify that the recipient name displays as <span className="font-bold text-[#1A1A2E]">Valli Hospital</span>.</li>
-                                <li>Copy the 12-digit UPI Transaction/Reference ID and enter it below.</li>
-                              </ol>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* UPI Transaction ID Input */}
-                        <div className="space-y-1.5 text-left">
-                          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
-                            <Lock className="w-3.5 h-3.5 text-teal" /> Payment Transaction ID / UTR Number *
-                          </label>
-                          <div className="relative">
-                            <input
-                              type="text"
-                              maxLength={12}
-                              value={transactionId}
-                              onChange={(e) => setTransactionId(e.target.value.replace(/\D/g, ""))}
-                              placeholder="e.g. 329012345678"
-                              className={`w-full bg-white border rounded-xl pl-4 pr-12 py-3 text-xs font-mono tracking-widest text-[#1A1A2E] transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${errors.transactionId ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-300"}`}
-                            />
-                            <div className="absolute right-3.5 top-1/2 -translate-y-1/2 flex items-center text-slate-400 pointer-events-none">
-                              {transactionId.length === 12 ? (
-                                <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-                              ) : (
-                                <span className="text-[9px] font-bold font-mono">{transactionId.length}/12</span>
-                              )}
-                            </div>
-                          </div>
-                          {errors.transactionId && <p className="text-[10px] text-red-500 font-semibold">{errors.transactionId}</p>}
-                          <p className="text-[10px] text-slate-400 leading-normal">
-                            Standard banking transaction ID. Found in your bank SMS or UPI transaction details screen.
+                      {/* Razorpay Online Payment Box */}
+                      <div className="p-6 bg-[#F0FAF9]/60 border border-teal/20 rounded-2xl space-y-4 text-center">
+                        <div className="space-y-1">
+                          <h3 className="font-display text-sm font-bold text-[#004B57] uppercase tracking-wider">
+                            Fast & Secure Online Checkout
+                          </h3>
+                          <p className="text-[11px] text-slate-500 font-medium max-w-sm mx-auto">
+                            Pay ₹{totalFee.toLocaleString("en-IN")} instantly using UPI (GPay, PhonePe, Paytm), Credit/Debit Card, Net Banking, or Wallets.
                           </p>
                         </div>
 
-                        {/* Screenshot upload */}
-                        <div className="space-y-1.5 mt-4 text-left">
-                          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
-                            <Upload className="w-3.5 h-3.5 text-teal" /> Upload Payment Screenshot *
-                          </label>
-
-                          {!screenshot ? (
-                            <div className="border-2 border-dashed border-slate-200 hover:border-teal/50 transition-colors rounded-xl p-5 text-center cursor-pointer relative bg-slate-50/30">
-                              <input
-                                type="file"
-                                accept="image/*"
-                                onChange={handleScreenshotChange}
-                                className="absolute inset-0 opacity-0 cursor-pointer"
-                              />
-                              <div className="space-y-2">
-                                <div className="w-8 h-8 bg-[#E0F2F1] text-teal rounded-lg flex items-center justify-center mx-auto shadow-inner border border-teal/10">
-                                  <Upload size={14} />
-                                </div>
-                                <p className="text-[11px] font-bold text-slate-700">Click or Drag screenshot here</p>
-                                <p className="text-[9px] text-slate-400 font-medium">JPEG, PNG up to 2MB. Make sure the Reference ID is visible.</p>
-                              </div>
-                            </div>
-                          ) : (
-                            <div className="relative border border-slate-200 rounded-xl p-3 bg-slate-50/50 flex items-center gap-3">
-                              <div className="w-12 h-12 bg-white rounded-lg overflow-hidden border border-slate-200 flex-shrink-0">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img src={screenshot} alt="Payment SS" className="w-full h-full object-cover" />
-                              </div>
-                              <div className="min-w-0 flex-1">
-                                <p className="text-[11px] font-bold text-slate-700 truncate">screenshot_uploaded.png</p>
-                                <p className="text-[9px] text-[#00A896] font-bold">Image loaded successfully</p>
-                              </div>
-                              <button
-                                type="button"
-                                onClick={handleClearScreenshot}
-                                className="p-1.5 bg-red-50 hover:bg-red-100 text-red-500 rounded-lg transition-colors text-xs font-bold"
-                              >
-                                Remove
-                              </button>
-                            </div>
-                          )}
-                          {errors.screenshot && <p className="text-[10px] text-red-500 font-semibold">{errors.screenshot}</p>}
-                        </div>
+                        <RazorpayCheckout
+                          amount={totalFee}
+                          title="ARISE 2026 CME Registration"
+                          description={`Delegate Registration Fee - ${fullName}`}
+                          prefillName={fullName}
+                          prefillEmail={emailId}
+                          prefillPhone={mobileNumber}
+                          onSuccess={handleRazorpaySuccess}
+                          onFailure={(errMsg) => setErrors({ transactionId: errMsg })}
+                          buttonText={`Pay ₹${totalFee.toLocaleString("en-IN")} via Razorpay`}
+                          buttonClassName="w-full bg-[#00A896] hover:bg-[#008B7A] text-white py-4 px-6 rounded-2xl font-bold text-sm tracking-wide transition-all duration-300 shadow-lg shadow-teal/20 hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2 cursor-pointer"
+                        />
                       </div>
                     </div>
                   )}
@@ -867,24 +820,9 @@ export default function AriseRegisterPage() {
                       Continue <ChevronRight size={16} />
                     </button>
                   ) : (
-                    <button
-                      type="button"
-                      onClick={handleSubmit}
-                      disabled={isSubmitting}
-                      className="btn-primary btn-orange"
-                      style={{ padding: "12px 28px", fontSize: 13, borderRadius: 10 }}
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                          Submitting...
-                        </>
-                      ) : (
-                        <>
-                          Submit Registration <ArrowRight size={16} />
-                        </>
-                      )}
-                    </button>
+                    <div className="text-[11px] text-slate-400 font-semibold italic">
+                      Click the Pay button above to proceed via Razorpay
+                    </div>
                   )}
                 </div>
               </div>
@@ -892,61 +830,6 @@ export default function AriseRegisterPage() {
           )}
         </div>
       </div>
-
-      {/* UPI QR Expanded Modal */}
-      {qrModalOpen && (
-        <div
-          className="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200"
-          onClick={() => setQrModalOpen(false)}
-        >
-          <div
-            className="bg-white rounded-[2rem] p-6 max-w-sm w-full border border-teal/10 shadow-2xl relative flex flex-col items-center gap-5 text-center animate-in fade-in zoom-in-95 duration-200"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              type="button"
-              onClick={() => setQrModalOpen(false)}
-              className="absolute top-4 right-4 p-1.5 text-slate-400 hover:text-slate-650 hover:bg-slate-100 rounded-full transition-colors"
-            >
-              <X size={18} />
-            </button>
-
-            <div className="space-y-1 mt-2 text-center">
-              <h3 className="font-display text-lg font-bold uppercase text-[#004B57]">UPI QR Code</h3>
-              <p className="text-[11px] text-slate-500 font-semibold leading-relaxed">
-                Scan using Google Pay, PhonePe, Paytm, or any UPI app to transfer ₹{totalFee}.
-              </p>
-            </div>
-
-            <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 shadow-inner flex items-center justify-center">
-              <Image
-                src="/assets/payment-qr.jpg"
-                alt="UPI QR Code Expanded"
-                width={260}
-                height={260}
-                className="w-[260px] h-[260px] object-contain rounded-xl bg-white shadow-sm"
-              />
-            </div>
-
-            <div className="w-full flex flex-col gap-2.5">
-              <a
-                href="/assets/payment-qr.jpg"
-                download="valli-hospital-payment-qr.jpg"
-                className="bg-[#00A896] hover:bg-[#008B7A] text-white w-full py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-md flex items-center justify-center gap-2"
-              >
-                <Download size={14} /> Save QR to Device
-              </a>
-              <button
-                type="button"
-                onClick={() => setQrModalOpen(false)}
-                className="bg-slate-100 hover:bg-slate-200 text-[#004B57] w-full py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300"
-              >
-                Close View
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       <Footer />
     </>

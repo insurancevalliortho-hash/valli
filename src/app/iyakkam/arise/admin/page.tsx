@@ -38,6 +38,7 @@ interface Registration {
   email_id: string;
   mobile_number: string;
   category: string;
+  designation?: string;
   include_workshop: boolean;
   institution: string;
   department?: string;
@@ -186,8 +187,11 @@ export default function AriseAdminPage() {
       .filter((r) => r.is_verified)
       .reduce((sum, r) => {
         let ticketPrice = 0;
-        if (r.category.toLowerCase().includes("student")) {
-          ticketPrice = r.include_workshop ? 1000 : 500;
+        const isStudent = (r.designation && r.designation.toLowerCase().includes("student")) || r.category.toLowerCase().includes("student");
+        if (r.category.toLowerCase().includes("bulk")) {
+          ticketPrice = 15000;
+        } else if (isStudent) {
+          ticketPrice = r.include_workshop ? 1500 : 1000;
         } else if (r.category.toLowerCase().includes("workshop")) {
           ticketPrice = 500;
         } else {

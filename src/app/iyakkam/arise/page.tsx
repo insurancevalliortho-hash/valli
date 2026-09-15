@@ -489,64 +489,112 @@ function FacultySection() {
           ))}
         </div>
 
-        {/* Featured Workshop & Acrophase Section */}
-        <div className="mt-16 max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="bg-gradient-to-br from-[#004B57] to-[#002D35] rounded-[2.5rem] p-8 sm:p-10 text-white relative overflow-hidden border border-[#00A896]/30 shadow-2xl text-left"
-          >
-            {/* Background Glow Orbs */}
-            <div className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-[#FF8C00]/15 blur-3xl pointer-events-none" />
-            <div className="absolute -left-20 -top-20 w-80 h-80 rounded-full bg-[#00A896]/20 blur-3xl pointer-events-none" />
+        {/* Featured Workshops Section */}
+        <div id="workshops" className="mt-20 border-t border-slate-200 pt-16 max-w-5xl mx-auto">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <span className="text-[#00A896] text-[10px] font-bold uppercase tracking-widest bg-white border border-[#00A896]/15 px-3.5 py-1.5 rounded-full shadow-sm">
+              Hands-on Masterclasses
+            </span>
+            <h3 className="font-display text-2xl sm:text-3xl font-black tracking-tight text-[#004B57] uppercase mt-3">
+              Featured Interactive Workshops
+            </h3>
+            <p className="text-slate-500 font-semibold text-xs sm:text-sm mt-2 leading-relaxed">
+              Experience practical, hands-on learning led by pioneering researchers and sports science experts.
+            </p>
+          </div>
 
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              {/* Left / Acrophase Logo & Facilitator Card */}
-              <div className="lg:col-span-5 flex flex-col items-center text-center p-6 bg-white/10 backdrop-blur-md rounded-3xl border border-white/15 shadow-inner">
-                <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-white p-3 shadow-xl border-2 border-[#FF8C00]/40 flex items-center justify-center overflow-hidden mb-4 hover:scale-105 transition-transform duration-300">
-                  <Image
-                    src="/assets/acrophase-logo.jpg"
-                    alt="Acrophase Logo"
-                    width={128}
-                    height={128}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#FF8C00] bg-[#FF8C00]/15 border border-[#FF8C00]/30 px-3 py-1 rounded-full mb-2">
-                  Hands-on Workshop Lead
-                </span>
-                <h3 className="font-display text-xl font-black text-white uppercase tracking-wide">
-                  Sri Gayathri.G
-                </h3>
-                <p className="text-xs text-[#00A896] font-bold uppercase tracking-wider mt-1">
-                  Lead Researcher
-                </p>
-                <p className="text-[11px] text-slate-300 font-semibold mt-1 leading-snug">
-                  Acrophase, Human Performance Lab, IIT Madras
-                </p>
-              </div>
+          <div className="space-y-8">
+            {[
+              {
+                title: "Footwear as Medicine; Biomechanical Assessment for Smarter Footwear Selection",
+                lead: "Dr. Rahul Tiwari, Ph.D.",
+                role: "Head of Sports Performance Analysis",
+                affiliation: "Inspire Institute of Sport (IIS), Karnataka",
+                img: "/SpeakersIMG/RahulTiwari.png",
+                imgStyle: "object-cover object-top",
+                badge: "Biomechanical Assessment",
+                desc: "A hands-on workshop on lower limb kinematics, plantagrade pressure dynamics, gait evaluation, and evidence-based biomechanical criteria for clinical and sports footwear selection."
+              },
+              {
+                title: "Hands on Workshop on Tele Rehabilitation Using VR",
+                lead: "Dr. Kishor Lakshminarayanan, Ph.D",
+                role: "Associate Professor",
+                affiliation: "School of Healthcare Science and Engineering, VIT Vellore",
+                img: "/SpeakersIMG/KishorLakshminarayanan.jpg",
+                imgStyle: "object-cover object-center",
+                badge: "Virtual Reality & Telerehab",
+                desc: "Immersive hands-on training with virtual reality environments, motion tracking sensors, and remote digital health frameworks transforming patient recovery."
+              },
+              {
+                title: "Cardiac Load Monitoring Using Wearable Sensors",
+                lead: "Sri Gayathri.G",
+                role: "Lead Researcher",
+                affiliation: "Acrophase, Human Performance Lab, IIT Madras",
+                img: "/assets/acrophase-logo.jpg",
+                imgStyle: "object-contain p-2 bg-white",
+                badge: "Wearable Sensor Telemetry",
+                desc: "An exclusive interactive session showcasing real-time telemetry, continuous cardiovascular monitoring, and wearable sensor research engineered at the Human Performance Lab, IIT Madras."
+              }
+            ].map((w, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="bg-gradient-to-br from-[#004B57] to-[#002D35] rounded-[2.5rem] p-8 sm:p-10 text-white relative overflow-hidden border border-[#00A896]/30 shadow-xl text-left hover:shadow-2xl transition-all duration-300"
+              >
+                {/* Background Glow Orbs */}
+                <div className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-[#FF8C00]/15 blur-3xl pointer-events-none" />
+                <div className="absolute -left-20 -top-20 w-80 h-80 rounded-full bg-[#00A896]/20 blur-3xl pointer-events-none" />
 
-              {/* Right / Workshop Details & Topic */}
-              <div className="lg:col-span-7 space-y-5">
-                <div className="inline-flex items-center gap-2 text-xs font-bold text-[#00A896] uppercase tracking-widest bg-[#00A896]/15 border border-[#00A896]/30 px-3.5 py-1.5 rounded-full">
-                  <Activity size={14} className="text-[#00A896]" /> Special Workshop Session
+                <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                  {/* Left / Facilitator Avatar & Details */}
+                  <div className="lg:col-span-5 flex flex-col items-center text-center p-6 bg-white/10 backdrop-blur-md rounded-3xl border border-white/15 shadow-inner">
+                    <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl bg-white p-1.5 shadow-xl border-2 border-[#FF8C00]/40 flex items-center justify-center overflow-hidden mb-4 hover:scale-105 transition-transform duration-300">
+                      <Image
+                        src={w.img}
+                        alt={w.lead}
+                        width={140}
+                        height={140}
+                        className={`w-full h-full rounded-xl ${w.imgStyle}`}
+                      />
+                    </div>
+                    <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#FF8C00] bg-[#FF8C00]/15 border border-[#FF8C00]/30 px-3 py-1 rounded-full mb-2">
+                      Hands-on Workshop Lead
+                    </span>
+                    <h3 className="font-display text-lg font-black text-white uppercase tracking-wide leading-snug">
+                      {w.lead}
+                    </h3>
+                    <p className="text-xs text-[#00A896] font-bold uppercase tracking-wider mt-1">
+                      {w.role}
+                    </p>
+                    <p className="text-[11px] text-slate-300 font-semibold mt-1 leading-snug">
+                      {w.affiliation}
+                    </p>
+                  </div>
+
+                  {/* Right / Workshop Details & Topic */}
+                  <div className="lg:col-span-7 space-y-4">
+                    <div className="inline-flex items-center gap-2 text-xs font-bold text-[#00A896] uppercase tracking-widest bg-[#00A896]/15 border border-[#00A896]/30 px-3.5 py-1.5 rounded-full">
+                      <Activity size={14} className="text-[#00A896]" /> {w.badge}
+                    </div>
+                    <div className="space-y-2">
+                      <span className="block text-[11px] font-bold uppercase tracking-widest text-[#FF8C00]">
+                        Workshop Topic
+                      </span>
+                      <h4 className="font-display text-xl sm:text-2xl font-black text-white uppercase tracking-tight leading-snug">
+                        {w.title}
+                      </h4>
+                    </div>
+                    <p className="text-xs sm:text-sm text-slate-200 font-semibold leading-relaxed">
+                      {w.desc}
+                    </p>
+                  </div>
                 </div>
-                <div className="space-y-2">
-                  <span className="block text-[11px] font-bold uppercase tracking-widest text-[#FF8C00]">
-                    Workshop Topic
-                  </span>
-                  <h4 className="font-display text-2xl sm:text-3xl font-black text-white uppercase tracking-tight leading-snug">
-                    Cardiac Load Monitoring Using Wearable Sensors
-                  </h4>
-                </div>
-                <p className="text-xs sm:text-sm text-slate-200 font-semibold leading-relaxed">
-                  An exclusive interactive session showcasing real-time telemetry, continuous cardiovascular monitoring, and wearable sensor research engineered at the Human Performance Lab, IIT Madras.
-                </p>
-              </div>
-            </div>
-          </motion.div>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
         {/* Committees Section */}
@@ -661,13 +709,19 @@ function PricingSection() {
             </div>
 
             {/* Tickets Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
               {[
                 {
-                  cat: "Students with Bonafide",
-                  price: "₹500",
-                  desc: "Verification via student ID required at entry desk.",
+                  cat: "Students / Interns",
+                  price: "₹1,000",
+                  desc: "Special ₹1,000 rate for Student / Intern designation.",
                   icon: <Users className="w-4 h-4 text-teal" />
+                },
+                {
+                  cat: "Bulk Student Offer (30+)",
+                  price: "₹500 / student",
+                  desc: "50% OFF for 30 students group booking (₹15,000 total).",
+                  icon: <Users className="w-4 h-4 text-[#FF8C00]" />
                 },
                 {
                   cat: "Professional & Consultant",
@@ -676,13 +730,13 @@ function PricingSection() {
                   icon: <Briefcase className="w-4 h-4 text-teal" />
                 },
                 {
-                  cat: "Hands-on VR Workshop",
+                  cat: "Hands-on Workshops",
                   price: "₹500",
-                  desc: "Practical simulation training add-on ticket.",
+                  desc: "Practical interactive masterclass add-on ticket.",
                   icon: <QrCode className="w-4 h-4 text-[#FF8C00]" />
                 }
               ].map((card, idx) => (
-                <div key={idx} className="bg-slate-50 border border-slate-250 p-6 rounded-2xl flex flex-col justify-between h-[180px]">
+                <div key={idx} className="bg-slate-50 border border-slate-250 p-5 rounded-2xl flex flex-col justify-between h-[185px]">
                   <div className="space-y-1.5">
                     <span className="flex items-center gap-1.5 text-[9px] font-bold text-slate-450 uppercase tracking-widest">
                       {card.icon} {card.cat}
@@ -691,7 +745,7 @@ function PricingSection() {
                       {card.desc}
                     </p>
                   </div>
-                  <span className="font-display text-2xl font-black tracking-tight block text-[#004B57]">
+                  <span className="font-display text-xl sm:text-2xl font-black tracking-tight block text-[#004B57]">
                     {card.price}
                   </span>
                 </div>
