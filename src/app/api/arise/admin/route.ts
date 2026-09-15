@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { sql } from "../../../../lib/db";
+import { getPgPool } from "../../../../lib/db";
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "ValliAdmin2026!";
 
@@ -15,12 +15,12 @@ export async function POST(request: Request) {
       );
     }
 
-    const registrations = await sql`
-      SELECT * FROM arise_registrations
-      ORDER BY created_at DESC;
-    `;
+    const pool = getPgPool();
+    const res = await pool.query(
+      `SELECT * FROM arise_registrations ORDER BY created_at DESC;`
+    );
 
-    return NextResponse.json({ success: true, data: registrations });
+    return NextResponse.json({ success: true, data: res.rows });
   } catch (error: any) {
     console.error("ARISE Admin API Error:", error);
     return NextResponse.json(
@@ -49,10 +49,11 @@ export async function DELETE(request: Request) {
       );
     }
 
-    await sql`
-      DELETE FROM arise_registrations
-      WHERE id = ${id};
-    `;
+    const pool = getPgPool();
+    await pool.query(
+      `DELETE FROM arise_registrations WHERE id = $1;`,
+      [id]
+    );
 
     return NextResponse.json({ success: true });
   } catch (error: any) {
@@ -83,11 +84,11 @@ export async function PATCH(request: Request) {
       );
     }
 
-    await sql`
-      UPDATE arise_registrations
-      SET is_verified = ${isVerified}
-      WHERE id = ${id};
-    `;
+    const pool = getPgPool();
+    await pool.query(
+      `UPDATE arise_registrations SET is_verified = $1 WHERE id = $2;`,
+      [isVerified, id]
+    );
 
     return NextResponse.json({ success: true });
   } catch (error: any) {
@@ -112,16 +113,18 @@ export async function PUT(request: Request) {
     }
 
     const { sendAriseRegistrationEmail } = await import("../../../../lib/email");
+    const pool = getPgPool();
 
     if (id) {
-      const records = await sql`
-        SELECT * FROM arise_registrations WHERE id = ${id} LIMIT 1;
-      `;
-      if (records.length === 0) {
+      const res = await pool.query(
+        `SELECT * FROM arise_registrations WHERE id = $1 LIMIT 1;`,
+        [id]
+      );
+      if (res.rows.length === 0) {
         return NextResponse.json({ success: false, error: "Registration not found" }, { status: 404 });
       }
 
-      const reg = records[0];
+      const reg = res.rows[0];
       const result = await sendAriseRegistrationEmail({
         registrationCode: reg.registration_code,
         fullName: reg.full_name,
@@ -146,9 +149,9 @@ export async function PUT(request: Request) {
       return NextResponse.json({ success: result.success, messageId, previewUrl });
     } else {
       // Send for all
-      const records = await sql`SELECT * FROM arise_registrations ORDER BY id ASC;`;
+      const res = await pool.query(`SELECT * FROM arise_registrations ORDER BY id ASC;`);
       let count = 0;
-      for (const reg of records) {
+      for (const reg of res.rows) {
         await sendAriseRegistrationEmail({
           registrationCode: reg.registration_code,
           fullName: reg.full_name,
@@ -179,4 +182,3 @@ export async function PUT(request: Request) {
     );
   }
 }
-
