@@ -32,7 +32,6 @@ import {
 import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
 import confetti from "canvas-confetti";
-import RazorpayCheckout from "../../../components/RazorpayCheckout";
 
 export default function ActiveSalemRegistrationPage() {
   const lenis = useLenis();
@@ -595,25 +594,24 @@ export default function ActiveSalemRegistrationPage() {
                       <div className="p-6 bg-[#FFF8F3]/70 border border-[#FFD8C2] rounded-2xl space-y-4 text-center">
                         <div className="space-y-1">
                           <h3 className="font-display text-sm font-bold text-[#004B57] uppercase tracking-wider">
-                            Fast & Secure Online Checkout
+                            Fast & Secure Online Checkout ({category} Run)
                           </h3>
                           <p className="text-[11px] text-slate-500 font-medium max-w-sm mx-auto">
-                            Pay ₹{totalFee} instantly using UPI (GPay, PhonePe, Paytm), Credit/Debit Card, Net Banking, or Wallets.
+                            Pay ₹{totalFee} instantly using UPI (GPay, PhonePe, Paytm), Credit/Debit Card, Net Banking, or Wallets via Razorpay.
                           </p>
                         </div>
 
-                        <RazorpayCheckout
-                          amount={totalFee}
-                          title="Active Salem Marathon"
-                          description={`${category} Run Registration Fee - ${fullName}`}
-                          prefillName={fullName}
-                          prefillEmail={emailId}
-                          prefillPhone={mobileNumber}
-                          onSuccess={handleRazorpaySuccess}
-                          onFailure={(errMsg) => setErrors({ transactionId: errMsg })}
-                          buttonText={`Pay ₹${totalFee} via Razorpay`}
-                          buttonClassName="w-full bg-[#F26522] hover:bg-[#C94F0E] text-white py-4 px-6 rounded-2xl font-bold text-sm tracking-wide transition-all duration-300 shadow-lg shadow-orange/20 hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2 cursor-pointer"
-                        />
+                        {/* Direct Razorpay Official Payment Link Button */}
+                        <a
+                          href={category === "10KM" ? "https://rzp.io/rzp/FiFHpJrg" : "https://rzp.io/rzp/c7h0k4O"}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-full bg-[#F26522] hover:bg-[#C94F0E] text-white py-4 px-6 rounded-2xl font-bold text-sm tracking-wide transition-all duration-300 shadow-lg shadow-orange/20 hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2 cursor-pointer no-underline block"
+                        >
+                          <Zap className="w-4 h-4" /> Pay ₹{totalFee} via Official Razorpay Page ({category})
+                        </a>
+
+
                       </div>
                     </div>
                   )}

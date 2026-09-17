@@ -3,6 +3,7 @@ import { getPgPool } from "../../../../lib/db";
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "ValliAdmin2026!";
 
+// POST to fetch all registrations securely
 export async function POST(request: Request) {
   try {
     const { password } = await request.json();
@@ -15,6 +16,11 @@ export async function POST(request: Request) {
     }
 
     const pool = getPgPool();
+    // Ensure is_verified column exists
+    await pool.query(
+      `ALTER TABLE active_salem_registrations ADD COLUMN IF NOT EXISTS is_verified BOOLEAN DEFAULT FALSE;`
+    );
+
     const res = await pool.query(
       `SELECT * FROM active_salem_registrations ORDER BY created_at DESC;`
     );
@@ -29,6 +35,7 @@ export async function POST(request: Request) {
   }
 }
 
+// DELETE a registration
 export async function DELETE(request: Request) {
   try {
     const { password, id } = await request.json();
@@ -56,9 +63,13 @@ export async function DELETE(request: Request) {
   }
 }
 
+// PATCH to update verification status
 export async function PATCH(request: Request) {
   try {
-    const { password, id, is_verified } = await request.json();
+    const body = await request.json();
+    const password = body.password;
+    const id = body.id;
+    const is_verified = body.is_verified ?? body.isVerified ?? false;
 
     if (password !== ADMIN_PASSWORD) {
       return NextResponse.json(
@@ -68,6 +79,9 @@ export async function PATCH(request: Request) {
     }
 
     const pool = getPgPool();
+    await pool.query(
+      `ALTER TABLE active_salem_registrations ADD COLUMN IF NOT EXISTS is_verified BOOLEAN DEFAULT FALSE;`
+    );
     await pool.query(
       `UPDATE active_salem_registrations SET is_verified = $1 WHERE id = $2;`,
       [is_verified, id]

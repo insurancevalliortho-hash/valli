@@ -437,18 +437,17 @@ export default function AriseAdminPage() {
                         <th className="p-5">Receipt Code</th>
                         <th className="p-5">Delegate</th>
                         <th className="p-5">Category & Workshop</th>
-                        <th className="p-5">Institution</th>
-                        <th className="p-5">Reference UPI & Date</th>
-                        <th className="p-5 text-center">Receipt Screenshot</th>
-                        <th className="p-5 text-center">Verification status</th>
-                        <th className="p-5 text-center">Actions</th>
+                        <th className="p-5 font-bold">Institution</th>
+                        <th className="p-5 font-bold">Reference UPI & Date</th>
+                        <th className="p-5 text-center font-bold">Verification status</th>
+                        <th className="p-5 text-center font-bold">Actions</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-150 text-xs sm:text-sm font-semibold text-slate-700">
                       {filteredRegistrations.length === 0 ? (
                         <tr>
-                          <td colSpan={8} className="p-10 text-center text-slate-400 font-bold">
-                            No matching registrations found in database database.
+                          <td colSpan={7} className="p-10 text-center text-slate-400 font-bold">
+                            No matching registrations found in database.
                           </td>
                         </tr>
                       ) : (
@@ -512,24 +511,6 @@ export default function AriseAdminPage() {
                               </span>
                             </td>
 
-                            {/* Screenshot view */}
-                            <td className="p-5 text-center">
-                              {r.payment_screenshot ? (
-                                <button
-                                  type="button"
-                                  onClick={() => setActiveScreenshot(r.payment_screenshot || null)}
-                                  className="p-2 border border-slate-200 rounded-lg hover:border-[#00A896] hover:bg-slate-50 text-[#004B57] transition-all cursor-pointer inline-flex items-center gap-1 text-xs"
-                                  title="View screenshot receipt"
-                                >
-                                  <Eye size={14} /> Inspect
-                                </button>
-                              ) : (
-                                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
-                                  No image
-                                </span>
-                              )}
-                            </td>
-
                             {/* Verification toggler */}
                             <td className="p-5 text-center">
                               <button
@@ -575,60 +556,6 @@ export default function AriseAdminPage() {
           )}
         </div>
       </div>
-
-      {/* Screenshot Lightbox Modal */}
-      {activeScreenshot && (
-        <div
-          className="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200"
-          onClick={() => setActiveScreenshot(null)}
-        >
-          <div
-            className="bg-white rounded-[2rem] p-6 max-w-xl w-full border border-teal/10 shadow-2xl relative flex flex-col items-center gap-4 animate-in fade-in zoom-in-95 duration-200"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              type="button"
-              onClick={() => setActiveScreenshot(null)}
-              className="absolute top-4 right-4 p-1.5 text-slate-400 hover:text-slate-650 hover:bg-slate-100 rounded-full transition-colors"
-            >
-              <X size={18} />
-            </button>
-
-            <div className="space-y-1 w-full text-center">
-              <h3 className="font-display text-base font-bold uppercase text-[#004B57]">Payment Receipt Screenshot</h3>
-              <p className="text-[10px] text-slate-500 font-semibold">
-                Verify that the reference UTR number matches what was submitted.
-              </p>
-            </div>
-
-            <div className="bg-slate-50 p-3 rounded-2xl border border-slate-200/85 w-full flex items-center justify-center overflow-hidden max-h-[60vh]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={activeScreenshot}
-                alt="UPI Reference receipt expanded"
-                className="w-auto h-auto max-w-full max-h-[50vh] object-contain rounded-lg border border-slate-200 bg-white"
-              />
-            </div>
-
-            <div className="w-full flex gap-3">
-              <a
-                href={activeScreenshot}
-                download="arise-payment-receipt.png"
-                className="bg-[#00A896] hover:bg-[#008B7A] text-white flex-1 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all text-center flex items-center justify-center gap-1.5"
-              >
-                <Download size={14} /> Download Receipt
-              </a>
-              <button
-                type="button"
-                onClick={() => setActiveScreenshot(null)}
-                className="bg-slate-100 hover:bg-slate-200 text-[#004B57] flex-1 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all"
-              >
-                Close View
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       <Footer />
     </>
