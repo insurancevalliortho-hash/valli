@@ -1,17 +1,47 @@
 import { neon } from "@neondatabase/serverless";
 import { Pool } from "pg";
+import dns from "dns";
 
-// ISP DNS blocks Neon hostnames — use direct IP with SNI servername as workaround.
-// IP resolved via Google DNS (8.8.8.8) for:
-//   ep-icy-lab-ah4q57yb-pooler.c-3.us-east-1.aws.neon.tech => 18.215.6.120
-const NEON_HOST = "18.215.6.120";
+// ISP DNS blocks Neon hostnames on default resolvers.
+// Monkeypatch dns.lookup for *.neon.tech to use Google (8.8.8.8) and Cloudflare (1.1.1.1) DNS.
+if (typeof process !== "undefined" && process.versions && process.versions.node) {
+  try {
+    const resolver = new dns.Resolver();
+    resolver.setServers(["8.8.8.8", "1.1.1.1"]);
+    const origLookup = dns.lookup;
+    const customLookup: any = (hostname: any, options: any, callback: any) => {
+      if (typeof options === "function") {
+        callback = options;
+        options = {};
+      }
+      if (typeof hostname === "string" && hostname.includes("neon.tech")) {
+        resolver.resolve4(hostname, (err, addresses) => {
+          if (!err && addresses && addresses.length > 0) {
+            return callback(null, addresses[0], 4);
+          }
+          return origLookup(hostname, options, callback);
+        });
+        return;
+      }
+      return origLookup(hostname, options, callback);
+    };
+    if (origLookup.__promisify__) {
+      customLookup.__promisify__ = origLookup.__promisify__;
+    }
+    dns.lookup = customLookup;
+  } catch (e) {
+    console.warn("DNS lookup monkeypatch warning:", e);
+  }
+}
+
+// Active Neon pooler host and fallback IP
 const NEON_SNI  = "ep-icy-lab-ah4q57yb-pooler.c-3.us-east-1.aws.neon.tech";
+const NEON_HOST = "23.21.74.185"; // Active IP resolved via 8.8.8.8
 const NEON_USER = "neondb_owner";
 const NEON_PASS = "npg_UbVtH6u1ToyO";
 const NEON_DB   = "neondb";
 
-// Neon HTTP driver needs a connection string — use the pooler hostname as-is
-// (the @neondatabase/serverless driver uses fetch, not TCP, so DNS is irrelevant here)
+// Neon HTTP driver connection string
 const connectionString =
   process.env.DATABASE_URL ||
   `postgresql://${NEON_USER}:${NEON_PASS}@${NEON_SNI}/${NEON_DB}?sslmode=require&channel_binding=require`;
