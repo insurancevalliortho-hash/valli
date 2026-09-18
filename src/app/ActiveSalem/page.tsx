@@ -208,8 +208,8 @@ function HeroSection() {
                     <span className="text-[10px] font-mono font-bold text-[#F26522] uppercase">10 KMS</span>
                     <span className="text-[9px] font-mono font-bold text-[#F26522] bg-orange-100/60 px-2 py-0.5 rounded border border-orange-200">ELITE</span>
                   </div>
-                  <span className="font-display text-xl sm:text-2xl font-black text-[#F26522]">Rs.299</span>
-                  <span className="text-[10px] text-orange-950/60 block mt-1">Rs.10,000 Top Podium Cash Prize</span>
+                  <span className="font-display text-xl sm:text-2xl font-black text-[#F26522]">₹299</span>
+                  <span className="text-[10px] text-orange-950/60 block mt-1">₹5,000 Top Podium Cash Prize</span>
                 </motion.div>
               </div>
 
@@ -273,7 +273,7 @@ function HeroSection() {
                 {[
                   { icon: <Clock size={14} className="text-[#00A896]" />, label: "Assembly & Start", value: "5:00 AM • 6:00 AM Flag Off" },
                   { icon: <MapPin size={14} className="text-[#F26522]" />, label: "Start & Finish Point", value: "Valli Super Speciality Hospital" },
-                  { icon: <Trophy size={14} className="text-amber-500" />, label: "Cash Prize Pool", value: "Top 3 Finishers (M & F)" },
+                  { icon: <Trophy size={14} className="text-amber-500" />, label: "Cash Prize Pool", value: "Top 3 Finishers" },
                   { icon: <Radio size={14} className="text-rose-500" />, label: "Radio Partner", value: "93.9 Suryan FM" },
                 ].map((row, i) => (
                   <div key={i} className={`flex items-center justify-between text-xs py-2 ${i < 3 ? "border-b border-slate-100" : ""}`}>
@@ -332,9 +332,9 @@ function CategoriesSection() {
       features: [
         { icon: <CheckCircle2 size={14} className="text-amber-600" />, label: "Official Valli Running Tee" },
         { icon: <CheckCircle2 size={14} className="text-amber-600" />, label: "Finisher Medal & Verified Certificate" },
-        { icon: <CheckCircle2 size={14} className="text-amber-600" />, label: "Cash Prizes for Top 3 (M & F)" },
+        { icon: <CheckCircle2 size={14} className="text-amber-600" />, label: "1st Prize ₹2,000 • Top 3 Cash Awards" },
       ],
-      fee: "Rs.249",
+      fee: "₹249",
       feeColor: "text-slate-900",
       cta: "/ActiveSalem/Registration",
       ctaNote: null,
@@ -349,11 +349,11 @@ function CategoriesSection() {
       accentColor: "text-[#F26522]",
       borderHover: "hover:border-[#F26522]",
       features: [
-        { icon: <CheckCircle2 size={14} className="text-[#F26522]" />, label: "1st Prize Rs.10,000 (M & F each)" },
+        { icon: <CheckCircle2 size={14} className="text-[#F26522]" />, label: "1st Prize ₹5,000 • Top 3 Cash Awards" },
         { icon: <CheckCircle2 size={14} className="text-[#F26522]" />, label: "Official Tee, Bib Tag & Custom Medal" },
         { icon: <CheckCircle2 size={14} className="text-[#F26522]" />, label: "Hydration & Electrolyte Stations" },
       ],
-      fee: "Rs.299",
+      fee: "₹299",
       feeColor: "text-[#F26522]",
       cta: "/ActiveSalem/Registration",
       ctaNote: null,
@@ -601,7 +601,7 @@ function PrizesSection() {
             EXCITING CASH AWARDS
           </h2>
           <p className="text-slate-500 text-sm">
-            Cash awards given equally to top finishers across both Male & Female categories.
+            Cash awards given to top podium finishers across race categories.
           </p>
         </motion.div>
 
@@ -611,27 +611,27 @@ function PrizesSection() {
             {
               label: "ELITE DISTANCE",
               title: "10 KMS Cash Prizes",
-              entry: "Entry: Rs.299",
+              entry: "Entry: ₹299/-",
               bg: "bg-[#FFF8F3]",
               border: "border-orange-200",
               accent: "text-[#F26522]",
               prizes: [
-                { medal: "1st", emoji: "gold", pos: "1st Place Winner", val: "Rs.10,000/-", highlight: true },
-                { medal: "2nd", emoji: "silver", pos: "2nd Place Winner", val: "Rs.5,000/-", highlight: false },
-                { medal: "3rd", emoji: "bronze", pos: "3rd Place Winner", val: "Rs.2,500/-", highlight: false },
+                { medal: "1st", emoji: "gold", pos: "1st Place Winner", val: "₹5,000/-", highlight: true },
+                { medal: "2nd", emoji: "silver", pos: "2nd Place Winner", val: "₹2,500/-", highlight: false },
+                { medal: "3rd", emoji: "bronze", pos: "3rd Place Winner", val: "₹1,250/-", highlight: false },
               ],
             },
             {
               label: "COMMUNITY DISTANCE",
               title: "5 KMS Cash Prizes",
-              entry: "Entry: Rs.249",
+              entry: "Entry: ₹249/-",
               bg: "bg-[#FAFCFC]",
               border: "border-slate-200",
               accent: "text-[#00A896]",
               prizes: [
-                { medal: "1st", emoji: "gold", pos: "1st Place Winner", val: "Rs.5,000/-", highlight: true },
-                { medal: "2nd", emoji: "silver", pos: "2nd Place Winner", val: "Rs.2,500/-", highlight: false },
-                { medal: "3rd", emoji: "bronze", pos: "3rd Place Winner", val: "Rs.1,250/-", highlight: false },
+                { medal: "1st", emoji: "gold", pos: "1st Place Winner", val: "₹2,000/-", highlight: true },
+                { medal: "2nd", emoji: "silver", pos: "2nd Place Winner", val: "₹1,000/-", highlight: false },
+                { medal: "3rd", emoji: "bronze", pos: "3rd Place Winner", val: "₹500/-", highlight: false },
               ],
             },
           ].map((cat, ci) => (
@@ -676,7 +676,6 @@ function PrizesSection() {
                       </div>
                       <div>
                         <span className="text-xs font-black uppercase text-slate-900 block">{prize.pos}</span>
-                        <span className="text-[10px] text-slate-400">Male & Female (Each)</span>
                       </div>
                     </div>
                     <span className={`font-display font-black text-slate-900 ${pi === 0 ? "text-2xl" : pi === 1 ? "text-xl" : "text-lg"}`}>

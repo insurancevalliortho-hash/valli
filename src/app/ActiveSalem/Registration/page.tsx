@@ -379,7 +379,7 @@ export default function ActiveSalemRegistrationPage() {
                                 <span className="text-[9px] font-mono font-bold text-[#F26522] bg-orange-50 px-2.5 py-0.5 rounded-full border border-orange-200">ELITE</span>
                               </div>
                               <span className="text-xs text-slate-500 block leading-relaxed">
-                                Podium Cash Rewards (₹10,000 Top Prize) • Bib Tag, Tee & Medal
+                                Podium Cash Rewards (₹5,000 Top Prize) • Bib Tag, Tee & Medal
                               </span>
                             </div>
                             <span className="font-display text-xl font-black text-[#F26522] mt-4">₹299</span>
