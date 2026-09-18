@@ -1,10 +1,75 @@
 import { neon } from "@neondatabase/serverless";
+import dns from "dns";
 
 // Active Neon pooler host and fallback credentials
-const NEON_SNI  = "ep-icy-lab-ah4q57yb-pooler.c-3.us-east-1.aws.neon.tech";
-const NEON_USER = "neondb_owner";
-const NEON_PASS = "npg_UbVtH6u1ToyO";
-const NEON_DB   = "neondb";
+const NEON_SNI      = "ep-icy-lab-ah4q57yb-pooler.c-3.us-east-1.aws.neon.tech";
+const NEON_HOST_IP  = "23.21.74.185"; // Verified active Neon pooler IP
+const NEON_USER     = "neondb_owner";
+const NEON_PASS     = "npg_UbVtH6u1ToyO";
+const NEON_DB       = "neondb";
+
+// Many local/Indian ISPs block *.neon.tech on default DNS resolvers.
+// We intercept dns.lookup specifically for *.neon.tech to query Google (8.8.8.8) / Cloudflare (1.1.1.1),
+// with an immediate fallback to the verified IP (23.21.74.185).
+// CRITICAL: We correctly handle both options.all (returns Array<{address, family}>)
+// and single lookup (returns (null, address, family)) to prevent 'Invalid IP address: undefined'.
+if (typeof process !== "undefined" && process.versions && process.versions.node) {
+  try {
+    const resolver = new dns.Resolver();
+    try {
+      resolver.setServers(["8.8.8.8", "1.1.1.1"]);
+    } catch (_) {}
+
+    const origLookup = dns.lookup;
+    const customLookup: any = (hostname: any, options: any, callback: any) => {
+      let cb = callback;
+      let opts = options;
+      if (typeof options === "function") {
+        cb = options;
+        opts = {};
+      }
+
+      if (typeof hostname === "string" && hostname.includes("neon.tech")) {
+        const returnIp = (ip: string) => {
+          if (opts && opts.all) {
+            return cb(null, [{ address: ip, family: 4 }]);
+          }
+          return cb(null, ip, 4);
+        };
+
+        resolver.resolve4(hostname, (err, addresses) => {
+          if (!err && addresses && addresses.length > 0) {
+            return returnIp(addresses[0]);
+          }
+          return returnIp(NEON_HOST_IP);
+        });
+        return;
+      }
+
+      return origLookup(hostname, opts, cb);
+    };
+
+    customLookup.__promisify__ = (hostname: any, options: any) => {
+      if (typeof hostname === "string" && hostname.includes("neon.tech")) {
+        return new Promise((resolve) => {
+          resolver.resolve4(hostname, (err, addresses) => {
+            const ip = !err && addresses && addresses.length > 0 ? addresses[0] : NEON_HOST_IP;
+            if (options && options.all) {
+              resolve([{ address: ip, family: 4 }]);
+            } else {
+              resolve({ address: ip, family: 4 });
+            }
+          });
+        });
+      }
+      return origLookup.__promisify__(hostname, options);
+    };
+
+    dns.lookup = customLookup;
+  } catch (e) {
+    console.warn("Neon DNS resolver setup note:", e);
+  }
+}
 
 // Neon HTTP driver connection string
 const connectionString =
