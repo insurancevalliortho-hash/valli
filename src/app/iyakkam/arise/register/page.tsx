@@ -581,7 +581,7 @@ export default function AriseRegisterPage() {
                 {transactionId && (
                   <div className="border-t border-dashed border-[#00A896]/20 pt-3 flex items-center justify-between text-[10px] text-slate-500 font-mono">
                     <span>Txn: {transactionId.slice(0, 18)}...</span>
-                    <span>Venue: Salem, TN</span>
+                    <span>Venue: Knowledge Institute of Technology</span>
                   </div>
                 )}
               </div>

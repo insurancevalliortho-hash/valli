@@ -739,7 +739,7 @@ export async function sendAriseRegistrationEmail(data: AriseEmailPayload) {
             <ul class="details-list">
               <li><strong>Date:</strong> 17 October 2026</li>
               <li><strong>Time:</strong> 8:00 AM - 5:00 PM</li>
-              <li><strong>Venue:</strong> Valli Super Speciality Hospital, Salem, Tamil Nadu</li>
+              <li><strong>Venue:</strong> Knowledge Institute of Technology, Salem, Tamil Nadu</li>
             </ul>
 
             <p style="margin-top: 24px; font-size: 13px; color: #475569;">
