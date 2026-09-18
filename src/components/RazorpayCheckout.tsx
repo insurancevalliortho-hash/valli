@@ -225,7 +225,7 @@ export default function RazorpayCheckout({
         ) : (
           <>
             <CreditCard className="w-4 h-4" />
-            <span>{buttonText || `Pay ₹${amount.toLocaleString("en-IN")} via Razorpay`}</span>
+            <span>{buttonText || `Pay ₹${amount.toLocaleString("en-IN")} & Confirm Registration`}</span>
             <Lock className="w-3.5 h-3.5 opacity-70 ml-auto" />
           </>
         )}
@@ -234,7 +234,7 @@ export default function RazorpayCheckout({
       {/* Security note */}
       <div className="flex items-center gap-1.5 text-[10px] text-slate-400 font-medium">
         <ShieldCheck className="w-3.5 h-3.5 text-teal" />
-        <span>256-bit SSL Encrypted • Razorpay Standard Checkout</span>
+        <span>256-bit SSL Encrypted • Secure Online Checkout</span>
       </div>
 
       {/* Status banner */}

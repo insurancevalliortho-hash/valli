@@ -36,7 +36,10 @@ import {
 import Navbar from "../../../../components/Navbar";
 import Footer from "../../../../components/Footer";
 import confetti from "canvas-confetti";
+import { motion, AnimatePresence } from "framer-motion";
 import RazorpayCheckout from "../../../../components/RazorpayCheckout";
+
+const easeSmooth = [0.16, 1, 0.3, 1] as const;
 
 interface BulkStudent {
   fullName: string;
@@ -104,9 +107,18 @@ export default function AriseRegisterPage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
-    // Generate a random registration code
-    const randNum = Math.floor(1000 + Math.random() * 9000);
-    setRegCode(`ARISE26-${randNum}`);
+    fetch("/api/arise/register")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && data.nextRegistrationCode) {
+          setRegCode(data.nextRegistrationCode);
+        } else {
+          setRegCode("ARISE26-0001");
+        }
+      })
+      .catch(() => {
+        setRegCode("ARISE26-0001");
+      });
   }, []);
 
   const isBulk = category.includes("Bulk");
@@ -349,7 +361,7 @@ export default function AriseRegisterPage() {
     }
   };
 
-  // Handle successful Razorpay payment submission
+  // Handle successful online payment submission
   const handleRazorpaySuccess = async (details: { paymentId: string; orderId: string; signature: string }) => {
     setIsSubmitting(true);
     setErrors({});
@@ -376,11 +388,12 @@ export default function AriseRegisterPage() {
           bonafideCertificate,
           foodPreference: st.foodPreference,
           iapCreditPoints: st.iapCreditPoints,
-          iapMembershipNumber: st.iapMembershipNumber
+          iapMembershipNumber: st.iapMembershipNumber,
+          isVerified: true,
         }));
 
         // Submit Lead Coordinator Record
-        await fetch("/api/arise/register", {
+        const leadRes = await fetch("/api/arise/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -401,9 +414,14 @@ export default function AriseRegisterPage() {
             bonafideCertificate,
             foodPreference,
             iapCreditPoints,
-            iapMembershipNumber
+            iapMembershipNumber,
+            isVerified: true,
           }),
         });
+        const leadData = await leadRes.json();
+        if (leadData.success && leadData.registrationCode) {
+          setRegCode(leadData.registrationCode);
+        }
 
         // Submit All 20 Student Records
         for (const payload of bulkPayloads) {
@@ -415,7 +433,7 @@ export default function AriseRegisterPage() {
         }
       } else {
         // Single Delegate Registration
-        await fetch("/api/arise/register", {
+        const res = await fetch("/api/arise/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -436,9 +454,14 @@ export default function AriseRegisterPage() {
             bonafideCertificate,
             foodPreference,
             iapCreditPoints,
-            iapMembershipNumber: iapCreditPoints ? iapMembershipNumber : ""
+            iapMembershipNumber: iapCreditPoints ? iapMembershipNumber : "",
+            isVerified: true,
           }),
         });
+        const data = await res.json();
+        if (data.success && data.registrationCode) {
+          setRegCode(data.registrationCode);
+        }
       }
 
       setIsSuccess(true);
@@ -493,40 +516,74 @@ export default function AriseRegisterPage() {
             </div>
           </div>
 
-          {/* Success Screen */}
+          {/* Success Screen: Digital Pass Ticket */}
           {isSuccess ? (
-            <div className="bg-white border border-slate-200 rounded-[2.5rem] shadow-xl p-8 sm:p-12 text-center space-y-6 animate-in zoom-in-95 duration-300">
-              <div className="w-20 h-20 bg-emerald-50 text-emerald-500 rounded-3xl flex items-center justify-center mx-auto shadow-inner border border-emerald-200">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: easeSmooth }}
+              className="bg-white border border-slate-200/90 rounded-[2.5rem] shadow-xl p-8 sm:p-12 text-center space-y-6"
+            >
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.15, type: "spring", stiffness: 260, damping: 20 }}
+                className="w-20 h-20 bg-emerald-50 text-emerald-500 rounded-3xl flex items-center justify-center mx-auto shadow-inner border border-emerald-200"
+              >
                 <CheckCircle2 size={42} />
-              </div>
+              </motion.div>
 
               <div className="space-y-2 max-w-lg mx-auto">
                 <span className="text-xs font-extrabold uppercase tracking-widest text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200 inline-block">
                   Registration Confirmed 🎉
                 </span>
-                <h2 className="font-display text-2xl font-black text-[#004B57] uppercase">
+                <h2 className="font-display text-2xl sm:text-3xl font-black text-[#004B57] uppercase">
                   Welcome to ARISE 2026!
                 </h2>
                 <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                  Thank you, <span className="font-bold text-[#004B57]">{fullName}</span>! Your {isBulk ? "20-Student Bulk Registration" : "CME Registration"} has been stored. A confirmation email and registration ticket pass have been dispatched to <span className="font-bold text-[#004B57]">{emailId}</span>.
+                  Thank you, <span className="font-bold text-[#004B57]">{fullName}</span>! Your {isBulk ? "20-Student Bulk Registration" : "CME Registration"} has been confirmed. A confirmation receipt and conference pass details have been sent to <span className="font-bold text-[#004B57]">{emailId}</span>.
                 </p>
               </div>
 
-              <div className="bg-[#F0FAF9] border border-[#00A896]/20 p-5 rounded-2xl max-w-md mx-auto space-y-2 text-left">
-                <div className="flex justify-between items-center text-xs">
-                  <span className="text-slate-500 font-medium">Primary Code:</span>
-                  <span className="font-mono font-bold text-[#004B57]">{regCode}</span>
-                </div>
-                <div className="flex justify-between items-center text-xs">
-                  <span className="text-slate-500 font-medium">Category:</span>
-                  <span className="font-bold text-[#FF8C00]">{category}</span>
-                </div>
-                <div className="flex justify-between items-center text-xs">
-                  <span className="text-slate-500 font-medium">Payment Status:</span>
-                  <span className="font-bold text-emerald-600 flex items-center gap-1">
-                    <CheckCircle2 size={13} /> Verified (Razorpay)
+              {/* Digital Boarding Pass Ticket */}
+              <div className="bg-[#F0FAF9] border border-[#00A896]/20 p-6 rounded-2xl max-w-md mx-auto space-y-4 text-left relative overflow-hidden shadow-sm">
+                <div className="flex justify-between items-start border-b border-[#00A896]/20 pb-4">
+                  <div>
+                    <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest block">DELEGATE PASS CODE</span>
+                    <span className="font-mono text-2xl font-black text-[#FF8C00] tracking-wider select-all">{regCode}</span>
+                  </div>
+                  <span className="px-3 py-1 bg-white border border-[#00A896]/30 text-[#004B57] rounded-lg text-xs font-mono font-bold uppercase shadow-sm">
+                    {category}
                   </span>
                 </div>
+
+                <div className="grid grid-cols-2 gap-3 text-xs">
+                  <div>
+                    <span className="text-slate-400 block text-[10px] uppercase font-mono">Delegate Name</span>
+                    <span className="text-[#004B57] font-bold text-sm block truncate">{fullName}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 block text-[10px] uppercase font-mono">Designation</span>
+                    <span className="text-slate-800 font-semibold text-xs block truncate">{designation}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 block text-[10px] uppercase font-mono">Institution / City</span>
+                    <span className="text-slate-800 font-medium block truncate">{institution ? `${institution}, ${city}` : city || "Salem"}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 block text-[10px] uppercase font-mono">Payment Status</span>
+                    <span className="text-emerald-600 font-bold block flex items-center gap-1">
+                      <CheckCircle2 size={13} /> Verified Paid (₹{totalFee.toLocaleString("en-IN")})
+                    </span>
+                  </div>
+                </div>
+
+                {transactionId && (
+                  <div className="border-t border-dashed border-[#00A896]/20 pt-3 flex items-center justify-between text-[10px] text-slate-500 font-mono">
+                    <span>Txn: {transactionId.slice(0, 18)}...</span>
+                    <span>Venue: Salem, TN</span>
+                  </div>
+                )}
               </div>
 
               <div className="pt-4 flex flex-col sm:flex-row gap-3 justify-center">
@@ -537,10 +594,15 @@ export default function AriseRegisterPage() {
                   Return to Event Homepage
                 </Link>
               </div>
-            </div>
+            </motion.div>
           ) : (
             /* Wizard Main Form */
-            <div className="bg-white border border-[#E2E8F0] rounded-[2.5rem] shadow-xl overflow-hidden">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: easeSmooth }}
+              className="bg-white border border-[#E2E8F0] rounded-[2.5rem] shadow-xl overflow-hidden"
+            >
               {/* Wizard Steps Header */}
               <div className="bg-slate-50 border-b border-[#E2E8F0] p-4 sm:p-6">
                 <div className="grid grid-cols-2 gap-4 max-w-xl mx-auto">
@@ -577,8 +639,16 @@ export default function AriseRegisterPage() {
 
               {/* Form Content */}
               <div className="p-6 sm:p-10">
-                {step === 1 && (
-                  <div className="space-y-6">
+                <AnimatePresence mode="wait">
+                  {step === 1 && (
+                    <motion.div
+                      key="step-1"
+                      initial={{ opacity: 0, x: -16 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 16 }}
+                      transition={{ duration: 0.35, ease: easeSmooth }}
+                      className="space-y-6"
+                    >
                     <div className="border-b border-slate-100 pb-4">
                       <h2 className="font-display text-base font-bold text-[#004B57] uppercase tracking-wider">
                         {isBulk ? "Lead Coordinator & Organization" : "Delegate Personal Details"}
@@ -933,17 +1003,24 @@ export default function AriseRegisterPage() {
                         </div>
                       </div>
                     )}
-                  </div>
+                  </motion.div>
                 )}
 
                 {step === 2 && (
-                  <div className="space-y-6">
+                  <motion.div
+                    key="step-2"
+                    initial={{ opacity: 0, x: 16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -16 }}
+                    transition={{ duration: 0.35, ease: easeSmooth }}
+                    className="space-y-6"
+                  >
                     <div className="border-b border-slate-100 pb-4">
                       <h2 className="font-display text-base font-bold text-[#004B57] uppercase tracking-wider">
                         Online Payment Gateway
                       </h2>
                       <p className="text-xs text-slate-500 mt-0.5">
-                        Complete your payment securely via Razorpay to instantly finalize registration.
+                        Complete your payment securely to instantly finalize registration.
                       </p>
                     </div>
 
@@ -973,8 +1050,8 @@ export default function AriseRegisterPage() {
                         </div>
                       </div>
 
-                      {/* Razorpay Online Payment Box */}
-                      <div className="p-6 bg-[#F0FAF9]/60 border border-teal/20 rounded-2xl space-y-4 text-center">
+                      {/* Online Payment Box */}
+                      <div className="p-6 bg-[#F0FAF9]/60 border border-[#00A896]/20 rounded-2xl space-y-4 text-center">
                         <div className="space-y-1">
                           <h3 className="font-display text-sm font-bold text-[#004B57] uppercase tracking-wider">
                             Fast & Secure Online Checkout
@@ -996,13 +1073,14 @@ export default function AriseRegisterPage() {
                           notes={{ category, includeWorkshop }}
                           onSuccess={handleRazorpaySuccess}
                           onFailure={(errMsg) => setErrors({ transactionId: errMsg })}
-                          buttonText={`Pay ₹${totalFee.toLocaleString("en-IN")} via Razorpay`}
+                          buttonText={`Pay ₹${totalFee.toLocaleString("en-IN")} & Confirm Registration`}
                           buttonClassName="w-full bg-[#00A896] hover:bg-[#008B7A] text-white py-4 px-6 rounded-2xl font-bold text-sm tracking-wide transition-all duration-300 shadow-lg shadow-teal/20 hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2 cursor-pointer"
                         />
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 )}
+                </AnimatePresence>
 
                 {/* Wizard navigation bar */}
                 <div className="mt-10 pt-6 border-t border-slate-100 flex items-center justify-between">
@@ -1030,12 +1108,12 @@ export default function AriseRegisterPage() {
                     </button>
                   ) : (
                     <div className="text-[11px] text-slate-400 font-semibold italic">
-                      Click the Pay button above to proceed via Razorpay
+                      Click the Pay button above to complete registration
                     </div>
                   )}
                 </div>
               </div>
-            </div>
+            </motion.div>
           )}
         </div>
       </div>
