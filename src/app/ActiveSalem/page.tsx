@@ -9,7 +9,6 @@ import {
   MapPin,
   Trophy,
   Award,
-  Users,
   ShieldCheck,
   CheckCircle2,
   Gift,
@@ -24,7 +23,8 @@ import {
   Navigation,
   Compass,
   Zap,
-  PhoneCall
+  PhoneCall,
+  Sparkles
 } from "lucide-react";
 
 import Navbar from "../../components/Navbar";
@@ -66,9 +66,9 @@ function CountdownTimer() {
       ].map((t, idx) => (
         <div
           key={idx}
-          className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 text-center min-w-[62px] sm:min-w-[76px] shadow-xl relative overflow-hidden group hover:border-[#F26522]/40 transition-all duration-300"
+          className="bg-white border border-slate-200/80 rounded-2xl p-3 text-center min-w-[68px] sm:min-w-[78px] shadow-[0_4px_20px_rgba(0,0,0,0.04)] relative overflow-hidden group hover:border-[#F26522]/40 transition-all duration-300"
         >
-          <div className="font-display text-xl sm:text-2xl lg:text-3xl font-black tracking-tight text-white group-hover:text-[#F26522] transition-colors">
+          <div className="font-display text-2xl sm:text-3xl font-black tracking-tight text-slate-900 group-hover:text-[#F26522] transition-colors">
             {t.value.toString().padStart(2, "0")}
           </div>
           <div className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-1">
@@ -83,176 +83,174 @@ function CountdownTimer() {
 // ─── Hero Section ─────────────────────────────────────────────────────────────
 function HeroSection() {
   return (
-    <section className="relative min-h-[92vh] flex items-center justify-center pt-28 pb-16 overflow-hidden bg-[#001217] text-white">
-      {/* Dynamic Background Mesh Gradients */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(0,168,150,0.25),rgba(255,255,255,0))]" />
-      <div className="absolute top-1/3 -right-40 w-96 h-96 bg-[#F26522]/15 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute -bottom-20 -left-40 w-96 h-96 bg-[#00A896]/20 rounded-full blur-[140px] pointer-events-none" />
+    <section className="relative min-h-[90vh] flex items-center justify-center pt-24 pb-20 overflow-hidden bg-[#FAFCFC] text-slate-900">
+      {/* Soft Ambient Radial Backgrounds */}
+      <div className="absolute top-0 right-0 w-[550px] h-[550px] bg-gradient-to-br from-[#00A896]/10 to-transparent rounded-full blur-[130px] pointer-events-none" />
+      <div className="absolute bottom-10 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-[#F26522]/10 to-transparent rounded-full blur-[130px] pointer-events-none" />
 
-      {/* Grid Pattern Overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.04] pointer-events-none" 
+      {/* Subtle Grid Canvas */}
+      <div
+        className="absolute inset-0 opacity-[0.35] pointer-events-none"
         style={{
-          backgroundImage: "linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)",
-          backgroundSize: "40px 40px"
+          backgroundImage: "radial-gradient(#CBD5E1 1px, transparent 1px)",
+          backgroundSize: "28px 28px"
         }}
       />
 
       <div className="max-w-[1240px] mx-auto px-5 sm:px-8 w-full relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
           
-          {/* Main Hero Typography */}
+          {/* Main Hero Copy */}
           <div className="lg:col-span-7 space-y-7 text-left">
+            
             {/* Host Badge */}
             <motion.div
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-semibold tracking-wider text-slate-300 backdrop-blur-md"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-slate-200/90 text-xs font-semibold tracking-wide text-slate-600 shadow-sm"
             >
-              <span className="w-2 h-2 rounded-full bg-[#00E5C8] animate-ping" />
-              <span className="text-[#00E5C8] font-bold">4TH EDITION</span>
-              <span className="text-slate-500">•</span>
+              <span className="w-2 h-2 rounded-full bg-[#00A896] animate-pulse" />
+              <span className="text-[#004B57] font-bold uppercase tracking-wider text-[11px]">Active Salem 4.0</span>
+              <span className="text-slate-300">•</span>
               <span>Valli Super Speciality Hospital</span>
             </motion.div>
 
             {/* Headline */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               className="space-y-3"
             >
-              <h1 className="font-display font-black text-5xl sm:text-7xl lg:text-8xl tracking-tighter uppercase leading-[0.95]">
+              <h1 className="font-display font-black text-5xl sm:text-7xl lg:text-[5.5rem] tracking-tight text-slate-900 leading-[0.96] uppercase">
                 ACTIVE <br />
-                <span className="bg-gradient-to-r from-white via-white to-slate-400 bg-clip-text text-transparent">
-                  SALEM
-                </span>{" "}
-                <span className="text-[#F26522] italic text-4xl sm:text-6xl lg:text-7xl font-light">4.0</span>
+                <span className="text-[#004B57]">SALEM</span>{" "}
+                <span className="text-[#F26522] italic font-light">4.0</span>
               </h1>
-              <p className="text-[#00E5C8] font-mono text-sm sm:text-base font-bold uppercase tracking-[0.25em]">
-                RUN SALEM RUN • ONE RUN, ONE UNITED SALEM
+              <p className="text-[#00A896] font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.2em]">
+                RUN SALEM RUN • SUNDAY, 18 OCTOBER 2026
               </p>
             </motion.div>
 
             <motion.p
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-slate-300 text-sm sm:text-base max-w-xl font-normal leading-relaxed"
+              className="text-slate-600 text-sm sm:text-base max-w-xl font-medium leading-relaxed"
             >
-              Salem's premier annual road race returns on <strong className="text-white font-bold">Sunday, 18 October 2026</strong>. 
-              Uniting athletes, families, armed forces veterans, and differently-abled runners for health, pride, and community triumph.
+              Join Salem's premier running movement uniting competitive athletes, fitness runners, armed forces veterans, and differently-abled champions across the heart of the city.
             </motion.p>
 
-            {/* Category Quick Badges */}
+            {/* Category Quick Badges (Light Double-Bezel) */}
             <motion.div
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               className="grid grid-cols-3 gap-3 max-w-lg"
             >
-              <div className="bg-white/5 border border-white/10 rounded-xl p-3 backdrop-blur-sm">
-                <span className="text-[10px] font-mono font-bold text-[#00E5C8] block uppercase">3 KMS</span>
-                <span className="font-display text-base sm:text-lg font-black text-white">FREE</span>
-                <span className="text-[9px] text-slate-400 block truncate">Inclusive / Armed Forces</span>
+              <div className="bg-white border border-slate-200/80 rounded-2xl p-3.5 shadow-sm hover:border-[#00A896]/40 transition-colors">
+                <span className="text-[10px] font-mono font-bold text-[#00A896] block uppercase">3 KMS</span>
+                <span className="font-display text-base sm:text-lg font-black text-slate-900">FREE</span>
+                <span className="text-[9px] text-slate-400 block truncate">Armed Forces & Inclusive</span>
               </div>
-              <div className="bg-white/5 border border-white/10 rounded-xl p-3 backdrop-blur-sm">
-                <span className="text-[10px] font-mono font-bold text-amber-400 block uppercase">5 KMS</span>
-                <span className="font-display text-base sm:text-lg font-black text-white">₹249</span>
+              <div className="bg-white border border-slate-200/80 rounded-2xl p-3.5 shadow-sm hover:border-amber-400/50 transition-colors">
+                <span className="text-[10px] font-mono font-bold text-amber-600 block uppercase">5 KMS</span>
+                <span className="font-display text-base sm:text-lg font-black text-slate-900">₹249</span>
                 <span className="text-[9px] text-slate-400 block truncate">Medal + Kit Included</span>
               </div>
-              <div className="bg-white/5 border border-white/10 rounded-xl p-3 backdrop-blur-sm border-[#F26522]/30 bg-[#F26522]/10">
+              <div className="bg-[#FFF8F3] border border-[#F26522]/30 rounded-2xl p-3.5 shadow-sm hover:border-[#F26522] transition-colors">
                 <span className="text-[10px] font-mono font-bold text-[#F26522] block uppercase">10 KMS</span>
                 <span className="font-display text-base sm:text-lg font-black text-[#F26522]">₹299</span>
-                <span className="text-[9px] text-amber-200/70 block truncate">₹10K Podium Awards</span>
+                <span className="text-[9px] text-orange-950/60 block truncate">₹10,000 Podium Prize</span>
               </div>
             </motion.div>
 
-            {/* CTAs */}
+            {/* Action Buttons */}
             <motion.div
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               className="flex flex-wrap items-center gap-4 pt-2"
             >
               <Link
                 href="/ActiveSalem/Registration"
-                className="bg-[#F26522] hover:bg-[#d95315] text-white px-8 py-4 rounded-xl font-bold text-sm uppercase tracking-wider shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 hover:-translate-y-0.5 transition-all flex items-center gap-3 cursor-pointer"
+                className="bg-[#F26522] hover:bg-[#d95315] text-white px-8 py-4 rounded-2xl font-bold text-sm uppercase tracking-wider shadow-lg shadow-orange-500/20 hover:shadow-orange-500/30 hover:-translate-y-0.5 transition-all flex items-center gap-3 cursor-pointer"
               >
-                <span>Register Now</span>
-                <ArrowRight size={18} />
+                <span>Register For Marathon</span>
+                <ArrowRight size={16} />
               </Link>
               <a
                 href="#categories"
-                className="px-6 py-4 rounded-xl font-semibold text-sm text-slate-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-all flex items-center gap-2"
+                className="px-6 py-4 rounded-2xl font-semibold text-sm text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-50 border border-slate-200/90 shadow-sm transition-all flex items-center gap-2"
               >
-                <span>Explore Details</span>
+                <span>Race Categories</span>
                 <ChevronRight size={16} />
               </a>
             </motion.div>
           </div>
 
-          {/* Right Card: Race Day Brief & Live Countdown */}
+          {/* Right Card: Race Morning Brief & Countdown */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.3 }}
             className="lg:col-span-5"
           >
-            <div className="relative rounded-3xl p-7 bg-gradient-to-b from-white/10 to-white/5 border border-white/15 backdrop-blur-xl shadow-2xl space-y-6">
-              <div className="flex items-center justify-between border-b border-white/10 pb-4">
+            <div className="bg-white border border-slate-200/90 rounded-[2rem] p-7 sm:p-8 shadow-[0_8px_30px_rgba(0,0,0,0.06)] space-y-6">
+              
+              <div className="flex items-center justify-between border-b border-slate-100 pb-4">
                 <div>
-                  <span className="text-[10px] font-mono tracking-widest text-[#00E5C8] font-bold uppercase block">
-                    COUNTDOWN TO FLAG-OFF
+                  <span className="text-[10px] font-mono tracking-widest text-[#00A896] font-bold uppercase block">
+                    COUNTDOWN TO FLAG OFF
                   </span>
-                  <h3 className="font-display text-lg font-bold text-white uppercase tracking-tight">
+                  <h3 className="font-display text-lg font-bold text-slate-900 uppercase">
                     Sunday, Oct 18, 2026
                   </h3>
                 </div>
-                <div className="w-9 h-9 rounded-xl bg-[#F26522]/20 border border-[#F26522]/30 flex items-center justify-center text-[#F26522]">
+                <div className="w-10 h-10 rounded-2xl bg-orange-50 text-[#F26522] flex items-center justify-center">
                   <Zap size={18} />
                 </div>
               </div>
 
-              {/* Countdown Component */}
+              {/* Countdown */}
               <div className="flex justify-center">
                 <CountdownTimer />
               </div>
 
-              {/* Quick Race Key Metrics */}
+              {/* Key Metrics */}
               <div className="space-y-3 pt-2">
-                <div className="flex items-center justify-between text-xs py-2 border-b border-white/5">
-                  <span className="text-slate-400 flex items-center gap-2">
-                    <Clock size={14} className="text-[#00E5C8]" /> Start Time
+                <div className="flex items-center justify-between text-xs py-2 border-b border-slate-100">
+                  <span className="text-slate-500 flex items-center gap-2">
+                    <Clock size={14} className="text-[#00A896]" /> Assembly & Start
                   </span>
-                  <span className="text-white font-mono font-bold">5:00 AM Assembly • 6:00 AM Flag Off</span>
+                  <span className="text-slate-800 font-mono font-bold">5:00 AM • 6:00 AM Flag Off</span>
                 </div>
-                <div className="flex items-center justify-between text-xs py-2 border-b border-white/5">
-                  <span className="text-slate-400 flex items-center gap-2">
-                    <MapPin size={14} className="text-[#F26522]" /> Start & Finish
+                <div className="flex items-center justify-between text-xs py-2 border-b border-slate-100">
+                  <span className="text-slate-500 flex items-center gap-2">
+                    <MapPin size={14} className="text-[#F26522]" /> Start & Finish Point
                   </span>
-                  <span className="text-white font-semibold">Valli Super Speciality Hospital</span>
+                  <span className="text-slate-800 font-semibold">Valli Hospital Grounds</span>
                 </div>
-                <div className="flex items-center justify-between text-xs py-2 border-b border-white/5">
-                  <span className="text-slate-400 flex items-center gap-2">
-                    <Trophy size={14} className="text-amber-400" /> Cash Prize Pool
+                <div className="flex items-center justify-between text-xs py-2 border-b border-slate-100">
+                  <span className="text-slate-500 flex items-center gap-2">
+                    <Trophy size={14} className="text-amber-500" /> Cash Prize Pool
                   </span>
-                  <span className="text-amber-300 font-mono font-bold">Top Finishers (M & F)</span>
+                  <span className="text-amber-600 font-mono font-bold">Top 3 Finishers (M & F)</span>
                 </div>
                 <div className="flex items-center justify-between text-xs py-2">
-                  <span className="text-slate-400 flex items-center gap-2">
-                    <Radio size={14} className="text-pink-400" /> Radio Partner
+                  <span className="text-slate-500 flex items-center gap-2">
+                    <Radio size={14} className="text-rose-500" /> Radio Partner
                   </span>
-                  <span className="text-white font-medium">93.9 Suryan FM</span>
+                  <span className="text-slate-800 font-medium">93.9 Suryan FM</span>
                 </div>
               </div>
 
               <Link
                 href="/ActiveSalem/Registration"
-                className="w-full py-3.5 bg-white/10 hover:bg-white/15 border border-white/20 rounded-xl text-center block text-xs font-bold uppercase tracking-wider text-white transition-colors"
+                className="w-full py-3.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-center block text-xs font-bold uppercase tracking-wider transition-colors shadow-sm"
               >
-                Quick Book Ticket →
+                Proceed To Booking →
               </Link>
             </div>
           </motion.div>
@@ -266,19 +264,19 @@ function HeroSection() {
 // ─── Categories & Inclusions Section ──────────────────────────────────────────
 function CategoriesSection() {
   return (
-    <section id="categories" className="py-24 bg-[#00171F] text-white relative">
+    <section id="categories" className="py-24 bg-white text-slate-900 border-t border-slate-100 relative">
       <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-          <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-[#00E5C8] uppercase bg-[#00E5C8]/10 border border-[#00E5C8]/20 px-3.5 py-1 rounded-full">
-            OFFICIAL RACE CATEGORIES
+          <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-[#00A896] uppercase bg-teal-50 border border-teal-100 px-3.5 py-1 rounded-full">
+            OFFICIAL RACE DISTANCES
           </span>
-          <h2 className="font-display text-3xl sm:text-5xl font-black uppercase tracking-tight">
-            CHOOSE YOUR DISTANCE
+          <h2 className="font-display text-3xl sm:text-5xl font-black uppercase tracking-tight text-slate-900">
+            CHOOSE YOUR CHALLENGE
           </h2>
-          <p className="text-slate-400 text-sm">
-            Whether you are racing for personal bests or walking in solidarity with heroes, there is a category for everyone.
+          <p className="text-slate-500 text-sm">
+            Whether racing for podium cash prizes or walking in gratitude with our veterans, choose the category that fits your spirit.
           </p>
         </div>
 
@@ -286,43 +284,43 @@ function CategoriesSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           
           {/* 3 KMS Inclusive */}
-          <div className="bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/10 rounded-3xl p-7 flex flex-col justify-between hover:border-[#00E5C8]/50 transition-all duration-300 relative group">
+          <div className="bg-[#FAFCFC] border border-slate-200/90 rounded-3xl p-7 flex flex-col justify-between hover:shadow-xl hover:border-[#00A896]/50 transition-all duration-300">
             <div className="space-y-4">
               <div className="flex justify-between items-start">
-                <span className="px-3 py-1 bg-[#00E5C8]/10 text-[#00E5C8] border border-[#00E5C8]/20 rounded-lg text-xs font-mono font-bold">
+                <span className="px-3 py-1 bg-teal-50 text-[#00A896] border border-teal-100 rounded-lg text-xs font-mono font-bold">
                   INCLUSIVE RUN
                 </span>
-                <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider bg-emerald-950/40 px-2.5 py-1 rounded-md border border-emerald-500/20">
+                <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
                   FREE ENTRY
                 </span>
               </div>
-              <h3 className="font-display text-3xl font-black uppercase text-white">
+              <h3 className="font-display text-3xl font-black uppercase text-slate-900">
                 3 KMS
               </h3>
-              <p className="text-xs text-slate-300 leading-relaxed font-medium">
-                Specially designed for <strong className="text-white">Ex-Servicemen, Armed Forces veterans, Special Children, and Differently Abled</strong> participants.
+              <p className="text-xs text-slate-600 leading-relaxed font-medium">
+                Specially designed for <strong className="text-slate-900">Ex-Servicemen, Armed Forces veterans, Special Children, and Differently Abled</strong> athletes.
               </p>
-              <ul className="space-y-2 pt-2 text-xs text-slate-400">
+              <ul className="space-y-2 pt-2 text-xs text-slate-600">
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 size={14} className="text-[#00E5C8]" /> Salute Walkathon & Tribute
+                  <CheckCircle2 size={14} className="text-[#00A896]" /> Salute Walkathon & Tribute
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 size={14} className="text-[#00E5C8]" /> Finisher Medal & Certificate
+                  <CheckCircle2 size={14} className="text-[#00A896]" /> Finisher Medal & Certificate
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 size={14} className="text-[#00E5C8]" /> Full Medical & Route Aid
+                  <CheckCircle2 size={14} className="text-[#00A896]" /> Full On-Route Medical & Hydration
                 </li>
               </ul>
             </div>
 
-            <div className="pt-8 mt-6 border-t border-white/10 flex items-center justify-between">
+            <div className="pt-8 mt-6 border-t border-slate-200/70 flex items-center justify-between">
               <div>
                 <span className="text-[10px] text-slate-400 uppercase tracking-wider block">Entry Fee</span>
-                <span className="font-display text-2xl font-black text-[#00E5C8]">₹0</span>
+                <span className="font-display text-2xl font-black text-[#00A896]">₹0</span>
               </div>
               <Link
                 href="/ActiveSalem/Registration"
-                className="px-5 py-2.5 bg-white/10 hover:bg-[#00E5C8] hover:text-[#00171F] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all"
+                className="px-5 py-2.5 bg-white hover:bg-[#00A896] hover:text-white text-slate-700 border border-slate-200 rounded-xl text-xs font-bold uppercase tracking-wider transition-all shadow-sm"
               >
                 Join Free
               </Link>
@@ -330,43 +328,43 @@ function CategoriesSection() {
           </div>
 
           {/* 5 KMS Fitness Run */}
-          <div className="bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/10 rounded-3xl p-7 flex flex-col justify-between hover:border-amber-400/50 transition-all duration-300 relative group">
+          <div className="bg-[#FAFCFC] border border-slate-200/90 rounded-3xl p-7 flex flex-col justify-between hover:shadow-xl hover:border-amber-400/50 transition-all duration-300">
             <div className="space-y-4">
               <div className="flex justify-between items-start">
-                <span className="px-3 py-1 bg-amber-400/10 text-amber-300 border border-amber-400/20 rounded-lg text-xs font-mono font-bold">
+                <span className="px-3 py-1 bg-amber-50 text-amber-700 border border-amber-200 rounded-lg text-xs font-mono font-bold">
                   COMMUNITY RUN
                 </span>
-                <span className="text-xs font-bold text-amber-300 uppercase tracking-wider">
+                <span className="text-xs font-bold text-amber-700 uppercase tracking-wider">
                   TIMED EVENT
                 </span>
               </div>
-              <h3 className="font-display text-3xl font-black uppercase text-white">
+              <h3 className="font-display text-3xl font-black uppercase text-slate-900">
                 5 KMS
               </h3>
-              <p className="text-xs text-slate-300 leading-relaxed font-medium">
+              <p className="text-xs text-slate-600 leading-relaxed font-medium">
                 Perfect for runners, fitness enthusiasts, families, and college students embarking on their running journey.
               </p>
-              <ul className="space-y-2 pt-2 text-xs text-slate-400">
+              <ul className="space-y-2 pt-2 text-xs text-slate-600">
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 size={14} className="text-amber-400" /> Official Valli Technical Running Tee
+                  <CheckCircle2 size={14} className="text-amber-600" /> Official Valli Running Tee
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 size={14} className="text-amber-400" /> Finisher Medal & Verified Certificate
+                  <CheckCircle2 size={14} className="text-amber-600" /> Finisher Medal & Verified Certificate
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 size={14} className="text-amber-400" /> Cash Prizes for Top 3 (M & F)
+                  <CheckCircle2 size={14} className="text-amber-600" /> Cash Prizes for Top 3 (M & F)
                 </li>
               </ul>
             </div>
 
-            <div className="pt-8 mt-6 border-t border-white/10 flex items-center justify-between">
+            <div className="pt-8 mt-6 border-t border-slate-200/70 flex items-center justify-between">
               <div>
                 <span className="text-[10px] text-slate-400 uppercase tracking-wider block">Entry Fee</span>
-                <span className="font-display text-2xl font-black text-white">₹249</span>
+                <span className="font-display text-2xl font-black text-slate-900">₹249</span>
               </div>
               <Link
                 href="/ActiveSalem/Registration"
-                className="px-5 py-2.5 bg-white/10 hover:bg-amber-400 hover:text-[#00171F] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all"
+                className="px-5 py-2.5 bg-white hover:bg-slate-900 hover:text-white text-slate-700 border border-slate-200 rounded-xl text-xs font-bold uppercase tracking-wider transition-all shadow-sm"
               >
                 Register
               </Link>
@@ -374,23 +372,23 @@ function CategoriesSection() {
           </div>
 
           {/* 10 KMS Elite Challenge */}
-          <div className="bg-gradient-to-b from-[#F26522]/15 to-white/[0.02] border-2 border-[#F26522]/40 rounded-3xl p-7 flex flex-col justify-between hover:border-[#F26522] transition-all duration-300 relative group shadow-2xl shadow-orange-950/20">
+          <div className="bg-[#FFF8F3] border-2 border-[#F26522]/30 rounded-3xl p-7 flex flex-col justify-between hover:shadow-xl hover:border-[#F26522] transition-all duration-300">
             <div className="space-y-4">
               <div className="flex justify-between items-start">
-                <span className="px-3 py-1 bg-[#F26522]/20 text-[#F26522] border border-[#F26522]/40 rounded-lg text-xs font-mono font-bold">
+                <span className="px-3 py-1 bg-orange-100/70 text-[#F26522] border border-orange-200 rounded-lg text-xs font-mono font-bold">
                   ELITE CHALLENGE
                 </span>
-                <span className="text-[10px] font-bold text-[#F26522] uppercase tracking-widest bg-[#F26522]/15 px-2.5 py-1 rounded-full">
+                <span className="text-[10px] font-bold text-[#F26522] uppercase tracking-widest bg-orange-100/50 px-2.5 py-1 rounded-full">
                   PODIUM CASH
                 </span>
               </div>
-              <h3 className="font-display text-3xl font-black uppercase text-white">
+              <h3 className="font-display text-3xl font-black uppercase text-slate-900">
                 10 KMS
               </h3>
-              <p className="text-xs text-slate-200 leading-relaxed font-medium">
-                The marquee distance across Salem's central avenues. Compete against top regional athletes for grand cash prizes.
+              <p className="text-xs text-slate-700 leading-relaxed font-medium">
+                The premier distance across Salem's central avenues. Compete against top athletes for grand cash prizes.
               </p>
-              <ul className="space-y-2 pt-2 text-xs text-slate-300">
+              <ul className="space-y-2 pt-2 text-xs text-slate-700">
                 <li className="flex items-center gap-2">
                   <CheckCircle2 size={14} className="text-[#F26522]" /> 1st Prize ₹10,000 (M & F each)
                 </li>
@@ -403,9 +401,9 @@ function CategoriesSection() {
               </ul>
             </div>
 
-            <div className="pt-8 mt-6 border-t border-white/15 flex items-center justify-between">
+            <div className="pt-8 mt-6 border-t border-orange-200/60 flex items-center justify-between">
               <div>
-                <span className="text-[10px] text-slate-400 uppercase tracking-wider block">Entry Fee</span>
+                <span className="text-[10px] text-slate-500 uppercase tracking-wider block">Entry Fee</span>
                 <span className="font-display text-2xl font-black text-[#F26522]">₹299</span>
               </div>
               <Link
@@ -420,30 +418,30 @@ function CategoriesSection() {
         </div>
 
         {/* Runner Inclusions Ribbon */}
-        <div className="mt-16 bg-white/5 border border-white/10 rounded-2xl p-6 lg:p-8">
+        <div className="mt-16 bg-[#FAFCFC] border border-slate-200/80 rounded-2xl p-6 lg:p-8 shadow-sm">
           <div className="text-center max-w-xl mx-auto mb-6">
-            <span className="text-[10px] font-mono text-[#00E5C8] font-bold tracking-widest uppercase">
-              ALL REGISTERED RUNNERS RECEIVE
+            <span className="text-[10px] font-mono text-[#00A896] font-bold tracking-widest uppercase">
+              REGISTERED RUNNER PRIVILEGES
             </span>
-            <h4 className="font-display text-lg font-bold text-white uppercase mt-1">
-              Complete Runner Kit & On-Course Privileges
+            <h4 className="font-display text-lg font-bold text-slate-900 uppercase mt-1">
+              Official Kit & Course Amenities
             </h4>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 text-center">
             {[
-              { label: "Valli Running Tee", icon: <Shirt className="w-5 h-5 text-[#00E5C8]" /> },
-              { label: "Finisher Medal", icon: <Award className="w-5 h-5 text-amber-400" /> },
-              { label: "Time Certificate", icon: <FileCheck className="w-5 h-5 text-emerald-400" /> },
-              { label: "Hydration Stations", icon: <Apple className="w-5 h-5 text-rose-400" /> },
-              { label: "Hospital Medics", icon: <ShieldCheck className="w-5 h-5 text-blue-400" /> },
+              { label: "Valli Running Tee", icon: <Shirt className="w-5 h-5 text-[#00A896]" /> },
+              { label: "Finisher Medal", icon: <Award className="w-5 h-5 text-amber-500" /> },
+              { label: "Time Certificate", icon: <FileCheck className="w-5 h-5 text-emerald-600" /> },
+              { label: "Hydration Stations", icon: <Apple className="w-5 h-5 text-rose-500" /> },
+              { label: "Hospital Medics", icon: <ShieldCheck className="w-5 h-5 text-blue-600" /> },
               { label: "Breakfast & Fruits", icon: <Gift className="w-5 h-5 text-[#F26522]" /> },
             ].map((inc, i) => (
-              <div key={i} className="p-3 bg-white/5 rounded-xl border border-white/5 space-y-2 flex flex-col items-center justify-center">
-                <div className="p-2 rounded-lg bg-white/5">
+              <div key={i} className="p-3 bg-white rounded-xl border border-slate-200/70 shadow-sm space-y-2 flex flex-col items-center justify-center">
+                <div className="p-2 rounded-lg bg-slate-50">
                   {inc.icon}
                 </div>
-                <span className="text-xs font-semibold text-slate-300 block">{inc.label}</span>
+                <span className="text-xs font-semibold text-slate-700 block">{inc.label}</span>
               </div>
             ))}
           </div>
@@ -454,83 +452,83 @@ function CategoriesSection() {
   );
 }
 
-// ─── Tribute & Inclusivity Spotlight (PDF Pages 5 & 6) ────────────────────────
+// ─── Tribute & Inclusivity Spotlight ──────────────────────────────────────────
 function TributeSection() {
   return (
-    <section className="py-20 bg-[#001015] text-white relative overflow-hidden border-t border-white/10">
+    <section className="py-20 bg-[#F5F8F8] text-slate-900 border-t border-slate-200/70 relative">
       <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           
-          {/* Ex-Servicemen & Armed Forces Tribute */}
-          <div className="bg-gradient-to-br from-[#0B2530] to-[#04131A] border border-cyan-500/20 rounded-3xl p-8 relative overflow-hidden space-y-6">
+          {/* Ex-Servicemen Tribute */}
+          <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-6">
             <div className="space-y-2">
-              <span className="text-[10px] font-mono tracking-widest text-[#00E5C8] font-bold uppercase flex items-center gap-2">
-                <Flag size={14} className="text-[#00E5C8]" /> ARMED FORCES WALKATHON
+              <span className="text-[10px] font-mono tracking-widest text-[#00A896] font-bold uppercase flex items-center gap-2">
+                <Flag size={14} className="text-[#00A896]" /> ARMED FORCES WALKATHON
               </span>
-              <h3 className="font-display text-2xl sm:text-3xl font-black uppercase text-white">
+              <h3 className="font-display text-2xl sm:text-3xl font-black uppercase text-slate-900">
                 Salute to the Heroes of the Nation
               </h3>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
                 "Let us walk with our nation's heroes." Active Salem 4.0 dedicates a special 3 KMS category to honor our Ex-Servicemen and Armed Forces personnel.
               </p>
             </div>
 
             <div className="grid grid-cols-3 gap-3 pt-2">
-              <div className="bg-white/5 border border-white/10 p-3.5 rounded-xl text-left space-y-1">
-                <span className="text-[10px] font-bold text-[#00E5C8] uppercase block">Pillar 01</span>
-                <span className="font-display text-xs font-bold text-white block uppercase">Honour Heroes</span>
-                <span className="text-[9px] text-slate-400">Gratitude to our veterans</span>
+              <div className="bg-slate-50 border border-slate-200 p-3.5 rounded-xl text-left space-y-1">
+                <span className="text-[10px] font-bold text-[#00A896] uppercase block">Pillar 01</span>
+                <span className="font-display text-xs font-bold text-slate-900 block uppercase">Honour Heroes</span>
+                <span className="text-[9px] text-slate-500">Gratitude to veterans</span>
               </div>
-              <div className="bg-white/5 border border-white/10 p-3.5 rounded-xl text-left space-y-1">
-                <span className="text-[10px] font-bold text-[#00E5C8] uppercase block">Pillar 02</span>
-                <span className="font-display text-xs font-bold text-white block uppercase">Spirit of Service</span>
-                <span className="text-[9px] text-slate-400">Courage and discipline</span>
+              <div className="bg-slate-50 border border-slate-200 p-3.5 rounded-xl text-left space-y-1">
+                <span className="text-[10px] font-bold text-[#00A896] uppercase block">Pillar 02</span>
+                <span className="font-display text-xs font-bold text-slate-900 block uppercase">Spirit of Service</span>
+                <span className="text-[9px] text-slate-500">Courage and discipline</span>
               </div>
-              <div className="bg-white/5 border border-white/10 p-3.5 rounded-xl text-left space-y-1">
-                <span className="text-[10px] font-bold text-[#00E5C8] uppercase block">Pillar 03</span>
-                <span className="font-display text-xs font-bold text-white block uppercase">Walk Together</span>
-                <span className="text-[9px] text-slate-400">Solidarity with citizens</span>
+              <div className="bg-slate-50 border border-slate-200 p-3.5 rounded-xl text-left space-y-1">
+                <span className="text-[10px] font-bold text-[#00A896] uppercase block">Pillar 03</span>
+                <span className="font-display text-xs font-bold text-slate-900 block uppercase">Walk Together</span>
+                <span className="text-[9px] text-slate-500">Solidarity with citizens</span>
               </div>
             </div>
 
-            <div className="pt-2 text-xs text-cyan-200/80 font-mono italic">
+            <div className="pt-2 text-xs text-slate-500 font-mono italic">
               "Honouring courage, discipline, and dedication beyond duty."
             </div>
           </div>
 
           {/* 3 KMS Inclusive Run */}
-          <div className="bg-gradient-to-br from-[#1E192B] to-[#0D0B14] border border-purple-500/20 rounded-3xl p-8 relative overflow-hidden space-y-6">
+          <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-6">
             <div className="space-y-2">
-              <span className="text-[10px] font-mono tracking-widest text-purple-400 font-bold uppercase flex items-center gap-2">
-                <HeartHandshake size={14} className="text-purple-400" /> INCLUSIVE COMMUNITY
+              <span className="text-[10px] font-mono tracking-widest text-purple-600 font-bold uppercase flex items-center gap-2">
+                <HeartHandshake size={14} className="text-purple-600" /> INCLUSIVE COMMUNITY
               </span>
-              <h3 className="font-display text-2xl sm:text-3xl font-black uppercase text-white">
+              <h3 className="font-display text-2xl sm:text-3xl font-black uppercase text-slate-900">
                 Different Abilities. Same Determination.
               </h3>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
                 A dedicated 3 KMS run for Special Children and Differently-Abled athletes. Creating an accessible, barrier-free celebration of willpower and joy.
               </p>
             </div>
 
             <div className="grid grid-cols-3 gap-3 pt-2">
-              <div className="bg-white/5 border border-white/10 p-3.5 rounded-xl text-left space-y-1">
-                <span className="text-[10px] font-bold text-purple-400 uppercase block">Value 01</span>
-                <span className="font-display text-xs font-bold text-white block uppercase">Inclusion</span>
-                <span className="text-[9px] text-slate-400">Equal celebration for all</span>
+              <div className="bg-slate-50 border border-slate-200 p-3.5 rounded-xl text-left space-y-1">
+                <span className="text-[10px] font-bold text-purple-600 uppercase block">Value 01</span>
+                <span className="font-display text-xs font-bold text-slate-900 block uppercase">Inclusion</span>
+                <span className="text-[9px] text-slate-500">Equal celebration for all</span>
               </div>
-              <div className="bg-white/5 border border-white/10 p-3.5 rounded-xl text-left space-y-1">
-                <span className="text-[10px] font-bold text-purple-400 uppercase block">Value 02</span>
-                <span className="font-display text-xs font-bold text-white block uppercase">Inspiration</span>
-                <span className="text-[9px] text-slate-400">Unstoppable determination</span>
+              <div className="bg-slate-50 border border-slate-200 p-3.5 rounded-xl text-left space-y-1">
+                <span className="text-[10px] font-bold text-purple-600 uppercase block">Value 02</span>
+                <span className="font-display text-xs font-bold text-slate-900 block uppercase">Inspiration</span>
+                <span className="text-[9px] text-slate-500">Unstoppable willpower</span>
               </div>
-              <div className="bg-white/5 border border-white/10 p-3.5 rounded-xl text-left space-y-1">
-                <span className="text-[10px] font-bold text-purple-400 uppercase block">Value 03</span>
-                <span className="font-display text-xs font-bold text-white block uppercase">United Salem</span>
-                <span className="text-[9px] text-slate-400">Move together, rise together</span>
+              <div className="bg-slate-50 border border-slate-200 p-3.5 rounded-xl text-left space-y-1">
+                <span className="text-[10px] font-bold text-purple-600 uppercase block">Value 03</span>
+                <span className="font-display text-xs font-bold text-slate-900 block uppercase">United Salem</span>
+                <span className="text-[9px] text-slate-500">Move together, rise together</span>
               </div>
             </div>
 
-            <div className="pt-2 text-xs text-purple-200/80 font-mono italic">
+            <div className="pt-2 text-xs text-slate-500 font-mono italic">
               "Building a stronger, healthier, and truly inclusive Salem."
             </div>
           </div>
@@ -544,141 +542,141 @@ function TributeSection() {
 // ─── Cash Prizes Section ─────────────────────────────────────────────────────
 function PrizesSection() {
   return (
-    <section className="py-24 bg-[#00171F] text-white relative">
+    <section className="py-24 bg-white text-slate-900 border-t border-slate-100 relative">
       <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
         
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-          <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-amber-400 uppercase bg-amber-400/10 border border-amber-400/20 px-3.5 py-1 rounded-full">
+          <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-amber-600 uppercase bg-amber-50 border border-amber-200 px-3.5 py-1 rounded-full">
             PODIUM REWARDS
           </span>
-          <h2 className="font-display text-3xl sm:text-5xl font-black uppercase tracking-tight">
+          <h2 className="font-display text-3xl sm:text-5xl font-black uppercase tracking-tight text-slate-900">
             EXCITING CASH AWARDS
           </h2>
-          <p className="text-slate-400 text-sm">
-            Cash prizes awarded equally to top finishers across both Male & Female categories.
+          <p className="text-slate-500 text-sm">
+            Cash awards given equally to top finishers across both Male & Female categories.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
           
           {/* 10 KMS Prizes */}
-          <div className="bg-gradient-to-b from-white/10 to-white/5 border border-[#F26522]/30 rounded-3xl p-8 space-y-6">
-            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+          <div className="bg-[#FFF8F3] border border-orange-200 rounded-3xl p-8 space-y-6 shadow-sm">
+            <div className="flex items-center justify-between border-b border-orange-100 pb-4">
               <div>
                 <span className="text-[10px] font-mono text-[#F26522] font-bold uppercase tracking-wider">
                   ELITE DISTANCE
                 </span>
-                <h3 className="font-display text-2xl font-black text-white uppercase">
+                <h3 className="font-display text-2xl font-black text-slate-900 uppercase">
                   10 KMS Cash Prizes
                 </h3>
               </div>
-              <span className="px-3 py-1 bg-[#F26522]/20 text-[#F26522] font-mono font-bold text-xs rounded-lg border border-[#F26522]/30">
+              <span className="px-3 py-1 bg-white text-[#F26522] font-mono font-bold text-xs rounded-lg border border-orange-200 shadow-sm">
                 Entry: ₹299
               </span>
             </div>
 
             <div className="space-y-3">
               {/* 1st */}
-              <div className="bg-white/5 border border-amber-400/30 rounded-2xl p-4 flex items-center justify-between">
+              <div className="bg-white border border-amber-200 rounded-2xl p-4 flex items-center justify-between shadow-sm">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-amber-400/20 text-amber-300 font-black flex items-center justify-center text-lg">
+                  <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 font-black flex items-center justify-center text-lg">
                     🥇
                   </div>
                   <div>
-                    <span className="text-xs font-black uppercase text-white block">1st Place Winner</span>
+                    <span className="text-xs font-black uppercase text-slate-900 block">1st Place Winner</span>
                     <span className="text-[10px] text-slate-400">Male & Female (Each)</span>
                   </div>
                 </div>
-                <span className="font-display text-2xl font-black text-amber-400">₹10,000/-</span>
+                <span className="font-display text-2xl font-black text-slate-900">₹10,000/-</span>
               </div>
 
               {/* 2nd */}
-              <div className="bg-white/5 border border-white/10 rounded-2xl p-4 flex items-center justify-between">
+              <div className="bg-white border border-slate-200 rounded-2xl p-4 flex items-center justify-between shadow-sm">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-slate-400/20 text-slate-300 font-black flex items-center justify-center text-lg">
+                  <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-600 font-black flex items-center justify-center text-lg">
                     🥈
                   </div>
                   <div>
-                    <span className="text-xs font-black uppercase text-white block">2nd Place Winner</span>
+                    <span className="text-xs font-black uppercase text-slate-900 block">2nd Place Winner</span>
                     <span className="text-[10px] text-slate-400">Male & Female (Each)</span>
                   </div>
                 </div>
-                <span className="font-display text-xl font-black text-white">₹5,000/-</span>
+                <span className="font-display text-xl font-black text-slate-900">₹5,000/-</span>
               </div>
 
               {/* 3rd */}
-              <div className="bg-white/5 border border-white/10 rounded-2xl p-4 flex items-center justify-between">
+              <div className="bg-white border border-slate-200 rounded-2xl p-4 flex items-center justify-between shadow-sm">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-orange-400/20 text-orange-300 font-black flex items-center justify-center text-lg">
+                  <div className="w-10 h-10 rounded-xl bg-orange-50 text-[#F26522] font-black flex items-center justify-center text-lg">
                     🥉
                   </div>
                   <div>
-                    <span className="text-xs font-black uppercase text-white block">3rd Place Winner</span>
+                    <span className="text-xs font-black uppercase text-slate-900 block">3rd Place Winner</span>
                     <span className="text-[10px] text-slate-400">Male & Female (Each)</span>
                   </div>
                 </div>
-                <span className="font-display text-lg font-black text-slate-300">₹2,500/-</span>
+                <span className="font-display text-lg font-black text-slate-900">₹2,500/-</span>
               </div>
             </div>
           </div>
 
           {/* 5 KMS Prizes */}
-          <div className="bg-gradient-to-b from-white/10 to-white/5 border border-white/10 rounded-3xl p-8 space-y-6">
-            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+          <div className="bg-[#FAFCFC] border border-slate-200 rounded-3xl p-8 space-y-6 shadow-sm">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-4">
               <div>
-                <span className="text-[10px] font-mono text-[#00E5C8] font-bold uppercase tracking-wider">
+                <span className="text-[10px] font-mono text-[#00A896] font-bold uppercase tracking-wider">
                   COMMUNITY DISTANCE
                 </span>
-                <h3 className="font-display text-2xl font-black text-white uppercase">
+                <h3 className="font-display text-2xl font-black text-slate-900 uppercase">
                   5 KMS Cash Prizes
                 </h3>
               </div>
-              <span className="px-3 py-1 bg-[#00E5C8]/10 text-[#00E5C8] font-mono font-bold text-xs rounded-lg border border-[#00E5C8]/20">
+              <span className="px-3 py-1 bg-white text-[#00A896] font-mono font-bold text-xs rounded-lg border border-teal-100 shadow-sm">
                 Entry: ₹249
               </span>
             </div>
 
             <div className="space-y-3">
               {/* 1st */}
-              <div className="bg-white/5 border border-amber-400/30 rounded-2xl p-4 flex items-center justify-between">
+              <div className="bg-white border border-amber-200 rounded-2xl p-4 flex items-center justify-between shadow-sm">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-amber-400/20 text-amber-300 font-black flex items-center justify-center text-lg">
+                  <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 font-black flex items-center justify-center text-lg">
                     🥇
                   </div>
                   <div>
-                    <span className="text-xs font-black uppercase text-white block">1st Place Winner</span>
+                    <span className="text-xs font-black uppercase text-slate-900 block">1st Place Winner</span>
                     <span className="text-[10px] text-slate-400">Male & Female (Each)</span>
                   </div>
                 </div>
-                <span className="font-display text-2xl font-black text-amber-400">₹5,000/-</span>
+                <span className="font-display text-2xl font-black text-slate-900">₹5,000/-</span>
               </div>
 
               {/* 2nd */}
-              <div className="bg-white/5 border border-white/10 rounded-2xl p-4 flex items-center justify-between">
+              <div className="bg-white border border-slate-200 rounded-2xl p-4 flex items-center justify-between shadow-sm">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-slate-400/20 text-slate-300 font-black flex items-center justify-center text-lg">
+                  <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-600 font-black flex items-center justify-center text-lg">
                     🥈
                   </div>
                   <div>
-                    <span className="text-xs font-black uppercase text-white block">2nd Place Winner</span>
+                    <span className="text-xs font-black uppercase text-slate-900 block">2nd Place Winner</span>
                     <span className="text-[10px] text-slate-400">Male & Female (Each)</span>
                   </div>
                 </div>
-                <span className="font-display text-xl font-black text-white">₹2,500/-</span>
+                <span className="font-display text-xl font-black text-slate-900">₹2,500/-</span>
               </div>
 
               {/* 3rd */}
-              <div className="bg-white/5 border border-white/10 rounded-2xl p-4 flex items-center justify-between">
+              <div className="bg-white border border-slate-200 rounded-2xl p-4 flex items-center justify-between shadow-sm">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-orange-400/20 text-orange-300 font-black flex items-center justify-center text-lg">
+                  <div className="w-10 h-10 rounded-xl bg-orange-50 text-[#F26522] font-black flex items-center justify-center text-lg">
                     🥉
                   </div>
                   <div>
-                    <span className="text-xs font-black uppercase text-white block">3rd Place Winner</span>
+                    <span className="text-xs font-black uppercase text-slate-900 block">3rd Place Winner</span>
                     <span className="text-[10px] text-slate-400">Male & Female (Each)</span>
                   </div>
                 </div>
-                <span className="font-display text-lg font-black text-slate-300">₹1,250/-</span>
+                <span className="font-display text-lg font-black text-slate-900">₹1,250/-</span>
               </div>
             </div>
           </div>
@@ -689,51 +687,51 @@ function PrizesSection() {
   );
 }
 
-// ─── Schedule & Route Overview (PDF Pages 7 & 8) ──────────────────────────────
+// ─── Schedule & Route Overview ────────────────────────────────────────────────
 function ScheduleAndRouteSection() {
   const [activeRoute, setActiveRoute] = useState<"3K" | "5K" | "10K">("10K");
 
   const timeline = [
-    { time: "5:00 AM", title: "Assembly & Warm-Up", desc: "Runners report at Valli Super Speciality Hospital grounds for bib check & warm-up session." },
+    { time: "5:00 AM", title: "Assembly & Warm-Up", desc: "Runners report at Valli Hospital grounds for bib check & warm-up session." },
     { time: "6:00 AM", title: "Flag-Off Ceremonies", desc: "Official start of 10K, 5K, and 3K runs with national anthem and dignitary flag-off." },
-    { time: "6:45 AM", title: "Armed Forces & Inclusive Tribute", desc: "Special felicitation ceremony honouring Ex-Servicemen and differently-abled runners." },
-    { time: "7:30 AM", title: "Podium & Prize Distribution", desc: "Awarding of cash prizes, trophies, and closing celebration with official radio partners." }
+    { time: "6:45 AM", title: "Armed Forces & Inclusive Tribute", desc: "Felicitation ceremony honouring Ex-Servicemen and differently-abled runners." },
+    { time: "7:30 AM", title: "Podium & Prize Distribution", desc: "Awarding of cash prizes, trophies, and closing celebration with radio partners." }
   ];
 
   return (
-    <section className="py-24 bg-[#001015] text-white relative border-t border-white/10">
+    <section className="py-24 bg-[#FAFCFC] text-slate-900 border-t border-slate-200/70 relative">
       <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           
-          {/* Left: Event Morning Timeline */}
+          {/* Left: Schedule */}
           <div className="lg:col-span-5 space-y-8">
             <div className="space-y-2">
-              <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-[#00E5C8] uppercase">
+              <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-[#00A896] uppercase">
                 EVENT PROGRAM
               </span>
-              <h3 className="font-display text-3xl font-black uppercase text-white">
+              <h3 className="font-display text-3xl font-black uppercase text-slate-900">
                 Race Morning Schedule
               </h3>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-500 font-medium">
                 Sunday, 18 October 2026 • Coordinated with Salem City Police & Medical Teams.
               </p>
             </div>
 
-            <div className="space-y-6 relative before:absolute before:left-3.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-white/10">
+            <div className="space-y-6 relative before:absolute before:left-3.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-200">
               {timeline.map((item, idx) => (
                 <div key={idx} className="relative flex items-start gap-4 pl-1">
-                  <div className="w-6 h-6 rounded-full bg-[#00171F] border-2 border-[#00E5C8] flex-shrink-0 z-10 flex items-center justify-center mt-0.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#00E5C8]" />
+                  <div className="w-6 h-6 rounded-full bg-white border-2 border-[#00A896] flex-shrink-0 z-10 flex items-center justify-center mt-0.5 shadow-sm">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#00A896]" />
                   </div>
                   <div className="space-y-1">
-                    <span className="font-mono text-xs font-bold text-[#00E5C8] block">
+                    <span className="font-mono text-xs font-bold text-[#00A896] block">
                       {item.time}
                     </span>
-                    <h4 className="font-display text-sm font-bold text-white uppercase">
+                    <h4 className="font-display text-sm font-bold text-slate-900 uppercase">
                       {item.title}
                     </h4>
-                    <p className="text-xs text-slate-400 leading-relaxed">
+                    <p className="text-xs text-slate-500 leading-relaxed">
                       {item.desc}
                     </p>
                   </div>
@@ -743,28 +741,28 @@ function ScheduleAndRouteSection() {
           </div>
 
           {/* Right: Interactive Route Visual Map */}
-          <div className="lg:col-span-7 bg-white/5 border border-white/10 rounded-3xl p-7 flex flex-col justify-between">
+          <div className="lg:col-span-7 bg-white border border-slate-200/90 rounded-3xl p-7 flex flex-col justify-between shadow-sm">
             <div className="space-y-4">
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <div>
                   <span className="text-[10px] font-mono text-[#F26522] font-bold uppercase tracking-wider">
                     CERTIFIED RACE COURSE
                   </span>
-                  <h4 className="font-display text-xl font-bold uppercase text-white">
+                  <h4 className="font-display text-xl font-bold uppercase text-slate-900">
                     Salem City Landmarks Route
                   </h4>
                 </div>
 
-                {/* Distance Selector Buttons */}
-                <div className="flex bg-white/10 p-1 rounded-xl border border-white/10">
+                {/* Distance Selector */}
+                <div className="flex bg-slate-100 p-1 rounded-xl border border-slate-200/70">
                   {(["3K", "5K", "10K"] as const).map((r) => (
                     <button
                       key={r}
                       onClick={() => setActiveRoute(r)}
-                      className={`px-3.5 py-1.5 rounded-lg text-xs font-bold font-mono transition-all ${
+                      className={`px-3.5 py-1.5 rounded-lg text-xs font-bold font-mono transition-all cursor-pointer ${
                         activeRoute === r
-                          ? "bg-[#F26522] text-white shadow-sm"
-                          : "text-slate-400 hover:text-white"
+                          ? "bg-white text-slate-900 shadow-sm"
+                          : "text-slate-500 hover:text-slate-900"
                       }`}
                     >
                       {r}
@@ -774,68 +772,66 @@ function ScheduleAndRouteSection() {
               </div>
 
               {/* Dynamic Route Milestones Description */}
-              <div className="p-4 bg-white/5 rounded-2xl border border-white/5 text-xs text-slate-300 space-y-2">
-                <div className="flex items-center gap-2 text-white font-bold">
-                  <Navigation size={14} className="text-[#00E5C8]" />
-                  <span>Start / Finish: Valli Super Speciality Hospital</span>
+              <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/70 text-xs text-slate-700 space-y-2">
+                <div className="flex items-center gap-2 text-slate-900 font-bold">
+                  <Navigation size={14} className="text-[#00A896]" />
+                  <span>Start / Finish: Valli Super Speciality Hospital Grounds</span>
                 </div>
                 {activeRoute === "3K" && (
-                  <p className="text-slate-400 leading-relaxed">
-                    Turns at <strong className="text-white">1.5 KMS</strong> milestone via Meyyanur Main Road & Sarada College Road intersection. Safe and gentle gradient suitable for walkathons.
+                  <p className="text-slate-500 leading-relaxed">
+                    Turns at <strong className="text-slate-900">1.5 KMS</strong> milestone via Meyyanur Main Road & Sarada College Road junction. Safe and gentle gradient suitable for walkathons.
                   </p>
                 )}
                 {activeRoute === "5K" && (
-                  <p className="text-slate-400 leading-relaxed">
-                    Turns at <strong className="text-white">2.5 KMS</strong> milestone along Sarada College Road. Includes 2 dedicated water and energy drink stations.
+                  <p className="text-slate-500 leading-relaxed">
+                    Turns at <strong className="text-slate-900">2.5 KMS</strong> milestone along Sarada College Road. Includes 2 dedicated hydration and glucose stations.
                   </p>
                 )}
                 {activeRoute === "10K" && (
-                  <p className="text-slate-400 leading-relaxed">
-                    Loops at <strong className="text-white">5.0 KMS</strong> milestone reaching Hasthampatty Roundabout before returning to Valli Hospital. 4 hydration points and ambulance coverage.
+                  <p className="text-slate-500 leading-relaxed">
+                    Loops at <strong className="text-slate-900">5.0 KMS</strong> milestone reaching Hasthampatty Roundabout before returning to Valli Hospital. 4 water points and full ambulance coverage.
                   </p>
                 )}
               </div>
 
               {/* Graphical Route Visual Representation */}
-              <div className="h-44 w-full bg-[#00171F] border border-white/10 rounded-2xl relative overflow-hidden flex items-center justify-center p-6">
-                <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#00E5C8_1px,transparent_1px)] [background-size:16px_16px]" />
-                
-                {/* Visual Pathway diagram */}
+              <div className="h-44 w-full bg-[#FAFCFC] border border-slate-200 rounded-2xl relative overflow-hidden flex items-center justify-center p-6">
                 <div className="relative w-full max-w-md flex items-center justify-between">
+                  
                   <div className="flex flex-col items-center gap-1.5">
-                    <div className="w-8 h-8 rounded-full bg-[#00E5C8]/20 border border-[#00E5C8] flex items-center justify-center text-[#00E5C8]">
+                    <div className="w-8 h-8 rounded-full bg-teal-50 border border-[#00A896] flex items-center justify-center text-[#00A896] shadow-sm">
                       <MapPin size={14} />
                     </div>
-                    <span className="text-[10px] font-bold text-white font-mono">Valli Hospital</span>
+                    <span className="text-[10px] font-bold text-slate-800 font-mono">Valli Hospital</span>
                     <span className="text-[8px] text-slate-400">0.0 KM</span>
                   </div>
 
-                  <div className="flex-1 h-0.5 bg-gradient-to-r from-[#00E5C8] via-[#F26522] to-[#00E5C8] mx-2 relative">
-                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[9px] font-mono text-slate-400">
-                      Meyyanur Main Rd
+                  <div className="flex-1 h-1 bg-gradient-to-r from-[#00A896] via-[#F26522] to-[#00A896] mx-2 rounded-full relative">
+                    <span className="absolute -top-4 left-1/2 -translate-x-1/2 text-[9px] font-mono text-slate-400">
+                      Meyyanur Rd
                     </span>
                   </div>
 
                   <div className="flex flex-col items-center gap-1.5">
-                    <div className="w-8 h-8 rounded-full bg-[#F26522]/20 border border-[#F26522] flex items-center justify-center text-[#F26522]">
+                    <div className="w-8 h-8 rounded-full bg-orange-50 border border-[#F26522] flex items-center justify-center text-[#F26522] shadow-sm">
                       <Compass size={14} />
                     </div>
-                    <span className="text-[10px] font-bold text-white font-mono">Sarada College</span>
+                    <span className="text-[10px] font-bold text-slate-800 font-mono">Sarada College</span>
                     <span className="text-[8px] text-slate-400">Midpoint</span>
                   </div>
 
                   {activeRoute === "10K" && (
                     <>
-                      <div className="flex-1 h-0.5 bg-[#F26522] mx-2 relative">
-                        <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[9px] font-mono text-slate-400">
+                      <div className="flex-1 h-1 bg-[#F26522] mx-2 rounded-full relative">
+                        <span className="absolute -top-4 left-1/2 -translate-x-1/2 text-[9px] font-mono text-slate-400">
                           Hasthampatty
                         </span>
                       </div>
                       <div className="flex flex-col items-center gap-1.5">
-                        <div className="w-8 h-8 rounded-full bg-amber-400/20 border border-amber-400 flex items-center justify-center text-amber-400">
+                        <div className="w-8 h-8 rounded-full bg-amber-50 border border-amber-400 flex items-center justify-center text-amber-500 shadow-sm">
                           <Flag size={14} />
                         </div>
-                        <span className="text-[10px] font-bold text-white font-mono">Turn Point</span>
+                        <span className="text-[10px] font-bold text-slate-800 font-mono">Turn Point</span>
                         <span className="text-[8px] text-slate-400">5.0 KM</span>
                       </div>
                     </>
@@ -844,11 +840,11 @@ function ScheduleAndRouteSection() {
               </div>
             </div>
 
-            <div className="pt-6 border-t border-white/10 flex items-center justify-between text-xs">
-              <span className="text-slate-400 font-mono">Medical Support: 24/7 Ambulance & Trauma Station</span>
+            <div className="pt-6 border-t border-slate-100 flex items-center justify-between text-xs">
+              <span className="text-slate-500 font-mono">Medical Support: 24/7 Ambulance & Trauma Care</span>
               <Link
                 href="/ActiveSalem/Registration"
-                className="text-[#00E5C8] hover:underline font-bold flex items-center gap-1"
+                className="text-[#00A896] hover:underline font-bold flex items-center gap-1"
               >
                 Choose This Distance →
               </Link>
@@ -861,46 +857,46 @@ function ScheduleAndRouteSection() {
   );
 }
 
-// ─── Radio Partner & Support Footer Ribbon ───────────────────────────────────
+// ─── Radio Partner & Support Ribbon ──────────────────────────────────────────
 function RadioAndSupportSection() {
   return (
-    <section className="py-16 bg-[#001217] text-white border-t border-white/10 relative">
+    <section className="py-16 bg-white text-slate-900 border-t border-slate-200/70 relative">
       <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           
           {/* Radio Partner Spotlight */}
-          <div className="flex items-center gap-5 p-6 bg-white/5 border border-white/10 rounded-2xl">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center text-white shadow-lg flex-shrink-0">
+          <div className="flex items-center gap-5 p-6 bg-[#FAFCFC] border border-slate-200 rounded-2xl shadow-sm">
+            <div className="w-14 h-14 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center shadow-inner flex-shrink-0 border border-rose-100">
               <Radio size={28} />
             </div>
             <div className="space-y-1 text-left">
-              <span className="text-[10px] font-mono text-pink-400 font-bold uppercase tracking-wider block">
+              <span className="text-[10px] font-mono text-rose-600 font-bold uppercase tracking-wider block">
                 OFFICIAL RADIO PARTNER
               </span>
-              <h4 className="font-display text-lg font-bold text-white uppercase">
+              <h4 className="font-display text-lg font-bold text-slate-900 uppercase">
                 93.9 Suryan FM
               </h4>
-              <p className="text-xs text-slate-400">
-                Tune in for live athlete interviews, countdown buzz, and race day announcements across Salem.
+              <p className="text-xs text-slate-500">
+                Tune in for live athlete interviews, countdown buzz, and race morning announcements across Salem.
               </p>
             </div>
           </div>
 
           {/* Quick Enquiries & Bulk Bookings */}
-          <div className="flex items-center gap-5 p-6 bg-white/5 border border-white/10 rounded-2xl">
-            <div className="w-14 h-14 rounded-2xl bg-[#00A896]/20 border border-[#00A896]/30 flex items-center justify-center text-[#00E5C8] shadow-lg flex-shrink-0">
+          <div className="flex items-center gap-5 p-6 bg-[#FAFCFC] border border-slate-200 rounded-2xl shadow-sm">
+            <div className="w-14 h-14 rounded-2xl bg-teal-50 text-[#00A896] flex items-center justify-center shadow-inner flex-shrink-0 border border-teal-100">
               <PhoneCall size={26} />
             </div>
             <div className="space-y-1 text-left">
-              <span className="text-[10px] font-mono text-[#00E5C8] font-bold uppercase tracking-wider block">
+              <span className="text-[10px] font-mono text-[#00A896] font-bold uppercase tracking-wider block">
                 DIRECT RUNNER DESK
               </span>
-              <h4 className="font-display text-lg font-bold text-white">
+              <h4 className="font-display text-lg font-bold text-slate-900">
                 Need Help or Bulk Entries?
               </h4>
-              <p className="text-xs text-slate-400">
-                Call <a href="tel:+919003417111" className="text-white font-bold hover:underline">+91 900 34 17 111</a> or{" "}
-                <a href="tel:+917092777764" className="text-white font-bold hover:underline">+91 709 27 77 764</a>
+              <p className="text-xs text-slate-500">
+                Call <a href="tel:+919003417111" className="text-slate-900 font-bold hover:underline">+91 900 34 17 111</a> or{" "}
+                <a href="tel:+917092777764" className="text-slate-900 font-bold hover:underline">+91 709 27 77 764</a>
               </p>
             </div>
           </div>
@@ -914,7 +910,7 @@ function RadioAndSupportSection() {
 // ─── Main Page Export ────────────────────────────────────────────────────────
 export default function ActiveSalemPage() {
   return (
-    <main className="bg-[#001217] text-white selection:bg-[#F26522] selection:text-white min-h-screen">
+    <main className="bg-white text-slate-900 selection:bg-[#F26522] selection:text-white min-h-screen">
       <Navbar />
       <HeroSection />
       <CategoriesSection />
