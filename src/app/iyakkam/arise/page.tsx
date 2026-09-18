@@ -194,7 +194,7 @@ function HeroSection() {
               <div className="grid grid-cols-3 gap-4 text-slate-800">
                 {[
                   { label: "Event Date", val: "Oct 17, 2026", color: "text-[#004B57]", icon: <Calendar className="w-3.5 h-3.5 text-[#00A896]" /> },
-                  { label: "Venue Location", val: "KIOT College of Engineering", color: "text-[#00A896]", icon: <MapPin className="w-3.5 h-3.5 text-[#FF8C00]" /> },
+                  { label: "Venue Location", val: "Knowledge Institute of Technology", color: "text-[#00A896]", icon: <MapPin className="w-3.5 h-3.5 text-[#FF8C00]" /> },
                   { label: "Timing", val: "8:00 AM Onwards", color: "text-[#FF8C00]", icon: <Clock className="w-3.5 h-3.5 text-teal" /> }
                 ].map((s, idx) => (
                   <div key={idx} className="space-y-1.5 text-left">
