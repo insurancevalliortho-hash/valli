@@ -596,10 +596,10 @@ export default function ActiveSalemRegistrationPage() {
                       <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 text-center space-y-4">
                         <div className="space-y-1">
                           <h3 className="font-display text-base font-bold uppercase text-slate-900">
-                            Secure Online Checkout
+                            Pay Registration Fee
                           </h3>
                           <p className="text-xs text-slate-600 max-w-sm mx-auto">
-                            Pay securely using UPI (Google Pay, PhonePe, Paytm), Credit/Debit Cards, or Net Banking.
+                            Pay using UPI (Google Pay, PhonePe, Paytm), Cards, or Net Banking.
                           </p>
                         </div>
 

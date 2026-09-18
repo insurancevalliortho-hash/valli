@@ -74,18 +74,18 @@ export default function RazorpayCheckout({
 
   const handlePayment = async () => {
     setLoading(true);
-    setStatusMessage("Initializing secure gateway...");
+    setStatusMessage("Opening payment options...");
     setPaymentSuccess(null);
 
     try {
-      // 1. Ensure Razorpay script is loaded
+      // 1. Ensure payment script is loaded
       const isLoaded = await loadRazorpayScript();
       if (!isLoaded) {
-        throw new Error("Failed to load Razorpay SDK. Please check your internet connection.");
+        throw new Error("Unable to load payment module. Please check your internet connection.");
       }
 
-      // 2. Call backend to create order (amount in Rupees -> server converts to paise)
-      setStatusMessage("Creating order...");
+      // 2. Call backend to create order
+      setStatusMessage("Preparing payment...");
       const orderResponse = await fetch("/api/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -102,22 +102,20 @@ export default function RazorpayCheckout({
       const orderData = await orderResponse.json();
 
       if (!orderResponse.ok || !orderData.success) {
-        throw new Error(orderData.error || "Failed to create order on server");
+        throw new Error(orderData.error || "Failed to initialize payment");
       }
 
       const orderId = orderData.order_id || orderData.orderId;
       const orderAmount = orderData.amount;
       const orderCurrency = orderData.currency || "INR";
-      const keyId = orderData.key || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
 
-      // 3. Configure Razorpay modal options
+      // 3. Configure payment options
       const options = {
-        key: keyId,
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
         amount: orderAmount,
         currency: orderCurrency,
         name: title,
         description: description,
-        image: "/assets/valli_logo_symbol.png",
         order_id: orderId,
         prefill: {
           name: prefillName,
@@ -125,31 +123,26 @@ export default function RazorpayCheckout({
           contact: prefillPhone,
         },
         theme: {
-          color: "#00A896",
+          color: eventType === "ACTIVE_SALEM" ? "#F26522" : "#00A896",
         },
-        handler: async function (response: {
-          razorpay_payment_id: string;
-          razorpay_order_id: string;
-          razorpay_signature: string;
-        }) {
-          setStatusMessage("Verifying payment signature...");
+        handler: async function (response: any) {
+          setStatusMessage("Verifying payment...");
           try {
-            // 4. Verify payment signature on server
-            const verifyResponse = await fetch("/api/verify-payment", {
+            const verifyRes = await fetch("/api/verify-payment", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
-                razorpay_payment_id: response.razorpay_payment_id,
-                razorpay_order_id: response.razorpay_order_id,
-                razorpay_signature: response.razorpay_signature,
+                orderCreationId: orderId,
+                razorpayPaymentId: response.razorpay_payment_id,
+                razorpayOrderId: response.razorpay_order_id,
+                razorpaySignature: response.razorpay_signature,
               }),
             });
 
-            const verifyData = await verifyResponse.json();
-
-            if (verifyResponse.ok && verifyData.success) {
+            const verifyData = await verifyRes.json();
+            if (verifyRes.ok && verifyData.isOk) {
               setPaymentSuccess(true);
-              setStatusMessage("Payment Verified Successfully!");
+              setStatusMessage("Payment verified successfully!");
               setPaymentDetails({
                 paymentId: response.razorpay_payment_id,
                 orderId: response.razorpay_order_id,
@@ -163,7 +156,7 @@ export default function RazorpayCheckout({
                 });
               }
             } else {
-              throw new Error(verifyData.error || "Payment signature verification failed");
+              throw new Error(verifyData.message || "Payment verification failed");
             }
           } catch (verifyErr: any) {
             console.error("Verification error:", verifyErr);
@@ -178,8 +171,8 @@ export default function RazorpayCheckout({
         modal: {
           ondismiss: function () {
             setLoading(false);
-            setStatusMessage("Payment cancelled by user.");
-            if (onFailure) onFailure("User dismissed payment modal");
+            setStatusMessage("Payment was cancelled.");
+            if (onFailure) onFailure("Payment window closed");
           },
         },
       };
@@ -190,11 +183,11 @@ export default function RazorpayCheckout({
         setLoading(false);
         setPaymentSuccess(false);
         const errMsg = response.error?.description || "Payment failed";
-        setStatusMessage(`Payment Failed: ${errMsg}`);
+        setStatusMessage(`Payment failed: ${errMsg}`);
         if (onFailure) onFailure(errMsg);
       });
 
-      setStatusMessage("Opening Razorpay Modal...");
+      setStatusMessage("Opening payment window...");
       razorpayInstance.open();
     } catch (err: any) {
       console.error("Checkout error:", err);
@@ -226,15 +219,14 @@ export default function RazorpayCheckout({
           <>
             <CreditCard className="w-4 h-4" />
             <span>{buttonText || `Pay ₹${amount.toLocaleString("en-IN")} & Confirm Registration`}</span>
-            <Lock className="w-3.5 h-3.5 opacity-70 ml-auto" />
           </>
         )}
       </button>
 
-      {/* Security note */}
-      <div className="flex items-center gap-1.5 text-[10px] text-slate-400 font-medium">
-        <ShieldCheck className="w-3.5 h-3.5 text-teal" />
-        <span>256-bit SSL Encrypted • Secure Online Checkout</span>
+      {/* Payment methods support note */}
+      <div className="flex items-center gap-2 text-xs text-slate-500 font-medium">
+        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+        <span>UPI (GPay, PhonePe, Paytm) • Cards • Net Banking</span>
       </div>
 
       {/* Status banner */}

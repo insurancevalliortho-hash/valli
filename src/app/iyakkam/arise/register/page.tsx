@@ -608,7 +608,7 @@ export default function AriseRegisterPage() {
                 <div className="grid grid-cols-2 gap-4 max-w-xl mx-auto">
                   {[
                     { num: 1, title: isBulk ? "1. Coordinator & 20 Students Roster" : "1. Delegate & CME Details" },
-                    { num: 2, title: "2. Online Checkout" },
+                    { num: 2, title: "2. Confirm & Pay" },
                   ].map((s) => (
                     <div
                       key={s.num}
@@ -1017,10 +1017,10 @@ export default function AriseRegisterPage() {
                   >
                     <div className="border-b border-slate-100 pb-4">
                       <h2 className="font-display text-base font-bold text-[#004B57] uppercase tracking-wider">
-                        Online Payment Gateway
+                        Payment Details
                       </h2>
                       <p className="text-xs text-slate-500 mt-0.5">
-                        Complete your payment securely to instantly finalize registration.
+                        Review your registration details and complete payment.
                       </p>
                     </div>
 
@@ -1050,14 +1050,14 @@ export default function AriseRegisterPage() {
                         </div>
                       </div>
 
-                      {/* Online Payment Box */}
+                      {/* Payment Box */}
                       <div className="p-6 bg-[#F0FAF9]/60 border border-[#00A896]/20 rounded-2xl space-y-4 text-center">
                         <div className="space-y-1">
                           <h3 className="font-display text-sm font-bold text-[#004B57] uppercase tracking-wider">
-                            Fast & Secure Online Checkout
+                            Pay Registration Fee
                           </h3>
                           <p className="text-[11px] text-slate-500 font-medium max-w-sm mx-auto">
-                            Pay ₹{totalFee.toLocaleString("en-IN")} instantly using UPI (GPay, PhonePe, Paytm), Credit/Debit Card, Net Banking, or Wallets.
+                            Pay ₹{totalFee.toLocaleString("en-IN")} using UPI (GPay, PhonePe, Paytm), Cards, or Net Banking.
                           </p>
                         </div>
 
