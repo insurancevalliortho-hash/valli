@@ -23,7 +23,8 @@ import {
   Compass,
   Zap,
   PhoneCall,
-  Info
+  Info,
+  ExternalLink
 } from "lucide-react";
 
 import Navbar from "../../components/Navbar";
@@ -307,7 +308,7 @@ function CategoriesSection() {
                 3 KMS
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed font-medium">
-                Specially designed for <strong className="text-slate-900">Ex-Servicemen, Armed Forces veterans, Special Children, and Differently Abled</strong> athletes.
+                Specially designed for <strong className="text-slate-900">Ex-Servicemen, Armed Forces veterans, and Differently Abled</strong> athletes.
               </p>
               <ul className="space-y-2 pt-2 text-xs text-slate-600">
                 <li className="flex items-center gap-2">
@@ -515,7 +516,7 @@ function TributeSection() {
                 Different Abilities. Same Determination.
               </h3>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
-                A dedicated 3 KMS run for Special Children and Differently-Abled athletes. Creating an accessible, barrier-free celebration of willpower and joy with direct participation.
+                A dedicated 3 KMS walkathon for Differently-Abled athletes, para-sports champions, and inspiring community walkers. Creating an accessible, barrier-free celebration of willpower and joy with direct participation.
               </p>
             </div>
 
@@ -707,6 +708,80 @@ function ScheduleAndRouteSection() {
     { time: "7:30 AM", title: "Podium & Prize Distribution", desc: "Awarding of cash prizes, trophies, and closing celebration with radio partners." }
   ];
 
+  const routeDetails = {
+    "3K": {
+      name: "3 KMS Walkathon",
+      category: "Honorary & Inclusive Walk",
+      fee: "Free On-Spot",
+      turnPoint: "Meyyanur Main Rd - Sarada College Rd Junction",
+      turnDistance: "1.5 KM Turnpoint",
+      mapUrl: "https://maps.app.goo.gl/13Pn3D56LS7L3dfg8",
+      embedQuery: "Valli+Hospital+Meyyanur+Salem+Tamil+Nadu",
+      zoom: 15,
+      description: "Smooth, barrier-free walking corridor along Meyyanur Main Road connecting to the Sarada College Road junction. Gentle gradient and fully marshaled.",
+      highlights: [
+        "100% barrier-free paved route with traffic marshals",
+        "Dedicated walking lane for veterans and differently-abled athletes",
+        "1 Hydration & glucose refreshment post at 1.5 KM turn"
+      ],
+      stations: "1 Hydration Station • 1 First-Aid Station • Ambulance Escort",
+      waypoints: [
+        { label: "Valli Hospital Grounds", mark: "Start (0.0 KM)" },
+        { label: "Meyyanur Main Road", mark: "Corridor" },
+        { label: "Sarada College Rd Jn", mark: "Turnpoint (1.5 KM)" },
+        { label: "Valli Hospital", mark: "Finish (3.0 KM)" }
+      ]
+    },
+    "5K": {
+      name: "5 KMS Community Run",
+      category: "Fitness & Open Category",
+      fee: "₹249",
+      turnPoint: "Sarada College Road Midpoint",
+      turnDistance: "2.5 KM Turnpoint",
+      mapUrl: "https://maps.app.goo.gl/qyQ9YhqGkybktFBj8",
+      embedQuery: "Sarada+College+Road+Salem+Tamil+Nadu",
+      zoom: 14,
+      description: "Scenic city road stretch heading through Meyyanur Main Road into Sarada College Road with clear kilometer signage, cheer squads, and RFID tracking.",
+      highlights: [
+        "Electronic timing chip checkpoints at start, turn, and finish",
+        "2 Refreshment & energy drink stations along the route",
+        "Clear distance markers every 500 meters"
+      ],
+      stations: "2 Hydration Stations • 2 Paramedic Posts • RFID Mat Checkpoint",
+      waypoints: [
+        { label: "Valli Hospital Grounds", mark: "Start (0.0 KM)" },
+        { label: "Meyyanur Main Road", mark: "1.2 KM" },
+        { label: "Sarada College Midpoint", mark: "Turnpoint (2.5 KM)" },
+        { label: "Valli Hospital", mark: "Finish (5.0 KM)" }
+      ]
+    },
+    "10K": {
+      name: "10 KMS Elite Challenge",
+      category: "Championship Timed Race",
+      fee: "₹299",
+      turnPoint: "Hasthampatty Roundabout Landmark Loop",
+      turnDistance: "5.0 KM Turnpoint",
+      mapUrl: "https://maps.app.goo.gl/t1n1EMxGRszEkCxt6",
+      embedQuery: "Hasthampatty+Roundabout+Salem+Tamil+Nadu",
+      zoom: 14,
+      description: "Salem's premier long-distance course spanning Meyyanur Main Road, Sarada College Road, and looping around the landmark Hasthampatty Roundabout.",
+      highlights: [
+        "Podium-certified chip-timed ranking with ₹10,000 top cash prize",
+        "4 Hydration, electrolyte, and cold-sponge stations",
+        "Salem City Police marshaled corridor with dedicated lead vehicle"
+      ],
+      stations: "4 Hydration Stations • 3 Paramedic Posts • Rapid Trauma Ambulance Escort",
+      waypoints: [
+        { label: "Valli Hospital Grounds", mark: "Start (0.0 KM)" },
+        { label: "Sarada College Corridor", mark: "2.5 KM" },
+        { label: "Hasthampatty Roundabout", mark: "Turnpoint (5.0 KM)" },
+        { label: "Valli Hospital", mark: "Finish (10.0 KM)" }
+      ]
+    }
+  };
+
+  const curr = routeDetails[activeRoute];
+
   return (
     <section className="py-24 bg-[#FAFCFC] text-slate-900 border-t border-slate-200/70 relative">
       <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
@@ -749,16 +824,18 @@ function ScheduleAndRouteSection() {
             </div>
           </div>
 
-          {/* Right: Interactive Route Visual Map */}
-          <div className="lg:col-span-7 bg-white border border-slate-200/90 rounded-3xl p-7 flex flex-col justify-between shadow-sm">
+          {/* Right: Interactive Live Route Map */}
+          <div className="lg:col-span-7 bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-7 flex flex-col justify-between shadow-sm space-y-6">
             <div className="space-y-4">
-              <div className="flex flex-wrap items-center justify-between gap-4">
+              
+              {/* Card Header & Distance Selector */}
+              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-4">
                 <div>
-                  <span className="text-[10px] font-mono text-[#F26522] font-bold uppercase tracking-wider">
-                    CERTIFIED RACE COURSE
+                  <span className="text-[10px] font-mono text-[#F26522] font-bold uppercase tracking-wider block">
+                    CERTIFIED LIVE GPS COURSE
                   </span>
                   <h4 className="font-display text-xl font-bold uppercase text-slate-900">
-                    Salem City Landmarks Route
+                    {curr.name}
                   </h4>
                 </div>
 
@@ -780,76 +857,116 @@ function ScheduleAndRouteSection() {
                 </div>
               </div>
 
-              {/* Dynamic Route Milestones Description */}
-              <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/70 text-xs text-slate-700 space-y-2">
-                <div className="flex items-center gap-2 text-slate-900 font-bold">
-                  <Navigation size={14} className="text-[#00A896]" />
-                  <span>Start / Finish: Valli Super Speciality Hospital Grounds</span>
+              {/* Action Banner & Turnpoint Summary */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-200/70">
+                <div className="space-y-0.5">
+                  <div className="flex items-center gap-2 text-slate-900 text-xs font-bold">
+                    <Navigation size={14} className="text-[#00A896]" />
+                    <span>{curr.turnDistance}</span>
+                    <span className="text-slate-400 font-normal">•</span>
+                    <span className="text-slate-600 font-medium">{curr.turnPoint}</span>
+                  </div>
+                  <p className="text-[11px] text-slate-500">
+                    Start & Finish: Valli Super Speciality Hospital Grounds, Meyyanur
+                  </p>
                 </div>
-                {activeRoute === "3K" && (
-                  <p className="text-slate-500 leading-relaxed">
-                    Turns at <strong className="text-slate-900">1.5 KMS</strong> milestone via Meyyanur Main Road & Sarada College Road junction. Safe and gentle gradient suitable for walkathons.
-                  </p>
-                )}
-                {activeRoute === "5K" && (
-                  <p className="text-slate-500 leading-relaxed">
-                    Turns at <strong className="text-slate-900">2.5 KMS</strong> milestone along Sarada College Road. Includes 2 dedicated hydration and glucose stations.
-                  </p>
-                )}
-                {activeRoute === "10K" && (
-                  <p className="text-slate-500 leading-relaxed">
-                    Loops at <strong className="text-slate-900">5.0 KMS</strong> milestone reaching Hasthampatty Roundabout before returning to Valli Hospital. 4 water points and full ambulance coverage.
-                  </p>
-                )}
+
+                <a
+                  href={curr.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-[#004B57] text-white text-xs font-bold font-mono uppercase tracking-wider rounded-xl hover:bg-[#003842] shadow-sm transition-all whitespace-nowrap"
+                >
+                  <Navigation size={13} className="text-[#00A896]" />
+                  Live GPS Route
+                  <ExternalLink size={12} />
+                </a>
               </div>
 
-              {/* Graphical Route Visual Representation */}
-              <div className="h-44 w-full bg-[#FAFCFC] border border-slate-200 rounded-2xl relative overflow-hidden flex items-center justify-center p-6">
-                <div className="relative w-full max-w-md flex items-center justify-between">
-                  
-                  <div className="flex flex-col items-center gap-1.5">
-                    <div className="w-8 h-8 rounded-full bg-teal-50 border border-[#00A896] flex items-center justify-center text-[#00A896] shadow-sm">
-                      <MapPin size={14} />
-                    </div>
-                    <span className="text-[10px] font-bold text-slate-800 font-mono">Valli Hospital</span>
-                    <span className="text-[8px] text-slate-400">0.0 KM</span>
-                  </div>
+              {/* Embedded Interactive Google Maps Frame */}
+              <div className="relative h-64 sm:h-72 w-full rounded-2xl overflow-hidden border border-slate-200 shadow-inner bg-slate-100">
+                <iframe
+                  title={`${curr.name} Course Map`}
+                  src={`https://maps.google.com/maps?q=${curr.embedQuery}&t=&z=${curr.zoom}&ie=UTF8&iwloc=&output=embed`}
+                  className="w-full h-full border-0"
+                  loading="lazy"
+                />
 
-                  <div className="flex-1 h-1 bg-gradient-to-r from-[#00A896] via-[#F26522] to-[#00A896] mx-2 rounded-full relative">
-                    <span className="absolute -top-4 left-1/2 -translate-x-1/2 text-[9px] font-mono text-slate-400">
-                      Meyyanur Rd
+                {/* Floating Map Overlay Badge */}
+                <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-sm border border-slate-200/90 rounded-xl px-3 py-1.5 shadow-sm text-xs font-mono flex items-center gap-2 pointer-events-none">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="font-bold text-slate-800">{curr.name}</span>
+                  <span className="text-slate-300">•</span>
+                  <span className="text-slate-600 text-[11px]">{curr.turnDistance}</span>
+                </div>
+
+                {/* Direct GPS Button on Map */}
+                <a
+                  href={curr.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute bottom-3 right-3 bg-white/95 hover:bg-white text-slate-900 border border-slate-200 rounded-xl px-3 py-1.5 shadow-md text-[11px] font-bold font-mono flex items-center gap-1.5 transition-all hover:scale-105"
+                >
+                  <MapPin size={12} className="text-[#F26522]" />
+                  Open in Google Maps
+                  <ExternalLink size={11} />
+                </a>
+              </div>
+
+              {/* Milestones Progression */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
+                {curr.waypoints.map((wp, idx) => (
+                  <div key={idx} className="bg-slate-50 border border-slate-200/80 rounded-xl p-2.5 text-center">
+                    <span className="text-[10px] font-mono text-[#00A896] font-bold block">
+                      {wp.mark}
+                    </span>
+                    <span className="text-[11px] font-semibold text-slate-800 line-clamp-1 block">
+                      {wp.label}
                     </span>
                   </div>
+                ))}
+              </div>
 
-                  <div className="flex flex-col items-center gap-1.5">
-                    <div className="w-8 h-8 rounded-full bg-orange-50 border border-[#F26522] flex items-center justify-center text-[#F26522] shadow-sm">
-                      <Compass size={14} />
-                    </div>
-                    <span className="text-[10px] font-bold text-slate-800 font-mono">Sarada College</span>
-                    <span className="text-[8px] text-slate-400">Midpoint</span>
-                  </div>
-
-                  {activeRoute === "10K" && (
-                    <>
-                      <div className="flex-1 h-1 bg-[#F26522] mx-2 rounded-full relative">
-                        <span className="absolute -top-4 left-1/2 -translate-x-1/2 text-[9px] font-mono text-slate-400">
-                          Hasthampatty
-                        </span>
-                      </div>
-                      <div className="flex flex-col items-center gap-1.5">
-                        <div className="w-8 h-8 rounded-full bg-amber-50 border border-amber-400 flex items-center justify-center text-amber-500 shadow-sm">
-                          <Flag size={14} />
-                        </div>
-                        <span className="text-[10px] font-bold text-slate-800 font-mono">Turn Point</span>
-                        <span className="text-[8px] text-slate-400">5.0 KM</span>
-                      </div>
-                    </>
-                  )}
+              {/* Route Description & Highlights */}
+              <div className="space-y-2 pt-1 text-xs text-slate-600">
+                <p className="leading-relaxed">{curr.description}</p>
+                <div className="bg-teal-50/50 border border-teal-100 rounded-xl p-3 text-[11px] text-[#004B57] font-mono">
+                  {curr.stations}
                 </div>
               </div>
+
+              {/* Direct Route Links Switcher */}
+              <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-100">
+                <span className="text-[11px] font-mono text-slate-400 font-bold">All Live Links:</span>
+                <a
+                  href="https://maps.app.goo.gl/13Pn3D56LS7L3dfg8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-2.5 py-1 bg-slate-100 hover:bg-teal-50 text-slate-700 hover:text-[#00A896] rounded-lg font-mono text-[11px] font-bold border border-slate-200 transition-colors inline-flex items-center gap-1"
+                >
+                  3K Live Map <ExternalLink size={10} />
+                </a>
+                <a
+                  href="https://maps.app.goo.gl/qyQ9YhqGkybktFBj8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-2.5 py-1 bg-slate-100 hover:bg-amber-50 text-slate-700 hover:text-amber-700 rounded-lg font-mono text-[11px] font-bold border border-slate-200 transition-colors inline-flex items-center gap-1"
+                >
+                  5K Live Map <ExternalLink size={10} />
+                </a>
+                <a
+                  href="https://maps.app.goo.gl/t1n1EMxGRszEkCxt6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-2.5 py-1 bg-slate-100 hover:bg-orange-50 text-slate-700 hover:text-[#F26522] rounded-lg font-mono text-[11px] font-bold border border-slate-200 transition-colors inline-flex items-center gap-1"
+                >
+                  10K Live Map <ExternalLink size={10} />
+                </a>
+              </div>
+
             </div>
 
-            <div className="pt-6 border-t border-slate-100 flex items-center justify-between text-xs">
+            <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
               <span className="text-slate-500 font-mono">Medical Support: 24/7 Ambulance & Trauma Care</span>
               <Link
                 href="/ActiveSalem/Registration"
