@@ -41,7 +41,7 @@ export default function ActiveSalemRegistrationPage() {
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("Male");
   const [category, setCategory] = useState<CategoryType>("5KM");
-  const [tshirtSize, setTshirtSize] = useState<"M" | "L" | "XL">("M");
+  const [tshirtSize, setTshirtSize] = useState<"S" | "M" | "L" | "XL" | "XXL">("M");
   const [city, setCity] = useState("Salem");
   const [emergencyContact, setEmergencyContact] = useState("");
   const [transactionId, setTransactionId] = useState("");
@@ -492,8 +492,8 @@ export default function ActiveSalemRegistrationPage() {
                             <span>Official Valli T-Shirt Size *</span>
                             <span className="text-[10px] text-[#00A896] font-sans font-medium">Moisture-wicking dry-fit</span>
                           </label>
-                          <div className="grid grid-cols-3 gap-3">
-                            {(["M", "L", "XL"] as const).map((size) => (
+                          <div className="grid grid-cols-5 gap-2 sm:gap-2.5">
+                            {(["S", "M", "L", "XL", "XXL"] as const).map((size) => (
                               <motion.button
                                 key={size}
                                 type="button"
