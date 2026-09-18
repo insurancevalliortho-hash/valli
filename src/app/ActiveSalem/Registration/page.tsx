@@ -6,28 +6,18 @@ import Link from "next/link";
 import {
   ArrowLeft,
   CheckCircle2,
-  Phone,
-  Mail,
-  User,
-  MapPin,
   ChevronRight,
   ChevronLeft,
-  Lock,
-  Shirt,
   Tag,
-  ShieldCheck,
-  Calendar,
-  Clock,
-  Sparkles,
-  Ticket,
   Printer,
-  Check,
-  HeartHandshake
+  Info
 } from "lucide-react";
 import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
 import RazorpayCheckout from "../../../components/RazorpayCheckout";
 import confetti from "canvas-confetti";
+
+type CategoryType = "5KM" | "10KM";
 
 export default function ActiveSalemRegistrationPage() {
   const lenis = useLenis();
@@ -41,8 +31,8 @@ export default function ActiveSalemRegistrationPage() {
   const [mobileNumber, setMobileNumber] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("Male");
-  const [category, setCategory] = useState<"3KM" | "5KM" | "10KM">("5KM");
-  const [tshirtSize, setTshirtSize] = useState("M"); // "S" | "M" | "L" | "XL" | "XXL"
+  const [category, setCategory] = useState<CategoryType>("5KM");
+  const [tshirtSize, setTshirtSize] = useState("M");
   const [city, setCity] = useState("Salem");
   const [emergencyContact, setEmergencyContact] = useState("");
   const [transactionId, setTransactionId] = useState("");
@@ -61,7 +51,6 @@ export default function ActiveSalemRegistrationPage() {
 
   // Compute total entry fee
   const calculateTotalFee = () => {
-    if (category === "3KM") return 0;
     if (category === "10KM") return 299;
     return 249; // 5KM
   };
@@ -134,50 +123,6 @@ export default function ActiveSalemRegistrationPage() {
     }
   };
 
-  // Handle Free 3KM Registration Submission
-  const handleFreeRegistration = async () => {
-    setIsSubmitting(true);
-    setErrors({});
-    const freeTxnId = `FREE_INCLUSIVE_${Date.now()}`;
-    setTransactionId(freeTxnId);
-
-    try {
-      const response = await fetch("/api/active-salem/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          registrationCode: regCode,
-          fullName,
-          emailId,
-          mobileNumber,
-          category,
-          tshirtSize,
-          gender,
-          age: Number(age),
-          emergencyContact: emergencyContact || "N/A",
-          city,
-          source: "Website Direct",
-          transactionId: freeTxnId,
-          paymentScreenshot: "FREE_INCLUSIVE_ENTRY",
-          isVerified: true,
-        }),
-      });
-
-      const result = await response.json();
-      if (response.ok) {
-        setIsSuccess(true);
-        if (lenis) lenis.scrollTo(0, { immediate: true });
-      } else {
-        alert(result.error || "Failed to complete registration.");
-      }
-    } catch (err) {
-      console.error(err);
-      alert("A network error occurred. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   // Handle successful Razorpay online checkout
   const handleRazorpaySuccess = async (details: { paymentId: string; orderId: string; signature: string }) => {
     setIsSubmitting(true);
@@ -226,7 +171,7 @@ export default function ActiveSalemRegistrationPage() {
       <Navbar />
 
       <main className="min-h-screen bg-[#FAFCFC] text-slate-900 pt-28 pb-24 px-4 sm:px-6 relative overflow-hidden">
-        {/* Subtle Architectural Backdrops */}
+        {/* Subtle Architectural Ambient Backdrops */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-orange-100/30 rounded-full blur-[140px] pointer-events-none" />
         <div className="absolute top-1/3 left-0 w-96 h-96 bg-teal-100/30 rounded-full blur-[140px] pointer-events-none" />
 
@@ -241,7 +186,7 @@ export default function ActiveSalemRegistrationPage() {
               <ArrowLeft size={14} /> Back to Overview
             </Link>
             <span className="text-[11px] font-mono text-slate-400">
-              ACTIVE SALEM 4.0 - 18 OCT 2026
+              ACTIVE SALEM 4.0 - 11 OCT 2026
             </span>
           </div>
 
@@ -287,16 +232,16 @@ export default function ActiveSalemRegistrationPage() {
                   </div>
                   <div>
                     <span className="text-slate-400 block text-[10px] uppercase font-mono">Date & Time</span>
-                    <span className="text-slate-900 font-medium block">18 Oct 2026, 5:00 AM</span>
+                    <span className="text-slate-900 font-medium block">11 Oct 2026, 5:00 AM</span>
                   </div>
                   <div>
                     <span className="text-slate-400 block text-[10px] uppercase font-mono">Payment Status</span>
-                    <span className="text-emerald-600 font-bold block">{totalFee === 0 ? "Free Entry" : "Verified Paid"}</span>
+                    <span className="text-emerald-600 font-bold block">Verified Paid (₹{totalFee})</span>
                   </div>
                 </div>
 
                 <div className="border-t border-dashed border-slate-200 pt-4 flex items-center justify-between text-[10px] text-slate-500 font-mono">
-                  <span>Txn: {transactionId.slice(0, 16)}...</span>
+                  <span>Txn: {transactionId ? `${transactionId.slice(0, 16)}...` : "Confirmed"}</span>
                   <span>Venue: Valli Hospital Grounds</span>
                 </div>
               </div>
@@ -349,78 +294,64 @@ export default function ActiveSalemRegistrationPage() {
                 {/* ─── STEP 1: RUNNER DETAILS & CATEGORY ─── */}
                 {step === 1 && (
                   <div className="space-y-6">
-                    {/* Category Selection Cards */}
-                    <div className="space-y-2">
+                    {/* Category Selection Cards (Only 5KM & 10KM) */}
+                    <div className="space-y-3">
                       <label className="text-[11px] font-mono text-[#00A896] uppercase font-bold tracking-wider flex items-center gap-1.5">
                         <Tag size={13} /> Select Marathon Distance *
                       </label>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        {/* 3KM */}
-                        <button
-                          type="button"
-                          onClick={() => setCategory("3KM")}
-                          className={`p-4 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between ${
-                            category === "3KM"
-                              ? "border-[#00A896] bg-teal-50/50 shadow-sm ring-1 ring-[#00A896]"
-                              : "border-slate-200 bg-white hover:border-slate-300"
-                          }`}
-                        >
-                          <div>
-                            <div className="flex justify-between items-center mb-1">
-                              <span className="text-xs font-extrabold uppercase text-slate-900">3 KMS Run</span>
-                              <span className="text-[9px] font-mono font-bold text-[#00A896] bg-teal-50 px-2 py-0.5 rounded border border-teal-200">FREE</span>
-                            </div>
-                            <span className="text-[10px] text-slate-500 block leading-snug">
-                              Ex-Servicemen & Inclusive
-                            </span>
-                          </div>
-                          <span className="font-display text-lg font-black text-[#00A896] mt-3">₹0 Entry</span>
-                        </button>
-
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {/* 5KM */}
                         <button
                           type="button"
                           onClick={() => setCategory("5KM")}
-                          className={`p-4 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between ${
+                          className={`p-5 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between ${
                             category === "5KM"
-                              ? "border-[#D97706] bg-amber-50/50 shadow-sm ring-1 ring-[#D97706]"
+                              ? "border-[#D97706] bg-amber-50/60 shadow-sm ring-2 ring-[#D97706]/20"
                               : "border-slate-200 bg-white hover:border-slate-300"
                           }`}
                         >
                           <div>
-                            <div className="flex justify-between items-center mb-1">
-                              <span className="text-xs font-extrabold uppercase text-slate-900">5 KMS Run</span>
-                              <span className="text-[9px] font-mono font-bold text-[#D97706] bg-amber-50 px-2 py-0.5 rounded border border-amber-200">TIMED</span>
+                            <div className="flex justify-between items-center mb-1.5">
+                              <span className="text-sm font-extrabold uppercase text-slate-900">5 KMS Run</span>
+                              <span className="text-[9px] font-mono font-bold text-[#D97706] bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200">TIMED</span>
                             </div>
-                            <span className="text-[10px] text-slate-500 block leading-snug">
-                              Fitness & Community Run
+                            <span className="text-xs text-slate-500 block leading-relaxed">
+                              Fitness & Community Run • Official Tee, Medal & Certificate Included
                             </span>
                           </div>
-                          <span className="font-display text-lg font-black text-[#D97706] mt-3">₹249</span>
+                          <span className="font-display text-xl font-black text-[#D97706] mt-4">₹249</span>
                         </button>
 
                         {/* 10KM */}
                         <button
                           type="button"
                           onClick={() => setCategory("10KM")}
-                          className={`p-4 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between ${
+                          className={`p-5 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between ${
                             category === "10KM"
-                              ? "border-[#F26522] bg-orange-50/50 shadow-sm ring-1 ring-[#F26522]"
+                              ? "border-[#F26522] bg-orange-50/60 shadow-sm ring-2 ring-[#F26522]/20"
                               : "border-slate-200 bg-white hover:border-slate-300"
                           }`}
                         >
                           <div>
-                            <div className="flex justify-between items-center mb-1">
-                              <span className="text-xs font-extrabold uppercase text-slate-900">10 KMS Run</span>
-                              <span className="text-[9px] font-mono font-bold text-[#F26522] bg-orange-50 px-2 py-0.5 rounded border border-orange-200">ELITE</span>
+                            <div className="flex justify-between items-center mb-1.5">
+                              <span className="text-sm font-extrabold uppercase text-slate-900">10 KMS Run</span>
+                              <span className="text-[9px] font-mono font-bold text-[#F26522] bg-orange-50 px-2.5 py-0.5 rounded-full border border-orange-200">ELITE</span>
                             </div>
-                            <span className="text-[10px] text-slate-500 block leading-snug">
-                              Podium Cash Rewards
+                            <span className="text-xs text-slate-500 block leading-relaxed">
+                              Podium Cash Rewards (₹10,000 Top Prize) • Bib Tag, Tee & Medal
                             </span>
                           </div>
-                          <span className="font-display text-lg font-black text-[#F26522] mt-3">₹299</span>
+                          <span className="font-display text-xl font-black text-[#F26522] mt-4">₹299</span>
                         </button>
+                      </div>
+
+                      {/* Informational callout regarding 3KM walkathon */}
+                      <div className="flex items-start gap-2.5 p-3.5 bg-teal-50/50 border border-teal-100 rounded-xl text-xs text-slate-600">
+                        <Info size={16} className="text-[#00A896] shrink-0 mt-0.5" />
+                        <p className="text-[11px] leading-relaxed">
+                          <strong>Looking for the 3 KMS Walkathon?</strong> The 3 KMS run is exclusively dedicated to Ex-Servicemen and differently-abled participants with complimentary entry. It is coordinated directly on-spot or via participating institutions (no online payment registration required).
+                        </p>
                       </div>
                     </div>
 
@@ -587,8 +518,8 @@ export default function ActiveSalemRegistrationPage() {
                         </div>
                         <div className="text-right">
                           <span className="text-[10px] font-mono text-slate-400 uppercase block">Total Payable</span>
-                          <span className="font-display text-2xl font-black text-[#00A896]">
-                            {totalFee === 0 ? "FREE" : `₹${totalFee}`}
+                          <span className="font-display text-2xl font-black text-[#F26522]">
+                            ₹{totalFee}
                           </span>
                         </div>
                       </div>
@@ -613,65 +544,39 @@ export default function ActiveSalemRegistrationPage() {
                       </div>
                     </div>
 
-                    {/* Gateway Trigger View */}
-                    {totalFee === 0 ? (
-                      /* Free 3KM Entry Flow */
-                      <div className="bg-teal-50/50 border border-teal-200 rounded-2xl p-6 text-center space-y-4">
-                        <div className="w-12 h-12 rounded-full bg-teal-100 text-[#00A896] flex items-center justify-center mx-auto">
-                          <HeartHandshake size={24} />
-                        </div>
-                        <div className="space-y-1">
-                          <h3 className="font-display text-base font-bold uppercase text-slate-900">
-                            3 KMS Inclusive Community Entry
-                          </h3>
-                          <p className="text-xs text-slate-600 max-w-sm mx-auto">
-                            Free entry honors Ex-Servicemen and differently-abled participants. Click below to generate your official pass instantly.
-                          </p>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={handleFreeRegistration}
-                          disabled={isSubmitting}
-                          className="w-full bg-[#00A896] hover:bg-[#009282] text-white py-4 rounded-xl font-bold text-xs sm:text-sm uppercase tracking-wider transition-all cursor-pointer disabled:opacity-60 shadow-sm"
-                        >
-                          {isSubmitting ? "Generating Ticket Pass..." : "Confirm Free Registration →"}
-                        </button>
+                    {/* Paid Razorpay Gateway Flow */}
+                    <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 text-center space-y-4">
+                      <div className="space-y-1">
+                        <h3 className="font-display text-base font-bold uppercase text-slate-900">
+                          Instant Razorpay Checkout
+                        </h3>
+                        <p className="text-xs text-slate-600 max-w-sm mx-auto">
+                          Pay securely using UPI (Google Pay, PhonePe, Paytm), Credit/Debit Card, or Net Banking.
+                        </p>
                       </div>
-                    ) : (
-                      /* Paid 5KM / 10KM Razorpay Gateway Flow */
-                      <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 text-center space-y-4">
-                        <div className="space-y-1">
-                          <h3 className="font-display text-base font-bold uppercase text-slate-900">
-                            Instant Razorpay Checkout
-                          </h3>
-                          <p className="text-xs text-slate-600 max-w-sm mx-auto">
-                            Pay securely using UPI (Google Pay, PhonePe, Paytm), Credit/Debit Card, or Net Banking.
-                          </p>
-                        </div>
 
-                        <div className="max-w-sm mx-auto pt-2">
-                          <RazorpayCheckout
-                            amount={totalFee}
-                            title="Active Salem Marathon 4.0"
-                            description={`${category} Entry - ${fullName}`}
-                            prefillName={fullName}
-                            prefillEmail={emailId}
-                            prefillPhone={mobileNumber}
-                            eventType="ACTIVE_SALEM"
-                            registrationCode={regCode}
-                            notes={{ category, tshirtSize, gender, age, city }}
-                            onSuccess={handleRazorpaySuccess}
-                            onFailure={(errMsg) => setErrors({ payment: errMsg })}
-                            buttonText={`Pay ₹${totalFee} & Claim Ticket`}
-                            buttonClassName="w-full bg-[#F26522] hover:bg-[#d95315] text-white py-4 px-6 rounded-xl font-bold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md hover:shadow-lg cursor-pointer flex items-center justify-center gap-2"
-                          />
-                        </div>
-
-                        {errors.payment && (
-                          <p className="text-xs text-rose-500 font-medium pt-1">{errors.payment}</p>
-                        )}
+                      <div className="max-w-sm mx-auto pt-2">
+                        <RazorpayCheckout
+                          amount={totalFee}
+                          title="Active Salem Marathon 4.0"
+                          description={`${category} Entry - ${fullName}`}
+                          prefillName={fullName}
+                          prefillEmail={emailId}
+                          prefillPhone={mobileNumber}
+                          eventType="ACTIVE_SALEM"
+                          registrationCode={regCode}
+                          notes={{ category, tshirtSize, gender, age, city }}
+                          onSuccess={handleRazorpaySuccess}
+                          onFailure={(errMsg) => setErrors({ payment: errMsg })}
+                          buttonText={`Pay ₹${totalFee} & Claim Ticket`}
+                          buttonClassName="w-full bg-[#F26522] hover:bg-[#d95315] text-white py-4 px-6 rounded-xl font-bold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md hover:shadow-lg cursor-pointer flex items-center justify-center gap-2"
+                        />
                       </div>
-                    )}
+
+                      {errors.payment && (
+                        <p className="text-xs text-rose-500 font-medium pt-1">{errors.payment}</p>
+                      )}
+                    </div>
                   </div>
                 )}
 

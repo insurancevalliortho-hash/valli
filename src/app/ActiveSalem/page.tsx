@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-  Calendar,
   Clock,
   MapPin,
   Trophy,
@@ -24,7 +23,7 @@ import {
   Compass,
   Zap,
   PhoneCall,
-  Sparkles
+  Info
 } from "lucide-react";
 
 import Navbar from "../../components/Navbar";
@@ -35,7 +34,7 @@ function CountdownTimer() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
-    const targetDate = new Date("2026-10-18T05:00:00").getTime();
+    const targetDate = new Date("2026-10-11T05:00:00").getTime();
     const updateTimer = () => {
       const now = new Date().getTime();
       const difference = targetDate - now;
@@ -129,7 +128,7 @@ function HeroSection() {
                 <span className="text-[#F26522] italic font-light">4.0</span>
               </h1>
               <p className="text-[#00A896] font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.2em]">
-                RUN SALEM RUN • SUNDAY, 18 OCTOBER 2026
+                RUN SALEM RUN • SUNDAY, 11 OCTOBER 2026
               </p>
             </motion.div>
 
@@ -142,27 +141,37 @@ function HeroSection() {
               Join Salem's premier running movement uniting competitive athletes, fitness runners, armed forces veterans, and differently-abled champions across the heart of the city.
             </motion.p>
 
-            {/* Category Quick Badges (Light Double-Bezel) */}
+            {/* Category Quick Badges (5K & 10K Online Registration) */}
             <motion.div
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="grid grid-cols-3 gap-3 max-w-lg"
+              className="space-y-3 max-w-lg"
             >
-              <div className="bg-white border border-slate-200/80 rounded-2xl p-3.5 shadow-sm hover:border-[#00A896]/40 transition-colors">
-                <span className="text-[10px] font-mono font-bold text-[#00A896] block uppercase">3 KMS</span>
-                <span className="font-display text-base sm:text-lg font-black text-slate-900">FREE</span>
-                <span className="text-[9px] text-slate-400 block truncate">Armed Forces & Inclusive</span>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="bg-white border border-slate-200/80 rounded-2xl p-4 shadow-sm hover:border-amber-400/50 transition-colors">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-[10px] font-mono font-bold text-amber-600 uppercase">5 KMS</span>
+                    <span className="text-[9px] font-mono font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">TIMED</span>
+                  </div>
+                  <span className="font-display text-xl sm:text-2xl font-black text-slate-900">₹249</span>
+                  <span className="text-[10px] text-slate-400 block mt-1">Official Tee + Finisher Medal Included</span>
+                </div>
+
+                <div className="bg-[#FFF8F3] border border-[#F26522]/30 rounded-2xl p-4 shadow-sm hover:border-[#F26522] transition-colors">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-[10px] font-mono font-bold text-[#F26522] uppercase">10 KMS</span>
+                    <span className="text-[9px] font-mono font-bold text-[#F26522] bg-orange-100/60 px-2 py-0.5 rounded border border-orange-200">ELITE</span>
+                  </div>
+                  <span className="font-display text-xl sm:text-2xl font-black text-[#F26522]">₹299</span>
+                  <span className="text-[10px] text-orange-950/60 block mt-1">₹10,000 Top Podium Cash Prize</span>
+                </div>
               </div>
-              <div className="bg-white border border-slate-200/80 rounded-2xl p-3.5 shadow-sm hover:border-amber-400/50 transition-colors">
-                <span className="text-[10px] font-mono font-bold text-amber-600 block uppercase">5 KMS</span>
-                <span className="font-display text-base sm:text-lg font-black text-slate-900">₹249</span>
-                <span className="text-[9px] text-slate-400 block truncate">Medal + Kit Included</span>
-              </div>
-              <div className="bg-[#FFF8F3] border border-[#F26522]/30 rounded-2xl p-3.5 shadow-sm hover:border-[#F26522] transition-colors">
-                <span className="text-[10px] font-mono font-bold text-[#F26522] block uppercase">10 KMS</span>
-                <span className="font-display text-base sm:text-lg font-black text-[#F26522]">₹299</span>
-                <span className="text-[9px] text-orange-950/60 block truncate">₹10,000 Podium Prize</span>
+
+              {/* Note on 3KM Walkathon */}
+              <div className="flex items-center gap-2 px-3 py-2 bg-teal-50/60 border border-teal-100 rounded-xl text-[11px] text-slate-600">
+                <Info size={14} className="text-[#00A896] shrink-0" />
+                <span><strong>3 KMS Walkathon:</strong> Free direct entry on-spot for Ex-Servicemen & differently-abled heroes.</span>
               </div>
             </motion.div>
 
@@ -177,7 +186,7 @@ function HeroSection() {
                 href="/ActiveSalem/Registration"
                 className="bg-[#F26522] hover:bg-[#d95315] text-white px-8 py-4 rounded-2xl font-bold text-sm uppercase tracking-wider shadow-lg shadow-orange-500/20 hover:shadow-orange-500/30 hover:-translate-y-0.5 transition-all flex items-center gap-3 cursor-pointer"
               >
-                <span>Register For Marathon</span>
+                <span>Register For 5K / 10K</span>
                 <ArrowRight size={16} />
               </Link>
               <a
@@ -205,7 +214,7 @@ function HeroSection() {
                     COUNTDOWN TO FLAG OFF
                   </span>
                   <h3 className="font-display text-lg font-bold text-slate-900 uppercase">
-                    Sunday, Oct 18, 2026
+                    Sunday, Oct 11, 2026
                   </h3>
                 </div>
                 <div className="w-10 h-10 rounded-2xl bg-orange-50 text-[#F26522] flex items-center justify-center">
@@ -250,7 +259,7 @@ function HeroSection() {
                 href="/ActiveSalem/Registration"
                 className="w-full py-3.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-center block text-xs font-bold uppercase tracking-wider transition-colors shadow-sm"
               >
-                Proceed To Booking →
+                Proceed To Booking (5K / 10K) →
               </Link>
             </div>
           </motion.div>
@@ -283,15 +292,15 @@ function CategoriesSection() {
         {/* Categories Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           
-          {/* 3 KMS Inclusive */}
+          {/* 3 KMS Inclusive & Armed Forces (No Online Registration Required) */}
           <div className="bg-[#FAFCFC] border border-slate-200/90 rounded-3xl p-7 flex flex-col justify-between hover:shadow-xl hover:border-[#00A896]/50 transition-all duration-300">
             <div className="space-y-4">
               <div className="flex justify-between items-start">
                 <span className="px-3 py-1 bg-teal-50 text-[#00A896] border border-teal-100 rounded-lg text-xs font-mono font-bold">
-                  INCLUSIVE RUN
+                  HONORARY WALKATHON
                 </span>
                 <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
-                  FREE ENTRY
+                  FREE (ON-SPOT)
                 </span>
               </div>
               <h3 className="font-display text-3xl font-black uppercase text-slate-900">
@@ -318,12 +327,12 @@ function CategoriesSection() {
                 <span className="text-[10px] text-slate-400 uppercase tracking-wider block">Entry Fee</span>
                 <span className="font-display text-2xl font-black text-[#00A896]">₹0</span>
               </div>
-              <Link
-                href="/ActiveSalem/Registration"
-                className="px-5 py-2.5 bg-white hover:bg-[#00A896] hover:text-white text-slate-700 border border-slate-200 rounded-xl text-xs font-bold uppercase tracking-wider transition-all shadow-sm"
-              >
-                Join Free
-              </Link>
+              <div className="text-right">
+                <span className="inline-block px-3.5 py-2 bg-teal-50 border border-teal-200 text-[#00A896] rounded-xl text-xs font-bold uppercase tracking-wider shadow-sm">
+                  Direct / On-Spot Entry
+                </span>
+                <span className="text-[9px] text-slate-400 block mt-1">No online booking needed</span>
+              </div>
             </div>
           </div>
 
@@ -364,9 +373,9 @@ function CategoriesSection() {
               </div>
               <Link
                 href="/ActiveSalem/Registration"
-                className="px-5 py-2.5 bg-white hover:bg-slate-900 hover:text-white text-slate-700 border border-slate-200 rounded-xl text-xs font-bold uppercase tracking-wider transition-all shadow-sm"
+                className="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all shadow-sm"
               >
-                Register
+                Register Online
               </Link>
             </div>
           </div>
@@ -410,7 +419,7 @@ function CategoriesSection() {
                 href="/ActiveSalem/Registration"
                 className="px-5 py-2.5 bg-[#F26522] hover:bg-[#d95315] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all shadow-md"
               >
-                Register
+                Register Online
               </Link>
             </div>
           </div>
@@ -469,7 +478,7 @@ function TributeSection() {
                 Salute to the Heroes of the Nation
               </h3>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
-                "Let us walk with our nation's heroes." Active Salem 4.0 dedicates a special 3 KMS category to honor our Ex-Servicemen and Armed Forces personnel.
+                "Let us walk with our nation's heroes." Active Salem 4.0 dedicates a special 3 KMS category to honor our Ex-Servicemen and Armed Forces personnel with complimentary on-spot entry.
               </p>
             </div>
 
@@ -499,30 +508,30 @@ function TributeSection() {
           {/* 3 KMS Inclusive Run */}
           <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-6">
             <div className="space-y-2">
-              <span className="text-[10px] font-mono tracking-widest text-purple-600 font-bold uppercase flex items-center gap-2">
-                <HeartHandshake size={14} className="text-purple-600" /> INCLUSIVE COMMUNITY
+              <span className="text-[10px] font-mono tracking-widest text-[#004B57] font-bold uppercase flex items-center gap-2">
+                <HeartHandshake size={14} className="text-[#00A896]" /> INCLUSIVE COMMUNITY
               </span>
               <h3 className="font-display text-2xl sm:text-3xl font-black uppercase text-slate-900">
                 Different Abilities. Same Determination.
               </h3>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
-                A dedicated 3 KMS run for Special Children and Differently-Abled athletes. Creating an accessible, barrier-free celebration of willpower and joy.
+                A dedicated 3 KMS run for Special Children and Differently-Abled athletes. Creating an accessible, barrier-free celebration of willpower and joy with direct participation.
               </p>
             </div>
 
             <div className="grid grid-cols-3 gap-3 pt-2">
               <div className="bg-slate-50 border border-slate-200 p-3.5 rounded-xl text-left space-y-1">
-                <span className="text-[10px] font-bold text-purple-600 uppercase block">Value 01</span>
+                <span className="text-[10px] font-bold text-[#00A896] uppercase block">Value 01</span>
                 <span className="font-display text-xs font-bold text-slate-900 block uppercase">Inclusion</span>
                 <span className="text-[9px] text-slate-500">Equal celebration for all</span>
               </div>
               <div className="bg-slate-50 border border-slate-200 p-3.5 rounded-xl text-left space-y-1">
-                <span className="text-[10px] font-bold text-purple-600 uppercase block">Value 02</span>
+                <span className="text-[10px] font-bold text-[#00A896] uppercase block">Value 02</span>
                 <span className="font-display text-xs font-bold text-slate-900 block uppercase">Inspiration</span>
                 <span className="text-[9px] text-slate-500">Unstoppable willpower</span>
               </div>
               <div className="bg-slate-50 border border-slate-200 p-3.5 rounded-xl text-left space-y-1">
-                <span className="text-[10px] font-bold text-purple-600 uppercase block">Value 03</span>
+                <span className="text-[10px] font-bold text-[#00A896] uppercase block">Value 03</span>
                 <span className="font-display text-xs font-bold text-slate-900 block uppercase">United Salem</span>
                 <span className="text-[9px] text-slate-500">Move together, rise together</span>
               </div>
@@ -714,7 +723,7 @@ function ScheduleAndRouteSection() {
                 Race Morning Schedule
               </h3>
               <p className="text-xs text-slate-500 font-medium">
-                Sunday, 18 October 2026 • Coordinated with Salem City Police & Medical Teams.
+                Sunday, 11 October 2026 • Coordinated with Salem City Police & Medical Teams.
               </p>
             </div>
 
@@ -846,7 +855,7 @@ function ScheduleAndRouteSection() {
                 href="/ActiveSalem/Registration"
                 className="text-[#00A896] hover:underline font-bold flex items-center gap-1"
               >
-                Choose This Distance →
+                Register for 5K / 10K →
               </Link>
             </div>
           </div>
