@@ -1,42 +1,7 @@
 import { neon } from "@neondatabase/serverless";
-import { Pool } from "pg";
-import dns from "dns";
 
-// ISP DNS blocks Neon hostnames on default resolvers.
-// Monkeypatch dns.lookup for *.neon.tech to use Google (8.8.8.8) and Cloudflare (1.1.1.1) DNS.
-if (typeof process !== "undefined" && process.versions && process.versions.node) {
-  try {
-    const resolver = new dns.Resolver();
-    resolver.setServers(["8.8.8.8", "1.1.1.1"]);
-    const origLookup = dns.lookup;
-    const customLookup: any = (hostname: any, options: any, callback: any) => {
-      if (typeof options === "function") {
-        callback = options;
-        options = {};
-      }
-      if (typeof hostname === "string" && hostname.includes("neon.tech")) {
-        resolver.resolve4(hostname, (err, addresses) => {
-          if (!err && addresses && addresses.length > 0) {
-            return callback(null, addresses[0], 4);
-          }
-          return origLookup(hostname, options, callback);
-        });
-        return;
-      }
-      return origLookup(hostname, options, callback);
-    };
-    if (origLookup.__promisify__) {
-      customLookup.__promisify__ = origLookup.__promisify__;
-    }
-    dns.lookup = customLookup;
-  } catch (e) {
-    console.warn("DNS lookup monkeypatch warning:", e);
-  }
-}
-
-// Active Neon pooler host and fallback IP
+// Active Neon pooler host and fallback credentials
 const NEON_SNI  = "ep-icy-lab-ah4q57yb-pooler.c-3.us-east-1.aws.neon.tech";
-const NEON_HOST = "23.21.74.185"; // Active IP resolved via 8.8.8.8
 const NEON_USER = "neondb_owner";
 const NEON_PASS = "npg_UbVtH6u1ToyO";
 const NEON_DB   = "neondb";
@@ -48,32 +13,21 @@ const connectionString =
 
 export const sql = neon(connectionString);
 
-let sharedPool: InstanceType<typeof Pool> | null = null;
+export interface PgQueryResult<T = any> {
+  rows: T[];
+  rowCount: number;
+}
+
 export function getPgPool() {
-  if (!sharedPool) {
-    if (process.env.DATABASE_URL) {
-      sharedPool = new Pool({
-        connectionString: process.env.DATABASE_URL,
-        ssl: { rejectUnauthorized: false },
-        max: 5,
-        idleTimeoutMillis: 10000,
-        connectionTimeoutMillis: 10000,
-      });
-    } else {
-      sharedPool = new Pool({
-        host: NEON_HOST,
-        port: 5432,
-        database: NEON_DB,
-        user: NEON_USER,
-        password: NEON_PASS,
-        ssl: { rejectUnauthorized: false, servername: NEON_SNI },
-        max: 5,
-        idleTimeoutMillis: 10000,
-        connectionTimeoutMillis: 10000,
-      });
-    }
-  }
-  return sharedPool;
+  return {
+    query: async <T = any>(text: string, params?: any[]): Promise<PgQueryResult<T>> => {
+      const rows = await (sql as any).query(text, params || []);
+      return {
+        rows: (rows as T[]) || [],
+        rowCount: (rows as T[])?.length || 0,
+      };
+    },
+  };
 }
 
 export async function saveRegistration(data: {
