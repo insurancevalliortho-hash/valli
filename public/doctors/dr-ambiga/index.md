@@ -2,7 +2,7 @@
 title: Dr. Ambiga - MBBS | Valli Hospital Salem
 description: Professional profile of Dr. Ambiga, specialist in DEPT OF GENERAL MEDICINE at Valli Super Specialty Hospital.
 url: https://www.vallihospital.in/doctors/dr-ambiga
-last_updated: 2026-09-15
+last_updated: 2026-09-18
 ---
 
 # Professional Medical Profile: Dr. Ambiga

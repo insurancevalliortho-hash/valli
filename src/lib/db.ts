@@ -51,17 +51,27 @@ export const sql = neon(connectionString);
 let sharedPool: InstanceType<typeof Pool> | null = null;
 export function getPgPool() {
   if (!sharedPool) {
-    sharedPool = new Pool({
-      host: NEON_HOST,
-      port: 5432,
-      database: NEON_DB,
-      user: NEON_USER,
-      password: NEON_PASS,
-      ssl: { rejectUnauthorized: false, servername: NEON_SNI },
-      max: 5,
-      idleTimeoutMillis: 10000,
-      connectionTimeoutMillis: 10000,
-    });
+    if (process.env.DATABASE_URL) {
+      sharedPool = new Pool({
+        connectionString: process.env.DATABASE_URL,
+        ssl: { rejectUnauthorized: false },
+        max: 5,
+        idleTimeoutMillis: 10000,
+        connectionTimeoutMillis: 10000,
+      });
+    } else {
+      sharedPool = new Pool({
+        host: NEON_HOST,
+        port: 5432,
+        database: NEON_DB,
+        user: NEON_USER,
+        password: NEON_PASS,
+        ssl: { rejectUnauthorized: false, servername: NEON_SNI },
+        max: 5,
+        idleTimeoutMillis: 10000,
+        connectionTimeoutMillis: 10000,
+      });
+    }
   }
   return sharedPool;
 }
@@ -251,16 +261,18 @@ export async function saveAriseRegistration(data: {
   foodPreference?: string;
   iapCreditPoints?: boolean;
   iapMembershipNumber?: string;
+  isVerified?: boolean;
 }) {
   const pool = getPgPool();
+  const isVerified = data.isVerified ?? (data.paymentScreenshot === "RAZORPAY_ONLINE_PAYMENT");
   try {
     const res = await pool.query(
       `INSERT INTO arise_registrations (
         registration_code, full_name, email_id, mobile_number, category, include_workshop,
         institution, department, city, source, transaction_id, payment_screenshot,
         designation, qualification, bonafide_certificate, food_preference,
-        iap_credit_points, iap_membership_number
-      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18) RETURNING id;`,
+        iap_credit_points, iap_membership_number, is_verified
+      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19) RETURNING id;`,
       [
         data.registrationCode,
         data.fullName,
@@ -279,7 +291,8 @@ export async function saveAriseRegistration(data: {
         data.bonafideCertificate || null,
         data.foodPreference || null,
         data.iapCreditPoints || false,
-        data.iapMembershipNumber || null
+        data.iapMembershipNumber || null,
+        isVerified
       ]
     );
     return res.rows;
@@ -316,8 +329,8 @@ export async function saveAriseRegistration(data: {
           registration_code, full_name, email_id, mobile_number, category, include_workshop,
           institution, department, city, source, transaction_id, payment_screenshot,
           designation, qualification, bonafide_certificate, food_preference,
-          iap_credit_points, iap_membership_number
-        ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18) RETURNING id;`,
+          iap_credit_points, iap_membership_number, is_verified
+        ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19) RETURNING id;`,
         [
           data.registrationCode,
           data.fullName,
@@ -336,7 +349,8 @@ export async function saveAriseRegistration(data: {
           data.bonafideCertificate || null,
           data.foodPreference || null,
           data.iapCreditPoints || false,
-          data.iapMembershipNumber || null
+          data.iapMembershipNumber || null,
+          isVerified
         ]
       );
       return retryRes.rows;
@@ -359,14 +373,16 @@ export async function saveActiveSalemRegistration(data: {
   source?: string;
   transactionId: string;
   paymentScreenshot?: string;
+  isVerified?: boolean;
 }) {
   const pool = getPgPool();
+  const isVerified = data.isVerified ?? (data.paymentScreenshot === "RAZORPAY_ONLINE_PAYMENT");
   try {
     const res = await pool.query(
       `INSERT INTO active_salem_registrations (
         registration_code, full_name, email_id, mobile_number, category, tshirt_size,
-        gender, age, emergency_contact, city, source, transaction_id, payment_screenshot
-      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) RETURNING id;`,
+        gender, age, emergency_contact, city, source, transaction_id, payment_screenshot, is_verified
+      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) RETURNING id;`,
       [
         data.registrationCode,
         data.fullName,
@@ -380,7 +396,8 @@ export async function saveActiveSalemRegistration(data: {
         data.city || null,
         data.source || null,
         data.transactionId,
-        data.paymentScreenshot || null
+        data.paymentScreenshot || null,
+        isVerified
       ]
     );
     return res.rows;
@@ -402,14 +419,15 @@ export async function saveActiveSalemRegistration(data: {
           source VARCHAR(100),
           transaction_id VARCHAR(100) UNIQUE NOT NULL,
           payment_screenshot TEXT,
+          is_verified BOOLEAN DEFAULT FALSE,
           created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
         );
       `);
       const retryRes = await pool.query(
         `INSERT INTO active_salem_registrations (
           registration_code, full_name, email_id, mobile_number, category, tshirt_size,
-          gender, age, emergency_contact, city, source, transaction_id, payment_screenshot
-        ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) RETURNING id;`,
+          gender, age, emergency_contact, city, source, transaction_id, payment_screenshot, is_verified
+        ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) RETURNING id;`,
         [
           data.registrationCode,
           data.fullName,
@@ -423,7 +441,8 @@ export async function saveActiveSalemRegistration(data: {
           data.city || null,
           data.source || null,
           data.transactionId,
-          data.paymentScreenshot || null
+          data.paymentScreenshot || null,
+          isVerified
         ]
       );
       return retryRes.rows;

@@ -188,8 +188,10 @@ export default function AriseAdminPage() {
       .reduce((sum, r) => {
         let ticketPrice = 0;
         const isStudent = (r.designation && r.designation.toLowerCase().includes("student")) || r.category.toLowerCase().includes("student");
-        if (r.category.toLowerCase().includes("bulk")) {
-          ticketPrice = 15000;
+        if (r.registration_code?.includes("LEAD")) {
+          ticketPrice = 10000;
+        } else if (r.category.toLowerCase().includes("bulk")) {
+          ticketPrice = 0; // Covered by the Lead Coordinator package
         } else if (isStudent) {
           ticketPrice = r.include_workshop ? 1500 : 1000;
         } else if (r.category.toLowerCase().includes("workshop")) {

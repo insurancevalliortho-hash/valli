@@ -2,15 +2,23 @@ import { NextResponse } from "next/server";
 import crypto from "crypto";
 import { getPgPool } from "@/lib/db";
 
-// Production Webhook Secret from environment or fallback
+// Production Webhook Secret from environment
 const WEBHOOK_SECRET = (
   process.env.RAZORPAY_WEBHOOK_SECRET ||
   process.env.RAZORPAY_KEY_SECRET ||
-  "bIi0nGfsMISX1pJZP5pXT27R"
+  ""
 ).trim();
 
 export async function POST(request: Request) {
   try {
+    if (!WEBHOOK_SECRET) {
+      console.error("Razorpay Webhook Error: RAZORPAY_WEBHOOK_SECRET / RAZORPAY_KEY_SECRET not set.");
+      return NextResponse.json(
+        { success: false, error: "Webhook secret not configured on server" },
+        { status: 500 }
+      );
+    }
+
     // 1. Read raw body as text for exact HMAC-SHA256 signature verification
     const rawBody = await request.text();
     const signature = request.headers.get("x-razorpay-signature");
@@ -28,10 +36,12 @@ export async function POST(request: Request) {
       .update(rawBody)
       .digest("hex");
 
-    const isSignatureValid = crypto.timingSafeEqual(
-      Buffer.from(signature, "utf-8"),
-      Buffer.from(expectedSignature, "utf-8")
-    );
+    const expectedBuffer = Buffer.from(expectedSignature, "utf-8");
+    const receivedBuffer = Buffer.from(signature, "utf-8");
+
+    const isSignatureValid =
+      expectedBuffer.length === receivedBuffer.length &&
+      crypto.timingSafeEqual(expectedBuffer, receivedBuffer);
 
     if (!isSignatureValid) {
       console.warn("Razorpay Webhook: Invalid signature detected!");
@@ -56,67 +66,62 @@ export async function POST(request: Request) {
         eventData.payload?.payment?.entity ||
         eventData.payload?.payment_link?.entity ||
         {};
+      const orderEntity = eventData.payload?.order?.entity || {};
 
       const paymentId = paymentEntity.id || "";
-      const email = (paymentEntity.email || "").trim().toLowerCase();
-      let contact = (paymentEntity.contact || "").replace(/\D/g, "");
-      if (contact.length > 10) {
-        contact = contact.slice(-10); // Extract last 10 digits
-      }
-
-      const notes = paymentEntity.notes || {};
+      const notes = { ...(orderEntity.notes || {}), ...(paymentEntity.notes || {}) };
       const registrationCode = notes.registration_code || notes.registrationCode || "";
+      const eventTarget = (notes.eventType || notes.event || "").toUpperCase();
 
       console.log("Razorpay Webhook Verified Payment Details:", {
         eventType,
         paymentId,
-        email,
-        contact,
         registrationCode,
+        eventTarget,
       });
 
       const pool = getPgPool();
+      let activeSalemUpdated = 0;
+      let ariseUpdated = 0;
 
-      // Ensure is_verified column exists on tables
-      await pool.query(
-        `ALTER TABLE active_salem_registrations ADD COLUMN IF NOT EXISTS is_verified BOOLEAN DEFAULT FALSE;`
-      );
-      await pool.query(
-        `ALTER TABLE arise_registrations ADD COLUMN IF NOT EXISTS is_verified BOOLEAN DEFAULT FALSE;`
-      );
+      // Determine which table to update based on event notes and code prefix
+      const isSalem = eventTarget.includes("SALEM") || registrationCode.startsWith("SALEM");
+      const isArise = eventTarget.includes("ARISE") || registrationCode.startsWith("ARISE");
 
-      // 4. Automated Database Confirmation for Active Salem Registrations
-      const activeSalemRes = await pool.query(
-        `UPDATE active_salem_registrations
-         SET is_verified = TRUE
-         WHERE transaction_id = $1
-            OR (registration_code = $2 AND $2 != '')
-            OR (email_id = $3 AND $3 != '')
-            OR (mobile_number = $4 AND $4 != '');`,
-        [paymentId, registrationCode, email, contact]
-      );
+      if (isSalem || (!isArise && registrationCode)) {
+        const res = await pool.query(
+          `UPDATE active_salem_registrations
+           SET is_verified = TRUE,
+               transaction_id = CASE WHEN transaction_id IS NULL OR transaction_id = '' THEN $1 ELSE transaction_id END
+           WHERE transaction_id = $1
+              OR (registration_code = $2 AND $2 != '');`,
+          [paymentId, registrationCode]
+        );
+        activeSalemUpdated = res.rowCount || 0;
+      }
 
-      // 5. Automated Database Confirmation for ARISE Registrations
-      const ariseRes = await pool.query(
-        `UPDATE arise_registrations
-         SET is_verified = TRUE
-         WHERE transaction_id = $1
-            OR (registration_code = $2 AND $2 != '')
-            OR (email_id = $3 AND $3 != '')
-            OR (mobile_number = $4 AND $4 != '');`,
-        [paymentId, registrationCode, email, contact]
-      );
+      if (isArise || (!isSalem && registrationCode)) {
+        const res = await pool.query(
+          `UPDATE arise_registrations
+           SET is_verified = TRUE,
+               transaction_id = CASE WHEN transaction_id IS NULL OR transaction_id = '' THEN $1 ELSE transaction_id END
+           WHERE transaction_id = $1
+              OR (registration_code = $2 AND $2 != '');`,
+          [paymentId, registrationCode]
+        );
+        ariseUpdated = res.rowCount || 0;
+      }
 
       console.log(
-        `Razorpay Webhook DB Sync: Active Salem updated (${activeSalemRes.rowCount} rows), ARISE updated (${ariseRes.rowCount} rows)`
+        `Razorpay Webhook DB Sync: Active Salem updated (${activeSalemUpdated} rows), ARISE updated (${ariseUpdated} rows)`
       );
 
       return NextResponse.json({
         success: true,
         message: "Webhook processed and registration verified automatically",
         updated: {
-          activeSalem: activeSalemRes.rowCount,
-          arise: ariseRes.rowCount,
+          activeSalem: activeSalemUpdated,
+          arise: ariseUpdated,
         },
       });
     }

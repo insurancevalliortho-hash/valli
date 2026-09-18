@@ -3,7 +3,15 @@ import crypto from "crypto";
 
 export async function POST(request: Request) {
   try {
-    const keySecret = (process.env.RAZORPAY_KEY_SECRET || "bIi0nGfsMISX1pJZP5pXT27R").trim();
+    const keySecret = process.env.RAZORPAY_KEY_SECRET?.trim();
+
+    if (!keySecret) {
+      console.error("Razorpay Error: Missing RAZORPAY_KEY_SECRET in environment variables.");
+      return NextResponse.json(
+        { success: false, error: "Razorpay payment gateway secret is not configured on the server." },
+        { status: 500 }
+      );
+    }
 
     const body = await request.json().catch(() => ({}));
     
@@ -27,7 +35,12 @@ export async function POST(request: Request) {
       .update(`${razorpay_order_id}|${razorpay_payment_id}`)
       .digest("hex");
 
-    const isSignatureValid = expectedSignature === razorpay_signature;
+    const expectedBuffer = Buffer.from(expectedSignature, "utf-8");
+    const receivedBuffer = Buffer.from(razorpay_signature, "utf-8");
+
+    const isSignatureValid =
+      expectedBuffer.length === receivedBuffer.length &&
+      crypto.timingSafeEqual(expectedBuffer, receivedBuffer);
 
     if (!isSignatureValid) {
       return NextResponse.json(
