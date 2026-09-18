@@ -49,6 +49,7 @@ export async function POST(request: Request) {
     }
 
     // Insert into Neon Database
+    const isOnlinePayment = paymentScreenshot === "RAZORPAY_ONLINE_PAYMENT" || String(transactionId).startsWith("pay_");
     await saveAriseRegistration({
       registrationCode,
       fullName,
@@ -67,7 +68,8 @@ export async function POST(request: Request) {
       bonafideCertificate,
       foodPreference,
       iapCreditPoints: !!iapCreditPoints,
-      iapMembershipNumber
+      iapMembershipNumber,
+      isVerified: Boolean(body.isVerified || isOnlinePayment),
     });
 
     // Dispatch confirmation email

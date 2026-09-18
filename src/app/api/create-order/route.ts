@@ -3,45 +3,54 @@ import Razorpay from "razorpay";
 
 export async function POST(request: Request) {
   try {
-    const keyId = (process.env.RAZORPAY_KEY_ID || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_test_TcMg1CMk9e7mZ6").trim();
-    const keySecret = (process.env.RAZORPAY_KEY_SECRET || "bIi0nGfsMISX1pJZP5pXT27R").trim();
+    const keyId = (process.env.RAZORPAY_KEY_ID || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID)?.trim();
+    const keySecret = process.env.RAZORPAY_KEY_SECRET?.trim();
 
-    console.log("Razorpay Order Creation - keyId:", keyId, "keySecret length:", keySecret?.length);
+    if (!keyId || !keySecret) {
+      console.error("Razorpay Error: Missing RAZORPAY_KEY_ID or RAZORPAY_KEY_SECRET in environment variables.");
+      return NextResponse.json(
+        { success: false, error: "Razorpay payment gateway credentials are not configured on the server." },
+        { status: 500 }
+      );
+    }
 
     const body = await request.json().catch(() => ({}));
-    let { amount, currency = "INR", receipt } = body;
+    const { amount, currency = "INR", receipt, eventType, registrationCode, notes: inputNotes } = body;
 
-    if (!amount) {
+    if (amount === undefined || amount === null || amount === "") {
       return NextResponse.json(
-        { success: false, error: "Amount is required" },
+        { success: false, error: "Payment amount is required" },
         { status: 400 }
       );
     }
 
-    // Ensure amount is in paise (minimum 100 paise = ₹1)
-    let amountInPaise = Math.round(Number(amount));
-    
-    // If user passed amount in Rupees (e.g., 100 for ₹100), convert to paise
-    if (amountInPaise < 100) {
-      amountInPaise = Math.round(Number(amount) * 100);
-    }
-
-    if (isNaN(amountInPaise) || amountInPaise < 100) {
+    const amountInRupees = Number(amount);
+    if (isNaN(amountInRupees) || amountInRupees < 1) {
       return NextResponse.json(
-        { success: false, error: "Minimum order amount must be at least 100 paise (₹1)" },
+        { success: false, error: "Order amount must be at least ₹1" },
         { status: 400 }
       );
     }
+
+    // Always convert Rupees to paise (1 INR = 100 paise)
+    const amountInPaise = Math.round(amountInRupees * 100);
 
     const razorpay = new Razorpay({
       key_id: keyId,
       key_secret: keySecret,
     });
 
+    const notes: Record<string, string> = {
+      eventType: String(eventType || inputNotes?.eventType || "GENERAL"),
+      registrationCode: String(registrationCode || inputNotes?.registrationCode || ""),
+      ...(inputNotes || {}),
+    };
+
     const options = {
       amount: amountInPaise,
-      currency: currency.toUpperCase(),
+      currency: (currency || "INR").toUpperCase(),
       receipt: receipt || `rcpt_${Date.now()}_${Math.floor(Math.random() * 1000)}`,
+      notes,
     };
 
     const order = await razorpay.orders.create(options);
@@ -50,14 +59,14 @@ export async function POST(request: Request) {
       success: true,
       order_id: order.id,
       orderId: order.id,
-      amount: order.amount,
+      amount: order.amount, // in paise
+      amountInRupees: amountInRupees,
       currency: order.currency,
       key: keyId,
     });
   } catch (error: any) {
     console.error("Error creating Razorpay order:", error);
-    
-    // Handle auth failure
+
     if (error?.statusCode === 401 || error?.error?.code === "BAD_REQUEST_ERROR") {
       return NextResponse.json(
         { success: false, error: error?.error?.description || "Razorpay API Authentication Failed" },

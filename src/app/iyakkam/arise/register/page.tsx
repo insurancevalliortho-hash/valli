@@ -991,6 +991,9 @@ export default function AriseRegisterPage() {
                           prefillName={fullName}
                           prefillEmail={emailId}
                           prefillPhone={mobileNumber}
+                          eventType="ARISE_2026"
+                          registrationCode={regCode}
+                          notes={{ category, includeWorkshop }}
                           onSuccess={handleRazorpaySuccess}
                           onFailure={(errMsg) => setErrors({ transactionId: errMsg })}
                           buttonText={`Pay ₹${totalFee.toLocaleString("en-IN")} via Razorpay`}

@@ -40,6 +40,7 @@ export async function POST(request: Request) {
     }
 
     // Save into Neon database
+    const isOnlinePayment = paymentScreenshot === "RAZORPAY_ONLINE_PAYMENT" || String(transactionId).startsWith("pay_");
     await saveActiveSalemRegistration({
       registrationCode,
       fullName,
@@ -54,6 +55,7 @@ export async function POST(request: Request) {
       source: source || "Other",
       transactionId,
       paymentScreenshot,
+      isVerified: Boolean(body.isVerified || isOnlinePayment),
     });
 
     return NextResponse.json({ success: true, registrationCode });

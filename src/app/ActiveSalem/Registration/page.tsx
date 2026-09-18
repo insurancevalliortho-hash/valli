@@ -31,6 +31,7 @@ import {
 } from "lucide-react";
 import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
+import RazorpayCheckout from "../../../components/RazorpayCheckout";
 import confetti from "canvas-confetti";
 
 export default function ActiveSalemRegistrationPage() {
@@ -198,6 +199,7 @@ export default function ActiveSalemRegistrationPage() {
           source,
           transactionId: details.paymentId,
           paymentScreenshot: "RAZORPAY_ONLINE_PAYMENT",
+          isVerified: true,
         }),
       });
 
@@ -601,15 +603,22 @@ export default function ActiveSalemRegistrationPage() {
                           </p>
                         </div>
 
-                        {/* Direct Razorpay Official Payment Link Button */}
-                        <a
-                          href={category === "10KM" ? "https://rzp.io/rzp/FiFHpJrg" : "https://rzp.io/rzp/c7h0k4O"}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-full bg-[#F26522] hover:bg-[#C94F0E] text-white py-4 px-6 rounded-2xl font-bold text-sm tracking-wide transition-all duration-300 shadow-lg shadow-orange/20 hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2 cursor-pointer no-underline block"
-                        >
-                          <Zap className="w-4 h-4" /> Pay ₹{totalFee} via Official Razorpay Page ({category})
-                        </a>
+                        {/* Embedded Razorpay Secure Checkout Modal */}
+                        <RazorpayCheckout
+                          amount={totalFee}
+                          title="Active Salem Marathon 2026"
+                          description={`${category} Run Registration - ${fullName}`}
+                          prefillName={fullName}
+                          prefillEmail={emailId}
+                          prefillPhone={mobileNumber}
+                          eventType="ACTIVE_SALEM"
+                          registrationCode={regCode}
+                          notes={{ category, tshirtSize, gender, age }}
+                          onSuccess={handleRazorpaySuccess}
+                          onFailure={(errMsg) => setErrors({ transactionId: errMsg })}
+                          buttonText={`Pay ₹${totalFee} via Razorpay`}
+                          buttonClassName="w-full bg-[#F26522] hover:bg-[#C94F0E] text-white py-4 px-6 rounded-2xl font-bold text-sm tracking-wide transition-all duration-300 shadow-lg shadow-orange/20 hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2 cursor-pointer"
+                        />
 
 
                       </div>

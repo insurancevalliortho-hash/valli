@@ -16,11 +16,6 @@ export async function POST(request: Request) {
     }
 
     const pool = getPgPool();
-    // Ensure is_verified column exists
-    await pool.query(
-      `ALTER TABLE active_salem_registrations ADD COLUMN IF NOT EXISTS is_verified BOOLEAN DEFAULT FALSE;`
-    );
-
     const res = await pool.query(
       `SELECT * FROM active_salem_registrations ORDER BY created_at DESC;`
     );
@@ -79,9 +74,6 @@ export async function PATCH(request: Request) {
     }
 
     const pool = getPgPool();
-    await pool.query(
-      `ALTER TABLE active_salem_registrations ADD COLUMN IF NOT EXISTS is_verified BOOLEAN DEFAULT FALSE;`
-    );
     await pool.query(
       `UPDATE active_salem_registrations SET is_verified = $1 WHERE id = $2;`,
       [is_verified, id]

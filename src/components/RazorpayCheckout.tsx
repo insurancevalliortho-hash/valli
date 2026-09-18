@@ -16,6 +16,9 @@ interface RazorpayCheckoutProps {
   prefillName?: string;
   prefillEmail?: string;
   prefillPhone?: string;
+  eventType?: string; // "ARISE" | "ACTIVE_SALEM" | "TECHNNOVATIONS"
+  registrationCode?: string;
+  notes?: Record<string, any>;
   onSuccess?: (details: {
     paymentId: string;
     orderId: string;
@@ -53,6 +56,9 @@ export default function RazorpayCheckout({
   prefillName = "",
   prefillEmail = "",
   prefillPhone = "",
+  eventType,
+  registrationCode,
+  notes,
   onSuccess,
   onFailure,
   buttonText,
@@ -78,15 +84,18 @@ export default function RazorpayCheckout({
         throw new Error("Failed to load Razorpay SDK. Please check your internet connection.");
       }
 
-      // 2. Call backend to create order (amount in Rupees -> server converts to paise or handles paise)
+      // 2. Call backend to create order (amount in Rupees -> server converts to paise)
       setStatusMessage("Creating order...");
       const orderResponse = await fetch("/api/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          amount: amount, // Rupees or paise handled by API
+          amount: amount, // Amount in Rupees
           currency: "INR",
           receipt: `rcpt_${Date.now()}`,
+          eventType,
+          registrationCode,
+          notes,
         }),
       });
 
@@ -99,7 +108,7 @@ export default function RazorpayCheckout({
       const orderId = orderData.order_id || orderData.orderId;
       const orderAmount = orderData.amount;
       const orderCurrency = orderData.currency || "INR";
-      const keyId = orderData.key || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_test_TcMg1CMk9e7mZ6";
+      const keyId = orderData.key || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
 
       // 3. Configure Razorpay modal options
       const options = {
