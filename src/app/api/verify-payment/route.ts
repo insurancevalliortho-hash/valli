@@ -62,7 +62,6 @@ export async function POST(request: Request) {
           success: false,
           isOk: false,
           verified: false,
-          isOk: false,
           error: "Payment verification failed: Signature mismatch",
         },
         { status: 400 }
@@ -73,7 +72,6 @@ export async function POST(request: Request) {
       success: true,
       isOk: true,
       verified: true,
-      isOk: true,
       message: "Payment signature verified successfully",
       payment_id: razorpay_payment_id,
       order_id: razorpay_order_id,
