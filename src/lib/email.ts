@@ -923,8 +923,8 @@ export interface ActiveSalemEmailPayload {
   mobileNumber: string;
   category: string; // "5KM" | "10KM"
   tshirtSize: string; // "S" | "M" | "L" | "XL" | "XXL"
-  gender: string;
-  age: number;
+  gender?: string;
+  age?: number;
   emergencyContact?: string;
   city?: string;
   transactionId: string;
@@ -1154,7 +1154,7 @@ export async function sendActiveSalemRegistrationEmail(data: ActiveSalemEmailPay
             <div class="content">
               <div class="greeting">Dear ${data.fullName},</div>
               <p class="lead-text">
-                Congratulations! You are officially registered for <strong>Active Salem Marathon 4.0</strong>. Your entry has been recorded and verified.
+                Congratulations! You are officially registered for <strong>Active Salem Marathon 4.0</strong>. Your payment of <strong>₹${amountPaid}</strong> has been received and verified.
               </p>
 
               <!-- Runner Bib Card -->
@@ -1179,10 +1179,8 @@ export async function sendActiveSalemRegistrationEmail(data: ActiveSalemEmailPay
                   <td class="k">Official T-Shirt Size</td>
                   <td class="v">${data.tshirtSize} (Unisex Sports Fit)</td>
                 </tr>
-                <tr>
-                  <td class="k">Gender & Age</td>
-                  <td class="v">${data.gender} • ${data.age} Years</td>
-                </tr>
+                ${data.gender ? `<tr><td class="k">Gender</td><td class="v">${data.gender}</td></tr>` : ""}
+                ${data.age ? `<tr><td class="k">Age</td><td class="v">${data.age} Years</td></tr>` : ""}
                 <tr>
                   <td class="k">Mobile Number</td>
                   <td class="v">${data.mobileNumber}</td>
@@ -1194,7 +1192,7 @@ export async function sendActiveSalemRegistrationEmail(data: ActiveSalemEmailPay
                 ${data.emergencyContact ? `<tr><td class="k">Emergency Contact</td><td class="v">${data.emergencyContact}</td></tr>` : ""}
                 <tr>
                   <td class="k">Registration Fee</td>
-                  <td class="v">₹${amountPaid}</td>
+                  <td class="v">₹${amountPaid} (Verified)</td>
                 </tr>
                 <tr>
                   <td class="k">Payment Reference</td>
@@ -1218,8 +1216,9 @@ export async function sendActiveSalemRegistrationEmail(data: ActiveSalemEmailPay
               <div class="guidelines-card">
                 <h4>Race Day Reporting & Bib Collection</h4>
                 <ul>
-                  <li><strong>Reporting Time:</strong> 5:30 AM on Race Day.</li>
-                  <li><strong>Flag-off Venue:</strong> Mahatma Gandhi Stadium, Salem, Tamil Nadu.</li>
+                  <li><strong>Date:</strong> Sunday, 11 October 2026</li>
+                  <li><strong>Reporting Time:</strong> 5:00 AM on Race Day</li>
+                  <li><strong>Venue:</strong> Valli Super Speciality Hospital, Meyyanoor Road, Salem - 636 004</li>
                   <li><strong>Kit Collection:</strong> Present this email and your <strong>Registration Code (${data.registrationCode})</strong> along with a valid Govt Photo ID at the kit distribution counter.</li>
                 </ul>
               </div>
@@ -1228,7 +1227,7 @@ export async function sendActiveSalemRegistrationEmail(data: ActiveSalemEmailPay
             <!-- Footer -->
             <div class="footer">
               <p><strong>Active Salem • Valli Super Speciality Hospital</strong></p>
-              <p>Salem, Tamil Nadu, India</p>
+              <p>Meyyanoor Road, Salem, Tamil Nadu, 636004</p>
               <p style="margin-top: 8px; font-size: 11px; opacity: 0.8;">For queries or support, reach out to helpdesk@activesalem.in or call our helpline.</p>
             </div>
           </div>
@@ -1298,6 +1297,3 @@ export async function sendDemoVerificationEmail(targetEmail: string, type: "sale
 
   return results;
 }
-
-
-
