@@ -110,8 +110,9 @@ export default function RazorpayCheckout({
       const orderCurrency = orderData.currency || "INR";
 
       // 3. Configure payment options
+      const keyId = orderData.key || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
       const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        key: keyId,
         amount: orderAmount,
         currency: orderCurrency,
         name: title,
@@ -132,6 +133,9 @@ export default function RazorpayCheckout({
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_signature: response.razorpay_signature,
                 orderCreationId: orderId,
                 razorpayPaymentId: response.razorpay_payment_id,
                 razorpayOrderId: response.razorpay_order_id,
@@ -140,7 +144,7 @@ export default function RazorpayCheckout({
             });
 
             const verifyData = await verifyRes.json();
-            if (verifyRes.ok && verifyData.isOk) {
+            if (verifyRes.ok && (verifyData.success || verifyData.verified || verifyData.isOk)) {
               setPaymentSuccess(true);
               setStatusMessage("Payment verified successfully!");
               setPaymentDetails({
@@ -149,14 +153,14 @@ export default function RazorpayCheckout({
               });
 
               if (onSuccess) {
-                onSuccess({
+                await onSuccess({
                   paymentId: response.razorpay_payment_id,
                   orderId: response.razorpay_order_id,
                   signature: response.razorpay_signature,
                 });
               }
             } else {
-              throw new Error(verifyData.message || "Payment verification failed");
+              throw new Error(verifyData.error || verifyData.message || "Payment verification failed");
             }
           } catch (verifyErr: any) {
             console.error("Verification error:", verifyErr);
