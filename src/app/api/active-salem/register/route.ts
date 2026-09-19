@@ -90,6 +90,27 @@ export async function POST(request: Request) {
     });
 
     const confirmedCode = savedRows?.[0]?.registration_code || finalCode;
+
+    // Dispatch confirmation email to runner
+    try {
+      const { sendActiveSalemRegistrationEmail } = await import("../../../../lib/email");
+      await sendActiveSalemRegistrationEmail({
+        registrationCode: confirmedCode,
+        fullName,
+        emailId,
+        mobileNumber,
+        category,
+        tshirtSize,
+        gender,
+        age: ageNum,
+        emergencyContact,
+        city,
+        transactionId,
+      });
+    } catch (emailErr) {
+      console.error("API error in dispatching Active Salem confirmation email:", emailErr);
+    }
+
     return NextResponse.json({ success: true, registrationCode: confirmedCode });
   } catch (error: any) {
     console.error("API error in Active Salem registration:", error);

@@ -163,6 +163,26 @@ export async function POST(request: Request) {
               );
               activeSalemUpdated = 1;
               console.log(`Razorpay Webhook: Auto-inserted Active Salem registration for ${paymentId} (${runnerCode})`);
+
+              // Dispatch email confirmation
+              try {
+                const { sendActiveSalemRegistrationEmail } = await import("../../../../lib/email");
+                await sendActiveSalemRegistrationEmail({
+                  registrationCode: runnerCode,
+                  fullName: runnerName,
+                  emailId: runnerEmail,
+                  mobileNumber: runnerMobile,
+                  category: runnerCategory,
+                  tshirtSize: runnerSize,
+                  gender: runnerGender,
+                  age: runnerAge,
+                  emergencyContact: runnerEmergency,
+                  city: runnerCity,
+                  transactionId: paymentId,
+                });
+              } catch (mailErr) {
+                console.error("Razorpay Webhook: Error sending Active Salem confirmation email:", mailErr);
+              }
             }
           } catch (autoErr) {
             console.error("Razorpay Webhook: Error auto-inserting Active Salem registration:", autoErr);

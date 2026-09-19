@@ -88,3 +88,74 @@ export async function PATCH(request: Request) {
     );
   }
 }
+
+// PUT to resend confirmation email for a runner (or all)
+export async function PUT(request: Request) {
+  try {
+    const { password, id } = await request.json();
+
+    if (password !== ADMIN_PASSWORD) {
+      return NextResponse.json(
+        { success: false, error: "Unauthorized: Invalid password" },
+        { status: 401 }
+      );
+    }
+
+    const { sendActiveSalemRegistrationEmail } = await import("../../../../lib/email");
+    const pool = getPgPool();
+
+    if (id) {
+      const res = await pool.query(
+        `SELECT * FROM active_salem_registrations WHERE id = $1 LIMIT 1;`,
+        [id]
+      );
+      if (res.rows.length === 0) {
+        return NextResponse.json({ success: false, error: "Registration not found" }, { status: 404 });
+      }
+
+      const reg = res.rows[0];
+      const result = await sendActiveSalemRegistrationEmail({
+        registrationCode: reg.registration_code,
+        fullName: reg.full_name,
+        emailId: reg.email_id,
+        mobileNumber: reg.mobile_number,
+        category: reg.category,
+        tshirtSize: reg.tshirt_size,
+        gender: reg.gender,
+        age: Number(reg.age),
+        emergencyContact: reg.emergency_contact || "",
+        city: reg.city || "",
+        transactionId: reg.transaction_id,
+      });
+
+      return NextResponse.json({ success: result.success, messageId: result.messageId });
+    } else {
+      // Send for all
+      const res = await pool.query(`SELECT * FROM active_salem_registrations ORDER BY id ASC;`);
+      let count = 0;
+      for (const reg of res.rows) {
+        await sendActiveSalemRegistrationEmail({
+          registrationCode: reg.registration_code,
+          fullName: reg.full_name,
+          emailId: reg.email_id,
+          mobileNumber: reg.mobile_number,
+          category: reg.category,
+          tshirtSize: reg.tshirt_size,
+          gender: reg.gender,
+          age: Number(reg.age),
+          emergencyContact: reg.emergency_contact || "",
+          city: reg.city || "",
+          transactionId: reg.transaction_id,
+        });
+        count++;
+      }
+      return NextResponse.json({ success: true, count });
+    }
+  } catch (error: any) {
+    console.error("Active Salem Admin Resend Email Error:", error);
+    return NextResponse.json(
+      { success: false, error: error.message || "Internal server error" },
+      { status: 500 }
+    );
+  }
+}
