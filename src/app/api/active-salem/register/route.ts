@@ -16,8 +16,9 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  let body: any = null;
   try {
-    const body = await request.json();
+    body = await request.json();
 
     const {
       registrationCode,
@@ -35,6 +36,7 @@ export async function POST(request: Request) {
       paymentScreenshot,
     } = body;
 
+    const ageNum = Number(age);
     if (
       !fullName ||
       !emailId ||
@@ -42,7 +44,8 @@ export async function POST(request: Request) {
       !category ||
       !tshirtSize ||
       !gender ||
-      !age ||
+      isNaN(ageNum) ||
+      ageNum <= 0 ||
       !transactionId ||
       !paymentScreenshot
     ) {
@@ -69,7 +72,7 @@ export async function POST(request: Request) {
 
     // Save into Neon database
     const isOnlinePayment = paymentScreenshot === "RAZORPAY_ONLINE_PAYMENT" || String(transactionId).startsWith("pay_");
-    await saveActiveSalemRegistration({
+    const savedRows = await saveActiveSalemRegistration({
       registrationCode: finalCode,
       fullName,
       emailId,
@@ -77,7 +80,7 @@ export async function POST(request: Request) {
       category,
       tshirtSize,
       gender,
-      age: Number(age),
+      age: ageNum,
       emergencyContact: emergencyContact || "",
       city: city || "",
       source: source || "Other",
@@ -86,11 +89,27 @@ export async function POST(request: Request) {
       isVerified: Boolean(body.isVerified || isOnlinePayment),
     });
 
-    return NextResponse.json({ success: true, registrationCode: finalCode });
+    const confirmedCode = savedRows?.[0]?.registration_code || finalCode;
+    return NextResponse.json({ success: true, registrationCode: confirmedCode });
   } catch (error: any) {
     console.error("API error in Active Salem registration:", error);
 
+    const isOnlinePayment = body?.paymentScreenshot === "RAZORPAY_ONLINE_PAYMENT" || String(body?.transactionId).startsWith("pay_");
+
     if (error.message && error.message.toLowerCase().includes("unique constraint")) {
+      if (isOnlinePayment && body?.transactionId) {
+        try {
+          const pool = getPgPool();
+          const existing = await pool.query(
+            "SELECT registration_code FROM active_salem_registrations WHERE transaction_id = $1 LIMIT 1;",
+            [body.transactionId]
+          );
+          if (existing.rows.length > 0) {
+            return NextResponse.json({ success: true, registrationCode: existing.rows[0].registration_code });
+          }
+        } catch (_) {}
+      }
+
       if (error.message.toLowerCase().includes("transaction_id")) {
         return NextResponse.json(
           { success: false, error: "This UPI Reference ID has already been registered." },

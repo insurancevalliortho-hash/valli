@@ -17,8 +17,9 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  let body: any = null;
   try {
-    const body = await request.json();
+    body = await request.json();
     
     // Server-side validation
     const {
@@ -80,7 +81,7 @@ export async function POST(request: Request) {
 
     // Insert into Neon Database
     const isOnlinePayment = paymentScreenshot === "RAZORPAY_ONLINE_PAYMENT" || String(transactionId).startsWith("pay_");
-    await saveAriseRegistration({
+    const savedRows = await saveAriseRegistration({
       registrationCode: finalCode,
       fullName,
       emailId,
@@ -102,10 +103,12 @@ export async function POST(request: Request) {
       isVerified: Boolean(body.isVerified || isOnlinePayment),
     });
 
+    const confirmedCode = savedRows?.[0]?.registration_code || finalCode;
+
     // Dispatch confirmation email
     try {
       await sendAriseRegistrationEmail({
-        registrationCode: finalCode,
+        registrationCode: confirmedCode,
         fullName,
         emailId,
         mobileNumber,
@@ -126,12 +129,27 @@ export async function POST(request: Request) {
       console.error("API error in dispatching ARISE registration email:", emailErr);
     }
 
-    return NextResponse.json({ success: true, registrationCode: finalCode });
+    return NextResponse.json({ success: true, registrationCode: confirmedCode });
   } catch (error: any) {
     console.error("API Error in ARISE registration:", error);
     
+    const isOnlinePayment = body?.paymentScreenshot === "RAZORPAY_ONLINE_PAYMENT" || String(body?.transactionId).startsWith("pay_");
+
     // Handle unique constraint violations
     if (error.message && error.message.toLowerCase().includes("unique constraint")) {
+      if (isOnlinePayment && body?.transactionId) {
+        try {
+          const pool = getPgPool();
+          const existing = await pool.query(
+            "SELECT registration_code FROM arise_registrations WHERE transaction_id = $1 LIMIT 1;",
+            [body.transactionId]
+          );
+          if (existing.rows.length > 0) {
+            return NextResponse.json({ success: true, registrationCode: existing.rows[0].registration_code });
+          }
+        } catch (_) {}
+      }
+
       if (error.message.toLowerCase().includes("transaction_id")) {
         return NextResponse.json(
           { success: false, error: "This UPI Reference ID has already been registered." },

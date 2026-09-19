@@ -419,8 +419,12 @@ export default function AriseRegisterPage() {
           }),
         });
         const leadData = await leadRes.json();
-        if (leadData.success && leadData.registrationCode) {
-          setRegCode(leadData.registrationCode);
+        if (leadRes.ok && leadData.success) {
+          if (leadData.registrationCode) {
+            setRegCode(leadData.registrationCode);
+          }
+        } else {
+          throw new Error(leadData.error || "Failed to save coordinator registration");
         }
 
         // Submit All 20 Student Records
@@ -459,8 +463,12 @@ export default function AriseRegisterPage() {
           }),
         });
         const data = await res.json();
-        if (data.success && data.registrationCode) {
-          setRegCode(data.registrationCode);
+        if (res.ok && data.success) {
+          if (data.registrationCode) {
+            setRegCode(data.registrationCode);
+          }
+        } else {
+          throw new Error(data.error || "Failed to save delegate registration");
         }
       }
 
@@ -470,9 +478,9 @@ export default function AriseRegisterPage() {
       } else {
         window.scrollTo(0, 0);
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
-      alert("Network error submitting registration. Payment ID: " + details.paymentId);
+      alert((err?.message || "Error submitting registration") + ". Payment ID: " + details.paymentId);
     } finally {
       setIsSubmitting(false);
     }
@@ -1070,7 +1078,23 @@ export default function AriseRegisterPage() {
                           prefillPhone={mobileNumber}
                           eventType="ARISE_2026"
                           registrationCode={regCode}
-                          notes={{ category, includeWorkshop }}
+                          notes={{
+                            category,
+                            includeWorkshop: String(includeWorkshop),
+                            fullName,
+                            emailId,
+                            mobileNumber,
+                            institution,
+                            department,
+                            city,
+                            source,
+                            designation,
+                            qualification,
+                            foodPreference,
+                            iapCreditPoints: String(iapCreditPoints),
+                            iapMembershipNumber,
+                            isBulk: String(isBulk),
+                          }}
                           onSuccess={handleRazorpaySuccess}
                           onFailure={(errMsg) => setErrors({ transactionId: errMsg })}
                           buttonText={`Pay ₹${totalFee.toLocaleString("en-IN")} & Confirm Registration`}
