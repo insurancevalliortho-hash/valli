@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { saveActiveSalemRegistration, getPgPool } from "../../../../lib/db";
+import { sendActiveSalemRegistrationEmail } from "../../../../lib/email";
 
 export async function GET() {
   try {
@@ -85,6 +86,19 @@ export async function POST(request: Request) {
       paymentScreenshot,
       isVerified: Boolean(body.isVerified || isOnlinePayment),
     });
+
+    // Send confirmation email asynchronously (don't block HTTP response)
+    sendActiveSalemRegistrationEmail({
+      registrationCode: finalCode,
+      fullName,
+      emailId,
+      mobileNumber,
+      category,
+      tshirtSize,
+      gender,
+      city,
+      transactionId,
+    }).catch((emailErr) => console.error("Failed to send active salem email:", emailErr));
 
     return NextResponse.json({ success: true, registrationCode: finalCode });
   } catch (error: any) {

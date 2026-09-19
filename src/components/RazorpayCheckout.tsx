@@ -140,7 +140,7 @@ export default function RazorpayCheckout({
             });
 
             const verifyData = await verifyRes.json();
-            if (verifyRes.ok && verifyData.isOk) {
+            if (verifyRes.ok && (verifyData.isOk || verifyData.success || verifyData.verified)) {
               setPaymentSuccess(true);
               setStatusMessage("Payment verified successfully!");
               setPaymentDetails({
