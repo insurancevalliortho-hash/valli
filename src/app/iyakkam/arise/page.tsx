@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, useInView } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
   Calendar,
@@ -14,15 +14,23 @@ import {
   Clock,
   MapPin,
   ChevronRight,
-  TrendingUp,
   Award,
   Users,
-  Compass,
   Briefcase,
   Layers,
   Heart,
   QrCode,
-  Phone
+  Phone,
+  Sparkles,
+  Coffee,
+  Utensils,
+  GraduationCap,
+  ShieldCheck,
+  UserCheck,
+  Building2,
+  Stethoscope,
+  HelpCircle,
+  FileText
 } from "lucide-react";
 
 import Navbar from "../../../components/Navbar";
@@ -33,7 +41,7 @@ function CountdownTimer() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
-    const targetDate = new Date("2026-10-17T08:00:00").getTime();
+    const targetDate = new Date("2026-10-17T08:30:00").getTime();
     const updateTimer = () => {
       const now = new Date().getTime();
       const difference = targetDate - now;
@@ -55,18 +63,21 @@ function CountdownTimer() {
   }, []);
 
   return (
-    <div className="flex gap-4 justify-center sm:justify-start">
+    <div className="flex gap-3 sm:gap-4 justify-center sm:justify-start">
       {[
         { value: timeLeft.days, label: "Days" },
         { value: timeLeft.hours, label: "Hours" },
         { value: timeLeft.minutes, label: "Mins" },
         { value: timeLeft.seconds, label: "Secs" }
       ].map((t, idx) => (
-        <div key={idx} className="bg-white text-slate-800 border border-slate-150 rounded-[1.25rem] p-4 text-center min-w-[85px] shadow-[0_12px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_15px_35px_rgba(0,168,150,0.08)] transition-all duration-300 relative overflow-hidden border-t-4 border-t-[#00A896]">
-          <div className="font-display text-3xl font-black tracking-tight leading-none text-[#00A896]">
+        <div
+          key={idx}
+          className="bg-white text-slate-800 border border-slate-200/80 rounded-2xl p-3 sm:p-4 text-center min-w-[72px] sm:min-w-[84px] shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden border-t-4 border-t-[#00A896]"
+        >
+          <div className="font-display text-2xl sm:text-3xl font-black tracking-tight leading-none text-[#00A896]">
             {t.value.toString().padStart(2, "0")}
           </div>
-          <div className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-2">
+          <div className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-1.5">
             {t.label}
           </div>
         </div>
@@ -75,154 +86,228 @@ function CountdownTimer() {
   );
 }
 
+// ─── Header Partner Badges Component ───────────────────────────────────────────
+function PartnerLogosHeader() {
+  const partners = [
+    { name: "Valli Super Speciality Hospital", subtitle: "Presents", primary: true },
+    { name: "KIOT", full: "Knowledge Institute of Technology", badge: "Estd. 2009" },
+    { name: "TNOA", full: "Tamilnadu Orthopaedic Association", badge: "Founded 1969" },
+    { name: "OASIS", full: "Orthopaedic Association of South Indian States", badge: "Estd. 2002" },
+    { name: "Mid West Ortho Society", full: "Mid West Ortho Society @ Salem", badge: "Estd. 1985" },
+  ];
+
+  return (
+    <div className="w-full bg-[#004B57] border-b border-[#00A896]/30 text-white py-3 px-4 relative z-20 shadow-md">
+      <div className="max-w-[1280px] mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div className="flex items-center gap-2">
+          <span className="w-2.5 h-2.5 rounded-full bg-[#FF8C00] animate-ping" />
+          <span className="font-extrabold text-[#00A896] uppercase tracking-wider text-[11px] bg-white/10 px-2.5 py-0.5 rounded-full border border-white/10">
+            National CME & Workshop 2026
+          </span>
+        </div>
+
+        {/* Association Badges List */}
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 font-semibold text-[11px] text-slate-200">
+          <span className="text-[#FF8C00] font-extrabold">In Joint Association With:</span>
+          {partners.slice(1).map((p, i) => (
+            <span
+              key={i}
+              className="inline-flex items-center gap-1.5 bg-white/10 border border-white/15 px-2.5 py-1 rounded-full text-white shadow-sm"
+              title={p.full}
+            >
+              <span className="font-extrabold text-white">{p.name}</span>
+              <span className="text-[9px] text-[#00A896] bg-slate-900/60 px-1.5 py-0.2 rounded font-mono font-bold">
+                {p.badge}
+              </span>
+            </span>
+          ))}
+        </div>
+
+        {/* Credit Points Badge */}
+        <div className="inline-flex items-center gap-1.5 bg-gradient-to-r from-amber-500/30 to-orange-500/30 border border-amber-400/50 text-amber-200 px-3 py-1 rounded-full font-black text-[10px] uppercase tracking-wider shadow-sm">
+          <Award className="w-3.5 h-3.5 text-amber-300" />
+          <span>IAP Credit Points Applied</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── Hero Section ─────────────────────────────────────────────────────────────
 function HeroSection() {
   return (
     <section
-      className="grid-bg-dots"
+      className="grid-bg-dots relative overflow-hidden"
       style={{
-        background: "linear-gradient(135deg, #F0FAF9 0%, #FFFFFF 100%)",
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        position: "relative",
-        overflow: "hidden",
-        paddingTop: 130,
-        paddingBottom: 80,
+        background: "linear-gradient(135deg, #F0FAF9 0%, #FFFFFF 50%, #F5FAFB 100%)",
+        paddingTop: 40,
+        paddingBottom: 70,
       }}
     >
       {/* Decorative Blur Orbs */}
-      <div className="absolute top-0 right-0 w-[40vw] h-[40vw] rounded-full bg-[#E0F2F1]/30 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 left-10 w-[30vw] h-[30vw] rounded-full bg-[#00A896]/5 blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[45vw] h-[45vw] rounded-full bg-[#E0F2F1]/40 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 left-10 w-[35vw] h-[35vw] rounded-full bg-[#00A896]/10 blur-3xl pointer-events-none" />
 
       <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-16 w-full relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[55%_45%] gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[58%_42%] gap-10 items-center">
 
           {/* Left Block */}
           <div className="space-y-6 text-left">
+
+            {/* Host Banner */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#00A896]/5 border border-[#00A896]/15 text-[#00A896] text-xs font-bold tracking-wider uppercase"
+              transition={{ duration: 0.5 }}
+              className="inline-flex flex-wrap items-center gap-2 px-4 py-2 rounded-full bg-white border border-[#00A896]/20 shadow-sm text-xs font-bold"
             >
-              <span className="w-2 h-2 rounded-full bg-[#00A896] animate-pulse" />
-              Valli Super Specialty Hospital Presents
+              <span className="text-[#00A896] uppercase tracking-wider">Valli Super Speciality Hospital</span>
+              <span className="text-slate-400 font-normal">Presents</span>
             </motion.div>
 
+            {/* Title & Acronym */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.15 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <h1
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontWeight: 900,
-                  fontSize: "clamp(42px, 5vw, 84px)",
-                  letterSpacing: "-0.035em",
-                  lineHeight: 0.9,
-                  color: "#004B57",
-                }}
-                className="flex flex-col gap-2"
-              >
-                <span>ARISE</span>
-                <span className="text-[#FF8C00] text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
+              <div className="flex items-baseline gap-3">
+                <h1
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontWeight: 900,
+                    fontSize: "clamp(48px, 6vw, 92px)",
+                    letterSpacing: "-0.04em",
+                    lineHeight: 0.85,
+                    color: "#004B57",
+                  }}
+                >
+                  ARISE
+                </h1>
+                <span className="font-display font-black text-3xl sm:text-4xl lg:text-5xl text-[#FF8C00] bg-[#FF8C00]/10 px-3 py-1 rounded-2xl border border-[#FF8C00]/30">
                   2026
                 </span>
-              </h1>
-              <p className="text-slate-500 font-bold uppercase tracking-wider text-xs sm:text-sm mt-3 leading-relaxed">
-                Advancements in Recovery, Intelligence & Sports Engineering
-              </p>
-              <div className="w-20 h-1 bg-[#FF8C00] rounded-full mt-4" />
+              </div>
+
+              {/* Acronym Breakdown */}
+              <div className="mt-4 p-4 rounded-2xl bg-white/80 border border-slate-200/80 shadow-sm backdrop-blur-sm">
+                <p className="text-slate-700 font-extrabold text-sm sm:text-base leading-snug tracking-wide">
+                  <span className="text-[#FF8C00]">A</span>dvancements in{" "}
+                  <span className="text-[#FF8C00]">R</span>ecovery,{" "}
+                  <span className="text-[#FF8C00]">I</span>ntelligence &{" "}
+                  <span className="text-[#FF8C00]">S</span>ports{" "}
+                  <span className="text-[#FF8C00]">E</span>ngineering
+                </p>
+                <div className="w-16 h-1 bg-gradient-to-r from-[#FF8C00] to-[#00A896] rounded-full mt-2" />
+                <p className="text-[#004B57] font-black uppercase tracking-wider text-xs sm:text-sm mt-2.5">
+                  WHERE ARTIFICIAL INTELLIGENCE MEETS HUMAN PERFORMANCE
+                </p>
+              </div>
             </motion.div>
 
-            <motion.p
+            {/* Event Key Info Chips */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="grid grid-cols-1 sm:grid-cols-3 gap-3"
+            >
+              <div className="bg-white border border-slate-200 rounded-2xl p-3.5 shadow-sm flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-[#00A896]/10 text-[#00A896] flex items-center justify-center shrink-0">
+                  <Calendar className="w-5 h-5" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block">Date</span>
+                  <span className="font-extrabold text-xs sm:text-sm text-[#004B57]">17 OCTOBER 2026</span>
+                </div>
+              </div>
+
+              <div className="bg-white border border-slate-200 rounded-2xl p-3.5 shadow-sm flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-[#FF8C00]/10 text-[#FF8C00] flex items-center justify-center shrink-0">
+                  <Clock className="w-5 h-5" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block">Timing</span>
+                  <span className="font-extrabold text-xs sm:text-sm text-[#004B57]">08:30 AM – 4:30 PM</span>
+                </div>
+              </div>
+
+              <div className="bg-white border border-slate-200 rounded-2xl p-3.5 shadow-sm flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-[#00A896]/10 text-[#00A896] flex items-center justify-center shrink-0">
+                  <MapPin className="w-5 h-5" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block">City</span>
+                  <span className="font-extrabold text-xs sm:text-sm text-[#004B57]">SALEM, TAMIL NADU</span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Detailed Venue Banner */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.25 }}
+              className="bg-slate-900 text-white p-4 rounded-2xl flex items-start gap-3 shadow-md border border-slate-800"
+            >
+              <Building2 className="w-5 h-5 text-[#00A896] shrink-0 mt-0.5" />
+              <div>
+                <span className="text-[10px] font-bold text-[#00A896] uppercase tracking-wider block">Official Venue</span>
+                <p className="font-bold text-xs sm:text-sm text-slate-100">
+                  Knowledge Institute of Technology, Kakapalayam, Salem, Tamil Nadu
+                </p>
+              </div>
+            </motion.div>
+
+            {/* CTAs */}
+            <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="text-slate-600 font-medium text-sm sm:text-base max-w-xl leading-relaxed"
-            >
-              The premier national CME and Workshop on Sports Science. Exploring where artificial intelligence meets human performance in recovery mapping, motion biomechanics, and telerehabilitation.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="flex flex-wrap gap-4"
+              className="flex flex-wrap items-center gap-4 pt-2"
             >
               <Link
                 href="/iyakkam/arise/register"
-                className="btn-primary btn-orange px-8 py-4 rounded-2xl text-sm font-bold shadow-md shadow-orange/15 flex items-center gap-2 hover:-translate-y-0.5 transition-transform"
+                className="btn-primary btn-orange px-8 py-4 rounded-2xl text-sm font-extrabold shadow-lg shadow-orange/20 flex items-center gap-2 hover:-translate-y-0.5 transition-transform"
               >
-                Register For Event
-                <ArrowRight size={16} />
+                Register Online Now
+                <ArrowRight size={18} />
               </Link>
               <a
-                href="#faculty"
-                className="btn-primary btn-outline-navy px-8 py-4 rounded-2xl text-sm font-bold flex items-center gap-2 hover:bg-slate-50 hover:-translate-y-0.5 transition-all"
+                href="#schedule"
+                className="bg-white text-[#004B57] border border-slate-300 hover:border-[#00A896] px-6 py-4 rounded-2xl text-sm font-bold flex items-center gap-2 shadow-sm hover:shadow-md transition-all"
               >
-                View Distinguished Faculty
+                <Calendar size={16} className="text-[#00A896]" />
+                View Session Schedule
               </a>
             </motion.div>
 
-            {/* Bulk Orders & Helpline Contact Ribbon in Hero */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.42 }}
-              className="pt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-[#004B57] font-bold text-sm sm:text-base"
-            >
-              <span className="flex items-center gap-2 text-[#00A896] font-extrabold uppercase text-xs sm:text-sm tracking-wider">
-                <Phone className="w-4.5 h-4.5 text-[#FF8C00]" /> Bulk Registration & Helpline:
+            {/* Phone Enquiries Banner */}
+            <div className="pt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-[#004B57] font-bold text-xs sm:text-sm">
+              <span className="flex items-center gap-1.5 text-[#00A896] uppercase tracking-wider font-extrabold">
+                <Phone className="w-4 h-4 text-[#FF8C00]" /> Helpline & Bulk Registrations:
               </span>
-              <div className="flex items-center gap-3 font-extrabold text-sm sm:text-base text-[#004B57]">
+              <div className="flex items-center gap-3 font-extrabold text-slate-800">
                 <a href="tel:+917092777764" className="hover:text-[#00A896] transition-colors">+91 7092777764</a>
                 <span className="text-slate-300">•</span>
                 <a href="tel:+918220377047" className="hover:text-[#00A896] transition-colors">+91 82203 77047</a>
               </div>
-            </motion.div>
+            </div>
 
-            {/* Quick Details Ribbon */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.45 }}
-              className="pt-6 border-t border-slate-200 max-w-[500px]"
-            >
-              <div className="grid grid-cols-3 gap-4 text-slate-800">
-                {[
-                  { label: "Event Date", val: "Oct 17, 2026", color: "text-[#004B57]", icon: <Calendar className="w-3.5 h-3.5 text-[#00A896]" /> },
-                  { label: "Venue Location", val: "Knowledge Institute of Technology", color: "text-[#00A896]", icon: <MapPin className="w-3.5 h-3.5 text-[#FF8C00]" /> },
-                  { label: "Timing", val: "8:00 AM Onwards", color: "text-[#FF8C00]", icon: <Clock className="w-3.5 h-3.5 text-teal" /> }
-                ].map((s, idx) => (
-                  <div key={idx} className="space-y-1.5 text-left">
-                    <span className="flex items-center gap-1.5 text-[9px] font-bold text-slate-400 uppercase tracking-widest">
-                      {s.icon} {s.label}
-                    </span>
-                    <span className={`font-display text-sm sm:text-base font-extrabold tracking-tight block ${s.color}`}>
-                      {s.val}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
           </div>
 
-          {/* Right Block: Image Collage / Tech Visualizer */}
+          {/* Right Block: Interactive Telemetry Visualizer */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="relative w-full aspect-square max-w-[460px] mx-auto flex items-center justify-center"
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="relative w-full aspect-square max-w-[440px] mx-auto flex items-center justify-center"
           >
-            {/* Circular glowing outline */}
-            <div className="absolute inset-0 border border-dashed border-[#00A896]/30 rounded-full animate-[spin_60s_linear_infinite]" />
-            <div className="absolute inset-4 border border-[#FF8C00]/10 rounded-full" />
+            {/* Outer animated rings */}
+            <div className="absolute inset-0 border border-dashed border-[#00A896]/30 rounded-full animate-[spin_50s_linear_infinite]" />
+            <div className="absolute inset-5 border border-[#FF8C00]/20 rounded-full" />
 
-            {/* Embedded Visuals */}
-            <div className="relative w-full h-full rounded-full overflow-hidden p-6 bg-white/40 backdrop-blur-md shadow-2xl border border-white/50 flex items-center justify-center">
+            <div className="relative w-full h-full rounded-full overflow-hidden p-5 bg-white/60 backdrop-blur-md shadow-2xl border border-white/80 flex items-center justify-center">
               <div className="relative w-full h-full rounded-full overflow-hidden bg-slate-950 flex items-center justify-center">
                 <Image
                   src="/assets/arise_telemetry_v4.png"
@@ -233,24 +318,23 @@ function HeroSection() {
                   className="w-full h-full object-cover opacity-90 object-center rounded-full"
                 />
 
-                {/* Corner/Edge Blur Overlay */}
+                {/* Mask Overlay */}
                 <div
-                  className="absolute inset-0 pointer-events-none backdrop-blur-[6px] rounded-full"
+                  className="absolute inset-0 pointer-events-none backdrop-blur-[4px] rounded-full"
                   style={{
-                    maskImage: "radial-gradient(circle, transparent 50%, black 100%)",
-                    WebkitMaskImage: "radial-gradient(circle, transparent 50%, black 100%)"
+                    maskImage: "radial-gradient(circle, transparent 55%, black 100%)",
+                    WebkitMaskImage: "radial-gradient(circle, transparent 55%, black 100%)"
                   }}
                 />
 
-                {/* Floating circles representing AI telemetry metrics */}
-                <div className="absolute top-8 left-8 bg-[#004B57]/80 text-[#00A896] p-3 rounded-full border border-[#00A896]/30 shadow-lg backdrop-blur-sm animate-bounce duration-[4s]">
-                  <Heart className="w-5 h-5 animate-pulse" />
+                {/* Metric Floating Badges */}
+                <div className="absolute top-6 left-6 bg-[#004B57]/90 text-[#00A896] p-3 rounded-2xl border border-[#00A896]/30 shadow-lg backdrop-blur-md flex items-center gap-2">
+                  <Heart className="w-5 h-5 text-rose-400 animate-pulse" />
+                  <span className="text-[10px] font-bold text-white uppercase tracking-wider">Bio-Telemetry</span>
                 </div>
-                <div className="absolute bottom-12 right-12 bg-[#FF8C00]/80 text-white p-3 rounded-full border border-white/20 shadow-lg backdrop-blur-sm animate-bounce duration-[5s]">
+                <div className="absolute bottom-8 right-8 bg-[#FF8C00]/90 text-white p-3 rounded-2xl border border-white/20 shadow-lg backdrop-blur-md flex items-center gap-2">
                   <Brain className="w-5 h-5" />
-                </div>
-                <div className="absolute top-1/2 right-6 bg-slate-900/80 text-[#E0F2F1] p-3 rounded-full border border-slate-700 shadow-lg backdrop-blur-sm">
-                  <Activity className="w-5 h-5" />
+                  <span className="text-[10px] font-bold uppercase tracking-wider">AI Rehabilitation</span>
                 </div>
               </div>
             </div>
@@ -262,220 +346,455 @@ function HeroSection() {
   );
 }
 
-// ─── Why Attend Section ───────────────────────────────────────────────────────
-function WhyAttendSection() {
-  const points = [
-    {
-      title: "AI in Injury Prevention",
-      desc: "Explore machine learning algorithms applied to orthopaedic diagnostics, video gait mapping, and strain forecasting.",
-      icon: <Brain className="w-5 h-5 text-teal" />
-    },
-    {
-      title: "Wearable Tech & Devices",
-      desc: "Experience real-time telemetry from muscle EMG sensors, inertial sensors, and smartwatch kinematics.",
-      icon: <Watch className="w-5 h-5 text-teal" />
-    },
-    {
-      title: "Sports Medicine Innovation",
-      desc: "Discover breakthrough clinical insights on cartilage healing, ligament recovery protocols, and joint stability.",
-      icon: <Activity className="w-5 h-5 text-teal" />
-    },
-    {
-      title: "Hands-on Experience",
-      desc: "Get real-world exposure to emerging AI interfaces, motion-capture sensor hubs, and VR tools.",
-      icon: <Layers className="w-5 h-5 text-teal" />
-    },
-    {
-      title: "Interdisciplinary Networking",
-      desc: "Bridge connections between orthopaedic surgeons, sports biomechanists, rehabilitation therapists, and engineers.",
-      icon: <Users className="w-5 h-5 text-teal" />
-    }
-  ];
-
+// ─── Dignitaries / Chief & Special Guests Section (Image 3) ────────────────────
+function DignitariesSection() {
   return (
-    <section className="py-24 bg-white border-t border-slate-100 relative z-10 text-left">
+    <section className="py-20 bg-gradient-to-b from-white to-slate-50 border-t border-slate-200/80 relative z-10 text-left">
       <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-16">
-        <div className="max-w-2xl mb-16">
-          <span className="text-[#00A896] text-[10px] font-bold uppercase tracking-widest bg-[#00A896]/5 border border-[#00A896]/10 px-3.5 py-1.5 rounded-full">
-            Key Objectives
+
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-14">
+          <span className="text-[#00A896] text-[10px] font-bold uppercase tracking-widest bg-[#00A896]/10 border border-[#00A896]/20 px-3.5 py-1.5 rounded-full">
+            Brochure Page 3 • Guest Dignitaries
           </span>
           <h2 className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-[#004B57] uppercase mt-4">
-            Why Attend ARISE 2026?
+            Chief & Special Guests
           </h2>
           <p className="text-slate-500 font-semibold text-xs sm:text-sm mt-2 leading-relaxed">
-            Delve into five core clinical and engineering pillars designed to revolutionize athletic assessment.
+            Honored by leaders from the Government of Tamil Nadu, Sports Authority of India, and Academic Institutions.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-          {points.map((p, idx) => (
+        {/* Chief Guest Banner */}
+        <div className="max-w-4xl mx-auto mb-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-gradient-to-r from-[#004B57] via-[#005F6E] to-[#004B57] rounded-3xl p-6 sm:p-8 text-white relative overflow-hidden shadow-xl border border-[#00A896]/30 text-center"
+          >
+            <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-[#FF8C00]/15 blur-3xl pointer-events-none" />
+            <div className="relative z-10 flex flex-col items-center">
+              <span className="bg-[#FF8C00] text-white text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full shadow-md mb-3">
+                CHIEF GUEST
+              </span>
+              <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl font-black text-white uppercase tracking-tight">
+                Dr. K. G. ARUNRAJ
+              </h3>
+              <p className="text-[#00A896] font-bold uppercase tracking-wider text-xs sm:text-sm mt-2 bg-white/10 px-4 py-1 rounded-full border border-white/10 inline-block">
+                HONORABLE HEALTH MINISTER, TAMIL NADU
+              </p>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Special Guests Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {[
+            {
+              badge: "SPECIAL GUEST",
+              name: "Dr. N. SHARATH CHANDRA YADAV",
+              role: "Regional Director",
+              inst: "Sports Authority of India (SAI)"
+            },
+            {
+              badge: "SPECIAL GUEST",
+              name: "Dr. PSS. SRINIVASAN",
+              qual: "B.E., M.Tech.(IIT-B), Ph.D., MISTE., ISHMT., FMFPI",
+              role: "Founder & Executive Chairman",
+              inst: "Knowledge Institute of Technology"
+            },
+            {
+              badge: "SPECIAL GUEST",
+              name: "Dr. K. VISAGAVEL",
+              qual: "B.E., M.E., Ph.D., FIE.",
+              role: "Principal",
+              inst: "Knowledge Institute of Technology"
+            }
+          ].map((g, idx) => (
             <motion.div
               key={idx}
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: idx * 0.08 }}
-              className="bg-slate-50 border border-slate-200/60 rounded-3xl p-6 flex flex-col justify-between hover:shadow-xl hover:shadow-[#00A896]/5 hover:border-teal/30 hover:-translate-y-1 transition-all duration-300"
+              transition={{ delay: idx * 0.1 }}
+              className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between text-center relative overflow-hidden group border-t-4 border-t-[#00A896]"
             >
-              <div className="space-y-4">
-                <div className="w-10 h-10 bg-[#E0F2F1] rounded-xl flex items-center justify-center shadow-inner">
-                  {p.icon}
-                </div>
-                <h3 className="font-display text-sm font-extrabold uppercase text-[#004B57] tracking-tight">
-                  {p.title}
-                </h3>
-                <p className="text-xs text-slate-500 font-semibold leading-relaxed">
-                  {p.desc}
-                </p>
+              <div>
+                <span className="text-[9px] font-bold text-[#00A896] uppercase tracking-widest bg-[#00A896]/10 px-2.5 py-1 rounded-full inline-block mb-3">
+                  {g.badge}
+                </span>
+                <h4 className="font-display text-base sm:text-lg font-black text-[#004B57] uppercase tracking-wide leading-snug">
+                  {g.name}
+                </h4>
+                {g.qual && (
+                  <p className="text-[10px] text-slate-400 font-semibold mt-1 leading-tight">
+                    {g.qual}
+                  </p>
+                )}
+              </div>
+
+              <div className="mt-4 pt-4 border-t border-slate-100">
+                <span className="text-xs font-extrabold text-slate-700 block">{g.role}</span>
+                <span className="text-[11px] font-bold text-[#00A896] block">{g.inst}</span>
               </div>
             </motion.div>
           ))}
         </div>
+
       </div>
     </section>
   );
 }
 
-// ─── Who Should Attend Section ────────────────────────────────────────────────
-function WhoShouldAttendSection() {
-  const groups = [
-    { name: "Orthopaedic Surgeons", icon: <Award className="w-5 h-5 text-teal" /> },
-    { name: "Sports Physicians & Medical Students", icon: <Users className="w-5 h-5 text-teal" /> },
-    { name: "Physiotherapists & Rehab Specialists", icon: <Activity className="w-5 h-5 text-teal" /> },
-    { name: "Biomedical Professionals", icon: <Compass className="w-5 h-5 text-teal" /> },
-    { name: "Engineers & Researchers", icon: <Layers className="w-5 h-5 text-teal" /> },
-    { name: "Athletic Trainers", icon: <Briefcase className="w-5 h-5 text-teal" /> },
-    { name: "AI & ML Engineers", icon: <Brain className="w-5 h-5 text-teal" /> },
-    { name: "Medical Device Developers", icon: <Watch className="w-5 h-5 text-teal" /> }
+// ─── Session Overview / Scientific Programme Schedule Section (Image 2) ────────
+function ScheduleSection() {
+  const [activeTab, setActiveTab] = useState<string>("ALL");
+
+  const scheduleData = [
+    {
+      time: "08:30 AM - 09:15 AM",
+      session: "REGISTRATION",
+      title: "Participant Check-In & Registration Kit Distribution",
+      speaker: "Organizing Team",
+      role: "Valli Super Speciality Hospital & KIOT Volunteers",
+      type: "BREAK",
+      icon: <FileText className="w-4 h-4 text-teal" />
+    },
+    {
+      time: "09:30 AM - 10:00 AM",
+      session: "SESSION I",
+      title: "Strategic AI Adoption in Sports Medicine Education: The Fine Line Between Independence and Dependence",
+      speaker: "Dr. Bharat Pulavarti, M.B.B.S, M.D (PMR)",
+      role: "Physical Medicine & Rehabilitation, Sports Injury Centre, Safdarjung Hospital, New Delhi",
+      type: "KEYNOTE",
+      icon: <Brain className="w-4 h-4 text-teal" />
+    },
+    {
+      time: "10:00 AM - 10:30 AM",
+      session: "SESSION I",
+      title: "Load Monitoring Injury Linkage Tracking by Biomarkers and Management",
+      speaker: "Mr. Tambi Medabala, M.Sc",
+      role: "Sports Physiologist; High Performance Director (Sports Sciences) NSNIS Patiala Under SAI",
+      type: "KEYNOTE",
+      icon: <Activity className="w-4 h-4 text-teal" />
+    },
+    {
+      time: "10:30 AM - 11:00 AM",
+      session: "SESSION I",
+      title: "INAUGURATION CEREMONY",
+      speaker: "Chief Guest & Dignitaries",
+      role: "Official Opening & Lamp Lighting",
+      type: "EVENT",
+      icon: <Sparkles className="w-4 h-4 text-amber-500" />
+    },
+    {
+      time: "11:00 AM - 11:30 AM",
+      session: "SESSION I",
+      title: "The Future of Human Motion Analysis - AI, Biomechanics and Personalised Rehabilitation",
+      speaker: "Dr. Rahul Tiwari, Ph.D",
+      role: "Head of Sports Performance Analysis, Inspire Institute of Sport (IIS), Karnataka",
+      type: "KEYNOTE",
+      icon: <Watch className="w-4 h-4 text-teal" />
+    },
+    {
+      time: "11:30 AM - 12:00 PM",
+      session: "SESSION I",
+      title: "EEG-Based Motor Imagery and Virtual Reality for Sports Medicine",
+      speaker: "Dr. Kishor Lakshminarayanan, Ph.D",
+      role: "Associate Professor, School of Healthcare Science and Engineering, VIT, Vellore",
+      type: "KEYNOTE",
+      icon: <Brain className="w-4 h-4 text-teal" />
+    },
+    {
+      time: "12:00 PM - 12:15 PM",
+      session: "SESSION I",
+      title: "Tea Break & Networking",
+      speaker: "All Participants",
+      role: "Refresher & Coffee Lounge",
+      type: "BREAK",
+      icon: <Coffee className="w-4 h-4 text-amber-600" />
+    },
+    {
+      time: "12:15 PM - 12:45 PM",
+      session: "SESSION II",
+      title: "Wearables and Sensors - Practical Applications for Athlete Recovery and Readiness",
+      speaker: "Mr. Aditya Subramanyam, M.S.",
+      role: "Sports Scientist, Department of Sports Science and Sports Medicine - Vijayi Bharath Foundation, Gujarat",
+      type: "KEYNOTE",
+      icon: <Watch className="w-4 h-4 text-teal" />
+    },
+    {
+      time: "12:45 PM - 01:15 PM",
+      session: "SESSION II",
+      title: "Structuring AI for Health and Sports Performance among Athletes of Special Olympics",
+      speaker: "Dr. R. Karthikeyan, M.B.B.S, M.D (PMR)",
+      role: "Prof & Head, Dept of Physical Medicine and Rehabilitation, SRM Medical College Hospital, Kattankulathur",
+      type: "KEYNOTE",
+      icon: <Stethoscope className="w-4 h-4 text-teal" />
+    },
+    {
+      time: "01:15 PM - 01:30 PM",
+      session: "SESSION II",
+      title: "Interactive Q&A Session & Live Kahoot Quiz",
+      speaker: "Session Chairs & Faculty",
+      role: "Audience Participation & Prize Distribution",
+      type: "EVENT",
+      icon: <HelpCircle className="w-4 h-4 text-teal" />
+    },
+    {
+      time: "01:30 PM - 02:15 PM",
+      session: "SESSION II",
+      title: "Lunch Break",
+      speaker: "All Participants",
+      role: "Hospitality Dining Area",
+      type: "BREAK",
+      icon: <Utensils className="w-4 h-4 text-emerald-600" />
+    },
+    {
+      time: "02:15 PM - 03:00 PM",
+      session: "SESSION III",
+      title: "Footwear as Medicine; Biomechanical Assessment for Smarter Footwear Selection",
+      speaker: "Dr. Rahul Tiwari, Ph.D",
+      role: "Head of Sports Performance Analysis, Inspire Institute of Sport (IIS)",
+      type: "WORKSHOP",
+      icon: <Layers className="w-4 h-4 text-[#FF8C00]" />
+    },
+    {
+      time: "03:00 PM - 03:45 PM",
+      session: "SESSION III",
+      title: "Hands on Workshop on Tele Rehabilitation Using VR",
+      speaker: "Dr. Kishor Lakshminarayanan, Ph.D",
+      role: "Associate Professor, VIT Vellore",
+      type: "WORKSHOP",
+      icon: <Layers className="w-4 h-4 text-[#FF8C00]" />
+    },
+    {
+      time: "03:45 PM - 04:30 PM",
+      session: "SESSION III",
+      title: "Cardiac Load Monitoring using Wearable Sensors",
+      speaker: "Miss G.Sri Gayathri, M.S.",
+      role: "Lead Researcher, Acrophase, Human performance lab, IIT Madras",
+      type: "WORKSHOP",
+      icon: <Layers className="w-4 h-4 text-[#FF8C00]" />
+    },
+    {
+      time: "04:30 PM Onwards",
+      session: "SESSION IV",
+      title: "Valedictory & Feedback Session",
+      speaker: "Organizing Committee & Faculty",
+      role: "Certificate Distribution & Closing Remarks",
+      type: "EVENT",
+      icon: <Award className="w-4 h-4 text-[#00A896]" />
+    }
   ];
 
+  const filteredData = activeTab === "ALL"
+    ? scheduleData
+    : scheduleData.filter(item => item.session === activeTab);
+
   return (
-    <section className="py-20 bg-slate-50 border-t border-slate-100 text-left relative z-10">
+    <section id="schedule" className="py-24 bg-white border-t border-slate-200 text-left relative z-10">
       <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-16">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-[#00A896] text-[10px] font-bold uppercase tracking-widest bg-white border border-[#00A896]/15 px-3.5 py-1.5 rounded-full shadow-sm">
-            Audience Profiles
+
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-14">
+          <span className="text-[#00A896] text-[10px] font-bold uppercase tracking-widest bg-[#00A896]/10 border border-[#00A896]/20 px-3.5 py-1.5 rounded-full">
+            Brochure Page 2 • Full Scientific Agenda
           </span>
-          <h2 className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-[#004B57] uppercase mt-4">
-            Who Should Attend?
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#004B57] uppercase mt-4">
+            SESSION OVERVIEW
           </h2>
           <p className="text-slate-500 font-semibold text-xs sm:text-sm mt-2 leading-relaxed">
-            This CME creates an intersection of clinical medical streams, sports science, and software engineering.
+            Detailed timeline featuring lectures, clinical keynotes, interactive Q&As, and hands-on workshops.
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-          {groups.map((g, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: idx * 0.05 }}
-              className="bg-white border border-slate-200/80 rounded-2xl p-5 flex flex-col items-center text-center justify-center shadow-sm hover:shadow-md transition-all duration-300"
+        {/* Tab Filters */}
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
+          {[
+            { id: "ALL", label: "All Sessions" },
+            { id: "SESSION I", label: "Session I (Morning)" },
+            { id: "SESSION II", label: "Session II (Midday)" },
+            { id: "SESSION III", label: "Session III (3 Hands-on Workshops)" },
+            { id: "SESSION IV", label: "Session IV (Valedictory)" }
+          ].map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`px-4 py-2.5 rounded-2xl text-xs font-bold transition-all ${activeTab === tab.id
+                ? "bg-[#004B57] text-white shadow-md"
+                : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                }`}
             >
-              <div className="w-10 h-10 bg-[#E0F2F1]/80 rounded-full flex items-center justify-center mb-3">
-                {g.icon}
-              </div>
-              <span className="text-[11px] sm:text-xs font-bold text-slate-700 uppercase tracking-wide leading-tight">
-                {g.name}
-              </span>
-            </motion.div>
+              {tab.label}
+            </button>
           ))}
         </div>
+
+        {/* Schedule Table / List */}
+        <div className="max-w-5xl mx-auto space-y-4">
+          {filteredData.map((item, index) => {
+            const isWorkshop = item.type === "WORKSHOP";
+            const isBreak = item.type === "BREAK";
+
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.03 }}
+                className={`p-5 sm:p-6 rounded-3xl border transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between gap-4 ${isWorkshop
+                  ? "bg-gradient-to-r from-orange-50/90 to-amber-50/60 border-orange-200 shadow-sm"
+                  : isBreak
+                    ? "bg-slate-50 border-slate-200/60"
+                    : "bg-white border-slate-200/90 hover:border-[#00A896]/40 hover:shadow-md"
+                  }`}
+              >
+                {/* Time & Session Badge */}
+                <div className="md:w-64 shrink-0 space-y-1">
+                  <div className="flex items-center gap-2 text-xs font-bold text-[#00A896]">
+                    <Clock className="w-4 h-4 text-[#FF8C00]" />
+                    <span>{item.time}</span>
+                  </div>
+                  <span
+                    className={`inline-block text-[9px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full ${isWorkshop
+                      ? "bg-[#FF8C00] text-white"
+                      : "bg-[#004B57]/10 text-[#004B57]"
+                      }`}
+                  >
+                    {item.session}
+                  </span>
+                </div>
+
+                {/* Scientific Programme Title */}
+                <div className="flex-1 space-y-1">
+                  <h4 className="font-display text-sm sm:text-base font-extrabold text-[#004B57] leading-snug">
+                    {item.title}
+                  </h4>
+                  {isWorkshop && (
+                    <span className="inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-widest text-[#FF8C00]">
+                      <Sparkles className="w-3 h-3" /> Hands-on Masterclass Session
+                    </span>
+                  )}
+                </div>
+
+                {/* Speaker Info */}
+                <div className="md:w-72 shrink-0 md:text-right pt-2 md:pt-0 border-t md:border-t-0 border-slate-100">
+                  <span className="font-extrabold text-xs text-slate-800 block">
+                    {item.speaker}
+                  </span>
+                  <span className="text-[10px] text-slate-500 font-semibold leading-tight block">
+                    {item.role}
+                  </span>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+
       </div>
     </section>
   );
 }
 
-
-
-// ─── Our Faculty Section ─────────────────────────────────────────────────────
+// ─── Our Faculty Section (Image 4) ─────────────────────────────────────────────
 function FacultySection() {
   const faculty = [
     {
-      name: "DR. R.KARTHIKEYAN, M.B.B.S, M.D (PMR)",
-      title: "Prof & Head, Dept of Physical Medicine & Rehabilitation",
-      affiliation: "SRM Medical College Hospital and Research Centre, Tamil Nadu",
+      name: "Dr. R. Karthikeyan, M.B.B.S, M.D (PMR)",
+      title: "Prof & Head, Dept of Physical Medicine and Rehabilitation",
+      affiliation: "SRM Medical College Hospital, Kattankulathur",
       img: "/SpeakersIMG/Karthikeyan.png",
       position: "object-center"
     },
     {
-      name: "MR. TAMBI MEDABALAN, M.SC",
+      name: "Mr. Tambi Medabala, M.Sc",
       title: "High Performance Director (Sports Science) Exercise Physiology & Human Performance",
       affiliation: "Sports Authority of India (SAI), NSNIS Patiala",
       img: "/SpeakersIMG/Tambi.png",
       position: "object-center"
     },
     {
-      name: "DR. RAHUL TIWARI, PH.D.",
+      name: "Dr. Rahul Tiwari, Ph.D",
       title: "Head of Sports Performance Analysis",
       affiliation: "Inspire Institute of Sport (IIS), Karnataka",
       img: "/SpeakersIMG/RahulTiwari.png",
       position: "object-top"
     },
     {
-      name: "DR. KISHOR LAKSHMINARAYANAN, PH.D",
+      name: "Dr. Kishor Lakshminarayanan, Ph.D",
       title: "Associate Professor",
-      affiliation: "School of Healthcare Science and Engineering, VIT Vellore",
+      affiliation: "School of Healthcare Science and Engineering, VIT, Vellore",
       img: "/SpeakersIMG/KishorLakshminarayanan.jpg",
       position: "object-center"
     },
     {
-      name: "DR. BHARAT PULAVARTI, M.B.B.S, M.D (PMR)",
-      title: "Physical Medicine and Rehabilitation",
-      affiliation: "Sports Injury Centre New Delhi",
+      name: "Dr. Bharat Pulavarti, M.B.B.S, M.D (PMR)",
+      title: "Physical Medicine & Rehabilitation",
+      affiliation: "Sports Injury Centre, Delhi",
       img: "/SpeakersIMG/BharatPulavarti.jpg",
       position: "object-center"
     },
     {
-      name: "MR. ADITYA SUBRAMANYAM, M.S",
+      name: "Mr. Aditya Subramanyam, M.S.",
       title: "Sports Scientist",
-      affiliation: "Department of Sports Science, Vijayi Bharat Foundation, Gujarat",
+      affiliation: "Department of Sports Science and Sports Medicine - Vijayi Bharath Foundation, Gujarat",
       img: "/SpeakersIMG/aditya.png",
       position: "object-center"
+    },
+    {
+      name: "Miss G. Sri Gayathri, M.S.",
+      title: "Lead Researcher, Acrophase",
+      affiliation: "Human performance lab, IIT Madras",
+      img: "/SpeakersIMG/gayathri.jpeg",
+      position: "object-contain p-2 bg-white"
     }
   ];
 
   return (
-    <section id="faculty" className="py-24 bg-slate-50 border-t border-slate-100 text-left relative z-10">
+    <section id="faculty" className="py-24 bg-slate-50 border-t border-slate-200 text-left relative z-10">
       <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-16">
+
+        {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <span className="text-[#00A896] text-[10px] font-bold uppercase tracking-widest bg-white border border-[#00A896]/15 px-3.5 py-1.5 rounded-full shadow-sm">
-            Event Lecturers
+            Brochure Page 4 • Distinguished Lecturers
           </span>
           <h2 className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-[#004B57] uppercase mt-4">
-            Distinguished Faculty
+            OUR FACULTY
           </h2>
           <p className="text-slate-500 font-semibold text-xs sm:text-sm mt-2 leading-relaxed">
-            Learn from leading experts in sports physiotherapy, clinical medicine, engineering, and data sciences.
+            Leading researchers and clinical experts spearheading sessions at ARISE 2026.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        {/* Faculty Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {faculty.map((f, idx) => (
             <motion.div
               key={idx}
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="bg-white border border-slate-200 rounded-3xl p-6 flex items-start gap-4 shadow-sm hover:shadow-md transition-all duration-300"
+              transition={{ duration: 0.5, delay: idx * 0.08 }}
+              className="bg-white border border-slate-200/90 rounded-3xl p-5 flex items-start gap-4 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5"
             >
               {/* Doctor Avatar */}
-              <div className="w-18 h-22 rounded-2xl bg-slate-100 overflow-hidden flex-shrink-0 border border-slate-200">
+              <div className="w-20 h-24 rounded-2xl bg-slate-100 overflow-hidden shrink-0 border border-slate-200 relative shadow-inner">
                 <Image
                   src={f.img}
                   alt={f.name}
                   width={150}
                   height={150}
-                  className={`w-full h-full object-left ${f.position}`}
+                  className={`w-full h-full object-cover ${f.position}`}
                 />
               </div>
 
               {/* Doctor Bio */}
-              <div className="space-y-1 self-center">
-                <h3 className="text-xs sm:text-sm font-extrabold text-[#004b57] uppercase tracking-wide leading-tight">
+              <div className="space-y-1 self-center min-w-0">
+                <h3 className="text-xs sm:text-sm font-extrabold text-[#004B57] uppercase tracking-wide leading-tight">
                   {f.name}
                 </h3>
                 <span className="block text-[10px] text-[#00A896] font-bold uppercase tracking-wider">
@@ -489,335 +808,263 @@ function FacultySection() {
           ))}
         </div>
 
-        {/* Featured Workshops Section */}
-        <div id="workshops" className="mt-20 border-t border-slate-200 pt-16 max-w-5xl mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-[#00A896] text-[10px] font-bold uppercase tracking-widest bg-white border border-[#00A896]/15 px-3.5 py-1.5 rounded-full shadow-sm">
-              Hands-on Masterclasses
-            </span>
-            <h3 className="font-display text-2xl sm:text-3xl font-black tracking-tight text-[#004B57] uppercase mt-3">
-              Featured Interactive Workshops
-            </h3>
-            <p className="text-slate-500 font-semibold text-xs sm:text-sm mt-2 leading-relaxed">
-              Experience practical, hands-on learning led by pioneering researchers and sports science experts.
-            </p>
-          </div>
-
-          <div className="space-y-8">
-            {[
-              {
-                title: "Footwear as Medicine; Biomechanical Assessment for Smarter Footwear Selection",
-                lead: "Dr. Rahul Tiwari, Ph.D.",
-                role: "Head of Sports Performance Analysis",
-                affiliation: "Inspire Institute of Sport (IIS), Karnataka",
-                img: "/SpeakersIMG/RahulTiwari.png",
-                imgStyle: "object-cover object-top",
-                badge: "Biomechanical Assessment",
-                desc: "A hands-on workshop on lower limb kinematics, plantagrade pressure dynamics, gait evaluation, and evidence-based biomechanical criteria for clinical and sports footwear selection."
-              },
-              {
-                title: "Hands on Workshop on Tele Rehabilitation Using VR",
-                lead: "Dr. Kishor Lakshminarayanan, Ph.D",
-                role: "Associate Professor",
-                affiliation: "School of Healthcare Science and Engineering, VIT Vellore",
-                img: "/SpeakersIMG/KishorLakshminarayanan.jpg",
-                imgStyle: "object-cover object-center",
-                badge: "Virtual Reality & Telerehab",
-                desc: "Immersive hands-on training with virtual reality environments, motion tracking sensors, and remote digital health frameworks transforming patient recovery."
-              },
-              {
-                title: "Cardiac Load Monitoring Using Wearable Sensors",
-                lead: "Sri Gayathri.G",
-                role: "Lead Researcher",
-                affiliation: "Acrophase, Human Performance Lab, IIT Madras",
-                img: "/assets/acrophase-logo.jpg",
-                imgStyle: "object-contain p-2 bg-white",
-                badge: "Wearable Sensor Telemetry",
-                desc: "An exclusive interactive session showcasing real-time telemetry, continuous cardiovascular monitoring, and wearable sensor research engineered at the Human Performance Lab, IIT Madras."
-              }
-            ].map((w, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="bg-gradient-to-br from-[#004B57] to-[#002D35] rounded-[2.5rem] p-8 sm:p-10 text-white relative overflow-hidden border border-[#00A896]/30 shadow-xl text-left hover:shadow-2xl transition-all duration-300"
-              >
-                {/* Background Glow Orbs */}
-                <div className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-[#FF8C00]/15 blur-3xl pointer-events-none" />
-                <div className="absolute -left-20 -top-20 w-80 h-80 rounded-full bg-[#00A896]/20 blur-3xl pointer-events-none" />
-
-                <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                  {/* Left / Facilitator Avatar & Details */}
-                  <div className="lg:col-span-5 flex flex-col items-center text-center p-6 bg-white/10 backdrop-blur-md rounded-3xl border border-white/15 shadow-inner">
-                    <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl bg-white p-1.5 shadow-xl border-2 border-[#FF8C00]/40 flex items-center justify-center overflow-hidden mb-4 hover:scale-105 transition-transform duration-300">
-                      <Image
-                        src={w.img}
-                        alt={w.lead}
-                        width={140}
-                        height={140}
-                        className={`w-full h-full rounded-xl ${w.imgStyle}`}
-                      />
-                    </div>
-                    <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#FF8C00] bg-[#FF8C00]/15 border border-[#FF8C00]/30 px-3 py-1 rounded-full mb-2">
-                      Hands-on Workshop Lead
-                    </span>
-                    <h3 className="font-display text-lg font-black text-white uppercase tracking-wide leading-snug">
-                      {w.lead}
-                    </h3>
-                    <p className="text-xs text-[#00A896] font-bold uppercase tracking-wider mt-1">
-                      {w.role}
-                    </p>
-                    <p className="text-[11px] text-slate-300 font-semibold mt-1 leading-snug">
-                      {w.affiliation}
-                    </p>
-                  </div>
-
-                  {/* Right / Workshop Details & Topic */}
-                  <div className="lg:col-span-7 space-y-4">
-                    <div className="inline-flex items-center gap-2 text-xs font-bold text-[#00A896] uppercase tracking-widest bg-[#00A896]/15 border border-[#00A896]/30 px-3.5 py-1.5 rounded-full">
-                      <Activity size={14} className="text-[#00A896]" /> {w.badge}
-                    </div>
-                    <div className="space-y-2">
-                      <span className="block text-[11px] font-bold uppercase tracking-widest text-[#FF8C00]">
-                        Workshop Topic
-                      </span>
-                      <h4 className="font-display text-xl sm:text-2xl font-black text-white uppercase tracking-tight leading-snug">
-                        {w.title}
-                      </h4>
-                    </div>
-                    <p className="text-xs sm:text-sm text-slate-200 font-semibold leading-relaxed">
-                      {w.desc}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Committees Section */}
-        <div className="mt-20 border-t border-slate-200 pt-16 max-w-5xl mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-[#00A896] text-[10px] font-bold uppercase tracking-widest bg-white border border-[#00A896]/15 px-3.5 py-1.5 rounded-full shadow-sm">
-              Event Leadership
-            </span>
-            <h3 className="font-display text-2xl sm:text-3xl font-black tracking-tight text-[#004B57] uppercase mt-3">
-              Organising Committee
-            </h3>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                role: "Organising Chairman",
-                name: "Dr. T. Natanasabapathy",
-                credentials: "MBBS, MS(ORTHO), FIAS, FDFM",
-                img: "/SpeakersIMG/TNS.jpeg"
-              },
-              {
-                role: "Organising Secretary",
-                name: "Dr. E. Aakash",
-                credentials: "MBBS, MS ORTHO, FIJR, FIOT, FDEM",
-                img: "/SpeakersIMG/aakash.jpeg"
-              },
-              {
-                role: "Scientific Committee",
-                name: "Prof. Dr. A. Rajan Samuel",
-                credentials: "Ph.D(PT), MIAP, MCMT, VMRF Director (Academics)",
-                img: "/SpeakersIMG/rajansamuel.jpeg"
-              },
-              {
-                role: "Organising Coordinators",
-                name: "Dr. D. Leela Kumari (PT)",
-                credentials: "BPT, FDFM",
-                img: "/SpeakersIMG/leela.jpeg"
-              },
-              {
-                role: "Organising Coordinators",
-                name: "Dr. V. Kaviya Sri (PT)",
-                credentials: "BPT, FDFM",
-                img: "/SpeakersIMG/kavya.jpeg"
-              }
-
-            ].map((c, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="bg-white border border-slate-200 rounded-3xl p-5 flex items-center gap-4 shadow-sm hover:shadow-md transition-all duration-300"
-              >
-                {/* Avatar */}
-                <div className="w-16 h-20 rounded-2xl bg-slate-100 overflow-hidden flex-shrink-0 border border-slate-200 relative">
-                  <Image
-                    src={c.img}
-                    alt={c.name}
-                    width={100}
-                    height={125}
-                    className="w-full h-full object-cover object-center"
-                  />
-                </div>
-                {/* Details */}
-                <div className="space-y-1 text-left min-w-0">
-                  <span className="block text-[9px] font-bold uppercase text-[#00A896] tracking-wider">
-                    {c.role}
-                  </span>
-                  <h4 className="font-display text-xs sm:text-sm font-black text-[#004B57] uppercase tracking-wide leading-tight break-words">
-                    {c.name}
-                  </h4>
-                  <p className="text-[10px] text-slate-500 font-semibold leading-snug break-words">
-                    {c.credentials}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );
 }
 
-// ─── Pricing & CTA Section ────────────────────────────────────────────────────
+// ─── Organizing Committee Section (Image 3) ────────────────────────────────────
+function CommitteeSection() {
+  const committee = [
+    {
+      role: "ORGANIZING CHAIRMAN",
+      name: "Dr. T. NATANASABAPATHY",
+      title: "Chief Orthopedic Surgeon",
+      inst: "Valli Super Speciality Hospital",
+      img: "/SpeakersIMG/TNS.jpeg"
+    },
+    {
+      role: "ORGANIZING CO-CHAIRMAN",
+      name: "Dr. I. VIJAYALAKSHMI",
+      title: "Chief Executive Officer",
+      inst: "Valli Super Speciality Hospital",
+      img: "/SpeakersIMG/mam.jpeg"
+    },
+    {
+      role: "ORGANIZING SECRETARY",
+      name: "Dr. E. AAKASH",
+      title: "Consultant Orthopedic Surgeon",
+      inst: "Valli Super Speciality Hospital",
+      img: "/SpeakersIMG/Aakash.jpeg"
+    },
+    {
+      role: "COMMITTEE MEMBER",
+      name: "Prof. Dr. A. Rajan Samuel",
+      title: "Ph.D(PT), MIAP, MCMT",
+      inst: "VMRF DIRECTOR (ACADEMICS)",
+      img: "/SpeakersIMG/rajansamuel.jpeg"
+    },
+    {
+      role: "COMMITTEE MEMBER",
+      name: "Dr. D. LEELA KUMARI",
+      title: "Physiotherapist",
+      inst: "Valli Super Speciality Hospital",
+      img: "/SpeakersIMG/leela.jpeg"
+    },
+    {
+      role: "COMMITTEE MEMBER",
+      name: "Dr. V. KAVIYA SRI",
+      title: "Physiotherapist",
+      inst: "Valli Super Speciality Hospital",
+      img: "/SpeakersIMG/kavya.jpeg"
+    }
+  ];
+
+  return (
+    <section className="py-24 bg-white border-t border-slate-200 text-left relative z-10">
+      <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-16">
+
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <span className="text-[#00A896] text-[10px] font-bold uppercase tracking-widest bg-[#00A896]/10 border border-[#00A896]/20 px-3.5 py-1.5 rounded-full">
+            Brochure Page 3 • Executive Leadership
+          </span>
+          <h2 className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-[#004B57] uppercase mt-4">
+            Organizing Committee
+          </h2>
+          <p className="text-slate-500 font-semibold text-xs sm:text-sm mt-2 leading-relaxed">
+            The leadership team behind ARISE 2026 at Valli Super Speciality Hospital.
+          </p>
+        </div>
+
+        {/* Committee Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {committee.map((c, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.08 }}
+              className="bg-slate-50 border border-slate-200/80 rounded-3xl p-5 flex items-center gap-4 shadow-sm hover:shadow-md transition-all duration-300"
+            >
+              <div className="w-18 h-22 rounded-2xl bg-white border border-slate-200 overflow-hidden shrink-0 relative shadow-sm">
+                <Image
+                  src={c.img}
+                  alt={c.name}
+                  width={100}
+                  height={125}
+                  className="w-full h-full object-cover object-top"
+                />
+              </div>
+
+              <div className="space-y-1 text-left min-w-0">
+                <span className="block text-[9px] font-extrabold uppercase text-[#FF8C00] tracking-wider">
+                  {c.role}
+                </span>
+                <h4 className="font-display text-xs sm:text-sm font-black text-[#004B57] uppercase tracking-wide leading-tight">
+                  {c.name}
+                </h4>
+                <p className="text-[10px] text-slate-600 font-bold leading-snug">
+                  {c.title}
+                </p>
+                <p className="text-[9px] text-slate-400 font-semibold leading-snug">
+                  {c.inst}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
+// ─── Registration & Pricing Section (Image 4) ──────────────────────────────────
 function PricingSection() {
   return (
-    <section className="py-24 bg-white border-t border-slate-100 text-left relative z-10 overflow-hidden">
-      {/* Glow orb */}
-      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 rounded-full bg-[#00A896]/5 blur-3xl pointer-events-none" />
-
+    <section id="registration" className="py-24 bg-gradient-to-b from-slate-50 to-white border-t border-slate-200 text-left relative z-10 overflow-hidden">
       <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-16 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_430px] gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-12 items-center">
 
-          {/* Left Block */}
+          {/* Left Column: Fees & Information */}
           <div className="space-y-8">
-            <div className="space-y-3">
-              <span className="text-[#00A896] text-[10px] font-bold uppercase tracking-widest bg-[#00A896]/5 border border-[#00A896]/10 px-3.5 py-1.5 rounded-full">
-                Tickets & Pricing
+            <div className="space-y-2">
+              <span className="text-[#00A896] text-[10px] font-bold uppercase tracking-widest bg-[#00A896]/10 border border-[#00A896]/20 px-3.5 py-1.5 rounded-full">
+                Brochure Page 4 • Fee Structure
               </span>
-              <h2 className="font-display text-4xl sm:text-5xl font-black tracking-tight text-[#004B57] uppercase leading-none mt-4">
-                Secure Your Seats
+              <h2 className="font-display text-4xl sm:text-5xl font-black tracking-tight text-[#004B57] uppercase leading-none mt-3">
+                REGISTRATION
               </h2>
               <div className="w-16 h-1 bg-[#FF8C00] rounded-full mt-2" />
             </div>
 
-            {/* Live Countdown Clock */}
-            <div className="bg-slate-50 border border-slate-200/60 p-5 rounded-[2rem] shadow-inner inline-block">
+            {/* Live Countdown Timer */}
+            <div className="bg-white border border-slate-200 p-5 rounded-3xl shadow-sm">
+              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-3">
+                Event Starts In:
+              </span>
               <CountdownTimer />
             </div>
 
-            {/* Tickets Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
-              {[
-                {
-                  cat: "Students / Interns",
-                  price: "₹1,000",
-                  desc: "Special ₹1,000 rate for Student / Intern designation.",
-                  icon: <Users className="w-4 h-4 text-teal" />
-                },
-                {
-                  cat: "Bulk Student Offer (30+)",
-                  price: "₹500 / student",
-                  desc: "50% OFF for 30 students group booking (₹15,000 total).",
-                  icon: <Users className="w-4 h-4 text-[#FF8C00]" />
-                },
-                {
-                  cat: "Professional & Consultant",
-                  price: "₹2,000",
-                  desc: "Includes full CME access & certificate credits.",
-                  icon: <Briefcase className="w-4 h-4 text-teal" />
-                },
-                {
-                  cat: "Hands-on Workshops",
-                  price: "₹500",
-                  desc: "Practical interactive masterclass add-on ticket.",
-                  icon: <QrCode className="w-4 h-4 text-[#FF8C00]" />
-                }
-              ].map((card, idx) => (
-                <div key={idx} className="bg-slate-50 border border-slate-250 p-5 rounded-2xl flex flex-col justify-between h-[185px]">
-                  <div className="space-y-1.5">
-                    <span className="flex items-center gap-1.5 text-[9px] font-bold text-slate-450 uppercase tracking-widest">
-                      {card.icon} {card.cat}
-                    </span>
-                    <p className="text-[10px] text-slate-400 font-semibold leading-snug">
-                      {card.desc}
-                    </p>
-                  </div>
-                  <span className="font-display text-xl sm:text-2xl font-black tracking-tight block text-[#004B57]">
-                    {card.price}
+            {/* Pricing Cards Grid (Exact matching Brochure Page 4) */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="bg-white border-2 border-[#00A896]/30 p-6 rounded-3xl shadow-sm flex flex-col justify-between text-left relative overflow-hidden">
+                <div className="space-y-2">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-[#00A896] bg-[#00A896]/10 px-2.5 py-1 rounded-full inline-block">
+                    STUDENT RATE
+                  </span>
+                  <h3 className="font-display text-sm font-extrabold text-[#004B57] uppercase">
+                    Students
+                  </h3>
+                  <p className="text-[10px] text-slate-500 font-semibold">
+                    Applicable for UG/PG medical & physiotherapy students.
+                  </p>
+                </div>
+                <div className="mt-4 pt-4 border-t border-slate-100">
+                  <span className="font-display text-3xl font-black text-[#004B57]">
+                    ₹1,000
                   </span>
                 </div>
-              ))}
-            </div>
+              </div>
 
-            {/* Contacts & Bulk Orders */}
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-4 border-t border-slate-100 text-slate-800 font-bold text-sm sm:text-base">
-              <span className="flex items-center gap-2 text-[#00A896] font-extrabold uppercase text-xs sm:text-sm tracking-wider">
-                <Phone className="w-4.5 h-4.5 text-[#00A896]" /> Contact
-              </span>
-              <div className="flex items-center gap-3 font-extrabold text-sm sm:text-base text-[#004B57]">
-                <a href="tel:+917092777764" className="hover:text-[#00A896] transition-colors">+91 7092777764</a>
-                <span className="text-slate-300">•</span>
-                <a href="tel:+918220377047" className="hover:text-[#00A896] transition-colors">+91 82203 77047</a>
+              <div className="bg-white border-2 border-[#FF8C00]/30 p-6 rounded-3xl shadow-sm flex flex-col justify-between text-left relative overflow-hidden">
+                <div className="space-y-2">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-[#FF8C00] bg-[#FF8C00]/10 px-2.5 py-1 rounded-full inline-block">
+                    PROFESSIONAL RATE
+                  </span>
+                  <h3 className="font-display text-sm font-extrabold text-[#004B57] uppercase">
+                    Professionals, Consultants & Graduates
+                  </h3>
+                  <p className="text-[10px] text-slate-500 font-semibold">
+                    Includes CME credits, full sessions & delegate kit.
+                  </p>
+                </div>
+                <div className="mt-4 pt-4 border-t border-slate-100">
+                  <span className="font-display text-3xl font-black text-[#004B57]">
+                    ₹2,000
+                  </span>
+                </div>
+              </div>
+
+              <div className="bg-white border-2 border-teal/30 p-6 rounded-3xl shadow-sm flex flex-col justify-between text-left relative overflow-hidden">
+                <div className="space-y-2">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-teal bg-teal/10 px-2.5 py-1 rounded-full inline-block">
+                    PRACTICAL ADD-ON
+                  </span>
+                  <h3 className="font-display text-sm font-extrabold text-[#004B57] uppercase">
+                    Workshop
+                  </h3>
+                  <p className="text-[10px] text-slate-500 font-semibold">
+                    Hands-on interactive masterclass sessions.
+                  </p>
+                </div>
+                <div className="mt-4 pt-4 border-t border-slate-100">
+                  <span className="font-display text-3xl font-black text-[#004B57]">
+                    ₹1,000
+                  </span>
+                </div>
               </div>
             </div>
+
+            {/* Helpline Contacts */}
+            <div className="bg-slate-900 text-white p-6 rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-4 border border-slate-800 shadow-md">
+              <div>
+                <span className="text-[10px] font-bold text-[#00A896] uppercase tracking-wider block">
+                  FOR REGISTRATION ENQUIRIES
+                </span>
+                <p className="text-xs text-slate-300 font-semibold">
+                  Have questions about bulk student discounts or registration?
+                </p>
+              </div>
+              <div className="flex items-center gap-4 font-black text-sm text-[#FF8C00]">
+                <a href="tel:+917092777764" className="hover:text-white transition-colors">+91 7092777764</a>
+                <span>|</span>
+                <a href="tel:+918220377047" className="hover:text-white transition-colors">+91 8220377047</a>
+              </div>
+            </div>
+
           </div>
 
-          {/* Right Block: CTA Box */}
+          {/* Right Column: Instant Registration Card with QR Code */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.5 }}
-            className="relative border border-slate-200 rounded-[2.5rem] bg-white shadow-[0_20px_50px_rgba(0,0,0,0.08)] overflow-hidden group min-w-0"
+            viewport={{ once: true }}
+            className="bg-white border border-slate-200 rounded-[2.5rem] shadow-xl overflow-hidden text-center p-8 relative flex flex-col items-center justify-between space-y-6"
           >
-            {/* Top accent */}
-            <div className="h-3.5 bg-[#FF8C00]" />
-
-            <div className="p-8 pb-8 space-y-6 text-left">
-              <div className="space-y-2">
-                <span className="text-[10px] font-bold text-teal tracking-[0.25em] uppercase block">
-                  Official Conference Booking
-                </span>
-                <h3 className="font-display text-3xl font-black tracking-tight text-[#004B57] uppercase leading-none">
-                  REGISTRATION OPEN NOW
-                </h3>
-              </div>
-
-              <p className="text-slate-500 font-semibold text-xs leading-relaxed">
-                Reserve your slot online by submitting individual info and uploading transaction reference screenshots instantly.
+            <div className="w-full space-y-2 text-center">
+              <span className="text-[10px] font-bold text-[#00A896] tracking-widest uppercase block bg-[#00A896]/10 py-1 px-3 rounded-full">
+                ONLINE REGISTRATION
+              </span>
+              <h3 className="font-display text-2xl font-black text-[#004B57] uppercase">
+                SCAN TO REGISTER
+              </h3>
+              <p className="text-slate-500 font-semibold text-xs">
+                Scan the QR code below using your phone camera or click the register button.
               </p>
-
-              <div className="space-y-4 pt-2">
-                {[
-                  "Quick 3-step registration layout",
-                  "Includes attendance credit credits & certificate",
-                  "Includes lunch and tea hospitality"
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-3">
-                    <div className="w-5 h-5 bg-[#E0F2F1] text-teal rounded-full flex items-center justify-center flex-shrink-0">
-                      <span className="text-teal font-black text-xs">✓</span>
-                    </div>
-                    <span className="text-xs text-slate-600 font-bold leading-none">
-                      {item}
-                    </span>
-                  </div>
-                ))}
-              </div>
             </div>
 
-            {/* Button */}
-            <div className="p-8 pt-6 bg-slate-50 border-t border-slate-100 flex flex-col justify-center min-h-[100px]">
-              <Link
-                href="/iyakkam/arise/register"
-                className="btn-primary btn-orange group/btn w-full justify-center text-sm py-4 rounded-2xl font-bold flex items-center gap-2 shadow-md hover:-translate-y-0.5 transition-transform"
-              >
-                Register Online Now
-                <ArrowRight size={16} className="group-hover/btn:translate-x-1.5 transition-transform" />
-              </Link>
+            {/* QR Code Container */}
+            <div className="p-4 bg-slate-50 border-2 border-dashed border-[#00A896]/30 rounded-3xl inline-block shadow-inner">
+              <Image
+                src="/assets/payment-qr.jpg"
+                alt="ARISE 2026 Registration QR Code"
+                width={200}
+                height={200}
+                className="w-44 h-44 object-contain rounded-2xl"
+              />
             </div>
+
+            {/* Register CTA Button */}
+            <Link
+              href="/iyakkam/arise/register"
+              className="btn-primary btn-orange w-full py-4 rounded-2xl font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg shadow-orange/20 hover:-translate-y-0.5 transition-transform"
+            >
+              <span>Go to Online Registration Form</span>
+              <ArrowRight size={18} />
+            </Link>
           </motion.div>
 
         </div>
@@ -826,15 +1073,141 @@ function PricingSection() {
   );
 }
 
+// ─── Session III: 3 Specialized Workshops Showcase ────────────────────────────
+function WorkshopsSection() {
+  const workshops = [
+    {
+      num: "Workshop 01",
+      time: "02:15 PM – 03:00 PM",
+      title: "Footwear as Medicine; Biomechanical Assessment for Smarter Footwear Selection",
+      speaker: "Dr. Rahul Tiwari, Ph.D",
+      role: "Head of Sports Performance Analysis, Inspire Institute of Sport (IIS), Karnataka",
+      img: "/SpeakersIMG/RahulTiwari.png",
+      badge: "Biomechanical Assessment & Gait Dynamics",
+      desc: "Practical evaluation of lower-limb kinematics, plantagrade pressure mapping, gait diagnostics, and evidence-based criteria for clinical and athletic footwear selection."
+    },
+    {
+      num: "Workshop 02",
+      time: "03:00 PM – 03:45 PM",
+      title: "Hands-on Workshop on Tele Rehabilitation Using VR",
+      speaker: "Dr. Kishor Lakshminarayanan, Ph.D",
+      role: "Associate Professor, School of Healthcare Science & Engineering, VIT Vellore",
+      img: "/SpeakersIMG/KishorLakshminarayanan.jpg",
+      badge: "Virtual Reality & Telerehab",
+      desc: "Immersive hands-on session using virtual reality environments, wireless motion capture sensors, and remote digital health frameworks for telerehabilitation."
+    },
+    {
+      num: "Workshop 03",
+      time: "03:45 PM – 04:30 PM",
+      title: "Cardiac Load Monitoring using Wearable Sensors",
+      speaker: "Miss G. Sri Gayathri, M.S.",
+      role: "Lead Researcher, Acrophase, Human Performance Lab, IIT Madras",
+      img: "/assets/acrophase-logo.jpg",
+      badge: "Wearable Sensor Telemetry",
+      desc: "Real-time cardiovascular telemetry demo, continuous athletic load tracking, and wearable PPG/ECG sensor analytics developed at the Human Performance Lab, IIT Madras."
+    }
+  ];
+
+  return (
+    <section id="workshops" className="py-20 bg-slate-900 text-white relative overflow-hidden text-left border-t border-slate-800">
+      {/* Background glow orbs */}
+      <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-[#FF8C00]/10 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-[#00A896]/15 blur-3xl pointer-events-none" />
+
+      <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-16 relative z-10">
+
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-14">
+          <span className="text-[#FF8C00] text-[10px] font-black uppercase tracking-widest bg-[#FF8C00]/15 border border-[#FF8C00]/30 px-4 py-1.5 rounded-full inline-block shadow-sm">
+            SESSION III • 3 EXCLUSIVE HANDS-ON WORKSHOPS
+          </span>
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-black text-white uppercase tracking-tight mt-4">
+            FEATURED SESSION III WORKSHOPS
+          </h2>
+          <p className="text-slate-300 font-semibold text-xs sm:text-sm mt-2 leading-relaxed">
+            Session III features 3 intensive practical masterclasses designed for clinical doctors, physiotherapists, and sports engineers.
+          </p>
+        </div>
+
+        {/* 3 Workshops Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {workshops.map((w, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              className="bg-slate-800/90 border border-slate-700 hover:border-[#FF8C00]/60 rounded-3xl p-6 sm:p-7 flex flex-col justify-between shadow-xl relative overflow-hidden group hover:-translate-y-1 transition-all duration-300"
+            >
+              <div className="space-y-4">
+                {/* Header Badge */}
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-black text-[#FF8C00] uppercase tracking-widest bg-[#FF8C00]/15 px-3 py-1 rounded-full border border-[#FF8C00]/30">
+                    {w.num}
+                  </span>
+                  <span className="text-xs font-bold text-[#00A896] flex items-center gap-1.5">
+                    <Clock className="w-3.5 h-3.5" /> {w.time}
+                  </span>
+                </div>
+
+                {/* Workshop Title */}
+                <h3 className="font-display text-lg sm:text-xl font-extrabold text-white leading-snug">
+                  {w.title}
+                </h3>
+
+                {/* Badge Tag */}
+                <span className="inline-block text-[10px] font-bold text-[#00A896] bg-[#00A896]/15 border border-[#00A896]/30 px-2.5 py-0.5 rounded-full">
+                  {w.badge}
+                </span>
+
+                {/* Description */}
+                <p className="text-xs text-slate-300 font-medium leading-relaxed">
+                  {w.desc}
+                </p>
+              </div>
+
+              {/* Speaker Card at Bottom */}
+              <div className="mt-6 pt-4 border-t border-slate-700/80 flex items-center gap-3">
+                <div className="w-12 h-12 rounded-xl bg-white/10 overflow-hidden shrink-0 border border-white/20">
+                  <Image
+                    src={w.img}
+                    alt={w.speaker}
+                    width={80}
+                    height={80}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="min-w-0">
+                  <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest block">Workshop Lead</span>
+                  <h4 className="font-bold text-xs text-white truncate">{w.speaker}</h4>
+                  <p className="text-[10px] text-[#00A896] truncate">{w.role}</p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
 // ─── Main Page Assembly ───────────────────────────────────────────────────────
 export default function ArisePage() {
   return (
-    <main className="bg-slate-50 text-slate-800 select-none overflow-x-clip">
+    <main className="bg-white text-slate-800 select-none overflow-x-clip min-h-screen">
       <Navbar />
+      {/* Top spacing to completely clear fixed header navbar (~88px) */}
+      <div className="pt-[84px] sm:pt-[92px]">
+        <PartnerLogosHeader />
+      </div>
       <HeroSection />
-      <WhyAttendSection />
-      <WhoShouldAttendSection />
+      <DignitariesSection />
+      <ScheduleSection />
+      <WorkshopsSection />
       <FacultySection />
+      <CommitteeSection />
       <PricingSection />
       <Footer />
     </main>
