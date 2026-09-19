@@ -291,7 +291,24 @@ export async function saveAriseRegistration(data: {
         institution, department, city, source, transaction_id, payment_screenshot,
         designation, qualification, bonafide_certificate, food_preference,
         iap_credit_points, iap_membership_number, is_verified
-      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19) RETURNING id;`,
+      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19)
+      ON CONFLICT (transaction_id) DO UPDATE SET
+        is_verified = TRUE,
+        full_name = CASE WHEN arise_registrations.full_name = 'ARISE Delegate' OR arise_registrations.full_name LIKE '%(Coordinator)' THEN EXCLUDED.full_name ELSE arise_registrations.full_name END,
+        email_id = CASE WHEN arise_registrations.email_id = 'delegate@vallicountry.com' THEN EXCLUDED.email_id ELSE arise_registrations.email_id END,
+        category = COALESCE(EXCLUDED.category, arise_registrations.category),
+        include_workshop = EXCLUDED.include_workshop,
+        institution = CASE WHEN arise_registrations.institution = 'Healthcare Institution' THEN EXCLUDED.institution ELSE arise_registrations.institution END,
+        department = COALESCE(EXCLUDED.department, arise_registrations.department),
+        city = COALESCE(EXCLUDED.city, arise_registrations.city),
+        source = COALESCE(EXCLUDED.source, arise_registrations.source),
+        designation = COALESCE(EXCLUDED.designation, arise_registrations.designation),
+        qualification = COALESCE(EXCLUDED.qualification, arise_registrations.qualification),
+        bonafide_certificate = COALESCE(EXCLUDED.bonafide_certificate, arise_registrations.bonafide_certificate),
+        food_preference = COALESCE(EXCLUDED.food_preference, arise_registrations.food_preference),
+        iap_credit_points = EXCLUDED.iap_credit_points,
+        iap_membership_number = COALESCE(EXCLUDED.iap_membership_number, arise_registrations.iap_membership_number)
+      RETURNING id, registration_code;`,
       [
         data.registrationCode,
         data.fullName,
@@ -349,7 +366,24 @@ export async function saveAriseRegistration(data: {
           institution, department, city, source, transaction_id, payment_screenshot,
           designation, qualification, bonafide_certificate, food_preference,
           iap_credit_points, iap_membership_number, is_verified
-        ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19) RETURNING id;`,
+        ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19)
+        ON CONFLICT (transaction_id) DO UPDATE SET
+          is_verified = TRUE,
+          full_name = CASE WHEN arise_registrations.full_name = 'ARISE Delegate' OR arise_registrations.full_name LIKE '%(Coordinator)' THEN EXCLUDED.full_name ELSE arise_registrations.full_name END,
+          email_id = CASE WHEN arise_registrations.email_id = 'delegate@vallicountry.com' THEN EXCLUDED.email_id ELSE arise_registrations.email_id END,
+          category = COALESCE(EXCLUDED.category, arise_registrations.category),
+          include_workshop = EXCLUDED.include_workshop,
+          institution = CASE WHEN arise_registrations.institution = 'Healthcare Institution' THEN EXCLUDED.institution ELSE arise_registrations.institution END,
+          department = COALESCE(EXCLUDED.department, arise_registrations.department),
+          city = COALESCE(EXCLUDED.city, arise_registrations.city),
+          source = COALESCE(EXCLUDED.source, arise_registrations.source),
+          designation = COALESCE(EXCLUDED.designation, arise_registrations.designation),
+          qualification = COALESCE(EXCLUDED.qualification, arise_registrations.qualification),
+          bonafide_certificate = COALESCE(EXCLUDED.bonafide_certificate, arise_registrations.bonafide_certificate),
+          food_preference = COALESCE(EXCLUDED.food_preference, arise_registrations.food_preference),
+          iap_credit_points = EXCLUDED.iap_credit_points,
+          iap_membership_number = COALESCE(EXCLUDED.iap_membership_number, arise_registrations.iap_membership_number)
+        RETURNING id, registration_code;`,
         [
           data.registrationCode,
           data.fullName,
@@ -401,7 +435,20 @@ export async function saveActiveSalemRegistration(data: {
       `INSERT INTO active_salem_registrations (
         registration_code, full_name, email_id, mobile_number, category, tshirt_size,
         gender, age, emergency_contact, city, source, transaction_id, payment_screenshot, is_verified
-      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) RETURNING id;`,
+      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)
+      ON CONFLICT (transaction_id) DO UPDATE SET
+        is_verified = TRUE,
+        full_name = CASE WHEN active_salem_registrations.full_name = 'Active Salem Runner' THEN EXCLUDED.full_name ELSE active_salem_registrations.full_name END,
+        email_id = CASE WHEN active_salem_registrations.email_id = 'runner@activesalem.in' THEN EXCLUDED.email_id ELSE active_salem_registrations.email_id END,
+        mobile_number = CASE WHEN active_salem_registrations.mobile_number = '9999999999' THEN EXCLUDED.mobile_number ELSE active_salem_registrations.mobile_number END,
+        category = COALESCE(EXCLUDED.category, active_salem_registrations.category),
+        tshirt_size = COALESCE(EXCLUDED.tshirt_size, active_salem_registrations.tshirt_size),
+        gender = CASE WHEN active_salem_registrations.gender = 'Other' THEN EXCLUDED.gender ELSE active_salem_registrations.gender END,
+        age = CASE WHEN active_salem_registrations.age = 25 THEN EXCLUDED.age ELSE active_salem_registrations.age END,
+        emergency_contact = COALESCE(EXCLUDED.emergency_contact, active_salem_registrations.emergency_contact),
+        city = COALESCE(EXCLUDED.city, active_salem_registrations.city),
+        source = COALESCE(EXCLUDED.source, active_salem_registrations.source)
+      RETURNING id, registration_code;`,
       [
         data.registrationCode,
         data.fullName,
@@ -446,7 +493,20 @@ export async function saveActiveSalemRegistration(data: {
         `INSERT INTO active_salem_registrations (
           registration_code, full_name, email_id, mobile_number, category, tshirt_size,
           gender, age, emergency_contact, city, source, transaction_id, payment_screenshot, is_verified
-        ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) RETURNING id;`,
+        ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)
+        ON CONFLICT (transaction_id) DO UPDATE SET
+          is_verified = TRUE,
+          full_name = CASE WHEN active_salem_registrations.full_name = 'Active Salem Runner' THEN EXCLUDED.full_name ELSE active_salem_registrations.full_name END,
+          email_id = CASE WHEN active_salem_registrations.email_id = 'runner@activesalem.in' THEN EXCLUDED.email_id ELSE active_salem_registrations.email_id END,
+          mobile_number = CASE WHEN active_salem_registrations.mobile_number = '9999999999' THEN EXCLUDED.mobile_number ELSE active_salem_registrations.mobile_number END,
+          category = COALESCE(EXCLUDED.category, active_salem_registrations.category),
+          tshirt_size = COALESCE(EXCLUDED.tshirt_size, active_salem_registrations.tshirt_size),
+          gender = CASE WHEN active_salem_registrations.gender = 'Other' THEN EXCLUDED.gender ELSE active_salem_registrations.gender END,
+          age = CASE WHEN active_salem_registrations.age = 25 THEN EXCLUDED.age ELSE active_salem_registrations.age END,
+          emergency_contact = COALESCE(EXCLUDED.emergency_contact, active_salem_registrations.emergency_contact),
+          city = COALESCE(EXCLUDED.city, active_salem_registrations.city),
+          source = COALESCE(EXCLUDED.source, active_salem_registrations.source)
+        RETURNING id, registration_code;`,
         [
           data.registrationCode,
           data.fullName,

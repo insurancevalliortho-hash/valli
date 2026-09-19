@@ -169,18 +169,18 @@ export default function ActiveSalemRegistrationPage() {
       });
 
       const result = await response.json();
-      if (response.ok) {
+      if (response.ok && result.success) {
         if (result.registrationCode) {
           setRegCode(result.registrationCode);
         }
         setIsSuccess(true);
         if (lenis) lenis.scrollTo(0, { immediate: true });
       } else {
-        alert(result.error || "Payment received, but registration record could not be saved. Contact helpline.");
+        throw new Error(result.error || "Payment received, but registration record could not be saved. Contact helpline.");
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
-      alert("Network error confirming registration. Payment ID: " + details.paymentId);
+      alert((err?.message || "Network error confirming registration") + ". Payment ID: " + details.paymentId);
     } finally {
       setIsSubmitting(false);
     }
@@ -613,7 +613,18 @@ export default function ActiveSalemRegistrationPage() {
                             prefillPhone={mobileNumber}
                             eventType="ACTIVE_SALEM"
                             registrationCode={regCode}
-                            notes={{ category, tshirtSize, gender, age, city }}
+                            notes={{
+                              category,
+                              tshirtSize,
+                              gender,
+                              age: String(age),
+                              city,
+                              fullName,
+                              emailId,
+                              mobileNumber,
+                              emergencyContact,
+                              source: "Online Gateway",
+                            }}
                             onSuccess={handlePaymentSuccess}
                             onFailure={(errMsg) => setErrors({ payment: errMsg })}
                             buttonText={`Pay ₹${totalFee} & Confirm Registration`}

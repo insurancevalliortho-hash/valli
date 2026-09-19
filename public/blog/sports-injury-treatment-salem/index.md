@@ -2,7 +2,7 @@
 title: Top Sports Injury Treatment in Salem | Valli Hospital Blog
 description: Expert care for sports injuries, ACL tears, and more.
 url: https://www.vallihospital.in/blog/sports-injury-treatment-salem
-last_updated: 2026-09-18
+last_updated: 2026-09-19
 ---
 
 # Top Sports Injury Treatment in Salem
