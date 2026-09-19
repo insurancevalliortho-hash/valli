@@ -784,5 +784,113 @@ export async function sendAriseRegistrationEmail(data: AriseEmailPayload) {
   }
 }
 
+export interface ActiveSalemEmailPayload {
+  registrationCode: string;
+  fullName: string;
+  emailId: string;
+  mobileNumber: string;
+  category: string;
+  tshirtSize: string;
+  gender?: string;
+  city?: string;
+  transactionId: string;
+}
+
+export async function sendActiveSalemRegistrationEmail(data: ActiveSalemEmailPayload) {
+  try {
+    const { transporter, from } = await getTransporter();
+    const fee = data.category === "10KM" ? 299 : 249;
+
+    const emailHtml = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="utf-8">
+        <title>Active Salem 4.0 - Registration Confirmed</title>
+        <style>
+          body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; margin: 0; padding: 0; color: #1e293b; }
+          .container { max-width: 600px; margin: 30px auto; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; }
+          .header { background: linear-gradient(135deg, #F26522 0%, #D97706 100%); padding: 40px 20px; text-align: center; color: #ffffff; }
+          .header h1 { margin: 0; font-size: 28px; text-transform: uppercase; letter-spacing: 2px; font-weight: 900; }
+          .header p { margin: 8px 0 0 0; font-size: 13px; opacity: 0.9; }
+          .content { padding: 32px 40px; line-height: 1.6; }
+          .welcome-text { font-size: 16px; font-weight: bold; color: #0f172a; }
+          .code-box { background-color: #fff7ed; border: 2px dashed #F26522; border-radius: 12px; padding: 20px; text-align: center; margin: 24px 0; }
+          .code-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #c2410c; font-weight: bold; margin-bottom: 6px; }
+          .code-val { font-family: 'Courier New', Courier, monospace; font-size: 32px; font-weight: 900; color: #F26522; margin: 0; letter-spacing: 1px; }
+          .section-title { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: #64748b; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; margin-top: 28px; margin-bottom: 12px; font-weight: bold; }
+          .details-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+          .details-table td { padding: 8px 0; vertical-align: top; }
+          .details-table td.label { width: 140px; color: #64748b; font-weight: 600; }
+          .details-table td.value { color: #0f172a; font-weight: 700; }
+          .badge { display: inline-block; background-color: #22c55e; color: #fff; font-size: 11px; font-weight: bold; padding: 3px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 1px; }
+          .footer { background-color: #0f172a; padding: 24px; text-align: center; font-size: 11px; color: #64748b; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>Active Salem 4.0</h1>
+            <p>11 October 2026 • Valli Super Speciality Hospital, Salem</p>
+          </div>
+          <div class="content">
+            <p class="welcome-text">Dear ${data.fullName},</p>
+            <p>
+              Congratulations! 🎉 Your registration for <strong>Active Salem 4.0 Marathon</strong> has been
+              <strong>confirmed</strong> and your payment of <strong>₹${fee}</strong> has been successfully received.
+            </p>
+            <p>Please note your Runner Pass Code below — you will need it to collect your race bib on event day.</p>
+
+            <div class="code-box">
+              <div class="code-label">Your Runner Pass Code</div>
+              <div class="code-val">${data.registrationCode}</div>
+            </div>
+
+            <span class="badge">✓ Payment Confirmed</span>
+
+            <div class="section-title">Registration Summary</div>
+            <table class="details-table">
+              <tr><td class="label">Runner Name</td><td class="value">${data.fullName}</td></tr>
+              <tr><td class="label">Run Category</td><td class="value">${data.category} Run</td></tr>
+              <tr><td class="label">T-Shirt Size</td><td class="value">${data.tshirtSize}</td></tr>
+              ${data.gender ? `<tr><td class="label">Gender</td><td class="value">${data.gender}</td></tr>` : ""}
+              <tr><td class="label">Mobile</td><td class="value">${data.mobileNumber}</td></tr>
+              ${data.city ? `<tr><td class="label">City</td><td class="value">${data.city}</td></tr>` : ""}
+              <tr><td class="label">Amount Paid</td><td class="value">₹${fee} (Verified)</td></tr>
+              <tr><td class="label">Transaction ID</td><td class="value" style="font-family: monospace; font-size: 11px;">${data.transactionId}</td></tr>
+            </table>
+
+            <div class="section-title">Event Details</div>
+            <table class="details-table">
+              <tr><td class="label">Date</td><td class="value">11 October 2026, Sunday</td></tr>
+              <tr><td class="label">Reporting Time</td><td class="value">5:00 AM</td></tr>
+              <tr><td class="label">Venue</td><td class="value">Valli Super Speciality Hospital<br><span style="font-weight:500;font-size:11px;color:#64748b;">Meyyanoor Road, Salem - 636 004</span></td></tr>
+            </table>
+          </div>
+          <div class="footer">
+            <p style="margin: 0 0 6px 0; font-weight: bold; color: #fff;">Valli Super Speciality Hospital</p>
+            <p style="margin: 0;">Meyyanoor Road, Salem, Tamil Nadu, 636004</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
+
+    const mailOptions = {
+      from: `"Active Salem 4.0" <${process.env.SMTP_USER || "vallisshospital@gmail.com"}>`,
+      to: data.emailId,
+      subject: `Active Salem 4.0 - Registration Confirmed [${data.registrationCode}]`,
+      html: emailHtml,
+    };
+
+    const info = await transporter.sendMail(mailOptions);
+    console.log(`Active Salem registration email sent to ${data.emailId}. Message ID: ${info.messageId}`);
+    return { success: true, messageId: info.messageId };
+  } catch (error) {
+    console.error("Failed to send Active Salem registration email:", error);
+    return { success: false, error };
+  }
+}
+
 
 

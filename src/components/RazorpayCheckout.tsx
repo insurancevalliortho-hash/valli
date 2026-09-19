@@ -236,13 +236,12 @@ export default function RazorpayCheckout({
       {/* Status banner */}
       {statusMessage && (
         <div
-          className={`w-full p-3.5 rounded-xl border text-xs font-semibold flex items-center gap-2.5 text-left transition-all ${
-            paymentSuccess === true
-              ? "bg-emerald-50 border-emerald-200 text-emerald-800"
-              : paymentSuccess === false
+          className={`w-full p-3.5 rounded-xl border text-xs font-semibold flex items-center gap-2.5 text-left transition-all ${paymentSuccess === true
+            ? "bg-emerald-50 border-emerald-200 text-emerald-800"
+            : paymentSuccess === false
               ? "bg-rose-50 border-rose-200 text-rose-800"
               : "bg-slate-50 border-slate-200 text-slate-700"
-          }`}
+            }`}
         >
           {paymentSuccess === true ? (
             <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />

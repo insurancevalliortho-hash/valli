@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { saveActiveSalemRegistration, getPgPool } from "../../../../lib/db";
+import { sendActiveSalemRegistrationEmail } from "../../../../lib/email";
 
 export async function GET() {
   try {
@@ -107,7 +108,7 @@ export async function POST(request: Request) {
           if (existing.rows.length > 0) {
             return NextResponse.json({ success: true, registrationCode: existing.rows[0].registration_code });
           }
-        } catch (_) {}
+        } catch (_) { }
       }
 
       if (error.message.toLowerCase().includes("transaction_id")) {

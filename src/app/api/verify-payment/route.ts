@@ -14,7 +14,7 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json().catch(() => ({}));
-    
+
     const razorpay_order_id =
       body.razorpay_order_id ||
       body.order_id ||
@@ -60,8 +60,8 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           success: false,
-          verified: false,
           isOk: false,
+          verified: false,
           error: "Payment verification failed: Signature mismatch",
         },
         { status: 400 }
@@ -70,8 +70,8 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
-      verified: true,
       isOk: true,
+      verified: true,
       message: "Payment signature verified successfully",
       payment_id: razorpay_payment_id,
       order_id: razorpay_order_id,
