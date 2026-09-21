@@ -450,8 +450,8 @@ Valli Orthopedic and Sports Hospital was co-founded on October 16, 2022, by Chie
 # Contact Valli Super Specialty Hospital
 
 ## Immediate Helplines
-- **24/7 Emergency Trauma Desk**: +91 90034 17111
-- **Consultation Booking & WhatsApp Coordinator**: +91 90034 17111
+- **24/7 Emergency Trauma Desk**: +91 90874 17111
+- **Consultation Booking & WhatsApp Coordinator**: +91 90874 17111 / +91 99945 99294
 - **Corporate Email**: info@vallihospital.in / valli.ortho.sports@gmail.com
 
 ## Corporate Coordinates
@@ -537,7 +537,7 @@ Valli Super Specialty Hospital is a premier medical institution specializing in 
 
 ## 📞 Critical Contacts & Location
 
-- **Emergency Line (24/7):** +91 90034 17111
+- **Emergency Line (24/7):** +91 90874 17111 / +91 99945 99294
 - **General Inquiry:** info@vallihospital.in / valli.ortho.sports@gmail.com
 - **Corporate Address:** Opposite Sri Vidya Mandir School, Meyyanoor Road, Salem - 636 004, Tamil Nadu, India.
 - **OPD Consultation Hours:** Monday – Sunday, 9:00 AM – 9:00 PM
@@ -593,7 +593,7 @@ ${pricingInfo}
 
 - **Home Page:** https://www.vallihospital.in/ (Main services & trust metrics)
 - **Specialties Directory:** https://www.vallihospital.in/specialties
-- **Consultation Booking Portal:** https://www.vallihospital.in/book-appointment (Redirects to WhatsApp Coordinator +919003417111)
+- **Consultation Booking Portal:** https://www.vallihospital.in/book-appointment (Redirects to WhatsApp Coordinator +919087417111)
 - **Clinical Facilities:** https://www.vallihospital.in/facilities
 - **Contact Desk:** https://www.vallihospital.in/contact-us
 

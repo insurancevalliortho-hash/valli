@@ -721,8 +721,8 @@ export default function SpecialtiesPage() {
                         Call us and our team will guide you to the right specialist.
                     </motion.p>
                     <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="tel:+919003417111" className="bg-[#f98825] text-white px-8 py-4 rounded-full font-bold text-sm hover:bg-[#e0751e] transition-colors shadow-lg">
-                            Call +91 90034 17111
+                        <a href="tel:+919087417111" className="bg-[#f98825] text-white px-8 py-4 rounded-full font-bold text-sm hover:bg-[#e0751e] transition-colors shadow-lg">
+                            Call +91 90874 17111
                         </a>
                         <Link href="/book-appointment" className="bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-full font-bold text-sm border border-white/20 transition-colors">
                             Book Online

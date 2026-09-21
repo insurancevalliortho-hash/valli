@@ -46,7 +46,7 @@ Our combination of highly experienced surgeons like Dr. Natanasabapathy, cutting
 Yes. We specialize in minimally invasive and computer-navigated knee replacement surgeries, which promote quicker recovery and less post-operative pain.
 
 ### How do I book an appointment with the best ortho doctor in Salem, Tamil Nadu?
-You can book an appointment by calling our helpline at +91-9003417111 or by filling out the appointment form on our website.
+You can book an appointment by calling our helpline at +91-9087417111 or +91-9994599294, or by filling out the appointment form on our website.
 
 ### What insurance plans are accepted?
 We accept all major health insurance providers and offer cashless hospitalization for eligible policies. Please contact our billing desk for specific details.

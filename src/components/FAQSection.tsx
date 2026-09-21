@@ -31,7 +31,7 @@ const FAQ_ITEMS = [
     },
     {
         question: "Where is Valli Hospital located in Salem, and how can I book an appointment?",
-        answer: "Valli Super Specialty Hospital is conveniently located on Meyyanoor Road (near 5 Roads), Salem, Tamil Nadu 636004. Patients from Salem, Omalur, Attur, Namakkal, and Dharmapuri can book appointments by calling +91 90034 17111 or directly via our website book-appointment portal."
+        answer: "Valli Super Specialty Hospital is conveniently located on Meyyanoor Road (near 5 Roads), Salem, Tamil Nadu 636004. Patients from Salem, Omalur, Attur, Namakkal, and Dharmapuri can book appointments by calling +91 90874 17111 or +91 99945 99294, or directly via our website book-appointment portal."
     },
     {
         question: "What specialties and services are offered at Valli Hospital in Salem?",

@@ -60,7 +60,7 @@ export default function TermsOfUsePage() {
             <section className="p-6 rounded-2xl bg-amber-50 border border-amber-200">
               <h2 className="text-xl font-bold text-amber-900 mb-2">⚠️ Medical Emergency Disclaimer</h2>
               <p className="text-amber-900/90 text-base">
-                The content on this website is for informational and educational purposes only and is not a substitute for direct clinical examination, professional medical advice, diagnosis, or treatment. <strong>If you are experiencing a life-threatening trauma, chest pain, or orthopedic emergency, call our 24/7 helpline immediately at <a href="tel:+919003417111" className="font-bold underline">+91 90034 17111</a> or visit our emergency casualty department in Salem.</strong>
+                The content on this website is for informational and educational purposes only and is not a substitute for direct clinical examination, professional medical advice, diagnosis, or treatment. <strong>If you are experiencing a life-threatening trauma, chest pain, or orthopedic emergency, call our 24/7 helpline immediately at <a href="tel:+919087417111" className="font-bold underline">+91 90874 17111</a> or visit our emergency casualty department in Salem.</strong>
               </p>
             </section>
 

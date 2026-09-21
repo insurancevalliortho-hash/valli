@@ -9,8 +9,8 @@ last_updated: 2026-09-19
 # Contact Valli Super Specialty Hospital
 
 ## Immediate Helplines
-- **24/7 Emergency Trauma Desk**: +91 90034 17111
-- **Consultation Booking & WhatsApp Coordinator**: +91 90034 17111
+- **24/7 Emergency Trauma Desk**: +91 90874 17111
+- **Consultation Booking & WhatsApp Coordinator**: +91 90874 17111 / +91 99945 99294
 - **Corporate Email**: info@vallihospital.in / valli.ortho.sports@gmail.com
 
 ## Corporate Coordinates

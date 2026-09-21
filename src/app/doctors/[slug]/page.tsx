@@ -112,7 +112,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                 "@type": "Hospital",
                 "name": "Valli Super Specialty Hospital",
                 "url": "https://www.vallihospital.in",
-                "telephone": "+91-9003417111",
+                "telephone": "+91-9087417111",
                 "address": {
                     "@type": "PostalAddress",
                     "streetAddress": "Meyyanoor Road",

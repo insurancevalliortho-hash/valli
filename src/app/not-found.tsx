@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
@@ -199,7 +199,7 @@ export default function NotFound() {
                                 delay: 0.3
                             },
                             {
-                                href: "tel:+919003417111",
+                                href: "tel:+919087417111",
                                 icon: <PhoneCall size={22} className="animate-pulse" />,
                                 title: "Emergency 24/7",
                                 desc: "ACLS/ATLS emergency.",

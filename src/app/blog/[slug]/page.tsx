@@ -312,10 +312,10 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                   Book Doctor Consultation
                 </Link>
                 <a
-                  href="tel:+919003417111"
+                  href="tel:+919087417111"
                   className="px-6 py-3 bg-white/10 text-white font-bold rounded-xl border border-white/20 hover:bg-white/20 transition-colors text-sm"
                 >
-                  📞 Call: +91 90034 17111
+                  📞 Call: +91 90874 17111
                 </a>
               </div>
             </div>
