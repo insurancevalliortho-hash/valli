@@ -36,6 +36,7 @@ import {
 } from "lucide-react";
 import Navbar from "../../../../components/Navbar";
 import Footer from "../../../../components/Footer";
+import AdminAnalyticsChart, { ChartDataPoint } from "../../../../components/iyakkam/AdminAnalyticsChart";
 
 interface Registration {
   id: number;
@@ -92,8 +93,13 @@ export default function AriseAdminPage() {
   const [sortField, setSortField] = useState<SortField>("created_at");
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
 
-  // Chart range: "7d" | "14d" | "all"
-  const [chartRange, setChartRange] = useState<"7d" | "14d" | "all">("14d");
+  // Date Filtering
+  const [dateFilter, setDateFilter] = useState<string>("all"); // "all" | "today" | "yesterday" | "7d" | "30d" | "custom"
+  const [customDate, setCustomDate] = useState<string>("");
+  const [selectedChartDate, setSelectedChartDate] = useState<string | null>(null);
+
+  // Chart range: "7d" | "14d" | "30d" | "all"
+  const [chartRange, setChartRange] = useState<"7d" | "14d" | "30d" | "all">("14d");
 
   // Lightbox Modal for Screenshots or Certificates
   const [activeScreenshot, setActiveScreenshot] = useState<string | null>(null);
@@ -270,7 +276,7 @@ export default function AriseAdminPage() {
       setSortDirection((prev) => (prev === "asc" ? "desc" : "asc"));
     } else {
       setSortField(field);
-      setSortDirection("asc");
+      setSortDirection(field === "created_at" ? "desc" : "asc");
     }
   };
 
@@ -322,37 +328,67 @@ export default function AriseAdminPage() {
     };
   }, [registrations]);
 
-  // Daily Chart Aggregation
-  const dailyChartData = useMemo(() => {
-    const map: Record<string, { date: string; displayDate: string; count: number; verifiedCount: number; revenue: number }> = {};
+  // Continuous Daily Chart Data Points
+  const dailyChartPoints = useMemo<ChartDataPoint[]>(() => {
+    const now = new Date();
+    let numDays = 14;
+    if (chartRange === "7d") numDays = 7;
+    else if (chartRange === "14d") numDays = 14;
+    else if (chartRange === "30d") numDays = 30;
+    else if (chartRange === "all") {
+      let earliestTime = now.getTime();
+      registrations.forEach((r) => {
+        const t = new Date(r.created_at).getTime();
+        if (!isNaN(t) && t < earliestTime) earliestTime = t;
+      });
+      const diffDays = Math.ceil((now.getTime() - earliestTime) / (1000 * 60 * 60 * 24));
+      numDays = Math.max(diffDays + 1, 14);
+    }
+
+    const dateMap: Record<string, { count: number; verifiedCount: number; revenue: number }> = {};
+    for (let i = numDays - 1; i >= 0; i--) {
+      const d = new Date(now);
+      d.setDate(now.getDate() - i);
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, "0");
+      const day = String(d.getDate()).padStart(2, "0");
+      const key = `${year}-${month}-${day}`;
+      dateMap[key] = { count: 0, verifiedCount: 0, revenue: 0 };
+    }
 
     registrations.forEach((r) => {
       const d = new Date(r.created_at);
       if (isNaN(d.getTime())) return;
-      const key = d.toISOString().split("T")[0]; // YYYY-MM-DD
-      const displayDate = d.toLocaleDateString("en-IN", { month: "short", day: "numeric" });
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, "0");
+      const day = String(d.getDate()).padStart(2, "0");
+      const key = `${year}-${month}-${day}`;
 
-      if (!map[key]) {
-        map[key] = { date: key, displayDate, count: 0, verifiedCount: 0, revenue: 0 };
-      }
-      map[key].count += 1;
-      if (r.is_verified) {
-        map[key].verifiedCount += 1;
-        map[key].revenue += calculateFee(r);
+      if (dateMap[key]) {
+        dateMap[key].count += 1;
+        if (r.is_verified) {
+          dateMap[key].verifiedCount += 1;
+          dateMap[key].revenue += calculateFee(r);
+        }
       }
     });
 
-    let sorted = Object.values(map).sort((a, b) => a.date.localeCompare(b.date));
-
-    if (chartRange === "7d") {
-      sorted = sorted.slice(-7);
-    } else if (chartRange === "14d") {
-      sorted = sorted.slice(-14);
-    }
-
-    const maxCount = Math.max(...sorted.map((item) => item.count), 1);
-
-    return { list: sorted, maxCount };
+    return Object.keys(dateMap)
+      .sort()
+      .map((dateStr) => {
+        const [y, m, d] = dateStr.split("-").map(Number);
+        const dateObj = new Date(y, m - 1, d);
+        const displayDate = dateObj.toLocaleDateString("en-IN", { month: "short", day: "numeric" });
+        const dayName = dateObj.toLocaleDateString("en-IN", { weekday: "short" });
+        return {
+          date: dateStr,
+          displayDate,
+          dayName,
+          count: dateMap[dateStr].count,
+          verifiedCount: dateMap[dateStr].verifiedCount,
+          revenue: dateMap[dateStr].revenue,
+        };
+      });
   }, [registrations, chartRange]);
 
   // Filters & Search logic
@@ -387,16 +423,47 @@ export default function AriseAdminPage() {
         matchesFood = (r.food_preference || "").toLowerCase().includes("non");
       }
 
+      // Date Filtering Logic
+      let matchesDate = true;
+      const regDate = new Date(r.created_at);
+      if (!isNaN(regDate.getTime())) {
+        const regDateKey = `${regDate.getFullYear()}-${String(regDate.getMonth() + 1).padStart(2, "0")}-${String(regDate.getDate()).padStart(2, "0")}`;
+        const now = new Date();
+        const todayKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+        const yday = new Date(now);
+        yday.setDate(now.getDate() - 1);
+        const yesterdayKey = `${yday.getFullYear()}-${String(yday.getMonth() + 1).padStart(2, "0")}-${String(yday.getDate()).padStart(2, "0")}`;
+
+        if (selectedChartDate) {
+          matchesDate = regDateKey === selectedChartDate;
+        } else if (dateFilter === "today") {
+          matchesDate = regDateKey === todayKey;
+        } else if (dateFilter === "yesterday") {
+          matchesDate = regDateKey === yesterdayKey;
+        } else if (dateFilter === "7d") {
+          const cutoff = new Date();
+          cutoff.setDate(cutoff.getDate() - 7);
+          matchesDate = regDate.getTime() >= cutoff.getTime();
+        } else if (dateFilter === "30d") {
+          const cutoff = new Date();
+          cutoff.setDate(cutoff.getDate() - 30);
+          matchesDate = regDate.getTime() >= cutoff.getTime();
+        } else if (dateFilter === "custom" && customDate) {
+          matchesDate = regDateKey === customDate;
+        }
+      }
+
       return (
         matchesSearch &&
         matchesCategory &&
         matchesVerification &&
         matchesWorkshop &&
-        matchesFood
+        matchesFood &&
+        matchesDate
       );
     });
 
-    // Sorting
+    // Sorting with robust date handling
     list.sort((a, b) => {
       let comparison = 0;
       switch (sortField) {
@@ -416,9 +483,16 @@ export default function AriseAdminPage() {
           comparison = (a.is_verified ? 1 : 0) - (b.is_verified ? 1 : 0);
           break;
         case "created_at":
-        default:
-          comparison = new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+        default: {
+          const timeA = a.created_at ? new Date(a.created_at).getTime() : 0;
+          const timeB = b.created_at ? new Date(b.created_at).getTime() : 0;
+          if (!isNaN(timeA) && !isNaN(timeB) && timeA !== timeB) {
+            comparison = timeA - timeB;
+          } else {
+            comparison = (Number(a.id) || 0) - (Number(b.id) || 0);
+          }
           break;
+        }
       }
 
       return sortDirection === "asc" ? comparison : -comparison;
@@ -432,6 +506,9 @@ export default function AriseAdminPage() {
     verificationFilter,
     workshopFilter,
     foodFilter,
+    dateFilter,
+    customDate,
+    selectedChartDate,
     sortField,
     sortDirection,
   ]);
@@ -725,82 +802,59 @@ export default function AriseAdminPage() {
                 </div>
               </div>
 
-              {/* DAILY REGISTRATION TREND CHART */}
-              <div className="bg-white border border-slate-200 rounded-[1.75rem] p-5 shadow-sm space-y-4">
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 bg-teal-50 text-[#00A896] rounded-lg flex items-center justify-center border border-teal-200">
-                      <BarChart3 size={16} />
-                    </div>
-                    <div>
-                      <h3 className="text-xs font-black text-slate-800 uppercase tracking-wider">
-                        Daily Delegate Registration Velocity
-                      </h3>
-                      <p className="text-[10px] text-slate-400 font-medium">
-                        Volume of delegate passes booked per calendar day
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl border border-slate-200">
-                    {(["7d", "14d", "all"] as const).map((range) => (
-                      <button
-                        key={range}
-                        type="button"
-                        onClick={() => setChartRange(range)}
-                        className={`px-3 py-1 rounded-lg text-[10px] font-bold uppercase transition-all cursor-pointer ${
-                          chartRange === range
-                            ? "bg-white text-[#00A896] shadow-sm"
-                            : "text-slate-500 hover:text-slate-800"
-                        }`}
-                      >
-                        {range === "7d" ? "Last 7 Days" : range === "14d" ? "Last 14 Days" : "All Time"}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {dailyChartData.list.length === 0 ? (
-                  <div className="h-32 flex items-center justify-center text-xs text-slate-400 font-medium">
-                    No timeline registration records recorded yet.
-                  </div>
-                ) : (
-                  <div className="pt-4">
-                    <div className="flex items-end gap-2 sm:gap-3 h-40 border-b border-slate-200 pb-2 overflow-x-auto">
-                      {dailyChartData.list.map((day) => {
-                        const heightPct = Math.max(Math.round((day.count / dailyChartData.maxCount) * 100), 8);
-                        return (
-                          <div
-                            key={day.date}
-                            className="flex-1 min-w-[32px] sm:min-w-[42px] flex flex-col items-center gap-1 group relative cursor-pointer"
-                          >
-                            {/* Hover tooltip */}
-                            <div className="absolute -top-12 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none bg-slate-900 text-white text-[10px] py-1 px-2 rounded-lg whitespace-nowrap z-20 shadow-xl">
-                              <span className="font-bold">{day.date}</span>: {day.count} signups ({day.verifiedCount} paid • ₹{day.revenue})
-                            </div>
-
-                            <span className="text-[10px] font-mono font-bold text-slate-600 mb-1 group-hover:text-[#00A896]">
-                              {day.count}
-                            </span>
-                            <div className="w-full bg-slate-100 rounded-t-lg h-full flex items-end overflow-hidden border border-slate-200/60">
-                              <div
-                                style={{ height: `${heightPct}%` }}
-                                className="w-full bg-gradient-to-t from-[#004B57] to-[#00A896] rounded-t group-hover:brightness-110 transition-all"
-                              />
-                            </div>
-                            <span className="text-[9px] font-mono text-slate-400 mt-1 whitespace-nowrap transform -rotate-45 sm:rotate-0 origin-center">
-                              {day.displayDate}
-                            </span>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
-              </div>
+              {/* HIGH-END INTERACTIVE SVG ANALYTICS CHART */}
+              <AdminAnalyticsChart
+                title="Daily Delegate Registration Velocity"
+                subtitle="Volume of delegate passes booked and CME revenue recorded per calendar day"
+                accentColor="#00A896"
+                accentGradientId="ariseChartGradient"
+                dataPoints={dailyChartPoints}
+                range={chartRange}
+                onRangeChange={(newRange) => setChartRange(newRange)}
+                selectedDate={selectedChartDate}
+                onSelectDate={(d) => setSelectedChartDate(d)}
+                entityName="Delegates"
+              />
 
               {/* Filters / Actions Toolbar */}
               <div className="bg-white border border-slate-200 rounded-[1.75rem] p-5 space-y-4 shadow-sm">
+                {/* Active Date Filter Alert Banner */}
+                {(selectedChartDate || dateFilter !== "all") && (
+                  <div className="bg-amber-50/90 border border-amber-200 text-amber-900 px-4 py-2.5 rounded-2xl flex flex-wrap items-center justify-between gap-3 text-xs font-semibold shadow-sm">
+                    <div className="flex items-center gap-2">
+                      <Calendar size={14} className="text-amber-600 shrink-0" />
+                      <span>
+                        Filtering by Date:{" "}
+                        <strong className="font-mono bg-amber-100/80 px-2 py-0.5 rounded-lg border border-amber-300/60">
+                          {selectedChartDate
+                            ? `Exact day ${selectedChartDate}`
+                            : dateFilter === "today"
+                            ? "Today"
+                            : dateFilter === "yesterday"
+                            ? "Yesterday"
+                            : dateFilter === "7d"
+                            ? "Past 7 Days"
+                            : dateFilter === "30d"
+                            ? "Past 30 Days"
+                            : `Selected date ${customDate}`}
+                        </strong>{" "}
+                        ({filteredRegistrations.length} delegate{filteredRegistrations.length === 1 ? "" : "s"} matched)
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSelectedChartDate(null);
+                        setDateFilter("all");
+                        setCustomDate("");
+                      }}
+                      className="text-amber-800 hover:text-amber-950 font-bold underline text-[11px] uppercase tracking-wider cursor-pointer flex items-center gap-1 ml-auto"
+                    >
+                      <X size={12} /> Clear Date Filter
+                    </button>
+                  </div>
+                )}
+
                 <div className="flex flex-wrap gap-3 items-center justify-between">
                   {/* Search Input */}
                   <div className="relative flex-1 min-w-[260px] max-w-md">
@@ -827,11 +881,65 @@ export default function AriseAdminPage() {
                   </div>
                 </div>
 
-                {/* Filter Dropdowns Ribbon */}
+                {/* Filter & Sort Ribbon */}
                 <div className="flex flex-wrap gap-2.5 items-center pt-1 border-t border-slate-100">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1 mr-1">
-                    <Filter size={12} /> Filters:
-                  </span>
+                  {/* Dedicated Sort Selector */}
+                  <div className="flex items-center gap-1.5 bg-slate-50 border border-[#E2E8F0] rounded-xl px-2.5 py-1">
+                    <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest flex items-center gap-1">
+                      <ArrowUpDown size={11} className="text-[#00A896]" /> Sort:
+                    </span>
+                    <select
+                      value={`${sortField}-${sortDirection}`}
+                      onChange={(e) => {
+                        const [field, dir] = e.target.value.split("-") as [SortField, SortDirection];
+                        setSortField(field);
+                        setSortDirection(dir);
+                      }}
+                      className="bg-transparent text-xs font-bold text-slate-800 focus:outline-none cursor-pointer"
+                    >
+                      <option value="created_at-desc">Date: Newest First (Latest ↓)</option>
+                      <option value="created_at-asc">Date: Oldest First (Earliest ↑)</option>
+                      <option value="full_name-asc">Delegate Name (A → Z)</option>
+                      <option value="full_name-desc">Delegate Name (Z → A)</option>
+                      <option value="registration_code-asc">Pass Code (A → Z)</option>
+                      <option value="registration_code-desc">Pass Code (Z → A)</option>
+                      <option value="category-asc">Category & Track</option>
+                      <option value="institution-asc">Institution (A → Z)</option>
+                      <option value="is_verified-desc">Status (Paid First)</option>
+                      <option value="is_verified-asc">Status (Pending First)</option>
+                    </select>
+                  </div>
+
+                  {/* Date Filter Dropdown */}
+                  <div className="flex items-center gap-1.5">
+                    <select
+                      value={selectedChartDate ? "chart_selected" : dateFilter}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        setSelectedChartDate(null);
+                        setDateFilter(val);
+                      }}
+                      className="bg-slate-50 border border-[#E2E8F0] hover:border-slate-350 rounded-xl px-3 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none cursor-pointer"
+                    >
+                      {selectedChartDate && (
+                        <option value="chart_selected">Date: {selectedChartDate} (Selected)</option>
+                      )}
+                      <option value="all">Date: All Dates</option>
+                      <option value="today">Date: Today</option>
+                      <option value="yesterday">Date: Yesterday</option>
+                      <option value="7d">Date: Last 7 Days</option>
+                      <option value="30d">Date: Last 30 Days</option>
+                      <option value="custom">Date: Specific Day...</option>
+                    </select>
+                    {dateFilter === "custom" && (
+                      <input
+                        type="date"
+                        value={customDate}
+                        onChange={(e) => setCustomDate(e.target.value)}
+                        className="bg-slate-50 border border-[#E2E8F0] rounded-xl px-2.5 py-1 text-xs font-semibold text-slate-700 focus:outline-none"
+                      />
+                    )}
+                  </div>
 
                   {/* Category Filter */}
                   <select
@@ -882,6 +990,8 @@ export default function AriseAdminPage() {
                     verificationFilter !== "all" ||
                     workshopFilter !== "all" ||
                     foodFilter !== "all" ||
+                    dateFilter !== "all" ||
+                    selectedChartDate !== null ||
                     searchQuery) && (
                     <button
                       type="button"
@@ -890,11 +1000,14 @@ export default function AriseAdminPage() {
                         setVerificationFilter("all");
                         setWorkshopFilter("all");
                         setFoodFilter("all");
+                        setDateFilter("all");
+                        setCustomDate("");
+                        setSelectedChartDate(null);
                         setSearchQuery("");
                       }}
-                      className="text-xs font-bold text-red-500 hover:text-red-700 underline ml-auto"
+                      className="text-xs font-bold text-red-500 hover:text-red-700 underline ml-auto cursor-pointer"
                     >
-                      Clear All
+                      Clear All Filters
                     </button>
                   )}
                 </div>
@@ -942,13 +1055,21 @@ export default function AriseAdminPage() {
                           {renderSortIcon("institution")}
                         </th>
 
-                        {/* Payment & Date */}
+                        {/* Date Sortable */}
                         <th
                           onClick={() => handleSort("created_at")}
                           className="p-4 cursor-pointer hover:bg-slate-100 transition-colors group"
+                          title="Click to sort by Date (Newest / Oldest)"
                         >
-                          <span>Payment & Date</span>
-                          {renderSortIcon("created_at")}
+                          <div className="flex items-center gap-1.5">
+                            <span>Payment & Date</span>
+                            {renderSortIcon("created_at")}
+                            {sortField === "created_at" && (
+                              <span className="text-[9px] font-mono font-bold text-[#00A896] lowercase bg-teal-50 px-1.5 py-0.5 rounded border border-teal-200">
+                                {sortDirection === "desc" ? "newest ↓" : "oldest ↑"}
+                              </span>
+                            )}
+                          </div>
                         </th>
 
                         {/* Status */}
