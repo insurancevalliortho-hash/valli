@@ -126,7 +126,7 @@ export default function AriseRegisterPage() {
   // Compute total fee amount to pay
   const calculateTotalFee = () => {
     if (isBulk) {
-      return 10000; // 20 Students @ ₹500 each (50% OFF ₹1000 rate)
+      return 20000; // 20 Students @ ₹1000 each (₹20,000 Total)
     }
     const isStudent = designation === "Student / Intern";
     if (category === "Conference with Workshop") {
@@ -753,8 +753,8 @@ export default function AriseRegisterPage() {
                             <option value="Conference">Conference Single (₹1,000 Student / ₹2,000 Prof)</option>
                             <option value="Conference with Workshop">Conference + Workshop (₹1,500 Student / ₹2,500 Prof)</option>
                             {designation === "Student / Intern" && (
-                              <option value="Bulk Student Registration (20 Students - 50% OFF)">
-                                🎓 Bulk Student Pass (20 Students @ 50% OFF - ₹10,000 Total)
+                              <option value="Bulk Student Registration (20 Students - ₹20,000 Total)">
+                                🎓 Bulk Student Pass (20 Students - ₹20,000 Total)
                               </option>
                             )}
                           </select>
@@ -827,7 +827,7 @@ export default function AriseRegisterPage() {
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
                           <div>
                             <span className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-600 bg-emerald-100 px-3 py-1 rounded-full inline-block mb-1 border border-emerald-200">
-                              🎓 50% OFF Bulk Student Package (20 Passes)
+                              🎓 Bulk Student Package (20 Passes - ₹20,000 Total)
                             </span>
                             <h3 className="font-display text-lg font-black text-[#004B57] uppercase">
                               20 Student Roster Details
@@ -1045,8 +1045,8 @@ export default function AriseRegisterPage() {
                         </div>
                         {isBulk && (
                           <div className="flex justify-between items-center text-xs bg-emerald-100/60 p-2 rounded-xl border border-emerald-200">
-                            <span className="text-emerald-800 font-bold">50% Bulk Student Discount Applied:</span>
-                            <span className="font-bold text-emerald-700">20 Passes @ ₹500 each</span>
+                            <span className="text-emerald-800 font-bold">Bulk Student Package Applied:</span>
+                            <span className="font-bold text-emerald-700">20 Passes @ ₹1,000 each (₹20,000 Total)</span>
                           </div>
                         )}
                         <div className="border-t border-slate-200 pt-3 flex justify-between items-center">

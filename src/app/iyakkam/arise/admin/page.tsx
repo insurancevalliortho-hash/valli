@@ -189,7 +189,7 @@ export default function AriseAdminPage() {
         let ticketPrice = 0;
         const isStudent = (r.designation && r.designation.toLowerCase().includes("student")) || r.category.toLowerCase().includes("student");
         if (r.registration_code?.includes("LEAD")) {
-          ticketPrice = 10000;
+          ticketPrice = 20000;
         } else if (r.category.toLowerCase().includes("bulk")) {
           ticketPrice = 0; // Covered by the Lead Coordinator package
         } else if (isStudent) {
