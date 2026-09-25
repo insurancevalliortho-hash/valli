@@ -87,7 +87,7 @@ export const metadata: Metadata = {
                 alt: "Valli Super Specialty Hospital — Best Orthopedic Hospital in Salem, Tamil Nadu",
             }
         ],
-        phoneNumbers: ["+919003417111"],
+        phoneNumbers: ["+919087417111", "+919994599294"],
     },
     twitter: {
         card: "summary_large_image",

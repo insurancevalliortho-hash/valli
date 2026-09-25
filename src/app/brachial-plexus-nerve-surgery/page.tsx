@@ -113,10 +113,10 @@ export default function BrachialPlexusPage() {
               Book Nerve Consultation
             </Link>
             <a
-              href="tel:+919003417111"
+              href="tel:+919087417111"
               className="px-8 py-4 bg-white/10 text-white font-bold rounded-xl border border-white/20 hover:bg-white/20 transition-all"
             >
-              📞 Direct Line: +91 90034 17111
+              📞 Direct Line: +91 90874 17111
             </a>
           </div>
         </div>

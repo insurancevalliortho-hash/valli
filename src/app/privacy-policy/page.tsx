@@ -105,7 +105,7 @@ export default function PrivacyPolicyPage() {
               <div className="bg-[#001f25] text-white p-6 rounded-2xl space-y-2">
                 <p><strong>Hospital:</strong> Valli Super Specialty Hospital</p>
                 <p><strong>Address:</strong> Meyyanoor Road (Opp. Sri Vidya Mandir School), Salem - 636 004, Tamil Nadu</p>
-                <p><strong>Phone:</strong> +91 90034 17111</p>
+                <p><strong>Phone:</strong> +91 90874 17111 / +91 99945 99294</p>
                 <p><strong>Email:</strong> info@vallihospital.in</p>
               </div>
             </section>

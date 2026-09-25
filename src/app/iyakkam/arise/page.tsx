@@ -1102,7 +1102,7 @@ function WorkshopsSection() {
       title: "Cardiac Load Monitoring using Wearable Sensors",
       speaker: "Miss G. Sri Gayathri, M.S.",
       role: "Lead Researcher, Acrophase, Human Performance Lab, IIT Madras",
-      img: "/assets/acrophase-logo.jpg",
+      img: "/SpeakersIMG/gayathri.jpeg",
       badge: "Wearable Sensor Telemetry",
       desc: "Real-time cardiovascular telemetry demo, continuous athletic load tracking, and wearable PPG/ECG sensor analytics developed at the Human Performance Lab, IIT Madras."
     }

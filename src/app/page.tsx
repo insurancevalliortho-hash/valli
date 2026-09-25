@@ -112,7 +112,7 @@ export default function Home() {
             "image": "https://www.vallihospital.in/favicon.png",
             "@id": "https://www.vallihospital.in",
             "url": "https://www.vallihospital.in",
-            "telephone": "+919003417111",
+            "telephone": "+919087417111",
             "priceRange": "$$",
             "currenciesAccepted": "INR",
             "paymentAccepted": "Cash, Credit Card, Debit Card, UPI, Cashless Health Insurance (Star Health, Medi Assist, Vidal Health, Paramount, ICICI Lombard, HDFC ERGO)",

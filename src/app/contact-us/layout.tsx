@@ -3,7 +3,7 @@ import { BreadcrumbSchema } from '../../components/seo/StructuredData';
 
 export const metadata: Metadata = {
   title: 'Contact Us, 24/7 Helpline & Location in Salem | Valli Hospital',
-  description: 'Contact Valli Super Specialty Hospital in Salem: 24/7 Emergency Helpline +91 90034 17111. Located on Meyyanoor Road (opp. Sri Vidya Mandir School), Salem - 636004.',
+  description: 'Contact Valli Super Specialty Hospital in Salem: 24/7 Emergency Helpline +91 90874 17111, +91 99945 99294. Located on Meyyanoor Road (opp. Sri Vidya Mandir School), Salem - 636004.',
   keywords: [
     'salem hospital phone number',
     'valli hospital contact number',

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
@@ -141,7 +141,7 @@ export default function DoctorsPage() {
                                     <Link href="/book-appointment" className="bg-[#f98825] text-white px-7 py-3 rounded-full font-bold text-sm shadow-[0_6px_20px_rgba(249,136,37,0.35)] hover:bg-[#e0751e] hover:-translate-y-0.5 transform transition-all duration-200 text-center">
                                         Book a Consultation →
                                     </Link>
-                                    <a href="tel:+919003417111" className="bg-white/10 hover:bg-white/20 text-white border border-white/15 px-7 py-3 rounded-full font-bold text-sm transition-colors text-center">
+                                    <a href="tel:+919087417111" className="bg-white/10 hover:bg-white/20 text-white border border-white/15 px-7 py-3 rounded-full font-bold text-sm transition-colors text-center">
                                         Call Directly
                                     </a>
                                 </div>
@@ -313,7 +313,7 @@ export default function DoctorsPage() {
                     </motion.p>
                     <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Link href="/book-appointment" className="bg-[#f98825] text-white px-8 py-4 rounded-full font-bold text-sm hover:bg-[#e0751e] transition-colors shadow-lg">Book Appointment</Link>
-                        <a href="tel:+919003417111" className="bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-full font-bold text-sm border border-white/20 transition-colors">Call +91 90034 17111</a>
+                        <a href="tel:+919087417111" className="bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-full font-bold text-sm border border-white/20 transition-colors">Call +91 90874 17111</a>
                     </motion.div>
                 </div>
             </section>
