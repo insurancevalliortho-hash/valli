@@ -298,10 +298,23 @@ export default function AriseAdminPage() {
 
     const revenue = registrations
       .filter((r) => r.is_verified)
-      .reduce((sum, r) => sum + calculateFee(r), 0);
-
-    // Workshop seats
-    const workshopCount = registrations.filter((r) => r.include_workshop || r.category.toLowerCase().includes("workshop")).length;
+      .reduce((sum, r) => {
+        let ticketPrice = 0;
+        const isStudent = (r.designation && r.designation.toLowerCase().includes("student")) || r.category.toLowerCase().includes("student");
+        if (r.registration_code?.includes("LEAD")) {
+          ticketPrice = 20000;
+        } else if (r.category.toLowerCase().includes("bulk")) {
+          ticketPrice = 0; // Covered by the Lead Coordinator package
+        } else if (isStudent) {
+          ticketPrice = r.include_workshop ? 1500 : 1000;
+        } else if (r.category.toLowerCase().includes("workshop")) {
+          ticketPrice = 500;
+        } else {
+          // Professional
+          ticketPrice = r.include_workshop ? 2500 : 2000;
+        }
+        return sum + ticketPrice;
+      }, 0);
 
     // Catering counts
     const vegCount = registrations.filter((r) => (r.food_preference || "").toLowerCase().includes("veg") && !(r.food_preference || "").toLowerCase().includes("non")).length;

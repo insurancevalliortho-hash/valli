@@ -569,7 +569,7 @@ export async function sendAriseRegistrationEmail(data: AriseEmailPayload) {
     let amountPaid = 2000;
     const isStudent = data.designation === "Student / Intern";
     if (data.category.toLowerCase().includes("bulk")) {
-      amountPaid = 10000;
+      amountPaid = 20000;
     } else if (data.category === "Conference with Workshop") {
       amountPaid = isStudent ? 1500 : 2500;
     } else if (data.category === "Workshop") {

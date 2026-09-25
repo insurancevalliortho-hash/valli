@@ -230,7 +230,7 @@ export async function POST(request: Request) {
               const delegateIapNo = notes.iapMembershipNumber || null;
 
               let delegateCode = registrationCode;
-              const isBulkPayment = notes.isBulk === "true" || notes.isBulk === true || amountInPaise === 1000000;
+              const isBulkPayment = notes.isBulk === "true" || notes.isBulk === true || amountInPaise === 2000000;
               if (isBulkPayment) {
                 delegateCode = delegateCode ? `${delegateCode}-LEAD` : `ARISE26-BULK-LEAD-${Math.floor(1000 + Math.random() * 9000)}`;
               } else if (!delegateCode || !delegateCode.startsWith("ARISE26-")) {
