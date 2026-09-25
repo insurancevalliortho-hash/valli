@@ -45,8 +45,7 @@ export default function Footer() {
                             <li className="group">
                                 <p className="text-[10px] uppercase tracking-widest text-[#f98825] mb-2 font-bold group-hover:translate-x-1 transition-transform">Emergency 24/7 & Helpline</p>
                                 <div className="flex flex-col gap-1.5">
-                                    <a href="tel:+919087417111" className="text-2xl sm:text-3xl font-black text-[#001014] tracking-tight hover:text-[#3cb3a6] transition-colors leading-none inline-block">+91 90874 17111</a>
-                                    <a href="tel:+919994599294" className="text-xl sm:text-2xl font-black text-gray-700 tracking-tight hover:text-[#f98825] transition-colors leading-none inline-block">+91 99945 99294</a>
+                                    <a href="tel:+919003417111" className="text-2xl sm:text-3xl font-black text-[#001014] tracking-tight hover:text-[#3cb3a6] transition-colors leading-none inline-block">+91 90034 17111</a>
                                 </div>
                             </li>
                             <li className="pt-6 border-t border-gray-100 group">
