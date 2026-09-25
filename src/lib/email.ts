@@ -306,7 +306,7 @@ export async function sendRegistrationEmail(data: EmailPayload) {
 
     const info = await transporter.sendMail(mailOptions);
     console.log(`Email successfully dispatched to ${data.emailId}. Message ID: ${info.messageId}`);
-    
+
     const testUrl = nodemailer.getTestMessageUrl(info);
     if (testUrl) {
       console.log(`[TEST EMAIL PREVIEW] View the rendered email at: ${testUrl}`);
@@ -1228,7 +1228,7 @@ export async function sendActiveSalemRegistrationEmail(data: ActiveSalemEmailPay
             <div class="footer">
               <p><strong>Active Salem • Valli Super Speciality Hospital</strong></p>
               <p>Meyyanoor Road, Salem, Tamil Nadu, 636004</p>
-              <p style="margin-top: 8px; font-size: 11px; opacity: 0.8;">For queries or support, reach out to helpdesk@activesalem.in or call our helpline.</p>
+              <p style="margin-top: 8px; font-size: 11px; opacity: 0.8;">For queries or support, reach out to info@vallihospital.in or call our helpline.</p>
             </div>
           </div>
         </div>
