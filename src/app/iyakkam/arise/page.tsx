@@ -35,6 +35,7 @@ import {
 
 import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
+import { syncLandingPageSource } from "../../../lib/attribution";
 
 // ─── Countdown Timer Component ────────────────────────────────────────────────
 function CountdownTimer() {
@@ -134,7 +135,7 @@ function PartnerLogosHeader() {
 }
 
 // ─── Hero Section ─────────────────────────────────────────────────────────────
-function HeroSection() {
+function HeroSection({ regHref = "/iyakkam/arise/register" }: { regHref?: string }) {
   return (
     <section
       className="grid-bg-dots relative overflow-hidden"
@@ -267,7 +268,7 @@ function HeroSection() {
               className="flex flex-wrap items-center gap-4 pt-2"
             >
               <Link
-                href="/iyakkam/arise/register"
+                href={regHref}
                 className="btn-primary btn-orange px-8 py-4 rounded-2xl text-sm font-extrabold shadow-lg shadow-orange/20 flex items-center gap-2 hover:-translate-y-0.5 transition-transform"
               >
                 Register Online Now
@@ -922,7 +923,7 @@ function CommitteeSection() {
 }
 
 // ─── Registration & Pricing Section (Image 4) ──────────────────────────────────
-function PricingSection() {
+function PricingSection({ regHref = "/iyakkam/arise/register" }: { regHref?: string }) {
   return (
     <section id="registration" className="py-24 bg-gradient-to-b from-slate-50 to-white border-t border-slate-200 text-left relative z-10 overflow-hidden">
       <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-16 relative z-10">
@@ -1059,7 +1060,7 @@ function PricingSection() {
 
             {/* Register CTA Button */}
             <Link
-              href="/iyakkam/arise/register"
+              href={regHref}
               className="btn-primary btn-orange w-full py-4 rounded-2xl font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg shadow-orange/20 hover:-translate-y-0.5 transition-transform"
             >
               <span>Go to Online Registration Form</span>
@@ -1195,6 +1196,15 @@ function WorkshopsSection() {
 
 // ─── Main Page Assembly ───────────────────────────────────────────────────────
 export default function ArisePage() {
+  const [regHref, setRegHref] = useState("/iyakkam/arise/register");
+
+  useEffect(() => {
+    const src = syncLandingPageSource("arise_source");
+    if (src && src !== "Direct") {
+      setRegHref(`/iyakkam/arise/register?source=${encodeURIComponent(src.toLowerCase())}`);
+    }
+  }, []);
+
   return (
     <main className="bg-white text-slate-800 select-none overflow-x-clip min-h-screen">
       <Navbar />
@@ -1202,13 +1212,13 @@ export default function ArisePage() {
       <div className="pt-[84px] sm:pt-[92px]">
         <PartnerLogosHeader />
       </div>
-      <HeroSection />
+      <HeroSection regHref={regHref} />
       <DignitariesSection />
       <ScheduleSection />
       <WorkshopsSection />
       <FacultySection />
       <CommitteeSection />
-      <PricingSection />
+      <PricingSection regHref={regHref} />
       <Footer />
     </main>
   );

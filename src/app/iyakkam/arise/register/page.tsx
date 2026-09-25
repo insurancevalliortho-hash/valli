@@ -38,6 +38,7 @@ import Footer from "../../../../components/Footer";
 import confetti from "canvas-confetti";
 import { motion, AnimatePresence } from "framer-motion";
 import RazorpayCheckout from "../../../../components/RazorpayCheckout";
+import { resolveClientSource } from "../../../../lib/attribution";
 
 const easeSmooth = [0.16, 1, 0.3, 1] as const;
 
@@ -74,7 +75,7 @@ export default function AriseRegisterPage() {
   const [foodPreference, setFoodPreference] = useState("Vegetarian");
   const [iapCreditPoints, setIapCreditPoints] = useState(false);
   const [iapMembershipNumber, setIapMembershipNumber] = useState("");
-  const [source, setSource] = useState("Social Media");
+  const [source, setSource] = useState("Direct");
   const [paymentMethod, setPaymentMethod] = useState<"online" | "upi_qr">("online");
   const [transactionId, setTransactionId] = useState("");
   const [screenshot, setScreenshot] = useState<string | null>(null);
@@ -107,6 +108,10 @@ export default function AriseRegisterPage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
+    // Resolve attribution source from URL params (?source=qr, ?source=meta) or stored session
+    const detectedSource = resolveClientSource("arise_source");
+    setSource(detectedSource);
+
     fetch("/api/arise/register")
       .then((res) => res.json())
       .then((data) => {

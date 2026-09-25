@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { saveActiveSalemRegistration, getPgPool } from "../../../../lib/db";
 import { sendActiveSalemRegistrationEmail } from "../../../../lib/email";
+import { normalizeSource } from "../../../../lib/attribution";
 
 export async function GET() {
   try {
@@ -84,7 +85,7 @@ export async function POST(request: Request) {
       age: ageNum,
       emergencyContact: emergencyContact || "",
       city: city || "",
-      source: source || "Other",
+      source: normalizeSource(source),
       transactionId,
       paymentScreenshot,
       isVerified: Boolean(body.isVerified || isOnlinePayment),

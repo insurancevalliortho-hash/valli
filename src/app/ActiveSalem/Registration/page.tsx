@@ -23,6 +23,7 @@ import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
 import RazorpayCheckout from "../../../components/RazorpayCheckout";
 import confetti from "canvas-confetti";
+import { resolveClientSource } from "../../../lib/attribution";
 
 type CategoryType = "5KM" | "10KM";
 
@@ -45,6 +46,7 @@ export default function ActiveSalemRegistrationPage() {
   const [city, setCity] = useState("Salem");
   const [emergencyContact, setEmergencyContact] = useState("");
   const [transactionId, setTransactionId] = useState("");
+  const [source, setSource] = useState("Direct");
 
   // Status States
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -53,6 +55,10 @@ export default function ActiveSalemRegistrationPage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
+    // Resolve attribution source from URL params (?source=qr, ?source=meta) or stored session
+    const detectedSource = resolveClientSource("active_salem_source");
+    setSource(detectedSource);
+
     // Fetch next sequential registration code (ordered, non-random)
     fetch("/api/active-salem/register")
       .then((res) => res.json())
@@ -161,7 +167,7 @@ export default function ActiveSalemRegistrationPage() {
           age: Number(age),
           emergencyContact: emergencyContact || "N/A",
           city,
-          source: "Online Gateway",
+          source: source || "Direct",
           transactionId: details.paymentId,
           paymentScreenshot: "RAZORPAY_ONLINE_PAYMENT",
           isVerified: true,
@@ -623,7 +629,7 @@ export default function ActiveSalemRegistrationPage() {
                               emailId,
                               mobileNumber,
                               emergencyContact,
-                              source: "Online Gateway",
+                              source: source || "Direct",
                             }}
                             onSuccess={handlePaymentSuccess}
                             onFailure={(errMsg) => setErrors({ payment: errMsg })}

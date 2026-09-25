@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { saveAriseRegistration, getPgPool } from "../../../../lib/db";
 import { sendAriseRegistrationEmail } from "../../../../lib/email";
+import { normalizeSource } from "../../../../lib/attribution";
 
 export async function GET() {
   try {
@@ -91,7 +92,7 @@ export async function POST(request: Request) {
       institution,
       department: department || "",
       city: city || "",
-      source: source || "Other",
+      source: normalizeSource(source),
       transactionId,
       paymentScreenshot,
       designation,

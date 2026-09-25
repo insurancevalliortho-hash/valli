@@ -32,11 +32,14 @@ import {
   Send,
   Filter,
   GraduationCap,
-  Utensils
+  Utensils,
+  Share2
 } from "lucide-react";
 import Navbar from "../../../../components/Navbar";
 import Footer from "../../../../components/Footer";
 import AdminAnalyticsChart, { ChartDataPoint } from "../../../../components/iyakkam/AdminAnalyticsChart";
+import SourceAttributionWidget from "../../../../components/iyakkam/SourceAttributionWidget";
+import { normalizeSource, getSourceBadgeStyle } from "../../../../lib/attribution";
 
 interface Registration {
   id: number;
@@ -67,6 +70,7 @@ type SortField =
   | "registration_code"
   | "category"
   | "institution"
+  | "source"
   | "is_verified";
 
 type SortDirection = "asc" | "desc";
@@ -88,6 +92,7 @@ export default function AriseAdminPage() {
   const [verificationFilter, setVerificationFilter] = useState("all");
   const [workshopFilter, setWorkshopFilter] = useState("all");
   const [foodFilter, setFoodFilter] = useState("all");
+  const [sourceFilter, setSourceFilter] = useState("all");
 
   // Sorting
   const [sortField, setSortField] = useState<SortField>("created_at");
@@ -316,6 +321,9 @@ export default function AriseAdminPage() {
         return sum + ticketPrice;
       }, 0);
 
+    // Workshop seats
+    const workshopCount = registrations.filter((r) => r.include_workshop || (r.category && r.category.toLowerCase().includes("workshop"))).length;
+
     // Catering counts
     const vegCount = registrations.filter((r) => (r.food_preference || "").toLowerCase().includes("veg") && !(r.food_preference || "").toLowerCase().includes("non")).length;
     const nonVegCount = registrations.filter((r) => (r.food_preference || "").toLowerCase().includes("non")).length;
@@ -326,6 +334,31 @@ export default function AriseAdminPage() {
     // Designation counts
     const studentCount = registrations.filter((r) => (r.designation && r.designation.toLowerCase().includes("student")) || r.category.toLowerCase().includes("student")).length;
     const profCount = total - studentCount;
+
+    // Source Attribution breakdown
+    const sourceMap: Record<string, { total: number; verified: number; revenue: number }> = {};
+    registrations.forEach((r) => {
+      const src = normalizeSource(r.source);
+      if (!sourceMap[src]) {
+        sourceMap[src] = { total: 0, verified: 0, revenue: 0 };
+      }
+      sourceMap[src].total += 1;
+      if (r.is_verified) {
+        sourceMap[src].verified += 1;
+        sourceMap[src].revenue += calculateFee(r);
+      }
+    });
+
+    const sourceBreakdown = Object.entries(sourceMap)
+      .map(([sourceName, data]) => ({
+        source: sourceName,
+        total: data.total,
+        verified: data.verified,
+        revenue: data.revenue,
+        pct: total > 0 ? Math.round((data.total / total) * 100) : 0,
+        paidRate: data.total > 0 ? Math.round((data.verified / data.total) * 100) : 0,
+      }))
+      .sort((a, b) => b.total - a.total);
 
     return {
       total,
@@ -338,6 +371,7 @@ export default function AriseAdminPage() {
       iapCount,
       studentCount,
       profCount,
+      sourceBreakdown,
     };
   }, [registrations]);
 
@@ -466,13 +500,20 @@ export default function AriseAdminPage() {
         }
       }
 
+      // Source Channel Filtering
+      let matchesSource = true;
+      if (sourceFilter !== "all") {
+        matchesSource = normalizeSource(r.source).toLowerCase() === sourceFilter.toLowerCase();
+      }
+
       return (
         matchesSearch &&
         matchesCategory &&
         matchesVerification &&
         matchesWorkshop &&
         matchesFood &&
-        matchesDate
+        matchesDate &&
+        matchesSource
       );
     });
 
@@ -491,6 +532,9 @@ export default function AriseAdminPage() {
           break;
         case "institution":
           comparison = (a.institution || "").localeCompare(b.institution || "");
+          break;
+        case "source":
+          comparison = normalizeSource(a.source).localeCompare(normalizeSource(b.source));
           break;
         case "is_verified":
           comparison = (a.is_verified ? 1 : 0) - (b.is_verified ? 1 : 0);
@@ -522,6 +566,7 @@ export default function AriseAdminPage() {
     dateFilter,
     customDate,
     selectedChartDate,
+    sourceFilter,
     sortField,
     sortDirection,
   ]);
@@ -542,6 +587,7 @@ export default function AriseAdminPage() {
       "Department",
       "City",
       "Designation",
+      "Source Channel",
       "Food Preference",
       "IAP Points",
       "IAP Number",
@@ -562,6 +608,7 @@ export default function AriseAdminPage() {
       `"${(r.department || "").replace(/"/g, '""')}"`,
       `"${(r.city || "").replace(/"/g, '""')}"`,
       `"${(r.designation || "").replace(/"/g, '""')}"`,
+      `"${normalizeSource(r.source)}"`,
       r.food_preference || "Vegetarian",
       r.iap_credit_points ? "Yes" : "No",
       `'${r.iap_membership_number || ""}`,
@@ -829,8 +876,43 @@ export default function AriseAdminPage() {
                 entityName="Delegates"
               />
 
+              {/* Source Attribution & Acquisition Channels */}
+              <SourceAttributionWidget
+                sources={stats.sourceBreakdown}
+                totalRegistrations={stats.total}
+                activeSourceFilter={sourceFilter}
+                onSelectSource={(src) => setSourceFilter(src)}
+                eventName="ARISE 2026 CME"
+                landingPath="/iyakkam/arise"
+                registerPath="/iyakkam/arise/register"
+                brandColor="#00A896"
+              />
+
               {/* Filters / Actions Toolbar */}
               <div className="bg-white border border-slate-200 rounded-[1.75rem] p-5 space-y-4 shadow-sm">
+                {/* Active Channel Filter Alert Banner */}
+                {sourceFilter !== "all" && (
+                  <div className="bg-teal-50/90 border border-teal-200 text-teal-900 px-4 py-2.5 rounded-2xl flex flex-wrap items-center justify-between gap-3 text-xs font-semibold shadow-sm">
+                    <div className="flex items-center gap-2">
+                      <Share2 size={14} className="text-teal-600 shrink-0" />
+                      <span>
+                        Filtering by Acquisition Channel:{" "}
+                        <strong className="font-mono bg-teal-100/80 px-2 py-0.5 rounded-lg border border-teal-300/60 uppercase">
+                          {sourceFilter}
+                        </strong>{" "}
+                        ({filteredRegistrations.length} delegate{filteredRegistrations.length === 1 ? "" : "s"} matched)
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setSourceFilter("all")}
+                      className="text-teal-800 hover:text-teal-950 font-bold underline text-[11px] uppercase tracking-wider cursor-pointer flex items-center gap-1 ml-auto"
+                    >
+                      <X size={12} /> Clear Channel Filter
+                    </button>
+                  </div>
+                )}
+
                 {/* Active Date Filter Alert Banner */}
                 {(selectedChartDate || dateFilter !== "all") && (
                   <div className="bg-amber-50/90 border border-amber-200 text-amber-900 px-4 py-2.5 rounded-2xl flex flex-wrap items-center justify-between gap-3 text-xs font-semibold shadow-sm">
@@ -918,6 +1000,8 @@ export default function AriseAdminPage() {
                       <option value="registration_code-desc">Pass Code (Z → A)</option>
                       <option value="category-asc">Category & Track</option>
                       <option value="institution-asc">Institution (A → Z)</option>
+                      <option value="source-asc">Source (A → Z)</option>
+                      <option value="source-desc">Source (Z → A)</option>
                       <option value="is_verified-desc">Status (Paid First)</option>
                       <option value="is_verified-asc">Status (Pending First)</option>
                     </select>
@@ -966,6 +1050,20 @@ export default function AriseAdminPage() {
                     <option value="bulk">Bulk Group</option>
                   </select>
 
+                  {/* Source / Channel Filter */}
+                  <select
+                    value={sourceFilter}
+                    onChange={(e) => setSourceFilter(e.target.value)}
+                    className="bg-slate-50 border border-[#E2E8F0] hover:border-slate-350 rounded-xl px-3 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none cursor-pointer"
+                  >
+                    <option value="all">Source: All Channels</option>
+                    {stats.sourceBreakdown.map((s) => (
+                      <option key={s.source} value={s.source}>
+                        Source: {s.source} ({s.total})
+                      </option>
+                    ))}
+                  </select>
+
                   {/* Verification filter */}
                   <select
                     value={verificationFilter}
@@ -1003,6 +1101,7 @@ export default function AriseAdminPage() {
                     verificationFilter !== "all" ||
                     workshopFilter !== "all" ||
                     foodFilter !== "all" ||
+                    sourceFilter !== "all" ||
                     dateFilter !== "all" ||
                     selectedChartDate !== null ||
                     searchQuery) && (
@@ -1013,6 +1112,7 @@ export default function AriseAdminPage() {
                         setVerificationFilter("all");
                         setWorkshopFilter("all");
                         setFoodFilter("all");
+                        setSourceFilter("all");
                         setDateFilter("all");
                         setCustomDate("");
                         setSelectedChartDate(null);
@@ -1068,6 +1168,18 @@ export default function AriseAdminPage() {
                           {renderSortIcon("institution")}
                         </th>
 
+                        {/* Source Sortable */}
+                        <th
+                          onClick={() => handleSort("source")}
+                          className="p-4 cursor-pointer hover:bg-slate-100 transition-colors group"
+                          title="Click to sort by Acquisition Channel"
+                        >
+                          <div className="flex items-center gap-1.5">
+                            <span>Source</span>
+                            {renderSortIcon("source")}
+                          </div>
+                        </th>
+
                         {/* Date Sortable */}
                         <th
                           onClick={() => handleSort("created_at")}
@@ -1101,7 +1213,7 @@ export default function AriseAdminPage() {
                     <tbody className="divide-y divide-slate-150 text-xs sm:text-sm font-semibold text-slate-700">
                       {filteredRegistrations.length === 0 ? (
                         <tr>
-                          <td colSpan={7} className="p-12 text-center text-slate-400 font-bold">
+                          <td colSpan={8} className="p-12 text-center text-slate-400 font-bold">
                             No matching ARISE delegates found with current filters.
                           </td>
                         </tr>
@@ -1171,6 +1283,14 @@ export default function AriseAdminPage() {
                                     <MapPin className="w-2.5 h-2.5" /> {r.city}
                                   </span>
                                 )}
+                              </td>
+
+                              {/* Acquisition Source */}
+                              <td className="p-4">
+                                <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold uppercase border shadow-2xs ${getSourceBadgeStyle(r.source)}`}>
+                                  <Share2 size={10} className="shrink-0" />
+                                  {normalizeSource(r.source)}
+                                </span>
                               </td>
 
                               {/* Payment & Date */}

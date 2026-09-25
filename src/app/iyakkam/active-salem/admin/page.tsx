@@ -29,11 +29,14 @@ import {
   Send,
   Filter,
   Award,
+  Compass,
   X
 } from "lucide-react";
 import Navbar from "../../../../components/Navbar";
 import Footer from "../../../../components/Footer";
 import AdminAnalyticsChart, { ChartDataPoint } from "../../../../components/iyakkam/AdminAnalyticsChart";
+import SourceAttributionWidget from "../../../../components/iyakkam/SourceAttributionWidget";
+import { normalizeSource, getSourceBadgeStyle } from "../../../../lib/attribution";
 
 interface ActiveSalemRegistration {
   id: number;
@@ -60,6 +63,7 @@ type SortField =
   | "category"
   | "tshirt_size"
   | "age"
+  | "source"
   | "is_verified";
 
 type SortDirection = "asc" | "desc";
@@ -90,6 +94,7 @@ export default function ActiveSalemAdminPage() {
   const [tshirtFilter, setTshirtFilter] = useState("all");
   const [genderFilter, setGenderFilter] = useState("all");
   const [ageFilter, setAgeFilter] = useState("all");
+  const [sourceFilter, setSourceFilter] = useState("all");
 
   // Sorting
   const [sortField, setSortField] = useState<SortField>("created_at");
@@ -326,6 +331,32 @@ export default function ActiveSalemAdminPage() {
     const count5KM = registrations.filter((r) => (r.category || "").includes("5")).length;
     const count10KM = registrations.filter((r) => (r.category || "").includes("10")).length;
 
+    // Source Attribution breakdown
+    const sourceMap: Record<string, { total: number; verified: number; revenue: number }> = {};
+    registrations.forEach((r) => {
+      const src = normalizeSource(r.source);
+      if (!sourceMap[src]) {
+        sourceMap[src] = { total: 0, verified: 0, revenue: 0 };
+      }
+      sourceMap[src].total += 1;
+      if (r.is_verified) {
+        sourceMap[src].verified += 1;
+        const ticketPrice = r.category?.includes("10KM") ? 299 : 249;
+        sourceMap[src].revenue += ticketPrice;
+      }
+    });
+
+    const sourceBreakdown = Object.entries(sourceMap)
+      .map(([sourceName, data]) => ({
+        source: sourceName,
+        total: data.total,
+        verified: data.verified,
+        revenue: data.revenue,
+        pct: total > 0 ? Math.round((data.total / total) * 100) : 0,
+        paidRate: data.total > 0 ? Math.round((data.verified / data.total) * 100) : 0,
+      }))
+      .sort((a, b) => b.total - a.total);
+
     return {
       total,
       verified,
@@ -341,6 +372,7 @@ export default function ActiveSalemAdminPage() {
       above50,
       count5KM,
       count10KM,
+      sourceBreakdown,
     };
   }, [registrations]);
 
@@ -480,6 +512,12 @@ export default function ActiveSalemAdminPage() {
         }
       }
 
+      // Source Channel Filtering
+      let matchesSource = true;
+      if (sourceFilter !== "all") {
+        matchesSource = normalizeSource(r.source).toLowerCase() === sourceFilter.toLowerCase();
+      }
+
       return (
         matchesSearch &&
         matchesCategory &&
@@ -487,7 +525,8 @@ export default function ActiveSalemAdminPage() {
         matchesTshirt &&
         matchesGender &&
         matchesAge &&
-        matchesDate
+        matchesDate &&
+        matchesSource
       );
     });
 
@@ -512,6 +551,9 @@ export default function ActiveSalemAdminPage() {
         }
         case "age":
           comparison = (Number(a.age) || 0) - (Number(b.age) || 0);
+          break;
+        case "source":
+          comparison = normalizeSource(a.source).localeCompare(normalizeSource(b.source));
           break;
         case "is_verified":
           comparison = (a.is_verified ? 1 : 0) - (b.is_verified ? 1 : 0);
@@ -581,7 +623,7 @@ export default function ActiveSalemAdminPage() {
       r.age,
       `'${r.emergency_contact || ""}`,
       `"${(r.city || "").replace(/"/g, '""')}"`,
-      r.source || "Website",
+      normalizeSource(r.source),
       `'${r.transaction_id}`,
       r.is_verified ? "Verified" : "Pending",
       new Date(r.created_at).toLocaleString(),
@@ -909,8 +951,43 @@ export default function ActiveSalemAdminPage() {
                 entityName="Runners"
               />
 
+              {/* Acquisition Source Attribution & Campaign Link Builder */}
+              <SourceAttributionWidget
+                sources={stats.sourceBreakdown}
+                totalRegistrations={stats.total}
+                activeSourceFilter={sourceFilter}
+                onSelectSource={(src) => setSourceFilter(src)}
+                eventName="Active Salem Marathon 4.0"
+                landingPath="/iyakkam/active-salem"
+                registerPath="/iyakkam/active-salem/register"
+                brandColor="#F26522"
+              />
+
               {/* Filters / Search / Actions Toolbar */}
               <div className="bg-white border border-slate-200 rounded-[1.75rem] p-5 space-y-4 shadow-sm">
+                {/* Active Source Filter Alert Banner */}
+                {sourceFilter !== "all" && (
+                  <div className="bg-purple-50/90 border border-purple-200 text-purple-900 px-4 py-2.5 rounded-2xl flex flex-wrap items-center justify-between gap-3 text-xs font-semibold shadow-sm">
+                    <div className="flex items-center gap-2">
+                      <Compass size={14} className="text-purple-600 shrink-0" />
+                      <span>
+                        Filtering by Acquisition Channel:{" "}
+                        <strong className="font-mono bg-purple-100 px-2 py-0.5 rounded-lg border border-purple-300">
+                          {sourceFilter}
+                        </strong>{" "}
+                        ({filteredRegistrations.length} runner{filteredRegistrations.length === 1 ? "" : "s"} matched)
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setSourceFilter("all")}
+                      className="text-purple-800 hover:text-purple-950 font-bold underline text-[11px] uppercase tracking-wider cursor-pointer flex items-center gap-1 ml-auto"
+                    >
+                      <X size={12} /> Clear Channel Filter
+                    </button>
+                  </div>
+                )}
+
                 {/* Active Date Filter Alert Banner */}
                 {(selectedChartDate || dateFilter !== "all") && (
                   <div className="bg-amber-50/90 border border-amber-200 text-amber-900 px-4 py-2.5 rounded-2xl flex flex-wrap items-center justify-between gap-3 text-xs font-semibold shadow-sm">
@@ -1001,6 +1078,8 @@ export default function ActiveSalemAdminPage() {
                       <option value="tshirt_size-desc">T-Shirt Size (XXL → S)</option>
                       <option value="age-asc">Age (Youngest First)</option>
                       <option value="age-desc">Age (Oldest First)</option>
+                      <option value="source-asc">Source (A → Z)</option>
+                      <option value="source-desc">Source (Z → A)</option>
                       <option value="is_verified-desc">Status (Paid First)</option>
                       <option value="is_verified-asc">Status (Pending First)</option>
                     </select>
@@ -1046,6 +1125,20 @@ export default function ActiveSalemAdminPage() {
                     <option value="all">Category: All</option>
                     <option value="5km">5KM Marathon (₹249)</option>
                     <option value="10km">10KM Timed Run (₹299)</option>
+                  </select>
+
+                  {/* Source / Channel Filter */}
+                  <select
+                    value={sourceFilter}
+                    onChange={(e) => setSourceFilter(e.target.value)}
+                    className="bg-slate-50 border border-[#E2E8F0] hover:border-slate-350 rounded-xl px-3 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none cursor-pointer"
+                  >
+                    <option value="all">Source: All Channels</option>
+                    {stats.sourceBreakdown.map((s) => (
+                      <option key={s.source} value={s.source}>
+                        Source: {s.source} ({s.total})
+                      </option>
+                    ))}
                   </select>
 
                   {/* Verification filter */}
@@ -1110,6 +1203,7 @@ export default function ActiveSalemAdminPage() {
                       onClick={() => {
                         setCategoryFilter("all");
                         setVerificationFilter("all");
+                        setSourceFilter("all");
                         setTshirtFilter("all");
                         setGenderFilter("all");
                         setAgeFilter("all");
@@ -1177,6 +1271,18 @@ export default function ActiveSalemAdminPage() {
                           {renderSortIcon("age")}
                         </th>
 
+                        {/* Source Sortable */}
+                        <th
+                          onClick={() => handleSort("source")}
+                          className="p-4 cursor-pointer hover:bg-slate-100 transition-colors group"
+                          title="Click to sort by Acquisition Channel"
+                        >
+                          <div className="flex items-center gap-1.5">
+                            <span>Source</span>
+                            {renderSortIcon("source")}
+                          </div>
+                        </th>
+
                         {/* Date Sortable */}
                         <th
                           onClick={() => handleSort("created_at")}
@@ -1210,7 +1316,7 @@ export default function ActiveSalemAdminPage() {
                     <tbody className="divide-y divide-slate-150 text-xs sm:text-sm font-semibold text-slate-700">
                       {filteredRegistrations.length === 0 ? (
                         <tr>
-                          <td colSpan={8} className="p-12 text-center text-slate-400 font-bold">
+                          <td colSpan={9} className="p-12 text-center text-slate-400 font-bold">
                             No matching registrations found with current filters.
                           </td>
                         </tr>
@@ -1274,6 +1380,20 @@ export default function ActiveSalemAdminPage() {
                                     Emg: {r.emergency_contact}
                                   </span>
                                 )}
+                              </td>
+
+                              {/* Acquisition Channel */}
+                              <td className="p-4">
+                                {(() => {
+                                  const srcNorm = normalizeSource(r.source);
+                                  const badge = getSourceBadgeStyle(srcNorm);
+                                  return (
+                                    <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold border ${badge.bg} ${badge.text} ${badge.border}`}>
+                                      <span className={`w-1.5 h-1.5 rounded-full ${badge.dot}`} />
+                                      {srcNorm}
+                                    </span>
+                                  );
+                                })()}
                               </td>
 
                               {/* Payment & Date */}

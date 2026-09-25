@@ -28,6 +28,7 @@ import {
 
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import { syncLandingPageSource } from "../../lib/attribution";
 
 const easeSmooth = [0.16, 1, 0.3, 1] as const;
 
@@ -124,7 +125,7 @@ function CountdownTimer() {
 }
 
 // ─── Hero Section ─────────────────────────────────────────────────────────────
-function HeroSection() {
+function HeroSection({ regHref = "/ActiveSalem/Registration" }: { regHref?: string }) {
   return (
     <section className="relative min-h-[92dvh] flex items-center pt-24 pb-20 overflow-hidden bg-[#FAFCFC] text-slate-900">
       {/* Ambient radials */}
@@ -227,7 +228,7 @@ function HeroSection() {
             >
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={{ type: "spring", stiffness: 300, damping: 18 }}>
                 <Link
-                  href="/ActiveSalem/Registration"
+                  href={regHref}
                   className="bg-[#F26522] hover:bg-[#d95315] text-white px-8 py-4 rounded-2xl font-bold text-sm uppercase tracking-wider shadow-lg shadow-orange-500/20 hover:shadow-orange-500/30 transition-all flex items-center gap-3 cursor-pointer"
                 >
                   <span>Register For 5K / 10K</span>
@@ -284,7 +285,7 @@ function HeroSection() {
               </div>
 
               <Link
-                href="/ActiveSalem/Registration"
+                href={regHref}
                 className="w-full py-3.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-center block text-xs font-bold uppercase tracking-wider transition-colors shadow-sm"
               >
                 Proceed To Booking (5K / 10K) →
@@ -299,7 +300,7 @@ function HeroSection() {
 }
 
 // ─── Categories Section ────────────────────────────────────────────────────────
-function CategoriesSection() {
+function CategoriesSection({ regHref = "/ActiveSalem/Registration" }: { regHref?: string }) {
   const categories = [
     {
       badge: "HONORARY WALKATHON",
@@ -336,7 +337,7 @@ function CategoriesSection() {
       ],
       fee: "₹249",
       feeColor: "text-slate-900",
-      cta: "/ActiveSalem/Registration",
+      cta: regHref,
       ctaNote: null,
     },
     {
@@ -355,7 +356,7 @@ function CategoriesSection() {
       ],
       fee: "₹299",
       feeColor: "text-[#F26522]",
-      cta: "/ActiveSalem/Registration",
+      cta: regHref,
       ctaNote: null,
     },
   ];
@@ -694,7 +695,7 @@ function PrizesSection() {
 }
 
 // ─── Schedule & Route Section ──────────────────────────────────────────────────
-function ScheduleAndRouteSection() {
+function ScheduleAndRouteSection({ regHref = "/ActiveSalem/Registration" }: { regHref?: string }) {
   const [activeRoute, setActiveRoute] = useState<"3K" | "5K" | "10K">("10K");
 
   const timeline = [
@@ -942,7 +943,7 @@ function ScheduleAndRouteSection() {
 
             <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
               <span className="text-slate-500 font-mono">Medical Support: 24/7 Ambulance & Trauma Care</span>
-              <Link href="/ActiveSalem/Registration" className="text-[#00A896] hover:underline font-bold flex items-center gap-1">
+              <Link href={regHref} className="text-[#00A896] hover:underline font-bold flex items-center gap-1">
                 Register for 5K / 10K →
               </Link>
             </div>
@@ -1014,14 +1015,23 @@ function RadioAndSupportSection() {
 
 // ─── Main Export ───────────────────────────────────────────────────────────────
 export default function ActiveSalemPage() {
+  const [regHref, setRegHref] = useState("/ActiveSalem/Registration");
+
+  useEffect(() => {
+    const src = syncLandingPageSource("active_salem_source");
+    if (src && src !== "Direct") {
+      setRegHref(`/ActiveSalem/Registration?source=${encodeURIComponent(src.toLowerCase())}`);
+    }
+  }, []);
+
   return (
     <main className="bg-white text-slate-900 selection:bg-[#F26522] selection:text-white min-h-screen">
       <Navbar />
-      <HeroSection />
-      <CategoriesSection />
+      <HeroSection regHref={regHref} />
+      <CategoriesSection regHref={regHref} />
       <TributeSection />
       <PrizesSection />
-      <ScheduleAndRouteSection />
+      <ScheduleAndRouteSection regHref={regHref} />
       <RadioAndSupportSection />
       <Footer />
     </main>
