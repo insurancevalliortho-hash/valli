@@ -456,7 +456,7 @@ function CategoriesSection({ regHref = "/ActiveSalem/Registration" }: { regHref?
             {[
               { label: "Valli Running Tee", icon: <Shirt className="w-5 h-5 text-[#00A896]" /> },
               { label: "Finisher Medal", icon: <Award className="w-5 h-5 text-amber-500" /> },
-              { label: "Time Certificate", icon: <FileCheck className="w-5 h-5 text-emerald-600" /> },
+              { label: "Certificate", icon: <FileCheck className="w-5 h-5 text-emerald-600" /> },
               { label: "Hydration Stations", icon: <Droplets className="w-5 h-5 text-blue-500" /> },
               { label: "Medical Support", icon: <ShieldCheck className="w-5 h-5 text-blue-600" /> },
             ].map((inc, i) => (
@@ -977,7 +977,7 @@ function RadioAndSupportSection() {
               labelColor: "text-[#00A896]",
               title: "Need Help or Bulk Entries?",
               desc: null,
-              phones: ["+91 900 34 17 111", "+91 709 27 77 764"],
+              phones: ["+91 99945 99524", "+91 90874 17111"],
             },
           ].map((card, i) => (
             <motion.div
@@ -998,10 +998,10 @@ function RadioAndSupportSection() {
                 {card.desc && <p className="text-xs text-slate-500">{card.desc}</p>}
                 {card.phones && (
                   <p className="text-xs text-slate-500">
-                    Call{" "}
-                    <a href={`tel:+91${card.phones[0].replace(/\D/g, "")}`} className="text-slate-900 font-bold hover:underline">{card.phones[0]}</a>
-                    {" "}or{" "}
-                    <a href={`tel:+91${card.phones[1].replace(/\D/g, "")}`} className="text-slate-900 font-bold hover:underline">{card.phones[1]}</a>
+                    Call to{" "}
+                    <a href={`tel:${card.phones[0].replace(/\s+/g, "")}`} className="text-slate-900 font-bold hover:underline">{card.phones[0]}</a>
+                    {" "}and{" "}
+                    <a href={`tel:${card.phones[1].replace(/\s+/g, "")}`} className="text-slate-900 font-bold hover:underline">{card.phones[1]}</a>
                   </p>
                 )}
               </div>
