@@ -1205,21 +1205,19 @@ export async function sendActiveSalemRegistrationEmail(data: ActiveSalemEmailPay
                 <h4>What's Included in Your Runner Kit</h4>
                 <ul>
                   <li><strong>Official Running T-Shirt:</strong> Size ${data.tshirtSize} high-performance moisture-wicking jersey.</li>
-                  <li><strong>RFID Timing Bib:</strong> High precision chip timing for official marathon results.</li>
-                  <li><strong>Custom Finisher Medal:</strong> Awarded to every runner crossing the finish line.</li>
-                  <li><strong>Breakfast & Hydration:</strong> Refreshments, energy drinks, and breakfast after the race.</li>
+                  <li><strong>Hydration:</strong> Refreshments, energy drinks.</li>
                   <li><strong>Digital Timing Certificate:</strong> Available for download post-event.</li>
                 </ul>
               </div>
 
               <!-- Race Day Guidelines -->
               <div class="guidelines-card">
-                <h4>Race Day Reporting & Bib Collection</h4>
+                <h4>Race Day Reporting & Collection</h4>
                 <ul>
                   <li><strong>Date:</strong> Sunday, 11 October 2026</li>
                   <li><strong>Reporting Time:</strong> 5:00 AM on Race Day</li>
                   <li><strong>Venue:</strong> Valli Super Speciality Hospital, Meyyanoor Road, Salem - 636 004</li>
-                  <li><strong>Kit Collection:</strong> Present this email and your <strong>Registration Code (${data.registrationCode})</strong> along with a valid Govt Photo ID at the kit distribution counter.</li>
+                  <li><strong>Kit Collection:</strong> Present this email and your Registration Code (${data.registrationCode}) at the kit distribution counter.</li>
                 </ul>
               </div>
             </div>

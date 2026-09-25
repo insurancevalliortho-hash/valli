@@ -958,8 +958,8 @@ export default function ActiveSalemAdminPage() {
                 activeSourceFilter={sourceFilter}
                 onSelectSource={(src) => setSourceFilter(src)}
                 eventName="Active Salem Marathon 4.0"
-                landingPath="/iyakkam/active-salem"
-                registerPath="/iyakkam/active-salem/register"
+                landingPath="/ActiveSalem/"
+                registerPath="/ActiveSalem/Registration"
                 brandColor="#F26522"
               />
 

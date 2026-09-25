@@ -64,7 +64,7 @@ export default function SourceAttributionWidget({
   // Base origin
   const origin = typeof window !== "undefined" && window.location.origin
     ? window.location.origin
-    : "https://vallicountry.com";
+    : "https://www.vallihospital.in";
 
   const cleanTag = campaignTag.trim().toLowerCase().replace(/\s+/g, "_");
   const landingUrl = `${origin}${landingPath}${cleanTag ? `?source=${cleanTag}` : ""}`;

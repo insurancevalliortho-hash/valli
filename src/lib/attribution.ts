@@ -98,11 +98,35 @@ export function extractSourceFromSearch(search?: string): string | null {
 }
 
 /**
+ * Detects acquisition source from document.referrer when no URL parameter is provided.
+ */
+export function detectSourceFromReferrer(): string | null {
+  if (typeof window === "undefined" || !document.referrer) return null;
+  const ref = document.referrer.toLowerCase();
+
+  // Ignore internal navigation within the hospital domain
+  if (ref.includes("vallihospital.in") || ref.includes("localhost")) {
+    return null;
+  }
+
+  if (ref.includes("instagram.com")) return "Instagram";
+  if (ref.includes("facebook.com") || ref.includes("fb.me") || ref.includes("meta.com")) return "Meta";
+  if (ref.includes("whatsapp.com") || ref.includes("wa.me")) return "WhatsApp";
+  if (ref.includes("google.com") || ref.includes("google.")) return "Google";
+  if (ref.includes("youtube.com") || ref.includes("youtu.be")) return "YouTube";
+  if (ref.includes("linkedin.com")) return "LinkedIn";
+  if (ref.includes("t.co") || ref.includes("twitter.com") || ref.includes("x.com")) return "Twitter";
+
+  return null;
+}
+
+/**
  * Resolves the client-side acquisition source for a registration page.
  * Hierarchy:
  * 1. Current URL search params (?source=qr, etc.)
- * 2. Stored session from landing page visit
- * 3. Fallback: "Direct"
+ * 2. Stored session/local storage from landing page visit
+ * 3. Document referrer (Instagram, Meta, WhatsApp, Google)
+ * 4. Fallback: "Direct"
  */
 export function resolveClientSource(storageKey: string): string {
   if (typeof window === "undefined") return "Direct";
@@ -112,40 +136,78 @@ export function resolveClientSource(storageKey: string): string {
   if (urlSource) {
     try {
       sessionStorage.setItem(storageKey, urlSource);
+      localStorage.setItem(storageKey, urlSource);
     } catch (_) {}
     return urlSource;
   }
 
-  // 2. Previously stored in session during landing page visit
+  // 2. Previously stored in session or local storage during landing page visit
   try {
-    const stored = sessionStorage.getItem(storageKey);
-    if (stored && stored.trim()) {
-      return normalizeSource(stored);
+    const sessionVal = sessionStorage.getItem(storageKey);
+    if (sessionVal && sessionVal.trim()) {
+      return normalizeSource(sessionVal);
     }
   } catch (_) {}
 
-  // 3. Fallback to Direct
+  try {
+    const localVal = localStorage.getItem(storageKey);
+    if (localVal && localVal.trim()) {
+      return normalizeSource(localVal);
+    }
+  } catch (_) {}
+
+  // 3. Document referrer detection
+  const referrerSource = detectSourceFromReferrer();
+  if (referrerSource) {
+    try {
+      sessionStorage.setItem(storageKey, referrerSource);
+      localStorage.setItem(storageKey, referrerSource);
+    } catch (_) {}
+    return referrerSource;
+  }
+
+  // 4. Fallback to Direct
   return "Direct";
 }
 
 /**
- * Stashes source into sessionStorage when visitor lands on an event page.
+ * Stashes source into storage when visitor lands on an event page (e.g. /ActiveSalem/).
  */
 export function syncLandingPageSource(storageKey: string): string {
   if (typeof window === "undefined") return "Direct";
+
   const urlSource = extractSourceFromSearch(window.location.search);
   if (urlSource) {
     try {
       sessionStorage.setItem(storageKey, urlSource);
+      localStorage.setItem(storageKey, urlSource);
     } catch (_) {}
     return urlSource;
   }
+
   try {
-    const stored = sessionStorage.getItem(storageKey);
-    if (stored && stored.trim()) {
-      return normalizeSource(stored);
+    const sessionVal = sessionStorage.getItem(storageKey);
+    if (sessionVal && sessionVal.trim()) {
+      return normalizeSource(sessionVal);
     }
   } catch (_) {}
+
+  try {
+    const localVal = localStorage.getItem(storageKey);
+    if (localVal && localVal.trim()) {
+      return normalizeSource(localVal);
+    }
+  } catch (_) {}
+
+  const referrerSource = detectSourceFromReferrer();
+  if (referrerSource) {
+    try {
+      sessionStorage.setItem(storageKey, referrerSource);
+      localStorage.setItem(storageKey, referrerSource);
+    } catch (_) {}
+    return referrerSource;
+  }
+
   return "Direct";
 }
 
