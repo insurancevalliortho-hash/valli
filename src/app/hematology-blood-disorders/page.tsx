@@ -1,5 +1,5 @@
 import React from 'react';
-import { BreadcrumbSchema, FAQSchema } from '../../components/seo/StructuredData';
+import { BreadcrumbSchema, FAQSchema, MedicalProcedureSchema, MedicalSpecialtySchema } from '../../components/seo/StructuredData';
 import Link from 'next/link';
 import { Metadata } from 'next';
 
@@ -23,9 +23,20 @@ export default function Page() {
         { name: 'Hematology & Blood Disorders', url: 'https://www.vallihospital.in/hematology-blood-disorders' }
       ]} />
       <FAQSchema questions={[
-        { question: 'What blood disorders are treated at Valli Hospital?', answer: 'We treat Iron Deficiency Anemia, Thalassemia, Sickle Cell Disease, Hemophilia, DVT, Leukemia, Lymphoma, DIC, Thrombocytopenia, and more within our 50-bedded multispecialty setup.' },
-        { question: 'Is 24/7 emergency hematology care available?', answer: 'Yes. Our ICU-backed, ACLS and ATLS certified team provides round-the-clock care for acute hematological emergencies including Septicemia and DIC.' },
+        { question: 'What blood disorders are treated at Valli Hospital Salem?', answer: 'We treat Iron Deficiency Anemia, Thalassemia, Sickle Cell Disease, Hemophilia, Deep Vein Thrombosis (DVT), Thrombocytopenia (low platelets), Leukemia, Lymphoma, and Disseminated Intravascular Coagulation (DIC).' },
+        { question: 'Is 24/7 emergency blood transfusion and ICU care available?', answer: 'Yes. Our ICU-backed emergency department provides round-the-clock transfusion services, component therapy, and critical stabilization for acute hematological emergencies in Salem.' },
+        { question: 'What diagnostic blood tests are performed on-site?', answer: 'Our 24/7 automated laboratory performs complete blood counts (CBC), peripheral blood smears, coagulation profiles (PT/INR, aPTT), ferritin levels, and hemoglobin electrophoresis.' }
       ]} />
+      <MedicalSpecialtySchema
+        name="Clinical Hematology & Blood Disorders Center"
+        description="Comprehensive diagnostic and therapeutic hematology care, anemia management, and coagulopathy treatment in Salem."
+        url="https://www.vallihospital.in/hematology-blood-disorders"
+      />
+      <MedicalProcedureSchema
+        name="Diagnostic Bone Marrow Examination & Blood Component Therapy"
+        description="Precision hematological diagnosis, blood component infusions, and anti-coagulation therapy."
+        bodyLocation="Hematopoietic & Circulatory System"
+      />
 
       <div className="mx-auto px-6 md:px-12 pt-28 pb-4 bg-[#001f25]">
         <nav aria-label="breadcrumb">

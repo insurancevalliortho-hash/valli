@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
@@ -184,12 +184,20 @@ export default function ContactUsPage() {
                   Direct pipeline to our trauma rooms and ambulance dispatchers. Call instantly for urgent orthopedic or surgical care.
                 </p>
               </div>
-              <a
-                href="tel:+919003417111"
-                className="bg-red-600 hover:bg-red-700 text-white font-bold text-xs tracking-wider uppercase text-center py-3.5 rounded-full transition-colors"
-              >
-                Call Hotline: +91 90034 17111
-              </a>
+              <div className="flex flex-col gap-2">
+                <a
+                  href="tel:+919087417111"
+                  className="bg-red-600 hover:bg-red-700 text-white font-bold text-xs tracking-wider uppercase text-center py-3 rounded-full transition-colors"
+                >
+                  Call Hotline: +91 90874 17111
+                </a>
+                <a
+                  href="tel:+919994599294"
+                  className="bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs tracking-wider uppercase text-center py-3 rounded-full transition-colors"
+                >
+                  Alt Helpline: +91 99945 99294
+                </a>
+              </div>
             </motion.div>
 
             {/* Card 2 */}

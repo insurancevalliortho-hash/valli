@@ -24,7 +24,19 @@ async function main() {
       ALTER TABLE technovations_registrations 
       ADD COLUMN IF NOT EXISTS is_verified BOOLEAN DEFAULT FALSE;
     `);
-    console.log("Column 'is_verified' verified/added.");
+    console.log("Column 'is_verified' verified/added on technovations_registrations.");
+
+    await client.query(`
+      ALTER TABLE arise_registrations 
+      ADD COLUMN IF NOT EXISTS is_verified BOOLEAN DEFAULT FALSE;
+    `);
+    console.log("Column 'is_verified' verified/added on arise_registrations.");
+
+    await client.query(`
+      ALTER TABLE active_salem_registrations 
+      ADD COLUMN IF NOT EXISTS is_verified BOOLEAN DEFAULT FALSE;
+    `);
+    console.log("Column 'is_verified' verified/added on active_salem_registrations.");
 
     console.log("Migration completed successfully!");
   } catch (err) {

@@ -29,11 +29,30 @@ import {
   Zap,
   Briefcase,
   Layers,
-  Compass
+  Compass,
+  Sparkles,
+  FileSpreadsheet
 } from "lucide-react";
 import Navbar from "../../../../components/Navbar";
 import Footer from "../../../../components/Footer";
 import confetti from "canvas-confetti";
+import { motion, AnimatePresence } from "framer-motion";
+import RazorpayCheckout from "../../../../components/RazorpayCheckout";
+import { resolveClientSource } from "../../../../lib/attribution";
+
+const easeSmooth = [0.16, 1, 0.3, 1] as const;
+
+interface BulkStudent {
+  fullName: string;
+  emailId: string;
+  mobileNumber: string;
+  qualification: string;
+  institution: string;
+  department: string;
+  city: string;
+  iapCreditPoints: boolean;
+  iapMembershipNumber: string;
+}
 
 export default function AriseRegisterPage() {
   const lenis = useLenis();
@@ -41,23 +60,42 @@ export default function AriseRegisterPage() {
   // Current step state (1, 2, or 3)
   const [step, setStep] = useState(1);
 
-  // Form fields
+  // Lead / Coordinator Form fields
   const [fullName, setFullName] = useState("");
   const [emailId, setEmailId] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
   const [designation, setDesignation] = useState("Student / Intern");
   const [qualification, setQualification] = useState("");
-  const [category, setCategory] = useState("Conference"); // "Conference" | "Conference with Workshop" | "Workshop"
+  const [category, setCategory] = useState("Conference"); // "Conference" | "Conference with Workshop" | "Workshop" | "Bulk Student Registration (20 Students - 50% OFF)"
   const [bonafideCertificate, setBonafideCertificate] = useState<string | null>(null);
   const [institution, setInstitution] = useState("");
   const [department, setDepartment] = useState("");
   const [city, setCity] = useState("");
-  const [foodPreference, setFoodPreference] = useState("Vegetarian");
+
   const [iapCreditPoints, setIapCreditPoints] = useState(false);
   const [iapMembershipNumber, setIapMembershipNumber] = useState("");
-  const [source, setSource] = useState("Social Media");
+  const [source, setSource] = useState("Direct");
+  const [paymentMethod, setPaymentMethod] = useState<"online" | "upi_qr">("online");
   const [transactionId, setTransactionId] = useState("");
   const [screenshot, setScreenshot] = useState<string | null>(null);
+
+  // Bulk 20 Students State
+  const [bulkStudents, setBulkStudents] = useState<BulkStudent[]>(() =>
+    Array.from({ length: 20 }, () => ({
+      fullName: "",
+      emailId: "",
+      mobileNumber: "",
+      qualification: "Undergraduate / Student",
+      institution: "",
+      department: "",
+      city: "",
+      iapCreditPoints: false,
+      iapMembershipNumber: "",
+    }))
+  );
+
+  // Active accordion index for bulk student cards
+  const [activeStudentIndex, setActiveStudentIndex] = useState<number | null>(0);
 
   // UI status states
   const [copied, setCopied] = useState(false);
@@ -68,56 +106,176 @@ export default function AriseRegisterPage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
-    // Generate a random registration code
-    const randNum = Math.floor(1000 + Math.random() * 9000);
-    setRegCode(`ARISE26-${randNum}`);
+    // Resolve attribution source from URL params (?source=qr, ?source=meta) or stored session
+    const detectedSource = resolveClientSource("arise_source");
+    setSource(detectedSource);
+
+    fetch("/api/arise/register")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && data.nextRegistrationCode) {
+          setRegCode(data.nextRegistrationCode);
+        } else {
+          setRegCode("ARISE26-0001");
+        }
+      })
+      .catch(() => {
+        setRegCode("ARISE26-0001");
+      });
   }, []);
+
+  const isBulk = category.includes("Bulk");
 
   // Compute total fee amount to pay
   const calculateTotalFee = () => {
-    if (designation === "Student / Intern" && bonafideCertificate) {
+    if (isBulk) {
+      return 20000; // 20 Students @ ₹1000 each (₹20,000 Total)
+    }
+    const isStudent = designation === "Student / Intern";
+    if (category === "Conference with Workshop") {
+      return isStudent ? 1500 : 2500;
+    }
+    if (category === "Workshop") {
       return 500;
     }
-    return 2000;
+    return isStudent ? 1000 : 2000;
   };
 
   const totalFee = calculateTotalFee();
   const includeWorkshop = category === "Conference with Workshop" || category === "Workshop";
 
-  const handleScreenshotChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Helper to update individual bulk student field
+  const updateBulkStudent = (index: number, field: keyof BulkStudent, value: any) => {
+    setBulkStudents((prev) =>
+      prev.map((s, i) => (i === index ? { ...s, [field]: value } : s))
+    );
+  };
+
+  // Helper to sync coordinator college & city to all 20 bulk students
+  const applyCoordinatorInfoToAll = () => {
+    if (!institution && !city) {
+      alert("Please fill in Institution and City in the Coordinator section first.");
+      return;
+    }
+    setBulkStudents((prev) =>
+      prev.map((s) => ({
+        ...s,
+        institution: institution || s.institution,
+        city: city || s.city,
+        department: department || s.department,
+      }))
+    );
+  };
+
+  // Auto-fill sample 20 students for testing/demo
+  const autoFillSampleBulkRoster = () => {
+    const inst = institution || "Valli Medical College";
+    const cty = city || "Salem";
+    setBulkStudents(
+      Array.from({ length: 20 }, (_, i) => ({
+        fullName: `Student ${i + 1} Delegate`,
+        emailId: `student${i + 1}@vallicountry.edu`,
+        mobileNumber: `9876543${(10 + i).toString().padStart(3, "0")}`,
+        qualification: "Undergraduate Student",
+        institution: inst,
+        department: department || "Physiotherapy",
+        city: cty,
+        iapCreditPoints: false,
+        iapMembershipNumber: "",
+      }))
+    );
+  };
+
+  // CSV Bulk file import parser
+  const handleCSVUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    if (file.size > 2 * 1024 * 1024) {
-      alert("Screenshot file size should be less than 2MB");
-      return;
-    }
-
     const reader = new FileReader();
-    reader.onload = (event) => {
-      setScreenshot(event.target?.result as string);
+    reader.onload = (evt) => {
+      const text = evt.target?.result as string;
+      if (!text) return;
+
+      const lines = text.split(/\r\n|\n/).filter((l) => l.trim().length > 0);
+      const parsed: BulkStudent[] = [];
+
+      for (let i = 0; i < 20; i++) {
+        const line = lines[i + 1] || lines[i]; // Skip header if present
+        if (line) {
+          const parts = line.split(",").map((p) => p.trim().replace(/^["']|["']$/g, ""));
+          parsed.push({
+            fullName: parts[0] || `Student ${i + 1}`,
+            emailId: parts[1] || `student${i + 1}@college.edu`,
+            mobileNumber: parts[2] || `987654320${i}`,
+            qualification: parts[3] || "Undergraduate Student",
+            institution: parts[4] || institution || "Medical College",
+            department: parts[5] || department || "",
+            city: parts[6] || city || "Salem",
+            iapCreditPoints: Boolean(parts[7]),
+            iapMembershipNumber: parts[7] || "",
+          });
+        } else {
+          parsed.push({
+            fullName: `Student ${i + 1}`,
+            emailId: `student${i + 1}@college.edu`,
+            mobileNumber: `987654320${i}`,
+            qualification: "Undergraduate Student",
+            institution: institution || "Medical College",
+            department: department || "",
+            city: city || "Salem",
+            iapCreditPoints: false,
+            iapMembershipNumber: "",
+          });
+        }
+      }
+      setBulkStudents(parsed);
+      alert("Successfully loaded 20 student roster records from CSV!");
     };
-    reader.readAsDataURL(file);
+    reader.readAsText(file);
   };
 
-  const handleClearScreenshot = () => {
-    setScreenshot(null);
+  const compressImage = (file: File, maxWidth = 1000, quality = 0.75): Promise<string> => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = document.createElement("img");
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          let width = img.width;
+          let height = img.height;
+          if (width > maxWidth) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          }
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext("2d");
+          if (ctx) {
+            ctx.drawImage(img, 0, 0, width, height);
+            resolve(canvas.toDataURL("image/jpeg", quality));
+          } else {
+            resolve(e.target?.result as string);
+          }
+        };
+        img.onerror = () => resolve(e.target?.result as string);
+        img.src = e.target?.result as string;
+      };
+      reader.onerror = () => resolve("");
+      reader.readAsDataURL(file);
+    });
   };
 
-  const handleBonafideChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleBonafideChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-
-    if (file.size > 2 * 1024 * 1024) {
-      alert("Bonafide Certificate file size should be less than 2MB");
-      return;
+    try {
+      const compressed = await compressImage(file);
+      setBonafideCertificate(compressed);
+    } catch {
+      const reader = new FileReader();
+      reader.onload = (event) => setBonafideCertificate(event.target?.result as string);
+      reader.readAsDataURL(file);
     }
-
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      setBonafideCertificate(event.target?.result as string);
-    };
-    reader.readAsDataURL(file);
   };
 
   const handleClearBonafide = () => {
@@ -125,7 +283,6 @@ export default function AriseRegisterPage() {
   };
 
   const triggerConfetti = () => {
-    // Confetti showers
     confetti({
       particleCount: 100,
       spread: 70,
@@ -151,7 +308,7 @@ export default function AriseRegisterPage() {
     const stepErrors: Record<string, string> = {};
 
     if (currentStep === 1) {
-      if (!fullName.trim()) stepErrors.fullName = "Full name is required";
+      if (!fullName.trim()) stepErrors.fullName = "Coordinator / Full name is required";
       if (!emailId.trim() || !/\S+@\S+\.\S+/.test(emailId)) {
         stepErrors.emailId = "A valid email ID is required";
       }
@@ -161,17 +318,22 @@ export default function AriseRegisterPage() {
       if (!designation.trim()) stepErrors.designation = "Designation is required";
       if (!category.trim()) stepErrors.category = "Registration category is required";
       if (!qualification.trim()) stepErrors.qualification = "Qualification is required";
-      if (!institution.trim()) stepErrors.institution = "Institution/Hospital/Organization name is required";
+      if (!institution.trim()) stepErrors.institution = "Institution/Hospital name is required";
       if (!city.trim()) stepErrors.city = "City/Location is required";
-      if (iapCreditPoints && !iapMembershipNumber.trim()) {
-        stepErrors.iapMembershipNumber = "IAP Membership Number is required for credit points";
-      }
-    } else if (currentStep === 2) {
-      if (!transactionId.trim() || !/^\d{12}$/.test(transactionId.trim())) {
-        stepErrors.transactionId = "Enter a valid 12-digit UPI Reference ID";
-      }
-      if (!screenshot) {
-        stepErrors.screenshot = "Payment screenshot upload is required";
+
+      // If Bulk category selected, validate all 20 students
+      if (isBulk) {
+        bulkStudents.forEach((st, idx) => {
+          if (!st.fullName.trim()) {
+            stepErrors[`student_${idx}_fullName`] = `Student #${idx + 1}: Name required`;
+          }
+          if (!st.emailId.trim()) {
+            stepErrors[`student_${idx}_emailId`] = `Student #${idx + 1}: Email required`;
+          }
+          if (!st.mobileNumber.trim()) {
+            stepErrors[`student_${idx}_mobileNumber`] = `Student #${idx + 1}: Mobile required`;
+          }
+        });
       }
     }
 
@@ -199,61 +361,123 @@ export default function AriseRegisterPage() {
     }
   };
 
-  // Submit registration form
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validateStep(2)) return;
-
+  // Handle successful online payment submission
+  const handleRazorpaySuccess = async (details: { paymentId: string; orderId: string; signature: string }) => {
     setIsSubmitting(true);
     setErrors({});
+    setTransactionId(details.paymentId);
 
     try {
-      const response = await fetch("/api/arise/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          registrationCode: regCode,
-          fullName,
-          emailId,
-          mobileNumber,
-          category,
-          includeWorkshop,
-          institution,
-          department,
-          city,
-          source,
-          transactionId,
-          paymentScreenshot: screenshot,
-          designation,
-          qualification,
+      if (isBulk) {
+        // Register Lead Coordinator + 20 Bulk Students
+        const bulkPayloads = bulkStudents.map((st, idx) => ({
+          registrationCode: `ARISE26-BULK${(idx + 1).toString().padStart(2, "0")}-${Math.floor(1000 + Math.random() * 9000)}`,
+          fullName: st.fullName,
+          emailId: st.emailId,
+          mobileNumber: st.mobileNumber,
+          category: "Bulk Student Pass (50% OFF)",
+          includeWorkshop: false,
+          institution: st.institution || institution,
+          department: st.department || department,
+          city: st.city || city,
+          source: "Bulk Group Booking",
+          transactionId: `${details.paymentId}-S${(idx + 1).toString().padStart(2, "00")}`,
+          paymentScreenshot: "RAZORPAY_ONLINE_PAYMENT",
+          designation: "Student / Intern",
+          qualification: st.qualification || qualification,
           bonafideCertificate,
-          foodPreference,
-          iapCreditPoints,
-          iapMembershipNumber: iapCreditPoints ? iapMembershipNumber : ""
-        }),
-      });
+          iapCreditPoints: st.iapCreditPoints,
+          iapMembershipNumber: st.iapMembershipNumber,
+          isVerified: true,
+        }));
 
-      const result = await response.json();
-
-      if (response.ok) {
-        setIsSuccess(true);
-        if (lenis) {
-          lenis.scrollTo(0, { immediate: true });
+        // Submit Lead Coordinator Record
+        const leadRes = await fetch("/api/arise/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            registrationCode: `${regCode}-LEAD`,
+            fullName: `${fullName} (Coordinator)`,
+            emailId,
+            mobileNumber,
+            category: "Bulk Student Registration (20 Students @ 50% OFF)",
+            includeWorkshop: false,
+            institution,
+            department,
+            city,
+            source,
+            transactionId: `${details.paymentId}-LEAD`,
+            paymentScreenshot: "RAZORPAY_ONLINE_PAYMENT",
+            designation: "Student Coordinator",
+            qualification,
+            bonafideCertificate,
+            iapCreditPoints,
+            iapMembershipNumber,
+            isVerified: true,
+          }),
+        });
+        const leadData = await leadRes.json();
+        if (leadRes.ok && leadData.success) {
+          if (leadData.registrationCode) {
+            setRegCode(leadData.registrationCode);
+          }
         } else {
-          window.scrollTo(0, 0);
+          throw new Error(leadData.error || "Failed to save coordinator registration");
+        }
+
+        // Submit All 20 Student Records
+        for (const payload of bulkPayloads) {
+          await fetch("/api/arise/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
         }
       } else {
-        setErrors({
-          transactionId: result.error || "Failed to submit registration.",
+        // Single Delegate Registration
+        const res = await fetch("/api/arise/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            registrationCode: regCode,
+            fullName,
+            emailId,
+            mobileNumber,
+            category,
+            includeWorkshop,
+            institution,
+            department,
+            city,
+            source,
+            transactionId: details.paymentId,
+            paymentScreenshot: "RAZORPAY_ONLINE_PAYMENT",
+            designation,
+            qualification,
+            bonafideCertificate,
+            iapCreditPoints,
+            iapMembershipNumber: iapCreditPoints ? iapMembershipNumber : "",
+            isVerified: true,
+          }),
         });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          if (data.registrationCode) {
+            setRegCode(data.registrationCode);
+          }
+        } else {
+          throw new Error(data.error || "Failed to save delegate registration");
+        }
       }
-    } catch (err) {
+
+      setIsSuccess(true);
+      if (lenis) {
+        lenis.scrollTo(0, { immediate: true });
+      } else {
+        window.scrollTo(0, 0);
+      }
+    } catch (err: any) {
       console.error(err);
-      setErrors({
-        transactionId: "A network error occurred. Please try again.",
-      });
+      alert((err?.message || "Error submitting registration") + ". Payment ID: " + details.paymentId);
     } finally {
       setIsSubmitting(false);
     }
@@ -263,555 +487,608 @@ export default function AriseRegisterPage() {
     <>
       <Navbar />
 
-      <div className="min-h-screen bg-slate-50 text-slate-800 font-body selection:bg-orange selection:text-white pt-28 pb-24 px-4 sm:px-6 relative overflow-hidden grid-bg-dots text-left">
+      <div className="min-h-screen bg-[#FAFAF9] text-slate-800 font-body selection:bg-orange selection:text-white pt-28 pb-24 px-4 sm:px-6 relative overflow-hidden grid-bg-dots text-left">
         <div className="relative z-10 max-w-4xl mx-auto">
-          {/* Back button */}
-          <div className="mb-6 max-w-2xl mx-auto">
+          {/* Header */}
+          <div className="mb-8">
             <Link
               href="/iyakkam/arise"
-              className="inline-flex items-center gap-2 text-slate-500 hover:text-teal font-semibold text-xs transition-colors group uppercase tracking-wider"
+              className="inline-flex items-center gap-2 text-slate-500 hover:text-[#00A896] font-semibold text-xs transition-colors group mb-3 uppercase tracking-wider"
             >
               <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
-              Back to Event Overview
+              Back to ARISE 2026 Home
             </Link>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#00A896] bg-[#00A896]/10 px-3 py-1 rounded-full inline-block mb-2 border border-[#00A896]/20">
+                  National CME Conference Registration
+                </span>
+                <h1 className="font-display text-2xl sm:text-3xl font-black text-[#004B57] tracking-tight uppercase">
+                  ARISE 2026 Registration
+                </h1>
+              </div>
+
+              {!isSuccess && (
+                <div className="bg-white border border-[#E2E8F0] px-4 py-2.5 rounded-2xl shadow-sm text-right">
+                  <span className="block text-[9px] font-bold text-slate-400 uppercase tracking-widest">
+                    Registration Code
+                  </span>
+                  <span className="font-mono text-sm font-black text-[#FF8C00] tracking-wider">
+                    {regCode}
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
 
-          {/* Success Screen */}
+          {/* Success Screen: Digital Pass Ticket */}
           {isSuccess ? (
-            <div className="max-w-2xl mx-auto bg-white border border-[#E2E8F0] rounded-[2rem] shadow-2xl relative overflow-hidden mt-8">
-              {/* Top border strip */}
-              <div className="h-4 bg-[#00A896]" />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: easeSmooth }}
+              className="bg-white border border-slate-200/90 rounded-[2.5rem] shadow-xl p-8 sm:p-12 text-center space-y-6"
+            >
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.15, type: "spring", stiffness: 260, damping: 20 }}
+                className="w-20 h-20 bg-emerald-50 text-emerald-500 rounded-3xl flex items-center justify-center mx-auto shadow-inner border border-emerald-200"
+              >
+                <CheckCircle2 size={42} />
+              </motion.div>
 
-              <div className="p-8 sm:p-12 text-center space-y-6">
-                <div className="w-20 h-20 bg-emerald-50 text-[#00A896] rounded-full flex items-center justify-center mx-auto shadow-inner border border-emerald-100">
-                  <CheckCircle2 size={40} className="animate-pulse" />
-                </div>
-
-                <div className="space-y-2">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block font-mono">
-                    RECEIPT CODE DISPATCHED
-                  </span>
-                  <h1 className="font-display text-3xl font-black text-[#004B57] uppercase tracking-tight">
-                    Registration Submitted!
-                  </h1>
-                </div>
-
-                <div className="max-w-md mx-auto bg-[#F0FAF9] border-2 border-dashed border-[#00A896] rounded-2xl p-6 space-y-3">
-                  <span className="block text-[10px] font-bold text-[#00A896] uppercase tracking-widest font-mono">
-                    Your Registration Ticket
-                  </span>
-                  <p className="font-mono text-3xl font-black text-[#FF8C00] tracking-wider select-all">
-                    {regCode}
-                  </p>
-                  <p className="text-[10px] text-slate-500 font-semibold leading-relaxed">
-                    Please take a screenshot of this receipt. A confirmation copy has also been sent to your email address: <span className="font-bold text-slate-700">{emailId}</span>.
-                  </p>
-                </div>
-
-                {/* Event Summary Receipt details */}
-                <div className="border border-slate-200 rounded-2xl p-5 text-left max-w-md mx-auto bg-slate-50/50 space-y-3">
-                  <span className="block text-[9px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-2">
-                    Summary Details
-                  </span>
-                  <ul className="space-y-2 text-xs font-semibold text-slate-600">
-                    <li className="flex justify-between">
-                      <span className="text-slate-400">Delegate Name:</span>
-                      <span className="text-[#1A1A2E]">{fullName}</span>
-                    </li>
-                    <li className="flex justify-between">
-                      <span className="text-slate-400">Category:</span>
-                      <span className="text-[#1A1A2E]">
-                        {category} {includeWorkshop ? "+ Workshop" : ""}
-                      </span>
-                    </li>
-                    <li className="flex justify-between">
-                      <span className="text-slate-400">Amount Paid:</span>
-                      <span className="text-[#00A896] font-bold">₹{totalFee.toLocaleString("en-IN")}</span>
-                    </li>
-                    <li className="flex justify-between">
-                      <span className="text-slate-400">Transaction VPA ID:</span>
-                      <span className="text-slate-700 font-mono tracking-wider">{transactionId}</span>
-                    </li>
-                    <li className="flex justify-between">
-                      <span className="text-slate-400">Institution:</span>
-                      <span className="text-slate-700 truncate max-w-[200px]">{institution}</span>
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="pt-4 flex flex-col gap-3 justify-center items-center">
-                  <Link
-                    href="/iyakkam/arise"
-                    className="btn-primary btn-outline-navy w-full max-w-xs justify-center"
-                    style={{ padding: "12px 24px", borderRadius: 12, fontSize: 13 }}
-                  >
-                    Return to Landing Page
-                  </Link>
-                  <button
-                    type="button"
-                    onClick={triggerConfetti}
-                    className="text-[10px] font-bold text-teal hover:underline uppercase tracking-wider"
-                  >
-                    Celebrate Again! 🎉
-                  </button>
-                </div>
+              <div className="space-y-2 max-w-lg mx-auto">
+                <span className="text-xs font-extrabold uppercase tracking-widest text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200 inline-block">
+                  Registration Confirmed 🎉
+                </span>
+                <h2 className="font-display text-2xl sm:text-3xl font-black text-[#004B57] uppercase">
+                  Welcome to ARISE 2026!
+                </h2>
+                <p className="text-xs text-slate-600 font-medium leading-relaxed">
+                  Thank you, <span className="font-bold text-[#004B57]">{fullName}</span>! Your {isBulk ? "20-Student Bulk Registration" : "CME Registration"} has been confirmed. A confirmation receipt and conference pass details have been sent to <span className="font-bold text-[#004B57]">{emailId}</span>.
+                </p>
               </div>
-            </div>
+
+              {/* Digital Boarding Pass Ticket */}
+              <div className="bg-[#F0FAF9] border border-[#00A896]/20 p-6 rounded-2xl max-w-md mx-auto space-y-4 text-left relative overflow-hidden shadow-sm">
+                <div className="flex justify-between items-start border-b border-[#00A896]/20 pb-4">
+                  <div>
+                    <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest block">DELEGATE PASS CODE</span>
+                    <span className="font-mono text-2xl font-black text-[#FF8C00] tracking-wider select-all">{regCode}</span>
+                  </div>
+                  <span className="px-3 py-1 bg-white border border-[#00A896]/30 text-[#004B57] rounded-lg text-xs font-mono font-bold uppercase shadow-sm">
+                    {category}
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3 text-xs">
+                  <div>
+                    <span className="text-slate-400 block text-[10px] uppercase font-mono">Delegate Name</span>
+                    <span className="text-[#004B57] font-bold text-sm block truncate">{fullName}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 block text-[10px] uppercase font-mono">Designation</span>
+                    <span className="text-slate-800 font-semibold text-xs block truncate">{designation}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 block text-[10px] uppercase font-mono">Institution / City</span>
+                    <span className="text-slate-800 font-medium block truncate">{institution ? `${institution}, ${city}` : city || "Salem"}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 block text-[10px] uppercase font-mono">Payment Status</span>
+                    <span className="text-emerald-600 font-bold block flex items-center gap-1">
+                      <CheckCircle2 size={13} /> Verified Paid (₹{totalFee.toLocaleString("en-IN")})
+                    </span>
+                  </div>
+                </div>
+
+                {transactionId && (
+                  <div className="border-t border-dashed border-[#00A896]/20 pt-3 flex items-center justify-between text-[10px] text-slate-500 font-mono">
+                    <span>Txn: {transactionId.slice(0, 18)}...</span>
+                    <span>Venue: Knowledge Institute of Technology</span>
+                  </div>
+                )}
+              </div>
+
+              <div className="pt-4 flex flex-col sm:flex-row gap-3 justify-center">
+                <Link
+                  href="/iyakkam/arise"
+                  className="bg-[#004B57] hover:bg-[#00333C] text-white px-8 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all shadow-md text-center"
+                >
+                  Return to Event Homepage
+                </Link>
+              </div>
+            </motion.div>
           ) : (
-            /* Multi-step registration wizard card */
-            <div className="max-w-2xl mx-auto bg-white border border-[#E2E8F0] rounded-[2rem] shadow-2xl overflow-hidden mt-6">
-              {/* Progress Bar */}
-              <div className="bg-slate-100 h-2 flex">
-                <div
-                  className="bg-[#00A896] transition-all duration-500"
-                  style={{ width: `${(step / 2) * 100}%` }}
-                />
+            /* Wizard Main Form */
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: easeSmooth }}
+              className="bg-white border border-[#E2E8F0] rounded-[2.5rem] shadow-xl overflow-hidden"
+            >
+              {/* Wizard Steps Header */}
+              <div className="bg-slate-50 border-b border-[#E2E8F0] p-4 sm:p-6">
+                <div className="grid grid-cols-2 gap-4 max-w-xl mx-auto">
+                  {[
+                    { num: 1, title: isBulk ? "1. Coordinator & 20 Students Roster" : "1. Delegate & CME Details" },
+                    { num: 2, title: "2. Confirm & Pay" },
+                  ].map((s) => (
+                    <div
+                      key={s.num}
+                      className={`flex items-center gap-3 p-3 rounded-2xl transition-all ${
+                        step === s.num
+                          ? "bg-white text-[#004B57] shadow-sm border border-[#E2E8F0] font-bold"
+                          : step > s.num
+                          ? "text-emerald-600 font-bold"
+                          : "text-slate-400 font-medium"
+                      }`}
+                    >
+                      <div
+                        className={`w-7 h-7 rounded-xl flex items-center justify-center text-xs font-black ${
+                          step === s.num
+                            ? "bg-[#004B57] text-white"
+                            : step > s.num
+                            ? "bg-emerald-500 text-white"
+                            : "bg-slate-200 text-slate-500"
+                        }`}
+                      >
+                        {step > s.num ? <Check size={14} /> : s.num}
+                      </div>
+                      <span className="text-xs uppercase tracking-wider truncate">{s.title}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
 
+              {/* Form Content */}
               <div className="p-6 sm:p-10">
-                <div className="space-y-6">
-                  {/* STEP 1: Attendee Info */}
+                <AnimatePresence mode="wait">
                   {step === 1 && (
-                    <div className="space-y-6">
-                      <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
-                        <span className="w-7 h-7 rounded-xl bg-[#E0F2F1] text-teal text-xs font-bold flex items-center justify-center font-mono">01</span>
-                        <h2 className="font-display text-base font-bold text-[#004B57] uppercase tracking-wider">Attendee Information</h2>
+                    <motion.div
+                      key="step-1"
+                      initial={{ opacity: 0, x: -16 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 16 }}
+                      transition={{ duration: 0.35, ease: easeSmooth }}
+                      className="space-y-6"
+                    >
+                    <div className="border-b border-slate-100 pb-4">
+                      <h2 className="font-display text-base font-bold text-[#004B57] uppercase tracking-wider">
+                        {isBulk ? "Lead Coordinator & Organization" : "Delegate Personal Details"}
+                      </h2>
+                      <p className="text-xs text-slate-500 mt-0.5">
+                        {isBulk ? "Enter primary contact info for receipt, confirmation & bulk passes." : "Please enter your delegate info accurately for your certificate & badge."}
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {/* Full Name */}
+                      <div className="space-y-1.5 md:col-span-2">
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
+                          <User className="w-3.5 h-3.5 text-teal" /> {isBulk ? "Lead Coordinator Full Name *" : "Full Name (as to appear on Certificate) *"}
+                        </label>
+                        <input
+                          type="text"
+                          value={fullName}
+                          onChange={(e) => setFullName(e.target.value)}
+                          placeholder="e.g. Dr. Ramesh Kumar"
+                          className={`w-full bg-white border rounded-xl px-4 py-3 text-xs font-medium text-slate-800 transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${errors.fullName ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-350"}`}
+                        />
+                        {errors.fullName && <p className="text-[10px] text-red-500 font-semibold">{errors.fullName}</p>}
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {/* Full Name */}
-                        <div className="space-y-1.5">
-                          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
-                            <User className="w-3.5 h-3.5 text-teal" /> Full Name *
-                          </label>
-                          <input
-                            type="text"
-                            value={fullName}
-                            onChange={(e) => setFullName(e.target.value)}
-                            placeholder="e.g. Dr. Jane Doe"
-                            className={`w-full bg-white border rounded-xl px-4 py-3 text-xs font-medium text-slate-800 transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${errors.fullName ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-350"}`}
-                          />
-                          {errors.fullName && <p className="text-[10px] text-red-500 font-semibold">{errors.fullName}</p>}
+                      {/* Email ID */}
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
+                          <Mail className="w-3.5 h-3.5 text-teal" /> Email Address *
+                        </label>
+                        <input
+                          type="email"
+                          value={emailId}
+                          onChange={(e) => setEmailId(e.target.value)}
+                          placeholder="e.g. ramesh@hospital.com"
+                          className={`w-full bg-white border rounded-xl px-4 py-3 text-xs font-medium text-slate-800 transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${errors.emailId ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-350"}`}
+                        />
+                        {errors.emailId && <p className="text-[10px] text-red-500 font-semibold">{errors.emailId}</p>}
+                      </div>
+
+                      {/* Mobile Number */}
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
+                          <Phone className="w-3.5 h-3.5 text-teal" /> Mobile Number *
+                        </label>
+                        <input
+                          type="tel"
+                          maxLength={10}
+                          value={mobileNumber}
+                          onChange={(e) => setMobileNumber(e.target.value.replace(/\D/g, ""))}
+                          placeholder="10-digit mobile number"
+                          className={`w-full bg-white border rounded-xl px-4 py-3 text-xs font-medium text-slate-800 transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${errors.mobileNumber ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-350"}`}
+                        />
+                        {errors.mobileNumber && <p className="text-[10px] text-red-500 font-semibold">{errors.mobileNumber}</p>}
+                      </div>
+
+                      {/* Designation */}
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
+                          <Briefcase className="w-3.5 h-3.5 text-teal" /> Designation *
+                        </label>
+                        <div className="relative">
+                          <select
+                            value={designation}
+                            onChange={(e) => {
+                              const val = e.target.value;
+                              setDesignation(val);
+                              if (val !== "Student / Intern" && category.toLowerCase().includes("bulk")) {
+                                setCategory("Conference");
+                              }
+                            }}
+                            className="w-full bg-white border border-[#E2E8F0] hover:border-slate-355 rounded-xl px-4 py-3 text-xs font-medium text-slate-800 transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%234A4A6A%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:0.6rem_auto] bg-[right_1.25rem_center] bg-no-repeat pr-10"
+                          >
+                            <option value="Student / Intern">Student / Intern</option>
+                            <option value="Graduate">Graduate</option>
+                            <option value="Physiotherapist / Professional">Physiotherapist / Professional</option>
+                            <option value="Consultant">Consultant</option>
+                            <option value="Other">Other</option>
+                          </select>
                         </div>
+                      </div>
 
-                        {/* Email ID */}
-                        <div className="space-y-1.5">
-                          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
-                            <Mail className="w-3.5 h-3.5 text-teal" /> Email ID *
-                          </label>
-                          <input
-                            type="email"
-                            value={emailId}
-                            onChange={(e) => setEmailId(e.target.value)}
-                            placeholder="delegate.email@example.com"
-                            className={`w-full bg-white border rounded-xl px-4 py-3 text-xs font-medium text-slate-800 transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${errors.emailId ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-350"}`}
-                          />
-                          {errors.emailId && <p className="text-[10px] text-red-500 font-semibold">{errors.emailId}</p>}
-                        </div>
-
-                        {/* Mobile Number */}
-                        <div className="space-y-1.5">
-                          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
-                            <Phone className="w-3.5 h-3.5 text-teal" /> Mobile Number *
-                          </label>
-                          <input
-                            type="tel"
-                            maxLength={10}
-                            value={mobileNumber}
-                            onChange={(e) => setMobileNumber(e.target.value.replace(/\D/g, ""))}
-                            placeholder="10-digit mobile number"
-                            className={`w-full bg-white border rounded-xl px-4 py-3 text-xs font-medium text-slate-800 transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${errors.mobileNumber ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-350"}`}
-                          />
-                          {errors.mobileNumber && <p className="text-[10px] text-red-500 font-semibold">{errors.mobileNumber}</p>}
-                        </div>
-
-                        {/* Designation */}
-                        <div className="space-y-1.5">
-                          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
-                            <Briefcase className="w-3.5 h-3.5 text-teal" /> Designation *
-                          </label>
-                          <div className="relative">
-                            <select
-                              value={designation}
-                              onChange={(e) => setDesignation(e.target.value)}
-                              className="w-full bg-white border border-[#E2E8F0] hover:border-slate-355 rounded-xl px-4 py-3 text-xs font-medium text-slate-800 transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%234A4A6A%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:0.6rem_auto] bg-[right_1.25rem_center] bg-no-repeat pr-10"
-                            >
-                              <option value="Student / Intern">Student / Intern</option>
-                              <option value="Graduate">Graduate</option>
-                              <option value="Physiotherapist / Professional">Physiotherapist / Professional</option>
-                              <option value="Consultant">Consultant</option>
-                              <option value="Other">Other</option>
-                            </select>
-                          </div>
-                        </div>
-
-                        {/* Registration Category (Type) */}
-                        <div className="space-y-1.5">
-                          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
-                            <Layers className="w-3.5 h-3.5 text-teal" /> Registration Category *
-                          </label>
-                          <div className="relative">
-                            <select
-                              value={category}
-                              onChange={(e) => setCategory(e.target.value)}
-                              className="w-full bg-white border border-[#E2E8F0] hover:border-slate-355 rounded-xl px-4 py-3 text-xs font-medium text-slate-800 transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%234A4A6A%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:0.6rem_auto] bg-[right_1.25rem_center] bg-no-repeat pr-10"
-                            >
-                              <option value="Conference">Conference</option>
-                              <option value="Conference with Workshop">Conference with Workshop</option>
-                              <option value="Workshop">Workshop</option>
-                            </select>
-                          </div>
-                        </div>
-
-                        {/* Upload Bonafide Certificate (Conditionally Rendered for Students/Interns in Step 1) */}
-                        {designation === "Student / Intern" && (
-                          <div className="space-y-2 p-5 bg-amber-50/55 border border-amber-200/50 rounded-2xl animate-in slide-in-from-top-2 duration-300 text-left md:col-span-2">
-                            <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
-                              <Upload className="w-3.5 h-3.5 text-[#FF8C00]" /> Upload Bonafide Certificate (Mandatory for Student discount)
-                            </label>
-                            <p className="text-[9px] text-slate-500 font-semibold leading-normal">
-                              Upload a scan/photo of your Student ID card or college bonafide certificate to avail the student discount rate (₹500). Without it, you will be charged ₹2,000.
-                            </p>
-
-                            {!bonafideCertificate ? (
-                              <div className="border-2 border-dashed border-slate-200 hover:border-teal/50 transition-colors rounded-xl p-4 text-center cursor-pointer relative bg-white">
-                                <input
-                                  type="file"
-                                  accept="image/*"
-                                  onChange={handleBonafideChange}
-                                  className="absolute inset-0 opacity-0 cursor-pointer"
-                                />
-                                <div className="space-y-1">
-                                  <div className="w-7 h-7 bg-[#E0F2F1] text-teal rounded-lg flex items-center justify-center mx-auto border border-teal/10">
-                                    <Upload size={13} />
-                                  </div>
-                                  <p className="text-[10px] font-bold text-slate-700">Click or Drag bonafide file here</p>
-                                  <p className="text-[8px] text-slate-400 font-medium">JPEG, PNG up to 2MB.</p>
-                                </div>
-                              </div>
-                            ) : (
-                              <div className="relative border border-slate-200 rounded-xl p-3 bg-white flex items-center gap-3">
-                                <div className="w-10 h-10 bg-slate-100 rounded-lg overflow-hidden border border-slate-200 flex-shrink-0">
-                                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                                  <img src={bonafideCertificate} alt="Bonafide Certificate" className="w-full h-full object-cover" />
-                                </div>
-                                <div className="min-w-0 flex-1">
-                                  <p className="text-[10px] font-bold text-slate-700 truncate">bonafide_certificate.png</p>
-                                  <p className="text-[8px] text-[#00A896] font-bold">Loaded successfully</p>
-                                </div>
-                                <button
-                                  type="button"
-                                  onClick={handleClearBonafide}
-                                  className="p-1.5 bg-red-50 hover:bg-red-100 text-red-500 rounded-lg transition-colors text-[9px] font-bold"
-                                >
-                                  Remove
-                                </button>
-                              </div>
+                      {/* Registration Category */}
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
+                          <Layers className="w-3.5 h-3.5 text-teal" /> Registration Category *
+                        </label>
+                        <div className="relative">
+                          <select
+                            value={category}
+                            onChange={(e) => setCategory(e.target.value)}
+                            className="w-full bg-white border border-[#E2E8F0] hover:border-slate-355 rounded-xl px-4 py-3 text-xs font-medium text-slate-800 transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%234A4A6A%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:0.6rem_auto] bg-[right_1.25rem_center] bg-no-repeat pr-10"
+                          >
+                            <option value="Conference">Conference Single (₹1,000 Student / ₹2,000 Prof)</option>
+                            <option value="Conference with Workshop">Conference + Workshop (₹1,500 Student / ₹2,500 Prof)</option>
+                            {designation === "Student / Intern" && (
+                              <option value="Bulk Student Registration (20 Students - ₹20,000 Total)">
+                                🎓 Bulk Student Pass (20 Students - ₹20,000 Total)
+                              </option>
                             )}
-                          </div>
-                        )}
-
-                        {/* Qualification */}
-                        <div className="space-y-1.5 md:col-span-2">
-                          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
-                            <FileText className="w-3.5 h-3.5 text-teal" /> Qualification *
-                          </label>
-                          <input
-                            type="text"
-                            value={qualification}
-                            onChange={(e) => setQualification(e.target.value)}
-                            placeholder="e.g. BPT, MPT, MBBS, MS, PhD"
-                            className={`w-full bg-white border rounded-xl px-4 py-3 text-xs font-medium text-slate-800 transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${errors.qualification ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-350"}`}
-                          />
-                          {errors.qualification && <p className="text-[10px] text-red-500 font-semibold">{errors.qualification}</p>}
+                          </select>
                         </div>
+                      </div>
 
-                        {/* Institution / Hospital / Organization */}
-                        <div className="space-y-1.5 md:col-span-2">
-                          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
-                            <Building className="w-3.5 h-3.5 text-teal" /> Institution / Hospital / Organization *
-                          </label>
-                          <input
-                            type="text"
-                            value={institution}
-                            onChange={(e) => setInstitution(e.target.value)}
-                            placeholder="Enter your college, hospital, or work organization name"
-                            className={`w-full bg-white border rounded-xl px-4 py-3 text-xs font-medium text-slate-800 transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${errors.institution ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-350"}`}
-                          />
-                          {errors.institution && <p className="text-[10px] text-red-500 font-semibold">{errors.institution}</p>}
-                        </div>
+                      {/* Qualification */}
+                      <div className="space-y-1.5 md:col-span-2">
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
+                          <FileText className="w-3.5 h-3.5 text-teal" /> Qualification *
+                        </label>
+                        <input
+                          type="text"
+                          value={qualification}
+                          onChange={(e) => setQualification(e.target.value)}
+                          placeholder="e.g. BPT, MPT, MBBS, MS"
+                          className={`w-full bg-white border rounded-xl px-4 py-3 text-xs font-medium text-slate-800 transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${errors.qualification ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-350"}`}
+                        />
+                        {errors.qualification && <p className="text-[10px] text-red-500 font-semibold">{errors.qualification}</p>}
+                      </div>
 
-                        {/* Department / Speciality */}
-                        <div className="space-y-1.5">
-                          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
-                            <Compass className="w-3.5 h-3.5 text-teal" /> Department / Speciality
-                          </label>
-                          <input
-                            type="text"
-                            value={department}
-                            onChange={(e) => setDepartment(e.target.value)}
-                            placeholder="e.g. Physiotherapy, Orthopaedics (Optional)"
-                            className="w-full bg-white border border-[#E2E8F0] hover:border-slate-350 rounded-xl px-4 py-3 text-xs font-medium text-slate-800 transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10"
-                          />
-                        </div>
+                      {/* Institution / College */}
+                      <div className="space-y-1.5 md:col-span-2">
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
+                          <Building className="w-3.5 h-3.5 text-teal" /> Institution / Hospital / College *
+                        </label>
+                        <input
+                          type="text"
+                          value={institution}
+                          onChange={(e) => setInstitution(e.target.value)}
+                          placeholder="Enter your college or hospital name"
+                          className={`w-full bg-white border rounded-xl px-4 py-3 text-xs font-medium text-slate-800 transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${errors.institution ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-350"}`}
+                        />
+                        {errors.institution && <p className="text-[10px] text-red-500 font-semibold">{errors.institution}</p>}
+                      </div>
 
-                        {/* City / Location */}
-                        <div className="space-y-1.5">
-                          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
-                            <MapPin className="w-3.5 h-3.5 text-teal" /> City / Location *
-                          </label>
-                          <input
-                            type="text"
-                            value={city}
-                            onChange={(e) => setCity(e.target.value)}
-                            placeholder="e.g. Salem, Bangalore"
-                            className={`w-full bg-white border rounded-xl px-4 py-3 text-xs font-medium text-slate-800 transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${errors.city ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-350"}`}
-                          />
-                          {errors.city && <p className="text-[10px] text-red-500 font-semibold">{errors.city}</p>}
-                        </div>
+                      {/* Department */}
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
+                          <Compass className="w-3.5 h-3.5 text-teal" /> Department
+                        </label>
+                        <input
+                          type="text"
+                          value={department}
+                          onChange={(e) => setDepartment(e.target.value)}
+                          placeholder="e.g. Physiotherapy"
+                          className="w-full bg-white border border-[#E2E8F0] hover:border-slate-350 rounded-xl px-4 py-3 text-xs font-medium text-slate-800 focus:outline-none focus:border-teal"
+                        />
+                      </div>
 
-                        {/* Food Preference */}
-                        <div className="space-y-2 md:col-span-2 text-left">
-                          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
-                            Food Preference *
-                          </label>
-                          <div className="flex gap-6 mt-1.5">
-                            {[
-                              { id: "Vegetarian", label: "Vegetarian" },
-                              { id: "Non-Vegetarian", label: "Non-Vegetarian" }
-                            ].map((food) => (
-                              <label key={food.id} className="flex items-center gap-2 cursor-pointer font-bold text-xs text-slate-700">
-                                <input
-                                  type="radio"
-                                  name="foodPreference"
-                                  value={food.id}
-                                  checked={foodPreference === food.id}
-                                  onChange={() => setFoodPreference(food.id)}
-                                  className="w-4.5 h-4.5 accent-[#00A896]"
-                                />
-                                {food.label}
-                              </label>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* IAP Credit Points */}
-                        <div className="md:col-span-2 p-4 bg-[#F0FAF9]/60 border border-teal/15 rounded-2xl space-y-3 text-left">
-                          <label className="flex items-center gap-2.5 cursor-pointer font-bold text-xs text-[#004B57]">
-                            <input
-                              type="checkbox"
-                              checked={iapCreditPoints}
-                              onChange={(e) => setIapCreditPoints(e.target.checked)}
-                              className="w-4.5 h-4.5 accent-[#00A896] rounded border-[#E2E8F0]"
-                            />
-                            IAP Credit Points Required
-                          </label>
-                          <p className="text-[10px] text-slate-500 font-medium leading-normal pl-7">
-                            Check this option if you are a member of the Indian Association of Physiotherapists (IAP) and require credit hours for this conference.
-                          </p>
-                          {iapCreditPoints && (
-                            <div className="pl-7 space-y-1.5 animate-in fade-in duration-200">
-                              <label className="text-[9px] font-bold uppercase tracking-widest text-slate-400">
-                                IAP Membership Number *
-                              </label>
-                              <input
-                                type="text"
-                                value={iapMembershipNumber}
-                                onChange={(e) => setIapMembershipNumber(e.target.value)}
-                                placeholder="e.g. L-12345 or PT-6789"
-                                className={`w-full max-w-md bg-white border rounded-xl px-4 py-2.5 text-xs font-semibold text-slate-800 transition-all focus:outline-none focus:border-teal ${errors.iapMembershipNumber ? "border-red-500" : "border-[#E2E8F0]"}`}
-                              />
-                              {errors.iapMembershipNumber && <p className="text-[10px] text-red-500 font-semibold">{errors.iapMembershipNumber}</p>}
-                            </div>
-                          )}
-                        </div>
-
-                        {/* How did you hear */}
-                        <div className="space-y-1.5 md:col-span-2 text-left">
-                          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
-                            <HelpCircle className="w-3.5 h-3.5 text-teal" /> How did you hear about ARISE 2026?
-                          </label>
-                          <div className="relative">
-                            <select
-                              value={source}
-                              onChange={(e) => setSource(e.target.value)}
-                              className="w-full bg-white border border-[#E2E8F0] hover:border-slate-350 rounded-xl px-4 py-3 text-xs font-medium text-slate-800 transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%234A4A6A%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:0.6rem_auto] bg-[right_1.25rem_center] bg-no-repeat pr-10"
-                            >
-                              <option value="Social Media">Social Media</option>
-                              <option value="Email Newsletter">Email Newsletter</option>
-                              <option value="Friends">Friends / Colleagues</option>
-                              <option value="College">College recommendation</option>
-                              <option value="Hospital Banner">Hospital banner / billboard</option>
-                              <option value="Other">Other</option>
-                            </select>
-                          </div>
-                        </div>
+                      {/* City */}
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
+                          <MapPin className="w-3.5 h-3.5 text-teal" /> City / Location *
+                        </label>
+                        <input
+                          type="text"
+                          value={city}
+                          onChange={(e) => setCity(e.target.value)}
+                          placeholder="e.g. Salem, Bangalore"
+                          className={`w-full bg-white border rounded-xl px-4 py-3 text-xs font-medium text-slate-800 transition-all focus:outline-none focus:border-teal ${errors.city ? "border-red-500" : "border-[#E2E8F0]"}`}
+                        />
+                        {errors.city && <p className="text-[10px] text-red-500 font-semibold">{errors.city}</p>}
                       </div>
                     </div>
-                  )}
 
-                  {/* STEP 2: Secure Billing Gateway */}
-                  {step === 2 && (
-                    <div className="space-y-6">
-                      <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
-                        <span className="w-7 h-7 rounded-xl bg-[#E0F2F1] text-teal text-xs font-bold flex items-center justify-center font-mono">02</span>
-                        <h2 className="font-display text-base font-bold text-[#004B57] uppercase tracking-wider">Secure Billing Gateway</h2>
-                      </div>
-                      <div className="p-4 bg-[#E8F7F5]/60 border border-[#B2E0DA] rounded-2xl text-left flex items-start gap-2.5">
-                        <Info className="w-4 h-4 text-teal flex-shrink-0 mt-0.5" />
-                        <div className="space-y-0.5">
-                          <span className="block text-[10px] font-bold text-[#004B57] uppercase tracking-wider">
-                            Amount to Pay: <span className="text-[#FF8C00] font-black">₹{totalFee.toLocaleString("en-IN")}</span>
-                          </span>
-                          <p className="text-[10px] text-slate-500 font-medium leading-normal">
-                            Category selected: <span className="font-bold text-slate-700">{category}</span>.
-                          </p>
-                        </div>
-                      </div>
+                    {/* BULK 20 STUDENTS ROSTER SECTION */}
+                    {isBulk && (
+                      <div className="mt-8 space-y-6 bg-slate-50 border-2 border-emerald-500/30 p-6 sm:p-8 rounded-[2rem] animate-in fade-in duration-300">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
+                          <div>
+                            <span className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-600 bg-emerald-100 px-3 py-1 rounded-full inline-block mb-1 border border-emerald-200">
+                              🎓 Bulk Student Package (20 Passes - ₹20,000 Total)
+                            </span>
+                            <h3 className="font-display text-lg font-black text-[#004B57] uppercase">
+                              20 Student Roster Details
+                            </h3>
+                            <p className="text-xs text-slate-500 mt-0.5">
+                              Fill all 20 students manually below, auto-sync college details, or import from CSV.
+                            </p>
+                          </div>
 
-                      {/* UPI QR Details */}
-                      <div className="space-y-6">
-                        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center bg-[#F0FAF9]/60 border border-teal/15 p-5 rounded-2xl">
-                          {/* QR Image */}
-                          <div className="md:col-span-5 flex flex-col items-center">
+                          <div className="flex flex-wrap gap-2">
                             <button
                               type="button"
-                              onClick={() => setQrModalOpen(true)}
-                              className="relative bg-white border border-slate-200 rounded-2xl p-3 shadow-md hover:shadow-lg hover:border-teal/30 hover:scale-105 transition-all duration-300 cursor-pointer group"
-                              title="Click to expand QR Code"
+                              onClick={applyCoordinatorInfoToAll}
+                              className="bg-white hover:bg-slate-100 text-[#004B57] border border-slate-300 px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm"
                             >
-                              <Image src="/assets/payment-qr.jpg" alt="UPI QR Code" width={135} height={135} className="w-[135px] h-[135px] object-contain rounded-lg bg-white" />
-                              <div className="absolute inset-0 bg-teal/5 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity flex items-center justify-center">
-                                <span className="bg-white/95 text-teal text-[9px] font-bold px-2.5 py-1 rounded-full shadow-md border border-teal/10">Click to Expand</span>
-                              </div>
+                              <Sparkles className="w-3.5 h-3.5 text-emerald-600" /> Copy College/City to All
                             </button>
-                            <span className="text-[8px] font-mono text-slate-400 mt-2 tracking-widest uppercase">Click to scan / save</span>
-                          </div>
 
-                          {/* Pay Instructions */}
-                          <div className="md:col-span-7 space-y-4">
-                            {/* Copy VPA */}
-                            <div className="bg-white border border-slate-200 rounded-xl p-3 flex items-center justify-between shadow-sm">
-                              <div>
-                                <span className="block text-[8px] font-bold text-slate-400 uppercase tracking-wider">Quick Pay / UPI VPA</span>
-                                <span className="font-mono text-xs font-bold text-[#1A1A2E]">drvjl79-2@okicici</span>
-                              </div>
-                              <button
-                                type="button"
-                                onClick={() => {
-                                  navigator.clipboard.writeText("drvjl79-2@okicici");
-                                  setCopied(true);
-                                  setTimeout(() => setCopied(false), 2000);
-                                }}
-                                className="p-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-slate-500 transition-colors cursor-pointer"
-                                title="Copy UPI VPA"
-                              >
-                                {copied ? <Check size={14} className="text-emerald-500" /> : <Copy size={14} />}
-                              </button>
-                            </div>
+                            <button
+                              type="button"
+                              onClick={autoFillSampleBulkRoster}
+                              className="bg-emerald-600 hover:bg-emerald-700 text-white px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm"
+                            >
+                              <Zap className="w-3.5 h-3.5" /> Auto-Fill Demo 20
+                            </button>
 
-                            {/* Mobile deep link */}
-                            <div className="space-y-1.5">
-                              <a
-                                href={`upi://pay?pa=drvjl79-2@okicici&pn=Valli%20Hospital&am=${totalFee}&cu=INR`}
-                                className="w-full bg-[#F26522] hover:bg-[#C94F0E] text-white py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-md flex items-center justify-center gap-2 cursor-pointer"
-                              >
-                                <Zap size={14} /> Quick Pay (UPI)
-                              </a>
-                              <span className="block text-[9px] text-slate-400 font-semibold text-center italic leading-none">
-                                *Direct pay works on mobile devices with active UPI apps (Google Pay, PhonePe, Paytm, etc.).
-                              </span>
-                            </div>
-
-                            <div className="text-xs space-y-2 text-[#004B57] font-semibold leading-relaxed text-left">
-                              <p className="text-teal font-bold flex items-center gap-1.5 text-xs uppercase">
-                                <Info className="w-4 h-4" /> UPI Payment Steps:
-                              </p>
-                              <ol className="list-decimal list-inside text-[11px] text-slate-500 pl-1 space-y-1.5">
-                                <li>Scan this QR code using Google Pay, PhonePe, Paytm, or any standard UPI app.</li>
-                                <li>Pay the entry fee amount of <span className="font-bold text-[#1A1A2E]">₹{totalFee}</span>.</li>
-                                <li>Verify that the recipient name displays as <span className="font-bold text-[#1A1A2E]">Valli Hospital</span>.</li>
-                                <li>Copy the 12-digit UPI Transaction/Reference ID and enter it below.</li>
-                              </ol>
-                            </div>
+                            <label className="bg-slate-800 hover:bg-slate-900 text-white px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-sm">
+                              <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-400" /> Import CSV
+                              <input type="file" accept=".csv,.txt" onChange={handleCSVUpload} className="hidden" />
+                            </label>
                           </div>
                         </div>
 
-                        {/* UPI Transaction ID Input */}
-                        <div className="space-y-1.5 text-left">
-                          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
-                            <Lock className="w-3.5 h-3.5 text-teal" /> Payment Transaction ID / UTR Number *
-                          </label>
-                          <div className="relative">
-                            <input
-                              type="text"
-                              maxLength={12}
-                              value={transactionId}
-                              onChange={(e) => setTransactionId(e.target.value.replace(/\D/g, ""))}
-                              placeholder="e.g. 329012345678"
-                              className={`w-full bg-white border rounded-xl pl-4 pr-12 py-3 text-xs font-mono tracking-widest text-[#1A1A2E] transition-all duration-200 focus:outline-none focus:border-teal focus:ring-4 focus:ring-teal/10 ${errors.transactionId ? "border-red-500 focus:ring-red-500/10" : "border-[#E2E8F0] hover:border-slate-300"}`}
-                            />
-                            <div className="absolute right-3.5 top-1/2 -translate-y-1/2 flex items-center text-slate-400 pointer-events-none">
-                              {transactionId.length === 12 ? (
-                                <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-                              ) : (
-                                <span className="text-[9px] font-bold font-mono">{transactionId.length}/12</span>
-                              )}
-                            </div>
+                        {/* 20 Accordion Student Cards */}
+                        <div className="space-y-3 max-h-[650px] overflow-y-auto pr-1">
+                          {bulkStudents.map((st, idx) => {
+                            const isOpen = activeStudentIndex === idx;
+                            const isFilled = st.fullName && st.emailId && st.mobileNumber;
+
+                            return (
+                              <div
+                                key={idx}
+                                className={`bg-white border rounded-2xl transition-all overflow-hidden ${
+                                  isOpen
+                                    ? "border-emerald-500 shadow-md ring-2 ring-emerald-500/10"
+                                    : isFilled
+                                    ? "border-emerald-200 bg-emerald-50/20"
+                                    : "border-slate-200"
+                                }`}
+                              >
+                                {/* Card Header */}
+                                <div
+                                  onClick={() => setActiveStudentIndex(isOpen ? null : idx)}
+                                  className="p-4 flex items-center justify-between cursor-pointer select-none hover:bg-slate-50/80 transition-colors"
+                                >
+                                  <div className="flex items-center gap-3">
+                                    <div
+                                      className={`w-7 h-7 rounded-xl flex items-center justify-center font-mono text-xs font-bold ${
+                                        isFilled
+                                          ? "bg-emerald-500 text-white"
+                                          : "bg-slate-200 text-slate-700"
+                                      }`}
+                                    >
+                                      #{idx + 1}
+                                    </div>
+                                    <div>
+                                      <span className="font-bold text-xs text-slate-800 block">
+                                        {st.fullName || `Student #${idx + 1}`}
+                                      </span>
+                                      <span className="text-[10px] text-slate-400 font-mono">
+                                        {st.emailId || "Pending email"} | {st.mobileNumber || "Pending mobile"}
+                                      </span>
+                                    </div>
+                                  </div>
+
+                                  <div className="flex items-center gap-2">
+                                    {isFilled ? (
+                                      <span className="text-[9px] font-extrabold uppercase bg-emerald-100 text-emerald-700 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                                        Filled ✓
+                                      </span>
+                                    ) : (
+                                      <span className="text-[9px] font-bold uppercase bg-slate-100 text-slate-400 px-2 py-0.5 rounded-full">
+                                        Required
+                                      </span>
+                                    )}
+                                    <ChevronRight
+                                      className={`w-4 h-4 text-slate-400 transition-transform ${
+                                        isOpen ? "rotate-90 text-emerald-600" : ""
+                                      }`}
+                                    />
+                                  </div>
+                                </div>
+
+                                {/* Card Expanded Body */}
+                                {isOpen && (
+                                  <div className="p-4 pt-0 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3 animate-in fade-in duration-200">
+                                    <div>
+                                      <label className="text-[9px] font-bold uppercase text-slate-400 block mb-1">
+                                        Student Name *
+                                      </label>
+                                      <input
+                                        type="text"
+                                        value={st.fullName}
+                                        onChange={(e) => updateBulkStudent(idx, "fullName", e.target.value)}
+                                        placeholder="Full name"
+                                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-800 focus:outline-none focus:border-emerald-500"
+                                      />
+                                    </div>
+
+                                    <div>
+                                      <label className="text-[9px] font-bold uppercase text-slate-400 block mb-1">
+                                        Student Email *
+                                      </label>
+                                      <input
+                                        type="email"
+                                        value={st.emailId}
+                                        onChange={(e) => updateBulkStudent(idx, "emailId", e.target.value)}
+                                        placeholder="email@college.edu"
+                                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-800 focus:outline-none focus:border-emerald-500"
+                                      />
+                                    </div>
+
+                                    <div>
+                                      <label className="text-[9px] font-bold uppercase text-slate-400 block mb-1">
+                                        Mobile Number *
+                                      </label>
+                                      <input
+                                        type="tel"
+                                        maxLength={10}
+                                        value={st.mobileNumber}
+                                        onChange={(e) => updateBulkStudent(idx, "mobileNumber", e.target.value.replace(/\D/g, ""))}
+                                        placeholder="10-digit mobile"
+                                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-800 focus:outline-none focus:border-emerald-500"
+                                      />
+                                    </div>
+
+                                    <div>
+                                      <label className="text-[9px] font-bold uppercase text-slate-400 block mb-1">
+                                        College / Institution *
+                                      </label>
+                                      <input
+                                        type="text"
+                                        value={st.institution}
+                                        onChange={(e) => updateBulkStudent(idx, "institution", e.target.value)}
+                                        placeholder="College name"
+                                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-800 focus:outline-none focus:border-emerald-500"
+                                      />
+                                    </div>
+
+                                    <div>
+                                      <label className="text-[9px] font-bold uppercase text-slate-400 block mb-1">
+                                        City *
+                                      </label>
+                                      <input
+                                        type="text"
+                                        value={st.city}
+                                        onChange={(e) => updateBulkStudent(idx, "city", e.target.value)}
+                                        placeholder="City"
+                                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-800 focus:outline-none focus:border-emerald-500"
+                                      />
+                                    </div>
+
+
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
+                  </motion.div>
+                )}
+
+                {step === 2 && (
+                  <motion.div
+                    key="step-2"
+                    initial={{ opacity: 0, x: 16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -16 }}
+                    transition={{ duration: 0.35, ease: easeSmooth }}
+                    className="space-y-6"
+                  >
+                    <div className="border-b border-slate-100 pb-4">
+                      <h2 className="font-display text-base font-bold text-[#004B57] uppercase tracking-wider">
+                        Payment Details
+                      </h2>
+                      <p className="text-xs text-slate-500 mt-0.5">
+                        Review your registration details and complete payment.
+                      </p>
+                    </div>
+
+                    <div className="space-y-4">
+                      {/* Summary Box */}
+                      <div className="bg-slate-50 border border-[#E2E8F0] p-5 rounded-2xl space-y-3">
+                        <div className="flex justify-between items-center text-xs">
+                          <span className="text-slate-500 font-medium">Registrant:</span>
+                          <span className="font-bold text-[#004B57]">{fullName}</span>
+                        </div>
+                        <div className="flex justify-between items-center text-xs">
+                          <span className="text-slate-500 font-medium">Category:</span>
+                          <span className="font-bold text-[#FF8C00]">{category}</span>
+                        </div>
+                        {isBulk && (
+                          <div className="flex justify-between items-center text-xs bg-emerald-100/60 p-2 rounded-xl border border-emerald-200">
+                            <span className="text-emerald-800 font-bold">Bulk Student Package Applied:</span>
+                            <span className="font-bold text-emerald-700">20 Passes @ ₹1,000 each (₹20,000 Total)</span>
                           </div>
-                          {errors.transactionId && <p className="text-[10px] text-red-500 font-semibold">{errors.transactionId}</p>}
-                          <p className="text-[10px] text-slate-400 leading-normal">
-                            Standard banking transaction ID. Found in your bank SMS or UPI transaction details screen.
+                        )}
+                        <div className="border-t border-slate-200 pt-3 flex justify-between items-center">
+                          <div className="space-y-0.5">
+                            <span className="block text-[10px] font-bold text-[#004B57] uppercase tracking-wider">
+                              Amount to Pay: <span className="text-[#FF8C00] font-black">₹{totalFee.toLocaleString("en-IN")}</span>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Payment Box */}
+                      <div className="p-6 bg-[#F0FAF9]/60 border border-[#00A896]/20 rounded-2xl space-y-4 text-center">
+                        <div className="space-y-1">
+                          <h3 className="font-display text-sm font-bold text-[#004B57] uppercase tracking-wider">
+                            Pay Registration Fee
+                          </h3>
+                          <p className="text-[11px] text-slate-500 font-medium max-w-sm mx-auto">
+                            Pay ₹{totalFee.toLocaleString("en-IN")} using UPI (GPay, PhonePe, Paytm), Cards, or Net Banking.
                           </p>
                         </div>
 
-                        {/* Screenshot upload */}
-                        <div className="space-y-1.5 mt-4 text-left">
-                          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
-                            <Upload className="w-3.5 h-3.5 text-teal" /> Upload Payment Screenshot *
-                          </label>
-
-                          {!screenshot ? (
-                            <div className="border-2 border-dashed border-slate-200 hover:border-teal/50 transition-colors rounded-xl p-5 text-center cursor-pointer relative bg-slate-50/30">
-                              <input
-                                type="file"
-                                accept="image/*"
-                                onChange={handleScreenshotChange}
-                                className="absolute inset-0 opacity-0 cursor-pointer"
-                              />
-                              <div className="space-y-2">
-                                <div className="w-8 h-8 bg-[#E0F2F1] text-teal rounded-lg flex items-center justify-center mx-auto shadow-inner border border-teal/10">
-                                  <Upload size={14} />
-                                </div>
-                                <p className="text-[11px] font-bold text-slate-700">Click or Drag screenshot here</p>
-                                <p className="text-[9px] text-slate-400 font-medium">JPEG, PNG up to 2MB. Make sure the Reference ID is visible.</p>
-                              </div>
-                            </div>
-                          ) : (
-                            <div className="relative border border-slate-200 rounded-xl p-3 bg-slate-50/50 flex items-center gap-3">
-                              <div className="w-12 h-12 bg-white rounded-lg overflow-hidden border border-slate-200 flex-shrink-0">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img src={screenshot} alt="Payment SS" className="w-full h-full object-cover" />
-                              </div>
-                              <div className="min-w-0 flex-1">
-                                <p className="text-[11px] font-bold text-slate-700 truncate">screenshot_uploaded.png</p>
-                                <p className="text-[9px] text-[#00A896] font-bold">Image loaded successfully</p>
-                              </div>
-                              <button
-                                type="button"
-                                onClick={handleClearScreenshot}
-                                className="p-1.5 bg-red-50 hover:bg-red-100 text-red-500 rounded-lg transition-colors text-xs font-bold"
-                              >
-                                Remove
-                              </button>
-                            </div>
-                          )}
-                          {errors.screenshot && <p className="text-[10px] text-red-500 font-semibold">{errors.screenshot}</p>}
-                        </div>
+                        <RazorpayCheckout
+                          amount={totalFee}
+                          title="ARISE 2026 CME Registration"
+                          description={`Delegate Registration Fee - ${fullName}`}
+                          prefillName={fullName}
+                          prefillEmail={emailId}
+                          prefillPhone={mobileNumber}
+                          eventType="ARISE_2026"
+                          registrationCode={regCode}
+                          notes={{
+                            category,
+                            includeWorkshop: String(includeWorkshop),
+                            fullName,
+                            emailId,
+                            mobileNumber,
+                            institution,
+                            department,
+                            city,
+                            source,
+                            designation,
+                            qualification,
+                            iapCreditPoints: String(iapCreditPoints),
+                            iapMembershipNumber,
+                            isBulk: String(isBulk),
+                          }}
+                          onSuccess={handleRazorpaySuccess}
+                          onFailure={(errMsg) => setErrors({ transactionId: errMsg })}
+                          buttonText={`Pay ₹${totalFee.toLocaleString("en-IN")} & Confirm Registration`}
+                          buttonClassName="w-full bg-[#00A896] hover:bg-[#008B7A] text-white py-4 px-6 rounded-2xl font-bold text-sm tracking-wide transition-all duration-300 shadow-lg shadow-teal/20 hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2 cursor-pointer"
+                        />
                       </div>
                     </div>
-                  )}
-                </div>
+                  </motion.div>
+                )}
+                </AnimatePresence>
 
                 {/* Wizard navigation bar */}
                 <div className="mt-10 pt-6 border-t border-slate-100 flex items-center justify-between">
@@ -838,86 +1115,16 @@ export default function AriseRegisterPage() {
                       Continue <ChevronRight size={16} />
                     </button>
                   ) : (
-                    <button
-                      type="button"
-                      onClick={handleSubmit}
-                      disabled={isSubmitting}
-                      className="btn-primary btn-orange"
-                      style={{ padding: "12px 28px", fontSize: 13, borderRadius: 10 }}
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                          Submitting...
-                        </>
-                      ) : (
-                        <>
-                          Submit Registration <ArrowRight size={16} />
-                        </>
-                      )}
-                    </button>
+                    <div className="text-[11px] text-slate-400 font-semibold italic">
+                      Click the Pay button above to complete registration
+                    </div>
                   )}
                 </div>
               </div>
-            </div>
+            </motion.div>
           )}
         </div>
       </div>
-
-      {/* UPI QR Expanded Modal */}
-      {qrModalOpen && (
-        <div
-          className="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200"
-          onClick={() => setQrModalOpen(false)}
-        >
-          <div
-            className="bg-white rounded-[2rem] p-6 max-w-sm w-full border border-teal/10 shadow-2xl relative flex flex-col items-center gap-5 text-center animate-in fade-in zoom-in-95 duration-200"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              type="button"
-              onClick={() => setQrModalOpen(false)}
-              className="absolute top-4 right-4 p-1.5 text-slate-400 hover:text-slate-650 hover:bg-slate-100 rounded-full transition-colors"
-            >
-              <X size={18} />
-            </button>
-
-            <div className="space-y-1 mt-2 text-center">
-              <h3 className="font-display text-lg font-bold uppercase text-[#004B57]">UPI QR Code</h3>
-              <p className="text-[11px] text-slate-500 font-semibold leading-relaxed">
-                Scan using Google Pay, PhonePe, Paytm, or any UPI app to transfer ₹{totalFee}.
-              </p>
-            </div>
-
-            <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 shadow-inner flex items-center justify-center">
-              <Image
-                src="/assets/payment-qr.jpg"
-                alt="UPI QR Code Expanded"
-                width={260}
-                height={260}
-                className="w-[260px] h-[260px] object-contain rounded-xl bg-white shadow-sm"
-              />
-            </div>
-
-            <div className="w-full flex flex-col gap-2.5">
-              <a
-                href="/assets/payment-qr.jpg"
-                download="valli-hospital-payment-qr.jpg"
-                className="bg-[#00A896] hover:bg-[#008B7A] text-white w-full py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-md flex items-center justify-center gap-2"
-              >
-                <Download size={14} /> Save QR to Device
-              </a>
-              <button
-                type="button"
-                onClick={() => setQrModalOpen(false)}
-                className="bg-slate-100 hover:bg-slate-200 text-[#004B57] w-full py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300"
-              >
-                Close View
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       <Footer />
     </>

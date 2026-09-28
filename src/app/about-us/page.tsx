@@ -134,7 +134,7 @@ export default function AboutPage() {
                         "name": "Valli Super Specialty Hospital",
                         "url": "https://www.vallihospital.in/",
                         "logo": "https://www.vallihospital.in/favicon.png",
-                        "telephone": "+919003417111",
+                        "telephone": "+919087417111",
                         "knowsAbout": [
                             "Orthopedic Surgery",
                             "Joint Replacement Surgery",
@@ -519,7 +519,7 @@ export default function AboutPage() {
                     </motion.p>
                     <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Link href="/book-appointment" className="bg-[#f98825] text-white px-8 py-4 rounded-full font-bold text-sm hover:bg-[#e0751e] transition-colors shadow-lg">Book Appointment</Link>
-                        <a href="tel:+919003417111" className="bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-full font-bold text-sm border border-white/20 transition-colors">Call +91 90034 17111</a>
+                        <a href="tel:+919087417111" className="bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-full font-bold text-sm border border-white/20 transition-colors">Call +91 90874 17111</a>
                     </motion.div>
                 </div>
             </section>

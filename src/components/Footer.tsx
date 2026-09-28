@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion } from "framer-motion";
 import ObfuscatedEmail from "./ObfuscatedEmail";
@@ -43,8 +43,10 @@ export default function Footer() {
                         <div className="text-[#f98825] text-xs font-bold uppercase tracking-[0.2em]">Contact & Info</div>
                         <ul className="space-y-6">
                             <li className="group">
-                                <p className="text-[10px] uppercase tracking-widest text-[#f98825] mb-2 font-bold group-hover:translate-x-1 transition-transform">Emergency 24/7</p>
-                                <a href="tel:+919003417111" className="text-2xl sm:text-3xl font-black text-[#001014] tracking-tight hover:text-[#3cb3a6] transition-colors leading-none inline-block">+91 90034 17111</a>
+                                <p className="text-[10px] uppercase tracking-widest text-[#f98825] mb-2 font-bold group-hover:translate-x-1 transition-transform">Emergency 24/7 & Helpline</p>
+                                <div className="flex flex-col gap-1.5">
+                                    <a href="tel:+919003417111" className="text-2xl sm:text-3xl font-black text-[#001014] tracking-tight hover:text-[#3cb3a6] transition-colors leading-none inline-block">+91 90034 17111</a>
+                                </div>
                             </li>
                             <li className="pt-6 border-t border-gray-100 group">
                                 <p className="text-[10px] uppercase tracking-widest text-[#f98825] mb-2 font-bold group-hover:translate-x-1 transition-transform">General Inquiry</p>
@@ -86,7 +88,7 @@ export default function Footer() {
                         initial={{ scale: 0.95 }} whileInView={{ opacity: 0.15, scale: 1 }} transition={{ duration: 1.5, ease: "easeOut" }} viewport={{ once: true }}
                         className="text-[9.5vw] md:text-[6.5vw] lg:text-[5.5vw] xl:text-[5vw] whitespace-nowrap font-black leading-none text-[#3cb3a6] tracking-tighter w-full text-center origin-bottom"
                     >
-                        VALLI Super Specialty HOSPITAL
+                        VALLI SUPER SPECIALTY HOSPITAL
                     </motion.span>
                 </div>
 
@@ -96,7 +98,7 @@ export default function Footer() {
                     className="pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-400"
                 >
                     <div className="flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
-                        <p>© {new Date().getFullYear()} VALLI Super Specialty HOSPITAL.<br className="md:hidden" /> ALL RIGHTS RESERVED.</p>
+                        <p>© {new Date().getFullYear()} VALLI SUPER SPECIALTY HOSPITAL.<br className="md:hidden" /> ALL RIGHTS RESERVED.</p>
 
                         {/* Social Signals for SEO & Trust */}
                         <div className="flex items-center gap-4 bg-gray-50 border border-gray-100 px-4 py-2 rounded-full">

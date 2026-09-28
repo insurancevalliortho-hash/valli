@@ -1,6 +1,7 @@
 import React from 'react';
-import { BreadcrumbSchema, FAQSchema } from '../../components/seo/StructuredData';
+import { BreadcrumbSchema, FAQSchema, MedicalProcedureSchema, MedicalSpecialtySchema } from '../../components/seo/StructuredData';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -37,10 +38,20 @@ export default function Page() {
         { name: 'Interventional Ultrasound & Pain Management', url: 'https://www.vallihospital.in/interventional-ultrasound-pain-management' }
       ]} />
       <FAQSchema questions={[
-        { question: 'What is Interventional Ultrasound & Pain Management?', answer: 'It is a precision-guided specialty at Valli Super Specialty Hospital using two GE Versana USG machines to perform nerve blocks, PRP injections, stem cell therapy, epidural injections, and ultrasound-guided biopsies for pain relief and diagnostics.' },
-        { question: 'What conditions are treated at Valli Hospital Pain Management clinic?', answer: 'We treat trauma pain, arthritis, chronic back pain, Trigeminal Neuralgia, TMJ disorders, cancer pain, pancreatic pain, stroke-related pain, and sports injuries using advanced interventional techniques.' },
-        { question: 'Who leads the Interventional Ultrasound team?', answer: 'Our multidisciplinary team includes a senior Radiologist, an Anesthetist, a specialized Pain Medicine Consultant, and three expert technicians.' },
+        { question: 'What is Interventional Ultrasound & Pain Management?', answer: 'It is a precision-guided specialty at Valli Super Specialty Hospital using high-definition GE Versana USG systems to perform targeted nerve blocks, regenerative PRP injections, epidural injections, and ultrasound-guided biopsies for instant and sustained pain relief.' },
+        { question: 'What pain conditions are treated at Valli Hospital Pain Management clinic?', answer: 'We treat severe joint arthritis, chronic back/neck pain, sciatica, Trigeminal Neuralgia, TMJ disorders, intractable cancer pain, and acute sports injuries without heavy reliance on oral opioids.' },
+        { question: 'Who leads the Interventional Ultrasound and Radiology team?', answer: 'Our imaging and interventional team is led by Dr. S. Senthilnathan (MBBS, MD - Consultant Radio Diagnosis) and senior anaesthetists.' },
       ]} />
+      <MedicalSpecialtySchema
+        name="Interventional Pain Management & Radio Diagnosis Center"
+        description="Ultrasound-guided targeted nerve blocks, regenerative therapies, and non-surgical pain management in Salem."
+        url="https://www.vallihospital.in/interventional-ultrasound-pain-management"
+      />
+      <MedicalProcedureSchema
+        name="Ultrasound-Guided Targeted Nerve Infiltration & PRP Therapy"
+        description="Real-time sonographic precision needle targeting of inflamed nerve bundles and degenerative joints."
+        bodyLocation="Peripheral Nerves & Musculoskeletal System"
+      />
 
       {/* Breadcrumb UI */}
       <div className="mx-auto px-6 md:px-12 pt-28 pb-4 bg-[#001f25]">
@@ -55,24 +66,64 @@ export default function Page() {
         </nav>
       </div>
 
-      {/* Hero Section */}
-      <section className="relative min-h-[40vh] flex items-center bg-[#001f25] pt-32 pb-20 overflow-hidden">
+      {/* Hero Section - Concept 1 */}
+      <section className="relative min-h-[45vh] flex items-center bg-[#001f25] pt-12 pb-16 overflow-hidden text-left">
         <div className="absolute inset-0 pointer-events-none z-0">
-          <div className="absolute top-[-20%] right-[-10%] w-[40vw] h-[40vw] bg-[#3cb3a6]/20 rounded-[6rem] rotate-12" />
-          <div className="absolute bottom-[-20%] left-[-10%] w-[35vw] h-[35vw] bg-[#f98825]/10 rounded-[5rem] rotate-45" />
+          <div className="absolute top-[-20%] right-[-10%] w-[40vw] h-[40vw] bg-[#3cb3a6]/20 rounded-[6rem] rotate-12 blur-3xl" />
+          <div className="absolute bottom-[-20%] left-[-10%] w-[35vw] h-[35vw] bg-[#f98825]/10 rounded-[5rem] rotate-45 blur-2xl" />
         </div>
         <div className="container mx-auto px-6 md:px-12 relative z-10">
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/8 border border-white/12 text-[#3cb3a6] text-xs font-bold tracking-[0.2em] uppercase mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#3cb3a6]" />
-            Specialty Clinic
-          </span>
-          <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-5xl">
-            Interventional Ultrasound<br />
-            <span className="text-[#3cb3a6]">&amp; Pain Management - <span className="whitespace-nowrap">Dr. Balamurugan</span></span>
-          </h1>
-          <p className="mt-6 text-white/60 text-lg max-w-2xl leading-relaxed font-medium">
-            Premier precision-guided diagnostics and advanced pain relief — powered by two GE Versana USG machines and a specialist multidisciplinary team in Salem.
-          </p>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+
+            {/* Left Content */}
+            <div className="lg:col-span-7 space-y-6">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/15 text-[#3cb3a6] text-xs font-bold tracking-[0.2em] uppercase">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#3cb3a6]" />
+                Specialty Clinic
+              </span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight">
+                Interventional Ultrasound <br /> <span className="text-[#3cb3a6]">&amp; Pain Management</span>
+              </h1>
+              <p className="text-gray-300 text-base md:text-lg max-w-xl font-normal leading-relaxed">
+                Premier precision-guided diagnostics and advanced pain relief — powered by GE Versana USG guidance and targeted nerve blocks.
+              </p>
+              <div className="pt-2 flex flex-wrap gap-4">
+                <Link
+                  href="/book-appointment"
+                  className="bg-[#f98825] hover:bg-[#e0751e] text-white px-7 py-3.5 rounded-full font-bold text-sm shadow-lg transition-all"
+                >
+                  Book Consultation
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Doctor Card */}
+            <div className="lg:col-span-5 relative">
+              <div className="relative mx-auto max-w-xs sm:max-w-sm bg-gradient-to-b from-white/15 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-4 shadow-2xl">
+                <div className="relative w-full h-72 rounded-2xl overflow-hidden bg-[#00333c] border border-white/10">
+                  <Image
+                    src="/doctorsIMG/Balamurugan.jpeg"
+                    alt="Dr. G. Balamurugan"
+                    fill
+                    className="object-cover object-top"
+                  />
+                </div>
+                <div className="mt-4 text-left space-y-1">
+                  <span className="text-[10px] font-bold tracking-widest text-[#3cb3a6] uppercase block">
+                    Anaesthesia &amp; Pain Specialist
+                  </span>
+                  <h3 className="text-lg sm:text-xl font-black text-white">Dr. G. Balamurugan</h3>
+                  <p className="text-xs text-gray-300 font-medium">
+                    MBBS, MD ANAESTHESIA
+                  </p>
+                </div>
+                <div className="absolute -top-3 -right-3 bg-[#f98825] text-white px-3.5 py-1.5 rounded-xl text-xs font-bold shadow-lg border border-white/20">
+                  Lead Specialist
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
       </section>
 

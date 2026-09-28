@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -68,7 +68,7 @@ export default function BookAppointmentPage() {
     };
 
     const handleSubmit = () => {
-        const whatsappNumber = "+919003417111";
+        const whatsappNumber = "+919087417111";
         const messageText = `*VALLI HOSPITAL APPOINTMENT REQUEST* 🏥\n\n` +
             `*Patient Name:* ${form.name}\n` +
             `*Mobile Number:* ${form.phone}\n` +
@@ -318,10 +318,16 @@ export default function BookAppointmentPage() {
                                     <span className="text-red-400 text-xs font-black uppercase tracking-widest">Emergency?</span>
                                 </div>
                                 <p className="text-white/70 text-sm mb-4">Don&apos;t wait — call our 24/7 helpline directly.</p>
-                                <a href="tel:+919003417111" className="flex items-center gap-3 bg-red-500/20 border border-red-500/30 rounded-xl px-4 py-3 hover:bg-red-500/30 transition-colors">
-                                    <Phone size={18} className="text-red-400" />
-                                    <span className="text-white font-bold text-sm">+91 90034 17111</span>
-                                </a>
+                                <div className="flex flex-col gap-2">
+                                    <a href="tel:+919087417111" className="flex items-center gap-3 bg-red-500/20 border border-red-500/30 rounded-xl px-4 py-3 hover:bg-red-500/30 transition-colors">
+                                        <Phone size={18} className="text-red-400" />
+                                        <span className="text-white font-bold text-sm">+91 90874 17111</span>
+                                    </a>
+                                    <a href="tel:+919994599294" className="flex items-center gap-3 bg-white/10 border border-white/15 rounded-xl px-4 py-2.5 hover:bg-white/15 transition-colors">
+                                        <Phone size={16} className="text-white/70" />
+                                        <span className="text-white font-bold text-xs">+91 99945 99294</span>
+                                    </a>
+                                </div>
                             </div>
 
                             {/* Contact Info */}
@@ -329,7 +335,7 @@ export default function BookAppointmentPage() {
                                 <h3 className="text-[#00333c] font-black text-base">Contact Info</h3>
                                 {[
                                     { icon: <MapPin size={18} />, label: "Address", val: "Opp. to Sri Vidya Mandir School, Meyyanoor Road, Salem - 636 004" },
-                                    { icon: <Phone size={18} />, label: "Helpline", val: "+91 90034 17111" },
+                                    { icon: <Phone size={18} />, label: "Helpline", val: "+91 90874 17111 / +91 99945 99294" },
                                     { icon: <Mail size={18} />, label: "Email", val: "info@vallihospital.com" },
                                     { icon: <Clock size={18} />, label: "OPD Hours", val: "9:00 AM – 8:00 PM" },
                                 ].map(({ icon, label, val }) => (

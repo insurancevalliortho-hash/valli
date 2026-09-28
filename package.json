@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --webpack",
     "build": "next build --webpack && node scripts/generate-mirrors.js",
     "start": "next start",
     "lint": "eslint"
@@ -24,6 +24,7 @@
     "next": "16.2.1",
     "nodemailer": "^9.0.3",
     "pg": "^8.21.0",
+    "razorpay": "^2.9.8",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "tailwind-merge": "^3.5.0"

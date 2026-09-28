@@ -338,8 +338,8 @@ export default function FacilitiesPage() {
                             <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0" />
                             <span className="relative z-10 flex items-center gap-2">Book an Appointment <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg></span>
                         </a>
-                        <a href="tel:+919003417111" className="text-white/80 font-bold text-sm hover:text-white transition-colors border-b-2 border-transparent hover:border-white pb-1 flex items-center gap-2">
-                            Call 24/7 Emergency Line
+                        <a href="tel:+919087417111" className="text-white/80 font-bold text-sm hover:text-white transition-colors border-b-2 border-transparent hover:border-white pb-1 flex items-center gap-2">
+                            Call 24/7 Emergency Line (+91 90874 17111)
                         </a>
                     </motion.div>
                 </div>

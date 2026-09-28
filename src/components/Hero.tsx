@@ -16,7 +16,7 @@ const HERO_BLUR_DATA_URL =
 const HERO_SLIDES = [
     {
         id: 1,
-        image: "/hero-surgery.png",
+        image: "/valli-hospital-building.jpg",
         title: "BEST ORTHOPEDIC",
         highlight: "HOSPITAL IN SALEM",
         subtitle: "Joint Replacement · Trauma Care · Sports Injury",
