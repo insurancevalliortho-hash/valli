@@ -1075,7 +1075,6 @@ export default function AriseRegisterPage() {
                             source,
                             designation,
                             qualification,
-                            foodPreference,
                             iapCreditPoints: String(iapCreditPoints),
                             iapMembershipNumber,
                             isBulk: String(isBulk),
