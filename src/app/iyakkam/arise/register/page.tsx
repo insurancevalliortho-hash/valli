@@ -50,7 +50,6 @@ interface BulkStudent {
   institution: string;
   department: string;
   city: string;
-  foodPreference: string;
   iapCreditPoints: boolean;
   iapMembershipNumber: string;
 }
@@ -72,7 +71,7 @@ export default function AriseRegisterPage() {
   const [institution, setInstitution] = useState("");
   const [department, setDepartment] = useState("");
   const [city, setCity] = useState("");
-  const [foodPreference, setFoodPreference] = useState("Vegetarian");
+
   const [iapCreditPoints, setIapCreditPoints] = useState(false);
   const [iapMembershipNumber, setIapMembershipNumber] = useState("");
   const [source, setSource] = useState("Direct");
@@ -90,7 +89,6 @@ export default function AriseRegisterPage() {
       institution: "",
       department: "",
       city: "",
-      foodPreference: "Vegetarian",
       iapCreditPoints: false,
       iapMembershipNumber: "",
     }))
@@ -182,7 +180,6 @@ export default function AriseRegisterPage() {
         institution: inst,
         department: department || "Physiotherapy",
         city: cty,
-        foodPreference: i % 2 === 0 ? "Vegetarian" : "Non-Vegetarian",
         iapCreditPoints: false,
         iapMembershipNumber: "",
       }))
@@ -214,9 +211,8 @@ export default function AriseRegisterPage() {
             institution: parts[4] || institution || "Medical College",
             department: parts[5] || department || "",
             city: parts[6] || city || "Salem",
-            foodPreference: parts[7] || "Vegetarian",
-            iapCreditPoints: Boolean(parts[8]),
-            iapMembershipNumber: parts[8] || "",
+            iapCreditPoints: Boolean(parts[7]),
+            iapMembershipNumber: parts[7] || "",
           });
         } else {
           parsed.push({
@@ -227,7 +223,6 @@ export default function AriseRegisterPage() {
             institution: institution || "Medical College",
             department: department || "",
             city: city || "Salem",
-            foodPreference: "Vegetarian",
             iapCreditPoints: false,
             iapMembershipNumber: "",
           });
@@ -386,12 +381,11 @@ export default function AriseRegisterPage() {
           department: st.department || department,
           city: st.city || city,
           source: "Bulk Group Booking",
-          transactionId: `${details.paymentId}-S${(idx + 1).toString().padStart(2, "0")}`,
+          transactionId: `${details.paymentId}-S${(idx + 1).toString().padStart(2, "00")}`,
           paymentScreenshot: "RAZORPAY_ONLINE_PAYMENT",
           designation: "Student / Intern",
           qualification: st.qualification || qualification,
           bonafideCertificate,
-          foodPreference: st.foodPreference,
           iapCreditPoints: st.iapCreditPoints,
           iapMembershipNumber: st.iapMembershipNumber,
           isVerified: true,
@@ -417,7 +411,6 @@ export default function AriseRegisterPage() {
             designation: "Student Coordinator",
             qualification,
             bonafideCertificate,
-            foodPreference,
             iapCreditPoints,
             iapMembershipNumber,
             isVerified: true,
@@ -461,7 +454,6 @@ export default function AriseRegisterPage() {
             designation,
             qualification,
             bonafideCertificate,
-            foodPreference,
             iapCreditPoints,
             iapMembershipNumber: iapCreditPoints ? iapMembershipNumber : "",
             isVerified: true,
@@ -995,19 +987,7 @@ export default function AriseRegisterPage() {
                                       />
                                     </div>
 
-                                    <div>
-                                      <label className="text-[9px] font-bold uppercase text-slate-400 block mb-1">
-                                        Food Preference
-                                      </label>
-                                      <select
-                                        value={st.foodPreference}
-                                        onChange={(e) => updateBulkStudent(idx, "foodPreference", e.target.value)}
-                                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-800 focus:outline-none focus:border-emerald-500"
-                                      >
-                                        <option value="Vegetarian">Vegetarian</option>
-                                        <option value="Non-Vegetarian">Non-Vegetarian</option>
-                                      </select>
-                                    </div>
+
                                   </div>
                                 )}
                               </div>

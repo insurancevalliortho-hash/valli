@@ -663,16 +663,14 @@ function PrizesSection() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: ci * 0.1 + pi * 0.08, duration: 0.5, ease: easeSmooth }}
-                    className={`rounded-2xl p-4 flex items-center justify-between shadow-sm ${
-                      prize.highlight
+                    className={`rounded-2xl p-4 flex items-center justify-between shadow-sm ${prize.highlight
                         ? "bg-gradient-to-r from-amber-50 to-white border border-amber-200"
                         : "bg-white border border-slate-200"
-                    }`}
+                      }`}
                   >
                     <div className="flex items-center gap-3">
-                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-lg ${
-                        prize.emoji === "gold" ? "bg-amber-50" : prize.emoji === "silver" ? "bg-slate-100" : "bg-orange-50"
-                      }`}>
+                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-lg ${prize.emoji === "gold" ? "bg-amber-50" : prize.emoji === "silver" ? "bg-slate-100" : "bg-orange-50"
+                        }`}>
                         {prize.emoji === "gold" ? "🥇" : prize.emoji === "silver" ? "🥈" : "🥉"}
                       </div>
                       <div>
@@ -831,9 +829,8 @@ function ScheduleAndRouteSection({ regHref = "/ActiveSalem/Registration" }: { re
                     <button
                       key={r}
                       onClick={() => setActiveRoute(r)}
-                      className={`px-3.5 py-1.5 rounded-lg text-xs font-bold font-mono transition-all cursor-pointer ${
-                        activeRoute === r ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-900"
-                      }`}
+                      className={`px-3.5 py-1.5 rounded-lg text-xs font-bold font-mono transition-all cursor-pointer ${activeRoute === r ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-900"
+                        }`}
                     >
                       {r}
                     </button>
@@ -977,7 +974,7 @@ function RadioAndSupportSection() {
               labelColor: "text-[#00A896]",
               title: "Need Help or Bulk Entries?",
               desc: null,
-              phones: ["+91 99945 99524", "+91 90874 17111"],
+              phones: ["+91 99945 99294", "+91 90874 17111"],
             },
           ].map((card, i) => (
             <motion.div
