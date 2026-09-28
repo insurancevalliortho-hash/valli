@@ -567,13 +567,28 @@ export async function sendAriseRegistrationEmail(data: AriseEmailPayload) {
     const { transporter, from } = await getTransporter();
 
     let amountPaid = 2000;
-    const isStudent = data.designation === "Student / Intern";
-    if (data.category.toLowerCase().includes("bulk")) {
+    const catLower = (data.category || "").toLowerCase();
+    const desigLower = (data.designation || "").toLowerCase();
+    const qualLower = (data.qualification || "").toLowerCase();
+    const isStudent =
+      desigLower.includes("student") ||
+      desigLower.includes("intern") ||
+      catLower.includes("student") ||
+      qualLower.includes("student");
+    const isLead = Boolean(data.registrationCode?.includes("LEAD"));
+    const isBulkStudent = catLower.includes("bulk") && !isLead;
+
+    if (isLead) {
       amountPaid = 20000;
-    } else if (data.category === "Conference with Workshop") {
-      amountPaid = isStudent ? 1500 : 2500;
-    } else if (data.category === "Workshop") {
+    } else if (isBulkStudent) {
+      amountPaid = 0;
+    } else if (
+      catLower === "workshop" ||
+      (catLower.includes("workshop") && !catLower.includes("conference") && !data.includeWorkshop)
+    ) {
       amountPaid = 500;
+    } else if (data.includeWorkshop || catLower.includes("workshop")) {
+      amountPaid = isStudent ? 1500 : 2500;
     } else {
       amountPaid = isStudent ? 1000 : 2000;
     }

@@ -49,6 +49,7 @@ interface Registration {
   mobile_number: string;
   category: string;
   designation?: string;
+  qualification?: string;
   include_workshop: boolean;
   institution: string;
   department?: string;
@@ -287,12 +288,38 @@ export default function AriseAdminPage() {
 
   // Helper to compute delegate fee
   const calculateFee = (r: Registration) => {
-    const isStudent = (r.designation && r.designation.toLowerCase().includes("student")) || r.category.toLowerCase().includes("student");
-    if (r.registration_code?.includes("LEAD")) return 10000;
-    if (r.category.toLowerCase().includes("bulk")) return 0;
-    if (isStudent) return r.include_workshop ? 1500 : 1000;
-    if (r.category.toLowerCase().includes("workshop")) return 500;
-    return r.include_workshop ? 2500 : 2000;
+    // 1. Bulk Lead Coordinator pays the 20-student package fee
+    if (r.registration_code?.includes("LEAD")) return 20000;
+
+    // 2. Individual bulk students registered under the package have ₹0 individual fee
+    if (r.category?.toLowerCase().includes("bulk")) return 0;
+
+    const catLower = (r.category || "").toLowerCase();
+    const desigLower = (r.designation || "").toLowerCase();
+    const qualLower = (r.qualification || "").toLowerCase();
+    const isStudent =
+      desigLower.includes("student") ||
+      desigLower.includes("intern") ||
+      catLower.includes("student") ||
+      qualLower.includes("student");
+
+    // 3. Standalone Workshop Only (without conference)
+    const isWorkshopOnly =
+      catLower === "workshop" ||
+      (catLower.includes("workshop") && !catLower.includes("conference") && !r.include_workshop);
+
+    if (isWorkshopOnly) {
+      return 500;
+    }
+
+    // 4. Conference with Workshop
+    const hasWorkshop = r.include_workshop || catLower.includes("workshop");
+    if (hasWorkshop) {
+      return isStudent ? 1500 : 2500;
+    }
+
+    // 5. Conference Only
+    return isStudent ? 1000 : 2000;
   };
 
   // Compute stats metrics
@@ -303,36 +330,36 @@ export default function AriseAdminPage() {
 
     const revenue = registrations
       .filter((r) => r.is_verified)
-      .reduce((sum, r) => {
-        let ticketPrice = 0;
-        const isStudent = (r.designation && r.designation.toLowerCase().includes("student")) || r.category.toLowerCase().includes("student");
-        if (r.registration_code?.includes("LEAD")) {
-          ticketPrice = 20000;
-        } else if (r.category.toLowerCase().includes("bulk")) {
-          ticketPrice = 0; // Covered by the Lead Coordinator package
-        } else if (isStudent) {
-          ticketPrice = r.include_workshop ? 1500 : 1000;
-        } else if (r.category.toLowerCase().includes("workshop")) {
-          ticketPrice = 500;
-        } else {
-          // Professional
-          ticketPrice = r.include_workshop ? 2500 : 2000;
-        }
-        return sum + ticketPrice;
-      }, 0);
+      .reduce((sum, r) => sum + calculateFee(r), 0);
 
     // Workshop seats
-    const workshopCount = registrations.filter((r) => r.include_workshop || (r.category && r.category.toLowerCase().includes("workshop"))).length;
+    const workshopCount = registrations.filter(
+      (r) => r.include_workshop || (r.category && r.category.toLowerCase().includes("workshop"))
+    ).length;
 
     // Catering counts
-    const vegCount = registrations.filter((r) => (r.food_preference || "").toLowerCase().includes("veg") && !(r.food_preference || "").toLowerCase().includes("non")).length;
-    const nonVegCount = registrations.filter((r) => (r.food_preference || "").toLowerCase().includes("non")).length;
+    const nonVegCount = registrations.filter(
+      (r) => (r.food_preference || "").toLowerCase().includes("non")
+    ).length;
+    const vegCount = registrations.filter(
+      (r) => !(r.food_preference || "").toLowerCase().includes("non")
+    ).length;
 
     // IAP credit counts
     const iapCount = registrations.filter((r) => r.iap_credit_points).length;
 
     // Designation counts
-    const studentCount = registrations.filter((r) => (r.designation && r.designation.toLowerCase().includes("student")) || r.category.toLowerCase().includes("student")).length;
+    const studentCount = registrations.filter((r) => {
+      const catLower = (r.category || "").toLowerCase();
+      const desigLower = (r.designation || "").toLowerCase();
+      const qualLower = (r.qualification || "").toLowerCase();
+      return (
+        desigLower.includes("student") ||
+        desigLower.includes("intern") ||
+        catLower.includes("student") ||
+        qualLower.includes("student")
+      );
+    }).length;
     const profCount = total - studentCount;
 
     // Source Attribution breakdown
@@ -587,6 +614,7 @@ export default function AriseAdminPage() {
       "Department",
       "City",
       "Designation",
+      "Fee (INR)",
       "Source Channel",
       "Food Preference",
       "IAP Points",
@@ -608,6 +636,7 @@ export default function AriseAdminPage() {
       `"${(r.department || "").replace(/"/g, '""')}"`,
       `"${(r.city || "").replace(/"/g, '""')}"`,
       `"${(r.designation || "").replace(/"/g, '""')}"`,
+      calculateFee(r),
       `"${normalizeSource(r.source)}"`,
       r.food_preference || "Vegetarian",
       r.iap_credit_points ? "Yes" : "No",
@@ -1295,6 +1324,20 @@ export default function AriseAdminPage() {
 
                               {/* Payment & Date */}
                               <td className="p-4">
+                                <div className="flex items-center gap-1.5 mb-1">
+                                  <span className="font-bold text-[#004B57] text-xs font-mono">
+                                    ₹{calculateFee(r).toLocaleString("en-IN")}
+                                  </span>
+                                  {r.is_verified ? (
+                                    <span className="text-[9px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-250 px-1.5 py-0.5 rounded-full">
+                                      PAID
+                                    </span>
+                                  ) : (
+                                    <span className="text-[9px] font-bold text-amber-700 bg-amber-50 border border-amber-250 px-1.5 py-0.5 rounded-full">
+                                      PENDING
+                                    </span>
+                                  )}
+                                </div>
                                 <span className="font-mono text-slate-800 bg-slate-100 border border-slate-200 rounded px-2 py-0.5 text-[11px] tracking-wide inline-block select-all">
                                   {r.transaction_id}
                                 </span>
