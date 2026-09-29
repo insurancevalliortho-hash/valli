@@ -10,61 +10,88 @@ export function normalizeSource(rawSource?: string | null): string {
 
   const lower = clean.toLowerCase();
 
-  // Direct / Unspecified
+  // 1. Direct / Google / Razorpay / Online Gateway / Organic as unified Direct
   if (
     lower === "direct" ||
     lower === "none" ||
     lower === "organic" ||
     lower === "other" ||
-    lower === "online gateway" ||
-    lower === "razorpay online gateway" ||
-    lower === "unknown"
+    lower === "unknown" ||
+    lower === "google" ||
+    lower === "gads" ||
+    lower === "google-ads" ||
+    lower === "google_ads" ||
+    lower.includes("google") ||
+    lower.includes("razorpay") ||
+    lower.includes("gateway")
   ) {
     return "Direct";
   }
 
-  // QR Code campaigns
-  if (lower === "qr" || lower === "qrcode" || lower === "qr-code" || lower === "qr_code") {
+  // 2. Meta & Instagram combined as Meta
+  if (
+    lower === "meta" ||
+    lower === "facebook" ||
+    lower === "fb" ||
+    lower === "instagram" ||
+    lower === "insta" ||
+    lower === "ig" ||
+    lower.includes("meta") ||
+    lower.includes("facebook") ||
+    lower.includes("instagram") ||
+    lower.includes("fb.me")
+  ) {
+    return "Meta";
+  }
+
+  // 3. QR Campaigns
+  if (
+    lower === "qr" ||
+    lower === "qrcode" ||
+    lower === "qr-code" ||
+    lower === "qr_code" ||
+    lower.startsWith("qr")
+  ) {
     return "QR";
   }
 
-  // Meta / Facebook / Instagram
-  if (lower === "meta" || lower === "facebook" || lower === "fb" || lower === "meta-ads" || lower === "meta_ads") {
-    return "Meta";
-  }
-  if (lower === "instagram" || lower === "ig") {
-    return "Instagram";
-  }
-
-  // WhatsApp
-  if (lower === "whatsapp" || lower === "wa") {
+  // 4. WhatsApp
+  if (lower === "whatsapp" || lower === "wa" || lower.includes("whatsapp") || lower.includes("wa.me")) {
     return "WhatsApp";
   }
 
-  // Google
-  if (lower === "google" || lower === "gads" || lower === "google-ads") {
-    return "Google";
-  }
-
-  // LinkedIn
-  if (lower === "linkedin") {
+  // 5. LinkedIn
+  if (lower === "linkedin" || lower === "li" || lower.includes("linkedin")) {
     return "LinkedIn";
   }
 
-  // YouTube
-  if (lower === "youtube" || lower === "yt") {
+  // 6. YouTube
+  if (lower === "youtube" || lower === "yt" || lower.includes("youtube") || lower.includes("youtu.be")) {
     return "YouTube";
   }
 
-  // Common print & offline marketing
+  // 7. Twitter / X
+  if (lower === "twitter" || lower === "x" || lower === "t.co" || lower.includes("twitter")) {
+    return "Twitter";
+  }
+
+  // 8. Offline & Print Media common factors (Posters, Brochures, Banners, Standees, Pamphlets, Flyers)
   if (
     lower === "poster" ||
     lower === "brochure" ||
     lower === "banner" ||
     lower === "standee" ||
-    lower === "pamphlet"
+    lower === "pamphlet" ||
+    lower === "flyer" ||
+    lower === "print" ||
+    lower === "offline" ||
+    lower.includes("poster") ||
+    lower.includes("brochure") ||
+    lower.includes("banner") ||
+    lower.includes("standee") ||
+    lower.includes("pamphlet")
   ) {
-    return clean.charAt(0).toUpperCase() + clean.slice(1).toLowerCase();
+    return "Print / Offline";
   }
 
   // Clean custom campaign tags (e.g., "kiot_college" -> "Kiot College")
@@ -109,10 +136,22 @@ export function detectSourceFromReferrer(): string | null {
     return null;
   }
 
-  if (ref.includes("instagram.com")) return "Instagram";
-  if (ref.includes("facebook.com") || ref.includes("fb.me") || ref.includes("meta.com")) return "Meta";
+  if (
+    ref.includes("instagram.com") ||
+    ref.includes("facebook.com") ||
+    ref.includes("fb.me") ||
+    ref.includes("meta.com")
+  ) {
+    return "Meta";
+  }
+  if (
+    ref.includes("google.com") ||
+    ref.includes("google.") ||
+    ref.includes("razorpay.com")
+  ) {
+    return "Direct";
+  }
   if (ref.includes("whatsapp.com") || ref.includes("wa.me")) return "WhatsApp";
-  if (ref.includes("google.com") || ref.includes("google.")) return "Google";
   if (ref.includes("youtube.com") || ref.includes("youtu.be")) return "YouTube";
   if (ref.includes("linkedin.com")) return "LinkedIn";
   if (ref.includes("t.co") || ref.includes("twitter.com") || ref.includes("x.com")) return "Twitter";
@@ -222,40 +261,12 @@ export function getSourceBadgeStyle(source: string): {
 } {
   const norm = normalizeSource(source);
   switch (norm) {
-    case "QR":
-      return {
-        bg: "bg-purple-50",
-        text: "text-purple-700",
-        border: "border-purple-200",
-        dot: "bg-purple-500",
-      };
     case "Meta":
       return {
         bg: "bg-blue-50",
         text: "text-blue-700",
         border: "border-blue-200",
         dot: "bg-blue-500",
-      };
-    case "Instagram":
-      return {
-        bg: "bg-pink-50",
-        text: "text-pink-700",
-        border: "border-pink-200",
-        dot: "bg-pink-500",
-      };
-    case "WhatsApp":
-      return {
-        bg: "bg-emerald-50",
-        text: "text-emerald-700",
-        border: "border-emerald-200",
-        dot: "bg-emerald-500",
-      };
-    case "Google":
-      return {
-        bg: "bg-rose-50",
-        text: "text-rose-700",
-        border: "border-rose-200",
-        dot: "bg-rose-500",
       };
     case "Direct":
       return {
@@ -264,12 +275,55 @@ export function getSourceBadgeStyle(source: string): {
         border: "border-slate-200",
         dot: "bg-slate-400",
       };
-    default:
+    case "QR":
+      return {
+        bg: "bg-purple-50",
+        text: "text-purple-700",
+        border: "border-purple-200",
+        dot: "bg-purple-500",
+      };
+    case "WhatsApp":
+      return {
+        bg: "bg-emerald-50",
+        text: "text-emerald-700",
+        border: "border-emerald-200",
+        dot: "bg-emerald-500",
+      };
+    case "Print / Offline":
+    case "Print":
       return {
         bg: "bg-amber-50",
         text: "text-amber-700",
         border: "border-amber-200",
         dot: "bg-amber-500",
+      };
+    case "YouTube":
+      return {
+        bg: "bg-red-50",
+        text: "text-red-700",
+        border: "border-red-200",
+        dot: "bg-red-500",
+      };
+    case "LinkedIn":
+      return {
+        bg: "bg-sky-50",
+        text: "text-sky-700",
+        border: "border-sky-200",
+        dot: "bg-sky-500",
+      };
+    case "Twitter":
+      return {
+        bg: "bg-cyan-50",
+        text: "text-cyan-700",
+        border: "border-cyan-200",
+        dot: "bg-cyan-500",
+      };
+    default:
+      return {
+        bg: "bg-teal-50",
+        text: "text-teal-700",
+        border: "border-teal-200",
+        dot: "bg-teal-500",
       };
   }
 }

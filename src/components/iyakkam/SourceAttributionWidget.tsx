@@ -53,9 +53,8 @@ export default function SourceAttributionWidget({
 
   // Quick preset suggestions
   const presets = [
+    { label: "Meta Ads (FB/IG)", tag: "meta" },
     { label: "QR Code", tag: "qr" },
-    { label: "Meta Ads", tag: "meta" },
-    { label: "Instagram", tag: "instagram" },
     { label: "WhatsApp", tag: "whatsapp" },
     { label: "College Poster", tag: "poster" },
     { label: "Brochure", tag: "brochure" },
@@ -86,7 +85,7 @@ export default function SourceAttributionWidget({
     if (s.includes("qr")) return <QrCode size={16} className="text-purple-600" />;
     if (s.includes("meta") || s.includes("face") || s.includes("insta")) return <Share2 size={16} className="text-blue-600" />;
     if (s.includes("whats")) return <MessageSquare size={16} className="text-emerald-600" />;
-    if (s.includes("direct")) return <Globe size={16} className="text-slate-500" />;
+    if (s.includes("direct") || s.includes("google") || s.includes("razor")) return <Globe size={16} className="text-slate-500" />;
     return <Tag size={16} className="text-amber-600" />;
   };
 
