@@ -95,8 +95,7 @@ export async function POST(request: Request) {
 
     // Dispatch confirmation email to runner
     try {
-      const { sendActiveSalemRegistrationEmail } = await import("../../../../lib/email");
-      await sendActiveSalemRegistrationEmail({
+      const emailRes = await sendActiveSalemRegistrationEmail({
         registrationCode: confirmedCode,
         fullName,
         emailId,
@@ -109,6 +108,9 @@ export async function POST(request: Request) {
         city,
         transactionId,
       });
+      if (emailRes && !emailRes.success) {
+        console.error("Warning: Active Salem confirmation email failed:", emailRes.error);
+      }
     } catch (emailErr) {
       console.error("API error in dispatching Active Salem confirmation email:", emailErr);
     }
@@ -124,10 +126,28 @@ export async function POST(request: Request) {
         try {
           const pool = getPgPool();
           const existing = await pool.query(
-            "SELECT registration_code FROM active_salem_registrations WHERE transaction_id = $1 LIMIT 1;",
+            "SELECT * FROM active_salem_registrations WHERE transaction_id = $1 LIMIT 1;",
             [body.transactionId]
           );
           if (existing.rows.length > 0) {
+            const reg = existing.rows[0];
+            try {
+              await sendActiveSalemRegistrationEmail({
+                registrationCode: reg.registration_code,
+                fullName: reg.full_name || body.fullName,
+                emailId: reg.email_id || body.emailId,
+                mobileNumber: reg.mobile_number || body.mobileNumber,
+                category: reg.category || body.category,
+                tshirtSize: reg.tshirt_size || body.tshirtSize,
+                gender: reg.gender || body.gender,
+                age: Number(reg.age) || Number(body.age),
+                emergencyContact: reg.emergency_contact || body.emergencyContact,
+                city: reg.city || body.city,
+                transactionId: body.transactionId,
+              });
+            } catch (mailErr) {
+              console.error("Error in fallback Active Salem email dispatch:", mailErr);
+            }
             return NextResponse.json({ success: true, registrationCode: existing.rows[0].registration_code });
           }
         } catch (_) { }

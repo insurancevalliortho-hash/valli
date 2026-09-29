@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import crypto from "crypto";
 import { getPgPool } from "@/lib/db";
 import { normalizeSource } from "@/lib/attribution";
+import { sendActiveSalemRegistrationEmail, sendAriseRegistrationEmail } from "@/lib/email";
 
 // Production Webhook Secret from environment
 const WEBHOOK_SECRET = (
@@ -167,7 +168,6 @@ export async function POST(request: Request) {
 
               // Dispatch email confirmation
               try {
-                const { sendActiveSalemRegistrationEmail } = await import("../../../../lib/email");
                 await sendActiveSalemRegistrationEmail({
                   registrationCode: runnerCode,
                   fullName: runnerName,
@@ -275,7 +275,6 @@ export async function POST(request: Request) {
 
               // Dispatch email confirmation
               try {
-                const { sendAriseRegistrationEmail } = await import("../../../../lib/email");
                 await sendAriseRegistrationEmail({
                   registrationCode: delegateCode,
                   fullName: delegateName,

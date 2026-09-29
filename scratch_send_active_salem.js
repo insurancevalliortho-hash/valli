@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
   secure: false,
   auth: {
     user: 'vallisshospital@gmail.com',
-    pass: 'veqz egqp lmgr akyw',
+    pass: 'uvohfmuoaycszims',
   },
 });
 

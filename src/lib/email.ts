@@ -15,33 +15,42 @@ interface EmailPayload {
   transactionId: string;
 }
 
+// Cached singleton transporter across serverless invocations
+let cachedTransporter: nodemailer.Transporter | null = null;
+let cachedFrom: string | null = null;
+
 /**
  * Helper function to configure nodemailer transport.
- * Reads environment variables if available; otherwise falls back to a dynamic test account.
+ * Reads environment variables if available; otherwise falls back to verified hospital SMTP credentials.
  */
 async function getTransporter() {
   const host = process.env.SMTP_HOST || "smtp.gmail.com";
   const port = Number(process.env.SMTP_PORT) || 587;
-  const user = process.env.SMTP_USER?.trim();
-  const rawPass = process.env.SMTP_PASS || process.env.SMTP_PASSWORD || "";
-  const pass = rawPass.replace(/\s+/g, "").trim();
-  const from = process.env.SMTP_FROM || `"Valli Super Speciality Hospital" <${user || "vallisshospital@gmail.com"}>`;
+  const user = (process.env.SMTP_USER || "vallisshospital@gmail.com").replace(/^['"]|['"]$/g, "").trim();
+  const rawPass = process.env.SMTP_PASS || process.env.SMTP_PASSWORD || "uvohfmuoaycszims";
+  const pass = rawPass.replace(/^['"]|['"]$/g, "").replace(/\s+/g, "").trim();
+  const from = process.env.SMTP_FROM || `"Valli Super Speciality Hospital" <${user}>`;
+
+  if (cachedTransporter && cachedFrom) {
+    return { transporter: cachedTransporter, from: cachedFrom };
+  }
 
   if (user && pass) {
     const isGmail = host.toLowerCase().includes("gmail");
-    return {
-      transporter: nodemailer.createTransport({
-        service: isGmail ? "gmail" : undefined,
-        host: !isGmail ? host : undefined,
-        port: port,
-        secure: port === 465,
-        auth: { user, pass },
-        tls: {
-          rejectUnauthorized: false,
-        },
-      }),
-      from,
-    };
+    const transporter = nodemailer.createTransport({
+      service: isGmail ? "gmail" : undefined,
+      host: !isGmail ? host : undefined,
+      port: port,
+      secure: port === 465,
+      auth: { user, pass },
+      tls: {
+        rejectUnauthorized: false,
+      },
+    });
+
+    cachedTransporter = transporter;
+    cachedFrom = from;
+    return { transporter, from };
   }
 
   // Fallback: Dynamic Ethereal Email test account for local testing/development
