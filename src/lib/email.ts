@@ -597,7 +597,7 @@ export async function sendAriseRegistrationEmail(data: AriseEmailPayload) {
     ) {
       amountPaid = 500;
     } else if (data.includeWorkshop || catLower.includes("workshop")) {
-      amountPaid = isStudent ? 1500 : 2500;
+      amountPaid = isStudent ? 2000 : 3000;
     } else {
       amountPaid = isStudent ? 1000 : 2000;
     }
