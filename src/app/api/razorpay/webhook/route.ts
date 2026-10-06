@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import crypto from "crypto";
 import { getPgPool } from "@/lib/db";
+import { normalizeSource } from "@/lib/attribution";
+import { sendActiveSalemRegistrationEmail, sendAriseRegistrationEmail } from "@/lib/email";
 
 // Production Webhook Secret from environment
 const WEBHOOK_SECRET = (
@@ -129,7 +131,7 @@ export async function POST(request: Request) {
               const runnerAge = Number(notes.age) || 25;
               const runnerEmergency = notes.emergencyContact || notes.emergency_contact || "N/A";
               const runnerCity = notes.city || "Salem";
-              const runnerSource = notes.source || "Razorpay Online Gateway";
+              const runnerSource = normalizeSource(notes.source || "Direct");
 
               let runnerCode = registrationCode;
               if (!runnerCode || !runnerCode.startsWith("SALEM26-")) {
@@ -166,7 +168,6 @@ export async function POST(request: Request) {
 
               // Dispatch email confirmation
               try {
-                const { sendActiveSalemRegistrationEmail } = await import("../../../../lib/email");
                 await sendActiveSalemRegistrationEmail({
                   registrationCode: runnerCode,
                   fullName: runnerName,
@@ -221,7 +222,7 @@ export async function POST(request: Request) {
               const delegateInstitution = notes.institution || "Healthcare Institution";
               const delegateDepartment = notes.department || "";
               const delegateCity = notes.city || "Salem";
-              const delegateSource = notes.source || "Razorpay Online Gateway";
+              const delegateSource = normalizeSource(notes.source || "Direct");
               const delegateDesignation = notes.designation || "Delegate";
               const delegateQualification = notes.qualification || "Physiotherapist / Medical Professional";
               const delegateBonafide = notes.bonafideCertificate || null;
@@ -274,7 +275,6 @@ export async function POST(request: Request) {
 
               // Dispatch email confirmation
               try {
-                const { sendAriseRegistrationEmail } = await import("../../../../lib/email");
                 await sendAriseRegistrationEmail({
                   registrationCode: delegateCode,
                   fullName: delegateName,

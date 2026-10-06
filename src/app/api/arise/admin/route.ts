@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getPgPool } from "../../../../lib/db";
+import { sendAriseRegistrationEmail } from "@/lib/email";
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "ValliAdmin2026!";
 
@@ -112,7 +113,6 @@ export async function PUT(request: Request) {
       );
     }
 
-    const { sendAriseRegistrationEmail } = await import("../../../../lib/email");
     const pool = getPgPool();
 
     if (id) {

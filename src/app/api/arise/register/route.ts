@@ -108,7 +108,7 @@ export async function POST(request: Request) {
 
     // Dispatch confirmation email
     try {
-      await sendAriseRegistrationEmail({
+      const emailResult = await sendAriseRegistrationEmail({
         registrationCode: confirmedCode,
         fullName,
         emailId,
@@ -126,6 +126,9 @@ export async function POST(request: Request) {
         iapMembershipNumber,
         bonafideCertificate
       });
+      if (emailResult && !emailResult.success) {
+        console.error("Warning: ARISE confirmation email failed:", emailResult.error);
+      }
     } catch (emailErr) {
       console.error("API error in dispatching ARISE registration email:", emailErr);
     }
@@ -142,10 +145,33 @@ export async function POST(request: Request) {
         try {
           const pool = getPgPool();
           const existing = await pool.query(
-            "SELECT registration_code FROM arise_registrations WHERE transaction_id = $1 LIMIT 1;",
+            "SELECT * FROM arise_registrations WHERE transaction_id = $1 LIMIT 1;",
             [body.transactionId]
           );
           if (existing.rows.length > 0) {
+            const reg = existing.rows[0];
+            try {
+              await sendAriseRegistrationEmail({
+                registrationCode: reg.registration_code,
+                fullName: reg.full_name || body.fullName,
+                emailId: reg.email_id || body.emailId,
+                mobileNumber: reg.mobile_number || body.mobileNumber,
+                category: reg.category || body.category,
+                includeWorkshop: reg.include_workshop ?? !!body.includeWorkshop,
+                institution: reg.institution || body.institution,
+                department: reg.department || body.department || "",
+                city: reg.city || body.city || "",
+                transactionId: body.transactionId,
+                designation: reg.designation || body.designation,
+                qualification: reg.qualification || body.qualification,
+                foodPreference: reg.food_preference || body.foodPreference,
+                iapCreditPoints: reg.iap_credit_points ?? !!body.iapCreditPoints,
+                iapMembershipNumber: reg.iap_membership_number || body.iapMembershipNumber,
+                bonafideCertificate: reg.bonafide_certificate || body.bonafideCertificate
+              });
+            } catch (mailErr) {
+              console.error("Error in fallback ARISE email dispatch:", mailErr);
+            }
             return NextResponse.json({ success: true, registrationCode: existing.rows[0].registration_code });
           }
         } catch (_) {}
