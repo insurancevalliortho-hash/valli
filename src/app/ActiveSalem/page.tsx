@@ -194,7 +194,7 @@ function HeroSection({ regHref = "/ActiveSalem/Registration" }: { regHref?: stri
                 >
                   <div className="flex items-center justify-between mb-1">
                     <span className="text-[10px] font-mono font-bold text-amber-600 uppercase">5 KMS</span>
-                    <span className="text-[9px] font-mono font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">TIMED</span>
+
                   </div>
                   <span className="font-display text-xl sm:text-2xl font-black text-slate-900">Rs.249</span>
                   <span className="text-[10px] text-slate-400 block mt-1">Official Tee + Finisher Medal</span>
@@ -207,7 +207,6 @@ function HeroSection({ regHref = "/ActiveSalem/Registration" }: { regHref?: stri
                 >
                   <div className="flex items-center justify-between mb-1">
                     <span className="text-[10px] font-mono font-bold text-[#F26522] uppercase">10 KMS</span>
-                    <span className="text-[9px] font-mono font-bold text-[#F26522] bg-orange-100/60 px-2 py-0.5 rounded border border-orange-200">ELITE</span>
                   </div>
                   <span className="font-display text-xl sm:text-2xl font-black text-[#F26522]">₹299</span>
                   <span className="text-[10px] text-orange-950/60 block mt-1">₹5,000 Top Podium Cash Prize</span>
@@ -324,7 +323,7 @@ function CategoriesSection({ regHref = "/ActiveSalem/Registration" }: { regHref?
     {
       badge: "COMMUNITY RUN",
       badgeColor: "text-amber-700 bg-amber-50 border-amber-200",
-      statusLabel: "TIMED EVENT",
+      statusLabel: "EVENT",
       statusColor: "text-amber-700",
       distance: "5 KMS",
       desc: "Perfect for runners, fitness enthusiasts, families, and college students embarking on their running journey.",
@@ -664,8 +663,8 @@ function PrizesSection() {
                     viewport={{ once: true }}
                     transition={{ delay: ci * 0.1 + pi * 0.08, duration: 0.5, ease: easeSmooth }}
                     className={`rounded-2xl p-4 flex items-center justify-between shadow-sm ${prize.highlight
-                        ? "bg-gradient-to-r from-amber-50 to-white border border-amber-200"
-                        : "bg-white border border-slate-200"
+                      ? "bg-gradient-to-r from-amber-50 to-white border border-amber-200"
+                      : "bg-white border border-slate-200"
                       }`}
                   >
                     <div className="flex items-center gap-3">
