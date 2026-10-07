@@ -32,7 +32,6 @@ import {
   Send,
   Filter,
   GraduationCap,
-  Utensils,
   Share2
 } from "lucide-react";
 import Navbar from "../../../../components/Navbar";
@@ -834,25 +833,8 @@ export default function AriseAdminPage() {
                 ))}
               </div>
 
-              {/* Operational Breakdown Cards: Catering & Workshops & IAP */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-                {/* Catering Headcount */}
-                <div className="bg-white border border-slate-200 rounded-[1.75rem] p-5 shadow-sm flex items-center gap-4">
-                  <div className="w-12 h-12 bg-amber-50 text-amber-700 rounded-2xl flex items-center justify-center border border-amber-200 shrink-0">
-                    <Utensils size={22} />
-                  </div>
-                  <div>
-                    <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                      KIOT Catering Roster
-                    </span>
-                    <span className="font-display text-xl font-black text-slate-800 block mt-0.5">
-                      {stats.vegCount} Veg • {stats.nonVegCount} Non-Veg
-                    </span>
-                    <span className="text-[10px] text-slate-500 font-medium">
-                      Exact dining hall lunch counts
-                    </span>
-                  </div>
-                </div>
+              {/* Operational Breakdown Cards: Workshops & IAP */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
 
                 {/* Workshop Seats */}
                 <div className="bg-white border border-slate-200 rounded-[1.75rem] p-5 shadow-sm flex items-center gap-4">
