@@ -314,7 +314,7 @@ export default function AriseAdminPage() {
     // 4. Conference with Workshop
     const hasWorkshop = r.include_workshop || catLower.includes("workshop");
     if (hasWorkshop) {
-      return isStudent ? 2000 : 3000;
+      return isStudent ? 1500 : 3000;
     }
 
     // 5. Conference Only
