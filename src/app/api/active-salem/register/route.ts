@@ -3,6 +3,9 @@ import { saveActiveSalemRegistration, getPgPool } from "../../../../lib/db";
 import { sendActiveSalemRegistrationEmail } from "../../../../lib/email";
 import { normalizeSource } from "../../../../lib/attribution";
 
+const LIMIT_5KM = 650;
+const LIMIT_10KM = 450;
+
 export async function GET() {
   try {
     const pool = getPgPool();
@@ -11,9 +14,47 @@ export async function GET() {
     );
     const nextId = res.rows[0]?.next_id || 1;
     const orderedCode = `SALEM26-${String(nextId).padStart(4, "0")}`;
-    return NextResponse.json({ success: true, nextRegistrationCode: orderedCode, nextId });
+
+    const countRes = await pool.query(
+      `SELECT 
+         COUNT(*) FILTER (WHERE UPPER(TRIM(category)) = '5KM') AS count_5k,
+         COUNT(*) FILTER (WHERE UPPER(TRIM(category)) = '10KM') AS count_10k
+       FROM active_salem_registrations`
+    );
+    const count5k = parseInt(countRes.rows[0]?.count_5k || "0", 10);
+    const count10k = parseInt(countRes.rows[0]?.count_10k || "0", 10);
+
+    const isClosed5k = count5k >= LIMIT_5KM;
+    const isClosed10k = count10k >= LIMIT_10KM;
+
+    return NextResponse.json({
+      success: true,
+      nextRegistrationCode: orderedCode,
+      nextId,
+      counts: {
+        "5KM": count5k,
+        "10KM": count10k,
+      },
+      limits: {
+        "5KM": LIMIT_5KM,
+        "10KM": LIMIT_10KM,
+      },
+      isClosed: {
+        "5KM": isClosed5k,
+        "10KM": isClosed10k,
+      },
+      isFullyClosed: isClosed5k && isClosed10k,
+    });
   } catch (err: any) {
-    return NextResponse.json({ success: true, nextRegistrationCode: "SALEM26-0001", nextId: 1 });
+    return NextResponse.json({
+      success: true,
+      nextRegistrationCode: "SALEM26-0001",
+      nextId: 1,
+      counts: { "5KM": 0, "10KM": 0 },
+      limits: { "5KM": LIMIT_5KM, "10KM": LIMIT_10KM },
+      isClosed: { "5KM": false, "10KM": false },
+      isFullyClosed: false,
+    });
   }
 }
 
@@ -55,6 +96,35 @@ export async function POST(request: Request) {
         { success: false, error: "Missing required runner fields" },
         { status: 400 }
       );
+    }
+
+    // Server-side check for category limits (5KM: 650, 10KM: 450)
+    try {
+      const pool = getPgPool();
+      const countRes = await pool.query(
+        `SELECT 
+           COUNT(*) FILTER (WHERE UPPER(TRIM(category)) = '5KM') AS count_5k,
+           COUNT(*) FILTER (WHERE UPPER(TRIM(category)) = '10KM') AS count_10k
+         FROM active_salem_registrations`
+      );
+      const count5k = parseInt(countRes.rows[0]?.count_5k || "0", 10);
+      const count10k = parseInt(countRes.rows[0]?.count_10k || "0", 10);
+
+      const normCat = String(category).toUpperCase().trim();
+      if (normCat === "5KM" && count5k >= LIMIT_5KM) {
+        return NextResponse.json(
+          { success: false, error: "Registration Closed for 5KM category (Limit of 650 runners reached)" },
+          { status: 400 }
+        );
+      }
+      if (normCat === "10KM" && count10k >= LIMIT_10KM) {
+        return NextResponse.json(
+          { success: false, error: "Registration Closed for 10KM category (Limit of 450 runners reached)" },
+          { status: 400 }
+        );
+      }
+    } catch (countErr) {
+      console.error("Error verifying category limit:", countErr);
     }
 
     // Assign sequential ordered registration code
@@ -171,3 +241,4 @@ export async function POST(request: Request) {
     );
   }
 }
+

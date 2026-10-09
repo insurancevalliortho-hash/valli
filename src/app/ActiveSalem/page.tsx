@@ -299,7 +299,23 @@ function HeroSection({ regHref = "/ActiveSalem/Registration" }: { regHref?: stri
 }
 
 // ─── Categories Section ────────────────────────────────────────────────────────
+// ─── Categories Section ────────────────────────────────────────────────────────
 function CategoriesSection({ regHref = "/ActiveSalem/Registration" }: { regHref?: string }) {
+  const [isClosed5k, setIsClosed5k] = useState(false);
+  const [isClosed10k, setIsClosed10k] = useState(false);
+
+  useEffect(() => {
+    fetch("/api/active-salem/register")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.isClosed) {
+          setIsClosed5k(Boolean(data.isClosed["5KM"]));
+          setIsClosed10k(Boolean(data.isClosed["10KM"]));
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   const categories = [
     {
       badge: "HONORARY WALKATHON",
@@ -319,44 +335,47 @@ function CategoriesSection({ regHref = "/ActiveSalem/Registration" }: { regHref?
       feeColor: "text-[#00A896]",
       cta: null,
       ctaNote: "Direct / On-Spot Entry",
+      isClosed: false,
     },
     {
       badge: "COMMUNITY RUN",
-      badgeColor: "text-amber-700 bg-amber-50 border-amber-200",
-      statusLabel: "EVENT",
-      statusColor: "text-amber-700",
+      badgeColor: isClosed5k ? "text-rose-700 bg-rose-50 border-rose-200" : "text-amber-700 bg-amber-50 border-amber-200",
+      statusLabel: isClosed5k ? "REGISTRATION CLOSED" : "EVENT",
+      statusColor: isClosed5k ? "text-rose-700 bg-rose-100 border border-rose-200" : "text-amber-700",
       distance: "5 KMS",
       desc: "Perfect for runners, fitness enthusiasts, families, and college students embarking on their running journey.",
       accentColor: "text-amber-600",
-      borderHover: "hover:border-amber-400/50",
+      borderHover: isClosed5k ? "hover:border-rose-300" : "hover:border-amber-400/50",
       features: [
         { icon: <CheckCircle2 size={14} className="text-amber-600" />, label: "Official Valli Running Tee" },
         { icon: <CheckCircle2 size={14} className="text-amber-600" />, label: "Finisher Medal & Verified Certificate" },
         { icon: <CheckCircle2 size={14} className="text-amber-600" />, label: "1st Prize ₹2,000 • Top 3 Cash Awards" },
       ],
-      fee: "₹249",
-      feeColor: "text-slate-900",
-      cta: regHref,
-      ctaNote: null,
+      fee: isClosed5k ? "CLOSED" : "₹249",
+      feeColor: isClosed5k ? "text-rose-600 font-bold text-lg" : "text-slate-900",
+      cta: isClosed5k ? null : regHref,
+      ctaNote: isClosed5k ? "Registration Closed" : null,
+      isClosed: isClosed5k,
     },
     {
       badge: "ELITE CHALLENGE",
-      badgeColor: "text-[#F26522] bg-orange-100/70 border-orange-200",
-      statusLabel: "PODIUM CASH",
-      statusColor: "text-[#F26522] bg-orange-100/50",
+      badgeColor: isClosed10k ? "text-rose-700 bg-rose-50 border-rose-200" : "text-[#F26522] bg-orange-100/70 border-orange-200",
+      statusLabel: isClosed10k ? "REGISTRATION CLOSED" : "PODIUM CASH",
+      statusColor: isClosed10k ? "text-rose-700 bg-rose-100 border border-rose-200" : "text-[#F26522] bg-orange-100/50",
       distance: "10 KMS",
       desc: "The premier distance across Salem's central avenues. Compete against top athletes for grand cash prizes.",
       accentColor: "text-[#F26522]",
-      borderHover: "hover:border-[#F26522]",
+      borderHover: isClosed10k ? "hover:border-rose-300" : "hover:border-[#F26522]",
       features: [
         { icon: <CheckCircle2 size={14} className="text-[#F26522]" />, label: "1st Prize ₹5,000 • Top 3 Cash Awards" },
         { icon: <CheckCircle2 size={14} className="text-[#F26522]" />, label: "Official Tee, Bib Tag & Custom Medal" },
         { icon: <CheckCircle2 size={14} className="text-[#F26522]" />, label: "Hydration & Electrolyte Stations" },
       ],
-      fee: "₹299",
-      feeColor: "text-[#F26522]",
-      cta: regHref,
-      ctaNote: null,
+      fee: isClosed10k ? "CLOSED" : "₹299",
+      feeColor: isClosed10k ? "text-rose-600 font-bold text-lg" : "text-[#F26522]",
+      cta: isClosed10k ? null : regHref,
+      ctaNote: isClosed10k ? "Registration Closed" : null,
+      isClosed: isClosed10k,
     },
   ];
 
@@ -423,6 +442,13 @@ function CategoriesSection({ regHref = "/ActiveSalem/Registration" }: { regHref?
                     >
                       Register Online
                     </Link>
+                  ) : cat.isClosed ? (
+                    <div>
+                      <span className="inline-block px-3.5 py-2 bg-rose-50 border border-rose-200 text-rose-700 rounded-xl text-xs font-bold uppercase tracking-wider shadow-sm font-bold">
+                        {cat.ctaNote}
+                      </span>
+                      <span className="text-[9px] text-slate-400 block mt-1">Limit Reached</span>
+                    </div>
                   ) : (
                     <div>
                       <span className="inline-block px-3.5 py-2 bg-teal-50 border border-teal-200 text-[#00A896] rounded-xl text-xs font-bold uppercase tracking-wider shadow-sm">
