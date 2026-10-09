@@ -17,7 +17,8 @@ import {
   Phone,
   Calendar,
   MapPin,
-  Sparkles
+  Sparkles,
+  Lock
 } from "lucide-react";
 import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
@@ -48,6 +49,12 @@ export default function ActiveSalemRegistrationPage() {
   const [transactionId, setTransactionId] = useState("");
   const [source, setSource] = useState("Direct");
 
+  // Category Limit / Capacity States
+  const [isClosed5k, setIsClosed5k] = useState(false);
+  const [isClosed10k, setIsClosed10k] = useState(false);
+  const [count5k, setCount5k] = useState(0);
+  const [count10k, setCount10k] = useState(0);
+
   // Status States
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -59,12 +66,25 @@ export default function ActiveSalemRegistrationPage() {
     const detectedSource = resolveClientSource("active_salem_source");
     setSource(detectedSource);
 
-    // Fetch next sequential registration code (ordered, non-random)
+    // Fetch next sequential registration code & category limit statuses
     fetch("/api/active-salem/register")
       .then((res) => res.json())
       .then((data) => {
         if (data?.nextRegistrationCode) {
           setRegCode(data.nextRegistrationCode);
+        }
+        if (data?.isClosed) {
+          const c5 = Boolean(data.isClosed["5KM"]);
+          const c10 = Boolean(data.isClosed["10KM"]);
+          setIsClosed5k(c5);
+          setIsClosed10k(c10);
+          if (c5 && !c10) {
+            setCategory("10KM");
+          }
+        }
+        if (data?.counts) {
+          setCount5k(data.counts["5KM"] || 0);
+          setCount10k(data.counts["10KM"] || 0);
         }
       })
       .catch(() => {
@@ -106,6 +126,11 @@ export default function ActiveSalemRegistrationPage() {
     const stepErrors: Record<string, string> = {};
 
     if (currentStep === 1) {
+      if (category === "5KM" && isClosed5k) {
+        stepErrors.category = "Registration Closed for 5KM category (Limit of 650 runners reached)";
+      } else if (category === "10KM" && isClosed10k) {
+        stepErrors.category = "Registration Closed for 10KM category (Limit of 450 runners reached)";
+      }
       if (!fullName.trim()) stepErrors.fullName = "Full name is required";
       if (!emailId.trim() || !/\S+@\S+\.\S+/.test(emailId)) {
         stepErrors.emailId = "A valid email address is required";
@@ -342,55 +367,107 @@ export default function ActiveSalemRegistrationPage() {
                           <Tag size={13} /> Select Marathon Distance *
                         </label>
 
+                        {isClosed5k && isClosed10k && (
+                          <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-900 space-y-1.5 shadow-sm">
+                            <div className="flex items-center gap-2 text-rose-800 font-extrabold text-xs sm:text-sm">
+                              <Lock size={16} className="text-rose-600 shrink-0" />
+                              <span>Registration Closed</span>
+                            </div>
+                            <p className="text-[11px] text-rose-700 leading-relaxed font-medium">
+                              We have reached our maximum participant limit (650 runners for 5KM & 450 runners for 10KM). Online registration for Active Salem 4.0 is now officially closed.
+                            </p>
+                          </div>
+                        )}
+
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           {/* 5KM */}
                           <motion.button
                             type="button"
-                            whileHover={{ y: -2 }}
-                            whileTap={{ scale: 0.99 }}
-                            onClick={() => setCategory("5KM")}
-                            className={`p-5 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between ${
-                              category === "5KM"
-                                ? "border-[#D97706] bg-amber-50/60 shadow-sm ring-2 ring-[#D97706]/20"
-                                : "border-slate-200 bg-white hover:border-slate-300"
+                            whileHover={isClosed5k ? {} : { y: -2 }}
+                            whileTap={isClosed5k ? {} : { scale: 0.99 }}
+                            onClick={() => {
+                              if (!isClosed5k) setCategory("5KM");
+                            }}
+                            disabled={isClosed5k}
+                            className={`p-5 rounded-2xl border text-left transition-all flex flex-col justify-between ${
+                              isClosed5k
+                                ? "border-slate-200 bg-slate-100/80 opacity-70 cursor-not-allowed"
+                                : category === "5KM"
+                                ? "border-[#D97706] bg-amber-50/60 shadow-sm ring-2 ring-[#D97706]/20 cursor-pointer"
+                                : "border-slate-200 bg-white hover:border-slate-300 cursor-pointer"
                             }`}
                           >
                             <div>
                               <div className="flex justify-between items-center mb-1.5">
                                 <span className="text-sm font-extrabold uppercase text-slate-900">5 KMS Run</span>
-                                <span className="text-[9px] font-mono font-bold text-[#D97706] bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200">TIMED</span>
+                                {isClosed5k ? (
+                                  <span className="text-[9px] font-mono font-bold text-rose-700 bg-rose-100 px-2.5 py-0.5 rounded-full border border-rose-300 flex items-center gap-1">
+                                    <Lock size={10} /> CLOSED
+                                  </span>
+                                ) : (
+                                  <span className="text-[9px] font-mono font-bold text-[#D97706] bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200">TIMED</span>
+                                )}
                               </div>
                               <span className="text-xs text-slate-500 block leading-relaxed">
                                 Fitness & Community Run • Official Tee, Medal & Certificate Included
                               </span>
                             </div>
-                            <span className="font-display text-xl font-black text-[#D97706] mt-4">₹249</span>
+                            {isClosed5k ? (
+                              <div className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-rose-600 bg-rose-50 px-3 py-1 rounded-lg border border-rose-200 w-fit">
+                                <Lock size={12} /> Registration Closed
+                              </div>
+                            ) : (
+                              <span className="font-display text-xl font-black text-[#D97706] mt-4">₹249</span>
+                            )}
                           </motion.button>
 
                           {/* 10KM */}
                           <motion.button
                             type="button"
-                            whileHover={{ y: -2 }}
-                            whileTap={{ scale: 0.99 }}
-                            onClick={() => setCategory("10KM")}
-                            className={`p-5 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between ${
-                              category === "10KM"
-                                ? "border-[#F26522] bg-orange-50/60 shadow-sm ring-2 ring-[#F26522]/20"
-                                : "border-slate-200 bg-white hover:border-slate-300"
+                            whileHover={isClosed10k ? {} : { y: -2 }}
+                            whileTap={isClosed10k ? {} : { scale: 0.99 }}
+                            onClick={() => {
+                              if (!isClosed10k) setCategory("10KM");
+                            }}
+                            disabled={isClosed10k}
+                            className={`p-5 rounded-2xl border text-left transition-all flex flex-col justify-between ${
+                              isClosed10k
+                                ? "border-slate-200 bg-slate-100/80 opacity-70 cursor-not-allowed"
+                                : category === "10KM"
+                                ? "border-[#F26522] bg-orange-50/60 shadow-sm ring-2 ring-[#F26522]/20 cursor-pointer"
+                                : "border-slate-200 bg-white hover:border-slate-300 cursor-pointer"
                             }`}
                           >
                             <div>
                               <div className="flex justify-between items-center mb-1.5">
                                 <span className="text-sm font-extrabold uppercase text-slate-900">10 KMS Run</span>
-                                <span className="text-[9px] font-mono font-bold text-[#F26522] bg-orange-50 px-2.5 py-0.5 rounded-full border border-orange-200">ELITE</span>
+                                {isClosed10k ? (
+                                  <span className="text-[9px] font-mono font-bold text-rose-700 bg-rose-100 px-2.5 py-0.5 rounded-full border border-rose-300 flex items-center gap-1">
+                                    <Lock size={10} /> CLOSED
+                                  </span>
+                                ) : (
+                                  <span className="text-[9px] font-mono font-bold text-[#F26522] bg-orange-50 px-2.5 py-0.5 rounded-full border border-orange-200">ELITE</span>
+                                )}
                               </div>
                               <span className="text-xs text-slate-500 block leading-relaxed">
                                 Podium Cash Rewards (₹5,000 Top Prize) • Bib Tag, Tee & Medal
                               </span>
                             </div>
-                            <span className="font-display text-xl font-black text-[#F26522] mt-4">₹299</span>
+                            {isClosed10k ? (
+                              <div className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-rose-600 bg-rose-50 px-3 py-1 rounded-lg border border-rose-200 w-fit">
+                                <Lock size={12} /> Registration Closed
+                              </div>
+                            ) : (
+                              <span className="font-display text-xl font-black text-[#F26522] mt-4">₹299</span>
+                            )}
                           </motion.button>
                         </div>
+
+                        {errors.category && (
+                          <p className="text-xs text-rose-600 font-bold bg-rose-50 border border-rose-200 px-3 py-2 rounded-xl flex items-center gap-1.5 mt-2">
+                            <Lock size={14} /> {errors.category}
+                          </p>
+                        )}
 
                         {/* Callout regarding 3KM Walkathon */}
                         <div className="flex items-start gap-2.5 p-3.5 bg-teal-50/50 border border-teal-100 rounded-xl text-xs text-slate-600">
@@ -664,12 +741,25 @@ export default function ActiveSalemRegistrationPage() {
                   {step === 1 && (
                     <motion.button
                       type="button"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                      whileHover={((category === "5KM" && isClosed5k) || (category === "10KM" && isClosed10k)) ? {} : { scale: 1.02 }}
+                      whileTap={((category === "5KM" && isClosed5k) || (category === "10KM" && isClosed10k)) ? {} : { scale: 0.98 }}
                       onClick={handleNext}
-                      className="px-7 py-3 bg-[#F26522] hover:bg-[#d95315] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-sm"
+                      disabled={(category === "5KM" && isClosed5k) || (category === "10KM" && isClosed10k)}
+                      className={`px-7 py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 ${
+                        ((category === "5KM" && isClosed5k) || (category === "10KM" && isClosed10k))
+                          ? "bg-rose-100 text-rose-700 border border-rose-200 cursor-not-allowed opacity-80"
+                          : "bg-[#F26522] hover:bg-[#d95315] text-white shadow-sm cursor-pointer"
+                      }`}
                     >
-                      Continue to Payment <ChevronRight size={16} />
+                      {((category === "5KM" && isClosed5k) || (category === "10KM" && isClosed10k)) ? (
+                        <>
+                          <Lock size={16} /> Registration Closed
+                        </>
+                      ) : (
+                        <>
+                          Continue to Payment <ChevronRight size={16} />
+                        </>
+                      )}
                     </motion.button>
                   )}
                 </div>

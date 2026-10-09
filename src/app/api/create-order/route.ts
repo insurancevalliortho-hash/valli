@@ -35,6 +35,42 @@ export async function POST(request: Request) {
     // Always convert Rupees to paise (1 INR = 100 paise)
     const amountInPaise = Math.round(amountInRupees * 100);
 
+    // Active Salem Limit Check
+    const isSalem = String(eventType || inputNotes?.eventType || "").toUpperCase() === "ACTIVE_SALEM" || String(registrationCode || "").startsWith("SALEM");
+    if (isSalem) {
+      try {
+        const { getPgPool } = await import("../../../lib/db");
+        const pool = getPgPool();
+        const countRes = await pool.query(
+          `SELECT 
+             COUNT(*) FILTER (WHERE UPPER(TRIM(category)) = '5KM') AS count_5k,
+             COUNT(*) FILTER (WHERE UPPER(TRIM(category)) = '10KM') AS count_10k
+           FROM active_salem_registrations`
+        );
+        const count5k = parseInt(countRes.rows[0]?.count_5k || "0", 10);
+        const count10k = parseInt(countRes.rows[0]?.count_10k || "0", 10);
+
+        const categoryFromNotes = String(inputNotes?.category || "").toUpperCase().trim();
+        const is5K = categoryFromNotes === "5KM" || amountInRupees === 249;
+        const is10K = categoryFromNotes === "10KM" || amountInRupees === 299;
+
+        if (is5K && count5k >= 650) {
+          return NextResponse.json(
+            { success: false, error: "Registration Closed for 5KM category (Limit of 650 runners reached)" },
+            { status: 400 }
+          );
+        }
+        if (is10K && count10k >= 450) {
+          return NextResponse.json(
+            { success: false, error: "Registration Closed for 10KM category (Limit of 450 runners reached)" },
+            { status: 400 }
+          );
+        }
+      } catch (dbErr) {
+        console.error("Warning: Error checking category limit in create-order:", dbErr);
+      }
+    }
+
     const razorpay = new Razorpay({
       key_id: keyId,
       key_secret: keySecret,
