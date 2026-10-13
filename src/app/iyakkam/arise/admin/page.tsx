@@ -302,7 +302,23 @@ export default function AriseAdminPage() {
       catLower.includes("student") ||
       qualLower.includes("student");
 
-    // 3. Standalone Workshop Only (without conference)
+    // 3. Special Categories
+    if (
+      catLower.includes("special catagory 1") ||
+      catLower.includes("special category 1") ||
+      (catLower.includes("special") && catLower.includes("500"))
+    ) {
+      return 500;
+    }
+    if (
+      catLower.includes("special catagory 2") ||
+      catLower.includes("special category 2") ||
+      (catLower.includes("special") && catLower.includes("1000"))
+    ) {
+      return 1000;
+    }
+
+    // 4. Standalone Workshop Only (without conference)
     const isWorkshopOnly =
       catLower === "workshop" ||
       (catLower.includes("workshop") && !catLower.includes("conference") && !r.include_workshop);
@@ -311,13 +327,13 @@ export default function AriseAdminPage() {
       return 500;
     }
 
-    // 4. Conference with Workshop
+    // 5. Conference with Workshop
     const hasWorkshop = r.include_workshop || catLower.includes("workshop");
     if (hasWorkshop) {
-      return isStudent ? 1500 : 3000;
+      return isStudent ? 1500 : 2500;
     }
 
-    // 5. Conference Only
+    // 6. Conference Only
     return isStudent ? 1000 : 2000;
   };
 

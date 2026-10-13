@@ -592,12 +592,24 @@ export async function sendAriseRegistrationEmail(data: AriseEmailPayload) {
     } else if (isBulkStudent) {
       amountPaid = 0;
     } else if (
+      catLower.includes("special catagory 1") ||
+      catLower.includes("special category 1") ||
+      (catLower.includes("special") && catLower.includes("500"))
+    ) {
+      amountPaid = 500;
+    } else if (
+      catLower.includes("special catagory 2") ||
+      catLower.includes("special category 2") ||
+      (catLower.includes("special") && catLower.includes("1000"))
+    ) {
+      amountPaid = 1000;
+    } else if (
       catLower === "workshop" ||
       (catLower.includes("workshop") && !catLower.includes("conference") && !data.includeWorkshop)
     ) {
       amountPaid = 500;
     } else if (data.includeWorkshop || catLower.includes("workshop")) {
-      amountPaid = isStudent ? 1500 : 3000;
+      amountPaid = isStudent ? 1500 : 2500;
     } else {
       amountPaid = isStudent ? 1000 : 2000;
     }

@@ -81,7 +81,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/iyakkam/technnovations/register',
         '/iyakkam/technnovations/portal',
         '/iyakkam/arise',
-        '/iyakkam/arise/register'
+        '/iyakkam/arise/register',
+        '/iyakkam/arise/register/student',
+        '/iyakkam/arise/register/doctor'
     ].map((route) => ({
         url: `${baseUrl}${route}`,
         lastModified: new Date().toISOString(),
