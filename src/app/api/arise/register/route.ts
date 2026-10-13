@@ -39,10 +39,11 @@ export async function POST(request: Request) {
       designation,
       qualification,
       bonafideCertificate,
-      foodPreference,
       iapCreditPoints,
       iapMembershipNumber
     } = body;
+
+    const finalFoodPreference = body.foodPreference || "Vegetarian";
 
     if (
       !fullName ||
@@ -54,8 +55,7 @@ export async function POST(request: Request) {
       !transactionId ||
       !paymentScreenshot ||
       !designation ||
-      !qualification ||
-      !foodPreference
+      !qualification
     ) {
       return NextResponse.json(
         { success: false, error: "Missing required fields" },
@@ -98,7 +98,7 @@ export async function POST(request: Request) {
       designation,
       qualification,
       bonafideCertificate,
-      foodPreference,
+      foodPreference: finalFoodPreference,
       iapCreditPoints: !!iapCreditPoints,
       iapMembershipNumber,
       isVerified: Boolean(body.isVerified || isOnlinePayment),
@@ -121,7 +121,7 @@ export async function POST(request: Request) {
         transactionId,
         designation,
         qualification,
-        foodPreference,
+        foodPreference: finalFoodPreference,
         iapCreditPoints: !!iapCreditPoints,
         iapMembershipNumber,
         bonafideCertificate
