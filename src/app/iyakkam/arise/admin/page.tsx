@@ -302,8 +302,9 @@ export default function AriseAdminPage() {
       catLower.includes("student") ||
       qualLower.includes("student");
 
-    // 3. Special Categories
+    // 3. Special Categories & Bulk
     if (
+      (catLower.includes("bulk") && (catLower.includes("500") || isStudent)) ||
       catLower.includes("special catagory 1") ||
       catLower.includes("special category 1") ||
       (catLower.includes("special") && catLower.includes("500"))
@@ -311,9 +312,11 @@ export default function AriseAdminPage() {
       return 500;
     }
     if (
+      catLower.includes("1000") ||
       catLower.includes("special catagory 2") ||
       catLower.includes("special category 2") ||
-      (catLower.includes("special") && catLower.includes("1000"))
+      (catLower.includes("special") && catLower.includes("1000")) ||
+      (isStudent && catLower.includes("conference") && catLower.includes("workshop"))
     ) {
       return 1000;
     }

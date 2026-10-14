@@ -45,6 +45,114 @@ export async function POST(request: Request) {
 
     const finalFoodPreference = body.foodPreference || "Vegetarian";
 
+    // Bulk registration with delegates array
+    if (Array.isArray(body.delegates) && body.delegates.length > 0) {
+      const delegates = body.delegates;
+      const { transactionId, paymentScreenshot = "RAZORPAY_ONLINE_PAYMENT", source, category } = body;
+
+      if (!transactionId || !paymentScreenshot) {
+        return NextResponse.json(
+          { success: false, error: "Payment transaction details are required" },
+          { status: 400 }
+        );
+      }
+
+      for (let i = 0; i < delegates.length; i++) {
+        const d = delegates[i];
+        if (!d.fullName || !d.emailId || !d.mobileNumber) {
+          return NextResponse.json(
+            { success: false, error: `Missing required details for Delegate ${i + 1}` },
+            { status: 400 }
+          );
+        }
+      }
+
+      const pool = getPgPool();
+      let nextId = 1;
+      try {
+        const seqRes = await pool.query(
+          "SELECT COALESCE(MAX(id), 0) + 1 AS next_id FROM arise_registrations"
+        );
+        nextId = parseInt(seqRes.rows[0]?.next_id || "1", 10);
+      } catch {
+        nextId = 1;
+      }
+
+      const isOnlinePayment = paymentScreenshot === "RAZORPAY_ONLINE_PAYMENT" || String(transactionId).startsWith("pay_");
+      const savedDelegates: Array<{ name: string; code: string; email: string }> = [];
+
+      for (let i = 0; i < delegates.length; i++) {
+        const d = delegates[i];
+        const delCode = `ARISE26-${String(nextId + i).padStart(4, "0")}`;
+        const delTxId = i === 0 ? transactionId : `${transactionId}-${i + 1}`;
+        const delCategory = d.category || category || "Bulk Registration 5 Persons (500 each)";
+        const delInst = d.institution || body.institution || "College / Institution";
+        const delCity = d.city || body.city || "Salem";
+        const delDept = d.department || body.department || "";
+        const delQual = d.qualification || "Student";
+        const delFood = d.foodPreference || "Vegetarian";
+
+        const savedRows = await saveAriseRegistration({
+          registrationCode: delCode,
+          fullName: d.fullName,
+          emailId: d.emailId,
+          mobileNumber: d.mobileNumber,
+          category: delCategory,
+          includeWorkshop: d.includeWorkshop !== undefined ? !!d.includeWorkshop : true,
+          institution: delInst,
+          department: delDept,
+          city: delCity,
+          source: normalizeSource(d.source || source),
+          transactionId: delTxId,
+          paymentScreenshot,
+          designation: d.designation || "Student",
+          qualification: delQual,
+          bonafideCertificate: d.bonafideCertificate || null,
+          foodPreference: delFood,
+          iapCreditPoints: !!d.iapCreditPoints,
+          iapMembershipNumber: d.iapMembershipNumber || "",
+          isVerified: Boolean(body.isVerified || isOnlinePayment),
+        });
+
+        const confirmedCode = savedRows?.[0]?.registration_code || delCode;
+        savedDelegates.push({
+          name: d.fullName,
+          code: confirmedCode,
+          email: d.emailId,
+        });
+
+        // Dispatch confirmation email to each delegate
+        try {
+          await sendAriseRegistrationEmail({
+            registrationCode: confirmedCode,
+            fullName: d.fullName,
+            emailId: d.emailId,
+            mobileNumber: d.mobileNumber,
+            category: delCategory,
+            includeWorkshop: d.includeWorkshop !== undefined ? !!d.includeWorkshop : true,
+            institution: delInst,
+            department: delDept,
+            city: delCity,
+            transactionId: delTxId,
+            designation: d.designation || "Student",
+            qualification: delQual,
+            foodPreference: delFood,
+            iapCreditPoints: !!d.iapCreditPoints,
+            iapMembershipNumber: d.iapMembershipNumber || "",
+          });
+        } catch (mailErr) {
+          console.error(`Warning: Email dispatch failed for bulk delegate ${d.emailId}:`, mailErr);
+        }
+      }
+
+      return NextResponse.json({
+        success: true,
+        registrationCode: savedDelegates[0]?.code,
+        registrationCodes: savedDelegates,
+        delegates: savedDelegates,
+      });
+    }
+
     if (
       !fullName ||
       !emailId ||

@@ -225,15 +225,10 @@ function HeroSection({ regHref = "/ActiveSalem/Registration" }: { regHref?: stri
               transition={{ duration: 0.65, delay: 0.4, ease: easeSmooth }}
               className="flex flex-wrap items-center gap-4 pt-2"
             >
-              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={{ type: "spring", stiffness: 300, damping: 18 }}>
-                <Link
-                  href={regHref}
-                  className="bg-[#F26522] hover:bg-[#d95315] text-white px-8 py-4 rounded-2xl font-bold text-sm uppercase tracking-wider shadow-lg shadow-orange-500/20 hover:shadow-orange-500/30 transition-all flex items-center gap-3 cursor-pointer"
-                >
-                  <span>Register For 5K / 10K</span>
-                  <ArrowRight size={16} />
-                </Link>
-              </motion.div>
+              <div className="bg-rose-50 border border-rose-200 text-rose-800 px-6 py-4 rounded-2xl font-bold text-xs uppercase tracking-wider flex items-center gap-2.5 shadow-sm">
+                <span className="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse" />
+                <span>Registration Closed • Date Has Ended</span>
+              </div>
               <motion.a
                 href="#categories"
                 whileHover={{ scale: 1.02 }}
@@ -301,8 +296,8 @@ function HeroSection({ regHref = "/ActiveSalem/Registration" }: { regHref?: stri
 // ─── Categories Section ────────────────────────────────────────────────────────
 // ─── Categories Section ────────────────────────────────────────────────────────
 function CategoriesSection({ regHref = "/ActiveSalem/Registration" }: { regHref?: string }) {
-  const [isClosed5k, setIsClosed5k] = useState(false);
-  const [isClosed10k, setIsClosed10k] = useState(false);
+  const [isClosed5k, setIsClosed5k] = useState(true);
+  const [isClosed10k, setIsClosed10k] = useState(true);
 
   useEffect(() => {
     fetch("/api/active-salem/register")
