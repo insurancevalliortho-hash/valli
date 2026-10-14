@@ -12,7 +12,6 @@ import {
   FileText,
   User,
   MapPin,
-  Calendar,
   Check,
   Briefcase,
   Layers,
@@ -231,7 +230,6 @@ export default function AriseOnlineRegisterPage() {
               {[
                 { icon: Video, label: "Live Google Meet session" },
                 { icon: CheckCircle2, label: "Digital E-Certificate" },
-                { icon: Calendar, label: "14–15 February 2026" },
                 { icon: CheckCircle2, label: "IAP Credit Points (if applicable)" },
               ].map(({ icon: Icon, label }) => (
                 <div key={label} className="flex items-center gap-1.5 text-violet-700 font-semibold">
