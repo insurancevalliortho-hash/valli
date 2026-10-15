@@ -68,6 +68,17 @@ export async function POST(request: Request) {
       }
 
       const pool = getPgPool();
+
+      // Clean up any fallback placeholder created by the webhook for this transaction before saving full delegates
+      try {
+        await pool.query(
+          "DELETE FROM arise_registrations WHERE transaction_id = $1 OR transaction_id = $2;",
+          [transactionId, `${transactionId}-LEAD`]
+        );
+      } catch (cleanErr) {
+        console.warn("Warning: Failed to clean webhook placeholder for bulk registration:", cleanErr);
+      }
+
       let nextId = 1;
       try {
         const seqRes = await pool.query(

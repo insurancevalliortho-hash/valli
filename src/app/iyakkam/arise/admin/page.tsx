@@ -287,12 +287,6 @@ export default function AriseAdminPage() {
 
   // Helper to compute delegate fee
   const calculateFee = (r: Registration) => {
-    // 1. Bulk Lead Coordinator pays the 20-student package fee
-    if (r.registration_code?.includes("LEAD")) return 20000;
-
-    // 2. Individual bulk students registered under the package have ₹0 individual fee
-    if (r.category?.toLowerCase().includes("bulk")) return 0;
-
     const catLower = (r.category || "").toLowerCase();
     const desigLower = (r.designation || "").toLowerCase();
     const qualLower = (r.qualification || "").toLowerCase();
@@ -302,9 +296,13 @@ export default function AriseAdminPage() {
       catLower.includes("student") ||
       qualLower.includes("student");
 
-    // 3. Special Categories & Bulk
+    // 1. Bulk Registrations: ₹500 per person (package of 5 = ₹2,500 total)
+    if (catLower.includes("bulk") || catLower.includes("5 persons")) {
+      return 500;
+    }
+
+    // 2. Special Categories
     if (
-      (catLower.includes("bulk") && (catLower.includes("500") || isStudent)) ||
       catLower.includes("special catagory 1") ||
       catLower.includes("special category 1") ||
       (catLower.includes("special") && catLower.includes("500"))
@@ -312,16 +310,24 @@ export default function AriseAdminPage() {
       return 500;
     }
     if (
-      catLower.includes("1000") ||
       catLower.includes("special catagory 2") ||
       catLower.includes("special category 2") ||
-      (catLower.includes("special") && catLower.includes("1000")) ||
-      (isStudent && catLower.includes("conference") && catLower.includes("workshop"))
+      (catLower.includes("special") && catLower.includes("1000"))
     ) {
       return 1000;
     }
 
-    // 4. Standalone Workshop Only (without conference)
+    // 3. Online Conference Pass: ₹500 for students, ₹1,000 for doctors / professionals
+    if (catLower.includes("online")) {
+      return isStudent ? 500 : 1000;
+    }
+
+    // 4. Conference + Workshop (1000) offer: ₹1,000
+    if (catLower.includes("1000")) {
+      return 1000;
+    }
+
+    // 5. Standalone Workshop Only (without conference): ₹500
     const isWorkshopOnly =
       catLower === "workshop" ||
       (catLower.includes("workshop") && !catLower.includes("conference") && !r.include_workshop);
@@ -330,13 +336,13 @@ export default function AriseAdminPage() {
       return 500;
     }
 
-    // 5. Conference with Workshop
+    // 6. Conference with Workshop: ₹1,500 for students, ₹2,500 for doctors / consultants
     const hasWorkshop = r.include_workshop || catLower.includes("workshop");
     if (hasWorkshop) {
       return isStudent ? 1500 : 2500;
     }
 
-    // 6. Conference Only
+    // 7. Conference Only: ₹1,000 for students, ₹2,000 for doctors / consultants
     return isStudent ? 1000 : 2000;
   };
 

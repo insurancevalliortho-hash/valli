@@ -584,11 +584,9 @@ export async function sendAriseRegistrationEmail(data: AriseEmailPayload) {
       desigLower.includes("intern") ||
       catLower.includes("student") ||
       qualLower.includes("student");
-    const isLead = Boolean(data.registrationCode?.includes("LEAD"));
 
-    if (isLead) {
-      amountPaid = 20000;
-    } else if (catLower.includes("bulk") && (catLower.includes("500") || isStudent)) {
+    // 1. Bulk Registrations: ₹500 per person
+    if (catLower.includes("bulk") || catLower.includes("5 persons")) {
       amountPaid = 500;
     } else if (
       catLower.includes("special catagory 1") ||
@@ -597,15 +595,15 @@ export async function sendAriseRegistrationEmail(data: AriseEmailPayload) {
     ) {
       amountPaid = 500;
     } else if (
-      catLower.includes("1000") ||
       catLower.includes("special catagory 2") ||
       catLower.includes("special category 2") ||
-      (catLower.includes("special") && catLower.includes("1000")) ||
-      (isStudent && catLower.includes("conference") && catLower.includes("workshop"))
+      (catLower.includes("special") && catLower.includes("1000"))
     ) {
       amountPaid = 1000;
-    } else if (catLower.includes("bulk")) {
-      amountPaid = 0;
+    } else if (catLower.includes("online")) {
+      amountPaid = isStudent ? 500 : 1000;
+    } else if (catLower.includes("1000")) {
+      amountPaid = 1000;
     } else if (
       catLower === "workshop" ||
       (catLower.includes("workshop") && !catLower.includes("conference") && !data.includeWorkshop)

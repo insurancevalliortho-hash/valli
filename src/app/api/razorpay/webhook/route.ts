@@ -231,10 +231,7 @@ export async function POST(request: Request) {
               const delegateIapNo = notes.iapMembershipNumber || null;
 
               let delegateCode = registrationCode;
-              const isBulkPayment = notes.isBulk === "true" || notes.isBulk === true || amountInPaise === 2000000;
-              if (isBulkPayment) {
-                delegateCode = delegateCode ? `${delegateCode}-LEAD` : `ARISE26-BULK-LEAD-${Math.floor(1000 + Math.random() * 9000)}`;
-              } else if (!delegateCode || !delegateCode.startsWith("ARISE26-")) {
+              if (!delegateCode || !delegateCode.startsWith("ARISE26-")) {
                 const seqRes = await pool.query(
                   "SELECT COALESCE(MAX(id), 0) + 1 AS next_id FROM arise_registrations"
                 );
@@ -261,7 +258,7 @@ export async function POST(request: Request) {
                   delegateDepartment,
                   delegateCity,
                   delegateSource,
-                  isBulkPayment ? `${paymentId}-LEAD` : paymentId,
+                  paymentId,
                   delegateDesignation,
                   delegateQualification,
                   delegateBonafide,
