@@ -296,6 +296,16 @@ export default function AriseAdminPage() {
       catLower.includes("student") ||
       qualLower.includes("student");
 
+    // 0. Special Concession: ₹300
+    if (
+      catLower.includes("special concession") ||
+      catLower.includes("concession") ||
+      (catLower.includes("special") && catLower.includes("300")) ||
+      catLower.includes("300")
+    ) {
+      return 300;
+    }
+
     // 1. Bulk Registrations: ₹500 per person (package of 5 = ₹2,500 total)
     if (catLower.includes("bulk") || catLower.includes("5 persons")) {
       return 500;

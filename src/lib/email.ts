@@ -22,15 +22,18 @@ let cachedFrom: string | null = null;
 /**
  * Helper function to configure nodemailer transport.
  * Reads environment variables if available; otherwise falls back to verified hospital SMTP credentials.
+ * NOTE: Does NOT cache until credentials are confirmed valid.
  */
 async function getTransporter() {
   const host = process.env.SMTP_HOST || "smtp.gmail.com";
   const port = Number(process.env.SMTP_PORT) || 587;
   const user = (process.env.SMTP_USER || "vallisshospital@gmail.com").replace(/^['"]|['"]$/g, "").trim();
-  const rawPass = process.env.SMTP_PASS || process.env.SMTP_PASSWORD || "uvohfmuoaycszims";
+  // Strip ALL whitespace (Gmail app passwords come with spaces)
+  const rawPass = process.env.SMTP_PASS || process.env.SMTP_PASSWORD || "";
   const pass = rawPass.replace(/^['"]|['"]$/g, "").replace(/\s+/g, "").trim();
-  const from = process.env.SMTP_FROM || `"Valli Super Speciality Hospital" <${user}>`;
+  const from = process.env.SMTP_FROM || `"ARISE 2026 | Valli Hospital" <${user}>`;
 
+  // Return cached transporter if already validated
   if (cachedTransporter && cachedFrom) {
     return { transporter: cachedTransporter, from: cachedFrom };
   }
@@ -48,8 +51,15 @@ async function getTransporter() {
       },
     });
 
-    cachedTransporter = transporter;
-    cachedFrom = from;
+    // Only cache after successful verification to avoid caching bad credentials
+    try {
+      await transporter.verify();
+      cachedTransporter = transporter;
+      cachedFrom = from;
+    } catch (verifyErr) {
+      console.warn("SMTP credential check failed — emails will not send. Error:", (verifyErr as Error).message);
+      // Do NOT cache — return the transporter anyway so the caller gets the error
+    }
     return { transporter, from };
   }
 
@@ -585,8 +595,16 @@ export async function sendAriseRegistrationEmail(data: AriseEmailPayload) {
       catLower.includes("student") ||
       qualLower.includes("student");
 
+    // 0. Special Concession: ₹300
+    if (
+      catLower.includes("special concession") ||
+      catLower.includes("concession") ||
+      (catLower.includes("special") && catLower.includes("300")) ||
+      catLower.includes("300")
+    ) {
+      amountPaid = 300;
     // 1. Bulk Registrations: ₹500 per person
-    if (catLower.includes("bulk") || catLower.includes("5 persons")) {
+    } else if (catLower.includes("bulk") || catLower.includes("5 persons")) {
       amountPaid = 500;
     } else if (
       catLower.includes("special catagory 1") ||
