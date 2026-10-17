@@ -4,7 +4,7 @@ import { sendAriseRegistrationEmail } from "@/lib/email";
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "ValliAdmin2026!";
 
-// POST to fetch all registrations securely
+// POST to fetch all registrations securely with feedback data
 export async function POST(request: Request) {
   try {
     const { password } = await request.json();
@@ -17,11 +17,89 @@ export async function POST(request: Request) {
     }
 
     const pool = getPgPool();
-    const res = await pool.query(
-      `SELECT * FROM arise_registrations ORDER BY created_at DESC;`
-    );
 
-    return NextResponse.json({ success: true, data: res.rows });
+    // Ensure feedback table exists defensively
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS arise_feedback (
+        id                       SERIAL PRIMARY KEY,
+        registration_id          INTEGER NOT NULL,
+        registration_code        TEXT NOT NULL,
+        email                    TEXT NOT NULL,
+        full_name                TEXT,
+        q1_event_quality         INTEGER CHECK (q1_event_quality BETWEEN 1 AND 5),
+        q2_session_relevance     INTEGER CHECK (q2_session_relevance BETWEEN 1 AND 5),
+        q3_speaker_effectiveness INTEGER CHECK (q3_speaker_effectiveness BETWEEN 1 AND 5),
+        q4_hands_on_workshop     INTEGER CHECK (q4_hands_on_workshop BETWEEN 1 AND 5),
+        q5_organization_venue    INTEGER CHECK (q5_organization_venue BETWEEN 1 AND 5),
+        comments                 TEXT DEFAULT '',
+        submitted_at             TIMESTAMPTZ DEFAULT NOW(),
+        UNIQUE(registration_id)
+      );
+    `);
+
+    // Fetch registrations joined with feedback
+    const res = await pool.query(`
+      SELECT 
+        r.*,
+        f.id AS feedback_id,
+        f.q1_event_quality,
+        f.q2_session_relevance,
+        f.q3_speaker_effectiveness,
+        f.q4_hands_on_workshop,
+        f.q5_organization_venue,
+        f.comments AS feedback_comments,
+        f.submitted_at AS feedback_submitted_at
+      FROM arise_registrations r
+      LEFT JOIN arise_feedback f ON r.id = f.registration_id
+      ORDER BY r.created_at DESC;
+    `);
+
+    // Fetch all feedbacks ordered by newest
+    const fbRes = await pool.query(
+      `SELECT * FROM arise_feedback ORDER BY submitted_at DESC;`
+    );
+    const feedbacks = fbRes.rows || [];
+
+    const totalRegistrations = res.rows.length;
+    const totalSubmitted = feedbacks.length;
+    const submissionRate = totalRegistrations > 0 ? Math.round((totalSubmitted / totalRegistrations) * 100) : 0;
+
+    let q1Total = 0, q2Total = 0, q3Total = 0, q4Total = 0, q5Total = 0;
+    feedbacks.forEach((f: any) => {
+      q1Total += Number(f.q1_event_quality) || 0;
+      q2Total += Number(f.q2_session_relevance) || 0;
+      q3Total += Number(f.q3_speaker_effectiveness) || 0;
+      q4Total += Number(f.q4_hands_on_workshop) || 0;
+      q5Total += Number(f.q5_organization_venue) || 0;
+    });
+
+    const avgQ1 = totalSubmitted > 0 ? Number((q1Total / totalSubmitted).toFixed(1)) : 0;
+    const avgQ2 = totalSubmitted > 0 ? Number((q2Total / totalSubmitted).toFixed(1)) : 0;
+    const avgQ3 = totalSubmitted > 0 ? Number((q3Total / totalSubmitted).toFixed(1)) : 0;
+    const avgQ4 = totalSubmitted > 0 ? Number((q4Total / totalSubmitted).toFixed(1)) : 0;
+    const avgQ5 = totalSubmitted > 0 ? Number((q5Total / totalSubmitted).toFixed(1)) : 0;
+    const overallAvg = totalSubmitted > 0 
+      ? Number(((avgQ1 + avgQ2 + avgQ3 + avgQ4 + avgQ5) / 5).toFixed(1)) 
+      : 0;
+
+    const feedbackStats = {
+      totalSubmitted,
+      totalRegistrations,
+      submissionRate,
+      avgQ1,
+      avgQ2,
+      avgQ3,
+      avgQ4,
+      avgQ5,
+      overallAvg,
+    };
+
+    return NextResponse.json({
+      success: true,
+      data: res.rows,
+      feedbacks,
+      feedbackStats,
+    });
   } catch (error: any) {
     console.error("ARISE Admin API Error:", error);
     return NextResponse.json(
@@ -31,7 +109,7 @@ export async function POST(request: Request) {
   }
 }
 
-// DELETE a registration
+// DELETE a registration (and associated feedback)
 export async function DELETE(request: Request) {
   try {
     const { password, id } = await request.json();
@@ -51,6 +129,7 @@ export async function DELETE(request: Request) {
     }
 
     const pool = getPgPool();
+    await pool.query(`DELETE FROM arise_feedback WHERE registration_id = $1;`, [id]);
     await pool.query(
       `DELETE FROM arise_registrations WHERE id = $1;`,
       [id]

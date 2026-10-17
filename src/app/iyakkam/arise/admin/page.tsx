@@ -32,7 +32,11 @@ import {
   Send,
   Filter,
   GraduationCap,
-  Share2
+  Share2,
+  Star,
+  MessageSquare,
+  ExternalLink,
+  ThumbsUp
 } from "lucide-react";
 import Navbar from "../../../../components/Navbar";
 import Footer from "../../../../components/Footer";
@@ -62,6 +66,15 @@ interface Registration {
   iap_membership_number?: string;
   is_verified: boolean;
   created_at: string;
+  // Live Feedback fields
+  feedback_id?: number | null;
+  q1_event_quality?: number | null;
+  q2_session_relevance?: number | null;
+  q3_speaker_effectiveness?: number | null;
+  q4_hands_on_workshop?: number | null;
+  q5_organization_venue?: number | null;
+  feedback_comments?: string | null;
+  feedback_submitted_at?: string | null;
 }
 
 type SortField =
@@ -71,7 +84,8 @@ type SortField =
   | "category"
   | "institution"
   | "source"
-  | "is_verified";
+  | "is_verified"
+  | "feedback";
 
 type SortDirection = "asc" | "desc";
 
@@ -93,6 +107,7 @@ export default function AriseAdminPage() {
   const [workshopFilter, setWorkshopFilter] = useState("all");
   const [foodFilter, setFoodFilter] = useState("all");
   const [sourceFilter, setSourceFilter] = useState("all");
+  const [feedbackFilter, setFeedbackFilter] = useState<"all" | "submitted" | "pending">("all");
 
   // Sorting
   const [sortField, setSortField] = useState<SortField>("created_at");
@@ -106,8 +121,12 @@ export default function AriseAdminPage() {
   // Chart range: "7d" | "14d" | "30d" | "all"
   const [chartRange, setChartRange] = useState<"7d" | "14d" | "30d" | "all">("14d");
 
-  // Lightbox Modal for Screenshots or Certificates
+  // Modals
   const [activeScreenshot, setActiveScreenshot] = useState<string | null>(null);
+  const [activeFeedbackModal, setActiveFeedbackModal] = useState<Registration | null>(null);
+  const [showAllFeedbacksModal, setShowAllFeedbacksModal] = useState(false);
+  const [feedbacksSearch, setFeedbacksSearch] = useState("");
+  const [feedbacksOnlyWithComments, setFeedbacksOnlyWithComments] = useState(false);
 
   // Load password from session storage
   useEffect(() => {
@@ -421,6 +440,33 @@ export default function AriseAdminPage() {
       }))
       .sort((a, b) => b.total - a.total);
 
+    // Feedback Analytics calculations
+    const submittedFeedbacks = registrations.filter((r) => Boolean(r.feedback_id));
+    const feedbackCount = submittedFeedbacks.length;
+    const feedbackRate = total > 0 ? Math.round((feedbackCount / total) * 100) : 0;
+
+    let fbQ1 = 0, fbQ2 = 0, fbQ3 = 0, fbQ4 = 0, fbQ5 = 0;
+    submittedFeedbacks.forEach((r) => {
+      fbQ1 += Number(r.q1_event_quality) || 0;
+      fbQ2 += Number(r.q2_session_relevance) || 0;
+      fbQ3 += Number(r.q3_speaker_effectiveness) || 0;
+      fbQ4 += Number(r.q4_hands_on_workshop) || 0;
+      fbQ5 += Number(r.q5_organization_venue) || 0;
+    });
+
+    const avgQ1 = feedbackCount > 0 ? Number((fbQ1 / feedbackCount).toFixed(1)) : 0;
+    const avgQ2 = feedbackCount > 0 ? Number((fbQ2 / feedbackCount).toFixed(1)) : 0;
+    const avgQ3 = feedbackCount > 0 ? Number((fbQ3 / feedbackCount).toFixed(1)) : 0;
+    const avgQ4 = feedbackCount > 0 ? Number((fbQ4 / feedbackCount).toFixed(1)) : 0;
+    const avgQ5 = feedbackCount > 0 ? Number((fbQ5 / feedbackCount).toFixed(1)) : 0;
+    const overallAvg = feedbackCount > 0
+      ? Number(((avgQ1 + avgQ2 + avgQ3 + avgQ4 + avgQ5) / 5).toFixed(1))
+      : 0;
+
+    const feedbackWithComments = submittedFeedbacks.filter(
+      (r) => Boolean(r.feedback_comments && r.feedback_comments.trim())
+    ).length;
+
     return {
       total,
       verified,
@@ -433,6 +479,16 @@ export default function AriseAdminPage() {
       studentCount,
       profCount,
       sourceBreakdown,
+      feedbackCount,
+      feedbackRate,
+      avgQ1,
+      avgQ2,
+      avgQ3,
+      avgQ4,
+      avgQ5,
+      overallAvg,
+      feedbackWithComments,
+      submittedFeedbacks,
     };
   }, [registrations]);
 
@@ -567,6 +623,14 @@ export default function AriseAdminPage() {
         matchesSource = normalizeSource(r.source).toLowerCase() === sourceFilter.toLowerCase();
       }
 
+      // Feedback Status Filtering
+      let matchesFeedback = true;
+      if (feedbackFilter === "submitted") {
+        matchesFeedback = Boolean(r.feedback_id);
+      } else if (feedbackFilter === "pending") {
+        matchesFeedback = !r.feedback_id;
+      }
+
       return (
         matchesSearch &&
         matchesCategory &&
@@ -574,7 +638,8 @@ export default function AriseAdminPage() {
         matchesWorkshop &&
         matchesFood &&
         matchesDate &&
-        matchesSource
+        matchesSource &&
+        matchesFeedback
       );
     });
 
@@ -600,6 +665,9 @@ export default function AriseAdminPage() {
         case "is_verified":
           comparison = (a.is_verified ? 1 : 0) - (b.is_verified ? 1 : 0);
           break;
+        case "feedback":
+          comparison = (a.feedback_id ? 1 : 0) - (b.feedback_id ? 1 : 0);
+          break;
         case "created_at":
         default: {
           const timeA = a.created_at ? new Date(a.created_at).getTime() : 0;
@@ -624,6 +692,7 @@ export default function AriseAdminPage() {
     verificationFilter,
     workshopFilter,
     foodFilter,
+    feedbackFilter,
     dateFilter,
     customDate,
     selectedChartDate,
@@ -632,7 +701,7 @@ export default function AriseAdminPage() {
     sortDirection,
   ]);
 
-  // Export registrations spreadsheet helper
+  // Export registrations spreadsheet helper with full feedback columns
   const exportToCSV = () => {
     if (filteredRegistrations.length === 0) return;
 
@@ -655,6 +724,15 @@ export default function AriseAdminPage() {
       "IAP Number",
       "UPI Reference ID",
       "Verified Status",
+      "Feedback Status",
+      "Q1 Event Quality (1-5)",
+      "Q2 Clinical Relevance (1-5)",
+      "Q3 Speaker Expertise (1-5)",
+      "Q4 Hands-on Workshop (1-5)",
+      "Q5 Venue & Hospitality (1-5)",
+      "Feedback Overall Rating",
+      "Feedback Comments / Suggestions",
+      "Feedback Submitted At",
       "Created At",
     ];
 
@@ -677,6 +755,24 @@ export default function AriseAdminPage() {
       `'${r.iap_membership_number || ""}`,
       `'${r.transaction_id}`,
       r.is_verified ? "Verified" : "Pending",
+      r.feedback_id ? "Submitted" : "Pending",
+      r.q1_event_quality ?? "",
+      r.q2_session_relevance ?? "",
+      r.q3_speaker_effectiveness ?? "",
+      r.q4_hands_on_workshop ?? "",
+      r.q5_organization_venue ?? "",
+      r.feedback_id
+        ? (
+            (Number(r.q1_event_quality || 0) +
+              Number(r.q2_session_relevance || 0) +
+              Number(r.q3_speaker_effectiveness || 0) +
+              Number(r.q4_hands_on_workshop || 0) +
+              Number(r.q5_organization_venue || 0)) /
+            5
+          ).toFixed(1)
+        : "",
+      r.feedback_comments ? `"${r.feedback_comments.replace(/"/g, '""')}"` : "",
+      r.feedback_submitted_at ? new Date(r.feedback_submitted_at).toLocaleString() : "",
       new Date(r.created_at).toLocaleString(),
     ]);
 
@@ -689,7 +785,72 @@ export default function AriseAdminPage() {
     link.setAttribute("href", encodedUri);
     link.setAttribute(
       "download",
-      `arise_delegates_${new Date().toISOString().split("T")[0]}.csv`
+      `arise_delegates_with_feedback_${new Date().toISOString().split("T")[0]}.csv`
+    );
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  // Dedicated Export for Feedback Responses Only
+  const exportFeedbackOnlyCSV = () => {
+    const feedbackRows = registrations.filter((r) => Boolean(r.feedback_id));
+    if (feedbackRows.length === 0) {
+      alert("No feedback submissions to export yet.");
+      return;
+    }
+
+    const headers = [
+      "Registration Code",
+      "Delegate Name",
+      "Institution",
+      "Email ID",
+      "Mobile Number",
+      "Category",
+      "Q1 Event Quality (1-5)",
+      "Q2 Clinical Relevance (1-5)",
+      "Q3 Speaker Expertise (1-5)",
+      "Q4 Hands-on Workshop (1-5)",
+      "Q5 Venue & Hospitality (1-5)",
+      "Overall Rating (Average)",
+      "Feedback Comments & Suggestions",
+      "Submitted At",
+    ];
+
+    const rows = feedbackRows.map((r) => [
+      r.registration_code,
+      `"${r.full_name.replace(/"/g, '""')}"`,
+      `"${r.institution.replace(/"/g, '""')}"`,
+      r.email_id,
+      `'${r.mobile_number}`,
+      r.category,
+      r.q1_event_quality ?? "",
+      r.q2_session_relevance ?? "",
+      r.q3_speaker_effectiveness ?? "",
+      r.q4_hands_on_workshop ?? "",
+      r.q5_organization_venue ?? "",
+      (
+        (Number(r.q1_event_quality || 0) +
+          Number(r.q2_session_relevance || 0) +
+          Number(r.q3_speaker_effectiveness || 0) +
+          Number(r.q4_hands_on_workshop || 0) +
+          Number(r.q5_organization_venue || 0)) /
+        5
+      ).toFixed(1),
+      r.feedback_comments ? `"${r.feedback_comments.replace(/"/g, '""')}"` : "",
+      r.feedback_submitted_at ? new Date(r.feedback_submitted_at).toLocaleString() : "",
+    ]);
+
+    const csvContent =
+      "data:text/csv;charset=utf-8," +
+      [headers.join(","), ...rows.map((e) => e.join(","))].join("\n");
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute(
+      "download",
+      `arise_feedback_responses_${new Date().toISOString().split("T")[0]}.csv`
     );
     document.body.appendChild(link);
     link.click();
@@ -908,6 +1069,165 @@ export default function AriseAdminPage() {
                 </div>
               </div>
 
+              {/* ARISE 2026 CME Delegate Feedback & Quality Ratings Ribbon */}
+              <div className="bg-gradient-to-br from-white via-teal-50/20 to-white border border-teal-200/90 rounded-[2rem] p-6 shadow-sm space-y-5">
+                <div className="flex flex-wrap items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-amber-50 rounded-2xl flex items-center justify-center border border-amber-200 text-amber-600 shadow-inner shrink-0">
+                      <Star className="w-6 h-6 fill-amber-400 text-amber-500" />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h3 className="font-display text-lg font-black text-slate-800 tracking-tight">
+                          ARISE 2026 Delegate Feedback &amp; Ratings
+                        </h3>
+                        <span className="text-[10px] font-bold uppercase tracking-wider bg-teal-100 text-teal-800 px-2.5 py-0.5 rounded-full border border-teal-200">
+                          Live Responses
+                        </span>
+                      </div>
+                      <p className="text-xs text-slate-500 font-medium mt-0.5">
+                        Real-time evaluation across clinical relevance, workshops, faculty, and venue hospitality.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-2.5">
+                    <button
+                      type="button"
+                      onClick={() => setShowAllFeedbacksModal(true)}
+                      disabled={stats.feedbackCount === 0}
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#004B57] hover:bg-[#003842] text-white rounded-xl text-xs font-bold shadow-sm transition-all cursor-pointer disabled:opacity-50"
+                    >
+                      <MessageSquare size={14} />
+                      <span>Browse All Feedback ({stats.feedbackCount})</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={exportFeedbackOnlyCSV}
+                      disabled={stats.feedbackCount === 0}
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-white border border-slate-200 hover:border-slate-350 text-slate-700 rounded-xl text-xs font-semibold shadow-xs transition-all cursor-pointer disabled:opacity-50"
+                      title="Export all feedback responses and ratings to CSV"
+                    >
+                      <Download size={13} />
+                      <span>Export Feedback CSV</span>
+                    </button>
+
+                    <a
+                      href="/arise/feedback"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-2 bg-teal-50 border border-teal-200 text-[#00A896] hover:bg-teal-100 rounded-xl text-xs font-bold transition-all"
+                      title="Open delegate feedback form in a new tab"
+                    >
+                      <ExternalLink size={13} />
+                      <span>Open Feedback Form</span>
+                    </a>
+                  </div>
+                </div>
+
+                {/* Overall Score & Core Stats Grid */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  {/* Metric 1: Overall Average */}
+                  <div className="bg-white border border-slate-200/80 rounded-2xl p-4 shadow-xs">
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block">Overall Rating</span>
+                    <div className="flex items-baseline gap-1.5 mt-1">
+                      <span className="font-display text-2xl font-black text-slate-800">
+                        {stats.feedbackCount > 0 ? stats.overallAvg : "—"}
+                      </span>
+                      <span className="text-xs text-slate-400 font-semibold">/ 5.0</span>
+                    </div>
+                    <div className="flex items-center gap-1 mt-1 text-amber-400">
+                      {[1, 2, 3, 4, 5].map((s) => (
+                        <Star
+                          key={s}
+                          className={`w-3.5 h-3.5 ${
+                            stats.feedbackCount > 0 && Math.round(stats.overallAvg) >= s
+                              ? "fill-amber-400 text-amber-400"
+                              : "text-slate-200"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Metric 2: Submissions count & rate */}
+                  <div className="bg-white border border-slate-200/80 rounded-2xl p-4 shadow-xs">
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block">Responses Received</span>
+                    <div className="flex items-baseline gap-1.5 mt-1">
+                      <span className="font-display text-2xl font-black text-[#00A896]">
+                        {stats.feedbackCount}
+                      </span>
+                      <span className="text-xs text-slate-500 font-semibold">/ {stats.total} delegates</span>
+                    </div>
+                    <div className="text-[11px] text-slate-400 font-medium mt-1">
+                      {stats.feedbackRate}% total submission rate
+                    </div>
+                  </div>
+
+                  {/* Metric 3: Suggestions & Comments */}
+                  <div className="bg-white border border-slate-200/80 rounded-2xl p-4 shadow-xs">
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block">Written Remarks</span>
+                    <div className="flex items-baseline gap-1.5 mt-1">
+                      <span className="font-display text-2xl font-black text-slate-800">
+                        {stats.feedbackWithComments}
+                      </span>
+                      <span className="text-xs text-slate-400 font-semibold">reviews</span>
+                    </div>
+                    <div className="text-[11px] text-slate-400 font-medium mt-1">
+                      Suggestions for next edition
+                    </div>
+                  </div>
+
+                  {/* Metric 4: Satisfaction Index */}
+                  <div className="bg-white border border-slate-200/80 rounded-2xl p-4 shadow-xs">
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block">Satisfaction Index</span>
+                    <div className="flex items-baseline gap-1 mt-1">
+                      <span className="font-display text-2xl font-black text-emerald-600">
+                        {stats.feedbackCount > 0 && stats.overallAvg >= 4 ? "Exceptional" : stats.feedbackCount > 0 ? "Positive" : "Awaiting Data"}
+                      </span>
+                    </div>
+                    <div className="text-[11px] text-slate-400 font-medium mt-1">
+                      {stats.feedbackCount > 0 ? "High delegate satisfaction" : "Form active for attendees"}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Category Rating Breakdown Bars */}
+                {stats.feedbackCount > 0 && (
+                  <div className="bg-white border border-slate-200/80 rounded-2xl p-4 sm:p-5 shadow-xs space-y-3">
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block">
+                      Score Breakdown Across 5 Focus Areas
+                    </span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 pt-1">
+                      {[
+                        { label: "1. Event Quality", score: stats.avgQ1 },
+                        { label: "2. Clinical Sessions", score: stats.avgQ2 },
+                        { label: "3. Speaker Expertise", score: stats.avgQ3 },
+                        { label: "4. Hands-on Workshop", score: stats.avgQ4 },
+                        { label: "5. Venue & Hospitality", score: stats.avgQ5 },
+                      ].map((item, idx) => {
+                        const pct = Math.min(100, Math.round((item.score / 5) * 100));
+                        return (
+                          <div key={idx} className="bg-slate-50 border border-slate-200/60 rounded-xl p-3 space-y-1.5">
+                            <div className="flex justify-between items-center text-xs">
+                              <span className="font-semibold text-slate-700 truncate text-[11px]">{item.label}</span>
+                              <span className="font-black text-[#00A896] font-mono text-xs">{item.score} ★</span>
+                            </div>
+                            <div className="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
+                              <div
+                                className="bg-[#00A896] h-full rounded-full transition-all duration-500"
+                                style={{ width: `${pct}%` }}
+                              />
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
+
               {/* HIGH-END INTERACTIVE SVG ANALYTICS CHART */}
               <AdminAnalyticsChart
                 title="Daily Delegate Registration Velocity"
@@ -1050,6 +1370,8 @@ export default function AriseAdminPage() {
                       <option value="source-desc">Source (Z → A)</option>
                       <option value="is_verified-desc">Status (Paid First)</option>
                       <option value="is_verified-asc">Status (Pending First)</option>
+                      <option value="feedback-desc">Feedback (Submitted First)</option>
+                      <option value="feedback-asc">Feedback (Pending First)</option>
                     </select>
                   </div>
 
@@ -1121,6 +1443,17 @@ export default function AriseAdminPage() {
                     <option value="pending">Pending Verification</option>
                   </select>
 
+                  {/* Feedback Status filter */}
+                  <select
+                    value={feedbackFilter}
+                    onChange={(e) => setFeedbackFilter(e.target.value as any)}
+                    className="bg-slate-50 border border-[#E2E8F0] hover:border-slate-350 rounded-xl px-3 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none cursor-pointer"
+                  >
+                    <option value="all">Feedback: All ({stats.total})</option>
+                    <option value="submitted">Feedback: Submitted ({stats.feedbackCount})</option>
+                    <option value="pending">Feedback: Pending ({stats.total - stats.feedbackCount})</option>
+                  </select>
+
                   {/* Workshop filter */}
                   <select
                     value={workshopFilter}
@@ -1148,6 +1481,7 @@ export default function AriseAdminPage() {
                     workshopFilter !== "all" ||
                     foodFilter !== "all" ||
                     sourceFilter !== "all" ||
+                    feedbackFilter !== "all" ||
                     dateFilter !== "all" ||
                     selectedChartDate !== null ||
                     searchQuery) && (
@@ -1159,6 +1493,7 @@ export default function AriseAdminPage() {
                         setWorkshopFilter("all");
                         setFoodFilter("all");
                         setSourceFilter("all");
+                        setFeedbackFilter("all");
                         setDateFilter("all");
                         setCustomDate("");
                         setSelectedChartDate(null);
@@ -1252,6 +1587,18 @@ export default function AriseAdminPage() {
                           {renderSortIcon("is_verified")}
                         </th>
 
+                        {/* Feedback Column Header */}
+                        <th
+                          onClick={() => handleSort("feedback")}
+                          className="p-4 text-center cursor-pointer hover:bg-slate-100 transition-colors group"
+                          title="Click to sort by Feedback submission status"
+                        >
+                          <div className="flex items-center justify-center gap-1.5">
+                            <span>Feedback</span>
+                            {renderSortIcon("feedback")}
+                          </div>
+                        </th>
+
                         <th className="p-4 text-center">Quick Actions</th>
                       </tr>
                     </thead>
@@ -1259,7 +1606,7 @@ export default function AriseAdminPage() {
                     <tbody className="divide-y divide-slate-150 text-xs sm:text-sm font-semibold text-slate-700">
                       {filteredRegistrations.length === 0 ? (
                         <tr>
-                          <td colSpan={8} className="p-12 text-center text-slate-400 font-bold">
+                          <td colSpan={9} className="p-12 text-center text-slate-400 font-bold">
                             No matching ARISE delegates found with current filters.
                           </td>
                         </tr>
@@ -1386,9 +1733,58 @@ export default function AriseAdminPage() {
                                 </button>
                               </td>
 
-                              {/* Quick Actions (WhatsApp, Resend Email, Screenshot, Delete) */}
+                              {/* Feedback Status */}
+                              <td className="p-4 text-center">
+                                {r.feedback_id ? (
+                                  <button
+                                    type="button"
+                                    onClick={() => setActiveFeedbackModal(r)}
+                                    className="inline-flex flex-col items-center gap-0.5 px-2.5 py-1.5 bg-amber-50/80 hover:bg-amber-100/90 text-amber-900 border border-amber-200 rounded-xl transition-all cursor-pointer group shadow-2xs"
+                                    title="Click to view detailed ratings and comments"
+                                  >
+                                    <div className="flex items-center gap-1 text-[11px] font-black">
+                                      <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-500" />
+                                      <span>
+                                        {(
+                                          (Number(r.q1_event_quality || 0) +
+                                            Number(r.q2_session_relevance || 0) +
+                                            Number(r.q3_speaker_effectiveness || 0) +
+                                            Number(r.q4_hands_on_workshop || 0) +
+                                            Number(r.q5_organization_venue || 0)) /
+                                          5
+                                        ).toFixed(1)}{" "}
+                                        ★
+                                      </span>
+                                    </div>
+                                    <span className="text-[9px] font-semibold text-emerald-700 flex items-center gap-1">
+                                      <span>Submitted</span>
+                                      {r.feedback_comments && (
+                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" title="Delegate provided written remarks" />
+                                      )}
+                                    </span>
+                                  </button>
+                                ) : (
+                                  <span className="inline-block text-[10px] font-semibold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-lg">
+                                    Pending
+                                  </span>
+                                )}
+                              </td>
+
+                              {/* Quick Actions (Feedback View, WhatsApp, Resend Email, Screenshot, Delete) */}
                               <td className="p-4 text-center">
                                 <div className="flex items-center justify-center gap-1.5">
+                                  {/* View Feedback Modal */}
+                                  {r.feedback_id && (
+                                    <button
+                                      type="button"
+                                      onClick={() => setActiveFeedbackModal(r)}
+                                      className="p-1.5 bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 rounded-lg transition-all cursor-pointer"
+                                      title="Inspect feedback ratings and comments"
+                                    >
+                                      <Star size={14} className="fill-amber-400 text-amber-500" />
+                                    </button>
+                                  )}
+
                                   {/* WhatsApp Web direct */}
                                   <a
                                     href={waUrl}
@@ -1463,6 +1859,260 @@ export default function AriseAdminPage() {
                 alt="Payment proof"
                 className="max-h-[70vh] object-contain rounded-lg"
               />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Individual Delegate Feedback Inspection Modal */}
+      {activeFeedbackModal && (
+        <div className="fixed inset-0 z-50 bg-black/75 flex items-center justify-center p-4 backdrop-blur-xs">
+          <div className="relative max-w-lg w-full bg-white rounded-3xl overflow-hidden shadow-2xl p-6 sm:p-7 border border-slate-200">
+            <button
+              onClick={() => setActiveFeedbackModal(null)}
+              className="absolute top-5 right-5 p-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full cursor-pointer transition-colors"
+            >
+              <X size={18} />
+            </button>
+
+            {/* Header */}
+            <div className="flex items-center gap-3 mb-5 pr-8">
+              <div className="w-12 h-12 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center border border-amber-200 shrink-0">
+                <Star className="w-6 h-6 fill-amber-400 text-amber-500" />
+              </div>
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#00A896] block">
+                  ARISE 2026 CME Feedback
+                </span>
+                <h3 className="text-lg font-bold text-slate-900 leading-tight">
+                  {activeFeedbackModal.full_name}
+                </h3>
+                <p className="text-xs text-slate-500 font-mono">
+                  {activeFeedbackModal.registration_code} • {activeFeedbackModal.institution || activeFeedbackModal.category}
+                </p>
+              </div>
+            </div>
+
+            {/* Overall Score Banner */}
+            <div className="bg-amber-50/80 border border-amber-200 rounded-2xl p-4 mb-5 flex items-center justify-between">
+              <div>
+                <span className="text-[10px] font-bold text-amber-900 uppercase tracking-widest block">Overall Score</span>
+                <div className="text-2xl font-black text-amber-950 font-display mt-0.5">
+                  {(
+                    (Number(activeFeedbackModal.q1_event_quality || 0) +
+                      Number(activeFeedbackModal.q2_session_relevance || 0) +
+                      Number(activeFeedbackModal.q3_speaker_effectiveness || 0) +
+                      Number(activeFeedbackModal.q4_hands_on_workshop || 0) +
+                      Number(activeFeedbackModal.q5_organization_venue || 0)) /
+                    5
+                  ).toFixed(1)}{" "}
+                  / 5.0 ★
+                </div>
+              </div>
+              <div className="text-right">
+                <span className="text-[10px] font-semibold text-slate-400 block">Submitted At</span>
+                <span className="text-xs font-mono text-slate-700">
+                  {activeFeedbackModal.feedback_submitted_at
+                    ? new Date(activeFeedbackModal.feedback_submitted_at).toLocaleString([], {
+                        month: "short",
+                        day: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })
+                    : "Recorded"}
+                </span>
+              </div>
+            </div>
+
+            {/* 5 Questions Breakdown */}
+            <div className="space-y-2.5 mb-5">
+              {[
+                { label: "1. Overall Event Quality & Relevance", score: activeFeedbackModal.q1_event_quality },
+                { label: "2. Scientific Sessions & Clinical Applicability", score: activeFeedbackModal.q2_session_relevance },
+                { label: "3. Speaker Expertise & Communication", score: activeFeedbackModal.q3_speaker_effectiveness },
+                { label: "4. Hands-on Workshop & Equipment", score: activeFeedbackModal.q4_hands_on_workshop },
+                { label: "5. Venue, Hospitality & Organization", score: activeFeedbackModal.q5_organization_venue },
+              ].map((q, idx) => (
+                <div key={idx} className="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl border border-slate-150 text-xs">
+                  <span className="font-semibold text-slate-700 truncate max-w-[280px]">{q.label}</span>
+                  <div className="flex items-center gap-1 font-bold text-amber-600 shrink-0">
+                    <span className="font-mono text-sm">{q.score || "—"}</span>
+                    <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-500" />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Written Remarks */}
+            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">
+                Written Remarks &amp; Suggestions
+              </span>
+              {activeFeedbackModal.feedback_comments && activeFeedbackModal.feedback_comments.trim() ? (
+                <p className="text-xs text-slate-800 italic leading-relaxed whitespace-pre-wrap">
+                  &ldquo;{activeFeedbackModal.feedback_comments}&rdquo;
+                </p>
+              ) : (
+                <p className="text-xs text-slate-400 italic">No written comments provided by delegate.</p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Browse All Feedbacks Modal */}
+      {showAllFeedbacksModal && (
+        <div className="fixed inset-0 z-50 bg-black/75 flex items-center justify-center p-3 sm:p-5 backdrop-blur-xs">
+          <div className="relative max-w-4xl w-full max-h-[92vh] bg-white rounded-3xl overflow-hidden shadow-2xl flex flex-col border border-slate-200">
+            {/* Header */}
+            <div className="p-6 border-b border-slate-200 flex items-center justify-between gap-4 bg-slate-50">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center border border-amber-200 shrink-0">
+                  <Star className="w-5 h-5 fill-amber-400 text-amber-500" />
+                </div>
+                <div>
+                  <h3 className="font-display text-lg font-black text-slate-900">
+                    All ARISE 2026 Feedback Responses ({stats.feedbackCount})
+                  </h3>
+                  <p className="text-xs text-slate-500">
+                    Average Score: <strong className="text-[#00A896]">{stats.overallAvg} / 5.0 ★</strong> • {stats.feedbackWithComments} reviews with written comments
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowAllFeedbacksModal(false)}
+                className="p-2 bg-white hover:bg-slate-200 text-slate-600 rounded-full border border-slate-200 cursor-pointer transition-colors"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            {/* Filter bar inside modal */}
+            <div className="p-4 border-b border-slate-100 bg-white flex flex-wrap items-center justify-between gap-3">
+              <div className="relative flex-1 min-w-[200px] max-w-xs">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
+                <input
+                  type="text"
+                  value={feedbacksSearch}
+                  onChange={(e) => setFeedbacksSearch(e.target.value)}
+                  placeholder="Search delegate or remarks..."
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-3 py-1.5 text-xs font-medium focus:outline-none focus:bg-white focus:border-[#00A896]"
+                />
+              </div>
+
+              <div className="flex items-center gap-3">
+                <label className="flex items-center gap-1.5 text-xs font-semibold text-slate-700 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    checked={feedbacksOnlyWithComments}
+                    onChange={(e) => setFeedbacksOnlyWithComments(e.target.checked)}
+                    className="rounded text-[#00A896] focus:ring-[#00A896]"
+                  />
+                  <span>Only show with comments ({stats.feedbackWithComments})</span>
+                </label>
+
+                <button
+                  type="button"
+                  onClick={exportFeedbackOnlyCSV}
+                  className="inline-flex items-center gap-1 px-3 py-1.5 bg-teal-50 hover:bg-teal-100 text-[#00A896] border border-teal-200 rounded-xl text-xs font-bold transition-all cursor-pointer"
+                >
+                  <Download size={12} />
+                  <span>Export CSV</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Feed list */}
+            <div className="p-6 overflow-y-auto space-y-4 flex-1">
+              {(() => {
+                const list = stats.submittedFeedbacks.filter((r) => {
+                  const matchSearch =
+                    !feedbacksSearch ||
+                    `${r.full_name} ${r.registration_code} ${r.institution} ${r.feedback_comments || ""}`
+                      .toLowerCase()
+                      .includes(feedbacksSearch.toLowerCase());
+                  const matchComments = !feedbacksOnlyWithComments || Boolean(r.feedback_comments && r.feedback_comments.trim());
+                  return matchSearch && matchComments;
+                });
+
+                if (list.length === 0) {
+                  return (
+                    <div className="py-12 text-center text-slate-400 font-semibold text-xs">
+                      No feedback entries match your search criteria.
+                    </div>
+                  );
+                }
+
+                return list.map((item) => {
+                  const avg = (
+                    (Number(item.q1_event_quality || 0) +
+                      Number(item.q2_session_relevance || 0) +
+                      Number(item.q3_speaker_effectiveness || 0) +
+                      Number(item.q4_hands_on_workshop || 0) +
+                      Number(item.q5_organization_venue || 0)) /
+                    5
+                  ).toFixed(1);
+
+                  return (
+                    <div
+                      key={item.id}
+                      className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs hover:border-teal-300 transition-colors space-y-3"
+                    >
+                      <div className="flex flex-wrap items-start justify-between gap-3">
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="font-bold text-slate-900 text-sm">{item.full_name}</span>
+                            <span className="font-mono text-[10px] text-[#00A896] bg-teal-50 px-2 py-0.5 rounded border border-teal-200 font-bold">
+                              {item.registration_code}
+                            </span>
+                          </div>
+                          <p className="text-xs text-slate-500 mt-0.5">
+                            {item.institution || item.category} • {item.mobile_number}
+                          </p>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-1 bg-amber-50 px-2.5 py-1 rounded-xl border border-amber-200 text-amber-900 text-xs font-black">
+                            <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-500" />
+                            <span>{avg} / 5.0</span>
+                          </div>
+                          <span className="text-[10px] text-slate-400 font-mono">
+                            {item.feedback_submitted_at ? new Date(item.feedback_submitted_at).toLocaleDateString() : ""}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* 5 mini rating chips */}
+                      <div className="flex flex-wrap gap-1.5 text-[11px] font-medium text-slate-600">
+                        <span className="bg-slate-50 border border-slate-200/60 px-2 py-0.5 rounded-lg">
+                          Quality: <strong className="text-amber-600">{item.q1_event_quality}★</strong>
+                        </span>
+                        <span className="bg-slate-50 border border-slate-200/60 px-2 py-0.5 rounded-lg">
+                          Sessions: <strong className="text-amber-600">{item.q2_session_relevance}★</strong>
+                        </span>
+                        <span className="bg-slate-50 border border-slate-200/60 px-2 py-0.5 rounded-lg">
+                          Speakers: <strong className="text-amber-600">{item.q3_speaker_effectiveness}★</strong>
+                        </span>
+                        <span className="bg-slate-50 border border-slate-200/60 px-2 py-0.5 rounded-lg">
+                          Workshop: <strong className="text-amber-600">{item.q4_hands_on_workshop}★</strong>
+                        </span>
+                        <span className="bg-slate-50 border border-slate-200/60 px-2 py-0.5 rounded-lg">
+                          Venue: <strong className="text-amber-600">{item.q5_organization_venue}★</strong>
+                        </span>
+                      </div>
+
+                      {/* Comment text */}
+                      {item.feedback_comments && item.feedback_comments.trim() ? (
+                        <div className="bg-slate-50/80 border border-slate-200/70 rounded-xl p-3 text-xs text-slate-800 italic">
+                          &ldquo;{item.feedback_comments}&rdquo;
+                        </div>
+                      ) : (
+                        <p className="text-[11px] text-slate-400 italic">No written comments provided.</p>
+                      )}
+                    </div>
+                  );
+                });
+              })()}
             </div>
           </div>
         </div>
